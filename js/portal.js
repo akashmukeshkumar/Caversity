@@ -337,7 +337,6 @@ window.submitFeedback = function() {
         if (dontShow) localStorage.setItem('hide_feedback_popup', 'true');
         closeFeedbackModal();
         nameInput.value = ''; textInput.value = '';
-        alert('Thank you! Your review has been added successfully.');
     }).catch(e => {
         console.error("Error adding review: ", e);
         alert("Failed to submit review. Try again.");
