@@ -36,6 +36,8 @@ function redirectTo(page) {
 }
 
 onAuthStateChanged(auth, async (user) => {
+    if (window.isAuthenticating) return; // Agar login/register ho raha hai toh interrupt na karo
+
     if (!user) { 
         if (PAGE_TYPE !== "auth") {
             redirectTo("login.html"); 
@@ -80,7 +82,15 @@ onAuthStateChanged(auth, async (user) => {
             if(lockStyle) lockStyle.remove();
             
         } else {
-            redirectTo("login.html");
+            // ⚠️ BROKEN STATE FIX: Agar auth hai par DB folder nahi bana, toh safai kar do!
+            await signOut(auth);
+            localStorage.removeItem('caversity_device_token');
+            if (PAGE_TYPE !== "auth") {
+                redirectTo("login.html");
+            } else {
+                const lockStyle = document.getElementById('page-lock');
+                if (lockStyle) lockStyle.remove();
+            }
         }
     } catch (e) { console.error("Auth check failed:", e); }
 });
