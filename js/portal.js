@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAeIvzRYa7G2f0iqfpgmRaaRRoDDb-OBZ8",
@@ -105,7 +105,7 @@ function renderSubjectCards() {
 
         if (subject.type === 'premium') {
             if (isSubscribed) {
-                buttonText = 'Enter Course';
+                buttonText = 'Open Subject';
                 buttonClass = 'subscribed-action';
             }
         } else {
@@ -294,20 +294,16 @@ function calculateTotal() {
 }
 
 // Reviews Logic
-let reviewsData = [
-    { name: "Ahmed Raza", text: "The Stories of Standards feature is a game changer! It makes complex topics so easy to understand.", date: "2 days ago" },
-    { name: "Sara Khan", text: "I love the 24/7 AI Helper. It's like having a personal tutor available at 3 AM before the exam.", date: "1 week ago" }
-];
-
 function renderReviews() {
-    const savedReviews = localStorage.getItem('caversity_reviews');
-    if (savedReviews) reviewsData = JSON.parse(savedReviews);
-
     const rList = document.getElementById('reviews-list');
     if (!rList) return;
-    rList.innerHTML = '';
-    reviewsData.forEach(r => {
-        const initial = r.name.charAt(0).toUpperCase();
+
+    const reviewsQuery = query(collection(db, "reviews"), orderBy("timestamp", "desc"));
+    onSnapshot(reviewsQuery, (snapshot) => {
+        rList.innerHTML = '';
+        snapshot.forEach((doc) => {
+            const r = doc.data();
+            const initial = r.name ? r.name.charAt(0).toUpperCase() : 'A';
         rList.innerHTML += `
             <div class="review-card">
                 <div class="review-header">
@@ -319,6 +315,7 @@ function renderReviews() {
                 <p class="review-text">"${r.text}"</p>
                 <div class="review-date">${r.date}</div>
             </div>`;
+        });
     });
 }
 
@@ -331,12 +328,18 @@ window.submitFeedback = function() {
 
     if (!nameInput.value.trim() || !textInput.value.trim()) return alert('Please fill out both your name and review.');
 
-    reviewsData.unshift({ name: nameInput.value.trim(), text: textInput.value.trim(), date: "Just now" });
-    localStorage.setItem('caversity_reviews', JSON.stringify(reviewsData));
-    if (dontShow) localStorage.setItem('hide_feedback_popup', 'true');
-
-    renderReviews();
-    closeFeedbackModal();
-    nameInput.value = ''; textInput.value = '';
-    alert('Thank you! Your review has been added successfully.');
+    addDoc(collection(db, "reviews"), {
+        name: nameInput.value.trim(),
+        text: textInput.value.trim(),
+        date: "Just now",
+        timestamp: new Date().getTime()
+    }).then(() => {
+        if (dontShow) localStorage.setItem('hide_feedback_popup', 'true');
+        closeFeedbackModal();
+        nameInput.value = ''; textInput.value = '';
+        alert('Thank you! Your review has been added successfully.');
+    }).catch(e => {
+        console.error("Error adding review: ", e);
+        alert("Failed to submit review. Try again.");
+    });
 }
