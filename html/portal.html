@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caversity - Academic Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle cx="30" cy="30" r="28" fill="url(#logoGradient)" stroke="#ffffff" stroke-width="2"/>
+                <text x="30" y="38" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">C</text>
+                <rect x="18" y="20" width="24" height="2" fill="#ffffff" rx="1"/>
+                <rect x="18" y="24" width="20" height="2" fill="#ffffff" rx="1"/>
+                <rect x="18" y="28" width="16" height="2" fill="#ffffff" rx="1"/>
+            </svg>
+            <span class="logo-text">Caversity</span>
+        </div>
+        <div class="nav-actions">
+            <button class="sign-out-btn" id="sign-out-btn">Sign Out</button>
+        </div>
+    </nav>
+
+    <header class="dashboard-header">
+        <h1 id="welcome-message">Welcome back, Scholar</h1>
+        <p id="header-subtitle">Manage your academic journey with precision and ease.</p>
+    </header>
+
+    <!-- Discount Offer Card -->
+    <div class="discount-card-container">
+        <div class="discount-card" id="discount-card-main">
+            <div class="discount-card-shine"></div>
+            <div class="discount-card-content">
+                <div class="discount-card-badge">🎉 LIMITED OFFER</div>
+                <h2 class="discount-card-title">Get Instant Discount</h2>
+                <p class="discount-card-desc">Select any 3 subjects → Save Rs. 100</p>
+                <div class="discount-card-cta">CLICK TO AVAIL OFFER →</div>
+            </div>
+        </div>
+    </div>
+
+    <main class="dashboard-grid" id="subjects-grid">
+        <!-- Subjects will be dynamically injected here -->
+    </main>
+
+    <!-- Student Feedback Section -->
+    <section class="feedback-container" id="reviews-section">
+        <div class="feedback-header">
+            <h2>Student Feedback</h2>
+            <p>Your reviews help us improve. Share your experience!</p>
+            <button class="confirm-btn" onclick="openFeedbackModal()">Write a Review ✍️</button>
+        </div>
+        <div class="reviews-grid" id="reviews-list">
+            <!-- Reviews will be dynamically injected here -->
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="subscription-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Subscribe to Subject</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-section">
+                    <label for="student-name">Full Name</label>
+                    <input type="text" id="student-name" placeholder="Enter your full name">
+                </div>
+
+                <div class="selection-section">
+                    <h3>Selected Subject(s)</h3>
+                    <div class="single-subject-display" id="single-subject-display">
+                        <div class="subject-info-row">
+                            <span class="subject-name" id="modal-subject-name">Subject Name</span>
+                            <span class="subject-price" id="modal-subject-price">Rs. 200 / month</span>
+                        </div>
+                    </div>
+                    <div class="checkboxes-container" id="subject-checkboxes" style="display: none;">
+                        <!-- Checkboxes will be dynamically injected here -->
+                    </div>
+                </div>
+
+                <div id="coupon-container">
+                    <div class="coupon-section">
+                        <input type="text" id="coupon-code" placeholder="Enter coupon code (e.g., CAVERSITY100)">
+                        <button type="button" id="apply-coupon-btn">Apply</button>
+                    </div>
+                    <div id="coupon-message" class="coupon-message"></div>
+                </div>
+
+                <div class="total-section single-total">
+                    <div class="total-details">
+                        <span class="total-label">Total Amount</span>
+                        <div id="discount-line" class="discount-line" style="display: none;">
+                            Discount Applied: -Rs. <span id="discount-value">0</span>
+                        </div>
+                    </div>
+                    <div class="total-values">
+                        <span class="original-value" id="original-amount" style="display: none;"></span>
+                        <span class="total-value" id="total-amount">Rs. 200 / month</span>
+                    </div>
+                </div>
+
+                <div class="payment-note clean-note">
+                    <p>⚠️ Please attach your payment screenshot in the WhatsApp chat before sending the message.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="whatsapp-btn" id="confirm-subscription">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.5rem;">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.022 0-2.031.193-3.002.568L3.924 3.5 4.62 6.362c-.36 1.023-.556 2.102-.556 3.202 0 5.091 4.122 9.238 9.166 9.238 2.454 0 4.761-.936 6.484-2.487 1.723-1.55 2.67-3.676 2.67-5.888 0-5.144-4.122-9.238-9.166-9.238"/>
+                    </svg>
+                    Send via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Write a Review</h2>
+                <button class="modal-close" onclick="closeFeedbackModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-section">
+                    <label for="review-user-name">Your Name</label>
+                    <input type="text" id="review-user-name" placeholder="e.g. Ali Ahmed" autocomplete="off">
+                </div>
+                <div class="form-section">
+                    <label for="user-review">Your Feedback</label>
+                    <textarea id="user-review" placeholder="Write your honest feedback..." rows="4"></textarea>
+                </div>
+                <div class="checkbox-item" style="margin-bottom: 1.5rem; background: transparent; border: none; padding: 0;">
+                    <input type="checkbox" id="dont-show-again">
+                    <label for="dont-show-again">Don't show this popup automatically again</label>
+                </div>
+                <button class="confirm-btn" style="width: 100%;" onclick="submitFeedback()">Submit Review</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="portal.js"></script>
+</body>
+</html>
