@@ -100,7 +100,11 @@ registerForm.addEventListener('submit', async (e) => {
 
     } catch (error) {
         console.error(error);
-        alert("Registration Failed: " + error.message);
+        if (error.code === 'auth/email-already-in-use') {
+            alert("⚠️ Registration Failed: This email is already registered!\nEk email par doosra account nahi ban sakta. Agar aapki device change hui hai toh 'Sign In' karein aur Admin se token reset karwayen.");
+        } else {
+            alert("Registration Failed: " + error.message);
+        }
         btn.innerText = "Join Caversity";
         btn.disabled = false;
     }
@@ -147,7 +151,11 @@ signinForm.addEventListener('submit', async (e) => {
 
     } catch (error) {
         console.error(error);
-        alert("Login Failed: Invalid Email or Password.");
+        if (error.message.includes("Device Locked")) {
+            alert("⚠️ " + error.message);
+        } else {
+            alert("Login Failed: Invalid Email or Password.");
+        }
         btn.innerText = "Sign In";
         btn.disabled = false;
     }
