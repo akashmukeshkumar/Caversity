@@ -101,7 +101,7 @@ registerForm.addEventListener('submit', async (e) => {
     } catch (error) {
         console.error(error);
         if (error.code === 'auth/email-already-in-use') {
-            alert("⚠️ Registration Failed: This email is already registered!\nEk email par doosra account nahi ban sakta. Agar aapki device change hui hai toh 'Sign In' karein aur Admin se token reset karwayen.");
+            alert("⚠️ Registration Failed: This email address is already associated with an active account.\n\nIf you are trying to log in from a new device, please use the 'Sign In' option instead. If you are locked out, contact the Administrator to reset your device access.");
         } else {
             alert("Registration Failed: " + error.message);
         }
@@ -135,7 +135,7 @@ signinForm.addEventListener('submit', async (e) => {
 
             if (userData.deviceToken && userData.deviceToken !== "" && userData.deviceToken !== localToken) {
                 await auth.signOut(); // Fauran bahar nikal do
-                throw new Error("Device Locked! This account is registered on another device. Please contact Admin to reset.");
+                throw new Error("Access Denied: Your account is securely locked to another authorized device. Please contact the Administrator to reset your token for this new device.");
             }
 
             // Agar Admin ne DB se token khali (reset) kar diya hai, toh naya token lagao
