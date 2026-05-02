@@ -343,16 +343,16 @@ body::before {
 }
 
 .subscribed-action {
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: linear-gradient(135deg, #16a34a, #22c55e);
     color: #ffffff;
-    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.2);
     cursor: pointer;
 }
 
 .subscribed-action:hover {
-    background: linear-gradient(135deg, #059669, #047857);
+    background: linear-gradient(135deg, #15803d, #16a34a);
     transform: translateY(-2px);
-    box-shadow: 0 8px 12px -2px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 8px 12px -2px rgba(22, 163, 74, 0.3);
 }
 
 .no-subjects {
@@ -727,7 +727,7 @@ body::before {
 
 .reviews-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
 }
 
@@ -853,6 +853,10 @@ body::before {
 
     .dashboard-grid {
         padding: 0 1.5rem 3rem;
+        grid-template-columns: 1fr;
+    }
+
+    .reviews-grid {
         grid-template-columns: 1fr;
     }
 
