@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, doc, setDoc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAeIvzRYa7G2f0iqfpgmRaaRRoDDb-OBZ8",
@@ -121,14 +121,26 @@ signinForm.addEventListener('submit', async (e) => {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // 2. Overwrite Device Lock Token (Logs out previous device automatically)
-        const newDeviceToken = generateDeviceToken();
-        localStorage.setItem('caversity_device_token', newDeviceToken);
+        // 2. STRICT DEVICE LOCK CHECK
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            const localToken = localStorage.getItem('caversity_device_token');
 
-        // 3. Update Token in Firestore Database
-        await updateDoc(doc(db, "users", user.uid), {
-            deviceToken: newDeviceToken
-        });
+            if (userData.deviceToken && userData.deviceToken !== "" && userData.deviceToken !== localToken) {
+                await auth.signOut(); // Fauran bahar nikal do
+                throw new Error("Device Locked! This account is registered on another device. Please contact Admin to reset.");
+            }
+
+            // Agar Admin ne DB se token khali (reset) kar diya hai, toh naya token lagao
+            if (!userData.deviceToken || userData.deviceToken === "") {
+                const newDeviceToken = generateDeviceToken();
+                localStorage.setItem('caversity_device_token', newDeviceToken);
+                await updateDoc(docRef, { deviceToken: newDeviceToken });
+            }
+        }
 
         // Redirect to Portal
         window.location.href = "portal.html";
