@@ -96,8 +96,10 @@ registerForm.addEventListener('submit', async (e) => {
             }
         });
 
-        // Redirect to Portal
-        window.location.href = "portal.html";
+        // ⏳ Chota delay taake Firebase database properly sync ho jaye
+        setTimeout(() => {
+            window.location.href = "portal.html";
+        }, 800);
 
     } catch (error) {
         console.error(error);
@@ -147,17 +149,35 @@ signinForm.addEventListener('submit', async (e) => {
                 localStorage.setItem('caversity_device_token', newDeviceToken);
                 await updateDoc(docRef, { deviceToken: newDeviceToken });
             }
+        } else {
+            // 🛠️ AUTO-REPAIR BROKEN ACCOUNTS (Agar database folder miss ho gaya tha)
+            const newDeviceToken = generateDeviceToken();
+            localStorage.setItem('caversity_device_token', newDeviceToken);
+            await setDoc(docRef, {
+                name: "Scholar",
+                email: email,
+                phone: "",
+                deviceToken: newDeviceToken,
+                subscriptions: {
+                    caf1: false, caf2: false, caf3: false, caf4: false,
+                    caf5: false, caf6: false, caf7: false, caf8: false
+                }
+            });
         }
 
-        // Redirect to Portal
-        window.location.href = "portal.html";
+        // ⏳ Delay for sync
+        setTimeout(() => {
+            window.location.href = "portal.html";
+        }, 800);
 
     } catch (error) {
         console.error(error);
-        if (error.message.includes("Device Locked")) {
+        if (error.message && error.message.includes("Access Denied")) {
             alert("⚠️ " + error.message);
-        } else {
+        } else if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
             alert("Login Failed: Invalid Email or Password.");
+        } else {
+            alert("Error: " + error.message);
         }
         window.isAuthenticating = false;
         btn.innerText = "Sign In";
