@@ -70,7 +70,7 @@ registerForm.addEventListener('submit', async (e) => {
     const email = document.getElementById('register-email').value.trim();
     const phone = document.getElementById('register-phone').value.trim();
     const password = document.getElementById('register-password').value;
-    const btn = e.target.querySelector('button');
+    const btn = e.target.querySelector('button[type="submit"]');
 
     try {
         btn.innerText = "Creating Account...";
@@ -120,7 +120,7 @@ signinForm.addEventListener('submit', async (e) => {
     window.isAuthenticating = true; // Prevent security.js conflict during login
     const email = document.getElementById('signin-email').value.trim();
     const password = document.getElementById('signin-password').value;
-    const btn = e.target.querySelector('button');
+    const btn = e.target.querySelector('button[type="submit"]');
 
     try {
         btn.innerText = "Verifying...";
