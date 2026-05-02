@@ -17,16 +17,16 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const academicSubjects = [
-    { id: 'caf1', name: 'CAF 1: Financial Accounting and Reporting I', price: 200, type: 'premium', url: 'subjects/caf1/index.html' },
-    { id: 'caf2', name: 'CAF 2: Tax Practices', price: 200, type: 'premium', url: 'subjects/caf2/index.html' },
-    { id: 'caf3', name: 'CAF 3: Cost and Management Accounting', price: 200, type: 'premium', url: 'subjects/caf3/index.html' },
-    { id: 'caf4', name: 'CAF 4: Business Law', price: 200, type: 'premium', url: 'subjects/caf4/index.html' },
-    { id: 'caf5', name: 'CAF 5: Financial Accounting and Reporting II', price: 200, type: 'premium', url: 'subjects/caf5/index.html' },
-    { id: 'caf6', name: 'CAF 6: Managerial and Financial Analysis', price: 200, type: 'premium', url: 'subjects/caf6/index.html' },
-    { id: 'caf7', name: 'CAF 7: Company Law', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
-    { id: 'caf8', name: 'CAF 8: Audit and Assurance', price: 200, type: 'premium', url: 'subjects/caf8_audit/index.html' },
-    { id: 'resume', name: 'CA Resume Builder', price: 0, type: 'free', url: 'features/html/resume.html' },
-    { id: 'sanctuary', name: 'The Sanctuary', price: 0, type: 'free', url: 'sanctuary.html' }
+    { id: 'caf1', name: 'CAF 1: Financial Accounting and Reporting I', description: 'Master the fundamentals of financial accounting principles and reporting standards.', price: 200, type: 'premium', url: 'subjects/caf1/index.html' },
+    { id: 'caf2', name: 'CAF 2: Tax Practices', description: 'Comprehensive understanding of taxation principles and practices.', price: 200, type: 'premium', url: 'subjects/caf2/index.html' },
+    { id: 'caf3', name: 'CAF 3: Cost and Management Accounting', description: 'Advanced cost analysis and management accounting techniques.', price: 200, type: 'premium', url: 'subjects/caf3/index.html' },
+    { id: 'caf4', name: 'CAF 4: Business Law', description: 'Legal frameworks and principles governing business operations.', price: 200, type: 'premium', url: 'subjects/caf4/index.html' },
+    { id: 'caf5', name: 'CAF 5: Financial Accounting and Reporting II', description: 'Advanced financial reporting and complex accounting scenarios.', price: 200, type: 'premium', url: 'subjects/caf5/index.html' },
+    { id: 'caf6', name: 'CAF 6: Managerial and Financial Analysis', description: 'Strategic financial analysis and managerial decision-making tools.', price: 200, type: 'premium', url: 'subjects/caf6/index.html' },
+    { id: 'caf7', name: 'CAF 7: Company Law', description: 'Corporate law principles and company governance structures.', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
+    { id: 'caf8', name: 'CAF 8: Audit and Assurance', description: 'Audit methodologies and assurance services in professional practice.', price: 200, type: 'premium', url: 'subjects/caf8_audit/index.html' },
+    { id: 'resume', name: 'CA Resume Builder', description: 'Craft a standout, ATS-friendly resume tailored specifically for CA & ACCA students.', price: 0, type: 'free', url: 'features/html/resume.html' },
+    { id: 'sanctuary', name: 'The Sanctuary', description: 'Spiritual guidance and ethical foundations for professional excellence.', price: 0, type: 'free', url: 'sanctuary.html' }
 ];
 
 let currentUserProfile = { name: "Loading...", subscriptions: [] };
@@ -115,7 +115,7 @@ function renderSubjectCards() {
 
         card.innerHTML = `
             <h3 class="subject-title">${subject.name}</h3>
-            <p class="subject-description">Premium CA content tailored for your success.</p>
+            <p class="subject-description">${subject.description}</p>
             <button class="subject-action ${buttonClass}" data-id="${subject.id}">${buttonText}</button>
         `;
         grid.appendChild(card);
