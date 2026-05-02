@@ -105,7 +105,14 @@
             .drawer-panel.active { transform: translateX(0) !important; }
             .btn-share-adhkar:hover { background: #dbeafe !important; transform: scale(1.02); }
             @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-            @media (max-width: 600px) { .adhkar-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+            @media (max-width: 600px) { 
+                .adhkar-glass-container { padding: 20px 15px !important; border-radius: 16px !important; }
+                .adhkar-glass-container h2 { font-size: 24px !important; }
+                .adhkar-glass-container p { font-size: 14px !important; }
+                .adhkar-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; } 
+                .adhkar-card { height: 100px !important; padding: 15px 10px !important; border-radius: 12px !important; }
+                .adhkar-card-title { font-size: 14px !important; }
+            }
         </style>
         <script>
             (function() {
