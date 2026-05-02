@@ -1,0 +1,73 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAeIvzRYa7G2f0iqfpgmRaaRRoDDb-OBZ8",
+    authDomain: "caversity-48b29.firebaseapp.com",
+    projectId: "caversity-48b29",
+    storageBucket: "caversity-48b29.firebasestorage.app",
+    messagingSenderId: "836067330285",
+    appId: "1:836067330285:web:b20c125a385f7a2107e4e4",
+    measurementId: "G-9QYDS8R9RJ"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// HTML se Meta tags read karo taake pata chale page Free hai ya Premium
+const pageIdMeta = document.querySelector('meta[name="page-id"]');
+const pageTypeMeta = document.querySelector('meta[name="page-type"]');
+const PAGE_ID = pageIdMeta ? pageIdMeta.getAttribute("content") : null;
+const PAGE_TYPE = pageTypeMeta ? pageTypeMeta.getAttribute("content") : null;
+
+onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.replace("login.html"); return; }
+    
+    try {
+        const docSnap = await getDoc(doc(db, "users", user.uid));
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            
+            // 1. UNIVERSAL DEVICE LOCK (For both Free and Premium)
+            if (userData.deviceToken !== localStorage.getItem('caversity_device_token')) {
+                await signOut(auth);
+                window.location.replace("login.html");
+                return;
+            }
+            
+            // 2. PREMIUM SUBSCRIPTION CHECK (Sirf Premium Pages ke liye)
+            if (PAGE_TYPE === "premium" && PAGE_ID) {
+                const subExpiry = userData.subscriptions?.[PAGE_ID];
+                if (!subExpiry || new Date(subExpiry) <= new Date()) {
+                    alert("⚠️ Access Denied! You do not have an active subscription for this subject.");
+                    window.location.replace("portal.html");
+                    return;
+                }
+            }
+
+            // 3. SAB THEEK HAI - PAGE SHOW KAR DO
+            const lockStyle = document.getElementById('page-lock');
+            if(lockStyle) lockStyle.remove();
+            
+        } else {
+            window.location.replace("login.html");
+        }
+    } catch (e) { console.error("Auth check failed:", e); }
+});
+
+// 🔥 UNIVERSAL SHIELD: DISABLE INSPECT, COPY & RIGHT CLICK 🔥
+document.addEventListener('contextmenu', event => event.preventDefault()); // Right Click Block
+
+document.onkeydown = function(e) {
+    if(e.keyCode == 123) { return false; } // F12 Block
+    if(e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0))) { return false; }
+    if(e.ctrlKey && (e.keyCode == 'U'.charCodeAt(0) || e.keyCode == 'S'.charCodeAt(0))) { return false; } // View Source & Save Block
+};
+
+// Text Selection Disable
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.style.userSelect = "none";
+    document.body.style.webkitUserSelect = "none";
+});
