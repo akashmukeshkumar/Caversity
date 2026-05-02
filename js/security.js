@@ -23,7 +23,15 @@ const PAGE_ID = pageIdMeta ? pageIdMeta.getAttribute("content") : null;
 const PAGE_TYPE = pageTypeMeta ? pageTypeMeta.getAttribute("content") : null;
 
 onAuthStateChanged(auth, async (user) => {
-    if (!user) { window.location.replace("login.html"); return; }
+    if (!user) { 
+        if (PAGE_TYPE !== "auth") {
+            window.location.replace("login.html"); 
+        } else {
+            const lockStyle = document.getElementById('page-lock');
+            if (lockStyle) lockStyle.remove();
+        }
+        return; 
+    }
     
     try {
         const docSnap = await getDoc(doc(db, "users", user.uid));
@@ -45,6 +53,12 @@ onAuthStateChanged(auth, async (user) => {
                     window.location.replace("portal.html");
                     return;
                 }
+            }
+
+            // Agar login page par hai aur pehle se logged in hai, toh portal bhej do
+            if (PAGE_TYPE === "auth") {
+                window.location.replace("portal.html");
+                return;
             }
 
             // 3. SAB THEEK HAI - PAGE SHOW KAR DO
