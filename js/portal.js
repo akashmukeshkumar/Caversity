@@ -150,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
         signOutBtn.addEventListener('click', async () => {
             if (confirm('Are you sure you want to sign out?')) {
                 await signOut(auth);
-                localStorage.removeItem('caversity_device_token');
                 window.location.replace('login.html');
             }
         });
