@@ -22,10 +22,23 @@ const pageTypeMeta = document.querySelector('meta[name="page-type"]');
 const PAGE_ID = pageIdMeta ? pageIdMeta.getAttribute("content") : null;
 const PAGE_TYPE = pageTypeMeta ? pageTypeMeta.getAttribute("content") : null;
 
+// 🔥 SMART REDIRECT FUNCTION (Folder structure handle karne ke liye) 🔥
+function redirectTo(page) {
+    const path = window.location.pathname;
+    const htmlIndex = path.indexOf('/html/');
+    if (htmlIndex !== -1) {
+        const basePath = path.substring(0, htmlIndex);
+        window.location.replace(window.location.origin + basePath + "/html/" + page);
+    } else {
+        let basePath = path.replace(/\/[^\/]*$/, '');
+        window.location.replace(window.location.origin + basePath + "/html/" + page);
+    }
+}
+
 onAuthStateChanged(auth, async (user) => {
     if (!user) { 
         if (PAGE_TYPE !== "auth") {
-            window.location.replace("login.html"); 
+            redirectTo("login.html"); 
         } else {
             const lockStyle = document.getElementById('page-lock');
             if (lockStyle) lockStyle.remove();
@@ -41,7 +54,7 @@ onAuthStateChanged(auth, async (user) => {
             // 1. UNIVERSAL DEVICE LOCK (For both Free and Premium)
             if (userData.deviceToken !== localStorage.getItem('caversity_device_token')) {
                 await signOut(auth);
-                window.location.replace("login.html");
+                redirectTo("login.html");
                 return;
             }
             
@@ -50,14 +63,14 @@ onAuthStateChanged(auth, async (user) => {
                 const subExpiry = userData.subscriptions?.[PAGE_ID];
                 if (!subExpiry || new Date(subExpiry) <= new Date()) {
                     alert("⚠️ Access Denied! You do not have an active subscription for this subject.");
-                    window.location.replace("portal.html");
+                    redirectTo("portal.html");
                     return;
                 }
             }
 
             // Agar login page par hai aur pehle se logged in hai, toh portal bhej do
             if (PAGE_TYPE === "auth") {
-                window.location.replace("portal.html");
+                redirectTo("portal.html");
                 return;
             }
 
@@ -66,7 +79,7 @@ onAuthStateChanged(auth, async (user) => {
             if(lockStyle) lockStyle.remove();
             
         } else {
-            window.location.replace("login.html");
+            redirectTo("login.html");
         }
     } catch (e) { console.error("Auth check failed:", e); }
 });
