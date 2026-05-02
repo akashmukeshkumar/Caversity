@@ -25,7 +25,7 @@ const academicSubjects = [
     { id: 'caf6', name: 'CAF 6: Managerial and Financial Analysis', price: 200, type: 'premium', url: 'subjects/caf6/index.html' },
     { id: 'caf7', name: 'CAF 7: Company Law', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
     { id: 'caf8', name: 'CAF 8: Audit and Assurance', price: 200, type: 'premium', url: 'subjects/caf8_audit/index.html' },
-    { id: 'resume', name: 'CA Resume Builder', price: 0, type: 'free', url: 'resume.html' },
+    { id: 'resume', name: 'CA Resume Builder', price: 0, type: 'free', url: 'features/html/resume.html' },
     { id: 'sanctuary', name: 'The Sanctuary', price: 0, type: 'free', url: 'sanctuary.html' }
 ];
 
