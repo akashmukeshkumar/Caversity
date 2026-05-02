@@ -835,44 +835,43 @@ body::before {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .navbar {
-        padding: 1rem 1.5rem;
-    }
+    .navbar { padding: 0.75rem 1.25rem; }
+    .logo svg { width: 40px; height: 40px; }
+    .logo-text { font-size: 1.35rem; }
+    .sign-out-btn { padding: 0.5rem 1rem; font-size: 0.8rem; }
+    
+    .dashboard-header { padding: 2rem 1.25rem 1rem; }
+    .dashboard-header h1 { font-size: 2rem; }
+    .dashboard-header p { font-size: 1rem; }
+    
+    .discount-card-container { padding: 0 1.25rem; margin: -1rem auto 1.5rem; }
+    .discount-card { padding: 1.5rem; }
+    .discount-card-title { font-size: 1.5rem; }
+    .discount-card-desc { font-size: 1rem; margin-bottom: 1rem; }
+    .discount-card-cta { padding: 0.6rem 1.2rem; font-size: 0.85rem; width: 100%; text-align: center; }
+    
+    .dashboard-grid { padding: 0 1.25rem 2rem; gap: 1.25rem; }
+    .subject-card { padding: 1.5rem; }
+    .subject-title { font-size: 1.35rem; }
+    .subject-description { font-size: 0.95rem; }
+    .subject-action { padding: 0.75rem 1rem; width: 100%; }
 
-    .logo-text {
-        font-size: 1.5rem;
-    }
-
-    .dashboard-header {
-        padding: 3rem 1.5rem 1.5rem;
-    }
-
-    .dashboard-header h1 {
-        font-size: 2.25rem;
-    }
-
-    .dashboard-grid {
-        padding: 0 1.5rem 3rem;
-        grid-template-columns: 1fr;
-    }
-
-    .reviews-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .subject-card {
-        padding: 2rem;
-    }
-
-    .modal-container {
-        width: 95%;
-        margin: 1rem;
-    }
-
-    .modal-header, .modal-body, .modal-footer {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
+    .feedback-container { padding: 0 1.25rem; margin: 1rem auto 3rem; }
+    .feedback-header h2 { font-size: 2rem; }
+    .feedback-header p { font-size: 1rem; }
+    .confirm-btn { width: 100%; padding: 0.875rem; }
+    .reviews-grid { grid-template-columns: 1fr; gap: 1rem; }
+    
+    .modal-container { width: 92%; margin: 1rem; max-height: 90vh; }
+    .modal-header { padding: 1.5rem 1.25rem 1rem; }
+    .modal-header h2 { font-size: 1.5rem; }
+    .modal-body { padding: 0 1.25rem 1.5rem; }
+    .modal-footer { padding: 1.25rem; }
+    
+    .coupon-section { flex-direction: column; }
+    .coupon-section button { padding: 0.75rem; width: 100%; }
+    .single-total { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .total-values { align-items: flex-start; }
 }
 
 @media (max-width: 480px) {
