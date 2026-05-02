@@ -1,1 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caversity - Your Universe of CA Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg-blur"></div>
+        <nav class="navbar">
+            <div class="logo">
+                <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="30" cy="30" r="28" fill="url(#logoGradient)" stroke="#ffffff" stroke-width="2"/>
+                    <text x="30" y="38" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">C</text>
+                    <rect x="18" y="20" width="24" height="2" fill="#ffffff" rx="1"/>
+                    <rect x="18" y="24" width="20" height="2" fill="#ffffff" rx="1"/>
+                    <rect x="18" y="28" width="16" height="2" fill="#ffffff" rx="1"/>
+                </svg>
+                <span class="logo-text">Caversity</span>
+            </div>
+            <button class="nav-signin-btn" id="nav-signin-btn">Sign In</button>
+        </nav>
 
+        <div class="hero-content">
+            <h1 class="hero-title">Your Universe of CA Learning.</h1>
+            <p class="hero-subtitle">Premium subjects at Rs. 200/month. Cancel anytime.</p>
+            
+            <div class="email-catcher">
+                <input type="email" id="hero-email" placeholder="Email address" required>
+                <button class="get-started-btn" id="hero-get-started">Get Started ></button>
+            </div>
+            <p class="catcher-note">Ready to start? Enter your email to create or restart your membership.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2 class="section-title">More Reasons to Join</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="36" height="36" stroke="#3b82f6" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                </div>
+                <h3>Stories of Standards</h3>
+                <p>Master complex accounting standards through engaging, Netflix-style cinematic stories and practical scenarios.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="36" height="36" stroke="#3b82f6" stroke-width="2" fill="none"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>
+                </div>
+                <h3>24/7 Custom AI Helper</h3>
+                <p>Stuck on a concept at 3 AM? Our custom AI is always awake to provide detailed, step-by-step explanations.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="36" height="36" stroke="#3b82f6" stroke-width="2" fill="none"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                </div>
+                <h3>Examiner Traps & Podcasts</h3>
+                <p>Deep-dive past paper analysis and exclusive podcasts discussing exactly where students fail and how to avoid it.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="36" height="36" stroke="#3b82f6" stroke-width="2" fill="none"><path d="M16 8.5V10c0 1.1-.9 2-2 2h-4c-1.1 0-2-.9-2-2V8.5"></path><path d="M8 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path><path d="M21 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path><path d="M14.5 17.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path><path d="M12 12v3"></path></svg>
+                </div>
+                <h3>Mindmaps & Recall</h3>
+                <p>Scientifically proven concept recall techniques with visually stunning mindmaps for every single subject.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="36" height="36" stroke="#3b82f6" stroke-width="2" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M12 6h.01"></path><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path></svg>
+                </div>
+                <h3>Real-Time Firm Experience</h3>
+                <p>Bridge the gap between theory and practice with case studies simulating actual top-tier firm scenarios.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="36" height="36" stroke="#3b82f6" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M16 13H8"></path><path d="M16 17H8"></path><path d="M10 9H8"></path></svg>
+                </div>
+                <h3>Extensive MCQ Practice</h3>
+                <p>Test your knowledge with a massive bank of practice questions, complete with instant feedback and logic breakdowns.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-accordion">
+            <div class="faq-item">
+                <button class="faq-question">What are 'Stories of Standards'? <span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Instead of traditional boring lectures, we teach complex CA standards through highly engaging, Netflix-style cinematic stories and scenarios that make concepts impossible to forget.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">How does the 24/7 AI Helper work? <span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Our custom-trained AI assistant is integrated right into your dashboard. You can ask it to explain complex examiner traps, solve specific queries, or guide you through past papers step-by-step.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Can I access mindmaps and MCQs on my phone? <span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Absolutely! Caversity is fully responsive. You can review our detailed mindmaps, practice MCQs, and listen to concept podcasts on any device smoothly.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Is 'The Sanctuary' really free? <span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Yes. We believe in building character alongside competence. The Sanctuary provides ethical and spiritual guidance, completely free of charge for everyone.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">How do I pay the Rs. 200/month fee? <span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Simply select your desired subjects on the portal, generate your request, and send us a screenshot of your payment via WhatsApp. We will instantly activate your premium access.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Modal (Hidden by Default) -->
+    <div class="auth-modal-overlay" id="auth-modal">
+        <div class="auth-modal-container">
+            <button class="modal-close" id="auth-close-btn">&times;</button>
+            
+            <div class="auth-logo-center">
+                <svg viewBox="0 0 60 60" width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="30" cy="30" r="28" fill="url(#logoGradient)" stroke="#2563eb" stroke-width="2"/>
+                    <text x="30" y="38" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">C</text>
+                </svg>
+            </div>
+
+            <!-- Sign In Form -->
+            <form id="signin-form" class="auth-form active">
+                <h2 class="auth-title">Sign In</h2>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="signin-email" placeholder="name@example.com" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="signin-password" placeholder="••••••••" required>
+                        <button type="button" class="toggle-password">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="auth-submit-btn">Sign In</button>
+                <div class="auth-footer">
+                    <p>New to Caversity? <a href="#" id="link-to-register">Register now.</a></p>
+                </div>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form">
+                <h2 class="auth-title">Create your Scholar Account</h2>
+                <p class="auth-subtitle">Start your premium CA journey today.</p>
+                
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="register-name" placeholder="e.g. Muhammad Ali" required>
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="register-email" placeholder="name@example.com" required>
+                </div>
+                <div class="input-group">
+                    <label>WhatsApp Number</label>
+                    <input type="tel" id="register-phone" placeholder="e.g. +92 300 1234567" required>
+                </div>
+                <div class="input-group">
+                    <label>Create Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="register-password" placeholder="••••••••" required>
+                        <button type="button" class="toggle-password">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="auth-submit-btn">Join Caversity</button>
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="#" id="link-to-signin">Sign In.</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">Caversity</div>
+            <p class="footer-copyright">&copy; 2024 Caversity. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Logic Script -->
+    <script type="module" src="login.js"></script>
+</body>
+</html>
