@@ -65,6 +65,7 @@ function generateDeviceToken() {
 // 🔥 REGISTER (SIGN UP) LOGIC
 registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    window.isAuthenticating = true; // Prevent security.js conflict during DB creation
     const name = document.getElementById('register-name').value.trim();
     const email = document.getElementById('register-email').value.trim();
     const phone = document.getElementById('register-phone').value.trim();
@@ -105,6 +106,7 @@ registerForm.addEventListener('submit', async (e) => {
         } else {
             alert("Registration Failed: " + error.message);
         }
+        window.isAuthenticating = false;
         btn.innerText = "Join Caversity";
         btn.disabled = false;
     }
@@ -113,6 +115,7 @@ registerForm.addEventListener('submit', async (e) => {
 // 🔥 LOGIN (SIGN IN) LOGIC
 signinForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    window.isAuthenticating = true; // Prevent security.js conflict during login
     const email = document.getElementById('signin-email').value.trim();
     const password = document.getElementById('signin-password').value;
     const btn = e.target.querySelector('button');
@@ -156,14 +159,8 @@ signinForm.addEventListener('submit', async (e) => {
         } else {
             alert("Login Failed: Invalid Email or Password.");
         }
+        window.isAuthenticating = false;
         btn.innerText = "Sign In";
         btn.disabled = false;
-    }
-});
-
-// Auto-Redirect if Already Logged In
-onAuthStateChanged(auth, (user) => {
-    if (user && localStorage.getItem('caversity_device_token')) {
-        window.location.replace("portal.html");
     }
 });
