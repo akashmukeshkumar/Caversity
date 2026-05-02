@@ -54,6 +54,7 @@ onAuthStateChanged(auth, async (user) => {
             // 1. UNIVERSAL DEVICE LOCK (For both Free and Premium)
             if (userData.deviceToken !== localStorage.getItem('caversity_device_token')) {
                 await signOut(auth);
+                alert("⚠️ Access Denied!\nYour account is locked to another device. For security, you have been logged out here.\n\nPlease contact Admin if you want to reset your device access.");
                 redirectTo("login.html");
                 return;
             }
