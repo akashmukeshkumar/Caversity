@@ -1,0 +1,159 @@
+/* Cinematic & Horror Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+body {
+    margin: 0; overflow: hidden; background-color: #000;
+    font-family: 'Inter', sans-serif; color: #fff;
+    -webkit-tap-highlight-color: transparent; user-select: none;
+}
+
+/* 🎥 Video Styling: Hidden completely until started */
+#graveVideo {
+    position: absolute; top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    object-fit: cover; z-index: 1; 
+    transform: scale(1.05); /* Edge hiding zoom */
+    filter: brightness(0.8) contrast(1.2);
+    opacity: 0; /* 🔥 VIDEO COMPLETELY INVISIBLE AT START 🔥 */
+    transition: opacity 1.5s ease, filter 2s ease;
+}
+
+/* 🌑 Edge Blender & Vignette */
+.edge-blender {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: 
+        linear-gradient(to right, #000 0%, rgba(0,0,0,0) 15%, rgba(0,0,0,0) 85%, #000 100%),
+        radial-gradient(circle at center, transparent 20%, #000 100%);
+}
+
+/* 🔴 Horror Azaab Shake & Blood Effect */
+@keyframes horrorShake {
+    0% { transform: translate(2px, 2px) scale(1.06); filter: hue-rotate(0deg) brightness(1.2); }
+    20% { transform: translate(-4px, -3px) scale(1.08); background-color: rgba(153, 27, 27, 0.4); }
+    40% { transform: translate(4px, 0px) scale(1.05); }
+    60% { transform: translate(-3px, 4px) scale(1.07); background-color: rgba(153, 27, 27, 0.2); }
+    80% { transform: translate(4px, -3px) scale(1.06); }
+    100% { transform: translate(-2px, 2px) scale(1.05); filter: hue-rotate(-20deg) brightness(0.8); }
+}
+.shake-active { animation: horrorShake 0.1s infinite; }
+
+#bloodFlash {
+    position: absolute; inset: 0; background: #991b1b; mix-blend-mode: multiply;
+    opacity: 0; z-index: 4; pointer-events: none; transition: opacity 0.5s;
+}
+.blood-active { opacity: 0.85 !important; }
+
+/* ✨ Jannah Heavenly Glow */
+#jannahGlow {
+    position: absolute; inset: 0; z-index: 4; pointer-events: none;
+    background: radial-gradient(circle at center, rgba(167, 243, 208, 0.3) 0%, rgba(250, 250, 210, 0.15) 50%, transparent 100%);
+    mix-blend-mode: screen; opacity: 0; transition: opacity 4s ease;
+}
+.jannah-active { opacity: 1 !important; }
+
+/* 🖥️ UI Layers & Interactions */
+#uiLayer {
+    position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+    opacity: 0; pointer-events: none; transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: scale(0.9);
+}
+.ui-visible { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) !important; }
+
+.cinematic-text {
+    font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 900; color: #fff;
+    text-align: center; text-transform: uppercase; letter-spacing: 5px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3);
+    margin-bottom: 2.5rem; padding: 0 20px;
+}
+@media (min-width: 768px) { .cinematic-text { font-size: 3.5rem; letter-spacing: 8px; } }
+
+.choice-btn {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: #e2e8f0;
+    padding: 16px 30px; margin: 10px; font-size: 1.1rem; font-family: 'Inter', sans-serif;
+    text-transform: uppercase; letter-spacing: 3px; border-radius: 4px; cursor: pointer;
+    transition: all 0.3s ease; width: 85%; max-width: 350px; position: relative; overflow: hidden;
+}
+.choice-btn:hover, .choice-btn:active { 
+    background: rgba(255,255,255,0.15); color: #fff; border-color: #fff; 
+    transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
+}
+
+/* Panic Timer */
+#timerBarContainer { width: 85%; max-width: 400px; height: 3px; background: rgba(255,255,255,0.1); margin-top: 3rem; border-radius: 2px; }
+#timerBar { width: 100%; height: 100%; background: #ef4444; transition: width 0.1s linear; box-shadow: 0 0 10px #ef4444; }
+
+/* Final Hadith Text Layer */
+#finalTextLayer {
+    position: absolute; inset: 0; z-index: 20; background: rgba(0,0,0,0.95);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; transition: opacity 3s ease; padding: 30px;
+}
+.final-hadith {
+    color: #fff; font-size: 1.2rem; font-family: 'Cinzel', serif;
+    text-align: center; line-height: 1.8; max-width: 800px; letter-spacing: 1px;
+    opacity: 0; transform: translateY(20px); transition: all 2s ease;
+}
+@media (min-width: 768px) { .final-hadith { font-size: 1.8rem; } }
+.reveal-text { opacity: 1; transform: translateY(0); }
+
+/* 🌑 Intro Screen - 🔥 GUARANTEED IMAGE LOAD 🔥 */
+#introScreen {
+    position: absolute; inset: 0; z-index: 50; 
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    /* Explicitly fixed the .jpg extension and added fallback color */
+    background-color: #050505;
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('../assets/quint.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 1.5s ease;
+}
+
+.name-input {
+    background: rgba(0,0,0,0.4); border: none; border-bottom: 2px solid #fff;
+    color: #fff; font-size: 1.5rem; text-align: center; padding: 12px; margin-bottom: 30px;
+    outline: none; font-family: 'Cinzel', serif; transition: all 0.3s;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8); border-radius: 4px 4px 0 0;
+}
+.name-input:focus { border-color: #ef4444; background: rgba(0,0,0,0.6); }
+
+/* Input Error Shake */
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+.input-error { border-color: #ef4444 !important; animation: errorShake 0.3s; }
+.input-error::placeholder { color: #ef4444; opacity: 0.9; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+
+/* 🎬 NETFLIX STYLE EXIT BUTTON */
+.exit-btn {
+    margin-top: 50px;
+    padding: 12px 35px;
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #a3a3a3;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    pointer-events: none; /* Start mein click nahi hoga */
+}
+.exit-btn:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    transform: translateY(0) scale(1.05) !important;
+}
+.exit-btn.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto; /* Ab click ho sakega */
+}
