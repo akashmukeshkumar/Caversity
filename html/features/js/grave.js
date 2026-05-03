@@ -97,8 +97,8 @@ function trackVideoTime() {
 
     if (hasFailed) {
         if (t >= AZAAB_END) {
-            // Loop Squeeze scene for ~7.5 seconds
-            if (Date.now() - azaabStartTime < 7500) {
+            // Loop Squeeze scene for ~4.8 seconds (2 times instead of 3)
+            if (Date.now() - azaabStartTime < 4800) {
                 video.currentTime = AZAAB_START; 
             } else {
                 video.pause();
