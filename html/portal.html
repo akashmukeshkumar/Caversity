@@ -172,12 +172,97 @@
                     document.body.style.overflow = 'auto';
                 }
                 window.triggerShare = function(type) {
-                    const msg = "Hey! Check out this amazing Emotion & Spiritual guidance portal at Caversity. It really helps calm the mind and soul! 🌟";
-                    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+                    let basePath = window.location.pathname.substring(0, window.location.pathname.indexOf('/html/'));
+                    const siteUrl = window.location.origin + basePath + "/html/login.html";
+                    let text = "";
+                    switch(type) {
+                        case 'cv':
+                            text = `Elevate your professional profile with Caversity's ATS-friendly Resume Builder, designed specifically for CA and ACCA students. Create your standout resume for free today!\n\nAccess here: ${siteUrl}`;
+                            break;
+                        case 'qarcs':
+                            text = `Discover Q-ARCS at Caversity—a groundbreaking 3D visual engine connecting corporate ethics with deep Quranic insights. A truly profound perspective awaits.\n\nExplore here: ${siteUrl}`;
+                            break;
+                        case 'adhkar':
+                            text = `Find spiritual comfort and guidance tailored to your emotional state. Caversity's Adhkar portal provides relevant supplications to help calm the mind and soul during stressful times.\n\nFind your peace here: ${siteUrl}`;
+                            break;
+                    }
+                    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+                    window.open(whatsappUrl, '_blank');
                 }
             })();
         </script>
     </section>
+
+    <!-- 🔥 Surprise Box Section 🔥 -->
+    <style>
+        #surprise-section { max-width: 800px; margin: 0 auto 5rem; padding: 0 2.5rem; text-align: center; }
+        .surprise-box {
+            background: linear-gradient(135deg, #0f172a, #1e40af);
+            border-radius: 1.5rem;
+            padding: 3rem 2rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(30, 64, 175, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .surprise-box:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(30, 64, 175, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2) inset; }
+        .surprise-front .icon { font-size: 4rem; display: block; margin-bottom: 1rem; animation: bounce 2s infinite; }
+        .surprise-front h3 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .surprise-front p { font-size: 1.1rem; color: #cbd5e1; }
+        .surprise-content { display: none; animation: fadeIn 0.6s ease-out; }
+        .surprise-content .quote-icon { font-size: 3rem; color: #3b82f6; display: block; margin-bottom: 0.5rem; opacity: 0.8; }
+        .surprise-content h4 { font-size: 1.2rem; font-weight: 600; color: #60a5fa; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; }
+        .surprise-content p { font-size: 1.5rem; font-weight: 500; font-style: italic; line-height: 1.6; margin-bottom: 1.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .surprise-content .quote-ref { font-size: 0.9rem; font-weight: 600; background: rgba(255,255,255,0.15); padding: 0.4rem 1rem; border-radius: 999px; letter-spacing: 1px;}
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @media (max-width: 768px) { #surprise-section { padding: 0 1.25rem; } .surprise-box { padding: 2rem 1.5rem; } .surprise-front h3 { font-size: 1.5rem; } .surprise-content p { font-size: 1.25rem; } }
+    </style>
+
+    <section id="surprise-section">
+        <div class="surprise-box" onclick="revealSurprise()">
+            <div class="surprise-front" id="box-front">
+                <span class="icon">🎁</span>
+                <h3>A Special Message for You</h3>
+                <p>Click to open your daily dose of reality.</p>
+            </div>
+            <div class="surprise-content" id="box-content">
+                <span class="quote-icon">❝</span>
+                <h4 id="daily-type">Loading...</h4>
+                <p id="daily-text">Fetching your surprise...</p>
+                <span class="quote-ref" id="daily-ref"></span>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let quotesCollection = [];
+        fetch('../assets/surprise.json')
+            .then(r => r.json())
+            .then(data => { quotesCollection = data; })
+            .catch(e => console.error('Error loading surprises:', e));
+
+        function revealSurprise() {
+            if(quotesCollection.length === 0) return;
+            const front = document.getElementById('box-front');
+            const content = document.getElementById('box-content');
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = now - start; 
+            const twelveHourBlock = 1000 * 60 * 60 * 12;
+            const currentSlot = Math.floor(diff / twelveHourBlock);
+            const index = currentSlot % quotesCollection.length;
+            const todayQuote = quotesCollection[index];
+
+            document.getElementById('daily-type').innerText = todayQuote.type;
+            document.getElementById('daily-text').innerText = '"' + todayQuote.text + '"';
+            document.getElementById('daily-ref').innerText = "- " + todayQuote.ref;
+
+            front.style.display = 'none';
+            content.style.display = 'block';
+        }
+    </script>
 
     <!-- Student Feedback Section -->
     <section class="feedback-container" id="reviews-section">
