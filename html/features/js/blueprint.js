@@ -29,7 +29,7 @@ async function initSystem() {
     }
 
     try {
-        const res = await fetch('../assets/divine-blueprint.json');
+        const res = await fetch('../assets/divine_blueprint.json');
         divineData = await res.json();
         divineData.forEach(item => {
             const titleEl = document.getElementById(`sidebarParaTitle-${item.day}`);
@@ -68,6 +68,7 @@ async function loadStation(dayNumber) {
     let allVerses = [];
     try {
         for (let p = startPage; p <= endPage; p++) {
+            console.log("Fetching Quran Page: ", p); // 🔥 Helps you see API working in console
             const url = `${API_BASE}/verses/by_page/${p}?language=en&words=true&word_fields=text_indopak,translation&translations=${TRANSLATION_IDS}&fields=text_indopak`;
             const res = await fetch(url);
             if (!res.ok) throw new Error("API Limit");
