@@ -26,7 +26,7 @@ const academicSubjects = [
     { id: 'caf7', name: 'CAF 7: Company Law', description: 'Corporate law principles and company governance structures.', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
     { id: 'caf8', name: 'CAF 8: Audit and Assurance', description: 'Audit methodologies and assurance services in professional practice.', price: 200, type: 'premium', url: 'subjects/caf8_audit/index.html' },
     { id: 'resume', name: 'CA Resume Builder', description: 'Craft a standout, ATS-friendly resume tailored specifically for CA & ACCA students.', price: 0, type: 'free', url: 'features/html/resume.html' },
-    { id: 'sanctuary', name: 'The Sanctuary', description: 'Spiritual guidance and ethical foundations for professional excellence.', price: 0, type: 'free', url: 'sanctuary.html' }
+    { id: 'sanctuary', name: 'The Sanctuary', description: 'Spiritual guidance and ethical foundations for professional excellence.', price: 0, type: 'free', url: 'features/html/blueprint.html' }
 ];
 
 let currentUserProfile = { name: "Loading...", subscriptions: [] };
