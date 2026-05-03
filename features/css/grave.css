@@ -103,7 +103,7 @@ body {
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     /* Explicitly fixed the .jpg extension and added fallback color */
     background-color: #050505;
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('../assets/quint.jpg');
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('../assets/quint.jpg'); /* This path is correct relative to the CSS file */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
