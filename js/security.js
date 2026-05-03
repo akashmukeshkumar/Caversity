@@ -24,15 +24,9 @@ const PAGE_TYPE = pageTypeMeta ? pageTypeMeta.getAttribute("content") : null;
 
 // 🔥 SMART REDIRECT FUNCTION (Folder structure handle karne ke liye) 🔥
 function redirectTo(page) {
-    const path = window.location.pathname;
-    const htmlIndex = path.indexOf('/html/');
-    if (htmlIndex !== -1) {
-        const basePath = path.substring(0, htmlIndex);
-        window.location.replace(window.location.origin + basePath + "/html/" + page);
-    } else {
-        let basePath = path.replace(/\/[^\/]*$/, '');
-        window.location.replace(window.location.origin + basePath + "/html/" + page);
-    }
+    // Since all HTML files are now in the root, we can use a simple relative path.
+    // This is robust for both local `file:///` and server `https://...` paths.
+    window.location.replace(page);
 }
 
 onAuthStateChanged(auth, async (user) => {
