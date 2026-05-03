@@ -9,10 +9,10 @@
     <meta name="page-id" content="portal">
     <meta name="page-type" content="dashboard">
     <style id="page-lock">body { display: none !important; }</style>
-    <script type="module" src="../js/security.js"></script>
+    <script type="module" src="js/security.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/portal.css">
+    <link rel="stylesheet" href="css/portal.css">
     <!-- Font Awesome for Adhkar section icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -126,7 +126,7 @@
                 const overlay = document.getElementById('adhkar-drawer-overlay');
 
                 // Set path linked to the 'features/assets' folder
-                fetch('../assets/emotion.json').then(r => r.json()).then(d => { appEmotions = d; return fetch('../assets/resource.json'); }).then(r => r.json()).then(d => { appResources = d; initGrid(); }).catch(e => { console.error(e); gridArea.innerHTML = '<p style="color:red; text-align:center;">Error loading Adhkar data.</p>'; });
+                fetch('assets/emotion.json').then(r => r.json()).then(d => { appEmotions = d; return fetch('assets/resource.json'); }).then(r => r.json()).then(d => { appResources = d; initGrid(); }).catch(e => { console.error(e); gridArea.innerHTML = '<p style="color:red; text-align:center;">Error loading Adhkar data.</p>'; });
 
                 function initGrid() {
                     gridArea.innerHTML = '';
@@ -172,8 +172,7 @@
                     document.body.style.overflow = 'auto';
                 }
                 window.triggerShare = function(type) {
-                    let basePath = window.location.pathname.substring(0, window.location.pathname.indexOf('/html/'));
-                    const siteUrl = window.location.origin + basePath + "/html/login.html";
+                    const siteUrl = new URL('login.html', window.location.href).href;
                     let text = "";
                     switch(type) {
                         case 'cv':
@@ -238,7 +237,7 @@
 
     <script>
         let quotesCollection = [];
-        fetch('../assets/surprise.json')
+        fetch('assets/surprise.json')
             .then(r => r.json())
             .then(data => { quotesCollection = data; })
             .catch(e => console.error('Error loading surprises:', e));
@@ -362,6 +361,6 @@
         </div>
     </div>
 
-    <script type="module" src="../js/portal.js"></script>
+    <script type="module" src="js/portal.js"></script>
 </body>
 </html>
