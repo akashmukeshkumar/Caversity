@@ -355,6 +355,27 @@ body::before {
     box-shadow: 0 8px 12px -2px rgba(22, 163, 74, 0.3);
 }
 
+.share-action-btn {
+    background: #f8fafc;
+    color: #25d366;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    width: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.share-action-btn:hover {
+    background: #25d366;
+    color: #ffffff;
+    border-color: #25d366;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(37, 211, 102, 0.2);
+}
+
 .no-subjects {
     text-align: center;
     color: #64748b;
