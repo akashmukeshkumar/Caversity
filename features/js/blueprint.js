@@ -29,7 +29,7 @@ async function initSystem() {
     }
 
     try {
-        const res = await fetch('../assets/divine_blueprint.json');
+        const res = await fetch('features/assets/divine_blueprint.json');
         divineData = await res.json();
         divineData.forEach(item => {
             const titleEl = document.getElementById(`sidebarParaTitle-${item.day}`);
@@ -303,7 +303,7 @@ function renderBlueprintCards(rukuData) {
 
 function initDayNightTheme() {
     if (new Date().getHours() >= 18 || new Date().getHours() < 6) document.documentElement.classList.add('dark');
-    audio.src = '../assets/night.mp3'; audio.load();
+    audio.src = 'features/assets/night.mp3'; audio.load();
 }
 
 function toggleMusic() {
