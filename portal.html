@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caversity - Academic Dashboard</title>
+
+    <!-- 🔥 UNIVERSAL SECURITY LOCK 🔥 -->
+    <meta name="page-id" content="portal">
+    <meta name="page-type" content="dashboard">
+    <style id="page-lock">body { display: none !important; }</style>
+    <script type="module" src="../js/security.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/portal.css">
+    <!-- Font Awesome for Adhkar section icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle cx="30" cy="30" r="28" fill="url(#logoGradient)" stroke="#ffffff" stroke-width="2"/>
+                <text x="30" y="38" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">C</text>
+                <rect x="18" y="20" width="24" height="2" fill="#ffffff" rx="1"/>
+                <rect x="18" y="24" width="20" height="2" fill="#ffffff" rx="1"/>
+                <rect x="18" y="28" width="16" height="2" fill="#ffffff" rx="1"/>
+            </svg>
+            <span class="logo-text">Caversity</span>
+        </div>
+        <div class="nav-actions">
+            <button class="sign-out-btn" id="sign-out-btn">Sign Out</button>
+        </div>
+    </nav>
+
+    <header class="dashboard-header">
+        <h1 id="welcome-message">Welcome back, Scholar</h1>
+        <p id="header-subtitle">Manage your academic journey with precision and ease.</p>
+    </header>
+
+    <!-- Discount Offer Card -->
+    <div class="discount-card-container">
+        <div class="discount-card" id="discount-card-main">
+            <div class="discount-card-shine"></div>
+            <div class="discount-card-content">
+                <div class="discount-card-badge">🎉 LIMITED OFFER</div>
+                <h2 class="discount-card-title">Get Instant Discount</h2>
+                <p class="discount-card-desc">Select any 3 subjects → Save Rs. 100</p>
+                <div class="discount-card-cta">CLICK TO AVAIL OFFER →</div>
+            </div>
+        </div>
+    </div>
+
+    <main class="dashboard-grid" id="subjects-grid">
+        <!-- Subjects will be dynamically injected here -->
+    </main>
+
+    <!-- 🔥 Adhkar (Emotions) App Section 🔥 -->
+    <section id="adhkar-app-section" style="padding: 40px 20px; font-family: 'Inter', sans-serif; max-width: 1100px; margin: 0 auto;">
+        <div class="adhkar-glass-container" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-radius: 24px; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.6);">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="font-size: 32px; font-weight: 800; color: #0f172a; margin-bottom: 8px;">How are you feeling?</h2>
+                <p style="color: #64748b; font-size: 16px; font-weight: 500;">Select an emotion to find comfort & divine guidance.</p>
+            </div>
+            
+            <div class="adhkar-grid" id="adhkar-grid-area" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; margin-bottom: 30px;">
+                <div class="loading-spinner" style="border: 4px solid #f3f3f3; border-top: 4px solid #2563eb; border-radius: 50%; width: 35px; height: 35px; animation: spin 1s linear infinite; margin: 0 auto; grid-column: 1/-1;"></div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="javascript:void(0)" onclick="triggerShare('adhkar')" class="btn-share-adhkar" style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 25px; background: #eff6ff; color: #2563eb; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 14px; border: 1px solid rgba(37,99,235,0.2); transition: all 0.3s ease;">
+                    <i class="fab fa-whatsapp" style="color: #25d366; font-size: 20px;"></i> Share this comfort with someone
+                </a>
+            </div>
+        </div>
+
+        <div id="adhkar-drawer-overlay" class="drawer-overlay" onclick="closeAdhkarDetail()" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.4); backdrop-filter: blur(4px); z-index: 9998; opacity: 0; visibility: hidden; transition: 0.3s;"></div>
+        <div id="adhkar-drawer" class="drawer-panel" style="position: fixed; top: 0; right: 0; height: 100%; width: 450px; max-width: 90%; background: #f8fafc; z-index: 9999; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.2, 1, 0.3, 1); display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,0.1);">
+            <div class="drawer-header" style="padding: 20px 25px; background: white; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                <h3 id="adhkar-title" style="margin: 0; font-size: 20px; font-weight: 700; color: #0f172a;">Title</h3>
+                <button class="close-btn" onclick="closeAdhkarDetail()" style="background: none; border: none; font-size: 28px; cursor: pointer; color: #94a3b8; transition: color 0.2s;">&times;</button>
+            </div>
+            <div id="adhkar-list-area" class="drawer-content" style="flex: 1; overflow-y: auto; padding: 20px;"></div>
+        </div>
+
+        <style>
+            .adhkar-card { border-radius: 20px; padding: 20px 10px; text-align: center; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 15px rgba(0,0,0,0.1); color: white; font-weight: bold; display: flex; align-items: center; justify-content: center; height: 130px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.4); }
+            .adhkar-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
+            .adhkar-card-title { font-size: 16px; text-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 2; letter-spacing: 0.5px; }
+            .list-item { background: white; border-radius: 12px; margin-bottom: 15px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+            .list-title-bar { padding: 18px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1e293b; background: #fff; font-size: 15px; transition: background 0.2s; }
+            .list-title-bar:hover { background: #f8fafc; }
+            .list-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: #fafafa; border-top: 1px solid #f1f5f9; }
+            .dua-content { padding: 25px 20px; }
+            .a-arabic { font-family: 'Traditional Arabic', serif; font-size: 28px; text-align: right; color: #0f172a; margin-bottom: 15px; line-height: 1.8; }
+            .a-trans { font-size: 15px; color: #475569; line-height: 1.7; margin-bottom: 15px; }
+            .a-ref { font-size: 12px; color: #2563eb; font-weight: 700; text-transform: uppercase; text-align: right; display: block; background: #eff6ff; padding: 6px 12px; border-radius: 6px; width: fit-content; margin-left: auto; }
+            .drawer-overlay.active { opacity: 1 !important; visibility: visible !important; }
+            .drawer-panel.active { transform: translateX(0) !important; }
+            .btn-share-adhkar:hover { background: #dbeafe !important; transform: scale(1.02); }
+            @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+            @media (max-width: 600px) { 
+                .adhkar-glass-container { padding: 20px 15px !important; border-radius: 16px !important; }
+                .adhkar-glass-container h2 { font-size: 24px !important; }
+                .adhkar-glass-container p { font-size: 14px !important; }
+                .adhkar-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; } 
+                .adhkar-card { height: 100px !important; padding: 15px 10px !important; border-radius: 12px !important; }
+                .adhkar-card-title { font-size: 14px !important; }
+            }
+        </style>
+        <script>
+            (function() {
+                let appEmotions = [];
+                let appResources = [];
+                const niceColors = ["linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%)", "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)", "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)", "linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)", "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)", "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)", "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)", "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)", "linear-gradient(135deg, #fa709a 0%, #fee140 100%)", "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)", "linear-gradient(135deg, #ff0844 0%, #ffb199 100%)", "linear-gradient(135deg, #b721ff 0%, #21d4fd 100%)", "linear-gradient(135deg, #20E2D7 0%, #F9FEA5 100%)"];
+                const gridArea = document.getElementById('adhkar-grid-area');
+                const drawer = document.getElementById('adhkar-drawer');
+                const listArea = document.getElementById('adhkar-list-area');
+                const titleArea = document.getElementById('adhkar-title');
+                const overlay = document.getElementById('adhkar-drawer-overlay');
+
+                // Set path linked to the 'features/assets' folder
+                fetch('../assets/emotion.json').then(r => r.json()).then(d => { appEmotions = d; return fetch('../assets/resource.json'); }).then(r => r.json()).then(d => { appResources = d; initGrid(); }).catch(e => { console.error(e); gridArea.innerHTML = '<p style="color:red; text-align:center;">Error loading Adhkar data.</p>'; });
+
+                function initGrid() {
+                    gridArea.innerHTML = '';
+                    appEmotions.forEach((emo, index) => {
+                        if(!emo.title) return;
+                        const div = document.createElement('div');
+                        div.className = 'adhkar-card';
+                        div.style.background = niceColors[index % niceColors.length];
+                        div.innerHTML = `<div class="adhkar-card-title">${emo.title}</div>`;
+                        div.onclick = () => openCorrectDetail(emo.id, emo.title);
+                        gridArea.appendChild(div);
+                    });
+                }
+                window.openCorrectDetail = function(emotionID, emotionTitle) {
+                    titleArea.innerText = emotionTitle;
+                    listArea.innerHTML = '';
+                    const filtered = appResources.filter(r => {
+                        if(!r.emotions) return false;
+                        const linkedEmotions = String(r.emotions).split(',').map(s => s.trim());
+                        return linkedEmotions.includes(String(emotionID));
+                    });
+                    if(filtered.length === 0) {
+                        listArea.innerHTML = `<div style="text-align:center; padding:30px; color:#94a3b8; font-weight:500;">No Duas found for this emotion yet.<br><small>(ID: ${emotionID})</small></div>`;
+                    } else {
+                        listArea.innerHTML = `<div style="padding:0 5px 15px; color:#64748b; font-size:13px; font-weight:600;">Found ${filtered.length} Supplication(s)</div>`;
+                        filtered.forEach((d, index) => {
+                            let displayTitle = d.title || (d.translation ? d.translation.substring(0, 30)+"..." : "Dua " + (index+1));
+                            listArea.innerHTML += `<div class="list-item" onclick="toggleDua(this)"><div class="list-title-bar"><span>${index + 1}. ${displayTitle}</span><span class="arrow-icon" style="color:#cbd5e1; font-size:12px;">▼</span></div><div class="list-body"><div class="dua-content"><div class="a-arabic">${d.arabic || ''}</div><div class="a-trans">${d.translation || ''}</div><div class="a-ref">${d.reference || ''}</div></div></div></div>`;
+                        });
+                    }
+                    drawer.classList.add('active');
+                    overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+                window.toggleDua = function(el) {
+                    el.classList.toggle('open');
+                    var body = el.querySelector('.list-body');
+                    body.style.maxHeight = body.style.maxHeight ? null : body.scrollHeight + "px";
+                }
+                window.closeAdhkarDetail = function() {
+                    drawer.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+                window.triggerShare = function(type) {
+                    let basePath = window.location.pathname.substring(0, window.location.pathname.indexOf('/html/'));
+                    const siteUrl = window.location.origin + basePath + "/html/login.html";
+                    let text = "";
+                    switch(type) {
+                        case 'cv':
+                            text = `Elevate your professional profile with Caversity's ATS-friendly Resume Builder, designed specifically for CA and ACCA students. Create your standout resume for free today!\n\nAccess here: ${siteUrl}`;
+                            break;
+                        case 'qarcs':
+                            text = `Discover Q-ARCS at Caversity—a groundbreaking 3D visual engine connecting corporate ethics with deep Quranic insights. A truly profound perspective awaits.\n\nExplore here: ${siteUrl}`;
+                            break;
+                        case 'adhkar':
+                            text = `Find spiritual comfort and guidance tailored to your emotional state. Caversity's Adhkar portal provides relevant supplications to help calm the mind and soul during stressful times.\n\nFind your peace here: ${siteUrl}`;
+                            break;
+                    }
+                    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+                    window.open(whatsappUrl, '_blank');
+                }
+            })();
+        </script>
+    </section>
+
+    <!-- 🔥 Surprise Box Section 🔥 -->
+    <style>
+        #surprise-section { max-width: 800px; margin: 0 auto 5rem; padding: 0 2.5rem; text-align: center; }
+        .surprise-box {
+            background: linear-gradient(135deg, #0f172a, #1e40af);
+            border-radius: 1.5rem;
+            padding: 3rem 2rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(30, 64, 175, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .surprise-box:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(30, 64, 175, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2) inset; }
+        .surprise-front .icon { font-size: 4rem; display: block; margin-bottom: 1rem; animation: bounce 2s infinite; }
+        .surprise-front h3 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .surprise-front p { font-size: 1.1rem; color: #cbd5e1; }
+        .surprise-content { display: none; animation: fadeIn 0.6s ease-out; }
+        .surprise-content .quote-icon { font-size: 3rem; color: #3b82f6; display: block; margin-bottom: 0.5rem; opacity: 0.8; }
+        .surprise-content h4 { font-size: 1.2rem; font-weight: 600; color: #60a5fa; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; }
+        .surprise-content p { font-size: 1.5rem; font-weight: 500; font-style: italic; line-height: 1.6; margin-bottom: 1.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .surprise-content .quote-ref { font-size: 0.9rem; font-weight: 600; background: rgba(255,255,255,0.15); padding: 0.4rem 1rem; border-radius: 999px; letter-spacing: 1px;}
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @media (max-width: 768px) { #surprise-section { padding: 0 1.25rem; } .surprise-box { padding: 2rem 1.5rem; } .surprise-front h3 { font-size: 1.5rem; } .surprise-content p { font-size: 1.25rem; } }
+    </style>
+
+    <section id="surprise-section">
+        <div class="surprise-box" onclick="revealSurprise()">
+            <div class="surprise-front" id="box-front">
+                <span class="icon">🎁</span>
+                <h3>A Special Message for You</h3>
+                <p>Click to open your daily dose of reality.</p>
+            </div>
+            <div class="surprise-content" id="box-content">
+                <span class="quote-icon">❝</span>
+                <h4 id="daily-type">Loading...</h4>
+                <p id="daily-text">Fetching your surprise...</p>
+                <span class="quote-ref" id="daily-ref"></span>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let quotesCollection = [];
+        fetch('../assets/surprise.json')
+            .then(r => r.json())
+            .then(data => { quotesCollection = data; })
+            .catch(e => console.error('Error loading surprises:', e));
+
+        function revealSurprise() {
+            if(quotesCollection.length === 0) return;
+            const front = document.getElementById('box-front');
+            const content = document.getElementById('box-content');
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = now - start; 
+            const twelveHourBlock = 1000 * 60 * 60 * 12;
+            const currentSlot = Math.floor(diff / twelveHourBlock);
+            const index = currentSlot % quotesCollection.length;
+            const todayQuote = quotesCollection[index];
+
+            document.getElementById('daily-type').innerText = todayQuote.type;
+            document.getElementById('daily-text').innerText = '"' + todayQuote.text + '"';
+            document.getElementById('daily-ref').innerText = "- " + todayQuote.ref;
+
+            front.style.display = 'none';
+            content.style.display = 'block';
+        }
+    </script>
+
+    <!-- Student Feedback Section -->
+    <section class="feedback-container" id="reviews-section">
+        <div class="feedback-header">
+            <h2>Student Feedback</h2>
+            <p>Your reviews help us improve. Share your experience!</p>
+            <button class="confirm-btn" onclick="openFeedbackModal()">Write a Review ✍️</button>
+        </div>
+        <div class="reviews-grid" id="reviews-list">
+            <!-- Reviews will be dynamically injected here -->
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="subscription-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Subscribe to Subject</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-section">
+                    <label for="student-name">Full Name</label>
+                    <input type="text" id="student-name" placeholder="Enter your full name">
+                </div>
+
+                <div class="selection-section">
+                    <h3>Selected Subject(s)</h3>
+                    <div class="single-subject-display" id="single-subject-display">
+                        <div class="subject-info-row">
+                            <span class="subject-name" id="modal-subject-name">Subject Name</span>
+                            <span class="subject-price" id="modal-subject-price">Rs. 200 / month</span>
+                        </div>
+                    </div>
+                    <div class="checkboxes-container" id="subject-checkboxes" style="display: none;">
+                        <!-- Checkboxes will be dynamically injected here -->
+                    </div>
+                </div>
+
+                <div id="coupon-container">
+                    <div class="coupon-section">
+                        <input type="text" id="coupon-code" placeholder="Enter coupon code (e.g., CAVERSITY100)">
+                        <button type="button" id="apply-coupon-btn">Apply</button>
+                    </div>
+                    <div id="coupon-message" class="coupon-message"></div>
+                </div>
+
+                <div class="total-section single-total">
+                    <div class="total-details">
+                        <span class="total-label">Total Amount</span>
+                        <div id="discount-line" class="discount-line" style="display: none;">
+                            Discount Applied: -Rs. <span id="discount-value">0</span>
+                        </div>
+                    </div>
+                    <div class="total-values">
+                        <span class="original-value" id="original-amount" style="display: none;"></span>
+                        <span class="total-value" id="total-amount">Rs. 200 / month</span>
+                    </div>
+                </div>
+
+                <div class="payment-note clean-note">
+                    <p>⚠️ Please attach your payment screenshot in the WhatsApp chat before sending the message.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="whatsapp-btn" id="confirm-subscription">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.5rem;">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.022 0-2.031.193-3.002.568L3.924 3.5 4.62 6.362c-.36 1.023-.556 2.102-.556 3.202 0 5.091 4.122 9.238 9.166 9.238 2.454 0 4.761-.936 6.484-2.487 1.723-1.55 2.67-3.676 2.67-5.888 0-5.144-4.122-9.238-9.166-9.238"/>
+                    </svg>
+                    Send via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Write a Review</h2>
+                <button class="modal-close" onclick="closeFeedbackModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-section">
+                    <label for="review-user-name">Your Name</label>
+                    <input type="text" id="review-user-name" placeholder="e.g. Ali Ahmed" autocomplete="off">
+                </div>
+                <div class="form-section">
+                    <label for="user-review">Your Feedback</label>
+                    <textarea id="user-review" placeholder="Write your honest feedback..." rows="4"></textarea>
+                </div>
+                <div class="checkbox-item" style="margin-bottom: 1.5rem; background: transparent; border: none; padding: 0;">
+                    <input type="checkbox" id="dont-show-again">
+                    <label for="dont-show-again">Don't show this popup automatically again</label>
+                </div>
+                <button class="confirm-btn" style="width: 100%;" onclick="submitFeedback()">Submit Review</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../js/portal.js"></script>
+</body>
+</html>
