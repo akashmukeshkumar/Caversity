@@ -113,10 +113,27 @@ function renderSubjectCards() {
             buttonClass = 'free-action';
         }
 
+        let actionsHtml = `<button class="subject-action ${buttonClass}" data-id="${subject.id}">${buttonText}</button>`;
+        
+        // Add small share button next to free subjects
+        if (subject.type === 'free') {
+            let shareType = subject.id === 'resume' ? 'cv' : (subject.id === 'sanctuary' ? 'qarcs' : '');
+            if (shareType) {
+                actionsHtml = `
+                <div style="display: flex; gap: 10px; width: 100%; margin-top: 1.5rem;">
+                    <button class="subject-action ${buttonClass}" data-id="${subject.id}" style="margin-top: 0; flex: 1;">${buttonText}</button>
+                    <button class="share-action-btn" onclick="triggerShare('${shareType}')" title="Share with friends">
+                        <i class="fab fa-whatsapp"></i>
+                    </button>
+                </div>
+                `;
+            }
+        }
+
         card.innerHTML = `
             <h3 class="subject-title">${subject.name}</h3>
             <p class="subject-description">${subject.description}</p>
-            <button class="subject-action ${buttonClass}" data-id="${subject.id}">${buttonText}</button>
+            ${actionsHtml}
         `;
         grid.appendChild(card);
     });
