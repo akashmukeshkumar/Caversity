@@ -35,7 +35,9 @@ async function initSystem() {
             const titleEl = document.getElementById(`sidebarParaTitle-${item.day}`);
             if(titleEl) titleEl.innerText = item.para_name;
         });
-    } catch(e) {}
+    } catch(e) {
+        console.error("⚠️ Error loading Divine Blueprint JSON:", e);
+    }
 
     loadStation(1);
 }
