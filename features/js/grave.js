@@ -88,7 +88,8 @@ function trackVideoTime() {
             video.currentTime = JANNAH_START;
             jannahGlow.classList.add('jannah-active');
         }
-        if (t >= JANNAH_END) {
+            // 🔥 FIX: Agar video file ka time 104.59 se thora pehle hi khatam ho jaye, tab bhi final screen show hogi
+            if (t >= JANNAH_END || video.ended) {
             video.pause();
             showFinalResult(true);
             return; 
@@ -96,7 +97,7 @@ function trackVideoTime() {
     }
 
     if (hasFailed) {
-        if (t >= AZAAB_END) {
+            if (t >= AZAAB_END || video.ended) {
             // Loop Squeeze scene for ~4.8 seconds (2 times instead of 3)
             if (Date.now() - azaabStartTime < 4800) {
                 video.currentTime = AZAAB_START; 
