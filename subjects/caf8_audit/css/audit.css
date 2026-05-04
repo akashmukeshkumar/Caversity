@@ -116,6 +116,14 @@ html, body {
     color: #2563eb; 
 }
 
+.nav-exit-btn {
+    background-color: #ef4444 !important;
+    color: white !important;
+}
+.nav-exit-btn:hover {
+    background-color: #dc2626 !important;
+}
+
 /* Mobile check: 900px par wese hi hide ho rahi hai toh masla nahi */
 @media (max-width: 900px) { 
     .nav-links { display: none; } 
