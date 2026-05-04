@@ -1943,3 +1943,116 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
 }
 .btn-mic.processing { opacity: 0.7; pointer-events: none; animation: spin 1s infinite linear; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* =========================================
+   🧠 30-MIN BRAIN DOSE (BLUE THEME FIX)
+   ========================================= */
+#audit-dose-section {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.audit-glass-card {
+    width: 100%;
+    max-width: 850px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    position: relative;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+.audit-glass-card:hover { transform: translateY(-5px); }
+
+/* Blue Timer Badge */
+.audit-glass-card .timer-badge {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: #eff6ff; 
+    color: #1d4ed8; 
+    padding: 7px 15px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex; align-items: center; gap: 6px;
+    border: 1px solid rgba(29, 78, 216, 0.2);
+}
+
+.audit-header h2 { font-size: 30px; font-weight: 800; color: #1e293b; margin: 10px 0 5px 0; }
+.audit-header p { color: #475569; font-size: 15px; margin-bottom: 25px; font-weight: 500; }
+
+.audit-glass-card .view-state {
+    background: rgba(255, 255, 255, 0.90);
+    border-radius: 20px;
+    padding: 40px 30px;
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.02);
+}
+
+/* Blue Category Badge */
+.audit-glass-card .category-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+#audit-question { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 25px; line-height: 1.5; }
+
+.options-list { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+
+/* Option Buttons Hover & Colors */
+.audit-opt-btn {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.audit-opt-btn:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    transform: translateX(5px);
+}
+.audit-opt-btn.correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
+.audit-opt-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+
+/* Explanation Box Blue Theme */
+.explanation-box {
+    margin-top: 25px;
+    padding: 20px;
+    background: #eff6ff;
+    border-radius: 12px;
+    border-left: 4px solid #3b82f6;
+    text-align: left;
+    animation: slideDown 0.4s ease;
+}
+.explanation-box.hidden { display: none !important; }
+
+@media (max-width: 600px) {
+    #audit-dose-section { padding: 20px 15px; }
+    .audit-glass-card { padding: 20px 15px; }
+    .audit-glass-card .timer-badge { position: relative; top: 0; right: 0; margin: 0 auto 15px auto; width: fit-content; }
+    .audit-glass-card .view-state { padding: 25px 15px; }
+    #audit-question { font-size: 16px; }
+}
