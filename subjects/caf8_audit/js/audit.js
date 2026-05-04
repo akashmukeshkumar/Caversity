@@ -205,21 +205,17 @@ function startExam(id) {
     document.getElementById('exam-hall').classList.remove('hidden');
     
     const pdfFrame = document.getElementById('paper-view');
-    let explicitPdf = typeof pastPapers !== 'undefined' && pastPapers[id] && pastPapers[id].pdf ? pastPapers[id].pdf : null;
+    let pdfPath = (typeof pastPapers !== 'undefined' && pastPapers[id] && pastPapers[id].pdf) ? pastPapers[id].pdf : `subjects/caf8_audit/assets/pastpapers/${id}.pdf`;
     
-    // 🔥 Relevant PDF linking logic
-    let generatedPath = explicitPdf ? explicitPdf : `subjects/caf8_audit/assets/pastpapers/${id}.pdf`;
-    let finalPdfPath = encodeURI(generatedPath); // Allows spaces safely (e.g. "Autumn 2025")
-    
-    if(finalPdfPath) {
+    if(pdfPath) {
+        let safePdfPath = encodeURI(pdfPath);
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if(isMobile) {
-            // 🔥 BULLETPROOF FIX: Automatically resolves full path including GitHub Pages subfolders
-            const fullPDFUrl = new URL(generatedPath, window.location.href).href;
-            const encodedUrl = encodeURIComponent(fullPDFUrl);
-            pdfFrame.innerHTML = `<iframe src="https://docs.google.com/gview?url=${encodedUrl}&embedded=true" width="100%" height="100%" style="border:none;"></iframe>`;
+            const baseURL = "https://akashmukeshkumar.github.io/Caversity/"; 
+            const fullPDFUrl = baseURL + safePdfPath;
+            pdfFrame.innerHTML = `<iframe src="https://docs.google.com/gview?url=${fullPDFUrl}&embedded=true" width="100%" height="100%" style="border:none;"></iframe>`;
         } else {
-            pdfFrame.innerHTML = `<iframe src="${finalPdfPath}" width="100%" height="100%" style="border:none;"></iframe>`;
+            pdfFrame.innerHTML = `<iframe src="${safePdfPath}" width="100%" height="100%" style="border:none;"></iframe>`;
         }
     } else {
         pdfFrame.innerHTML = `<div style="text-align:center; padding:50px; color:white;"><h3>PDF Not Found</h3><p>Ensure '${id}.pdf' is in 'subjects/caf8_audit/assets/pastpapers' folder.</p></div>`;
