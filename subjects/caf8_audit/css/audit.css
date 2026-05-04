@@ -1847,257 +1847,310 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
 }
 
 /* =========================================
-   🔥 STANDARD FONT IMPORT 🔥
+   🔥 1. GPT CARDS (EXACT ORIGINAL DESIGN) 🔥
    ========================================= */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
-
-/* =========================================
-   🔥 1. EXACT PIC 1 GPT CARDS DESIGN (PERFECT SIZE & FONT) 🔥
-   ========================================= */
-
-/* OUTER SLEEK WRAPPER (Bada Dabba) */
+/* Cards section layout */
 .cards {
     display: flex;
     flex-wrap: wrap;
-    gap: 40px; /* Cards ke darmiyan fasla thora barhaya */
     justify-content: center;
-    background: rgba(235, 240, 245, 0.85) !important; 
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 24px !important;
-    padding: 60px 50px !important; /* Dabba thora khula aur bada kiya */
-    max-width: 1150px !important; /* Width barha di taake space achi aaye */
+    gap: 20px;
+    padding: 40px 20px;
+    flex-grow: 1;
     margin: 40px auto;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.08) !important;
-    font-family: 'Poppins', sans-serif !important; /* Standard Font Apply */
+    max-width: 1200px;
+    /* Light translucent backdrop so the cards stand out against the blue portrait */
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
-/* INNER CARDS (White Dabbe) */
 .card {
-    background: #ffffff !important; 
-    border-radius: 12px !important;
-    padding: 40px 30px !important;
-    flex: 1;
-    min-width: 340px; /* Thora sa chora kiya */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.06) !important; 
-    position: relative;
-    overflow: hidden;
-    text-align: center !important; 
-    border: none !important;
-    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-    font-family: 'Poppins', sans-serif !important;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 35px;
+    max-width: 360px;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
 }
 
+/* Elevate cards slightly on hover */
 .card:hover {
-    transform: translateY(-5px) !important;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* TOP COLORED LINES */
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; height: 6px;
-}
-.card-green::before { background: linear-gradient(90deg, #0ea5e9, #0284c7) !important; } 
-.card-purple::before { background: #3b82f6 !important; } 
-
-/* TEXT STYLING (WITH POPPINS FONT) */
-.card h2 {
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 24px !important;
-    color: #1e3a8a !important; 
-    margin-bottom: 15px !important;
-    font-weight: 600 !important;
-    letter-spacing: -0.5px;
+/* Colourful study-themed cards inspired by Studydrive */
+.card-green,
+.card-purple {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 16px;
+    border-top-width: 6px;
+    border-top-style: solid;
+    color: #254d80;
 }
 
-.card p {
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 14px !important;
-    color: #64748b !important; 
-    margin-bottom: 25px !important;
-    line-height: 1.7 !important;
-    font-weight: 400 !important;
+.card-green {
+    border-top-color: #2193b0;
 }
 
-/* SIMPLE BLUE BULLET POINTS */
+.card-purple {
+    border-top-color: #2575fc;
+}
+
+.card-green h2,
+.card-purple h2 {
+    margin-top: 0;
+    font-weight: 700;
+    color: #254d80;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+}
+
+.card-green p,
+.card-purple p {
+    color: #254d80;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.card-green .features li,
+.card-purple .features li {
+    color: #254d80;
+}
+
+.card-green .features li::before {
+    color: #2193b0;
+}
+
+.card-purple .features li::before {
+    color: #2575fc;
+}
+
+/* Feature list styling inside cards */
 .features {
-    list-style: none !important;
-    padding: 0 10px !important;
-    margin: 0 0 35px 0 !important;
-    text-align: left !important; 
-    font-family: 'Poppins', sans-serif !important;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 24px;
+    text-align: left;
 }
 
 .features li {
-    position: relative !important;
-    padding-left: 20px !important;
-    margin-bottom: 15px !important;
-    font-size: 13px !important;
-    color: #475569 !important;
-    line-height: 1.6 !important;
-    font-weight: 400 !important;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #254d80;
 }
 
 .features li::before {
-    content: '•' !important;
-    position: absolute !important;
-    left: 0 !important;
-    top: -2px !important;
-    font-size: 18px !important;
-    color: #3b82f6 !important; 
-    font-weight: bold;
+    content: "\2022"; /* Unicode bullet point */
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 1.2rem;
+    line-height: 1;
 }
 
-/* SOLID BLUE BUTTONS */
+/* Gradient Button */
 .card .btn {
-    display: inline-block !important;
-    background: #0084ff !important; 
-    color: white !important;
-    padding: 14px 35px !important;
-    text-decoration: none !important;
-    border-radius: 8px !important; 
-    font-family: 'Poppins', sans-serif !important;
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    transition: all 0.2s ease !important;
-    border: none !important;
-    box-shadow: 0 4px 15px rgba(0, 132, 255, 0.4) !important; 
+    display: inline-block;
+    padding: 12px 28px;
+    background: linear-gradient(to right, #007bff, #00c6ff);
+    color: #ffffff !important;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    background-size: 200% 100%;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+    transition: background-position 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    width: auto;
 }
 
 .card .btn:hover {
-    background: #006bce !important;
-    transform: translateY(-2px) !important;
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 123, 255, 0.5);
+}
+
+.card .btn:active {
+    transform: scale(0.97);
 }
 
 
 /* =========================================
-   🧠 2. 30-MIN BRAIN DOSE (FIXED FONT)
+   🧠 2. 30-MIN BRAIN DOSE (EXACT ORIGINAL DESIGN)
    ========================================= */
 #audit-dose-section {
-    padding: 60px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif !important; /* Standard Font */
+    padding: 20px;
 }
 
-/* Outer Glass Card */
+/* 1. Main Card Container */
 .audit-glass-card {
-    width: 100%;
-    max-width: 850px;
-    background: rgba(226, 232, 240, 0.65) !important;
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 24px;
-    padding: 50px 40px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-    position: relative;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    
+    /* Transparent White Background */
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+    
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.6); 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05); 
+    
     text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-/* Timer Badge */
-.audit-glass-card .timer-badge {
+.audit-glass-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* 2. Timer Badge (Top Right Corner) */
+.timer-badge {
     position: absolute;
-    top: 25px;
-    right: 25px;
-    background: #e0f2fe !important; 
-    color: #0284c7 !important; 
-    padding: 7px 16px;
-    border-radius: 50px;
+    top: 20px;
+    right: 20px;
+    background: #e0f2fe;
+    color: #0284c7;
     font-size: 13px;
-    font-weight: 600;
-    display: flex; align-items: center; gap: 6px;
-    font-family: 'Poppins', sans-serif !important;
-}
-
-.audit-header { margin-bottom: 20px; }
-.audit-header h2 { font-family: 'Poppins', sans-serif !important; font-size: 28px; font-weight: 700; color: #1e293b; margin: 10px 0 5px 0; letter-spacing: -0.5px; }
-.audit-header p { font-family: 'Poppins', sans-serif !important; color: #64748b; font-size: 14px; margin-bottom: 25px; font-weight: 400; }
-
-/* Inner Transparent View */
-.audit-glass-card .view-state {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-}
-
-/* Neon Green Category Badge */
-.audit-glass-card .category-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, #4ade80 0%, #2dd4bf 100%) !important;
-    color: #064e3b !important;
-    padding: 6px 20px;
-    border-radius: 50px;
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 12px;
     font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: inset 0 0 0 1px rgba(2, 132, 199, 0.2);
+}
+
+/* 3. Header Text */
+.audit-header {
+    margin-top: 10px;
+}
+
+.audit-header h2 {
+    color: #1e293b;
+    font-size: 26px;
+    margin: 0 0 5px 0;
+    font-weight: 800;
+}
+
+.audit-header p {
+    color: #64748b;
+    font-size: 15px;
+    margin: 0 0 25px 0;
+}
+
+/* 4. BADGE STYLE ADDED (Green Gradient) */
+.category-badge {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    color: #064e3b; /* Dark Green Text */
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 800;
     letter-spacing: 1px;
     text-transform: uppercase;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 15px rgba(45, 212, 191, 0.4) !important;
+    display: inline-block;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(56, 249, 215, 0.3);
+    border: none;
 }
 
-/* Question Styling */
-#audit-question { 
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 18px; 
-    font-weight: 600; 
-    color: #1e293b; 
-    margin-bottom: 25px; 
-    line-height: 1.6; 
-    text-align: left !important; 
+/* 5. Question Text */
+#audit-question {
+    font-size: 19px;
+    color: #334155;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    text-align: left;
+    font-weight: 700;
 }
 
-/* Solid White Options */
-.options-list { display: flex; flex-direction: column; gap: 12px; text-align: left !important; }
+/* 6. Options Buttons */
+.options-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
 
 .audit-opt-btn {
-    background: #ffffff !important;
-    border: none !important;
-    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.7); 
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 14px 18px;
     border-radius: 12px;
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 14px;
-    font-weight: 500;
+    text-align: left;
+    font-size: 15px;
     color: #475569;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.04) !important;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
 }
 
 .audit-opt-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
+    background: #ffffff;
+    border-color: #94a3b8;
+    transform: translateX(5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-.audit-opt-btn.correct { background: #dcfce7 !important; color: #166534 !important; font-weight: 600; }
-.audit-opt-btn.wrong { background: #fee2e2 !important; color: #991b1b !important; font-weight: 600; }
+/* Correct/Wrong States */
+.audit-opt-btn.correct {
+    background: #dcfce7 !important; 
+    border-color: #22c55e !important;
+    color: #14532d !important;
+    font-weight: 700;
+}
+
+.audit-opt-btn.wrong {
+    background: #fee2e2 !important; 
+    border-color: #ef4444 !important;
+    color: #7f1d1d !important;
+    opacity: 0.8;
+}
 
 /* Explanation Box */
 .explanation-box {
-    margin-top: 25px;
+    margin-top: 20px;
     padding: 20px;
-    background: #ffffff !important;
+    background: rgba(239, 246, 255, 0.8); 
     border-radius: 12px;
-    border-left: 4px solid #10b981 !important;
+    border-left: 4px solid #2563eb;
     text-align: left;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    animation: slideDown 0.4s ease;
 }
-.explanation-box h4, .explanation-box p { font-family: 'Poppins', sans-serif !important; }
-.explanation-box.hidden { display: none !important; }
 
-/* Mobile View Adjustments */
-@media (max-width: 768px) {
-    .cards { padding: 40px 20px !important; margin: 20px 15px !important; }
-    .card { padding: 30px 20px !important; min-width: 100%; }
-    .audit-glass-card { padding: 30px 20px; }
-    #audit-question { font-size: 16px; }
+.explanation-box.hidden { 
+    display: none !important; 
+}
+
+/* Responsive: Mobile pe Timer ko adjust karna */
+@media (max-width: 600px) {
+    .timer-badge {
+        position: static;
+        display: inline-flex;
+        margin-bottom: 10px;
+    }
+}
+
+@keyframes slideDown { 
+    from { opacity: 0; transform: translateY(-10px); } 
+    to { opacity: 1; transform: translateY(0); } 
 }
