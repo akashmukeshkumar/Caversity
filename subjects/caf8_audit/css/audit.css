@@ -1847,40 +1847,46 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
 }
 
 /* =========================================
-   🔥 EXACT PIC 1 GPT CARDS DESIGN (WITH SLEEK OUTER BOX) 🔥
+   🔥 STANDARD FONT IMPORT 🔥
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* =========================================
+   🔥 1. EXACT PIC 1 GPT CARDS DESIGN (PERFECT SIZE & FONT) 🔥
    ========================================= */
 
-/* 1. OUTER SLEEK WRAPPER (Bahar Wala Dabba) */
+/* OUTER SLEEK WRAPPER (Bada Dabba) */
 .cards {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 40px; /* Cards ke darmiyan fasla thora barhaya */
     justify-content: center;
-    /* Yeh hai wo sleek frosted background jo aapko chahiye */
     background: rgba(235, 240, 245, 0.85) !important; 
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 24px !important;
-    padding: 50px 40px !important;
-    max-width: 1000px;
+    padding: 60px 50px !important; /* Dabba thora khula aur bada kiya */
+    max-width: 1150px !important; /* Width barha di taake space achi aaye */
     margin: 40px auto;
     box-shadow: 0 20px 50px rgba(0,0,0,0.08) !important;
+    font-family: 'Poppins', sans-serif !important; /* Standard Font Apply */
 }
 
-/* 2. INNER CARDS (Andar wale Pure White Dabbe) */
+/* INNER CARDS (White Dabbe) */
 .card {
-    background: #ffffff !important; /* Pure White */
+    background: #ffffff !important; 
     border-radius: 12px !important;
     padding: 40px 30px !important;
     flex: 1;
-    min-width: 320px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.06) !important; /* Halki si shadow taake outer box se alag lagay */
+    min-width: 340px; /* Thora sa chora kiya */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06) !important; 
     position: relative;
     overflow: hidden;
     text-align: center !important; 
     border: none !important;
     transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 .card:hover {
@@ -1888,45 +1894,51 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
     box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
 }
 
-/* 3. TOP COLORED LINES (Pic 1 Style) */
+/* TOP COLORED LINES */
 .card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; height: 6px;
 }
-.card-green::before { background: linear-gradient(90deg, #0ea5e9, #0284c7) !important; } /* Left card line */
-.card-purple::before { background: #3b82f6 !important; } /* Right card line (Solid Blue) */
+.card-green::before { background: linear-gradient(90deg, #0ea5e9, #0284c7) !important; } 
+.card-purple::before { background: #3b82f6 !important; } 
 
-/* 4. TEXT STYLING */
+/* TEXT STYLING (WITH POPPINS FONT) */
 .card h2 {
-    font-size: 22px !important;
-    color: #1e3a8a !important; /* Dark Blue Heading */
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 24px !important;
+    color: #1e3a8a !important; 
     margin-bottom: 15px !important;
     font-weight: 600 !important;
+    letter-spacing: -0.5px;
 }
 
 .card p {
-    font-size: 13px !important;
-    color: #64748b !important; /* Grey text */
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 14px !important;
+    color: #64748b !important; 
     margin-bottom: 25px !important;
-    line-height: 1.6 !important;
+    line-height: 1.7 !important;
+    font-weight: 400 !important;
 }
 
-/* 5. SIMPLE BLUE BULLET POINTS */
+/* SIMPLE BLUE BULLET POINTS */
 .features {
     list-style: none !important;
     padding: 0 10px !important;
-    margin: 0 0 30px 0 !important;
+    margin: 0 0 35px 0 !important;
     text-align: left !important; 
+    font-family: 'Poppins', sans-serif !important;
 }
 
 .features li {
     position: relative !important;
-    padding-left: 18px !important;
+    padding-left: 20px !important;
     margin-bottom: 15px !important;
     font-size: 13px !important;
     color: #475569 !important;
     line-height: 1.6 !important;
+    font-weight: 400 !important;
 }
 
 .features li::before {
@@ -1935,23 +1947,24 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
     left: 0 !important;
     top: -2px !important;
     font-size: 18px !important;
-    color: #3b82f6 !important; /* Pure Blue Dots */
+    color: #3b82f6 !important; 
     font-weight: bold;
 }
 
-/* 6. SOLID BLUE BUTTONS */
+/* SOLID BLUE BUTTONS */
 .card .btn {
     display: inline-block !important;
-    background: #0084ff !important; /* Exactly Pic 1 wala Blue */
+    background: #0084ff !important; 
     color: white !important;
-    padding: 12px 30px !important;
+    padding: 14px 35px !important;
     text-decoration: none !important;
-    border-radius: 6px !important; /* Square-ish rounded corners */
+    border-radius: 8px !important; 
+    font-family: 'Poppins', sans-serif !important;
     font-weight: 600 !important;
-    font-size: 13px !important;
+    font-size: 14px !important;
     transition: all 0.2s ease !important;
     border: none !important;
-    box-shadow: 0 4px 15px rgba(0, 132, 255, 0.4) !important; /* Glow effect */
+    box-shadow: 0 4px 15px rgba(0, 132, 255, 0.4) !important; 
 }
 
 .card .btn:hover {
@@ -1959,19 +1972,9 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
     transform: translateY(-2px) !important;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .cards {
-        padding: 30px 20px !important;
-        margin: 20px 15px !important;
-    }
-    .card {
-        padding: 30px 20px !important;
-    }
-}
 
 /* =========================================
-   🧠 30-MIN BRAIN DOSE (ORIGINAL SOLID DESIGN)
+   🧠 2. 30-MIN BRAIN DOSE (FIXED FONT)
    ========================================= */
 #audit-dose-section {
     padding: 60px 20px;
@@ -1981,18 +1984,19 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif !important; /* Standard Font */
 }
 
 /* Outer Glass Card */
 .audit-glass-card {
     width: 100%;
     max-width: 850px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(226, 232, 240, 0.65) !important;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 24px;
-    padding: 40px;
+    padding: 50px 40px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.1);
     position: relative;
     text-align: center;
@@ -2003,97 +2007,97 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
     position: absolute;
     top: 25px;
     right: 25px;
-    background: #e0f2fe; 
-    color: #0ea5e9; 
-    padding: 8px 16px;
+    background: #e0f2fe !important; 
+    color: #0284c7 !important; 
+    padding: 7px 16px;
     border-radius: 50px;
     font-size: 13px;
-    font-weight: 700;
-    display: flex; 
-    align-items: center; 
-    gap: 6px;
-    border: 1px solid rgba(14, 165, 233, 0.2);
+    font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'Poppins', sans-serif !important;
 }
 
-.audit-header h2 { font-size: 30px; font-weight: 800; color: #1e293b; margin: 10px 0 5px 0; }
-.audit-header p { color: #64748b; font-size: 15px; margin-bottom: 25px; font-weight: 500; }
+.audit-header { margin-bottom: 20px; }
+.audit-header h2 { font-family: 'Poppins', sans-serif !important; font-size: 28px; font-weight: 700; color: #1e293b; margin: 10px 0 5px 0; letter-spacing: -0.5px; }
+.audit-header p { font-family: 'Poppins', sans-serif !important; color: #64748b; font-size: 14px; margin-bottom: 25px; font-weight: 400; }
 
-/* 🔥 INNER BOX (WAPIS LAA DIYA) 🔥 */
+/* Inner Transparent View */
 .audit-glass-card .view-state {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 40px 30px;
-    border: 1px solid rgba(226, 232, 240, 0.8);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
 }
 
-/* Category Badge */
+/* Neon Green Category Badge */
 .audit-glass-card .category-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
-    color: white;
-    padding: 6px 18px;
+    background: linear-gradient(135deg, #4ade80 0%, #2dd4bf 100%) !important;
+    color: #064e3b !important;
+    padding: 6px 20px;
     border-radius: 50px;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(45, 212, 191, 0.4) !important;
 }
 
+/* Question Styling */
 #audit-question { 
+    font-family: 'Poppins', sans-serif !important;
     font-size: 18px; 
-    font-weight: 700; 
-    color: #0f172a; 
+    font-weight: 600; 
+    color: #1e293b; 
     margin-bottom: 25px; 
-    line-height: 1.5; 
+    line-height: 1.6; 
+    text-align: left !important; 
 }
 
-.options-list { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 12px; 
-    text-align: left; 
-}
+/* Solid White Options */
+.options-list { display: flex; flex-direction: column; gap: 12px; text-align: left !important; }
 
-/* 🔥 SOLID OPTIONS WITH BORDERS 🔥 */
 .audit-opt-btn {
-    background: #f8fafc;
-    border: 2px solid #e2e8f0;
-    padding: 15px 20px;
+    background: #ffffff !important;
+    border: none !important;
+    padding: 16px 20px;
     border-radius: 12px;
-    font-size: 15px;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 14px;
     font-weight: 500;
-    color: #334155;
+    color: #475569;
     cursor: pointer;
     transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04) !important;
 }
 
 .audit-opt-btn:hover {
-    background: #eff6ff;
-    border-color: #3b82f6;
-    transform: translateX(5px);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
 }
 
-.audit-opt-btn.correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
-.audit-opt-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+.audit-opt-btn.correct { background: #dcfce7 !important; color: #166534 !important; font-weight: 600; }
+.audit-opt-btn.wrong { background: #fee2e2 !important; color: #991b1b !important; font-weight: 600; }
 
 /* Explanation Box */
 .explanation-box {
     margin-top: 25px;
     padding: 20px;
-    background: #eff6ff;
+    background: #ffffff !important;
     border-radius: 12px;
-    border-left: 4px solid #3b82f6;
+    border-left: 4px solid #10b981 !important;
     text-align: left;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
+.explanation-box h4, .explanation-box p { font-family: 'Poppins', sans-serif !important; }
 .explanation-box.hidden { display: none !important; }
 
-/* Mobile Adjustments */
-@media (max-width: 600px) {
-    #audit-dose-section { padding: 20px 15px; }
-    .audit-glass-card { padding: 20px 15px; }
-    .audit-glass-card .timer-badge { position: relative; top: 0; right: 0; margin: 0 auto 15px auto; width: fit-content; }
-    .audit-glass-card .view-state { padding: 25px 15px; }
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+    .cards { padding: 40px 20px !important; margin: 20px 15px !important; }
+    .card { padding: 30px 20px !important; min-width: 100%; }
+    .audit-glass-card { padding: 30px 20px; }
     #audit-question { font-size: 16px; }
 }
