@@ -2154,3 +2154,172 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
     from { opacity: 0; transform: translateY(-10px); } 
     to { opacity: 1; transform: translateY(0); } 
 }
+
+
+/* =========================================
+   🧠 2. 30-MIN BRAIN DOSE (EXACT ORIGINAL DESIGN)
+   ========================================= */
+#audit-dose-section {
+    padding: 20px;
+}
+
+/* 1. Main Card Container */
+.audit-glass-card {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    
+    /* Transparent White Background */
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+    
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.6); 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05); 
+    
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.audit-glass-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* 2. Timer Badge (Top Right Corner) */
+.timer-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #e0f2fe;
+    color: #0284c7;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: inset 0 0 0 1px rgba(2, 132, 199, 0.2);
+}
+
+/* 3. Header Text */
+.audit-header {
+    margin-top: 10px;
+}
+
+.audit-header h2 {
+    color: #1e293b;
+    font-size: 26px;
+    margin: 0 0 5px 0;
+    font-weight: 800;
+}
+
+.audit-header p {
+    color: #64748b;
+    font-size: 15px;
+    margin: 0 0 25px 0;
+}
+
+/* 4. BADGE STYLE ADDED (Green Gradient) */
+.category-badge {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    color: #064e3b; /* Dark Green Text */
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(56, 249, 215, 0.3);
+    border: none;
+}
+
+/* 5. Question Text */
+#audit-question {
+    font-size: 19px;
+    color: #334155;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    text-align: left;
+    font-weight: 700;
+}
+
+/* 6. Options Buttons */
+.options-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+.audit-opt-btn {
+    background: rgba(255, 255, 255, 0.7); 
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 14px 18px;
+    border-radius: 12px;
+    text-align: left;
+    font-size: 15px;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+}
+
+.audit-opt-btn:hover {
+    background: #ffffff;
+    border-color: #94a3b8;
+    transform: translateX(5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Correct/Wrong States */
+.audit-opt-btn.correct {
+    background: #dcfce7 !important; 
+    border-color: #22c55e !important;
+    color: #14532d !important;
+    font-weight: 700;
+}
+
+.audit-opt-btn.wrong {
+    background: #fee2e2 !important; 
+    border-color: #ef4444 !important;
+    color: #7f1d1d !important;
+    opacity: 0.8;
+}
+
+/* Explanation Box */
+.explanation-box {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(239, 246, 255, 0.8); 
+    border-radius: 12px;
+    border-left: 4px solid #2563eb;
+    text-align: left;
+    animation: slideDown 0.4s ease;
+}
+
+.explanation-box.hidden { 
+    display: none !important; 
+}
+
+/* Responsive: Mobile pe Timer ko adjust karna */
+@media (max-width: 600px) {
+    .timer-badge {
+        position: static;
+        display: inline-flex;
+        margin-bottom: 10px;
+    }
+}
+
+@keyframes slideDown { 
+    from { opacity: 0; transform: translateY(-10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
