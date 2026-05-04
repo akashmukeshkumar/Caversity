@@ -205,17 +205,14 @@ function startExam(id) {
     document.getElementById('exam-hall').classList.remove('hidden');
     
     const pdfFrame = document.getElementById('paper-view');
-    let pdfPath = typeof pastPapers !== 'undefined' && pastPapers[id] ? pastPapers[id].pdf : ""; 
+    let explicitPdf = typeof pastPapers !== 'undefined' && pastPapers[id] && pastPapers[id].pdf ? pastPapers[id].pdf : null;
     
-    if(pdfPath) {
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        if(isMobile) {
-            const baseURL = "https://akashmukeshkumar.github.io/auditbyamk/"; 
-            const fullPDFUrl = baseURL + pdfPath;
-            pdfFrame.innerHTML = `<iframe src="https://docs.google.com/gview?url=${fullPDFUrl}&embedded=true" width="100%" height="100%" style="border:none;"></iframe>`;
-        } else {
-            pdfFrame.innerHTML = `<iframe src="${pdfPath}" width="100%" height="100%" style="border:none;"></iframe>`;
-        }
+    // 🔥 Relevant PDF linking logic
+    let generatedPath = explicitPdf ? explicitPdf : `subjects/caf8_audit/assets/pastpapers/${id}.pdf`;
+    let finalPdfPath = encodeURI(generatedPath); // Allows spaces safely (e.g. "Autumn 2025")
+    
+    if(finalPdfPath) {
+        pdfFrame.innerHTML = `<iframe src="${finalPdfPath}" width="100%" height="100%" style="border:none;"></iframe>`;
     } else {
         pdfFrame.innerHTML = `<div style="text-align:center; padding:50px; color:white;"><h3>PDF Not Found</h3><p>Ensure '${id}.pdf' is in 'subjects/caf8_audit/assets/pastpapers' folder.</p></div>`;
     }
@@ -767,7 +764,7 @@ window.addEventListener('load', () => {
     // Setup Exam Simulator Grid
     const grid = document.getElementById('papers-grid');
     if(typeof pastPapers === 'undefined') {
-        if(grid) grid.innerHTML = '<p style="color:red; text-align:center;">Error: exam_data.js not loaded. Check file path.</p>';
+        if(grid) grid.innerHTML = '<p style="color:red; text-align:center;">Error: examformat.js not loaded. Check file path.</p>';
     } else {
         if(grid) {
             grid.innerHTML = '';
