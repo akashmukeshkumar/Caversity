@@ -209,28 +209,27 @@ function startExam(id) {
     
     const pdfFrame = document.getElementById('paper-view');
     
-    // 🔥 BULLETPROOF PATH FIX 🔥
-    // Hamesha ID ko chotay huroof (lowercase) mein lay ga
-    let lowerId = id.toLowerCase();
-    let fileName = `${lowerId}.pdf`; 
+    // 1. ID ko lowercase karein aur spaces hatayen (e.g. "Spring2023" ban jayega "spring2023")
+    let cleanId = id.toLowerCase().replace(/\s+/g, '');
+    let fileName = `${cleanId}.pdf`;
     
-    // Agar aapne examformat.js mein koi file naam diya hai, toh usko extract karega
+    // Agar data mein file ka naam kuch aur diya hai, tou usay clean kar ke use karein
     if(typeof pastPapers !== 'undefined' && pastPapers[id] && pastPapers[id].pdf) {
         let rawPath = pastPapers[id].pdf;
-        fileName = rawPath.split('/').pop(); // Sirf file ka naam nikalega (e.g., "spring2023.pdf")
+        fileName = rawPath.split('/').pop().toLowerCase().replace(/\s+/g, ''); 
     }
     
-    // 🚀 EXACT GITHUB LIVE URL (Yeh kabhi fail nahi hoga kiyunke ye direct server se file uthayega)
-    const githubBaseUrl = "https://akashmukeshkumar.github.io/Caversity/";
-    const fullPDFUrl = `${githubBaseUrl}subjects/caf8_audit/assets/pastpapers/${encodeURI(fileName)}`;
+    // 🔥 THE BULLETPROOF FIX 🔥
+    // Hamesha aapke Live GitHub folder ka direct link use karega!
+    const fullPDFUrl = `https://akashmukeshkumar.github.io/Caversity/subjects/caf8_audit/assets/pastpapers/${fileName}`;
 
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     
     if(isMobile) {
-        // Mobile View (Google Docs Viewer)
+        // Mobile View (Google Docs Viewer ko direct live link chahiye hota hai)
         pdfFrame.innerHTML = `<iframe src="https://docs.google.com/gview?url=${fullPDFUrl}&embedded=true" width="100%" height="100%" style="border:none;"></iframe>`;
     } else {
-        // Desktop View (Direct PDF Load)
+        // Desktop View (Seedha direct link iframe mein khulega)
         pdfFrame.innerHTML = `<iframe src="${fullPDFUrl}" width="100%" height="100%" style="border:none;"></iframe>`;
     }
 
@@ -249,16 +248,6 @@ function startExam(id) {
             }
         });
     }
-
-    timeLeft = READING_TIME_SEC;
-    updateTimerDisplay();
-    clearInterval(timer);
-    timer = setInterval(() => {
-        timeLeft--;
-        updateTimerDisplay();
-        if(timeLeft <= 0) startWriting();
-    }, 1000);
-}
 
     timeLeft = READING_TIME_SEC;
     updateTimerDisplay();
