@@ -1783,5 +1783,163 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
 @keyframes ring-pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
 .btn-mic.recording { background: white; color: #ef4444; animation: breathe 1.5s infinite; }
 @keyframes breathe { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); } 70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); } }
+
+/* =========================================
+   🔥 NAVBAR DASHBOARD BUTTON FIX 🔥
+   ========================================= */
+.nav-dashboard-btn {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-dashboard-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, #0f172a 0%, #000000 100%);
+    color: #ffffff;
+}
+
+/* Navbar Flex Adjustment for Mobile */
+@media (max-width: 1050px) {
+    .nav-dashboard-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+}
+@media (max-width: 900px) {
+    .premium-nav {
+        justify-content: space-between;
+    }
+}
+
+/* =========================================
+   🔥 ORIGINAL GPT CARDS STYLE (GREEN & PURPLE) 🔥
+   ========================================= */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 40px 30px;
+    flex: 1;
+    min-width: 320px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    border: 1px solid rgba(255,255,255,0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+}
+
+/* The Top Accent Line */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 5px;
+}
+.card-green::before { background: linear-gradient(90deg, #10b981, #34d399); }
+.card-purple::before { background: linear-gradient(90deg, #8b5cf6, #c084fc); }
+
+.card h2 {
+    font-size: 26px;
+    color: #1e293b;
+    margin-bottom: 12px;
+    font-weight: 800;
+}
+
+.card p {
+    font-size: 15px;
+    color: #475569;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+.features li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* Custom Checkmarks */
+.features li::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+}
+.card-green .features li::before { color: #10b981; }
+.card-purple .features li::before { color: #8b5cf6; }
+
+/* Launch Buttons */
+.card .btn {
+    display: block;
+    width: 100%;
+    padding: 14px 25px;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+.card-green .btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+.card-green .btn:hover {
+    box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4);
+    transform: translateY(-2px);
+}
+
+.card-purple .btn {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+}
+.card-purple .btn:hover {
+    box-shadow: 0 12px 25px rgba(139, 92, 246, 0.4);
+    transform: translateY(-2px);
+}
 .btn-mic.processing { opacity: 0.7; pointer-events: none; animation: spin 1s infinite linear; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
