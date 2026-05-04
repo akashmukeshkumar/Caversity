@@ -119,8 +119,8 @@ html, body {
 /* 🔥 GLOBAL EXIT BUTTON (Top Right, Outside Navbar) 🔥 */
 #global-back-btn {
     position: fixed;
-    top: 90px; /* Navbar se alag karne ke liye thora neechay kiya */
-    right: 25px;
+    top: 26px; /* Navbar ke bilkul parallel set kiya */
+    right: 35px; /* Navbar ke right corner mein visually fit karne ke liye */
     z-index: 999999;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
@@ -434,7 +434,7 @@ footer {
 .card-green { border-top-color: #2193b0; }
 .card-purple { border-top-color: #2575fc; }
 
-.card-green h2, .card-purple h2 { margin-top: 0; font-weight: 700; color: #254d80; font-size: 1.6rem; }
+.card-green h2, .card-purple h2 { margin-top: 0; font-weight: 500; color: #254d80; font-size: 1.6rem; } /* Bold look ko khatam kar ke original jaisa kiya */
 .card-green p, .card-purple p { color: #254d80; font-size: 1rem; margin-bottom: 20px; line-height: 1.6; }
 
 .features { list-style: none; padding-left: 0; margin-top: 0; margin-bottom: 24px; text-align: left; }
@@ -1828,8 +1828,8 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
    ========================================= */
 .floating-dash-btn {
     position: fixed !important;
-    top: 90px !important; /* Navbar se alag karne ke liye */
-    right: 25px !important;
+    top: 26px !important; /* Navbar ke parallel set kiya */
+    right: 35px !important; /* Right side py proper fit */
     z-index: 100000 !important;
     display: flex !important;
     align-items: center !important;
@@ -1871,8 +1871,8 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     .floating-dash-btn {
-        top: 80px !important; /* Mobile par bhi detached rakha */
-        right: 20px !important;
+        top: 20px !important;
+        right: 15px !important;
         padding: 6px 12px !important;
         font-size: 11px !important;
     }
