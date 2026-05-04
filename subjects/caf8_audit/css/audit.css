@@ -1847,7 +1847,7 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
 }
 
 /* =========================================
-   🔥 2. GPT CARDS (EXACT ORIGINAL DESIGN) 🔥
+   🔥 1. GPT CARDS (EXACT ORIGINAL DESIGN) 🔥
    ========================================= */
 /* Cards section layout */
 .cards {
@@ -1959,11 +1959,11 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
     line-height: 1;
 }
 
-/* 🔥 Gradient Button (White Bug Fixed) 🔥 */
+/* Gradient Button */
 .card .btn {
     display: inline-block;
     padding: 12px 28px;
-    background: linear-gradient(to right, #007bff, #00c6ff) !important; /* Force Gradient */
+    background: linear-gradient(to right, #007bff, #00c6ff);
     color: #ffffff !important;
     border: none;
     border-radius: 6px;
@@ -1976,11 +1976,8 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
     width: auto;
 }
 
-/* Hover effect: Safaid honay ki ijazat nahi, sirf gradient shift aur slight lift */
 .card .btn:hover {
-    background: linear-gradient(to right, #007bff, #00c6ff) !important; /* Safaid hone se rokne ke liye */
-    color: #ffffff !important; /* Text ko bhi white fix kar diya */
-    background-position: right center !important;
+    background-position: right center;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 123, 255, 0.5);
 }
@@ -1988,6 +1985,7 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
 .card .btn:active {
     transform: scale(0.97);
 }
+
 
 /* =========================================
    🧠 2. 30-MIN BRAIN DOSE (EXACT ORIGINAL DESIGN)
