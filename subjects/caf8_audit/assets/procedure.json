@@ -1,0 +1,1333 @@
+[
+  {
+    "industry": "Micro-finance Bank",
+    "scenario": "The auditor sent 'Negative Confirmations' to 1,000 small borrowers. 950 borrowers did not respond. The auditor concluded that these 950 balances were 100% accurate without performing any further testing.",
+    "examiner_comment": "Students ignored the 'Conditions for Negative Confirmations'. If inherent and control risks are high, negative confirmations are NOT reliable audit evidence. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Evaluate if the population strictly consists of a large number of small, homogeneous balances required for negative confirmations.",
+      "Assess if the combined 'Inherent Risk' and 'Control Risk' are assessed as low before justifying the use of negative confirmations.",
+      "Perform alternative procedures on a sample of the non-responses to ensure no systematic error exists.",
+      "Investigate the 50 responses that did indicate a mismatch to identify if fraud or control failures are present."
+    ]
+  },
+  {
+    "industry": "Manufacturing Sector",
+    "scenario": "Inventory count was held 5 days before the year-end. The auditor just observed the count and agreed the balance to the ledger without testing the intervening period.",
+    "examiner_comment": "Candidates failed to write procedures for the 'Roll-forward' period. You must test transactions between the count date and the balance sheet date. (Autumn 2022)",
+    "reqCount": 3,
+    "procedures": [
+      "Obtain a schedule of inventory movements (additions and issuances) between the count date and the year-end.",
+      "Vouch a sample of goods received notes (GRNs) and dispatch notes (GDNs) during the intervening period to supporting invoices.",
+      "Perform analytical procedures on the gross profit margin during the last 5 days to identify any unusual fluctuations."
+    ]
+  },
+  {
+    "industry": "Aviation (Airline)",
+    "scenario": "The company disposed of two old aircraft and leased new ones. The accountant recorded the entire sale proceeds as 'Other Income' and did not cease the depreciation on the disposed assets.",
+    "examiner_comment": "Students failed to identify that profit/loss on disposal should be calculated instead of recording full proceeds as income. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the sales agreement to verify the actual disposal date and sale price.",
+      "Recalculate the profit or loss on disposal and compare it with the amount in 'Other Income'.",
+      "Verify that depreciation was only charged up to the date of disposal.",
+      "Check the lease agreement for new aircrafts to determine if they are Right-of-Use (ROU) assets under IFRS 16."
+    ]
+  },
+  {
+    "industry": "Audit Firm (Internal Conflict)",
+    "scenario": "The audit manager assigned to the engagement is a former employee of the client. Furthermore, the client has offered a 'Success Fee' if the audit is completed on time with an unmodified (clean) report.",
+    "examiner_comment": "Students often miss the 'Self-Interest Threat' associated with the success fee and only focus on 'Familiarity'. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Evaluate the significance of the self-interest threat created by the success fee.",
+      "Apply safeguards: Remove the manager from the audit team immediately.",
+      "Communicate the matter regarding the success fee to Those Charged With Governance (TCWG).",
+      "Assign an independent reviewer (EQCR) to check the work done by that manager."
+    ]
+  },
+  {
+    "industry": "Chemical Manufacturing",
+    "scenario": "The inventory includes 'hazardous chemicals' held at a third-party warehouse. The warehouse owner has refused to provide a written confirmation regarding the inventory.",
+    "examiner_comment": "Many candidates forgot that physical inspection is mandatory even if a third party is involved when the risk is high. (Autumn 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Attend the physical inventory count at the third-party warehouse personally.",
+      "Inspect the warehouse's internal control reports (SOC 1 or SOC 2) if available.",
+      "Perform analytical procedures by comparing chemical usage with production output.",
+      "Trace a sample of chemical purchases to the third-party storage receipts."
+    ]
+  },
+  {
+    "industry": "Pharmaceuticals",
+    "scenario": "The company launched a new medicine formula that failed. The health authority imposed a 50M fine. Management disclosed it as a 'Contingent Liability', but the legal advisor states there is a 90% chance the fine will have to be paid.",
+    "examiner_comment": "Candidates struggle to distinguish between Provision and Contingent Liability. If it's probable (>50%), a provision must be recognized. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the legal advisor's correspondence to confirm the 'Probable' nature of the fine.",
+      "Check if a provision of 50M has been recognized in accordance with IAS 37.",
+      "Verify the disclosure in notes to financial statements regarding the nature and timing of the fine.",
+      "Perform a search for unrecorded liabilities to ensure no other legal fines are pending."
+    ]
+  },
+  {
+    "industry": "Textile",
+    "scenario": "The company's major customer (representing 40% of revenue) has gone bankrupt. The bank refused to provide further loans, and the current ratio has fallen to 0.6:1. Management plans to survive by selling non-core assets.",
+    "examiner_comment": "Students fail to suggest examining 'Mitigating Factors' like alternate financing or owner's capital injection. (Autumn 2021)",
+    "reqCount": 4,
+    "procedures": [
+      "Analyze the company's cash flow forecast for the next 12 months.",
+      "Inspect bank loan rejection letters and existing debt repayment schedules.",
+      "Review board minutes for management's formal plan to dispose of non-core assets.",
+      "Obtain a written representation from management regarding their ability to continue as a going concern."
+    ]
+  },
+  {
+    "industry": "Software-as-a-Service (SaaS)",
+    "scenario": "The SaaS company sells 2-year subscriptions and receives full payment upfront on day 1. The accountant recorded the entire 100M payment immediately as 'Revenue'.",
+    "examiner_comment": "Common error: Overlooking 'Deferred Revenue' or 'Contract Liability' under IFRS 15. (Spring 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Trace a sample of subscription contracts to verify the service period duration.",
+      "Recalculate the 'Earned' vs 'Unearned' portion of revenue based on the time elapsed.",
+      "Vouch bank receipts to the deferred income (Contract Liability) account in the general ledger.",
+      "Perform analytical procedures by comparing current year revenue with the number of active subscribers."
+    ]
+  },
+  {
+    "industry": "Automobile Assembly",
+    "scenario": "After the year-end (June 30), it was discovered in August that 5,000 units of a car model were recalled due to a technical defect. The fault existed before June but was detected later.",
+    "examiner_comment": "Students ignore 'Adjusting Events' after the reporting period (IAS 10). (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Review post-year-end board minutes for the decision on the product recall.",
+      "Inspect correspondence with the quality control department to confirm the defect existed at year-end.",
+      "Evaluate the estimated cost of repairs/refunds and ensure an adjusting entry is made.",
+      "Confirm if the recall has impacted the brand value (Impairment of Intangibles)."
+    ]
+  },
+  {
+    "industry": "Construction",
+    "scenario": "At a construction site, there is no gate-pass system for materials. The storekeeper independently generates purchase requisitions, receives goods, and updates the inventory records. Physical counts are done only annually.",
+    "examiner_comment": "Candidates fail to identify the lack of 'Segregation of Duties'. One person should not handle both authorization and recording. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Observe the current inventory handling process to identify vulnerabilities to unauthorized access.",
+      "Trace a sample of material purchases to see if they were authorized by a separate department.",
+      "Perform a surprise physical test count of high-value items like steel bars.",
+      "Review the discrepancy reports from the last annual physical count."
+    ]
+  },
+  {
+    "industry": "Trading",
+    "scenario": "The auditor selected 50 samples. In 2 samples, the invoice amount and ledger amount did not match. The auditor ignored these 2 errors, categorizing them as 'isolated incidents' because the error was small.",
+    "examiner_comment": "Students don't understand 'Anomalies'. Every error must be 'Projected' to the whole population before ignoring. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Project the sample error to the entire population to estimate the total misstatement.",
+      "Inquire from management about the nature and root cause of these specific mismatches.",
+      "Perform additional testing on the specific class of transactions where errors were found.",
+      "Evaluate if the projected error plus uncorrected misstatements exceeds overall materiality."
+    ]
+  },
+  {
+    "industry": "Hospitality",
+    "scenario": "Hotel management restricted the auditor from accessing 'Guest Feedback Records' and 'Internal Legal Files', claiming the data is highly confidential.",
+    "examiner_comment": "Candidates often jump to 'Adverse Opinion'. If evidence is missing, it is a 'Scope Limitation' (Qualified or Disclaimer). (Autumn 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Communicate the limitation to Those Charged With Governance (TCWG) and formally request access.",
+      "Perform alternative procedures, such as reviewing external legal confirmations or public reviews.",
+      "Evaluate the impact of the missing information on the overall financial statements.",
+      "Draft a 'Basis for Qualified Opinion' or 'Disclaimer' paragraph depending on pervasiveness."
+    ]
+  },
+  {
+    "industry": "Tech Startup",
+    "scenario": "Payroll expense has increased by 30% from the previous year, whereas headcount only increased by 5%. The HR manager states this is due to 'performance bonuses', but no formal policy is documented.",
+    "examiner_comment": "Students forget to verify the 'Existence' of employees (Ghost employees risk) in high-growth startups. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Perform an analytical review by comparing monthly payroll trends with budget and prior years.",
+      "Select a sample of new employees and inspect their joining letters and CNICs to verify existence.",
+      "Vouch a sample of bonus payments to approved board minutes or performance appraisals.",
+      "Reconcile the total payroll expense with the withholding tax deposited in the government treasury."
+    ]
+  },
+  {
+    "industry": "Telecom",
+    "scenario": "The telecom company processes millions of billing transactions. The system automatically applies discounts. The auditor suspects the system is making 'Rounding-off' errors which are individually small but collectively material.",
+    "examiner_comment": "Students fail to suggest 'Test Data' or 'Audit Software'. Manual testing is impossible for millions of rows. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Use Audit Software (CAATs) to re-perform the discount calculation on 100% of the billing data population.",
+      "Input 'Test Data' (dummy transactions with known errors) into the system to check if automated controls detect them.",
+      "Use Data Analytics to identify 'Outliers' or transactions that deviate from the standard discount policy.",
+      "Perform a 'Gap Analysis' on invoice numbering to ensure completeness of the billing records."
+    ]
+  },
+  {
+    "industry": "Oil & Gas",
+    "scenario": "The company used its 'In-house Geologist' to value reserves. The reserve value increased by 40% from last year. The auditor has no background knowledge of geology.",
+    "examiner_comment": "Candidates forget to evaluate the 'Objectivity' and 'Competence' of the expert, especially if they are an employee. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Evaluate the Geologist's professional competence, experience, and membership in relevant professional bodies.",
+      "Assess the 'Objectivity' of the expert, considering they are an employee of the client.",
+      "Review the assumptions and methods used by the expert to ensure they are consistent with industry standards.",
+      "Consider appointing an 'Auditor's External Expert' to independently verify the reserve estimates."
+    ]
+  },
+  {
+    "industry": "Automotive Parts",
+    "scenario": "After the year-end (Dec 31), it was discovered on Feb 15 that a major debtor went bankrupt due to a factory fire that occurred on Jan 10. Management claims this is a next-year event.",
+    "examiner_comment": "Common misconception: Bankruptcy after year-end is usually adjusting, BUT here the fire happened AFTER year-end. Therefore, it is a Non-Adjusting event. (Autumn 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect correspondence with the liquidator to confirm the debtor's financial status at year-end.",
+      "Verify the exact date of the fire incident to confirm the bankruptcy was caused by a post-year-end event.",
+      "Ensure management has provided adequate disclosure in the notes regarding the non-adjusting event.",
+      "Review post-year-end bank statements to see if any partial payments were received prior to bankruptcy."
+    ]
+  },
+  {
+    "industry": "Retail (New Client)",
+    "scenario": "This is the first year you are auditing the company. Last year's audit was conducted by 'Firm XYZ', which issued a 'Qualified Opinion' regarding Inventory Valuation.",
+    "examiner_comment": "Students miss the 'ISA 510' requirements. You must check if the previous year's issue is resolved or still exists. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Review the predecessor auditor’s working papers to understand the basis of the qualification.",
+      "Perform audit procedures on the opening balances to verify if inventory was correctly brought forward.",
+      "Evaluate if the accounting policies have been consistently applied in the current period.",
+      "Assess if the matter that caused the previous qualification still impacts the current period's financial statements."
+    ]
+  },
+  {
+    "industry": "Consultancy",
+    "scenario": "The client has explicitly forbidden the auditor from reviewing the 'Internal Audit Report' and management refused to sign the 'Engagement Letter' citing high audit fees.",
+    "examiner_comment": "Students fail to realize that if pre-conditions are not met (access to info), the auditor should NOT accept the engagement.",
+    "reqCount": 4,
+    "procedures": [
+      "Determine if the financial reporting framework is acceptable for the company.",
+      "Obtain agreement from management that it acknowledges its responsibility for Internal Controls.",
+      "Inform management that 'Limitation on Scope' prior to acceptance will lead to rejection of the audit engagement.",
+      "Communicate with 'Those Charged With Governance' (TCWG) regarding the refusal to sign the engagement letter."
+    ]
+  },
+  {
+    "industry": "Trading",
+    "scenario": "The Bank Reconciliation Statement (BRS) shows 10M in 'Unpresented Checks' that are 8 months old. The cash-in-hand amount has tripled since last year, but the locker key is solely with the Accountant.",
+    "examiner_comment": "Students forget 'Stale Checks' logic. 6 months+ checks should be written back. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the BRS and identify checks older than 6 months (Stale Checks) to ensure they are reversed.",
+      "Send external confirmation requests directly to all banks where the company has accounts.",
+      "Perform a surprise cash count at the year-end and reconcile it with the cash book.",
+      "Verify the 'Cut-off' of bank transactions by inspecting the bank statement for 5 days post-year-end."
+    ]
+  },
+  {
+    "industry": "Real Estate",
+    "scenario": "Management has reduced the 'Provision for Warranty' by 50% compared to last year, even though overall sales have increased. They claim that 'Product Quality' has significantly improved.",
+    "examiner_comment": "Students don't test the 'Reasonableness' of estimates. They just accept management's word. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Review the method and assumptions used by management to calculate the warranty provision.",
+      "Compare the actual warranty claims paid during the year with the provision made last year (Retrospective review).",
+      "Test the data integrity used in the estimation process (e.g., sales volume vs. historical claim history).",
+      "Evaluate if the change in estimate is corroborated by internal quality control reports or industry trends."
+    ]
+  },
+  {
+    "industry": "Consumer Electronics",
+    "scenario": "Management stated they have no written computation for 'Inventory Obsolescence' as the CEO decides it personally. They offered to sign a 'Management Representation Letter' asserting the inventory is correctly valued instead.",
+    "examiner_comment": "Students mistakenly think 'Representation' is a substitute for other audit evidence. It is NOT. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Explain to management that written representations are not a substitute for physical inspection and NRV testing.",
+      "Perform independent testing of inventory aging to identify slow-moving items.",
+      "Evaluate the reliability of management's representations based on past audit experience.",
+      "If management refuses to provide other evidence, consider it a 'Scope Limitation' despite the letter."
+    ]
+  },
+  {
+    "industry": "Cloud Logistics",
+    "scenario": "The client has outsourced its entire 'Payroll Processing' to a foreign IT company. The auditor is denied access to the IT company's premises, and the client claims it is out of their control.",
+    "examiner_comment": "Candidates fail to suggest 'Type 1' or 'Type 2' reports (ISAE 3402) for service organizations. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Obtain and review a 'Type 1' or 'Type 2' report from the Service Auditor of the IT company.",
+      "Inquire from management about the internal controls they maintain over the data sent to the service organization.",
+      "Perform analytical procedures on the payroll data received back from the service organization.",
+      "Visit the service organization to perform tests of controls if no assurance report is available."
+    ]
+  },
+  {
+    "industry": "Wholesale Trading",
+    "scenario": "The auditor sent confirmation letters to 20 major debtors. 5 did not reply. The client said, 'Their record was clean last year, just ignore them.' The auditor selected 5 new random debtors instead.",
+    "examiner_comment": "Common blunder: Replacing non-responses with new samples. You MUST perform alternative procedures for those specific non-responding debtors. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Perform alternative procedures such as inspecting subsequent cash receipts from those 5 specific debtors.",
+      "Vouch the sales invoices and shipping documents (GDNs) for the outstanding balances of the non-respondents.",
+      "Inquire from management about the reasons for the lack of response from these specific customers.",
+      "Evaluate if the non-responses indicate a risk of fraud or unidentified related party transactions."
+    ]
+  },
+  {
+    "industry": "Manufacturing",
+    "scenario": "Near the end of the audit, it was discovered that a 500M 'Fictitious Sales' fraud occurred, representing 80% of the company's profit. Management has blatantly refused to adjust the financial statements.",
+    "examiner_comment": "80% of profit means the misstatement is both 'Material and Pervasive'. (Autumn 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Communicate the fraud findings to the 'Audit Committee' and 'Board of Directors' immediately.",
+      "Request management to reverse the 500M fictitious revenue entries.",
+      "Evaluate the impact of the fraud on the 'Integrity of Management' and the reliability of other audit evidence.",
+      "Draft the 'Basis for Adverse Opinion' paragraph for the audit report detailing the pervasive misstatement."
+    ]
+  },
+  {
+    "industry": "E-Commerce",
+    "scenario": "The Database Administrator (DBA) has 'Master Access' and can modify 'Product Prices' without approval. The auditor noted prices dropped by 50% over the weekend and reverted to normal after specific orders were shipped.",
+    "examiner_comment": "Classic 'IT Fraud' scenario. Lack of 'Audit Trail' and 'Segregation of Duties' in IT systems. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the 'System Logs' to identify which User ID was used to modify the prices on the weekend.",
+      "Review the 'User Access Rights' to ensure the DBA does not have authorization to initiate transactions.",
+      "Vouch the 'Sales Invoices' during the price-drop period to identify the beneficiaries of the 50% discount.",
+      "Recommend implementing an 'Automated Alert System' for any manual changes made to the Master Data."
+    ]
+  },
+  {
+    "industry": "Construction",
+    "scenario": "The auditor found that 50M of 'Material Costs' were double-recorded using last year's invoices. The accountant claimed it was a 'mistake', but the auditor traced the 50M payment directly to the contractor building the CFO's new personal bungalow.",
+    "examiner_comment": "Students often treat this as a simple 'Error'. They miss the 'Fraud Red Flag' regarding Intent and Personal Benefit. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Inquire from the CFO regarding the exact nature of the 50M payment and the contractor's relationship to the company.",
+      "Inspect the original invoices and payment vouchers to identify any 'Ghost Suppliers' or duplicate billing markers.",
+      "Review the 'Conflicts of Interest' declarations of all senior management members.",
+      "Communicate the potential management fraud to TCWG and consider reporting to legal/regulatory authorities."
+    ]
+  },
+  {
+    "industry": "Export-Import",
+    "scenario": "The company paid 10M as 'Consultancy Fees' to a Government Official to expedite 'Custom Clearance'. The accountant classified this payment under 'Operating Expenses'.",
+    "examiner_comment": "Candidates fail to identify this as a 'Non-compliance with Laws' (NOCLAR). Bribes are illegal and cannot be treated as normal business expenses. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Obtain an understanding of the nature of the 'consultancy services' allegedly provided by the official.",
+      "Evaluate the impact of this illegal payment on the company's reputation and calculate potential regulatory fines.",
+      "Inquire from management about their 'Anti-Bribery Policy' and compliance monitoring procedures.",
+      "Seek legal advice to determine the auditor's statutory responsibility to report this to external regulators."
+    ]
+  },
+  {
+    "industry": "Wholesale (Grain-Trade)",
+    "scenario": "While testing debtors, the auditor noted that Customer A's payment was adjusted against Customer B's balance, and B's payment against C's. The cashier holds the responsibility for both 'Cash Collection' and 'Ledger Recording'.",
+    "examiner_comment": "Classic 'Lapping' Fraud. Students miss the lack of 'Segregation of Duties' as the root cause. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Perform a 'Cut-off' test on bank deposits and debtor records to identify exact timing mismatches.",
+      "Send 'External Confirmations' to Customers A, B, and C to verify their actual payment dates and amounts.",
+      "Inspect the physical 'Deposit Slips' and compare them with the individual entries in the Receivables Ledger.",
+      "Recommend immediate 'Segregation of Duties' between the cash collection and recording functions."
+    ]
+  },
+  {
+    "industry": "Oil & Gas",
+    "scenario": "International oil prices increased by 20%, yet the company's 'Gross Profit Margin' jumped from 15% to 22%. Sales volume remained identical to the previous year.",
+    "examiner_comment": "Students fail to identify the 'Overstatement of Sales' or 'Understatement of Purchases'. If costs rise, GP should ideally fall unless prices are hiked significantly. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Compare the 'Unit Sale Price' with the 'Unit Purchase Cost' to verify the mathematical validity of the margin increase.",
+      "Inspect the 'Purchase Invoices' for the last quarter to ensure all 20% price increases were accurately recorded.",
+      "Vouch a sample of 'Sales Invoices' to 'Goods Dispatch Notes' (GDNs) to ensure no fictitious sales exist.",
+      "Perform a 'Cut-off' test on purchases to ensure all year-end liabilities are completely recorded."
+    ]
+  },
+  {
+    "industry": "Manufacturing (Heavy Machinery)",
+    "scenario": "The Current Ratio has dropped from 2.5:1 to 0.8:1. 'Inventory' value has increased by 300M, but 'Cash' reserves are completely depleted. Management insists 'Everything is fine'.",
+    "examiner_comment": "Candidates ignore the 'Going Concern' threat. A ratio below 1:1 indicates the company cannot pay its short-term debts. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Analyze the 'Cash Flow Forecast' for the next 12 months to assess the company's debt repayment ability.",
+      "Inspect the 'Inventory Aging' report to see if the 300M increase consists of slow-moving or obsolete stock.",
+      "Review 'Bank Loan Agreements' for any breach of current ratio covenants that could trigger loan recalls.",
+      "Obtain a 'Management Representation Letter' detailing their specific plans to raise emergency funds."
+    ]
+  },
+  {
+    "industry": "Service (IT Consultancy)",
+    "scenario": "Revenue increased by 10%, but 'Net Profit' dropped by 50%. 'Administrative Expenses' saw an unusual 80% spike without any new office expansion or staff hiring.",
+    "examiner_comment": "Students miss the 'Personal Expenses' or 'Fraud' risk embedded within unexplained administrative overheads. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Perform a 'Detailed Ledger Review' of administrative expenses to identify unusually large or unauthorized payments.",
+      "Vouch a sample of 'Consultancy Fees' or 'Legal Charges' to actual service agreements and bank statements.",
+      "Compare the current 'Headcount' with the 'Payroll Expense' to identify the existence of 'Ghost Employees'.",
+      "Evaluate if any 'Capital Expenditure' (e.g., purchasing Laptops/Servers) has been wrongly expensed as administration costs."
+    ]
+  },
+  {
+    "industry": "Retail (Wholesale)",
+    "scenario": "Receivable days have stretched from 45 days to 120 days. Management has maintained the 'Provision for Doubtful Debts' at the exact same level as last year (2M).",
+    "examiner_comment": "Classic 'Bad Debt' risk. If collections take significantly longer, the provision MUST proportionally increase. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the 'Debtors Ageing Report' and specifically identify balances overdue by more than 90 days.",
+      "Check 'Subsequent Collections' in July/August bank statements to see if old debtors have actually paid.",
+      "Inquire from the 'Credit Manager' regarding the specific economic or operational reasons for the delay in recovery.",
+      "Recalculate the 'Provision' based on the revised aging brackets and historical loss rates."
+    ]
+  },
+  {
+    "industry": "Retail (Fashion Hub)",
+    "scenario": "The company has provided a Rs. 10 million interest-free loan to one of its Directors. The accountant argues that since the Director is an internal party, there is no need to disclose this in the financial statements.",
+    "examiner_comment": "Candidates failed to identify that Related Party transactions must be disclosed regardless of materiality or 'Arm's Length' status. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the board of directors' minutes to identify all loans and advances provided to directors or their close relatives.",
+      "Review the general ledger for unusual 'interest-free' entries or large round-sum payments.",
+      "Verify that the loan is adequately disclosed in the financial statements according to the requirements of IAS 24.",
+      "Obtain a written representation from management identifying all related party transactions and confirming their disclosure."
+    ]
+  },
+  {
+    "industry": "E-Commerce (Shop-Fast)",
+    "scenario": "While testing the order portal, the auditor found that a customer can enter a negative quantity (e.g., -5), which reduces the total bill. The system accepts negative inventory balances and generates no warning.",
+    "examiner_comment": "Students failed to distinguish between 'General IT Controls' and 'Application Controls'. This is a clear failure of input validation. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Use 'Test Data' to deliberately input negative quantities and verify if the system effectively rejects them.",
+      "Inspect the system's configuration for 'Reasonableness Checks' and 'Range Checks' on the quantity field.",
+      "Review the error logs generated by the system to identify any unauthorized or unusual billing adjustments.",
+      "Perform a 'Walkthrough' of the sales cycle to pinpoint the exact stage where the input validation control is failing."
+    ]
+  },
+  {
+    "industry": "Logistics (Cargo-Link)",
+    "scenario": "Last year's audit was conducted by 'Firm A', which issued an 'Adverse Opinion' due to asset overvaluation. This year, management has corrected the issue, but the prior year's comparative figures are presented exactly as before.",
+    "examiner_comment": "Candidates forgot that if a prior year's issue is resolved in the current year, the auditor must still add an 'Other Matter' paragraph referencing the predecessor auditor. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Verify that the prior period error has been corrected through a proper retrospective restatement of the comparative figures.",
+      "Inspect the opening balances to ensure the overvaluation has been correctly adjusted in the current year's ledger.",
+      "Draft an 'Other Matter' paragraph stating that the prior year was audited by another firm which expressed an adverse opinion.",
+      "Evaluate whether the current year's depreciation and cost of sales are correctly calculated following the asset adjustment."
+    ]
+  },
+  {
+    "industry": "Real Estate (Grand Plaza)",
+    "scenario": "The company hired a 'Professional Valuer' to determine the fair value of its Investment Property. The valuer's report explicitly states a limitation: they only conducted a physical inspection of 20% of the property.",
+    "examiner_comment": "Students blindly relied on the valuer's report without evaluating the adequacy of the 'Scope of Work'. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Evaluate the valuer’s scope of work to determine if a 20% physical inspection is sufficient to form a reliable estimate.",
+      "Inquire from the valuer about the specific assumptions and extrapolation methods used for the remaining 80% of the property.",
+      "Compare the valuer’s applied rates with current market prices of similar properties in the same locality.",
+      "Assess the 'Competence, Capability, and Objectivity' of the valuer by verifying their professional accreditations."
+    ]
+  },
+  {
+    "industry": "Insurance Brokerage",
+    "scenario": "The company paid its July rent in advance during the month of June (year-end is June 30). The accountant recorded this entire payment as a current year 'Expense', and total prepayments are showing as zero.",
+    "examiner_comment": "Candidates often ignore 'Cut-off' issues in small balance sheet items like prepayments, which impacts profitability. (Autumn 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the rental agreement to verify the payment terms and the exact period covered by the payment.",
+      "Vouch the bank statement for the month of June to identify any advance payments made for the subsequent financial year.",
+      "Recalculate the prepaid portion of the rent and request management to pass an adjusting entry to recognize the asset.",
+      "Perform a search for unrecorded prepayments by reviewing vendor invoices received shortly after the year-end."
+    ]
+  },
+  {
+    "industry": "Telecom (Data-Link)",
+    "scenario": "The company implemented a highly complex 'Revenue Recognition System' this year. The audit team spent 40% of their time auditing this specific area. Management requested the auditor to exclude this from the report since no errors were found.",
+    "examiner_comment": "Students mistakenly think Key Audit Matters (KAM) are only for highlighting 'Errors'. KAM is for areas requiring 'Significant Auditor Attention'. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Determine if the new system implementation required significant auditor judgment or the involvement of specialized IT experts.",
+      "Evaluate the documentation detailing why this matter was communicated to Those Charged With Governance (TCWG).",
+      "Draft a KAM paragraph describing the matter, explaining why it was significant, and detailing how it was addressed.",
+      "Check if the matter is adequately disclosed in the financial statements, as the KAM must refer to the related disclosures."
+    ]
+  },
+  {
+    "industry": "Cold Storage (Fresh-Freeze)",
+    "scenario": "During the year-end inventory count, the auditor was denied access to 3 warehouse blocks due to a toxic 'Chemical Leak'. Management claims those blocks are 'Full' and a physical count is unnecessary.",
+    "examiner_comment": "Candidates often accept management's word. Inability to access inventory is a classic 'Scope Limitation' requiring alternative evidence. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Perform alternative procedures such as inspecting 'Third-Party' storage reports or safety logs if available.",
+      "Inspect subsequent sales records to verify if items supposedly stored in the inaccessible blocks were actually sold.",
+      "Request a physical count at a later date when the area is deemed safe and perform a 'Roll-back' reconciliation to the year-end.",
+      "Evaluate the materiality of the inaccessible inventory to decide if the audit report requires a qualified or disclaimer of opinion."
+    ]
+  },
+  {
+    "industry": "Tobacco Manufacturing",
+    "scenario": "The Health Department imposed a Rs. 100 million fine on the company for 'Illegal Advertising'. The company appealed the decision, and their legal counsel assesses the chances of success as 50-50. No disclosure has been made.",
+    "examiner_comment": "Students missed the 'Disclosure' requirement. Even if a provision isn't recorded, a 'Contingent Liability' disclosure is mandatory unless the outflow is remote. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the official fine notice from the Health Department to understand the legal basis of the penalty.",
+      "Confirm the status of the appeal directly with the company’s legal counsel via an external confirmation letter.",
+      "Evaluate management's judgment and reasoning for omitting the contingent liability disclosure.",
+      "Investigate if the illegal advertising points towards a wider 'Internal Control' failure or management integrity issue."
+    ]
+  },
+  {
+    "industry": "Real Estate Developer",
+    "scenario": "The company secured a Rs. 500 million long-term loan with a covenant requiring the Current Ratio to stay above 2:1. At year-end, the ratio fell to 1.5:1. The bank has not yet recalled the loan.",
+    "examiner_comment": "Students ignored that a 'Breach of Covenant' automatically makes the long-term loan 'Current' (payable on demand) at the reporting date. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the signed loan agreement to identify all financial covenants and the specific consequences of a breach.",
+      "Recalculate the current ratio as of the year-end to mathematically confirm the breach of the 2:1 requirement.",
+      "Verify if the loan has been correctly reclassified from 'Non-current' to 'Current Liabilities' in the draft balance sheet.",
+      "Check for a formal 'Waiver Letter' obtained from the bank prior to the year-end that might permit long-term classification."
+    ]
+  },
+  {
+    "industry": "Textile Export (Silk-Way)",
+    "scenario": "You are appointed as the auditor for the first time. Last year, the predecessor auditor issued a 'Qualified Opinion' regarding Inventory Valuation. Management changed the valuation method this year but refuses to show you prior year inventory records.",
+    "examiner_comment": "Students forgot that if opening balances cannot be verified, the current year's 'Cost of Sales' is completely un-auditable. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Request access to review the predecessor auditor’s working papers to understand the exact basis of the qualification.",
+      "Perform alternative procedures such as 'Roll-back' testing from the current year's physical count to opening balances.",
+      "Inspect the subsequent sales of opening inventory items to verify their Net Realizable Value at the start of the year.",
+      "Evaluate if a 'Disclaimer of Opinion' or 'Qualified Opinion' is required on the current Statement of Profit or Loss."
+    ]
+  },
+  {
+    "industry": "Banking (National Bank)",
+    "scenario": "Two audit firms (Firm X and Firm Y) are conducting a joint audit. Firm X audited 'Loans' while Firm Y audited 'Deposits'. Later, a massive loan fraud was discovered. Firm Y claims they have zero responsibility for the loan section.",
+    "examiner_comment": "Common mistake: Thinking joint auditors are only liable for their allocated sections. They are 'Jointly and Severally' responsible for the entire audit report. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Review the 'Joint Audit Plan' to ensure that there were no overlaps or unaddressed gaps in critical audit areas.",
+      "Ensure that both firms performed cross-reviews of each other's significant audit findings prior to signing.",
+      "Evaluate if the failure to detect the fraud was due to a breakdown in communication and coordination between the firms.",
+      "Verify that the final 'Audit Report' is signed by both firms, acknowledging joint responsibility."
+    ]
+  },
+  {
+    "industry": "Public Sector Entity",
+    "scenario": "Management prepared summarized financial statements for the Annual Report. The auditor had issued a clean report on the full financials. However, management deliberately removed the 'Going Concern' note from the summary, claiming it looked 'negative'.",
+    "examiner_comment": "Students missed that summarized financials must remain consistent with the full version. Omitting a critical note makes the summary 'Misleading'. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Compare the summarized financial statements meticulously with the audited full financial statements for consistency.",
+      "Evaluate if the summary contains all fundamental disclosures (like Going Concern) necessary to avoid misleading users.",
+      "Verify that the auditor’s report on the summarized financials explicitly states whether it is consistent with the full version.",
+      "Request management to immediately re-insert the 'Going Concern' disclosure before signing the report on the summary."
+    ]
+  },
+  {
+    "industry": "Gaming Studio (Pixel-Perfect)",
+    "scenario": "The company spent Rs. 200 million on a new 'Game Engine'. The breakdown shows 150M was for the development phase and 50M for the initial research phase. The accountant capitalized the entire 200M as an Intangible Asset.",
+    "examiner_comment": "Candidates failed to distinguish between IAS 38 'Research' and 'Development'. Research costs must ALWAYS be expensed immediately. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the project's time-sheets and vendor invoices to segregate costs strictly into Research vs. Development phases.",
+      "Evaluate if the development costs meet all the 'PIRATE' criteria (Technical feasibility, Intention to complete, etc.).",
+      "Vouch a sample of the capitalized development costs to supporting bank statements and payroll records.",
+      "Request management to pass an adjusting entry to expense the 50M research cost in the Statement of Profit or Loss."
+    ]
+  },
+  {
+    "industry": "Audit Firm (Partner's Investment)",
+    "scenario": "The audit partner's brother recently purchased a 5% shareholding in the client company. The partner argues that his brother lives independently, and their financial matters are completely separate.",
+    "examiner_comment": "Students missed the 'Close Family Member' rule. A brother holding a material financial interest creates a significant Self-Interest threat. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Evaluate the materiality of the 5% shareholding to assess the severity of the self-interest threat.",
+      "Apply safeguards by removing the audit partner from the engagement team immediately.",
+      "Appoint an independent Quality Control Reviewer (EQCR) to review any audit work already performed by the partner.",
+      "Communicate the ethical conflict and the applied safeguards to Those Charged With Governance (TCWG)."
+    ]
+  },
+  {
+    "industry": "Manufacturing (Steel-Works)",
+    "scenario": "The client threatened the auditor that if they force an 'Inventory Write-down' adjustment, the client will not pay the previous year's outstanding audit fee and will replace the firm next year.",
+    "examiner_comment": "Candidates failed to identify the 'Intimidation Threat'. Furthermore, significantly overdue fees can be construed as a prohibited loan to the client. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Formally request the client to clear the overdue audit fees before the current year's audit report is issued.",
+      "Evaluate whether the unpaid fees constitute a financial loan, which violates independence rules.",
+      "Involve an additional professional accountant from outside the team to independently review the audit work.",
+      "Resign from the engagement if the intimidation threat to independence cannot be reduced to an acceptable level."
+    ]
+  },
+  {
+    "industry": "Retail (Mega-Mart)",
+    "scenario": "The inventory consists of 50,000 items. 10 of these items are high-value equipment worth 50M in total, while 49,990 items are small accessories worth 10M. The auditor used 'Simple Random Sampling', resulting in only small accessories being tested.",
+    "examiner_comment": "Students did not suggest 'Stratification'. High-value items carry material risk and should be tested 100%. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Stratify the inventory population by dividing it into high-value and low-value sub-populations.",
+      "Perform 100% substantive testing on the 10 high-value items as they are individually material to the financials.",
+      "Apply statistical random sampling exclusively to the remaining low-value stratum to ensure representative coverage.",
+      "Evaluate the misstatements found in each stratum separately before projecting the errors to the total population."
+    ]
+  },
+  {
+    "industry": "Tech (Soft-Core)",
+    "scenario": "The audit firm's Tax Department is currently representing the audit client in a legal dispute against the tax authorities in court. The audit partner argues that this is purely a tax matter and does not affect the audit.",
+    "examiner_comment": "Students overlooked the 'Advocacy Threat'. Promoting a client's position in litigation heavily compromises auditor objectivity. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Evaluate the significance of the advocacy threat and self-review threat regarding the tax provision.",
+      "Ensure completely different partners and teams are used for the tax litigation and the financial audit.",
+      "Appoint an external professional (not part of the firm) to review the audit of the tax provision.",
+      "Withdraw from either the tax consultancy service or the audit engagement if the threat is deemed too high."
+    ]
+  },
+  {
+    "industry": "Pharmaceuticals (Med-Life)",
+    "scenario": "During the final week of the year, manual journal entries totaling Rs. 500 million were posted with no description. The CFO states these are routine adjustments that only he is authorized to post.",
+    "examiner_comment": "Students missed 'Management Override of Controls'. Large, undocumented year-end entries by top management are classic fraud red flags. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Inquire from the IT department to extract system logs detailing the exact time and User ID used for these entries.",
+      "Inspect the underlying supporting documents (invoices, contracts, calculations) for a sample of these year-end adjustments.",
+      "Review the company's 'Accounting Estimates' for any management bias that could result in material misstatement due to fraud.",
+      "Communicate these unusual findings directly to the Audit Committee or Those Charged With Governance (TCWG)."
+    ]
+  },
+  {
+    "industry": "Retail (Fashion Outlet)",
+    "scenario": "Inventory shrinkage (losses) increased by 400% compared to the prior year. The store manager blames an increase in shoplifting, but the auditor discovers that the store's CCTV cameras have been broken for 3 months.",
+    "examiner_comment": "Candidates failed to link the 'Internal Control Weakness' (broken cameras) with the increased 'Fraud Opportunity' for asset misappropriation. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Perform a surprise physical inventory count of high-value items at multiple store locations.",
+      "Reconcile the daily Point of Sale (POS) reports with the actual inventory dispatched from the central warehouse.",
+      "Interview former employees or current security staff regarding the actual operational reasons for the shrinkage.",
+      "Review the store's electronic 'Access Logs' to identify if any personnel entered the premises after working hours."
+    ]
+  },
+  {
+    "industry": "Micro-finance Bank",
+    "scenario": "The auditor sent 'Negative Confirmations' to 1,000 small borrowers. 950 borrowers did not respond. The auditor concluded that these 950 balances were 100% accurate without performing any further testing.",
+    "examiner_comment": "Students ignored the 'Conditions for Negative Confirmations'. If inherent and control risks are high, negative confirmations are NOT reliable audit evidence. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Evaluate if the population strictly consists of a large number of small, homogeneous balances required for negative confirmations.",
+      "Assess if the combined 'Inherent Risk' and 'Control Risk' are assessed as low before justifying the use of negative confirmations.",
+      "Perform alternative procedures on a sample of the non-responses to ensure no systematic error exists.",
+      "Investigate the 50 responses that did indicate a mismatch to identify if fraud or control failures are present."
+    ]
+  },
+  {
+    "industry": "Software House (Cloud-App)",
+    "scenario": "The sales team receives a massive quarterly bonus upon hitting targets. A significant spike in sales was recorded on December 31st, but 40% of these specific sales were 'Returned' by customers on January 5th.",
+    "examiner_comment": "Classic 'Channel Stuffing' fraud scenario. Recording revenue for goods that will predictably be returned after the audit cutoff. (Autumn 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect sales invoices and shipping documents for all transactions occurring in the final week of December.",
+      "Vouch the 'Credit Notes' and sales return entries issued in January to identify any deliberate reversals of year-end sales.",
+      "Review the sales contracts for 'Right of Return' clauses that legally prevent premature revenue recognition.",
+      "Compare the current month's sales with historical monthly averages to mathematically prove the unusual year-end spike."
+    ]
+  },
+  {
+    "industry": "Trading (Bulk-Buy)",
+    "scenario": "The auditor intended to send an external confirmation to a major customer owing 80 million. Management refused, stating it would 'damage the business relationship', and offered to provide an internal bank statement instead.",
+    "examiner_comment": "Students mistakenly accepted management's reasoning. You MUST evaluate the validity of the refusal and perform alternative procedures. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Inquire from management about the specific reasons for the refusal and critically evaluate their validity.",
+      "Evaluate the implications of this refusal on the assessment of the relevant risks of material misstatement, including fraud risk.",
+      "Perform alternative audit procedures, such as inspecting subsequent cash receipts and third-party shipping documents (GDNs).",
+      "Communicate the matter to Those Charged With Governance (TCWG) if management's refusal is deemed unreasonable."
+    ]
+  },
+  {
+    "industry": "Manufacturing (Auto-Parts)",
+    "scenario": "During the physical count, inventory was short by 5,000 units compared to system records. The storekeeper claimed they were 'in-transit' but provided no dispatch documents. Management did not adjust the stock register.",
+    "examiner_comment": "Candidates failed to suggest 'Cut-off' testing for in-transit inventory to verify the storekeeper's claim. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the Goods Dispatch Notes (GDNs) dated just before and after the year-end to verify the 'in-transit' status.",
+      "Trace the missing 5,000 units to the subsequent receiving reports at the destination warehouse.",
+      "Vouch the relevant purchase/sales invoices to ensure the risks and rewards of ownership have officially transferred.",
+      "Request management to record an 'Inventory Write-down' if no reliable supporting documentation for the transit stock is found."
+    ]
+  },
+  {
+    "industry": "Service Sector (Consultancy)",
+    "scenario": "The audit fieldwork is complete, but the CEO refuses to sign the 'Written Representation Letter', stating that his verbal assurances should be sufficient due to their long-standing trust with the auditor.",
+    "examiner_comment": "Students forget that refusal to sign is a definitive 'Scope Limitation'. You cannot issue an unmodified report without it. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Discuss the matter with management to understand the underlying reasons for their refusal to provide written representations.",
+      "Re-evaluate the integrity of management and assess the effect this refusal has on the reliability of all other audit evidence.",
+      "Determine the possible effect of this limitation on the final audit opinion.",
+      "Issue a disclaimer of opinion if sufficient appropriate evidence cannot be obtained due to the lack of representations."
+    ]
+  },
+  {
+    "industry": "Utility Provider (Power-Gen)",
+    "scenario": "The company accrued its year-end electricity expense at the exact same amount as the previous year, despite a publicized 30% increase in utility tariffs. The accountant insists last year's data is a reliable proxy.",
+    "examiner_comment": "Common error: Ignoring 'Subsequent Payments' for testing the accuracy of year-end accruals. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Compare the current year’s electricity expense with the prior year and investigate the financial impact of the 30% rate hike.",
+      "Vouch the actual electricity bills received *after* the year-end to verify the accuracy of the accrual made in June.",
+      "Recalculate the required accrual based on the actual units consumed (via meter readings) and the revised tariff rates.",
+      "Inspect the general ledger for any 'Unrecorded Liabilities' by thoroughly reviewing bank payments made in July."
+    ]
+  },
+  {
+    "industry": "FinTech (E-Wallet)",
+    "scenario": "Ten employees resigned last month, but their system access credentials remain active. The IT manager claims there is no risk as they were 'trusted former employees'.",
+    "examiner_comment": "Students confuse ITGCs with Application Controls. Removing access for leavers is a critical 'Logical Access Control'. (Spring 2025 Prediction)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the HR 'Leavers List' and cross-reference it with the active 'IT User Accounts' list in the system.",
+      "Review the 'Access Logs' to identify if any resigned employee logged into the system after their official last working day.",
+      "Test a sample of password changes to ensure the company's 'Password Policy' (complexity and expiration) is strictly followed.",
+      "Inquire from the IT Head regarding the formalized process for the immediate deactivation of user IDs upon resignation."
+    ]
+  },
+  {
+    "industry": "Electronics (Mobile-Store)",
+    "scenario": "The inventory contains 1,000 units of an older mobile model costing Rs. 50,000 each. Following a new model launch, their market price dropped to 40,000. The accountant insists on keeping them at cost.",
+    "examiner_comment": "Candidates failed to perform 'Subsequent Sales Price' testing to verify NRV adjustments. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the 'Post-Year-End Sales Invoices' for the 1,000 units to determine the actual selling price realized (NRV).",
+      "Compare the cost of 50,000 with the estimated selling price minus selling costs to identify the 'Lower of Cost or NRV'.",
+      "Inquire from the Marketing Manager about any planned 'Clearance Sales' or heavy discounts for the obsolete models.",
+      "Recalculate the 'Inventory Write-down' and request management to record the resulting loss in the financial statements."
+    ]
+  },
+  {
+    "industry": "Software House (Data-Center)",
+    "scenario": "The company backs up its data daily onto physical tapes, which are stored inside the exact same server room. Furthermore, no data restoration test has been performed in the last 12 months.",
+    "examiner_comment": "Students miss the point that 'Off-site Storage' is mandatory for ITGCs. If the server room catches fire, the backup is also destroyed. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Observe the physical storage location of backup tapes to ensure they are kept in a separate, fire-proof off-site location.",
+      "Inspect the 'Backup Logs' to verify if the daily automated backups were successfully completed without errors throughout the year.",
+      "Perform a 'Test Restoration' of a sample backup tape to ensure the data is fully retrievable and not corrupted.",
+      "Review the 'Disaster Recovery Plan' (DRP) and check if it has been updated to include the current IT infrastructure."
+    ]
+  },
+  {
+    "industry": "Manufacturing (Fertilizers)",
+    "scenario": "The corporate tax rate increased from 29% to 32% under the new Finance Act. However, the accountant calculated the year-end tax provision using the old 29% rate, suggesting they will adjust it next year.",
+    "examiner_comment": "Common error: Ignoring 'Enacted Tax Rates' for year-end provisions, which leads to an understated liability. (Autumn 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Compare the tax rate used in the provision calculation with the latest 'Finance Act' to ensure legal compliance.",
+      "Recalculate the tax expense based on the taxable profit and the newly enacted 32% corporate tax rate.",
+      "Vouch the 'Tax Challans' for any advance tax paid during the year to ensure the 'Net Payable' calculation is accurate.",
+      "Inspect correspondence with external 'Tax Consultants' regarding any pending tax litigations or regulatory disallowances."
+    ]
+  },
+  {
+    "industry": "Distribution (Logistics-Hub)",
+    "scenario": "The year-end Bank Reconciliation Statement includes 15 million in unpresented cheques. Review of the subsequent bank statements reveals that 10 million of these cheques only cleared in August, but were recorded as cash outflows in June.",
+    "examiner_comment": "Students fail to check the 'Timing of Payments'. If checks are presented after year-end, they are correct, but if they are 'Stale' (6 months+), they must be reversed. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the 'Bank Reconciliation Statement' (BRS) for June 30 to identify all unpresented checks.",
+      "Vouch the 'July and August Bank Statements' to trace the exact clearance dates of the 15M unpresented checks.",
+      "Check the 'Ageing' of unpresented checks to identify any 'Stale Checks' (older than 6 months) that require reversal.",
+      "Agree the bank balance in the BRS with the 'External Bank Confirmation' received directly from the bank."
+    ]
+  },
+  {
+    "industry": "Pharmaceuticals (Cure-Lab)",
+    "scenario": "The company has sued a supplier for Rs. 20 million due to the supply of substandard materials. The legal counsel states there is a '95% chance of winning'. The accountant recorded the 20 million as 'Other Income' at year-end.",
+    "examiner_comment": "Common error: Premature recognition of 'Contingent Assets'. Even if 'Virtually Certain' according to lawyers, it should only be disclosed unless the cash has actually been received. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the 'Legal Counsel’s' opinion letter to confirm the exact probability of winning the litigation.",
+      "Verify if the 20 million has actually been received in the bank after the year-end (Subsequent Receipts).",
+      "Request management to reverse the 'Other Income' entry if the economic inflow is not completely certain by the reporting date.",
+      "Ensure that the contingent asset is appropriately 'Disclosed' in the notes rather than recognized in the balance sheet."
+    ]
+  },
+  {
+    "industry": "Manufacturing (Steel-Forge)",
+    "scenario": "The company's bank account is currently overdrawn by Rs. 50 million. The bank agreement contains a covenant that any reported financial loss gives the bank the right to recall the loan immediately. The company reported a 10M loss this year, but the bank hasn't sent a notice yet.",
+    "examiner_comment": "Students completely missed the 'Going Concern' and liquidity impact of breached bank covenants. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the 'Bank Loan Agreement' to identify the specific clauses (covenants) related to financial losses and loan recall.",
+      "Communicate with management regarding the 'Breach of Covenant' and formally inquire about their repayment strategy.",
+      "Evaluate the 'Going Concern' assumption considering the material uncertainty if the bank officially recalls the 50M overdraft.",
+      "Vouch for any formal 'Waiver Letter' received from the bank that allows the company to continue utilizing the facility despite the reported loss."
+    ]
+  },
+  {
+    "industry": "Airlines (Blue-Sky)",
+    "scenario": "The 'Repairs & Maintenance' expense has dropped by 60% compared to last year, even though the total number of flights increased. The accountant argues that this is because 'new aircraft were purchased', hence lower maintenance.",
+    "examiner_comment": "Candidates forgot to consider the risk that routine maintenance costs might have been incorrectly 'Capitalized' as assets to inflate profits. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Perform a detailed 'Analytical Review' by correlating the maintenance expense with the total number of flying hours during the year.",
+      "Inspect the 'Fixed Asset Register' (FAR) to identify if any routine maintenance costs have been incorrectly capitalized.",
+      "Vouch a sample of 'Maintenance Invoices' to ensure they were correctly classified as revenue expenditure.",
+      "Inquire from the Chief Engineering Officer regarding any deliberate deferral of maintenance, assessing potential safety or impairment issues."
+    ]
+  },
+  {
+    "industry": "Real Estate (Elite Developers)",
+    "scenario": "To verify 'Land Ownership', the auditor asked for the title deeds. Management provided a 'Photocopy', stating that the original documents are held by the bank as security for a loan. The auditor accepted the photocopy as sufficient evidence.",
+    "examiner_comment": "Common mistake: Photocopies are significantly less reliable than originals. The auditor should obtain a direct 'Bank Confirmation' or physically inspect the originals at the bank. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Send a direct 'External Confirmation' to the bank to verify the existence of the title deeds and the exact nature of the lien.",
+      "Visit the bank premises to physically 'Inspect' the original title deeds held as security.",
+      "Obtain an updated 'Certified Copy' from the official Land Registrar's office to ensure ownership is still registered in the company's name.",
+      "Vouch recent 'Property Tax' receipts to ensure the company is paying taxes as the legal owner."
+    ]
+  },
+  {
+    "industry": "Consumer Goods (Daily-Needs)",
+    "scenario": "Year-end inventory is 500M against sales of 2,000M. The 'Inventory Turnover' has stretched from 60 days last year to 120 days this year. The accountant explains, 'We stockpiled aggressively for next year's sales'.",
+    "examiner_comment": "Students ignored the high 'Risk of Obsolescence'. If turnover days double, the inventory is highly likely to be slow-moving or overvalued. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Analyze the 'Inventory Ageing Report' to explicitly identify items that have not moved for more than 90 to 120 days.",
+      "Inquire from the Production/Sales Manager regarding the business rationale for the 100% increase in the stock-holding period.",
+      "Inspect 'Post-Year-End Sales Invoices' of the bulk-purchased stock to verify if it is selling at cost or requires a discount.",
+      "Perform a 'Net Realizable Value' (NRV) test by comparing historical cost with the latest discounted selling prices."
+    ]
+  },
+  {
+    "industry": "Technology (AI-Solutions)",
+    "scenario": "After the year-end (June 30), the company successfully acquired a major competitor for 200M on July 15. The auditor treated this as an 'Adjusting Event' and increased the company's assets in the June 30 financial statements.",
+    "examiner_comment": "A business combination occurring after the reporting period is strictly a 'Non-Adjusting Event'. It requires a detailed disclosure, not a numerical adjustment. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the finalized 'Acquisition Agreement' to confirm the exact date of transfer of control (July 15).",
+      "Verify that absolutely no assets or liabilities of the acquired company have been merged into the June 30 balance sheet.",
+      "Review the 'Draft Financial Statements' to ensure a comprehensive disclosure of the acquisition is provided in the notes.",
+      "Evaluate the impact of the 200M cash outflow on the acquiring company's post-year-end 'Liquidity' and 'Going Concern' position."
+    ]
+  },
+  {
+    "industry": "Leasing (Auto-Lease)",
+    "scenario": "The company obtained a 100M loan at a 15% interest rate. The accountant only recorded 5M as interest expense for the year. The auditor calculated 15M for a full year, but the accountant clarified, 'The loan was disbursed in January (mid-year)'.",
+    "examiner_comment": "Candidates failed to perform a 'Proof in Total' calculation considering the time factor. If the loan date is mid-year, interest must be strictly pro-rated. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the 'Loan Disbursement Advice' from the bank to confirm the exact date the funds were credited to the account.",
+      "Recalculate the interest expense on a 'Pro-rata' basis from the verified date of disbursement to the financial year-end.",
+      "Agree the 'Interest Rate' utilized with the formal loan agreement and check for any 'Variable/Floating' rate changes during the period.",
+      "Trace the actual interest payments made to the 'Bank Statements' to ensure the completeness of the recorded expense."
+    ]
+  },
+  {
+    "industry": "Real Estate (Paradise City)",
+    "scenario": "The company recorded a 400M Investment Property at 'Cost', despite IFRS requiring 'Fair Value' (which is 600M). The total company profit is 50M and Total Assets are 1,000M. Management is refusing to pass the 200M fair value adjustment.",
+    "examiner_comment": "Students often suggested a 'Qualified Opinion'. Since the misstatement (200M) is 4 times the total profit (50M), the effect is highly 'Pervasive'. An 'Adverse Opinion' is strictly required. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Quantify the exact total misstatement by comparing the 400M recorded cost with the 600M independent valuation report.",
+      "Evaluate the pervasiveness of the 200M difference on the net profit, equity, and key ratios of the company.",
+      "Discuss the deliberate misstatement with Those Charged With Governance (TCWG) and formally request an adjustment.",
+      "Draft the 'Basis for Adverse Opinion' paragraph explaining the material and pervasive non-compliance with the IFRS framework."
+    ]
+  },
+  {
+    "industry": "Oil & Gas (Fuel-Hub)",
+    "scenario": "80% of the company's inventory (Oil Tanks) is located in a 'War Zone', making it impossible for the auditor to visit. No third-party confirmation is possible either. Inventory represents 70% of the company's Total Assets.",
+    "examiner_comment": "Common mistake: Believing alternative procedures will always work. If you absolutely cannot verify 70% of the total assets, it is a pervasive scope limitation requiring a Disclaimer. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Critically evaluate if any alternative procedures (like subsequent sales testing or military-escort drone footage) can provide sufficient evidence.",
+      "Communicate the absolute inability to perform the count to TCWG and explain its severe impact on the audit report.",
+      "Determine that since the unverified inventory constitutes 70% of assets, the limitation is fundamental to the users' understanding.",
+      "Draft a 'Disclaimer of Opinion' stating explicitly that the auditor was unable to obtain sufficient appropriate audit evidence to form an opinion."
+    ]
+  },
+  {
+    "industry": "FMCG (Daily-Mart)",
+    "scenario": "The auditor set 'Overall Materiality' at 10M. During testing, 5 uncorrected errors were found, each worth 2M. The auditor concluded, 'Since each error is below 10M, the financials are clean' and ignored them.",
+    "examiner_comment": "Students forgot 'Aggregation Risk'. While individual errors might be small, their aggregate sum (10M) exactly equals materiality and must be evaluated collectively. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Calculate and utilize 'Performance Materiality' (usually 60-75% of overall materiality) during testing to actively address aggregation risk.",
+      "Maintain a comprehensive 'Schedule of Uncorrected Misstatements' to track the cumulative financial impact of all small errors.",
+      "Evaluate if the aggregated 10M error impacts 'Key Performance Indicators' (KPIs), turns a profit into a loss, or breaches bank covenants.",
+      "Formally request management to adjust the 5 identified errors to reduce the total uncorrected misstatement to an acceptable level."
+    ]
+  },
+  {
+    "industry": "Aviation (Fly-High)",
+    "scenario": "The company is facing a massive 500M lawsuit. Management has perfectly disclosed the nature, timing, and uncertainty of this lawsuit in 'Note 12'. The auditor wants to ensure shareholders don't miss this critical information.",
+    "examiner_comment": "Candidates often 'Qualify' the report in panic. If the disclosure is adequate and perfect, you do not qualify; you simply add an 'Emphasis of Matter' (EOM) paragraph. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the external legal counsel's latest assessment report to verify the 500M claim and confirm it is a contingent liability.",
+      "Agree the specific wording of 'Note 12' in the financial statements with the factual evidence obtained.",
+      "Draft an 'Emphasis of Matter' paragraph in the audit report with a clear, direct reference to Note 12.",
+      "Ensure that the EOM paragraph explicitly states that 'the auditor's opinion is not modified in respect of this matter'."
+    ]
+  },
+  {
+    "industry": "Telecom (Network-One)",
+    "scenario": "The telecom regulator (PTA) imposed a 300M fine on the company for a 'Spectrum Breach'. Management flawlessly disclosed this in 'Note 15', and the lawyer confirms it will likely have to be paid. The auditor wishes to highlight this regulatory action.",
+    "examiner_comment": "Students often suggest qualifying the report despite correct disclosure. Regulatory actions of significant magnitude require an EOM to draw users' attention. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the official regulatory notice from PTA to verify the 300M fine amount and its legal basis.",
+      "Check if the 300M provision has been formally recorded in the Statement of Financial Position alongside the disclosure.",
+      "Vouch the disclosure in 'Note 15' to ensure it accurately reflects the financial uncertainty and expected timing of the outflow.",
+      "Draft an EOM paragraph with a clear heading (e.g., 'Emphasis of Matter - Regulatory Fine') pointing to the specific note."
+    ]
+  },
+  {
+    "industry": "Retail (New Chain Ltd)",
+    "scenario": "This is the company's first-ever statutory audit. The comparative figures from the previous year are labeled as 'Unaudited'. The auditor has successfully verified the current year's inventory, but is unsure how to report on the comparatives.",
+    "examiner_comment": "Candidates forget ISA 710 requirements. The auditor must add an 'Other Matter' paragraph specifically stating that the comparative figures were not audited. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Perform specific audit procedures on the opening balances to ensure they do not contain misstatements that materially affect the current year.",
+      "Inquire from management regarding the accounting policies applied to formulate the unaudited prior year figures.",
+      "Draft an 'Other Matter' paragraph clearly stating that the comparative information for the prior period is unaudited.",
+      "Evaluate if any 'Prior Period Errors' exist that require a retrospective restatement of the unaudited comparative figures."
+    ]
+  },
+  {
+    "industry": "Textile (Loom-Master)",
+    "scenario": "Following the year-end (June 30), a massive fire broke out in the main warehouse on August 10, destroying 50M worth of inventory. Management perfectly disclosed this non-adjusting event in Note 40. The auditor wants to highlight it in the report.",
+    "examiner_comment": "Common blunder: Attempting to adjust the year-end inventory balance. Since the fire was post-year-end, it is strictly non-adjusting. Use an EOM paragraph to highlight the disclosure. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the submitted insurance claims and the official fire department's report to substantiate the 50M loss value.",
+      "Verify that the physical inventory balance reported as of June 30 has NOT been reduced (confirming non-adjusting treatment).",
+      "Agree the explanatory wording of 'Note 40' with the evidence gathered during the subsequent events review.",
+      "Draft an EOM paragraph stating that a significant post-balance sheet event has occurred, directing users to Note 40."
+    ]
+  },
+  {
+    "industry": "International Branch (Pak-UAE)",
+    "scenario": "You are auditing a Pakistan-based branch that prepares its financials using 'IFRS'. The parent company in Dubai prepares its consolidated financials using 'Local UAE GAAP'. You need to address this framework difference in your reporting.",
+    "examiner_comment": "Students miss that differences in the 'Reporting Framework' for specific purposes are highlighted in the 'Other Matter' section of the audit report. (Autumn 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Compare the accounting policies mandated by 'IFRS' with 'Local UAE GAAP' to identify material mapping or recognition differences.",
+      "Inspect the 'Inter-company reconciliations' to ensure the branch data perfectly translates into the parent company's records.",
+      "Draft an 'Other Matter' paragraph explaining the specific financial reporting framework used and any restrictions on the distribution of the report.",
+      "Communicate the framework transition differences transparently to Those Charged With Governance (TCWG)."
+    ]
+  },
+  {
+    "industry": "FinTech (Payment Gateway)",
+    "scenario": "The client completely outsourced its 'Data Hosting' to a cloud Service Organization. The auditor obtained a 'Type 1 Report' (Design of Controls) and immediately set control risk to 'Low'. Later, it was discovered the servers were down for 2 months.",
+    "examiner_comment": "Common mistake: Believing a Type 1 report provides evidence of 'Operating Effectiveness'. An auditor MUST obtain a Type 2 report or perform their own tests to rely on outsourced controls. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Obtain and critically evaluate the 'Type 2 Report' from the service auditor to verify the actual operating effectiveness of the controls.",
+      "Check the 'Reporting Period' of the Type 2 report to ensure it seamlessly covers the client's financial year.",
+      "Perform testing on 'Complementary User Entity Controls' (CUECs) implemented at the client's own end (e.g., matching daily transaction logs).",
+      "Inquire from the service organization management about any significant system outages, downtime, or data breaches during the year."
+    ]
+  },
+  {
+    "industry": "Manufacturing (Fiber-Optic)",
+    "scenario": "To save time, the external auditor requested the 'Internal Audit Team' to physically dispatch and receive all 'Bank Confirmation Letters' (Direct Assistance). The internal audit head gladly agreed.",
+    "examiner_comment": "Students ignore that 'External Confirmations' should NEVER be handled by internal audit when providing direct assistance, due to high fraud manipulation risks. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Evaluate the 'Objectivity' and 'Competence' of the internal audit team before assigning any direct assistance tasks.",
+      "Ensure that the external auditor strictly maintains direct control over the dispatch and receipt of all external confirmation requests.",
+      "Re-perform a sample of the routine work done by internal audit to independently verify its accuracy and reliability.",
+      "Obtain a written agreement from management stating that internal auditors will solely follow the external auditor's instructions during the assignment."
+    ]
+  },
+  {
+    "industry": "Logistics (Global-Ship)",
+    "scenario": "The client uses Company 'A' for payroll processing. However, Company 'A' hosts its data on Company 'B's servers (a Sub-service provider). The auditor only obtained the service report for Company 'A' and ignored 'B'.",
+    "examiner_comment": "Candidates fail to consider the ripple effect of 'Sub-service' organizations. If the sub-service provider handles material data, their controls must also be evaluated. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Identify whether Company 'A' utilized a 'Carve-out' or an 'Inclusive' method regarding sub-service providers in their service auditor's report.",
+      "Obtain the specific service auditor's report for Company 'B' if Company 'A' has carved out their controls from the primary report.",
+      "Evaluate the exact nature of IT services provided by the sub-service provider and assess their direct impact on financial reporting.",
+      "Inquire from the client's management about their monitoring controls over the entire outsourcing chain (both A and B)."
+    ]
+  },
+  {
+    "industry": "Banking (Islamic Bank)",
+    "scenario": "The Internal Audit department extensively tested the highly complex 'Profit Distribution' calculations. The external auditor merely reviewed their final 'Work-paper' and issued a clean report without performing any independent re-calculation.",
+    "examiner_comment": "Students miss that 'Significant Risk Areas' (like complex profit/revenue distributions) strictly require the external auditor to perform their own independent testing, regardless of internal audit's conclusions. (Autumn 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Review the 'Audit Methodology' and sampling techniques used by the internal audit department to ensure they align with ISAs.",
+      "Perform 'Independent Re-performance' on a material sample of the profit distribution calculations to verify mathematical accuracy.",
+      "Assess if the internal audit function is adequately resourced, competent, and genuinely independent from operational management.",
+      "Vouch the raw source data (deposit balances, agreed ratios) used by internal audit to ensure its absolute completeness and accuracy."
+    ]
+  },
+  {
+    "industry": "Construction (Sky-High Builders)",
+    "scenario": "The auditor found that 50M of 'Material Costs' were recorded twice using old invoices. The accountant casually claimed it was a 'clerical double-entry mistake'. However, the auditor traced the duplicate 50M payment directly to the contractor building the CFO's private residence.",
+    "examiner_comment": "Students often treat this as a simple 'Error' requiring a reversal entry. They dangerously miss the 'Fraud Red Flag' involving top management's intent and personal benefit. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Inquire from the CFO regarding the exact nature of the 50M payment and demand an explanation for the contractor's dual relationship.",
+      "Inspect the original physical invoices and payment vouchers to identify 'Ghost Suppliers' or deliberate duplicate billing markers.",
+      "Review the 'Conflicts of Interest' declarations signed by all senior management members.",
+      "Communicate the suspected management fraud immediately to Those Charged With Governance (TCWG) and seek legal counsel."
+    ]
+  },
+  {
+    "industry": "Export-Import (Trade-Link)",
+    "scenario": "The company paid a massive 10M cash amount labeled as 'Consultancy Fees' to a Government Official to expedite 'Custom Clearance' for imported goods. The accountant classified this under regular 'Operating Expenses'.",
+    "examiner_comment": "Candidates fail to identify this as a blatant 'Non-compliance with Laws' (NOCLAR). Bribes are illegal under Anti-Money Laundering laws and cannot be treated as normal expenses. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Obtain a deep understanding of the exact nature of the 'consultancy services' allegedly provided by the government official.",
+      "Evaluate the financial impact of this illegal payment on the company's reputation and calculate potential regulatory fines.",
+      "Inquire from management about the enforcement of their 'Anti-Bribery Policy' and internal compliance monitoring.",
+      "Seek legal advice to determine the auditor's statutory and ethical responsibility to report this matter to external regulators."
+    ]
+  },
+  {
+    "industry": "Consumer Goods (Mega-Mart)",
+    "scenario": "The auditor selected 100 invoice samples. 80 were perfect, but 20 had pricing errors. The auditor stated, 'The price difference in these 20 is tiny, so the overall result is satisfactory' without performing any mathematical projection.",
+    "examiner_comment": "Students do not utilize 'Probability Theory' in Statistical Sampling. Errors MUST be 'Projected' to the entire population regardless of how small the individual sample errors seem. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Calculate the 'Projected Misstatement' for the entire population using the formula: (Sample Error / Sample Size) * Population Size.",
+      "Evaluate if the projected misstatement, when combined with other errors, exceeds the established 'Tolerable Misstatement' level.",
+      "Request management to thoroughly investigate the root cause of the 20 price differences (e.g., system master-data bug or human input error).",
+      "Determine if an extension of the sample size is required to reduce 'Sampling Risk' to an acceptable minimum level."
+    ]
+  },
+  {
+    "industry": "Wholesale (Grain-Trade)",
+    "scenario": "While verifying debtor balances, the auditor noticed that Customer A's cash payment was adjusted to settle Customer B's balance, and B's payment settled C's balance. The company's Cashier is responsible for both 'Receiving Cash' and 'Updating the Ledger'.",
+    "examiner_comment": "This is a textbook 'Lapping' Fraud. Students often miss identifying the lack of 'Segregation of Duties' as the fundamental enabler of this fraud. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Perform a strict 'Cut-off' and matching test on daily bank deposits versus specific debtor ledger updates to identify timing mismatches.",
+      "Send immediate 'External Confirmations' to Customers A, B, and C to independently verify their actual payment dates and amounts.",
+      "Inspect the physical 'Bank Deposit Slips' and cross-match the names on the cheques with the individual entries in the Receivables Ledger.",
+      "Recommend immediate 'Segregation of Duties' mandating that the person collecting cash cannot access the accounting software."
+    ]
+  },
+  {
+    "industry": "Oil & Gas (Fuel-Direct)",
+    "scenario": "International oil purchasing prices surged by 20%, yet the company's 'Gross Profit Margin' miraculously jumped from 15% to 22%. The overall sales volume remained identical to the previous year.",
+    "examiner_comment": "Students fail to identify the high risk of 'Overstatement of Sales' or 'Understatement of Purchases'. If input costs rise significantly, GP should fall unless selling prices were hiked astronomically. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Compare the 'Unit Sale Price' with the 'Unit Purchase Cost' on a month-by-month basis to verify the mathematical validity of the margin increase.",
+      "Inspect the 'Purchase Invoices' from international suppliers for the last quarter to ensure all 20% price increases were accurately captured.",
+      "Vouch a sample of 'Sales Invoices' directly to 'Goods Dispatch Notes' (GDNs) to ensure no fictitious sales were recorded to inflate margins.",
+      "Perform a rigorous 'Cut-off' test on purchases to ensure all year-end liabilities and costs are completely recorded."
+    ]
+  },
+  {
+    "industry": "Manufacturing (Heavy Machinery)",
+    "scenario": "The company's Current Ratio has plummeted from 2.5:1 to 0.8:1. 'Inventory' value has massively increased by 300M, but 'Cash' reserves are completely depleted. Management insists 'Business is usual'.",
+    "examiner_comment": "Candidates ignored the 'Going Concern' and liquidity threat. A current ratio below 1:1 strongly indicates the company lacks the liquid assets to pay its short-term liabilities. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Critically analyze the 'Cash Flow Forecast' for the next 12 months to assess the company's realistic debt repayment ability.",
+      "Inspect the 'Inventory Aging' report to verify if the 300M increase consists of illiquid, slow-moving, or obsolete stock.",
+      "Review 'Bank Loan Agreements' specifically looking for any breach of current ratio covenants that could trigger immediate loan recalls.",
+      "Obtain a 'Management Representation Letter' detailing their specific, feasible plans to raise emergency funds or liquidate stock."
+    ]
+  },
+  {
+    "industry": "Service (IT Consultancy)",
+    "scenario": "Company revenue increased by a healthy 10%, but 'Net Profit' severely dropped by 50%. This was driven by an unusual 80% spike in 'Administrative Expenses', despite no new office expansion or staff hiring.",
+    "examiner_comment": "Students missed the 'Personal Expenses' or 'Asset Misappropriation' fraud risk embedded within unexplained, spiking administrative overheads. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Perform a 'Detailed Ledger Review' of all administrative expense accounts to isolate unusually large, round, or unauthorized payments.",
+      "Vouch a sample of 'Consultancy Fees' or 'Legal Charges' to actual signed service agreements and corresponding bank statements.",
+      "Compare the current 'Headcount' with the 'Payroll Expense' to identify the potential existence of 'Ghost Employees'.",
+      "Evaluate if any 'Capital Expenditure' (e.g., purchasing heavy IT Servers) has been erroneously or deliberately expensed as administration costs."
+    ]
+  },
+  {
+    "industry": "Retail (Wholesale Furnishings)",
+    "scenario": "The Accounts Receivable collection period has stretched severely from 45 days to 120 days. Despite this, management has maintained the 'Provision for Doubtful Debts' at the exact same minimal level as last year (2M).",
+    "examiner_comment": "Classic 'Bad Debt' valuation risk. If customer collections take significantly longer, the provision for expected credit losses MUST proportionally increase. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the 'Debtors Ageing Report' and specifically identify and isolate balances that are overdue by more than 90 days.",
+      "Check 'Subsequent Collections' in the July and August bank statements to see if these old debtors have actually cleared their dues.",
+      "Inquire from the 'Credit Control Manager' regarding the specific economic or operational reasons for the severe delay in recovery.",
+      "Recalculate the required 'Provision' based on the revised, worsened aging brackets and historical bad debt loss rates."
+    ]
+  },
+  {
+    "industry": "Mining (Coal-Excavation)",
+    "scenario": "The company's primary coal stock, valued at 500M, is located in an area where 'Heavy Flooding' has completely blocked access. A year-end physical count is impossible. Management says, 'Just trust our ERP records'.",
+    "examiner_comment": "Students mistakenly agreed to skip the count based on management's assurance. If you cannot attend, you MUST perform rigorous alternative procedures or conduct a delayed count with a roll-back. (Spring 2025 Prediction)",
+    "reqCount": 4,
+    "procedures": [
+      "Arrange for a 'Physical Count' at a later date once the location becomes accessible, and 'Roll-back' the quantities to the June 30 balance using GRNs/GDNs.",
+      "Inspect 'Third-Party' satellite imagery or commercial drone footage (if available) to visually verify the existence of the large coal heaps.",
+      "Vouch 'Subsequent Sales' and dispatches of coal from that specific location in July/August to confirm the stock physically existed at year-end.",
+      "Evaluate the 'Internal Controls' over the recording of coal extraction and dispatch to assess the baseline reliability of the ERP records."
+    ]
+  },
+  {
+    "industry": "Audit Firm (Internal Issue)",
+    "scenario": "The Audit Manager's laptop was stolen from a cafe. It contained the only copies of 'Bank Confirmations' and signed 'Inventory Count Sheets'. The hard copies were lost during office shifting. The audit report is due to be signed in 2 days.",
+    "examiner_comment": "Candidates failed to realize that if documentation is lost, the auditor has ZERO evidence. You absolutely cannot sign a clean report based on 'Memory'. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Immediately re-perform the critical audit procedures, such as requesting 'Fresh Bank Confirmations' via urgent courier or secure email.",
+      "Obtain 'Duplicate Inventory Sheets' from the client's records and perform a 'Test Count' again to independently verify their accuracy.",
+      "Document the exact 'Circumstances' of the data loss and meticulously record the additional procedures performed to reconstruct the evidence.",
+      "Formally inform 'Those Charged With Governance' (TCWG) about the mandatory delay in issuing the audit report due to the reconstruction of evidence."
+    ]
+  },
+  {
+    "industry": "Wholesale (Electronics)",
+    "scenario": "On June 30, a customer's outstanding balance was 40M. On July 10, the auditor learned the customer officially filed for 'Bankruptcy' because their main factory had permanently shut down back in May. Management claims this is strictly a next-year disclosure event.",
+    "examiner_comment": "Common error: Treating this as a Non-adjusting event. Because the underlying condition (insolvency due to factory closure) clearly existed before year-end (in May), it is a textbook 'Adjusting Event'. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the 'Legal Notification' of bankruptcy to firmly establish the date of filing and the historical reasons provided for insolvency.",
+      "Verify the 'Aging' of the debtor's balance to see if payments had already stalled or cheques bounced prior to June 30.",
+      "Formally request management to record a numerical 'Bad Debt Provision' for the entire 40M instead of merely disclosing it in the notes.",
+      "Review 'Post-year-end' correspondence with the official liquidator to estimate the final recovery percentage (if any) to adjust the provision."
+    ]
+  },
+  {
+    "industry": "Manufacturing (Plastics)",
+    "scenario": "The company switched its inventory valuation method from FIFO to Weighted Average without providing any solid justification. This change has a material impact on the closing inventory valuation.",
+    "examiner_comment": "Students miss 'Consistency'. If accounting policies change without justification (per IAS 8), the auditor must 'Qualify' the report for non-compliance. (Autumn 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Evaluate if the change in accounting policy provides more reliable and relevant financial information as required by IAS 8.",
+      "Recalculate the inventory value using both FIFO and Weighted Average methods to quantify the exact financial impact of the change.",
+      "Check if the policy change has been correctly applied retrospectively, restating the prior year's comparative figures.",
+      "Determine if a modified (Qualified) audit opinion is necessary if the change is unjustified or incorrectly applied."
+    ]
+  },
+  {
+    "industry": "Chemicals (Green-Tox)",
+    "scenario": "A toxic gas leak from the factory caused illness in the neighboring community. The Environmental Protection Agency (EPA) imposed a 200M fine. Management states they are appealing in court, so no provision is needed yet.",
+    "examiner_comment": "Students miss that ongoing legal proceedings don't eliminate the need for a provision if the obligating event (the leak) has already definitively occurred. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the official penalty notice from the Environmental Protection Agency (EPA) to verify the 200M fine amount.",
+      "Obtain direct written confirmation from the company’s legal counsel regarding the realistic probability of losing the court appeal.",
+      "Evaluate whether a formal provision of 200M should be recognized in the financials under IAS 37 (Provisions & Contingent Liabilities).",
+      "Investigate if the gas leak indicates a severe breakdown in internal safety controls or environmental compliance."
+    ]
+  },
+  {
+    "industry": "Multinational (Euro-Pak Ltd)",
+    "scenario": "You are auditing the parent company in Pakistan. A London-based subsidiary (representing 40% of total group assets) was audited by a local UK firm. The group engagement partner plans to sign the report without reviewing the component auditor's working papers.",
+    "examiner_comment": "Common blunder: Sole reliance on a foreign firm without reviewing their working papers or audit strategy violates ISA 600 requirements. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Evaluate the professional competence, independence, and regulatory standing of the London-based component auditor.",
+      "Communicate the calculated group materiality and significant component-level risks directly to the component auditor.",
+      "Review the component auditor’s summary of findings and specific documentation for highly material audit areas.",
+      "Perform analytical procedures on the subsidiary’s financial data at the group level to identify any unusual or unexplained trends."
+    ]
+  },
+  {
+    "industry": "Retail (Mega-Store)",
+    "scenario": "The inventory comprises 10,000 items. 50 items have a combined value of 500M, while the remaining 9,950 items are valued at 50M. The auditor used simple random sampling, resulting in only low-value items being selected for testing.",
+    "examiner_comment": "Students don't suggest 'Stratification'. High-value items carry material risk and must be tested 100%. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Divide the inventory population into two distinct strata: High-value items and Low-value items.",
+      "Perform 100% substantive testing on the high-value stratum to ensure all individually material items are verified.",
+      "Apply statistical random sampling exclusively to the low-value stratum to ensure representative coverage.",
+      "Evaluate the misstatements found in each stratum separately before mathematically aggregating them to determine the total misstatement."
+    ]
+  },
+  {
+    "industry": "Textile (Spinning-Mill)",
+    "scenario": "After the year-end (June 30), the bank sent a notice on August 15 stating the company's 'Current Ratio' had fallen below the required threshold, demanding immediate loan repayment. The accountant retained the loan as 'Non-current' at June 30.",
+    "examiner_comment": "Breach of covenant makes a long-term loan 'Current' immediately at the reporting date, regardless of when the notice arrives. (Autumn 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the signed loan agreement to identify the specific 'Current Ratio' covenant and the legal consequences of its breach.",
+      "Recalculate the current ratio exactly as of June 30 to mathematically confirm that the breach actually occurred prior to year-end.",
+      "Request management to immediately reclassify the loan from 'Non-current' to 'Current Liabilities' in the balance sheet.",
+      "Verify if a formal 'Waiver' was obtained from the bank strictly prior to the year-end that would permit continued long-term classification."
+    ]
+  },
+  {
+    "industry": "Construction",
+    "scenario": "The auditor dispatched a confirmation letter to a major debtor. The debtor called the auditor and verbally confirmed that the balance was correct but refused to send a written reply. The auditor accepted the phone call as sufficient evidence.",
+    "examiner_comment": "Oral responses do not constitute external confirmations. A written response is legally and professionally mandatory. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Firmly request the debtor to provide a formal, written response directly to the auditor's office.",
+      "If a written response is absolutely not provided, perform alternative procedures such as inspecting subsequent bank receipts.",
+      "Vouch the original sales invoices and signed Goods Dispatch Notes (GDNs) to verify the actual existence of the outstanding debt.",
+      "Evaluate whether the debtor’s staunch refusal to provide a written response indicates a potential dispute or fraud risk."
+    ]
+  },
+  {
+    "industry": "Audit Firm (Ethics)",
+    "scenario": "A major client contributes 40% of the audit firm's total annual revenue. The client threatened to replace the firm next year if the auditor issues a qualified opinion over an inventory dispute.",
+    "examiner_comment": "High fee dependency creates a massive 'Self-Interest' and 'Intimidation' threat that compromises objectivity. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Discuss the extent of the fee dependency and the intimidation threat transparently with Those Charged With Governance (TCWG).",
+      "Assign an Independent Engagement Quality Control Reviewer (EQCR) who is completely unassociated with the audit team.",
+      "Implement a strategic firm-wide plan to reduce dependency by expanding the client base so no single client exceeds 15% of total revenue.",
+      "Resign from the audit engagement immediately if the intimidation and self-interest threats cannot be mitigated to an acceptable level."
+    ]
+  },
+  {
+    "industry": "Service Sector",
+    "scenario": "The auditor did not physically inspect the newly acquired fixed assets. Instead, the working paper simply noted, 'The CEO confirmed the assets are present.' The auditor treated this verbal assurance as sufficient audit evidence.",
+    "examiner_comment": "Verbal explanations are NOT audit evidence. Every procedure must be corroborated with physical or documentary proof. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Perform a direct physical inspection of the newly acquired fixed assets to independently verify their existence and condition.",
+      "Inspect original purchase invoices and title documents to definitively establish the company's legal rights and obligations.",
+      "Document the precise descriptions, physical locations, and manufacturer serial numbers of the assets inspected during the site visit.",
+      "Re-perform the depreciation calculation based on the actual date the assets were physically available for use."
+    ]
+  },
+  {
+    "industry": "Manufacturing",
+    "scenario": "At the conclusion of the audit, a 500M 'Fictitious Sales' fraud was uncovered, representing 80% of the company's reported profit. Management adamantly refuses to reverse the entries or adjust the financial statements.",
+    "examiner_comment": "80% of profit means the misstatement is both material and highly pervasive, necessitating an immediate Adverse Opinion. (Autumn 2022)",
+    "reqCount": 4,
+    "procedures": [
+      "Communicate the definitive fraud findings to the Audit Committee and Board of Directors without delay.",
+      "Formally request management to reverse the 500M fictitious revenue entries and correct the financial statements.",
+      "Critically evaluate the severe impact of this deliberate fraud on the integrity of management and all other audit evidence obtained.",
+      "Draft the 'Basis for Adverse Opinion' paragraph detailing the pervasive nature of the uncorrected, fraudulent misstatement."
+    ]
+  },
+  {
+    "industry": "Commercial Bank (Fast-Bank)",
+    "scenario": "The bank calculated its Expected Credit Loss (ECL) using only historical data from the past 5 years. The auditor noted that due to a recent economic recession, default rates have surged by 20%, but the bank ignored these current trends in its model.",
+    "examiner_comment": "Estimates must be 'Forward-looking' under IFRS 9. Relying solely on historical data during an economic downturn leads to a material misstatement. (Spring 2025 Prediction)",
+    "reqCount": 4,
+    "procedures": [
+      "Evaluate the reasonableness and relevance of the underlying assumptions used by the bank in their ECL calculation model.",
+      "Compare the bank's historical default rates with current industry benchmarks and macroeconomic forward-looking forecasts.",
+      "Inquire from the Risk Management Department regarding the deliberate exclusion of current recessionary impacts from their model.",
+      "Test the mathematical accuracy of the ECL output by independently re-performing a sample of specific loan provisions."
+    ]
+  },
+  {
+    "industry": "E-Commerce (Cart-Direct)",
+    "scenario": "The Database Administrator (DBA) has master access and can modify product prices without system approval. The auditor discovered that prices dropped by 50% over the weekend and reverted to normal immediately after specific orders were dispatched.",
+    "examiner_comment": "Classic IT Fraud scenario highlighting a severe lack of Audit Trail and Segregation of Duties in IT application controls. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the detailed system logs to identify the exact User ID and timestamp utilized to secretly modify prices during the weekend.",
+      "Review the IT User Access Rights matrix to ensure the DBA does not possess the authorization to initiate or alter business transactions.",
+      "Vouch the sales invoices processed during the price-drop window to identify the ultimate beneficiaries of the unauthorized discount.",
+      "Recommend the mandatory implementation of an automated alert system for any manual overrides made to the master pricing data."
+    ]
+  },
+  {
+    "industry": "Audit Firm (Internal QC)",
+    "scenario": "The audit firm appointed 'Mr. A' as the Engagement Quality Control Reviewer (EQCR) for a major client. However, 'Mr. A' served as the Engagement Partner for this exact same client until last year.",
+    "examiner_comment": "Students miss the 'Cooling-off Period' requirement. A partner cannot become an EQCR for the same client immediately due to familiarity and self-review threats. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Immediately remove 'Mr. A' from the EQCR role to ensure a completely objective, unbiased, and independent quality review.",
+      "Appoint an independent external reviewer or a senior partner from a completely different office of the firm to act as the EQCR.",
+      "Document the identified conflict of interest and the safeguard steps actively taken in the firm's quality control records.",
+      "Review and aggressively update the firm's Quality Management Policy to enforce mandatory cooling-off periods for senior personnel."
+    ]
+  },
+  {
+    "industry": "Jewelry (Gold-Mine)",
+    "scenario": "The inventory includes 500kg of gold biscuits. The auditor lacks the expertise to verify the gold's purity (e.g., 24k vs 18k). Management provided a purity report generated by their own internal gemologist.",
+    "examiner_comment": "Students blindly trust management's expert. The auditor must thoroughly assess the expert's competence and strongly consider engaging an Auditor's Expert. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Evaluate the competence, capabilities, and professional objectivity of the client's internal gemologist.",
+      "Inspect independent gold purity certificates issued by recognized, third-party assaying and hallmarking laboratories.",
+      "Appoint an independent Auditor’s External Expert to perform physical sample purity testing on the gold biscuits.",
+      "Vouch the original purchase invoices to ensure the gold was acquired from reputable suppliers with guaranteed purity warranties."
+    ]
+  },
+  {
+    "industry": "Manufacturing (Auto-Parts)",
+    "scenario": "At year-end (June 30), a 50M lawsuit was disclosed as a Contingent Liability. On August 20, the court delivered a final verdict ordering the company to pay 80M. The audit report is scheduled to be signed on August 30.",
+    "examiner_comment": "This is an 'Adjusting Event' because the court ruling provides conclusive evidence of a condition (the legal obligation) that definitively existed at the reporting date. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the official court judgment dated August 20 to definitively verify the final, legally binding settlement amount of 80M.",
+      "Formally request management to record a numerical provision of 80M in the June 30 financial statements via an adjusting entry.",
+      "Vouch any subsequent bank payments made after the year-end to confirm the legal settlement is actively being executed.",
+      "Verify that the previous 'Contingent Liability' note has been completely removed and replaced by the formal provision disclosure."
+    ]
+  },
+  {
+    "industry": "Energy (Green-Power Co.)",
+    "scenario": "The company claimed in its Annual Report's Chairman Statement that carbon emissions dropped by 30%. The auditor found no standardized measurement system exists, and management relied on rough, unverified estimates.",
+    "examiner_comment": "Students ignore 'Other Information' (ISA 720). If the Chairman's claim is completely inconsistent with audited evidence, it constitutes a material inconsistency. (New Trend 2025)",
+    "reqCount": 4,
+    "procedures": [
+      "Inquire from the Sustainability Officer regarding the exact methodology and data used as the basis for the 30% reduction claim.",
+      "Compare the reported emissions data with verifiable operational records like fuel consumption and total production output.",
+      "Inspect any third-party verification reports if the company utilized external environmental consultants for the metric.",
+      "Communicate the material inconsistency to TCWG and strongly request a revision or removal of the Chairman's unverified statement."
+    ]
+  },
+  {
+    "industry": "Banking (Digital-Connect)",
+    "scenario": "The bank migrated its entire customer database to a new cloud server. During migration, data mapping errors occurred, resulting in 500 customer accounts displaying severely outdated balances.",
+    "examiner_comment": "Treating this solely as an application control issue is wrong. Major data migration is an IT General Control (Change Management) risk requiring specific mapping testing. (Autumn 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Review the formal Data Migration Plan and inspect the post-migration reconciliation reports comparing old and new system balances.",
+      "Perform a rigorous data integrity check by selecting a sample of the 500 affected customers and vouching balances to physical transaction slips.",
+      "Inspect the User Acceptance Testing (UAT) sign-off logs to determine if mapping errors were identified but ignored prior to the go-live date.",
+      "Evaluate the aggregate financial impact of the misstated balances on the overall reliability of the financial statements."
+    ]
+  },
+  {
+    "industry": "Audit Firm (Tender Process)",
+    "scenario": "During a competitive tender, your firm quoted an audit fee that is 50% lower than the incumbent auditor to secure the contract. The audit partner plans to cover the cost by assigning exclusively junior, inexperienced staff to the engagement.",
+    "examiner_comment": "'Lowballing' creates a massive Self-Interest Threat directly compromising professional competence and due care. (Spring 2024)",
+    "reqCount": 4,
+    "procedures": [
+      "Ensure that the audit team comprises sufficient qualified and highly experienced staff, regardless of the artificially lowered fee.",
+      "Apply stringent Quality Control Procedures, including an extensive EQCR, to ensure audit quality is not sacrificed for cost-cutting.",
+      "Comply meticulously with all applicable auditing standards (ISAs) and accurately document the actual time spent on the engagement.",
+      "Discuss the proposed fee structure and resource allocation transparently with the client's Audit Committee."
+    ]
+  },
+  {
+    "industry": "Retail (Outlet-Mall)",
+    "scenario": "The company signed long-term lease agreements for 20 new retail outlets. The accountant recorded the monthly lease payments purely as 'Rent Expense' and failed to recognize any Right-of-Use (ROU) Asset or Lease Liability on the balance sheet.",
+    "examiner_comment": "Students miss the fundamental capitalization requirement under IFRS 16 for long-term leases, leading to massively understated assets and liabilities. (Autumn 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Inspect the lease agreements for all 20 outlets to definitively verify the lease term, break clauses, and monthly payment schedules.",
+      "Recalculate the present value of the future lease payments to determine the required initial ROU asset and corresponding lease liability.",
+      "Verify the discount rate used by comparing it directly with the company's verified incremental borrowing rate.",
+      "Request an immediate adjustment to record the ROU asset, lease liability, related depreciation, and finance costs in the financials."
+    ]
+  },
+  {
+    "industry": "Conglomerate (Global-Pak)",
+    "scenario": "A group operates 5 subsidiaries, all of which use a single Shared Service Center (SSC) in Pakistan for their accounting. The auditor audited each subsidiary individually but completely bypassed testing the internal controls at the SSC.",
+    "examiner_comment": "If multiple components rely on a single SSC, the auditor MUST evaluate the SSC's controls to prevent repetitive testing and address centralized risks. (Spring 2023)",
+    "reqCount": 4,
+    "procedures": [
+      "Obtain a comprehensive understanding of the specific IT and manual internal controls implemented centrally at the Shared Service Center.",
+      "Perform tests of controls directly at the SSC to simultaneously verify the accuracy of accounting data processed for all 5 subsidiaries.",
+      "Evaluate the segregation of duties among the SSC personnel to ensure staff handling one subsidiary cannot manipulate data for another.",
+      "Coordinate proactively with component auditors to ensure that all findings from the SSC audit are effectively communicated across the group engagement."
+    ]
+  }
+]
