@@ -201,28 +201,42 @@ function startExam(id) {
     if(!confirm("⚠️ Rules:\n1. 15 Mins Reading (Locked)\n2. 3 Hours Writing\n3. Submit -> Auto Copy -> Open GPT")) return;
     
     currentPaper = id;
-    document.getElementById('exam-dashboard').classList.add('hidden');
-    document.getElementById('exam-hall').classList.remove('hidden');
+    const dashboard = document.getElementById('exam-dashboard');
+    const hall = document.getElementById('exam-hall');
+    
+    if(dashboard) dashboard.classList.add('hidden');
+    if(hall) hall.classList.remove('hidden');
     
     const pdfFrame = document.getElementById('paper-view');
-    let pdfPath = (typeof pastPapers !== 'undefined' && pastPapers[id] && pastPapers[id].pdf) ? pastPapers[id].pdf : `subjects/caf8_audit/assets/pastpapers/${id}.pdf`;
+    
+    // 🔥 THE FIX: id.toLowerCase() hamesha 'spring2023' (small letters) banayega
+    let fallbackPath = `subjects/caf8_audit/assets/pastpapers/${id.toLowerCase()}.pdf`;
+    
+    let pdfPath = (typeof pastPapers !== 'undefined' && pastPapers[id] && pastPapers[id].pdf) 
+        ? pastPapers[id].pdf 
+        : fallbackPath;
     
     if(pdfPath) {
         let safePdfPath = encodeURI(pdfPath);
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        
         if(isMobile) {
-            const baseURL = "https://akashmukeshkumar.github.io/Caversity/"; 
+            // Dynamic URL Generator (Localhost aur GitHub dono par chalega)
+            let currentUrl = window.location.href.split('?')[0].split('#')[0]; 
+            let baseURL = currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1);
             const fullPDFUrl = baseURL + safePdfPath;
+            
             pdfFrame.innerHTML = `<iframe src="https://docs.google.com/gview?url=${fullPDFUrl}&embedded=true" width="100%" height="100%" style="border:none;"></iframe>`;
         } else {
             pdfFrame.innerHTML = `<iframe src="${safePdfPath}" width="100%" height="100%" style="border:none;"></iframe>`;
         }
     } else {
-        pdfFrame.innerHTML = `<div style="text-align:center; padding:50px; color:white;"><h3>PDF Not Found</h3><p>Ensure '${id}.pdf' is in 'subjects/caf8_audit/assets/pastpapers' folder.</p></div>`;
+        pdfFrame.innerHTML = `<div style="text-align:center; padding:50px; color:white;"><h3>PDF Not Found</h3><p>Ensure '${id.toLowerCase()}.pdf' exists.</p></div>`;
     }
 
     const ansDiv = document.getElementById('answer-view');
-    ansDiv.innerHTML = '';
+    if(ansDiv) ansDiv.innerHTML = '';
+    
     if(typeof pastPapers !== 'undefined' && pastPapers[id]) {
         pastPapers[id].questions.forEach((q, i) => {
             ansDiv.innerHTML += `<div style="margin-top:20px; border-bottom:2px solid #e2e8f0; padding-bottom:5px; margin-bottom:10px;"><h3 style="color:#1e3a8a; margin:0;">HW ${q.id}: ${q.header}</h3></div>`;
@@ -238,6 +252,7 @@ function startExam(id) {
 
     timeLeft = READING_TIME_SEC;
     updateTimerDisplay();
+    clearInterval(timer);
     timer = setInterval(() => {
         timeLeft--;
         updateTimerDisplay();
