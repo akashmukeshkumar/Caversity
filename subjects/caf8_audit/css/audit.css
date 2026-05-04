@@ -456,7 +456,6 @@ footer {
 
 .card-green .btn { background: #2193b0; }
 .card-purple .btn { background: #2575fc; }
-.card-green .btn:hover, .card-purple .btn:hover { filter: brightness(1.15); color: #ffffff !important; text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
 
 @media (max-width: 600px) {
     .cards { flex-direction: column; padding: 20px 10px; margin: 20px 10px; border-radius: 12px; background: rgba(255, 255, 255, 0.9); }
