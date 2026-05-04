@@ -209,33 +209,29 @@ function startExam(id) {
     
     const pdfFrame = document.getElementById('paper-view');
     
-    // 🔥 FIX 1: Hamesha ID ko chotay huroof (lowercase) mein convert karega taake GitHub par 404 na aaye
+    // 🔥 BULLETPROOF PATH FIX 🔥
+    // Hamesha ID ko chotay huroof (lowercase) mein lay ga
     let lowerId = id.toLowerCase();
-    let fallbackPath = `subjects/caf8_audit/assets/pastpapers/${lowerId}.pdf`;
+    let fileName = `${lowerId}.pdf`; 
     
-    let pdfPath = (typeof pastPapers !== 'undefined' && pastPapers[id] && pastPapers[id].pdf) 
-        ? pastPapers[id].pdf 
-        : fallbackPath;
+    // Agar aapne examformat.js mein koi file naam diya hai, toh usko extract karega
+    if(typeof pastPapers !== 'undefined' && pastPapers[id] && pastPapers[id].pdf) {
+        let rawPath = pastPapers[id].pdf;
+        fileName = rawPath.split('/').pop(); // Sirf file ka naam nikalega (e.g., "spring2023.pdf")
+    }
     
-    if(pdfPath) {
-        let safePdfPath = encodeURI(pdfPath);
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        
-        if(isMobile) {
-            // 🔥 FIX 2: Dynamic URL Generator. Yeh khud pata lagayega ke website ka live link kya hai.
-            let currentUrl = window.location.href.split('?')[0].split('#')[0]; 
-            let baseURL = currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1);
-            const fullPDFUrl = baseURL + safePdfPath;
-            
-            // NOTE: Agar aap localhost (PC) par check kar rahay hain toh ye Google Viewer 404 dega. 
-            // Yeh sirf tab chalega jab file GitHub Pages par LIVE hogi.
-            pdfFrame.innerHTML = `<iframe src="https://docs.google.com/gview?url=${fullPDFUrl}&embedded=true" width="100%" height="100%" style="border:none;"></iframe>`;
-        } else {
-            // Desktop View (Yeh localhost par bhi chalega aur live bhi)
-            pdfFrame.innerHTML = `<iframe src="${safePdfPath}" width="100%" height="100%" style="border:none;"></iframe>`;
-        }
+    // 🚀 EXACT GITHUB LIVE URL (Yeh kabhi fail nahi hoga kiyunke ye direct server se file uthayega)
+    const githubBaseUrl = "https://akashmukeshkumar.github.io/Caversity/";
+    const fullPDFUrl = `${githubBaseUrl}subjects/caf8_audit/assets/pastpapers/${encodeURI(fileName)}`;
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    if(isMobile) {
+        // Mobile View (Google Docs Viewer)
+        pdfFrame.innerHTML = `<iframe src="https://docs.google.com/gview?url=${fullPDFUrl}&embedded=true" width="100%" height="100%" style="border:none;"></iframe>`;
     } else {
-        pdfFrame.innerHTML = `<div style="text-align:center; padding:50px; color:white;"><h3>PDF Not Found</h3><p>Ensure '${lowerId}.pdf' exists in your folder.</p></div>`;
+        // Desktop View (Direct PDF Load)
+        pdfFrame.innerHTML = `<iframe src="${fullPDFUrl}" width="100%" height="100%" style="border:none;"></iframe>`;
     }
 
     const ansDiv = document.getElementById('answer-view');
