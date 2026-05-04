@@ -1785,47 +1785,50 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
 @keyframes breathe { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); } 70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); } }
 
 /* =========================================
-   🔥 NAVBAR DASHBOARD BUTTON FIX 🔥
+   🔥 1. FLOATING GLOWING DASHBOARD BUTTON 🔥
    ========================================= */
-.nav-dashboard-btn {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    color: #ffffff;
-    text-decoration: none;
-    padding: 8px 18px;
+.floating-dash-btn {
+    position: fixed;
+    top: 25px;
+    right: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff; 
+    padding: 10px 22px;
     border-radius: 50px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
+    text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px;
-    border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 100000; /* Sab se upar rahega */
     transition: all 0.3s ease;
-    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.nav-dashboard-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    background: linear-gradient(135deg, #0f172a 0%, #000000 100%);
+.floating-dash-btn:hover {
+    background: #0084ff; /* Pure Blue */
     color: #ffffff;
+    border-color: #0084ff;
+    transform: translateY(-3px) scale(1.05);
+    /* 🌟 THE GLOW EFFECT 🌟 */
+    box-shadow: 0 0 15px rgba(0, 132, 255, 0.6), 0 0 30px rgba(0, 132, 255, 0.4);
 }
 
-/* Navbar Flex Adjustment for Mobile */
-@media (max-width: 1050px) {
-    .nav-dashboard-btn {
-        padding: 6px 12px;
-        font-size: 11px;
-    }
-}
-@media (max-width: 900px) {
-    .premium-nav {
-        justify-content: space-between;
+@media (max-width: 768px) {
+    .floating-dash-btn {
+        top: 15px;
+        right: 15px;
+        padding: 8px 16px;
+        font-size: 12px;
     }
 }
 
 /* =========================================
-   🔥 ORIGINAL GPT CARDS STYLE (GREEN & PURPLE) 🔥
+   🔥 2. EXACT PIC 1 GPT CARDS DESIGN 🔥
    ========================================= */
 .cards {
     display: flex;
@@ -1833,119 +1836,117 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
     gap: 30px;
     justify-content: center;
     padding: 20px;
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 40px 30px;
+    background: #ffffff !important; /* Pure White Box */
+    border-radius: 12px !important;
+    padding: 40px 30px !important;
     flex: 1;
     min-width: 320px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-    border: 1px solid rgba(255,255,255,0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
     position: relative;
     overflow: hidden;
-    text-align: left;
+    text-align: center !important; /* Heading center hongi */
+    border: none !important;
 }
 
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-}
-
-/* The Top Accent Line */
+/* Top Colored Lines like Pic 1 */
 .card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; height: 5px;
+    top: 0; left: 0; right: 0; height: 6px;
 }
-.card-green::before { background: linear-gradient(90deg, #10b981, #34d399); }
-.card-purple::before { background: linear-gradient(90deg, #8b5cf6, #c084fc); }
+.card-green::before { background: linear-gradient(90deg, #0ea5e9, #2563eb) !important; } /* Teal to Blue */
+.card-purple::before { background: linear-gradient(90deg, #3b82f6, #1d4ed8) !important; } /* Blue to Dark Blue */
 
 .card h2 {
-    font-size: 26px;
-    color: #1e293b;
-    margin-bottom: 12px;
-    font-weight: 800;
+    font-size: 24px !important;
+    color: #1e3a8a !important; /* Dark Blue Text */
+    margin-bottom: 15px !important;
+    font-weight: 700 !important;
 }
 
 .card p {
-    font-size: 15px;
-    color: #475569;
-    margin-bottom: 25px;
-    line-height: 1.6;
+    font-size: 14px !important;
+    color: #64748b !important; /* Grey text */
+    margin-bottom: 25px !important;
+    line-height: 1.6 !important;
 }
 
+/* Simple Bullet Points (Left Aligned) */
 .features {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 30px 0;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 0 30px 0 !important;
+    text-align: left !important; 
 }
 
 .features li {
-    position: relative;
-    padding-left: 28px;
-    margin-bottom: 14px;
-    font-size: 14px;
-    color: #334155;
-    line-height: 1.6;
-    font-weight: 500;
+    position: relative !important;
+    padding-left: 20px !important;
+    margin-bottom: 12px !important;
+    font-size: 13px !important;
+    color: #475569 !important;
+    line-height: 1.6 !important;
 }
 
-/* Custom Checkmarks */
+/* 🔵 Blue Dots for Bullets */
 .features li::before {
-    content: '✔';
-    position: absolute;
-    left: 0;
-    top: 0;
+    content: '•' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: -2px !important;
+    font-size: 18px !important;
+    color: #3b82f6 !important; /* Blue Dots */
     font-weight: bold;
 }
-.card-green .features li::before { color: #10b981; }
-.card-purple .features li::before { color: #8b5cf6; }
 
-/* Launch Buttons */
+/* Blue Buttons (Slightly Rounded, NOT Pill) */
 .card .btn {
-    display: block;
-    width: 100%;
-    padding: 14px 25px;
-    color: white;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    text-align: center;
-    border: none;
-    cursor: pointer;
+    display: inline-block !important;
+    background: #0084ff !important; /* Bright Blue */
+    color: white !important;
+    padding: 12px 30px !important;
+    text-decoration: none !important;
+    border-radius: 6px !important; /* Clean square-ish round corners */
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    transition: all 0.2s ease !important;
+    border: none !important;
+    box-shadow: 0 4px 10px rgba(0, 132, 255, 0.3) !important;
 }
 
-.card-green .btn {
-    background: linear-gradient(135deg, #10b981, #059669);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+.card .btn:hover {
+    background: #006bce !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 15px rgba(0, 132, 255, 0.4) !important;
 }
-.card-green .btn:hover {
-    box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4);
-    transform: translateY(-2px);
-}
-
-.card-purple .btn {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
-}
-.card-purple .btn:hover {
-    box-shadow: 0 12px 25px rgba(139, 92, 246, 0.4);
-    transform: translateY(-2px);
-}
-.btn-mic.processing { opacity: 0.7; pointer-events: none; animation: spin 1s infinite linear; }
-@keyframes spin { 100% { transform: rotate(360deg); } }
 
 /* =========================================
-   🧠 30-MIN BRAIN DOSE (BLUE THEME FIX)
+   🧠 3. 30-MIN BRAIN DOSE (STRICTLY BLUE)
+   ========================================= */
+.audit-glass-card .timer-badge {
+    background: #eff6ff !important; 
+    color: #1d4ed8 !important; 
+    border: 1px solid rgba(29, 78, 216, 0.2) !important;
+}
+.audit-glass-card .category-badge {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25) !important;
+}
+.audit-opt-btn:hover {
+    background: #eff6ff !important;
+    border-color: #3b82f6 !important;
+}
+.explanation-box {
+    background: #eff6ff !important;
+    border-left: 4px solid #3b82f6 !important;
+}
+/* =========================================
+   🧠 30-MIN BRAIN DOSE (EXACT PIC 1 DESIGN)
    ========================================= */
 #audit-dose-section {
     padding: 40px 20px;
@@ -1957,102 +1958,119 @@ textarea.locked { background: #f1f5f9; cursor: not-allowed; }
     box-sizing: border-box;
 }
 
+/* Outer Frosted Glass (No inner white box) */
 .audit-glass-card {
     width: 100%;
     max-width: 850px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(226, 232, 240, 0.65) !important; /* Pic 1 jaisa thora darker frosted glass */
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 24px;
-    padding: 40px;
+    padding: 50px 40px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.1);
     position: relative;
     text-align: center;
-    transition: transform 0.3s ease;
 }
-.audit-glass-card:hover { transform: translateY(-5px); }
 
-/* Blue Timer Badge */
+/* Light Blue Timer Badge */
 .audit-glass-card .timer-badge {
     position: absolute;
     top: 25px;
     right: 25px;
-    background: #eff6ff; 
-    color: #1d4ed8; 
-    padding: 7px 15px;
+    background: #e0f2fe !important; 
+    color: #0284c7 !important; 
+    padding: 7px 16px;
     border-radius: 50px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     display: flex; align-items: center; gap: 6px;
-    border: 1px solid rgba(29, 78, 216, 0.2);
+    border: none !important; /* Border hata diya Pic 1 jaisa */
 }
 
-.audit-header h2 { font-size: 30px; font-weight: 800; color: #1e293b; margin: 10px 0 5px 0; }
-.audit-header p { color: #475569; font-size: 15px; margin-bottom: 25px; font-weight: 500; }
+.audit-header { margin-bottom: 20px; }
+.audit-header h2 { font-size: 28px; font-weight: 800; color: #1e293b; margin: 10px 0 5px 0; }
+.audit-header p { color: #64748b; font-size: 14px; margin-bottom: 25px; font-weight: 500; }
 
+/* 🔥 REMOVED INNER WHITE BOX 🔥 */
 .audit-glass-card .view-state {
-    background: rgba(255, 255, 255, 0.90);
-    border-radius: 20px;
-    padding: 40px 30px;
-    border: 1px solid rgba(255,255,255,0.8);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.02);
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
 }
 
-/* Blue Category Badge */
+/* Neon Green Category Badge (Pic 1 Style) */
 .audit-glass-card .category-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-    color: white;
-    padding: 6px 18px;
+    background: linear-gradient(135deg, #4ade80 0%, #2dd4bf 100%) !important;
+    color: #064e3b !important;
+    padding: 6px 20px;
     border-radius: 50px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 800;
-    letter-spacing: 1.5px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(45, 212, 191, 0.4) !important;
 }
 
-#audit-question { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 25px; line-height: 1.5; }
+/* Question (Left Aligned) */
+#audit-question { 
+    font-size: 18px; 
+    font-weight: 700; 
+    color: #1e293b; 
+    margin-bottom: 25px; 
+    line-height: 1.5; 
+    text-align: left !important; 
+}
 
-.options-list { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+.options-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    text-align: left !important; 
+}
 
-/* Option Buttons Hover & Colors */
+/* 🔥 Solid White Options WITHOUT Borders (Pic 1 Style) 🔥 */
 .audit-opt-btn {
-    background: #f8fafc;
-    border: 2px solid #e2e8f0;
-    padding: 15px 20px;
+    background: #ffffff !important;
+    border: none !important;
+    padding: 16px 20px;
     border-radius: 12px;
     font-size: 15px;
     font-weight: 500;
-    color: #334155;
+    color: #475569;
     cursor: pointer;
     transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04) !important; /* Halki si shadow taake white background se alag lagay */
 }
-.audit-opt-btn:hover {
-    background: #eff6ff;
-    border-color: #3b82f6;
-    transform: translateX(5px);
-}
-.audit-opt-btn.correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
-.audit-opt-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
 
-/* Explanation Box Blue Theme */
+.audit-opt-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
+}
+
+/* Colors for Correct/Wrong Answers */
+.audit-opt-btn.correct { background: #dcfce7 !important; color: #166534 !important; }
+.audit-opt-btn.wrong { background: #fee2e2 !important; color: #991b1b !important; }
+
+/* Explanation Box */
 .explanation-box {
     margin-top: 25px;
     padding: 20px;
-    background: #eff6ff;
+    background: #ffffff !important;
     border-radius: 12px;
-    border-left: 4px solid #3b82f6;
+    border-left: 4px solid #10b981 !important;
     text-align: left;
-    animation: slideDown 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 .explanation-box.hidden { display: none !important; }
 
+/* Mobile Adjustments */
 @media (max-width: 600px) {
     #audit-dose-section { padding: 20px 15px; }
-    .audit-glass-card { padding: 20px 15px; }
+    .audit-glass-card { padding: 30px 20px; }
     .audit-glass-card .timer-badge { position: relative; top: 0; right: 0; margin: 0 auto 15px auto; width: fit-content; }
-    .audit-glass-card .view-state { padding: 25px 15px; }
     #audit-question { font-size: 16px; }
 }
