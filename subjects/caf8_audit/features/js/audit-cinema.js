@@ -63,7 +63,7 @@
             }
         ];
 
-        const bgMusic = new Audio('Caversity/subjects/caf8_audit/features/assets/fire.mp3');
+        const bgMusic = new Audio('subjects/caf8_audit/features/assets/fire.mp3');
         bgMusic.loop = true; bgMusic.volume = 0.5;
 
         let currentPhaseIdx = 0;
@@ -141,7 +141,7 @@
                 const row = document.createElement('div');
                 row.className = "chapter-row";
                 
-                const thumbPath = `Caversity/subjects/caf8_audit/features/assets/acu_database/${ACU_DATA[currentPhaseIdx].id}/${book.folder}/ep_${i}/1.png`;
+                const thumbPath = `subjects/caf8_audit/features/assets/acu_database/${ACU_DATA[currentPhaseIdx].id}/${book.folder}/ep_${i}/1.png`;
                 const fallbackThumb = `https://via.placeholder.com/180x100/000000/FFFFFF/?text=EP${i}`;
 
                 row.innerHTML = `
@@ -165,7 +165,7 @@
         function checkAndPlay(chapNum) {
             const phaseFolder = ACU_DATA[currentPhaseIdx].id;
             const bookFolder = ACU_DATA[currentPhaseIdx].books[currentBookIdx].folder;
-            const testPath = `Caversity/subjects/caf8_audit/features/assets/acu_database/${phaseFolder}/${bookFolder}/ep_${chapNum}/1.png`;
+            const testPath = `subjects/caf8_audit/features/assets/acu_database/${phaseFolder}/${bookFolder}/ep_${chapNum}/1.png`;
 
             const testImg = new Image();
             testImg.onload = function() { launchReader(chapNum); };
@@ -208,7 +208,7 @@ setTimeout(() => { document.getElementById('rotate-hint').style.display = 'none'
             
             const phaseFolder = ACU_DATA[currentPhaseIdx].id;
             const bookFolder = ACU_DATA[currentPhaseIdx].books[currentBookIdx].folder;
-            const currentImgSrc = `Caversity/subjects/caf8_audit/features/assets/acu_database/${phaseFolder}/${bookFolder}/ep_${currentChap}/${currentPage}.png`;
+            const currentImgSrc = `subjects/caf8_audit/features/assets/acu_database/${phaseFolder}/${bookFolder}/ep_${currentChap}/${currentPage}.png`;
 
             // 🔥 Delay ko 100ms se 50ms kar diya taake fauran change ho
             setTimeout(() => {
@@ -230,7 +230,7 @@ setTimeout(() => { document.getElementById('rotate-hint').style.display = 'none'
         function preloadNextImage(phaseFolder, bookFolder) {
             const nextImg = new Image();
             const nextPage = currentPage + 1;
-            nextImg.src = `Caversity/subjects/caf8_audit/features/assets/acu_database/${phaseFolder}/${bookFolder}/ep_${currentChap}/${nextPage}.png`;
+            nextImg.src = `subjects/caf8_audit/features/assets/acu_database/${phaseFolder}/${bookFolder}/ep_${currentChap}/${nextPage}.png`;
         }
 
         function changePage(dir) {
