@@ -105,35 +105,3 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.userSelect = "none";
     document.body.style.webkitUserSelect = "none";
 });
-
-// =========================================
-// 🔥 UNIVERSAL STICKY FULL-SCREEN LOGIC 🔥
-// =========================================
-function triggerUniversalFS() {
-    // Agar user ne explicitly ESC daba kar mana kar diya hai, toh dobara tang na karo
-    if (sessionStorage.getItem('cv_fullscreen') === 'false') return;
-
-    if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen().then(() => {
-            sessionStorage.setItem('cv_fullscreen', 'true');
-            const toast = document.getElementById('fs-toast');
-            if (toast) { toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2500); }
-        }).catch(e => console.log("FS Blocked", e));
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Har page par pehle click pe try karo (Sivaye Login page ke)
-    if (sessionStorage.getItem('cv_fullscreen') !== 'false' && PAGE_TYPE !== 'auth') {
-        document.addEventListener('click', function initFS() { triggerUniversalFS(); document.removeEventListener('click', initFS); });
-    }
-});
-
-// Navigation flag: Taake page change hotay waqt browser usay ESC press na samjhe
-let isNavigating = false;
-window.addEventListener('beforeunload', () => { isNavigating = true; });
-
-document.addEventListener('fullscreenchange', () => {
-    if (isNavigating) return; // Agar page leave kar raha hai toh ignore karo
-    sessionStorage.setItem('cv_fullscreen', document.fullscreenElement ? 'true' : 'false');
-});
