@@ -110,6 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // 🔥 UNIVERSAL STICKY FULL-SCREEN LOGIC 🔥
 // =========================================
 function triggerUniversalFS() {
+    // Agar user ne explicitly ESC daba kar mana kar diya hai, toh dobara tang na karo
+    if (sessionStorage.getItem('cv_fullscreen') === 'false') return;
+
     if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen().then(() => {
             sessionStorage.setItem('cv_fullscreen', 'true');
@@ -120,12 +123,17 @@ function triggerUniversalFS() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const wantsFS = sessionStorage.getItem('cv_fullscreen') === 'true';
-    if (wantsFS || PAGE_ID === 'portal') {
+    // Har page par pehle click pe try karo (jab tak user ne ESC na dabaya ho)
+    if (sessionStorage.getItem('cv_fullscreen') !== 'false') {
         document.addEventListener('click', function initFS() { triggerUniversalFS(); document.removeEventListener('click', initFS); });
     }
 });
 
+// Navigation flag: Taake page change hotay waqt browser usay ESC press na samjhe
+let isNavigating = false;
+window.addEventListener('beforeunload', () => { isNavigating = true; });
+
 document.addEventListener('fullscreenchange', () => {
+    if (isNavigating) return; // Agar page leave kar raha hai toh ignore karo
     sessionStorage.setItem('cv_fullscreen', document.fullscreenElement ? 'true' : 'false');
 });
