@@ -123,8 +123,8 @@ function triggerUniversalFS() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Har page par pehle click pe try karo (jab tak user ne ESC na dabaya ho)
-    if (sessionStorage.getItem('cv_fullscreen') !== 'false') {
+    // Har page par pehle click pe try karo (Sivaye Login page ke)
+    if (sessionStorage.getItem('cv_fullscreen') !== 'false' && PAGE_TYPE !== 'auth') {
         document.addEventListener('click', function initFS() { triggerUniversalFS(); document.removeEventListener('click', initFS); });
     }
 });
