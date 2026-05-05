@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Unplugged - Premium Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- 🔥 UNIVERSAL SECURITY LOCK 🔥 -->
+    <meta name="page-id" content="caf8">
+    <meta name="page-type" content="premium">
+    <style id="page-lock">body { display: none !important; }</style>
+    <script type="module" src="js/security.js"></script>
+    <link rel="stylesheet" href="subjects/caf8_audit/features/css/auditpodcast.css">
+</head>
+<body>
+
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+
+    <nav class="podcast-nav">
+        <a href="audit.html" class="back-btn"><i class="fas fa-arrow-left"></i> Archive</a>
+        <div style="font-weight: 700; color: #fff; letter-spacing: 1.5px; font-size: 13px; text-transform: uppercase;">
+            <i class="fas fa-bolt" style="color:var(--accent-orange)"></i> Premium Studio
+        </div>
+    </nav>
+
+    <header class="podcast-hero">
+        <div class="hero-badge"><i class="fas fa-satellite-dish"></i> THE AUDIT MASTERCLASS</div>
+        <h1 class="hero-title">Audit <span>Unplugged</span></h1>
+        <p class="hero-sub">
+            The ultimate virtual podcast experience. Dive deep into complex financial frameworks, real-world corporate fraud, and drafting secrets.
+        </p>
+    </header>
+
+    <audio id="main-audio" crossorigin="anonymous"></audio>
+
+    <main class="playlist-container">
+        <div class="episodes-grid">
+            
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep1.mp3', 'Concept and Need for Assurance', 'Internal vs External Audit')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 01</div>
+                    <h3 class="ep-title">Concept and Need for Assurance</h3>
+                    <p class="ep-desc">Internal vs External Audit, True and Fair View</p>
+                    <div class="tag-row"><span class="tag blue">#Assurance</span><span class="tag pink">#Framework</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep2.mp3', 'Ethics and Professional Conduct', 'Threats and Safeguards')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 02</div>
+                    <h3 class="ep-title">Ethics and Professional Conduct</h3>
+                    <p class="ep-desc">Threats and Safeguards, 5 Principles</p>
+                    <div class="tag-row"><span class="tag purple">#Ethics</span><span class="tag orange">#Compliance</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep3.mp3', 'Engagement Acceptance & Planning', 'Strategy vs Plan')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 03</div>
+                    <h3 class="ep-title">Engagement Acceptance & Planning</h3>
+                    <p class="ep-desc">Engagement Letter, Strategy vs Plan</p>
+                    <div class="tag-row"><span class="tag pink">#Planning</span><span class="tag blue">#Strategy</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep4.mp3', 'Risk Assessment & Controls', 'Inherent/Control/Detection Risk')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 04</div>
+                    <h3 class="ep-title">Risk Assessment & Controls</h3>
+                    <p class="ep-desc">Inherent/Control/Detection Risk, GITC vs Application Controls</p>
+                    <div class="tag-row"><span class="tag orange">#Risk</span><span class="tag purple">#GITC</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep5.mp3', 'Audit Evidence', 'AEIOU, Assertions')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 05</div>
+                    <h3 class="ep-title">Audit Evidence</h3>
+                    <p class="ep-desc">AEIOU, Assertions, Sufficient Appropriate Evidence</p>
+                    <div class="tag-row"><span class="tag blue">#Evidence</span><span class="tag pink">#Assertions</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep6.mp3', 'Audit Sampling & Testing', 'ADA - Data Analytics')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 06</div>
+                    <h3 class="ep-title">Audit Sampling & Testing</h3>
+                    <p class="ep-desc">ADA - Data Analytics, Statistical vs Non-statistical</p>
+                    <div class="tag-row"><span class="tag purple">#DataAnalytics</span><span class="tag blue">#Sampling</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep7.mp3', 'Internal Control Deficiencies', 'Identification, Implication')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 07</div>
+                    <h3 class="ep-title">Internal Control Deficiencies</h3>
+                    <p class="ep-desc">Identification, Implication, Recommendation</p>
+                    <div class="tag-row"><span class="tag pink">#Deficiencies</span><span class="tag orange">#Controls</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep8.mp3', 'Income Statement Procedures', 'Revenue, Payroll, Purchases')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 08</div>
+                    <h3 class="ep-title">Income Statement Procedures</h3>
+                    <p class="ep-desc">Revenue, Payroll, Purchases</p>
+                    <div class="tag-row"><span class="tag blue">#Revenue</span><span class="tag purple">#Payroll</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep9.mp3', 'Balance Sheet Procedures', 'Inventory, Fixed Assets')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 09</div>
+                    <h3 class="ep-title">Balance Sheet Procedures</h3>
+                    <p class="ep-desc">Inventory, Fixed Assets, Debtors, Bank</p>
+                    <div class="tag-row"><span class="tag orange">#Assets</span><span class="tag pink">#Inventory</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep10.mp3', 'Audit Documentation & Quality', 'Audit File, EQMR')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 10</div>
+                    <h3 class="ep-title">Audit Documentation & Quality</h3>
+                    <p class="ep-desc">Audit File, EQMR</p>
+                    <div class="tag-row"><span class="tag purple">#Quality</span><span class="tag blue">#EQMR</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep11.mp3', 'Representations & Confirmations', 'ISA 580 and ISA 505')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 11</div>
+                    <h3 class="ep-title">Representations & Confirmations</h3>
+                    <p class="ep-desc">ISA 580 and ISA 505</p>
+                    <div class="tag-row"><span class="tag pink">#ISA580</span><span class="tag orange">#Confirmations</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep12.mp3', 'Subsequent Events & Going Concern', 'IAS 10 and ISA 570')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 12</div>
+                    <h3 class="ep-title">Subsequent Events & Going Concern</h3>
+                    <p class="ep-desc">Adjusting vs Non-adjusting, IAS 10 and ISA 570</p>
+                    <div class="tag-row"><span class="tag blue">#IAS10</span><span class="tag purple">#GoingConcern</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep13.mp3', 'Audit Reporting', 'Qualified, Adverse, Disclaimer')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 13</div>
+                    <h3 class="ep-title">Audit Reporting</h3>
+                    <p class="ep-desc">Qualified, Adverse, Disclaimer, KAM, EoM</p>
+                    <div class="tag-row"><span class="tag orange">#Reporting</span><span class="tag pink">#KAM</span></div>
+                </div>
+            </div>
+
+        <div class="episode-card" onclick="openTheater('subjects/caf8_audit/features/assets/audios/ep14.mp3', 'Sustainability & Assurance', 'ESG, Greenwashing, ISA 720')">
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
+                <div class="ep-info">
+                    <div class="ep-number">Episode 14</div>
+                    <h3 class="ep-title">Sustainability & Assurance</h3>
+                    <p class="ep-desc">New Topic: ESG, Greenwashing, ISA 720</p>
+                    <div class="tag-row"><span class="tag purple">#ESG</span><span class="tag blue">#Sustainability</span></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="theater-overlay">
+        <div class="theater-card">
+            <button class="close-theater" onclick="closeTheater()"><i class="fas fa-times"></i></button>
+            
+            <div class="studio-image-wrapper">
+                <div class="studio-image-container" id="studio-img"></div>
+                <div class="spotlight" id="spotlight"></div>
+                
+                <canvas id="audio-canvas"></canvas>
+            </div>
+
+            <div class="theater-controls">
+                <div class="control-row">
+                    <div class="title-area">
+                        <p class="now-playing-sub" id="t-sub">Audit Unplugged</p>
+                        <h2 class="now-playing-title" id="t-title">Select an Episode</h2>
+                    </div>
+
+                    <div class="buttons-box">
+                        <button class="btn-skip" onclick="skip(-15)"><i class="fas fa-undo-alt"></i></button>
+                        <button class="btn-circle" id="t-play-btn" onclick="togglePlay()"><i class="fas fa-play"></i></button>
+                        <button class="btn-skip" onclick="skip(15)"><i class="fas fa-redo-alt"></i></button>
+                    </div>
+
+                    <div class="progress-box">
+                        <span id="t-current">00:00</span>
+                        <div class="prog-bar-bg" id="t-prog-bg" onclick="seekAudio(event)">
+                            <div class="prog-fill" id="t-prog-fill"></div>
+                        </div>
+                        <span id="t-total">--:--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <script src="subjects/caf8_audit/features/js/auditpodcast.js"></script>
+</body>
+</html>
