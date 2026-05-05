@@ -359,3 +359,114 @@ window.submitFeedback = function() {
         alert("Failed to submit review. Try again.");
     });
 }
+
+// =========================================
+// 🔥 SURPRISE BOX LOGIC 🔥
+// =========================================
+let quotesCollection = [];
+fetch('assets/surprise.json')
+    .then(r => r.json())
+    .then(data => { quotesCollection = data; })
+    .catch(e => console.error('Error loading surprises:', e));
+
+window.revealSurprise = function() {
+    if(quotesCollection.length === 0) return;
+    const front = document.getElementById('box-front');
+    const content = document.getElementById('box-content');
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = now - start; 
+    const twelveHourBlock = 1000 * 60 * 60 * 12;
+    const currentSlot = Math.floor(diff / twelveHourBlock);
+    const index = currentSlot % quotesCollection.length;
+    const todayQuote = quotesCollection[index];
+
+    document.getElementById('daily-type').innerText = todayQuote.type;
+    document.getElementById('daily-text').innerText = '"' + todayQuote.text + '"';
+    document.getElementById('daily-ref').innerText = "- " + todayQuote.ref;
+
+    front.style.display = 'none';
+    content.style.display = 'block';
+};
+
+// =========================================
+// 🔥 ADHKAR APP LOGIC 🔥
+// =========================================
+(function() {
+    let appEmotions = [];
+    let appResources = [];
+    const niceColors = ["linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%)", "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)", "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)", "linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)", "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)", "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)", "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)", "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)", "linear-gradient(135deg, #fa709a 0%, #fee140 100%)", "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)", "linear-gradient(135deg, #ff0844 0%, #ffb199 100%)", "linear-gradient(135deg, #b721ff 0%, #21d4fd 100%)", "linear-gradient(135deg, #20E2D7 0%, #F9FEA5 100%)"];
+    
+    // Fetch resources directly from 'assets' folder
+    fetch('assets/emotion.json').then(r => r.json()).then(d => { appEmotions = d; return fetch('assets/resource.json'); }).then(r => r.json()).then(d => { appResources = d; initGrid(); }).catch(e => { console.error(e); const gridArea = document.getElementById('adhkar-grid-area'); if(gridArea) gridArea.innerHTML = '<p style="color:red; text-align:center;">Error loading Adhkar data.</p>'; });
+
+    function initGrid() {
+        const gridArea = document.getElementById('adhkar-grid-area');
+        if(!gridArea) return;
+        gridArea.innerHTML = '';
+        appEmotions.forEach((emo, index) => {
+            if(!emo.title) return;
+            const div = document.createElement('div');
+            div.className = 'adhkar-card';
+            div.style.background = niceColors[index % niceColors.length];
+            div.innerHTML = `<div class="adhkar-card-title">${emo.title}</div>`;
+            div.onclick = () => openCorrectDetail(emo.id, emo.title);
+            gridArea.appendChild(div);
+        });
+    }
+    window.openCorrectDetail = function(emotionID, emotionTitle) {
+        const listArea = document.getElementById('adhkar-list-area');
+        const titleArea = document.getElementById('adhkar-title');
+        const drawer = document.getElementById('adhkar-drawer');
+        const overlay = document.getElementById('adhkar-drawer-overlay');
+        
+        titleArea.innerText = emotionTitle;
+        listArea.innerHTML = '';
+        const filtered = appResources.filter(r => {
+            if(!r.emotions) return false;
+            const linkedEmotions = String(r.emotions).split(',').map(s => s.trim());
+            return linkedEmotions.includes(String(emotionID));
+        });
+        if(filtered.length === 0) {
+            listArea.innerHTML = `<div style="text-align:center; padding:30px; color:#94a3b8; font-weight:500;">No Duas found for this emotion yet.<br><small>(ID: ${emotionID})</small></div>`;
+        } else {
+            listArea.innerHTML = `<div style="padding:0 5px 15px; color:#64748b; font-size:13px; font-weight:600;">Found ${filtered.length} Supplication(s)</div>`;
+            filtered.forEach((d, index) => {
+                let displayTitle = d.title || (d.translation ? d.translation.substring(0, 30)+"..." : "Dua " + (index+1));
+                listArea.innerHTML += `<div class="list-item" onclick="toggleDua(this)"><div class="list-title-bar"><span>${index + 1}. ${displayTitle}</span><span class="arrow-icon" style="color:#cbd5e1; font-size:12px;">▼</span></div><div class="list-body"><div class="dua-content"><div class="a-arabic">${d.arabic || ''}</div><div class="a-trans">${d.translation || ''}</div><div class="a-ref">${d.reference || ''}</div></div></div></div>`;
+            });
+        }
+        drawer.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    window.toggleDua = function(el) {
+        el.classList.toggle('open');
+        var body = el.querySelector('.list-body');
+        body.style.maxHeight = body.style.maxHeight ? null : body.scrollHeight + "px";
+    }
+    window.closeAdhkarDetail = function() {
+        const drawer = document.getElementById('adhkar-drawer');
+        const overlay = document.getElementById('adhkar-drawer-overlay');
+        drawer.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    window.triggerShare = function(type) {
+        const siteUrl = new URL('login.html', window.location.href).href;
+        let text = "";
+        switch(type) {
+            case 'cv':
+                text = `Elevate your professional profile with Caversity's ATS-friendly Resume Builder, designed specifically for CA and ACCA students. Create your standout resume for free today!\n\nAccess here: ${siteUrl}`;
+                break;
+            case 'qarcs':
+                text = `Discover Q-ARCS at Caversity—a groundbreaking 3D visual engine connecting corporate ethics with deep Quranic insights. A truly profound perspective awaits.\n\nExplore here: ${siteUrl}`;
+                break;
+            case 'adhkar':
+                text = `Find spiritual comfort and guidance tailored to your emotional state. Caversity's Adhkar portal provides relevant supplications to help calm the mind and soul during stressful times.\n\nFind your peace here: ${siteUrl}`;
+                break;
+        }
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+        window.open(whatsappUrl, '_blank');
+    }
+})();
