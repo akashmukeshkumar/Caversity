@@ -77,7 +77,7 @@ document.querySelectorAll('.faq-item').forEach(item => {
         if (!isOpen) {
             item.classList.add('active');
             if(answer) answer.style.maxHeight = answer.scrollHeight + "px";
-            if(icon) icon.textContent = '−'; // Minus sign
+            if(icon) icon.textContent = '+'; // Plus sign
         }
     });
 });
