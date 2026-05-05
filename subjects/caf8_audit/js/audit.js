@@ -157,18 +157,11 @@ function toggleSubDetail() {
 // 🎬 CINEMA / TEASER
 // =========================================
 function enterCinema() {
-    const token = localStorage.getItem("session_token");
-    if (token) window.location.href = "audit-cinema.html";
-    else alert("🔒 Access Denied!\nPlease Login first to enter the Audit Archive.");
+    window.location.href = "audit-cinema.html";
 }
 
 function tryEnterCinema() {
-    const token = localStorage.getItem("session_token");
-    if (token) window.location.href = "audit-cinema.html";
-    else {
-        alert("🔒 Access Denied!\nPlease Login first to enter the Audit Archive.");
-        window.location.replace("login.html");
-    }
+    window.location.href = "audit-cinema.html";
 }
 
 function applyMobileFix() {
