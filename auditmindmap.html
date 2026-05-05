@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Masterclass | Interactive Framework</title>
+
+    <!-- 🔥 UNIVERSAL SECURITY LOCK 🔥 -->
+    <meta name="page-id" content="caf8">
+    <meta name="page-type" content="premium">
+    <style id="page-lock">body { display: none !important; }</style>
+    <script type="module" src="js/security.js"></script>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="subjects/caf8_audit/features/css/auditmindmap.css">
+</head>
+<body>
+
+    <button id="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-list-ul"></i></button>
+
+    <div id="sidebar">
+        <div class="logo-section">
+            <h1>Audit Visuals</h1>
+            <p>Masterclass Series</p>
+        </div>
+        <div class="chapter-list" id="chapter-list"></div>
+    </div>
+
+    <div id="canvas-area">
+        <div class="page-header">
+            <h2 id="chapter-title-main">Select Topic</h2>
+            <p id="chapter-subtitle">Framework & Connectivity Exploration</p>
+        </div>
+
+        <div class="nav-controls">
+    <a href="audit.html" class="ctrl-btn" title="Back to Main Page" style="text-decoration: none;">
+        <i class="fas fa-home"></i>
+    </a>
+    <button class="ctrl-btn" id="expand-all" title="Expand/Collapse All">⤡</button>
+    <button class="ctrl-btn" id="zoom-in" title="Zoom In">＋</button>
+    <button class="ctrl-btn" id="zoom-out" title="Zoom Out">－</button>
+</div>
+
+        <div id="mindmap"></div>
+    </div>
+    <script src="subjects/caf8_audit/features/js/auditmindmap.js"></script>
+</body>
+</html>
