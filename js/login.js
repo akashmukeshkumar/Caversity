@@ -105,9 +105,12 @@ registerForm.addEventListener('submit', async (e) => {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // 2. Generate and Save Device Lock Token locally
-        const deviceToken = generateDeviceToken();
-        localStorage.setItem('caversity_device_token', deviceToken);
+        // 2. Reuse existing Device Lock Token if present, otherwise create new
+        let deviceToken = localStorage.getItem('caversity_device_token');
+        if (!deviceToken) {
+            deviceToken = generateDeviceToken();
+            localStorage.setItem('caversity_device_token', deviceToken);
+        }
 
         // 3. Save User Profile in Firestore Database
         await setDoc(doc(db, "users", user.uid), {
@@ -170,14 +173,20 @@ signinForm.addEventListener('submit', async (e) => {
 
             // Agar Admin ne DB se token khali (reset) kar diya hai, toh naya token lagao
             if (!userData.deviceToken || userData.deviceToken === "") {
-                const newDeviceToken = generateDeviceToken();
-                localStorage.setItem('caversity_device_token', newDeviceToken);
+                let newDeviceToken = localToken;
+                if (!newDeviceToken) {
+                    newDeviceToken = generateDeviceToken();
+                    localStorage.setItem('caversity_device_token', newDeviceToken);
+                }
                 await updateDoc(docRef, { deviceToken: newDeviceToken });
             }
         } else {
             // 🛠️ AUTO-REPAIR BROKEN ACCOUNTS (Agar database folder miss ho gaya tha)
-            const newDeviceToken = generateDeviceToken();
-            localStorage.setItem('caversity_device_token', newDeviceToken);
+            let newDeviceToken = localStorage.getItem('caversity_device_token');
+            if (!newDeviceToken) {
+                newDeviceToken = generateDeviceToken();
+                localStorage.setItem('caversity_device_token', newDeviceToken);
+            }
             await setDoc(docRef, {
                 name: "Scholar",
                 email: email,
