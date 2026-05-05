@@ -273,12 +273,12 @@ body::before {
     transition: opacity 0.3s ease;
 }
 
-    .premium-card::before {
-        background: linear-gradient(90deg, #1e40af, #3b82f6);
-    }
-
-        background: linear-gradient(90deg, #16a34a, #22c55e);
-    }
+.premium-card::before {
+    background: linear-gradient(90deg, #1e40af, #3b82f6);
+}
+.free-card::before, .subscribed-card::before {
+    background: linear-gradient(90deg, #16a34a, #22c55e) !important;
+}
 
 .subject-card:hover {
     transform: translateY(-8px);
