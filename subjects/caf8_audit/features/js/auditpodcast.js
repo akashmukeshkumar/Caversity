@@ -16,6 +16,9 @@
         let isAudioSetup = false;
 
         function openTheater(audioUrl, title, sub) {
+            // 🔥 FIX: Awaaz ka link system on hone se pehlay dena zaroori hai
+            audio.src = audioUrl;
+
             if(!isAudioSetup) {
                 setupAudioVisualizer();
                 isAudioSetup = true;
@@ -31,8 +34,13 @@
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
 
-            audio.src = audioUrl;
-            audio.play().catch(e => console.log("Play prevented.", e));
+            audio.play().then(() => {
+                // 🔥 FIX: Strict browsers mein background system ko zabardasti jagana parta hai
+                if (audioContext && audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+            }).catch(e => console.log("Play prevented.", e));
+            
             isPlaying = true;
             updatePlayBtn();
             
