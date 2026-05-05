@@ -943,3 +943,47 @@ body::before {
         font-size: 1.5rem;
     }
 }
+
+/* =========================================
+   🔥 ADHKAR APP STYLES
+   ========================================= */
+.adhkar-card { border-radius: 20px; padding: 20px 10px; text-align: center; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 15px rgba(0,0,0,0.1); color: white; font-weight: bold; display: flex; align-items: center; justify-content: center; height: 130px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.4); }
+.adhkar-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
+.adhkar-card-title { font-size: 16px; text-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 2; letter-spacing: 0.5px; }
+.list-item { background: white; border-radius: 12px; margin-bottom: 15px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+.list-title-bar { padding: 18px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1e293b; background: #fff; font-size: 15px; transition: background 0.2s; }
+.list-title-bar:hover { background: #f8fafc; }
+.list-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: #fafafa; border-top: 1px solid #f1f5f9; }
+.dua-content { padding: 25px 20px; }
+.a-arabic { font-family: 'Traditional Arabic', serif; font-size: 28px; text-align: right; color: #0f172a; margin-bottom: 15px; line-height: 1.8; }
+.a-trans { font-size: 15px; color: #475569; line-height: 1.7; margin-bottom: 15px; }
+.a-ref { font-size: 12px; color: #2563eb; font-weight: 700; text-transform: uppercase; text-align: right; display: block; background: #eff6ff; padding: 6px 12px; border-radius: 6px; width: fit-content; margin-left: auto; }
+.drawer-overlay.active { opacity: 1 !important; visibility: visible !important; }
+.drawer-panel.active { transform: translateX(0) !important; }
+.btn-share-adhkar:hover { background: #dbeafe !important; transform: scale(1.02); }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@media (max-width: 600px) { 
+    .adhkar-glass-container { padding: 20px 15px !important; border-radius: 16px !important; }
+    .adhkar-glass-container h2 { font-size: 24px !important; }
+    .adhkar-glass-container p { font-size: 14px !important; }
+    .adhkar-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; } 
+    .adhkar-card { height: 100px !important; padding: 15px 10px !important; border-radius: 12px !important; }
+    .adhkar-card-title { font-size: 14px !important; }
+}
+
+/* =========================================
+   🔥 SURPRISE BOX STYLES
+   ========================================= */
+#surprise-section { max-width: 800px; margin: 0 auto 5rem; padding: 0 2.5rem; text-align: center; }
+.surprise-box { background: linear-gradient(135deg, #0f172a, #1e40af); border-radius: 1.5rem; padding: 3rem 2rem; color: white; cursor: pointer; box-shadow: 0 15px 35px rgba(30, 64, 175, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1) inset; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
+.surprise-box:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(30, 64, 175, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2) inset; }
+.surprise-front .icon { font-size: 4rem; display: block; margin-bottom: 1rem; animation: bounce 2s infinite; }
+.surprise-front h3 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+.surprise-front p { font-size: 1.1rem; color: #cbd5e1; }
+.surprise-content { display: none; animation: fadeIn 0.6s ease-out; }
+.surprise-content .quote-icon { font-size: 3rem; color: #3b82f6; display: block; margin-bottom: 0.5rem; opacity: 0.8; }
+.surprise-content h4 { font-size: 1.2rem; font-weight: 600; color: #60a5fa; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; }
+.surprise-content p { font-size: 1.5rem; font-weight: 500; font-style: italic; line-height: 1.6; margin-bottom: 1.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+.surprise-content .quote-ref { font-size: 0.9rem; font-weight: 600; background: rgba(255,255,255,0.15); padding: 0.4rem 1rem; border-radius: 999px; letter-spacing: 1px;}
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@media (max-width: 768px) { #surprise-section { padding: 0 1.25rem; } .surprise-box { padding: 2rem 1.5rem; } .surprise-front h3 { font-size: 1.5rem; } .surprise-content p { font-size: 1.25rem; } }
