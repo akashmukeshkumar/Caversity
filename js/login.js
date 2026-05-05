@@ -57,6 +57,31 @@ document.querySelectorAll('.toggle-password').forEach(btn => {
     });
 });
 
+// 🔥 FAQ ACCORDION LOGIC 🔥
+document.querySelectorAll('.faq-item').forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    const icon = item.querySelector('.faq-icon');
+
+    question.addEventListener('click', () => {
+        const isOpen = item.classList.contains('active');
+        
+        // Pehle baqi sab open FAQs ko band karo
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+            otherItem.classList.remove('active');
+            if(otherItem.querySelector('.faq-answer')) otherItem.querySelector('.faq-answer').style.maxHeight = null;
+            if(otherItem.querySelector('.faq-icon')) otherItem.querySelector('.faq-icon').textContent = '+';
+        });
+
+        // Agar jispe click kiya hai wo band tha, toh usay khol do
+        if (!isOpen) {
+            item.classList.add('active');
+            if(answer) answer.style.maxHeight = answer.scrollHeight + "px";
+            if(icon) icon.textContent = '−'; // Minus sign
+        }
+    });
+});
+
 // Secret Code Generator for Device Lock
 function generateDeviceToken() {
     return 'cv_sys_' + Math.random().toString(36).substr(2, 12) + '_' + Date.now();
