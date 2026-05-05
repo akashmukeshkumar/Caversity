@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+        :root {
+            --bg-base: #f8fafc;
+            --sidebar-bg: rgba(255, 255, 255, 0.95);
+            --accent: #3b82f6;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(147, 51, 234, 0.05) 0px, transparent 50%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+            display: flex;
+            color: var(--text-main);
+        }
+
+        /* 📌 SIDEBAR: RESPONSIVE FIX */
+        #sidebar {
+            width: 340px;
+            height: 100vh;
+            background: var(--sidebar-bg);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            padding: 40px 25px;
+            box-sizing: border-box;
+            z-index: 2000;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 📱 MOBILE SIDEBAR OVERLAY LOGIC */
+        @media (max-width: 768px) {
+            #sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 280px;
+                transform: translateX(-100%); /* Start hidden */
+                box-shadow: 20px 0 50px rgba(0,0,0,0.1);
+            }
+            #sidebar.open {
+                transform: translateX(0); /* Slide in */
+            }
+            .page-header { left: 20px !important; top: 80px !important; }
+            .page-header h2 { font-size: 22px !important; }
+        }
+
+        /* 🔘 FLOATING TOGGLE BUTTON FOR MOBILE */
+        #menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 3000;
+            width: 45px;
+            height: 45px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            color: var(--accent);
+            font-size: 18px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--card-shadow);
+        }
+
+        @media (max-width: 768px) {
+            #menu-toggle { display: flex; }
+        }
+
+        .logo-section h1 { margin: 0; font-size: 22px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; }
+        .logo-section p { margin: 5px 0 35px 0; font-size: 13px; color: var(--text-sub); font-weight: 500; }
+
+        .chapter-list { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; padding-right: 5px; }
+        .chapter-list::-webkit-scrollbar { width: 4px; }
+        .chapter-list::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+
+        .chapter-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-main);
+            padding: 14px 18px;
+            border-radius: 12px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.4;
+        }
+        .chapter-btn:hover { background: #fff; border-color: #e2e8f0; transform: translateX(5px); box-shadow: var(--card-shadow); }
+        .chapter-btn.active {
+            background: #fff;
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: var(--card-shadow);
+        }
+
+        /* 🧠 MAIN CANVAS */
+        #canvas-area { position: relative; flex-grow: 1; height: 100vh; overflow: hidden; }
+        #mindmap { width: 100%; height: 100%; cursor: grab; }
+        
+        .page-header {
+            position: absolute; top: 50px; left: 60px; z-index: 10; pointer-events: none;
+        }
+        .page-header h2 { 
+            margin: 0; font-weight: 800; font-size: 32px; color: #0f172a; 
+            letter-spacing: -1px; animation: slideIn 0.8s ease-out;
+        }
+        .page-header p { 
+            margin: 8px 0 0 0; font-size: 15px; color: var(--text-sub); 
+            font-weight: 500; animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- INTELLIGENT RESPONSIVE CONTROLS (With Home Button) --- */
+.nav-controls { 
+    position: fixed; 
+    z-index: 5000; 
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    backdrop-filter: blur(10px);
+    display: flex;
+}
+
+/* 💻 DESKTOP: Vertical (Right Side) */
+@media (min-width: 769px) {
+    .nav-controls { 
+        right: 40px; 
+        bottom: 40px; 
+        flex-direction: column; 
+        gap: 12px;
+    }
+}
+
+/* 📱 MOBILE: Horizontal (Bottom Center) */
+@media (max-width: 768px) {
+    .nav-controls { 
+        bottom: 25px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        flex-direction: row; 
+        gap: 12px; 
+        padding: 8px 15px;
+        border-radius: 50px; 
+    }
+}
+
+.ctrl-btn { 
+    width: 45px; 
+    height: 45px; 
+    background: #f8fafc; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 12px; 
+    color: var(--accent); 
+    font-size: 20px; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    transition: all 0.3s ease; 
+}
+
+/* Home Button Specific Style */
+.ctrl-btn i.fa-home { color: #ef4444; } /* Exit/Home ko red touch diya taake highlight ho */
+
+.ctrl-btn:hover { 
+    background: #fff; 
+    border-color: var(--accent); 
+    transform: scale(1.1); 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .ctrl-btn { width: 42px; height: 42px; font-size: 18px; }
+}
+
+.ctrl-btn:hover { background: #fff; border-color: var(--accent); transform: scale(1.1); }
+        
+        .node rect { rx: 12; ry: 12; stroke-width: 1.5px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .node:hover rect { filter: drop-shadow(0 10px 15px rgba(0,0,0,0.08)); }
+        .node text { font-family: 'Outfit', sans-serif; font-size: 13.5px; font-weight: 600; fill: #1e293b; pointer-events: none; }
+        
+        .link { 
+            fill: none; 
+            stroke-width: 2px; 
+            opacity: 0.6; 
+            stroke-dasharray: 6, 6; 
+            animation: dataFlow 20s linear infinite; 
+        }
+        @keyframes dataFlow {
+            from { stroke-dashoffset: 1000; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        .chevron { font-size: 18px; font-weight: 800; fill: var(--accent); cursor: pointer; }
+/* 4. CSS Based Selection Block */
+    body, html {
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none;    /* Firefox */
+        -ms-user-select: none;     /* IE10+/Edge */
+        user-select: none;         /* Standard */
+    }
+    
+    /* Disable Image Dragging & Saving */
+    img {
+        -webkit-user-drag: none;
+        user-drag: none;
+        pointer-events: none; /* Disables right click context menu on images */
+    }
