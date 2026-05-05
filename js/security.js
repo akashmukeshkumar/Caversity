@@ -105,3 +105,27 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.userSelect = "none";
     document.body.style.webkitUserSelect = "none";
 });
+
+// =========================================
+// 🔥 UNIVERSAL STICKY FULL-SCREEN LOGIC 🔥
+// =========================================
+function triggerUniversalFS() {
+    if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().then(() => {
+            sessionStorage.setItem('cv_fullscreen', 'true');
+            const toast = document.getElementById('fs-toast');
+            if (toast) { toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2500); }
+        }).catch(e => console.log("FS Blocked", e));
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const wantsFS = sessionStorage.getItem('cv_fullscreen') === 'true';
+    if (wantsFS || PAGE_ID === 'portal') {
+        document.addEventListener('click', function initFS() { triggerUniversalFS(); document.removeEventListener('click', initFS); });
+    }
+});
+
+document.addEventListener('fullscreenchange', () => {
+    sessionStorage.setItem('cv_fullscreen', document.fullscreenElement ? 'true' : 'false');
+});
