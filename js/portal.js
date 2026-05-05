@@ -358,3 +358,26 @@ window.submitFeedback = function() {
         alert("Failed to submit review. Try again.");
     });
 }
+// =========================================
+// 🔥 AUTO FULL-SCREEN LOGIC 🔥
+// =========================================
+function triggerFullScreen() {
+    if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().then(() => {
+            const toast = document.getElementById('fs-toast');
+            if (toast) {
+                toast.classList.add('show');
+                // 2.5 seconds baad fade out (Professional Feel)
+                setTimeout(() => { 
+                    toast.classList.remove('show'); 
+                }, 2500);
+            }
+        }).catch(err => console.log("Fullscreen blocked:", err));
+    }
+}
+
+// User jahan bhi pehli dafa click karega, full-screen activate ho jayega
+document.addEventListener('click', function initFS() { 
+    triggerFullScreen(); 
+    document.removeEventListener('click', initFS); // Trigger hone ke baad dubara listen nahi karega
+});
