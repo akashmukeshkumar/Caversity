@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+        <!-- 🔥 UNIVERSAL SECURITY LOCK 🔥 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACU | The Audit Archive</title>
+
+    <!-- 🔥 UNIVERSAL SECURITY LOCK 🔥 -->
+    <meta name="page-id" content="caf8">
+    <meta name="page-type" content="premium">
+    <style id="page-lock">body { display: none !important; }</style>
+    <script type="module" src="js/security.js"></script>
+
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACU | The Audit Archive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="subjects/caf8_audit/features/css/audit-cinema.css">
+</head>
+<body>
+
+    <header class="acu-header" id="navbar">
+        <div class="logo-text">ACU <span style="font-weight:400; font-size:14px; color:#aaa;">| STORIES</span></div>
+        <a href="index.html" class="exit-btn">EXIT</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-bg active" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=100&w=3840');"></div>
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=100&w=3840');"></div>
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1614064641938-3bcee529cfae?q=100&w=3840');"></div>
+
+        <div class="hero-content">
+            <span class="phase-badge">#1 IN AUDIT LEARNING</span>
+            <h1 class="hero-title" id="main-hero-title">THE GATEKEEPER</h1>
+            <div class="hero-meta">
+                <span class="match-score">98% Match</span>
+                <span id="hero-year">2024</span> <span class="age-rating">A+</span>
+                <span id="hero-seasons">5 Seasons</span> <span style="border:1px solid #777; padding:0 4px; font-size:10px;">HD</span>
+            </div>
+            <p class="hero-desc" id="main-hero-desc">
+                Entering the battlefield requires knowledge of the laws. 
+                Follow the journey through Ethics, Risk, and the Corporate Act.
+            </p>
+            <div class="hero-btns">
+                <button class="btn-play" onclick="openPhase(0)"><i class="fas fa-play"></i> Play</button>
+                <button class="btn-info" onclick="scrollToPanel()"><i class="fas fa-info-circle"></i> More Info</button>
+            </div>
+        </div>
+    </section>
+
+    <h3 class="section-title">The Saga</h3>
+    <div class="phases-wrapper" id="phase-list"></div>
+
+    <section id="content-panel">
+        <div class="panel-header">
+            <h2 id="active-phase-title">The Gatekeeper</h2>
+            <div class="panel-meta">
+                <span id="active-phase-tag">Phase 1</span> | Graphic Novel
+            </div>
+        </div>
+
+        <div class="books-row" id="books-list"></div>
+        <div class="chapters-list" id="chapters-list"></div>
+    </section>
+
+    <div id="reader-mode">
+        <div class="reader-top-zone"></div>
+        <div class="close-reader" onclick="exitReader()"><i class="fas fa-times"></i></div>
+
+<div id="rotate-hint" style="display:none; position:fixed; top:30px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.8); color:#fff; padding:8px 15px; border-radius:20px; font-size:12px; z-index:10005; border:1px solid #444;">
+    🔄 Rotate mobile for best experience
+</div>
+        
+        <div class="nav-zone nav-prev" onclick="changePage(-1)"></div>
+        <div class="nav-zone nav-next" onclick="changePage(1)"></div>
+        
+        <img src="" id="reader-image" class="reader-img" onerror="handleReadError()">
+    </div>
+
+    <div id="toast">🚧 Coming Soon: Episode in Production</div>
+
+    <script src="subjects/caf8_audit/features/js/audit-cinema.js"></script>
+</body>
+</html>
