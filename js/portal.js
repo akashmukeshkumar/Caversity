@@ -105,6 +105,7 @@ function renderSubjectCards() {
 
         if (subject.type === 'premium') {
             if (isSubscribed) {
+                card.classList.add('subscribed-card');
                 buttonText = 'Open Subject';
                 buttonClass = 'subscribed-action';
             }
