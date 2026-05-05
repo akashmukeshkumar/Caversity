@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Audit Ninja | Cinematic Intelligence</title>
+
+    <!-- 🔥 UNIVERSAL SECURITY LOCK 🔥 -->
+    <meta name="page-id" content="caf8">
+    <meta name="page-type" content="premium">
+    <style id="page-lock">body { display: none !important; }</style>
+    <script type="module" src="js/security.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="subjects/caf8_audit/features/css/auditsanctum.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon"><i class="fa-solid fa-fingerprint"></i></div>
+            <div class="logo-text">
+                <h1>Skeptic's Sanctum</h1>
+                <p>Auditor's Intelligence Vault</p>
+            </div>
+        </div>
+        <a href="audit.html" class="btn-exit">
+    
+    <script src="subjects/caf8_audit/features/js/auditsanctum.js"></script>
+        </div>
+        <a href="index.html" class="btn-exit">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Exit Vault</span>
+        </a>
+    </header>
+
+    <div class="app-container">
+        
+        <div class="section-title"><i class="fa-solid fa-layer-group"></i> Archive Seasons</div>
+        <div class="reel-container" id="reel-container">
+            <div style="color: var(--text-secondary); padding: 20px;">Fetching past papers...</div>
+        </div>
+
+        <div class="episodes-wrapper" id="episodes-wrapper">
+            <div class="section-title"><i class="fa-solid fa-list-ul"></i> Select Knowledge Node</div>
+            <div class="episodes-grid" id="episodes-grid">
+                </div>
+        </div>
+
+        <div class="arena" id="arena">
+            
+            <div class="arena-panel">
+                <div class="laser-beam" id="scanner-laser"></div>
+                
+                <div class="doc-header">
+                    <h2 class="doc-title-text" id="doc-title">Topic Title</h2>
+                    <span class="doc-marks" id="doc-marks">0 Marks</span>
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); background: rgba(0,0,0,0.2); padding: 10px 15px; border-radius: 10px; width: 100%;">
+                    <span style="color: var(--color-trap); display: flex; align-items: center; gap: 5px;"><i class="fa-solid fa-circle"></i> Fatal Trap</span>
+                    <span style="color: var(--color-key); display: flex; align-items: center; gap: 5px;"><i class="fa-solid fa-circle"></i> Core Concept</span>
+                </div>
+
+                <div class="scenario-text" id="doc-scenario">
+                    Scenario text goes here...
+                </div>
+
+                <div class="scan-action-box">
+                    <button class="btn-scan" id="btn-scan" onclick="triggerDecryption()">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> 
+                        <span>Decrypt Examiner's Strategy</span>
+                        <div class="loader-bg"></div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="arena-panel">
+                
+                <div class="locked-placeholder" id="analysis-locked">
+                    <i class="fa-solid fa-lock"></i>
+                    <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 10px;">Analysis Locked</h3>
+                    <p style="max-width: 300px; line-height: 1.6;">Read the scenario carefully. When you are ready, run the decryption scan to reveal the hidden traps and solutions.</p>
+                </div>
+
+                <div class="analysis-results" id="analysis-results">
+                    
+                    <div class="ans-card card-mindset" id="card-1">
+                        <h4><i class="fa-solid fa-brain"></i> Examiner's Mindset</h4>
+                        <p id="ans-mindset"></p>
+                    </div>
+
+                    <div class="ans-card card-trap" id="card-2">
+                        <h4><i class="fa-solid fa-skull-crossbones"></i> The Fatal Trap</h4>
+                        <p id="ans-trap"></p>
+                    </div>
+
+                    <div class="ans-card card-blueprint" id="card-3" style="background: transparent; border: none; padding: 0;">
+                        <h4><i class="fa-solid fa-clipboard-check"></i> Execution Blueprint</h4>
+                        <ul class="blueprint-list" id="ans-blueprint"></ul>
+                    </div>
+
+                    <div class="ans-card card-ninja" id="card-4">
+                        <h4><i class="fa-solid fa-user-ninja"></i> Ninja Technique</h4>
+                        <p id="ans-ninja"></p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+</body>
+</html>
