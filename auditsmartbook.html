@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audit Smart Book | Audit Interactive Reader</title>
+    <title>Smart Book | Audit Interactive Reader</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,6 @@
     <style id="page-lock">body { display: none !important; }</style>
     <script type="module" src="js/security.js"></script>
 
-    <!-- 🔥 EXTERNAL CSS 🔥 -->
     <link rel="stylesheet" href="subjects/caf8_audit/features/css/auditsmartbook.css">
 </head>
 <body>
@@ -24,7 +23,7 @@
     <header>
         <div class="logo"><i class="fa-solid fa-book-open-reader"></i> Audit Smart Book</div>
         <a href="audit.html" class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i> Back to Audit
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
         </a>
     </header>
 
@@ -43,7 +42,7 @@
                 <div class="load-message">
                     <i class="fa-solid fa-spinner fa-spin"></i>
                     <strong>Loading chapter...</strong>
-                    <span>Syncing Secure Data...</span>
+                    <span>Reading auditbook.json</span>
                 </div>
             </div>
         </div>
@@ -74,7 +73,7 @@
         </div>
     </div>
 
-    <!-- 🔥 EXTERNAL JS 🔥 -->
-    <script src="subjects/caf8_audit/features/js/auditsmartbook.js"></script>
+    <!-- Application Logic -->
+    <script type="module" src="subjects/caf8_audit/features/js/auditsmartbook.js"></script>
 </body>
 </html>
