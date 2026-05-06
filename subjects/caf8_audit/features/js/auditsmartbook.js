@@ -1,6 +1,7 @@
         let currentSpread = 1;
         let totalSpreads = 1;
         let bookDatabase = {};
+        let globalChapterTitle = '';
 
         const bookFrame = document.getElementById('book-frame');
         const spreadContainer = document.getElementById('spread-container');
@@ -59,6 +60,7 @@
         }
 
         function renderBook(data) {
+            globalChapterTitle = escapeHtml(data.title || data.source?.title || '');
             const spreads = [];
             spreads.push(renderCoverSpread(data));
 
@@ -76,7 +78,7 @@
         }
 
         function renderCoverSpread(data) {
-            const title = escapeHtml(data.source?.title || 'Audit Chapter');
+            const title = escapeHtml(data.title || data.source?.title || '');
 
             return `
                 <div class="book-spread active" id="spread-1" data-chp="${title}">
@@ -84,8 +86,6 @@
                     <div class="page-right cover-content">
                         <i class="fa-solid fa-scale-balanced" style="font-size: 3.5rem; color: var(--accent-blue); margin-bottom: 20px;"></i>
                         <h1 class="book-title">${title}</h1>
-                        <p class="cover-subtitle">An Interactive Guide to Core Auditing Concepts</p>
-                        <div class="cover-author">Audit by ATS</div>
                         <div class="page-num-right">1</div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                     displayPages.push(currentPage);
                 }
 
-                currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', true);
+                currentPage = createDisplayPage(sourcePage.heading || '', true);
                 const groups = buildPageGroups(sourcePage);
 
                 groups.forEach(group => {
@@ -130,7 +130,7 @@
                             displayPages.push(currentPage);
                         }
 
-                        currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', false);
+                        currentPage = createDisplayPage(sourcePage.heading || '', false);
                         currentPage.items.push(...group.items);
                         measurePage.innerHTML = renderMeasuredPage(currentPage);
                     }
@@ -197,10 +197,10 @@
         }
 
         function renderMeasuredPage(page) {
-            const headingHtml = page.showHeading ? `<h1 class="book-title">${escapeHtml(page.heading || 'Chapter Page')}</h1>` : '';
+            const headingHtml = (page.showHeading && page.heading) ? `<h1 class="book-title">${escapeHtml(page.heading)}</h1>` : '';
 
             return `
-                <span class="chapter-header">Chapter 1</span>
+                <span class="chapter-header">${globalChapterTitle}</span>
                 ${headingHtml}
                 ${page.items.map(renderPageItem).join('')}
             `;
@@ -219,14 +219,14 @@
             const sideClass = side === 'left' ? 'page-left' : 'page-right';
             const pageNumClass = side === 'left' ? 'page-num-left' : 'page-num-right';
             const pageNumber = page?.page ?? '';
-            const heading = escapeHtml(page?.heading || 'Chapter Page');
+            const heading = escapeHtml(page?.heading || '');
             const items = Array.isArray(page?.items) ? page.items : [];
             const contentHtml = items.map(renderPageItem).join('');
-            const headingHtml = page?.showHeading === false ? '' : `<h1 class="book-title">${heading}</h1>`;
+            const headingHtml = (page?.showHeading !== false && heading) ? `<h1 class="book-title">${heading}</h1>` : '';
 
             return `
                 <div class="${sideClass}">
-                    <span class="chapter-header">Chapter 1</span>
+                    <span class="chapter-header">${globalChapterTitle}</span>
                     ${headingHtml}
                     ${contentHtml}
                     <div class="${pageNumClass}">${escapeHtml(pageNumber)}</div>
