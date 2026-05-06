@@ -77,36 +77,64 @@
             measurePage.className = 'page-right measure-page';
             bookFrame.appendChild(measurePage);
 
-            let currentPage = null;
-
+            // Flatten all content groups into a single stream
+            const allGroups = [];
             sourcePages.forEach(sourcePage => {
-                if (currentPage && currentPage.items.length) {
-                    displayPages.push(currentPage);
-                }
-
-                currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', true);
-                const groups = buildPageGroups(sourcePage);
-
-                groups.forEach(group => {
-                    const previousItems = currentPage.items.slice();
-                    currentPage.items.push(...group.items);
-                    measurePage.innerHTML = renderMeasuredPage(currentPage);
-
-                    if (measurePage.scrollHeight > measurePage.clientHeight) {
-                        currentPage.items = previousItems;
-
-                        if (currentPage.items.length) {
-                            displayPages.push(currentPage);
-                        }
-
-                        currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', false);
-                        currentPage.items.push(...group.items);
-                        measurePage.innerHTML = renderMeasuredPage(currentPage);
-                    }
-                });
+                // Add the main heading as a special group
+                allGroups.push({ isMainHeading: true, headingText: sourcePage.heading || 'Chapter Page' });
+                // Add the content groups
+                allGroups.push(...buildPageGroups(sourcePage));
             });
 
-            if (currentPage && currentPage.items.length) {
+            if (allGroups.length === 0) {
+                measurePage.remove();
+                return [];
+            }
+
+            // Start with a blank page object.
+            let currentPage = createDisplayPage('Initial', false);
+
+            allGroups.forEach(group => {
+                // Handle main headings
+                if (group.isMainHeading) {
+                    // If the current page has any content, it's complete. Push it.
+                    if (currentPage.items.length > 0) {
+                        displayPages.push(currentPage);
+                    }
+                    // Start a new page for this main heading.
+                    currentPage = createDisplayPage(group.headingText, true);
+                    // We don't add items yet, just set up the page with its heading.
+                    // The next content group will be added to this new page.
+                    return; // Move to the next group in the stream
+                }
+
+                // Handle regular content groups
+                const previousItems = currentPage.items.slice();
+                currentPage.items.push(...group.items);
+                measurePage.innerHTML = renderMeasuredPage(currentPage);
+
+                // Check for overflow
+                if (measurePage.scrollHeight > measurePage.clientHeight) {
+                    // It overflowed. Revert to the state before adding the group.
+                    currentPage.items = previousItems;
+
+                    // If the page had content before this attempt, it's a full page.
+                    if (currentPage.items.length > 0) {
+                        displayPages.push(currentPage);
+                    }
+
+                    // Start a new page for the group that caused the overflow.
+                    // This new page should NOT show the main heading again.
+                    currentPage = createDisplayPage(currentPage.heading, false);
+                    currentPage.items.push(...group.items);
+                    
+                    // Re-measure. If a single group is too big, it will just overflow on its own page.
+                    measurePage.innerHTML = renderMeasuredPage(currentPage);
+                }
+            });
+
+            // Add the very last constructed page if it has content.
+            if (currentPage && (currentPage.items.length > 0 || currentPage.showHeading)) {
                 displayPages.push(currentPage);
             }
 
