@@ -1,6 +1,7 @@
         let currentSpread = 1;
         let totalSpreads = 1;
         let bookDatabase = {};
+        let CHAPTER_DATA = null;
 
         const bookFrame = document.getElementById('book-frame');
         const spreadContainer = document.getElementById('spread-container');
@@ -17,6 +18,7 @@
         async function loadChapter() {
             try {
                 const chapterData = await fetchChapterJson();
+                CHAPTER_DATA = chapterData;
                 bookDatabase = chapterData.smart_lines || {};
                 renderBook(chapterData);
                 bindSmartLines();
@@ -25,6 +27,19 @@
                 showLoadError(error);
             }
         }
+
+        // 📱 MOBILE RESPONSIVENESS FIX: Auto-recalculate pages if screen size changes
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (CHAPTER_DATA) {
+                    renderBook(CHAPTER_DATA);
+                    bindSmartLines();
+                    updateNavigation();
+                }
+            }, 300);
+        });
 
         async function fetchChapterJson() {
             const response = await fetch('/api/get-data?file=auditbook');
@@ -77,64 +92,36 @@
             measurePage.className = 'page-right measure-page';
             bookFrame.appendChild(measurePage);
 
-            // Flatten all content groups into a single stream
-            const allGroups = [];
+            let currentPage = null;
+
             sourcePages.forEach(sourcePage => {
-                // Add the main heading as a special group
-                allGroups.push({ isMainHeading: true, headingText: sourcePage.heading || 'Chapter Page' });
-                // Add the content groups
-                allGroups.push(...buildPageGroups(sourcePage));
-            });
-
-            if (allGroups.length === 0) {
-                measurePage.remove();
-                return [];
-            }
-
-            // Start with a blank page object.
-            let currentPage = createDisplayPage('Initial', false);
-
-            allGroups.forEach(group => {
-                // Handle main headings
-                if (group.isMainHeading) {
-                    // If the current page has any content, it's complete. Push it.
-                    if (currentPage.items.length > 0) {
-                        displayPages.push(currentPage);
-                    }
-                    // Start a new page for this main heading.
-                    currentPage = createDisplayPage(group.headingText, true);
-                    // We don't add items yet, just set up the page with its heading.
-                    // The next content group will be added to this new page.
-                    return; // Move to the next group in the stream
+                if (currentPage && currentPage.items.length) {
+                    displayPages.push(currentPage);
                 }
 
-                // Handle regular content groups
-                const previousItems = currentPage.items.slice();
-                currentPage.items.push(...group.items);
-                measurePage.innerHTML = renderMeasuredPage(currentPage);
+                currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', true);
+                const groups = buildPageGroups(sourcePage);
 
-                // Check for overflow
-                if (measurePage.scrollHeight > measurePage.clientHeight) {
-                    // It overflowed. Revert to the state before adding the group.
-                    currentPage.items = previousItems;
-
-                    // If the page had content before this attempt, it's a full page.
-                    if (currentPage.items.length > 0) {
-                        displayPages.push(currentPage);
-                    }
-
-                    // Start a new page for the group that caused the overflow.
-                    // This new page should NOT show the main heading again.
-                    currentPage = createDisplayPage(currentPage.heading, false);
+                groups.forEach(group => {
+                    const previousItems = currentPage.items.slice();
                     currentPage.items.push(...group.items);
-                    
-                    // Re-measure. If a single group is too big, it will just overflow on its own page.
                     measurePage.innerHTML = renderMeasuredPage(currentPage);
-                }
+
+                    if (measurePage.scrollHeight > measurePage.clientHeight) {
+                        currentPage.items = previousItems;
+
+                        if (currentPage.items.length) {
+                            displayPages.push(currentPage);
+                        }
+
+                        currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', false);
+                        currentPage.items.push(...group.items);
+                        measurePage.innerHTML = renderMeasuredPage(currentPage);
+                    }
+                });
             });
 
-            // Add the very last constructed page if it has content.
-            if (currentPage && (currentPage.items.length > 0 || currentPage.showHeading)) {
+            if (currentPage && currentPage.items.length) {
                 displayPages.push(currentPage);
             }
 
