@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Book | Audit Interactive Reader</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- 🔥 UNIVERSAL SECURITY LOCK 🔥 -->
+    <meta name="page-id" content="caf8">
+    <meta name="page-type" content="premium">
+    <style id="page-lock">body { display: none !important; }</style>
+    <script type="module" src="js/security.js"></script>
+
+    <!-- 🔥 EXTERNAL CSS 🔥 -->
+    <link rel="stylesheet" href="subjects/caf8_audit/features/css/smartbook.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo"><i class="fa-solid fa-book-open-reader"></i> Smart Book</div>
+        <a href="audit.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back to Audit
+        </a>
+    </header>
+
+    <div class="book-environment">
+        <div class="book-frame cover-mode" id="book-frame">
+            <div class="book-spine"></div>
+
+            <div class="page-turn-zone-prev" id="btn-prev" onclick="turnSpread(-1)">
+                <div class="curl"></div>
+            </div>
+            <div class="page-turn-zone-next" id="btn-next" onclick="turnSpread(1)">
+                <div class="curl"></div>
+            </div>
+
+            <div id="spread-container" style="width: 100%; height: 100%;">
+                <div class="load-message">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <strong>Loading chapter...</strong>
+                    <span>Syncing Secure Data...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="magic-drawer" id="magic-drawer">
+        <div class="drawer-header">
+            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Concept Decoder</h3>
+            <button class="btn-close" onclick="closeDrawer()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="drawer-body">
+            <div class="box-english" id="dec-english">
+                Click on any dashed line in the book to see its meaning.
+            </div>
+
+            <div id="dec-content" style="display: none;">
+                <div class="box-urdu">
+                    <div class="box-label l-urdu"><i class="fa-solid fa-language"></i> Asaan Lafzon Mein</div>
+                    <div class="urdu-text" id="dec-urdu">...</div>
+                </div>
+
+                <div class="box-example" id="dec-example-box" style="display: none;">
+                    <div class="box-label l-example"><i class="fa-solid fa-lightbulb"></i> Practical Example</div>
+                    <div class="example-text" id="dec-example">Is line ko exam concept ke tor par yaad rakhein.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔥 EXTERNAL JS 🔥 -->
+    <script src="subjects/caf8_audit/features/js/smartbook.js"></script>
+</body>
+</html>
