@@ -29,7 +29,7 @@ async function initSystem() {
     }
 
     try {
-        const res = await fetch('features/assets/divine_blueprint.json');
+        const res = await fetch('/api/divine_blueprint.json');
         divineData = await res.json();
         divineData.forEach(item => {
             const titleEl = document.getElementById(`sidebarParaTitle-${item.day}`);
