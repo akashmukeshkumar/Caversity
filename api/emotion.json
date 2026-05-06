@@ -1,0 +1,212 @@
+[
+    {
+        "color_code": "#40C43939",
+        "id": 1,
+        "last_modified": 1617865355,
+        "position": 1,
+        "title": "Angry"
+    },
+    {
+        "color_code": "#4064B59D",
+        "id": 2,
+        "last_modified": 1617865391,
+        "position": 2,
+        "title": "Anxious"
+    },
+    {
+        "color_code": "#405CACE3",
+        "id": 3,
+        "last_modified": 1746041159,
+        "position": 29,
+        "title": "Bored"
+    },
+    {
+        "color_code": "#40B38D43",
+        "id": 4,
+        "last_modified": 1617865408,
+        "position": 4,
+        "title": "Confident"
+    },
+    {
+        "color_code": "#4064B59D",
+        "id": 5,
+        "last_modified": 1617865416,
+        "position": 5,
+        "title": "Confused"
+    },
+    {
+        "color_code": "#33DF6D49",
+        "id": 6,
+        "last_modified": 1617865423,
+        "position": 6,
+        "title": "Content"
+    },
+    {
+        "color_code": "#40949498",
+        "id": 7,
+        "last_modified": 1617865429,
+        "position": 7,
+        "title": "Depressed"
+    },
+    {
+        "color_code": "#405CACE3",
+        "id": 8,
+        "last_modified": 1617865435,
+        "position": 8,
+        "title": "Doubtful"
+    },
+    {
+        "color_code": "#40C43939",
+        "id": 9,
+        "last_modified": 1617865441,
+        "position": 9,
+        "title": "Grateful"
+    },
+    {
+        "color_code": "#4064B59D",
+        "id": 10,
+        "last_modified": 1632996075,
+        "position": 11,
+        "title": "Guilty"
+    },
+    {
+        "color_code": "#33DF6D49",
+        "id": 11,
+        "last_modified": 1632996075,
+        "position": 12,
+        "title": "Happy"
+    },
+    {
+        "color_code": "#40C43939",
+        "id": 12,
+        "last_modified": 1632996075,
+        "position": 13,
+        "title": "Hurt"
+    },
+    {
+        "color_code": "#40949498",
+        "id": 13,
+        "last_modified": 1632996075,
+        "position": 14,
+        "title": "Indecisive"
+    },
+    {
+        "color_code": "#4064B59D",
+        "id": 14,
+        "last_modified": 1632996075,
+        "position": 16,
+        "title": "Jealous"
+    },
+    {
+        "color_code": "#405CACE3",
+        "id": 15,
+        "last_modified": 1632996075,
+        "position": 17,
+        "title": "Lazy"
+    },
+    {
+        "color_code": "#40949498",
+        "id": 16,
+        "last_modified": 1632996075,
+        "position": 18,
+        "title": "Lonely"
+    },
+    {
+        "color_code": "#40949498",
+        "id": 17,
+        "last_modified": 1632996075,
+        "position": 19,
+        "title": "Lost"
+    },
+    {
+        "color_code": "#4064B59D",
+        "id": 18,
+        "last_modified": 1632996075,
+        "position": 20,
+        "title": "Nervous"
+    },
+    {
+        "color_code": "#4064B59D",
+        "id": 19,
+        "last_modified": 1632996075,
+        "position": 21,
+        "title": "Overwhelmed"
+    },
+    {
+        "color_code": "#40C43939",
+        "id": 20,
+        "last_modified": 1632996075,
+        "position": 23,
+        "title": "Sad"
+    },
+    {
+        "color_code": "#40949498",
+        "id": 21,
+        "last_modified": 1632996075,
+        "position": 25,
+        "title": "Suicidal"
+    },
+    {
+        "color_code": "#405CACE3",
+        "id": 22,
+        "last_modified": 1632996075,
+        "position": 26,
+        "title": "Tired"
+    },
+    {
+        "color_code": "#40C43939",
+        "id": 23,
+        "last_modified": 1632996075,
+        "position": 27,
+        "title": "Unloved"
+    },
+    {
+        "color_code": "#40949498",
+        "id": 24,
+        "last_modified": 1632996075,
+        "position": 28,
+        "title": "Weak"
+    },
+    {
+        "color_code": "#40949498",
+        "id": 25,
+        "last_modified": 1632996075,
+        "position": 24,
+        "title": "Scared"
+    },
+    {
+        "color_code": "#40B38D43",
+        "id": 26,
+        "last_modified": 1632996075,
+        "position": 15,
+        "title": "Hypocritical"
+    },
+    {
+        "color_code": "#40B38D43",
+        "id": 27,
+        "last_modified": 1632996075,
+        "position": 10,
+        "title": "Greedy"
+    },
+    {
+        "color_code": "#40949498",
+        "id": 28,
+        "last_modified": 1632996075,
+        "position": 22,
+        "title": "Regret"
+    },
+    {
+        "color_code": "#405CACE3",
+        "id": 29,
+        "last_modified": 1746959580,
+        "position": 3,
+        "title": "Urge to Sin"
+    },
+    {
+        "color_code": "#4064B59D",
+        "id": 30,
+        "last_modified": 1752069128,
+        "position": 30,
+        "title": "Impatient"
+    }
+]

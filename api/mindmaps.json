@@ -1,0 +1,1450 @@
+{
+"chapter1": {
+    "title": "Chapter 1: Audit Risk & Planning",
+    "treeData": {
+      "name": "Audit Risk & Planning",
+      "children": [
+        {
+          "name": "1. Governance & Basics",
+          "children": [
+            { "name": "Objective: Enhance users' confidence in Financial Statements" },
+            { "name": "Auditor must maintain strict independence and neutrality" },
+            { "name": "Board of Directors oversees Management for Shareholders" },
+            { "name": "Risk: Management bias and financial manipulation for bonuses" }
+          ]
+        },
+        {
+          "name": "2. Assertions & Evidence",
+          "children": [
+            {
+              "name": "Key Assertions",
+              "children": [
+                { "name": "Existence: Physical presence of recorded assets" },
+                { "name": "Valuation: Accuracy of recorded amounts" },
+                { "name": "Completeness: Ensuring all transactions are recorded" },
+                { "name": "Rights & Obligations: Legal ownership of assets" }
+              ]
+            },
+            {
+              "name": "Verification Tools",
+              "children": [
+                { "name": "Physical inspection and system data logs" },
+                { "name": "External confirmations (e.g., from Banks/Debtors)" },
+                { "name": "Rule: Third-party evidence is highly reliable" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "3. Specific Audit Risks (IFRS/IAS)",
+          "children": [
+            {
+              "name": "Revenue (IFRS 15)",
+              "children": [
+                { "name": "Recognize only when performance obligation is satisfied" },
+                { "name": "Advance receipts must be classified as liabilities" },
+                { "name": "Risk: Fictitious sales recorded to inflate revenue" }
+              ]
+            },
+            {
+              "name": "Inventory (IAS 2)",
+              "children": [
+                { "name": "Valued strictly at Lower of Cost or NRV" },
+                { "name": "Risks: Damaged, expired, or obsolete stock" },
+                { "name": "Indicator: High inventory days suggest slow-moving goods" }
+              ]
+            },
+            {
+              "name": "Assets & Impairment (IAS 36)",
+              "children": [
+                { "name": "Impairment needed if Recoverable Value < Carrying Value" },
+                { "name": "Technological shifts cause sudden value drops" },
+                { "name": "Indicator: Continuous negative operating cash flows" }
+              ]
+            },
+            {
+              "name": "Intangibles (IAS 38)",
+              "children": [
+                { "name": "Research Phase: Expensed immediately in P&L" },
+                { "name": "Development Phase: Capitalized only if 5 criteria are met" },
+                { "name": "Auditor verifies technical and commercial feasibility" }
+              ]
+            },
+            {
+              "name": "Foreign Exchange (IAS 21)",
+              "children": [
+                { "name": "Initial recording at the transaction date exchange rate" },
+                { "name": "Receivables/Payables must be revalued at year-end rate" },
+                { "name": "Differences recorded as Exchange Gain/Loss" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "4. Going Concern Assessment",
+          "children": [
+            {
+              "name": "Responsibilities",
+              "children": [
+                { "name": "Management assesses survival for the next 12 months" },
+                { "name": "Auditor challenges and verifies this assessment" }
+              ]
+            },
+            {
+              "name": "Key Red Flags",
+              "children": [
+                { "name": "Continuous net losses and negative cash flows" },
+                { "name": "Resignation of key operational personnel" },
+                { "name": "Breach of debt covenants or loan defaults" }
+              ]
+            },
+            {
+              "name": "Impact of Failure",
+              "children": [
+                { "name": "Financials prepared on Liquidation/Break-up Basis" },
+                { "name": "All assets reclassified as Current and valued at NRV" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "5. Industry-Specific Risks",
+          "children": [
+            {
+              "name": "NPOs & Charities",
+              "children": [
+                { "name": "Cash collection methods pose high theft risk" },
+                { "name": "Risk of breaching restricted donor fund conditions" },
+                { "name": "Misclassification due to unskilled accounting staff" }
+              ]
+            },
+            {
+              "name": "Regulated Industries",
+              "children": [
+                { "name": "Strict compliance with health/safety authorities required" },
+                { "name": "Risk: Unrecorded legal penalties and regulatory lawsuits" }
+              ]
+            },
+            {
+              "name": "Service Sector",
+              "children": [
+                { "name": "Accidents lead to legal provisions and claims (IAS 37)" },
+                { "name": "Advance booking models create liquidity risks" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+"chapter2": {
+    "title": "Chapter 2: Internal Controls & Cycles",
+    "treeData": {
+      "name": "Internal Controls",
+      "children": [
+        {
+          "name": "1. Core Concepts & Limitations",
+          "children": [
+            { "name": "Objective: Prevent fraud, minimize errors, and protect assets" },
+            {
+              "name": "Auditor's Assessment Levels",
+              "children": [
+                { "name": "Existence: Is the control actually in place?" },
+                { "name": "Design: Is the control logically capable of preventing errors?" },
+                { "name": "Operation: Is the control consistently being followed?" }
+              ]
+            },
+            {
+              "name": "Inherent Limitations",
+              "children": [
+                { "name": "Cost-benefit constraints (controls shouldn't cost more than the risk)" },
+                { "name": "Human error, fatigue, or negligence" },
+                { "name": "Collusion: Staff conspiring to bypass controls" },
+                { "name": "Management override of established policies" }
+              ]
+            },
+            { "name": "Deficiency Reporting: Management Letter (Deficiency, Implication, Recommendation)" }
+          ]
+        },
+        {
+          "name": "2. Sales & Receivables Cycle",
+          "children": [
+            {
+              "name": "Order Processing",
+              "children": [
+                { "name": "Strict credit limit checks before order approval" },
+                { "name": "Pricing must be fetched from pre-approved master lists" }
+              ]
+            },
+            {
+              "name": "Dispatch & Delivery",
+              "children": [
+                { "name": "Goods Dispatch Notes (GDN) must be sequentially pre-numbered" },
+                { "name": "Mandatory customer acknowledgement signatures upon delivery" }
+              ]
+            },
+            {
+              "name": "Invoicing & Segregation",
+              "children": [
+                { "name": "Invoice quantity matched to GDN; Price matched to Sales Order" },
+                { "name": "Segregation of Duties: Sales initiation separated from credit approval" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "3. Purchases & Payables Cycle",
+          "children": [
+            {
+              "name": "Requisition & Ordering",
+              "children": [
+                { "name": "Reorder levels automatically trigger purchase requests" },
+                { "name": "Procurement restricted to Approved Supplier Lists (ASL)" },
+                { "name": "Mandatory multi-supplier quotations for competitive pricing" }
+              ]
+            },
+            {
+              "name": "Payment Authorization",
+              "children": [
+                { "name": "Strict Three-Way Match (Purchase Order, Receipt Note, Invoice)" },
+                { "name": "System checks to prevent duplicate invoice numbers" },
+                { "name": "Supplier statements reconciled with internal sub-ledgers" }
+              ]
+            },
+            {
+              "name": "Fixed Assets (PPE)",
+              "children": [
+                { "name": "Maintenance of a detailed Fixed Asset Register (FAR) with tags" },
+                { "name": "Maker-Checker principle ensures separate entry and approval" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "4. Inventory & Warehouse Cycle",
+          "children": [
+            {
+              "name": "Year-End Count Controls",
+              "children": [
+                { "name": "Auditor observes physical counting; management performs it" },
+                { "name": "Counting performed by independent staff (not warehouse keepers)" },
+                { "name": "Use of pre-numbered sheets, written in ink, physically signed" },
+                { "name": "Physical tagging of items to prevent double counting" }
+              ]
+            },
+            { "name": "Cut-off Procedures: Strict halt on inventory movement during counts" },
+            { "name": "Valuation Risk: Identification of obsolete stock (Lower of Cost or NRV)" }
+          ]
+        },
+        {
+          "name": "5. Payroll & HR Cycle",
+          "children": [
+            {
+              "name": "Time & Attendance",
+              "children": [
+                { "name": "Automated biometric systems preferred over manual registers" },
+                { "name": "Overtime requires mandatory supervisor pre-approval" },
+                { "name": "System exception reports generated for abnormal working hours" }
+              ]
+            },
+            {
+              "name": "Employee Lifecycle",
+              "children": [
+                { "name": "Immediate HR-to-Payroll notification upon employee termination" },
+                { "name": "System access revoked instantly to prevent 'Ghost Employees'" }
+              ]
+            },
+            { "name": "Payment: Payroll sheets must be independently reviewed and approved by CFO" }
+          ]
+        },
+        {
+          "name": "6. Cash & Bank Cycle",
+          "children": [
+            {
+              "name": "Cash Controls",
+              "children": [
+                { "name": "Pre-numbered receipt vouchers and daily cash reconciliations" },
+                { "name": "Physical security measures (Vaults/Safes) for cash handling" },
+                { "name": "Petty Cash maintained via Imprest system with unannounced surprise counts" },
+                { "name": "Mandatory IOU slips for temporary employee cash advances" }
+              ]
+            },
+            {
+              "name": "Bank Controls",
+              "children": [
+                { "name": "Prompt ledger recording upon cash handover to the bank" },
+                { "name": "Dual-signature authorization required for bank payments" },
+                { "name": "Independent verification via Bank Confirmation Letters" },
+                { "name": "Regular preparation and review of Bank Reconciliation Statements (BRS)" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "7. IT Controls & Internal Audit",
+          "children": [
+            {
+              "name": "IT Systems",
+              "children": [
+                { "name": "General Controls: Security, password policies, access logs, backups" },
+                { "name": "Application Controls: Specific data entry rules (Range, Format, Limit checks)" }
+              ]
+            },
+            {
+              "name": "Internal Audit (IA)",
+              "children": [
+                { "name": "Objective: Monitors control effectiveness and adds operational value" },
+                { "name": "Independence: Must report directly to the Audit Committee/TCWG" },
+                { "name": "External auditor may rely on IA if objective, competent, and systematic" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+"chapter3": {
+    "title": "Chapter 3: Audit Reports & Conclusions",
+    "treeData": {
+      "name": "Audit Reports & Conclusions",
+      "children": [
+        {
+          "name": "1. Standard Sequence of an Audit Report",
+          "children": [
+            { "name": "Title & Addressee: 'Independent Auditor’s Report' addressed to Shareholders/Members" },
+            { "name": "Opinion Section: Identifies FS audited and expresses Unmodified or Modified view" },
+            { "name": "Basis for Opinion: Confirms ISA compliance, independence, SAAE, & explains modifications" },
+            { "name": "Material Uncertainty - Going Concern (MURGC): Used if survival risks exist but are properly disclosed" },
+            { "name": "Key Audit Matters (KAM): Mandatory for listed cos; explains 'Why' a matter was significant & 'How' it was audited" },
+            { "name": "Other Information (OI): Confirms reading of Directors' Report for inconsistencies; no audit opinion expressed" },
+            { "name": "Responsibilities of Management: For FS preparation, internal controls, and going concern assessment" },
+            { "name": "Auditor's Responsibilities: To obtain reasonable assurance, acknowledging inherent limitations (sampling/time)" },
+            { "name": "Other Regulatory Requirements: Reporting on proper books, business expenditures, and Zakat deductions" },
+            { "name": "Signature & Date: Firm's name plus Engagement Partner's name for accountability and transparency" }
+          ]
+        },
+        {
+          "name": "2. Types of Audit Opinions",
+          "children": [
+            { "name": "Unmodified (Clean) Opinion: FS give a 'True and Fair' view with no material misstatements" },
+            {
+              "name": "Modified Opinions",
+              "children": [
+                { "name": "Qualified Opinion: Material but NOT pervasive ('Except for' this issue, FS are fine)" },
+                { "name": "Adverse Opinion: Misstatements are material AND pervasive (FS are entirely misleading)" },
+                { "name": "Disclaimer of Opinion: Scope limitation is material AND pervasive (Unable to obtain evidence to form an opinion)" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "3. Additional Communication Paragraphs",
+          "children": [
+            {
+              "name": "Emphasis of Matter (EOM)",
+              "children": [
+                { "name": "Highlights a fundamental matter already PROPERLY disclosed in FS (e.g., major lawsuit or fire)" },
+                { "name": "Does NOT modify the audit opinion; distinct from Key Audit Matters (KAM)" }
+              ]
+            },
+            {
+              "name": "Other Matter Paragraph (OMP)",
+              "children": [
+                { "name": "Highlights matters relevant to understanding the audit process itself" },
+                { "name": "Examples: Prior year audited by another firm, or Special Purpose Framework usage" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "4. Materiality & Professional Judgment",
+          "children": [
+            {
+              "name": "Quantitative Materiality",
+              "children": [
+                { "name": "Based on numerical thresholds (e.g., 5% of Profit Before Tax)" },
+                { "name": "100% testing for items above threshold; sampling for items below it" }
+              ]
+            },
+            {
+              "name": "Qualitative Materiality",
+              "children": [
+                { "name": "Small financial errors that change user decisions due to their nature" },
+                { "name": "Examples: Errors that breach bank loan covenants, regulatory licenses, or management bonus targets" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "5. Subsequent Events (IAS 10)",
+          "children": [
+            {
+              "name": "Types of Events",
+              "children": [
+                { "name": "Adjusting Events: Conditions existed at year-end; requires FS adjustment (e.g., customer bankruptcy)" },
+                { "name": "Non-Adjusting Events: Conditions arose after year-end; requires disclosure only (e.g., natural disasters)" }
+              ]
+            },
+            {
+              "name": "Auditor's Timeline Duties",
+              "children": [
+                { "name": "Active Duty: Must proactively perform procedures up to the Audit Report signing date" },
+                { "name": "After Issuance: If material facts are discovered late, auditor must request FS revision and notify stakeholders" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "6. Audit Evidence & Representations",
+          "children": [
+            { "name": "Written Representation: Mandatory letter from Management/TCWG taking responsibility for FS" },
+            { "name": "Acts as supporting evidence, but does not substitute the auditor's own evidence gathering" },
+            { "name": "Refusal to provide representations results in a Scope Limitation (often Disclaimer of Opinion)" }
+          ]
+        },
+        {
+          "name": "7. Reporting Frameworks",
+          "children": [
+            { "name": "General Purpose Framework: Serves wide public needs (e.g., IFRS + Companies Act)" },
+            { "name": "Special Purpose Framework: For specific users (e.g., Tax basis); requires restricted distribution via OMP" }
+          ]
+        }
+      ]
+    }
+  },
+"chapter4": {
+    "title": "Chapter 4: Fraud Risk & Auditor's Responsibilities",
+    "treeData": {
+      "name": "Fraud in Financial Statements",
+      "children": [
+        {
+          "name": "1. Core Concepts of Misstatements",
+          "children": [
+            { "name": "Error vs. Fraud: Error is an unintentional mistake, while fraud is an intentional act to deceive" },
+            { "name": "Auditor's Objective: Obtain reasonable assurance that FS are free from material misstatements, whether due to fraud or error" },
+            { "name": "Misappropriation of Assets: Physical theft of assets due to weak security or open access" }
+          ]
+        },
+        {
+          "name": "2. The Fraud Triangle",
+          "children": [
+            { "name": "Opportunity: Created by weak, missing, or easily bypassed internal controls" },
+            { "name": "Pressure / Incentive: Financial stress, personal debt, or pressure to meet unrealistic business targets" },
+            { "name": "Rationalization: The individual mentally justifying their fraudulent actions as acceptable" }
+          ]
+        },
+        {
+          "name": "3. High-Risk Fraud Areas",
+          "children": [
+            {
+              "name": "Revenue Recognition",
+              "children": [
+                { "name": "Highest risk area; directly impacts reported profits and market perception" },
+                { "name": "Risk of recording fictitious sales or premature revenue before delivery" },
+                { "name": "Auditor's Response: Strict cut-off testing and direct customer confirmations" }
+              ]
+            },
+            {
+              "name": "Accounting Estimates",
+              "children": [
+                { "name": "Manipulating subjective areas (e.g., bad debt provisions, useful lives) to overstate assets" },
+                { "name": "Auditor's Response: Develop independent expectations and maintain high professional skepticism" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "4. Key Risk Indicators (Red Flags)",
+          "children": [
+            { "name": "Abrupt, unexplained resignations of senior management or high finance staff turnover" },
+            { "name": "Significant and sudden changes in accounting estimates without logical business reasons" },
+            { "name": "Employees exhibiting a lifestyle that heavily mismatches their known income" },
+            { "name": "Abnormal volume of sales or complex transactions recorded at the very end of the year" }
+          ]
+        },
+        {
+          "name": "5. Management Override of Controls",
+          "children": [
+            { "name": "Risk: Management actively bypassing established internal controls for personal or company gain" },
+            { "name": "Auditor must test unusual journal entries, especially those posted after-hours or on weekends" },
+            { "name": "Investigating recurring large, exact round numbers (e.g., exactly 10 million) in the general ledger" },
+            { "name": "Analyzing narrative descriptions of entries to ensure they match legitimate business reasons" }
+          ]
+        },
+        {
+          "name": "6. Audit Procedures & Detection",
+          "children": [
+            { "name": "Team Brainstorming: Mandatory discussion among the audit team to predict where fraud might occur" },
+            { "name": "Targeted Testing: High-risk and unusual entries require 100% targeted testing, not just random sampling" },
+            { "name": "GL Mapping Analysis: Verifying ledger codes to catch misclassified expenses (e.g., personal travel hidden in admin costs)" },
+            { "name": "Physical Verification: Ensuring sampled assets physically exist to prevent 'paper-only' fraud" }
+          ]
+        },
+        {
+          "name": "7. Governance & Reporting Duties",
+          "children": [
+            { "name": "Strict legal and professional duty to report identified fraud to management and TCWG immediately" },
+            { "name": "Maintaining zero tolerance for deliberate misreporting to ensure a strong control environment" },
+            { "name": "Ensuring exhaustive documentation of all fraud risk assessments and team discussions" }
+          ]
+        }
+      ]
+    }
+  },
+"chapter5": {
+    "title": "Chapter 5: Related Party Transactions",
+    "treeData": {
+      "name": "Related Party Transactions",
+      "children": [
+        {
+          "name": "1. Definition & Identification",
+          "children": [
+            { "name": "Control & Influence: Entities exercising direct control or significant influence (e.g., Parents, Subsidiaries, Associates)" },
+            { "name": "Key Management Personnel (KMP): Directors, CEOs, CFOs, and decision-makers" },
+            { "name": "Family Ties: Close family members of KMP (spouses, children, dependents)" },
+            { "name": "Other Links: Entities under common control or company-managed employee pension funds" }
+          ]
+        },
+        {
+          "name": "2. Why RPTs Carry High Audit Risk",
+          "children": [
+            { "name": "Complex Structures: Often used to conceal fraudulent financial reporting or manipulate results" },
+            { "name": "Lack of Commercial Substance: Transactions occurring outside normal business practices (e.g., interest-free loans)" },
+            { "name": "Market Value Deviation: Buying or selling assets at prices significantly different from the open market" },
+            { "name": "Hidden Transactions: Deliberate attempts by management to omit or modify transaction records" }
+          ]
+        },
+        {
+          "name": "3. Auditor's Initial Procedures",
+          "children": [
+            { "name": "Information Request: Obtain a list of all related parties, nature of relationships, and year-end balances" },
+            { "name": "Completeness Check: Compare the current year's list with prior years to identify any undisclosed parties" },
+            { "name": "Control Evaluation: Assess management's policies, such as KMP conflict-of-interest declarations" }
+          ]
+        },
+        {
+          "name": "4. Verification & Substantive Testing",
+          "children": [
+            { "name": "Document Inspection: Cross-verify shareholder registers and investment logs with accounting entries" },
+            { "name": "Transaction Tracing: Ensure proper authorization and 'Maker-Checker' segregation exist for RPTs" },
+            { "name": "Expert Involvement: Use independent valuation experts for major asset transfers to confirm fair market pricing" }
+          ]
+        },
+        {
+          "name": "5. Assessing Business Rationale",
+          "children": [
+            { "name": "Substance Over Form: Look beyond the legal structure to understand the true economic reality of the transaction" },
+            { "name": "Management Inquiry: Challenge the underlying business logic for unusual terms or high discounts" },
+            { "name": "Out of Normal Course: Highly scrutinize offline or exceptional transactions for compliance and fraud risks" }
+          ]
+        },
+        {
+          "name": "6. Disclosures & Ethical Duties",
+          "children": [
+            { "name": "Transparency: Ensure all material transactions are fully and properly disclosed in the Financial Statements" },
+            { "name": "Professional Skepticism: Maintain a highly questioning mind; RPTs are a primary vehicle for management override" },
+            { "name": "Independence Preservation: Reject any unethical favors or gifts from KMP that could compromise objectivity" }
+          ]
+        }
+      ]
+    }
+  },
+"chapter6": {
+    "title": "Chapter 6: Materiality in Auditing",
+    "treeData": {
+      "name": "Materiality",
+      "children": [
+        {
+          "name": "1. Core Concepts & Definitions",
+          "children": [
+            { "name": "Objective: Obtain reasonable assurance that FS as a whole are free from material misstatements." },
+            { "name": "Definition: Information is material if its omission or misstatement influences users' economic decisions." },
+            { "name": "Misstatement: The difference between reported FS amounts/disclosures and the required AFRF framework." }
+          ]
+        },
+        {
+          "name": "2. Types of Materiality",
+          "children": [
+            { "name": "Overall Materiality: A single maximum threshold applied to the financial statements as a whole." },
+            { "name": "Performance Materiality: Set lower than overall materiality to ensure aggregated small errors do not exceed the main threshold." },
+            { "name": "Specific Materiality: Applied to highly sensitive areas like Directors' remuneration or related party transactions regardless of size." }
+          ]
+        },
+        {
+          "name": "3. Determining Materiality (Benchmarks)",
+          "children": [
+            { "name": "Profit Before Tax (PBT): 5% - 10% benchmark, standard for stable, profit-oriented entities." },
+            { "name": "Total Revenue: 0.5% - 1% benchmark, used for loss-making entities or those with volatile profits." },
+            { "name": "Total Assets / Equity: 1% - 2% benchmark, used for asset-heavy entities like banks or investment firms." },
+            { "name": "Normalization: Adjusting the base profit by removing exceptional, one-off transactions before calculating the threshold." }
+          ]
+        },
+        {
+          "name": "4. Factors Influencing Materiality",
+          "children": [
+            { "name": "Quantitative Factors: The overall size of the entity dictates the monetary threshold; larger entities have higher limits." },
+            { "name": "Qualitative Factors: The nature of the item makes it material regardless of a small amount, such as regulatory breaches or fraud." },
+            { "name": "Entity's Circumstances: Loss-making or high-risk companies require stricter (lower) materiality thresholds." }
+          ]
+        },
+        {
+          "name": "5. Application & Documentation Principles",
+          "children": [
+            { "name": "Professional Judgment: Materiality is not a rigid rule; it relies entirely on the auditor's expertise and firm policy." },
+            { "name": "Risk Correlation: Higher perceived audit risk requires a lower, more conservative materiality threshold to enforce extensive testing." },
+            { "name": "Continuous Revision: Materiality must be adjusted downwards if the entity's circumstances, like falling profits, change during the audit." },
+            { "name": "Required Documentation: The audit file must comprehensively log Overall Materiality, Performance Materiality, and any subsequent revisions." }
+          ]
+        }
+      ]
+    }
+  },
+"chapter7": {
+    "title": "Chapter 7: Code of Ethics & Professional Conduct",
+    "treeData": {
+      "name": "Code of Ethics",
+      "children": [
+        {
+          "name": "1. Fundamental Principles",
+          "children": [
+            { "name": "Integrity: Being straightforward, honest, and completely truthful in all professional relationships." },
+            { "name": "Objectivity: Not allowing bias, conflict of interest, or undue influence to override professional judgments." },
+            { "name": "Professional Competence & Due Care: Maintaining current knowledge and acting diligently in accordance with standards." },
+            { "name": "Confidentiality: Protecting client information and not disclosing it without proper authority or legal duty." },
+            { "name": "Professional Behavior: Complying with laws and avoiding any actions that discredit the accounting profession." }
+          ]
+        },
+        {
+          "name": "2. Ethical Threats & Independence",
+          "children": [
+            {
+              "name": "The 5 Key Threats",
+              "children": [
+                { "name": "Self-Interest Threat: A financial or other interest improperly influencing the auditor's judgment." },
+                { "name": "Self-Review Threat: Evaluating the results of a previous judgment or service performed by the auditor's own firm." },
+                { "name": "Advocacy Threat: Promoting a client's position to the point where the auditor's objectivity is compromised." },
+                { "name": "Familiarity Threat: Becoming too sympathetic to the client's interests due to a long or close relationship." },
+                { "name": "Intimidation Threat: Being deterred from acting objectively due to actual or perceived pressures from the client." }
+              ]
+            },
+            {
+              "name": "Independence",
+              "children": [
+                { "name": "Independence of Mind: The state of mind that permits the expression of a conclusion without bias." },
+                { "name": "Independence in Appearance: Avoiding facts and circumstances that would make a reasonable third party doubt neutrality." }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "3. Specific Risks & Safeguards",
+          "children": [
+            { "name": "Family & Business Ties: Close family members (spouses, dependents) having financial interests in the client creates severe threats." },
+            { "name": "Gifts & Hospitality: Must be strictly declined unless the value is clearly trivial and inconsequential." },
+            { "name": "Long Association: Requires periodic rotation of the engagement partner and senior team members to mitigate familiarity threats." },
+            { "name": "Fees & Dependence: Undue dependence on one client's fees or contingent fees creates massive self-interest and intimidation threats." }
+          ]
+        },
+        {
+          "name": "4. Non-Audit Services Constraints",
+          "children": [
+            { "name": "Recruitment: Auditors must never make final management hiring decisions, though they can review candidate qualifications." },
+            { "name": "Legal Services: Acting as an advocate for the client in dispute resolution severely breaches the advocacy and objectivity rules." },
+            { "name": "Internal Audit & IT Systems: Designing systems or performing internal audits creates an unacceptable self-review threat." }
+          ]
+        },
+        {
+          "name": "5. Confidentiality Exceptions & Conflicts",
+          "children": [
+            {
+              "name": "Permitted Disclosures",
+              "children": [
+                { "name": "When disclosure is required by law (e.g., court orders, anti-money laundering reporting)." },
+                { "name": "When there is a professional duty or right to disclose (e.g., quality reviews by regulatory bodies)." },
+                { "name": "When explicit, written consent is granted by the client." }
+              ]
+            },
+            {
+              "name": "Conflict of Interest Management",
+              "children": [
+                { "name": "Auditing competing companies simultaneously creates direct threats to objectivity and confidentiality." },
+                { "name": "Safeguards: Notifying both clients, using entirely separate audit teams, and establishing strict 'Chinese Walls' (information barriers)." }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "6. Professional Appointments",
+          "children": [
+            { "name": "Client Acceptance: Must evaluate client integrity and firm competence before accepting an engagement." },
+            { "name": "Predecessor Communication: The new auditor MUST request client permission to contact the previous auditor to uncover hidden ethical issues." },
+            { "name": "Second Opinions: Providing opinions on accounting treatments for non-clients requires contacting the existing auditor to get full facts." }
+          ]
+        },
+        {
+          "name": "7. NOCLAR (Non-Compliance with Laws)",
+          "children": [
+            { "name": "Definition: Acts of omission or commission by the client contrary to prevailing laws (e.g., tax evasion, fraud, environmental breaches)." },
+            { "name": "Auditor's Steps: Obtain understanding -> Discuss with Management/TCWG -> Evaluate their response and FS impact." },
+            { "name": "Public Interest Override: In severe cases, the auditor must disclose the issue to appropriate authorities, overriding standard confidentiality rules." }
+          ]
+        }
+      ]
+    }
+  },
+"chapter8": {
+    "title": "Chapter 8: Statutory Regulations & Companies Act",
+    "treeData": {
+      "name": "Statutory Regulations",
+      "children": [
+        {
+          "name": "1. Appointment & Tenure",
+          "children": [
+            { "name": "First Auditor: Appointed by the Board of Directors (BOD); holds office until the first AGM." },
+            { "name": "Subsequent Auditor: Appointed by Shareholders at the AGM based on BOD recommendations." },
+            { "name": "Consent requirement: A valid written consent from the auditor is mandatory before official appointment." }
+          ]
+        },
+        {
+          "name": "2. Removal & Casual Vacancy",
+          "children": [
+            { "name": "Casual Vacancy: Filled by BOD; if they fail to do so within 30 days, SECP makes the appointment." },
+            { "name": "Mid-Term Removal: Requires a Special Resolution by shareholders and must be reported to the SECP." },
+            { "name": "Representation Right: The retiring auditor has a statutory right to submit a written representation to be read at the AGM." }
+          ]
+        },
+        {
+          "name": "3. Auditor Qualifications (Eligibility)",
+          "children": [
+            { "name": "Public Companies & Large Private: Only a Chartered Accountant (CA) with a valid Certificate of Practice can audit." },
+            { "name": "Small Private Companies (Capital < 3M): Both Chartered Accountants (CA) and Cost & Management Accountants (ICMA) are eligible." },
+            { "name": "Firm Responsibility: Appointment is made in the firm's name, but the Engagement Partner takes ultimate responsibility." }
+          ]
+        },
+        {
+          "name": "4. Strict Disqualifications",
+          "children": [
+            { "name": "Body Corporate: A company cannot be appointed as an auditor; only individuals or firms are eligible." },
+            { "name": "Past Employment: Anyone who has been a director, officer, or employee of the company in the last 3 years." },
+            { "name": "Family Ties: If the auditor's spouse or a close family member is a director in the client company." },
+            { "name": "Criminal Record: Any person convicted of an offense involving fraud cannot be an auditor for 10 years." }
+          ]
+        },
+        {
+          "name": "5. Shareholding & The 90-Day Rule",
+          "children": [
+            { "name": "General Rule: The auditor, their spouse, or minor children cannot hold shares in the company, its holding, or subsidiary." },
+            { "name": "The 90-Day Exemption: If shares are held at the time of appointment, they must be disclosed immediately and disposed of within 90 days." },
+            { "name": "Failure to Comply: Failing to dispose of the shares results in immediate disqualification and vacation of the office." }
+          ]
+        },
+        {
+          "name": "6. Loans & Business Relationships",
+          "children": [
+            { "name": "Loans: Direct loans from the client are prohibited; loans acquired in the normal course of business (e.g., from a bank) are allowed." },
+            { "name": "Guarantees: Providing security or guarantees to the client on behalf of a third party is strictly prohibited." },
+            { "name": "Business Ties: Significant commercial relationships (e.g., major insurance contracts) compromise independence and disqualify the auditor." }
+          ]
+        },
+        {
+          "name": "7. Statutory Rights & Reporting Duties",
+          "children": [
+            { "name": "Rights: Unrestricted access to books, accounts, branch records, and the right to demand management explanations." },
+            { "name": "Reporting on FS: Must confirm whether the financial statements present a 'True and Fair View'." },
+            { "name": "Additional Local Disclosures: Must explicitly report on the proper maintenance of books, Zakat deductions, and valid business expenditures." }
+          ]
+        }
+      ]
+    }
+  },
+"chapter9": {
+    "title": "Chapter 9: External Confirmations (ISA 505)",
+    "treeData": {
+      "name": "External Confirmations",
+      "children": [
+        {
+          "name": "1. Objective & Scope",
+          "children": [
+            { "name": "Objective: Obtain reliable audit evidence directly from independent 3rd parties (more reliable than internal evidence) " },
+            { "name": "Balances: Confirming bank loans, trade receivables, and payables " },
+            { "name": "Transactions & Legal: Confirming specific sales/purchases and ongoing legal matters with lawyers " }
+          ]
+        },
+        {
+          "name": "2. The Confirmation Process",
+          "children": [
+            { "name": "Step 1 & 2: Decide what specific information to confirm and select the appropriate confirming party " },
+            { "name": "Step 3 & 4: Design a clear request and ensure the auditor sends it directly to maintain control " },
+            { "name": "Step 5: Proactively follow up if no reply is received within a reasonable timeframe " }
+          ]
+        },
+        {
+          "name": "3. Types of Responses",
+          "children": [
+            { "name": "Agreement: No exceptions noted; internal records match external evidence perfectly " },
+            { "name": "Exception Noted: Discrepancies found; must be investigated for timing differences or actual errors " },
+            { "name": "No Response: Requires sending reminders, followed by mandatory alternative audit procedures " }
+          ]
+        },
+        {
+          "name": "4. Management Restrictions",
+          "children": [
+            { "name": "Validity Check: Evaluate if management has a valid, logical reason for refusing the confirmation request " },
+            { "name": "Fraud Risk: A restriction without valid grounds strongly indicates a potential fraud risk " },
+            { "name": "Reporting Impact: If alternative procedures fail to provide evidence, it causes a Scope Limitation (Qualified or Disclaimer opinion) " }
+          ]
+        },
+        {
+          "name": "5. Confirmation Methodologies",
+          "children": [
+            {
+              "name": "Positive Confirmation",
+              "children": [
+                { "name": "Requires the receiving party to reply in all cases (whether they agree or disagree) " },
+                { "name": "Provides the highest level of reliable audit evidence " }
+              ]
+            },
+            {
+              "name": "Negative Confirmation",
+              "children": [
+                { "name": "Requires a reply ONLY if the receiving party disagrees with the stated balance " },
+                { "name": "Conditions for use: Low misstatement risk, strong internal controls, and a homogeneous population of small balances " }
+              ]
+            },
+            {
+              "name": "Electronic Confirmations",
+              "children": [
+                { "name": "Carries authenticity risks; requires strong controls like digital signatures and encryption " }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "6. Alternative Procedures",
+          "children": [
+            { "name": "Receivables/Sales: Inspecting underlying invoices, shipping agreements, and checking subsequent cash receipts " },
+            { "name": "Conclusion: If sufficient evidence is gained, the assertion is verified; if not, a scope limitation is reported " }
+          ]
+        }
+      ]
+    }
+  },
+"chapter10": {
+    "title": "Chapter 10: Using the Work of an Auditor's Expert",
+    "treeData": {
+      "name": "Auditor's Expert (ISA 620)",
+      "children": [
+        {
+          "name": "1. Core Concept & Definitions",
+          "children": [
+            { "name": "When to Use: Required when matters fall outside accounting and auditing (e.g., actuarial estimations, property valuations)" },
+            { "name": "Auditor's Expert: Appointed directly by the auditor to obtain independent, unbiased audit evidence" },
+            { "name": "Management's Expert: Appointed by the client to assist in preparing FS; carries a higher risk of bias" }
+          ]
+        },
+        {
+          "name": "2. Pre-Appointment Evaluation",
+          "children": [
+            { "name": "Competence & Capability: Verify professional qualifications, certifications, and industry experience" },
+            { "name": "Objectivity & Independence: Ensure no financial or personal conflict of interest exists with the client" },
+            { "name": "Self-Assessment: The auditor must first determine if the audit team already possesses the required expertise" }
+          ]
+        },
+        {
+          "name": "3. The Formal Agreement",
+          "children": [
+            { "name": "Roles & Responsibilities: Clear division of tasks, ensuring the expert allows review of their working papers" },
+            { "name": "Confidentiality: Strict obligation for the expert to protect sensitive client information" },
+            { "name": "Scope & Timing: Pre-deciding deadlines and communicating materiality thresholds to the expert" }
+          ]
+        },
+        {
+          "name": "4. Evaluating the Expert's Work",
+          "children": [
+            { "name": "Relevance of Methods: Confirming the valuation or calculation models align with accepted industry standards" },
+            { "name": "Reasonableness of Assumptions: Challenging aggressive forecasts and comparing them to historical realities" },
+            { "name": "Reliability of Source Data: Checking if the raw data provided to the expert was accurate and complete" },
+            { "name": "No Blind Reliance: The auditor must maintain professional skepticism and re-calculate samples if necessary" }
+          ]
+        },
+        {
+          "name": "5. Audit Report & Responsibilities",
+          "children": [
+            { "name": "Ultimate Responsibility: The auditor retains sole responsibility for the audit opinion; it cannot be shifted to the expert" },
+            { "name": "General Rule: The expert's name is NOT mentioned in a standard, unmodified audit report" },
+            {
+              "name": "Exceptions for Reference",
+              "children": [
+                { "name": "When explicitly required by prevailing laws or regulations" },
+                { "name": "When necessary to explain the nature of a Modified Opinion" },
+                { "name": "Conditions: Must obtain the expert's written consent and explicitly state that the auditor's responsibility is not reduced" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+"chapter11": {
+    "title": "Chapter 11: Information Technology (IT) Controls",
+    "treeData": {
+      "name": "IT Systems & Controls",
+      "children": [
+        {
+          "name": "1. Core Control Classifications",
+          "children": [
+            { "name": "Manual Controls: Human-driven actions (e.g., physically stamping an invoice as 'Paid')" },
+            { "name": "Automated Controls: System-driven processes (e.g., system auto-matching POs with Invoices)" },
+            { "name": "Preventive Controls: Proactively block errors before processing (e.g., system rejecting transactions over a set limit)" },
+            { "name": "Detective Controls: Identify errors after processing via automated exception reports for subsequent rectification" }
+          ]
+        },
+        {
+          "name": "2. Application & Input Controls",
+          "children": [
+            { "name": "Input Authorization: Restricting data entry rights (e.g., prices, salaries) to authorized personnel only" },
+            { "name": "Range & Format Checks: System boundaries that reject abnormal values or incorrect data formats" },
+            { "name": "Duplicate Checks: Automated flags that reject previously processed invoice numbers to prevent double payments" },
+            { "name": "Batch Total Controls: Reconciling grouped data totals before and after processing to ensure no entry is missed" },
+            { "name": "3-Way Matching: System mandates a perfect match between PO, GRN, and Invoice before enabling payment" }
+          ]
+        },
+        {
+          "name": "3. Access & Security Controls",
+          "children": [
+            { "name": "Physical Access: Securing server rooms and critical hardware using biometrics, swipe cards, and physical locks" },
+            { "name": "Logical Access: Enforcing unique user IDs, complex passwords, and strict role-based access to specific modules" },
+            { "name": "Segregation of Duties (SoD): Ensuring system developers do not have posting or modification rights in the live environment" }
+          ]
+        },
+        {
+          "name": "4. Processing & Output Controls",
+          "children": [
+            { "name": "Master Data Locks: Automatically locking records during authorized edits to prevent concurrent unauthorized modifications" },
+            { "name": "Exception & Variance Detection: System generates immediate alerts for abnormal trends, missing data, or overdue balances" },
+            { "name": "Output Confidentiality: Restricting sensitive report visibility using password protection and tracking distribution" }
+          ]
+        },
+        {
+          "name": "5. Backup & Disaster Recovery",
+          "children": [
+            { "name": "Continuous Backups: Automated, periodic saving of data stored securely off-site or on isolated servers" },
+            { "name": "Recovery Testing: Routinely testing backup files to verify that data can actually be restored during a real disaster" },
+            { "name": "Service Level Agreements (SLA): Formal contracts with IT vendors dictating minimum system uptime and recovery protocols" }
+          ]
+        },
+        {
+          "name": "6. Modern Audit Technology",
+          "children": [
+            { "name": "Artificial Intelligence (AI): Reduces manual effort by automating ratio calculations and predicting error patterns" },
+            { "name": "Data Analytics: Enables instant analysis of massive datasets (e.g., thousands of loans) to identify anomalies and outliers" },
+            { "name": "Microcomputer Risks: Recognizing that isolated local networks carry higher risks of viruses and downtime compared to centralized systems" }
+          ]
+        }
+      ]
+    }
+  },
+"chapter12": {
+    "title": "Chapter 12: Internal Audit & Reliance (ISA 610)",
+    "treeData": {
+      "name": "Internal Audit (ISA 610)",
+      "children": [
+        {
+          "name": "1. Internal vs. External Audit",
+          "children": [
+            { "name": "Internal Auditor: Company employee focused on year-round operational efficiency and internal control compliance." },
+            { "name": "External Auditor: Independent third-party focused on providing reasonable assurance on Financial Statements." },
+            { "name": "Appointment: IA is appointed by Management/TCWG; External Auditor is appointed by Shareholders." }
+          ]
+        },
+        {
+          "name": "2. Role & Independence of Internal Audit",
+          "children": [
+            { "name": "Reporting Line: To maintain objectivity, IA must report directly to the Audit Committee rather than operational management." },
+            { "name": "Systematic Approach: IA follows a structured process of Planning, Testing, and Reporting on multiple business areas." },
+            { "name": "Audit Committee: An independent sub-committee providing governance and oversight over the IA function." }
+          ]
+        },
+        {
+          "name": "3. Modes of External Auditor Reliance",
+          "children": [
+            { "name": "Using IA's Work: Relying on previously performed internal audit procedures (e.g., control testing) as audit evidence." },
+            { "name": "Direct Assistance: Using IA staff to perform specific audit procedures under the direct supervision of the external auditor." }
+          ]
+        },
+        {
+          "name": "4. Pre-Conditions for Using IA Work",
+          "children": [
+            { "name": "Objectivity: Is the IA department structurally independent and free from conflicting responsibilities (self-review threats)?" },
+            { "name": "Competence: Does the IA staff possess adequate professional qualifications, training, and experience?" },
+            { "name": "Systematic & Disciplined Approach: Is the IA work properly planned, documented, and quality-reviewed?" }
+          ]
+        },
+        {
+          "name": "5. Implementation Rules & Responsibility",
+          "children": [
+            { "name": "Ultimate Responsibility: The external auditor bears 100% responsibility for the audit opinion; it cannot be shared with IA." },
+            { "name": "Audit Report Reference: The external auditor must NOT refer to the use of IA work in the audit report unless required by law." },
+            { "name": "Review Requirement: Before relying on evidence, the external auditor must comprehensively review IA's working papers and re-perform sample tests." }
+          ]
+        }
+      ]
+    }
+  },
+"chapter13": {
+    "title": "Chapter 13: Terms of Audit Engagements (ISA 210)",
+    "treeData": {
+      "name": "Audit Engagements (ISA 210)",
+      "children": [
+        {
+          "name": "1. Purpose & Preconditions",
+          "children": [
+            { "name": "Engagement Letter: A formal written agreement signed before the audit begins to fix accountability and prevent disputes." },
+            { "name": "Acceptable Framework: The auditor must ensure the financial reporting framework used by the entity is appropriate." },
+            { "name": "Management's Acknowledgement: Management must formally accept responsibility for FS preparation, internal controls, and providing unrestricted access." }
+          ]
+        },
+        {
+          "name": "2. Mandatory Contents of the Letter",
+          "children": [
+            { "name": "Objective & Scope: Clearly states the goal is to obtain reasonable assurance, not absolute guarantee." },
+            { "name": "Division of Responsibilities: Explicitly separates the auditor's duties from management's duties to avoid self-review threats." },
+            { "name": "Reporting Framework: Identification of the specific framework being applied (e.g., IFRS)." },
+            { "name": "Report Format: Reference to the expected form and content of the final audit report." }
+          ]
+        },
+        {
+          "name": "3. Optional & Additional Contents",
+          "children": [
+            { "name": "Logistics & Fees: Details regarding billing timelines, fee structures, and management delays." },
+            { "name": "Involvement of Others: Arrangements for using the work of experts, internal auditors, or communicating with predecessor auditors." },
+            { "name": "Liability & Access: Clauses limiting auditor liability or defining regulator access to working papers." }
+          ]
+        },
+        {
+          "name": "4. Scope Limitations Prior to Acceptance",
+          "children": [
+            { "name": "Pre-Engagement Restriction: If management restricts access to records before the audit even begins, it creates a severe scope limitation." },
+            { "name": "Auditor's Action: The auditor must decline the engagement and withdraw if such limitations are imposed upfront." }
+          ]
+        },
+        {
+          "name": "5. Recurring Audits (Client Continuance)",
+          "children": [
+            { "name": "General Rule: The engagement letter does not need to be rewritten every year unless circumstances change." },
+            { "name": "Triggers for Revision: A revised letter is required if there is a change in senior management, ownership, or a misunderstanding of the audit scope." },
+            { "name": "Regulatory Changes: Any significant changes in legal or reporting frameworks also mandate a revision of terms." }
+          ]
+        },
+        {
+          "name": "6. Changing Engagement Scope (Audit to Review)",
+          "children": [
+            { "name": "Evaluating the Request: If a client asks to downgrade the engagement from a full audit to a review, the auditor must assess the reason." },
+            { "name": "Reasonable Request: E.g., A bank requirement changed, and a full audit is no longer legally required." },
+            { "name": "Unreasonable Request: E.g., Management is trying to hide fraudulent activities or avoiding the provision of specific evidence." },
+            { "name": "Auditor's Action: If the reason is unjustified, the auditor must reject the request and withdraw from the engagement entirely." }
+          ]
+        }
+      ]
+    }
+  },
+"chapter14": {
+    "title": "Chapter 14: Audit Documentation (ISA 230)",
+    "treeData": {
+      "name": "Audit Documentation (ISA 230)",
+      "children": [
+        {
+          "name": "1. Purpose & Core Principles",
+          "children": [
+            { "name": "Primary Objective: Provide evidence of procedures performed, facilitate Quality Control reviews, and ensure team accountability." },
+            { "name": "The Golden Rule: If an audit procedure is not documented, it is assumed it was never performed." },
+            { "name": "Self-Explanatory Standard: Documentation must be clear enough for an experienced, independent auditor to understand without further explanation." }
+          ]
+        },
+        {
+          "name": "2. Structure of Working Papers",
+          "children": [
+            { "name": "Standard Flow: Every working paper must clearly document the Procedure Performed, Evidence Obtained, and the Final Conclusion." },
+            { "name": "Accountability Logs: Must explicitly state 'Prepared By' and 'Reviewed By' along with respective dates." },
+            { "name": "Proof of Work: Verbal claims are insufficient; must attach solid evidence like system screenshots, email logs, and signed confirmations." }
+          ]
+        },
+        {
+          "name": "3. Documenting Critical Areas",
+          "children": [
+            { "name": "Materiality Justification: Must document the rationale behind choosing a specific benchmark (e.g., Profit Before Tax) and the risk-based percentage applied." },
+            { "name": "Entity Understanding: Maintaining a permanent file with background checks on management, business model, and legal environment." },
+            { "name": "Significant Judgments: Detailed recalculations of debt covenants, going concern assessments, and related party evaluations." }
+          ]
+        },
+        {
+          "name": "4. Assembly, Retention & Ownership",
+          "children": [
+            { "name": "Ownership & Confidentiality: The audit firm owns the working papers and cannot share them with third parties or successor auditors without the client's explicit consent." },
+            { "name": "Assembly Timeline: The final administrative assembly of the audit file must be completed within 60 days of the audit report date." },
+            { "name": "Retention Period: The firm is legally and professionally required to retain the audit documentation for a minimum of 5 years." }
+          ]
+        },
+        {
+          "name": "5. Post-Report Modifications",
+          "children": [
+            { "name": "General Rule: Routine changes to the audit file are strictly prohibited after the final assembly period." },
+            { "name": "Exceptional Circumstances: If a modification is unavoidable (e.g., adding a delayed expert report), it requires explicit Engagement Partner approval." },
+            { "name": "Documentation of Change: The auditor must record exactly who made the modification, when it was made, and the specific reason for it." }
+          ]
+        }
+      ]
+    }
+  },
+"chapter15": {
+    "title": "Chapter 15: Review Engagements (ISRE 2400 & 2410)",
+    "treeData": {
+      "name": "Review Engagements",
+      "children": [
+        {
+          "name": "1. Audit vs. Review (Assurance Levels)",
+          "children": [
+            { "name": "Audit Engagement: Provides Reasonable Assurance (High level); results in a Positive Opinion (e.g., 'FS give a true and fair view')." },
+            { "name": "Review Engagement: Provides Limited Assurance (Moderate level); results in a Negative Conclusion (e.g., 'Nothing has come to our attention...')." },
+            { "name": "Work Effort: Audit involves extensive testing (confirmations, physical counts), while Review relies primarily on Inquiries and Analytical Procedures." }
+          ]
+        },
+        {
+          "name": "2. ISRE Standards Framework",
+          "children": [
+            { "name": "ISRE 2410: Applied when the entity's current statutory auditor performs the review (e.g., half-yearly reviews for listed companies)." },
+            { "name": "ISRE 2400: Applied when a practitioner (who is not the statutory auditor) performs the review for a non-audit client." },
+            { "name": "Standard Objective: To enable the practitioner to state whether anything material has come to light that causes the FS to be misstated." }
+          ]
+        },
+        {
+          "name": "3. Acceptance & Rational Purpose",
+          "children": [
+            { "name": "Rational Purpose: The auditor must ensure the client isn't just seeking 'name association' with a big firm for undue credibility." },
+            { "name": "Red Flags for Rejection: Management integrity issues, lack of independence, unacceptable reporting frameworks, or restricted data access." },
+            { "name": "Engagement Letter: Must clearly distinguish the review from an audit to eliminate the 'Expectation Gap'." }
+          ]
+        },
+        {
+          "name": "4. Review Procedures & Risk Model",
+          "children": [
+            { "name": "Analytical Procedures: Using trend analysis and ratio comparisons (Current vs. Prior Year) to identify unusual anomalies." },
+            { "name": "Tailored Inquiries: Direct questioning of management regarding revenue recognition, related parties, and significant estimates." },
+            { "name": "Higher Detection Risk: Since detailed substantive testing is not performed, the risk of missing material misstatements is higher than in an audit." },
+            { "name": "Use of Experts: Practitioners can review (but not re-perform) the work of management experts for complex valuations." }
+          ]
+        },
+        {
+          "name": "5. Going Concern & Reporting",
+          "children": [
+            { "name": "Going Concern: Reviewers must still evaluate management's assessment of the entity's survival for the next 12 months." },
+            { "name": "Conclusion vs. Opinion: The review report issues a 'Conclusion' based on limited evidence rather than a full 'Opinion'." },
+            { "name": "Modifications: Review reports can be qualified if material misstatements or scope limitations (missing tax/property records) are found." },
+            { "name": "Emphasis of Matter (EOM): Used to draw attention to properly disclosed fundamental matters like special purpose frameworks or going concern doubts." }
+          ]
+        }
+      ]
+    }
+  },
+"chapter16": {
+    "title": "Chapter 16: Audit Sampling & Selection (ISA 530)",
+    "treeData": {
+      "name": "Audit Sampling (ISA 530)",
+      "children": [
+        {
+          "name": "1. Selection Strategies",
+          "children": [
+            { "name": "100% Selection: Applied for high-risk areas, small populations of large values, or when CAATs are cost-effective." },
+            { "name": "Specific Items: Targeting high-value, unusual, or critical year-end transactions." },
+            { "name": "Audit Sampling: Testing a portion of the remaining untested population to draw conclusions." }
+          ]
+        },
+        {
+          "name": "2. Audit & Detection Risk Model",
+          "children": [
+            { "name": "Sampling Risk: The risk that the auditor's conclusion based on a sample may differ from the conclusion if the entire population were tested." },
+            { "name": "Non-Sampling Risk: Risk of human error or blind reliance on management even when evidence is present." },
+            { "name": "Stratification: Dividing a heterogeneous population into homogeneous sub-groups to increase audit efficiency." }
+          ]
+        },
+        {
+          "name": "3. Error Projection & Evaluation",
+          "children": [
+            { "name": "Projection Formula: Error Rate (Sample Error / Sample Base) × Population Amount." },
+            { "name": "SUOM: Summary of Uncorrected Misstatements combining Actual and Projected errors." },
+            { "name": "Decision Rule: If SUOM exceeds overall materiality, a modified opinion is required unless adjustments are made." }
+          ]
+        },
+        {
+          "name": "4. Nature of Errors & Replacement",
+          "children": [
+            { "name": "Isolated Error: Non-recurring errors that do not require population-wide projection if properly corrected." },
+            { "name": "Systematic Error: Recurring or system-driven errors requiring full testing and projection." },
+            { "name": "Replacement Rules: Replace cancelled or irrelevant items to maintain sample size; do NOT replace items with actual errors." }
+          ]
+        },
+        {
+          "name": "5. Test of Controls (TOC) vs Details (TOD)",
+          "children": [
+            { "name": "TOC (Deviation): Focuses on the rate of control failure compared to the Tolerable Rate of Deviation (TRD)." },
+            { "name": "TOD (Misstatement): Focuses on monetary errors compared to Materiality." },
+            { "name": "Condition: If expected error (ERD) equals or exceeds tolerance (TRD), reliance on controls is not possible." }
+          ]
+        },
+        {
+          "name": "6. Sampling Methodologies",
+          "children": [
+            { "name": "Statistical Sampling: Uses random selection and probability theory to evaluate results without human bias." },
+            { "name": "Non-Statistical Sampling: Relies on auditor judgment; carries a higher risk of human bias." },
+            { "name": "Common Techniques: Random (software-based), Systematic (interval-based), and Block (sequential) sampling." }
+          ]
+        },
+        {
+          "name": "7. Factors Affecting Sample Size",
+          "children": [
+            { "name": "Increase Size: Higher expected errors (ERD) or higher desired reliance on controls." },
+            { "name": "Decrease Size: Higher tolerance (TRD) or use of other effective analytical procedures." },
+            { "name": "Neutral: The total population size has little to no direct effect on the sample size." }
+          ]
+        }
+      ]
+    }
+  },
+"chapter17": {
+    "title": "Chapter 17: Subsequent Events (ISA 560)",
+    "treeData": {
+      "name": "Subsequent Events (ISA 560)",
+      "children": [
+        {
+          "name": "1. Scope & Timeframes",
+          "children": [
+            { "name": "Active Period: Events occurring between the Financial Statement date and the Auditor's Report date." },
+            { "name": "Passive Period: Facts discovered after the report is signed but before FS issuance." },
+            { "name": "Post-Issuance Period: Significant facts discovered after the Financial Statements have been made public." }
+          ]
+        },
+        {
+          "name": "2. Adjusting vs. Non-Adjusting (IAS 10)",
+          "children": [
+            {
+              "name": "Adjusting Events",
+              "children": [
+                { "name": "Definition: Conditions that existed at the reporting date; requires adjustment of FS figures." },
+                { "name": "Examples: Debtor bankruptcy confirming prior trouble, or inventory sales below cost confirming year-end impairment." }
+              ]
+            },
+            {
+              "name": "Non-Adjusting Events",
+              "children": [
+                { "name": "Definition: Conditions that arose after the reporting date; requires disclosure only if material." },
+                { "name": "Examples: Post-year-end factory fires, floods, or debtor bankruptcy due to a post-year-end disaster." }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "3. Auditor's Active Procedures",
+          "children": [
+            { "name": "Management Inquiries: Questioning TCWG on new commitments, borrowings, or asset destructions." },
+            { "name": "Meeting Minutes: Reading Board and Audit Committee records to identify significant post-year-end issues." },
+            { "name": "Interim Review: Analyzing management accounts, budgets, and cash flow forecasts prepared after year-end." },
+            { "name": "External Checks: Obtaining direct lawyer confirmations and a formal management representation letter." }
+          ]
+        },
+        {
+          "name": "4. Discovery After Report Signing",
+          "children": [
+            { "name": "Action Plan: Discuss the matter with management and determine if an amendment to the FS is necessary." },
+            {
+              "name": "Reporting Options",
+              "children": [
+                { "name": "Full Amendment: Issue a new audit report with a new date after performing extended procedures." },
+                { "name": "Dual Dating: Amending only a specific note; report shows original date plus a restricted date for the amendment." }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "5. Handling Management Refusal",
+          "children": [
+            { "name": "Before Issuance: Auditor modifies the opinion (Qualified or Adverse) before the report is released." },
+            { "name": "After Issuance: Notify TCWG and relevant regulators (e.g., SECP/ICAP) to prevent reliance on the report." },
+            { "name": "Public Action: Take legal steps or use public notices (e.g., statement at AGM) to inform users the report is no longer reliable." }
+          ]
+        }
+      ]
+    }
+  },
+"chapter18": {
+    "title": "Chapter 18: Written Representations (ISA 580)",
+    "treeData": {
+      "name": "Written Representations (ISA 580)",
+      "children": [
+        {
+          "name": "1. Core Concept & Purpose",
+          "children": [
+            { "name": "Formal Confirmation: A written letter from management (MRL) confirming key matters to ensure accountability and prevent future disputes." },
+            { "name": "Supportive Nature: Acts as documentary evidence that supports other audit procedures; it is NOT a substitute for them." },
+            { "name": "Accountability: Prevents management from later denying their responsibilities regarding the financial statements." }
+          ]
+        },
+        {
+          "name": "2. Mandatory Contents (MRL)",
+          "children": [
+            { "name": "Management Responsibilities: Confirmation that FS were prepared according to the reporting framework and internal controls were maintained." },
+            { "name": "Completeness of Information: Affirmation that all relevant records, data, and access were provided to the auditor." },
+            { "name": "Specific Assertions: Written confirmation regarding fraud prevention, going concern assessments, and related party disclosures." },
+            { "name": "Uncorrected Misstatements: Statement that any unadjusted errors are immaterial, both individually and in aggregate." }
+          ]
+        },
+        {
+          "name": "3. Reliability & Dating Rules",
+          "children": [
+            { "name": "Least Reliable Evidence: While essential, it is considered less reliable than external confirmations or independent documents." },
+            { "name": "Dating Rule: The representation letter must be dated as near as practicable to, but NOT after, the date of the auditor's report." },
+            { "name": "Period Coverage: Must cover all periods mentioned in the audit report, reaffirming prior year representations if necessary." }
+          ]
+        },
+        {
+          "name": "4. Auditor's Response to Contradictions",
+          "children": [
+            { "name": "Inconsistency Check: If management's written claims contradict other audit evidence, the auditor must investigate the discrepancy." },
+            { "name": "Integrity Re-evaluation: Significant contradictions may lead the auditor to doubt management's overall honesty and the reliability of other representations." }
+          ]
+        },
+        {
+          "name": "5. Handling Management Refusal",
+          "children": [
+            { "name": "Initial Action: Discuss the refusal with management and re-evaluate their integrity and the potential impact on evidence reliability." },
+            { "name": "Reporting Impact: If management still refuses to provide written confirmation, it constitutes a serious scope limitation." },
+            { "name": "Opinion Type: The auditor should issue a 'Disclaimer of Opinion' or a 'Qualified Opinion' based on the pervasiveness of the matter." },
+            { "name": "Prohibition: The auditor cannot sign the audit report until the required written representations are received." }
+          ]
+        },
+        {
+          "name": "6. Administrative Requirements",
+          "children": [
+            { "name": "Formal Format: Must be on the company's official letterhead and addressed specifically to the auditor." },
+            { "name": "Authorized Signatories: Typically signed by the CEO and CFO as they have primary responsibility for the financial statements." }
+          ]
+        }
+      ]
+    }
+  },
+"chapter19": {
+    "title": "Chapter 19: Quality Control for an Audit (ISA 220)",
+    "treeData": {
+      "name": "Quality Control (ISA 220)",
+      "children": [
+        {
+          "name": "1. Core Objective & Leadership",
+          "children": [
+            { "name": "Firm's Responsibility: To provide high-quality professional services and ensure audit conclusions strictly follow ISA standards." },
+            { "name": "Engagement Partner Role: Takes ultimate responsibility for the overall quality of the audit, leading the team and ensuring independence compliance." },
+            { "name": "Final Sign-off: The Partner must personally review critical judgments and high-risk areas before approving the final conclusions." }
+          ]
+        },
+        {
+          "name": "2. Client Acceptance & Integrity",
+          "children": [
+            { "name": "Background Investigation: Mandatory checks for fraud or unethical behavior involving client owners or management before acceptance." },
+            { "name": "Information Sources: Utilizing news reports, global watchlists, and blacklists to assess client integrity." },
+            { "name": "System Logging: All investigation results must be documented and uploaded to the firm’s internal compliance system." }
+          ]
+        },
+        {
+          "name": "3. Team Management & Supervision",
+          "children": [
+            { "name": "Direction & Supervision: Senior members must guide junior staff and continuously monitor the progress of audit procedures." },
+            { "name": "Review Process: A structured hierarchy where every junior's work is reviewed by a more senior member (e.g., Manager reviews Associate's work)." },
+            { "name": "Competence: Ensuring the team possesses relevant industry knowledge and professional skills for the specific engagement." }
+          ]
+        },
+        {
+          "name": "4. Consultation & Opinion Management",
+          "children": [
+            { "name": "Consultation: Mandatory for complex or contentious matters; involves seeking advice from other partners or external experts." },
+            { "name": "Documentation of Advice: Both the conclusion of the consultation and the reasons behind it must be formally recorded." },
+            { "name": "Differences of Opinion: If the team disagrees on a point, it must be resolved according to firm policy; the report cannot be signed until the dispute is settled." }
+          ]
+        },
+        {
+          "name": "5. Engagement Quality Control Review (EQCR)",
+          "children": [
+            { "name": "Independent Partner Review: A 'Cold Review' performed by a Partner who is NOT part of the engagement team." },
+            { "name": "Applicability: Mandatory for listed companies and high-risk clients to ensure the team has gathered sufficient appropriate evidence." },
+            { "name": "Objective: To verify that the engagement team’s conclusions and final audit report are logically sound and justified." }
+          ]
+        }
+      ]
+    }
+  },
+"chapter20": {
+    "title": "Chapter 20: Substantive Audit Procedures",
+    "treeData": {
+      "name": "Substantive Procedures (ISA 330/500)",
+      "children": [
+        {
+          "name": "1. Sales & Trade Receivables (Debtors)",
+          "children": [
+            { "name": "Existence: Select 100% of large balances and send 'External Confirmations'. In case of no reply, perform alternative procedures such as inspecting bank statements and GDNs." },
+            { "name": "Valuation: Review the ageing report and challenge management's provision for doubtful debts for balances outstanding for more than 90 days." },
+            { "name": "Completeness: Reconcile the debtors' listing total with the General Ledger and Financial Statements, and trace 'Subsequent Receipts' to the records." },
+            { "name": "Cut-off: Check Goods Dispatch Notes (GDN) near the year-end to ensure sales are recorded in the correct accounting period." }
+          ]
+        },
+        {
+          "name": "2. Inventory & Stock-taking",
+          "children": [
+            { "name": "Existence (Sheet to Floor): Select a sample from the stock sheet and physically verify the presence and condition of items in the warehouse." },
+            { "name": "Completeness (Floor to Sheet): Pick random items from the warehouse floor and trace them back to the inventory report (sheet)." },
+            { "name": "Valuation (NRV): Check rates from purchase invoices and ensure inventory is valued at the 'Lower of Cost or NRV'. Verify NRV losses for damaged items." },
+            { "name": "Rights & Obligations: Send confirmations for third-party inventory and inspect ownership documents such as invoices and agreements." }
+          ]
+        },
+        {
+          "name": "3. Property, Plant & Equipment (PPE)",
+          "children": [
+            { "name": "Existence & Additions: Select a sample from the Fixed Asset Register (FAR) and physically verify. Check purchase orders and invoices for new assets." },
+            { "name": "Valuation & Depreciation: Recalculate depreciation expense based on asset life and industry standards." },
+            { "name": "Impairment: Identify trigger events such as damage or technological changes and challenge management's cash flow projections and discount rates." },
+            { "name": "Revaluation: Evaluate the competence and independence of the management expert and verify the mathematical accuracy of the revaluation surplus." }
+          ]
+        },
+        {
+          "name": "4. Cash & Bank Balances",
+          "children": [
+            { "name": "Existence (Bank): Send 'Direct Confirmations' to all banks, including those for loans and guarantees. Trace unpresented or uncleared cheques from the BRS to subsequent bank statements." },
+            { "name": "Existence (Cash): Observe the physical cash count or verify it through CCTV or video call." },
+            { "name": "Valuation (FX): Retranslate foreign currency cash at the 31st December rate provided by the State Bank (SBP)." }
+          ]
+        },
+        {
+          "name": "5. Revenue & Long-Term Contracts",
+          "children": [
+            { "name": "Performance Obligations: Allocate the transaction price based on standalone market prices in bundled offers." },
+            { "name": "Construction Revenue: Verify the '% Completion' by matching total estimated costs and Cost to Date (CTD) with vouchers and payroll. Involve an engineer or expert if necessary." },
+            { "name": "Occurrence: Take a sample from the sales report and inspect original contracts and delivery notes (GDN/SDN)." }
+          ]
+        },
+        {
+          "name": "6. Liabilities (Loans, Payables & Tax)",
+          "children": [
+            { "name": "Trade Payables: Reconcile supplier statements with the company ledger and check 'Subsequent Payments' to identify unrecorded liabilities." },
+            { "name": "Borrowings: Verify loan agreement covenants (conditions) and recalculate the interest expense." },
+            { "name": "Current Tax: Recalculate taxable income by adding back disallowed expenses (provisions/fines) to the Profit Before Tax (PBT) and verify the tax rate." },
+            { "name": "Deferred Tax: Evaluate the recoverability of the Deferred Tax Asset (DTA) based on future taxable profit forecasts." }
+          ]
+        },
+        {
+          "name": "7. Other Areas (Legal, Payroll & Leases)",
+          "children": [
+            { "name": "Provisions & Contingencies: Scan legal fee ledgers and board minutes and obtain direct confirmations from lawyers. Verify the accounting treatment (Provision/Disclosure) based on probability (Probable/Possible)." },
+            { "name": "Payroll Expense: Check the 12-month payroll register, recalculate tax deductions, and review contracts to identify potential ghost employees." },
+            { "name": "Leases (IFRS 16): Recalculate the Present Value (PV) of lease liabilities and ROU assets according to the original agreement and the discount rate (IBOR)." }
+          ]
+        }
+      ]
+    }
+  }
+}
