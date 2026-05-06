@@ -1,7 +1,6 @@
         let currentSpread = 1;
         let totalSpreads = 1;
         let bookDatabase = {};
-        let CHAPTER_DATA = null;
 
         const bookFrame = document.getElementById('book-frame');
         const spreadContainer = document.getElementById('spread-container');
@@ -13,12 +12,16 @@
         const decContent = document.getElementById('dec-content');
         const pageFlipSound = new Audio('subjects/caf8_audit/features/assets/book curl.mp3');
 
+        const JSON_PATHS = [
+            '/api/data/auditbook.json',
+            '/api/get-data?file=auditbook'
+        ];
+
         document.addEventListener('DOMContentLoaded', loadChapter);
 
         async function loadChapter() {
             try {
                 const chapterData = await fetchChapterJson();
-                CHAPTER_DATA = chapterData;
                 bookDatabase = chapterData.smart_lines || {};
                 renderBook(chapterData);
                 bindSmartLines();
@@ -28,27 +31,28 @@
             }
         }
 
-        // 📱 MOBILE RESPONSIVENESS FIX: Auto-recalculate pages if screen size changes
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                if (CHAPTER_DATA) {
-                    renderBook(CHAPTER_DATA);
-                    bindSmartLines();
-                    updateNavigation();
-                }
-            }, 300);
-        });
-
         async function fetchChapterJson() {
-            const response = await fetch('/api/get-data?file=auditbook');
-            if (!response.ok) throw new Error("API Connection Failed");
-            const result = await response.json();
-            
-            // 🛠️ UTF-8 FIX: atob dabbon (boxes) aur special characters ko theek rakhega
-            const decodedPayload = new TextDecoder("utf-8").decode(Uint8Array.from(atob(result.payload), c => c.charCodeAt(0)));
-            return JSON.parse(decodedPayload);
+            let lastError = null;
+
+            for (const path of JSON_PATHS) {
+                try {
+                    const response = await fetch(path, { cache: 'no-store' });
+                    if (!response.ok) {
+                        throw new Error(path + ' returned ' + response.status);
+                    }
+                const result = await response.json();
+                
+                // 🔥 Encrypted Payload Base64 Decoding Logic
+                if (result.payload) {
+                    return JSON.parse(atob(result.payload));
+                }
+                return result; // Fallback directly agar raw JSON aye
+                } catch (error) {
+                    lastError = error;
+                }
+            }
+
+        throw lastError || new Error('auditbook.json could not be loaded');
         }
 
         function renderBook(data) {
@@ -88,7 +92,6 @@
         function paginateChapter(data) {
             const sourcePages = Array.isArray(data.pages) ? data.pages : [];
             const displayPages = [];
-            
             const measurePage = document.createElement('div');
             measurePage.className = 'page-right measure-page';
             bookFrame.appendChild(measurePage);
@@ -150,52 +153,32 @@
             sections.forEach(section => {
                 const paragraphs = Array.isArray(section?.paragraphs) ? section.paragraphs : [];
                 const smartIds = Array.isArray(section?.smart_line_ids) ? section.smart_line_ids : [];
-                
-                let isFirstInSection = true;
-
-                paragraphs.forEach((paragraph, index) => {
+                const paragraphItems = paragraphs.map((paragraph, index) => {
                     let paragraphSmartIds = smartIds.slice(index, index + 1);
                     if (index === paragraphs.length - 1 && smartIds.length > paragraphs.length) {
                         paragraphSmartIds = smartIds.slice(index);
                     }
 
-                    // 🔥 CRITICAL FIX: Massive paragraphs ko sentences mein tor diya taake lines kutt (cut) na hon!
-                    const sentences = paragraph.match(/[^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$/g) || [paragraph];
-                    const chunks = [];
-                    let currentChunk = "";
-                    
-                    sentences.forEach(sentence => {
-                        currentChunk += sentence;
-                        if (currentChunk.length > 250) { // Approx 3-4 lines ka chunk banega
-                            chunks.push(currentChunk.trim());
-                            currentChunk = "";
-                        }
-                    });
-                    if (currentChunk.trim().length > 0) {
-                        chunks.push(currentChunk.trim());
-                    }
-
-                    chunks.forEach((chunk, chunkIndex) => {
-                        const item = {
-                            type: 'paragraph',
-                            text: chunk,
-                            smartIds: paragraphSmartIds
-                        };
-
-                        if (isFirstInSection && chunkIndex === 0 && section?.title) {
-                            groups.push({
-                                items: [
-                                    { type: 'sectionTitle', text: section.title },
-                                    item
-                                ]
-                            });
-                        } else {
-                            groups.push({ items: [item] });
-                        }
-                    });
-                    
-                    isFirstInSection = false;
+                    return {
+                        type: 'paragraph',
+                        text: paragraph,
+                        smartIds: paragraphSmartIds
+                    };
                 });
+
+                if (section?.title && paragraphItems.length) {
+                    groups.push({
+                        items: [
+                            { type: 'sectionTitle', text: section.title },
+                            paragraphItems[0]
+                        ]
+                    });
+                    paragraphItems.slice(1).forEach(item => groups.push({ items: [item] }));
+                } else if (section?.title) {
+                    groups.push({ items: [{ type: 'sectionTitle', text: section.title }] });
+                } else {
+                    paragraphItems.forEach(item => groups.push({ items: [item] }));
+                }
             });
 
             return groups;
@@ -366,8 +349,8 @@
             spreadContainer.innerHTML = `
                 <div class="load-message">
                     <i class="fa-solid fa-triangle-exclamation"></i>
-                    <strong>Secure Data Sync Failed</strong>
-                    <span>API server se data fetch nahi ho saka. Connection check karein.</span>
+                <strong>auditbook.json load nahi ho rahi</strong>
+                <span>JSON ko <b>/api/data/auditbook.json</b> mein check karein ya API route verify karein.</span>
                     <span style="font-size: 0.8rem; opacity: 0.75;">${escapeHtml(error?.message || 'Unknown error')}</span>
                 </div>
             `;
