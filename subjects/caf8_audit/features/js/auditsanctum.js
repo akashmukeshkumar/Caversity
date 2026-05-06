@@ -5,7 +5,7 @@
         // 1. Fetch JSON
         async function bootstrapApp() {
             try {
-                const response = await fetch('subjects/caf8_audit/features/assets/auditninja.json');
+                const response = await fetch('/api/auditninja.json');
                 if(!response.ok) throw new Error("JSON Fetch Failed");
                 
                 auditData = await response.json();
