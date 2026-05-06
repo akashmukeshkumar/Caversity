@@ -357,7 +357,7 @@ const AUDIT_DOSE_INTERVAL = 30 * 60 * 1000;
 
 async function initAutoAudit() {
     try {
-       const response = await fetch('/api/get-data?file=mcq');
+       const response = await fetch('/api/get-data?file=mcqs');
     const result = await response.json();
     auditData = JSON.parse(atob(result.payload));
 
