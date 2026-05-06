@@ -2,19 +2,25 @@
         let groupedData = {};
         let currentQuestion = null;
 
-        // 1. Fetch JSON
-        async function bootstrapApp() {
-            try {
-                const response = await fetch('/api/auditninja.json');
-                if(!response.ok) throw new Error("JSON Fetch Failed");
-                
-                auditData = await response.json();
-                processAndRenderReel();
-            } catch (error) {
-                console.error(error);
-                document.getElementById('reel-container').innerHTML = `<p style="color:var(--color-trap);">Error: Could not locate <b>auditninja.json</b>.</p>`;
-            }
-        }
+        // 🛡️ Secure Bootstrap for AuditNinja
+async function bootstrapApp() {
+    try {
+        // 1. Naya Secure API link (get-data script use karein)
+        const response = await fetch('/api/get-data?file=auditninja');
+        if(!response.ok) throw new Error("JSON Fetch Failed");
+        
+        const result = await response.json();
+        
+        // 2. 'atob' use karke ajeeb alphabets ko wapis normal JSON banayein
+        auditData = JSON.parse(atob(result.payload));
+        
+        // 3. Render logic (pehle jaisa hi hai)
+        processAndRenderReel();
+    } catch (error) {
+        console.error("Secure Load Error:", error);
+        document.getElementById('reel-container').innerHTML = `<p style="color:var(--color-trap);">Error: Security Error or Missing <b>auditninja.json</b>.</p>`;
+    }
+}
 
         // 2. Process Data
         function processAndRenderReel() {
