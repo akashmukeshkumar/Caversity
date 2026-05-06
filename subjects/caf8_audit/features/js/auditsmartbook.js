@@ -10,7 +10,7 @@
         const decExample = document.getElementById('dec-example');
         const decExampleBox = document.getElementById('dec-example-box');
         const decContent = document.getElementById('dec-content');
-        const pageFlipSound = new Audio('book curl.mp3');
+        const pageFlipSound = new Audio('subjects/caf8_audit/features/assets/book curl.mp3');
 
         document.addEventListener('DOMContentLoaded', loadChapter);
 
