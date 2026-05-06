@@ -1,4 +1,6 @@
-import { auditData as shuffledAuditData } from '../assets/concept.js';
+// Data store karne ke liye variables
+let shuffledAuditData = [];
+let auditData = []; // Yeh MCQ.json ke liye hai
 
 // =========================================
 // 💡 CONCEPT RECALL SYSTEM
@@ -6,14 +8,20 @@ import { auditData as shuffledAuditData } from '../assets/concept.js';
 const RECALL_INTERVAL = 30 * 60 * 1000; // 30 Mins
 let currentRecall = {};
 
-function initRecallSystem() {
-    if (!shuffledAuditData || shuffledAuditData.length === 0) {
+async function initRecallSystem() {
+    try {
+        // Naya API link lagaya
+        const response = await fetch('/api/concept.json');
+        shuffledAuditData = await response.json();
+        
+        if (!shuffledAuditData || shuffledAuditData.length === 0) throw new Error("Empty");
+        
+        updateRecallContent();
+        setInterval(updateRecallTimer, 1000);
+    } catch (error) {
         const titleEl = document.getElementById('recall-title');
-        if(titleEl) titleEl.innerText = "Data Error";
-        return;
+        if(titleEl) titleEl.innerText = "Data Error - Concept load nahi hua";
     }
-    updateRecallContent();
-    setInterval(updateRecallTimer, 1000);
 }
 
 function updateRecallContent() {
@@ -82,7 +90,7 @@ function toggleRecallDetail() {
 // =========================================
 // 🕵️ PROCEDURE SPRINT SYSTEM
 // =========================================
-const JSON_URL = 'subjects/caf8_audit/assets/procedure.json'; 
+const JSON_URL = '/api/procedure.json';
 let productionDb = []; 
 const SUB_INTERVAL = 30 * 60 * 1000; // 30 Mins
 
@@ -345,13 +353,22 @@ function copyCode() {
 // =========================================
 const AUDIT_DOSE_INTERVAL = 30 * 60 * 1000; 
 
-function initAutoAudit() {
-    if (typeof auditData === 'undefined' || !auditData.length) {
-        console.error("Audit Data not loaded for MCQs");
-        return;
+async function initAutoAudit() {
+    try {
+        // Naya API link lagaya
+        const response = await fetch('/api/mcq.json');
+        auditData = await response.json();
+
+        if (!auditData || !auditData.length) {
+            console.error("Audit Data not loaded for MCQs");
+            return;
+        }
+        
+        updateScenario(); 
+        setInterval(updateTimer, 1000); 
+    } catch (error) {
+        console.error("Error loading mcq.json:", error);
     }
-    updateScenario(); 
-    setInterval(updateTimer, 1000); 
 }
 
 function updateScenario() {
