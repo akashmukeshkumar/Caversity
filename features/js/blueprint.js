@@ -47,6 +47,7 @@ async function initSystem() {
 
 // Station load karein
 loadStation(1);
+    }
     
 async function loadStation(dayNumber) {
     currentStation = dayNumber;
