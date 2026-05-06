@@ -89,21 +89,9 @@
             const sourcePages = Array.isArray(data.pages) ? data.pages : [];
             const displayPages = [];
             
-            const tempSpread = document.createElement('div');
-            tempSpread.className = 'book-spread active';
-            tempSpread.style.position = 'absolute';
-            tempSpread.style.visibility = 'hidden';
-            tempSpread.style.zIndex = '-9999';
-            tempSpread.style.width = '100%';
-            tempSpread.style.height = '100%';
-            
             const measurePage = document.createElement('div');
             measurePage.className = 'page-right measure-page';
-            // 🛠️ DOM FIX: Measure page ko real page se 40px chota kar diya taake buffer naturally ban jaye
-            measurePage.style.height = 'calc(100% - 40px)';
-            
-            tempSpread.appendChild(measurePage);
-            bookFrame.appendChild(tempSpread);
+            bookFrame.appendChild(measurePage);
 
             let currentPage = null;
 
@@ -120,7 +108,6 @@
                     currentPage.items.push(...group.items);
                     measurePage.innerHTML = renderMeasuredPage(currentPage);
 
-                    // 🛠️ EXACT SSS.HTML LOGIC: Ab normal comparison hogi, text neechay se nahi katega!
                     if (measurePage.scrollHeight > measurePage.clientHeight) {
                         currentPage.items = previousItems;
 
@@ -139,7 +126,7 @@
                 displayPages.push(currentPage);
             }
 
-            tempSpread.remove();
+            measurePage.remove();
             displayPages.forEach((page, index) => {
                 page.page = index + 2;
             });
@@ -201,6 +188,8 @@
                 <span class="chapter-header">Chapter 1</span>
                 ${headingHtml}
                 ${page.items.map(renderPageItem).join('')}
+                <!-- 🛠️ GHOST SPACER FIX: System ko dhoka dega ke text neeche tak poanch gaya hai, taake wo real page par 70px safe margin chor de! -->
+                <div style="height: 70px; width: 100%; display: block; clear: both;"></div>
             `;
         }
 
