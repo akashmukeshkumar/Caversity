@@ -397,9 +397,27 @@ window.revealSurprise = function() {
     let appResources = [];
     const niceColors = ["linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%)", "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)", "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)", "linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)", "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)", "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)", "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)", "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)", "linear-gradient(135deg, #fa709a 0%, #fee140 100%)", "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)", "linear-gradient(135deg, #ff0844 0%, #ffb199 100%)", "linear-gradient(135deg, #b721ff 0%, #21d4fd 100%)", "linear-gradient(135deg, #20E2D7 0%, #F9FEA5 100%)"];
     
-    // Fetch resources directly from 'assets' folder
-    fetch('api/emotion.json').then(r => r.json()).then(d => { appEmotions = d; return fetch('api/resource.json'); }).then(r => r.json()).then(d => { appResources = d; initGrid(); }).catch(e => { console.error(e); const gridArea = document.getElementById('adhkar-grid-area'); if(gridArea) gridArea.innerHTML = '<p style="color:red; text-align:center;">Error loading Adhkar data.</p>'; });
+   // 🛡️ Naya Secure tareeqa
+async function loadAdhkarData() {
+    try {
+        // Emotions mangwao (ajeeb alphabets mein aayenge)
+        const resEmo = await fetch('/api/get-data?file=emotion');
+        const dataEmo = await resEmo.json();
+        appEmotions = JSON.parse(atob(dataEmo.payload)); // yahan seedha ho jayega
 
+        // Resources mangwao
+        const resRes = await fetch('/api/get-data?file=resource');
+        const dataRes = await resRes.json();
+        appResources = JSON.parse(atob(dataRes.payload)); // yahan seedha ho jayega
+
+        initGrid(); // Grid bana do
+    } catch (e) {
+        console.error("Data Load Error:", e);
+    }
+}
+
+// Is function ko foran chala dein
+loadAdhkarData();
     function initGrid() {
         const gridArea = document.getElementById('adhkar-grid-area');
         if(!gridArea) return;
