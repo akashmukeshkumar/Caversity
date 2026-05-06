@@ -85,14 +85,25 @@
             `;
         }
 
-        function paginateChapter(data) {
+       function paginateChapter(data) {
             const sourcePages = Array.isArray(data.pages) ? data.pages : [];
             const displayPages = [];
+            
+            // 🛠️ FIX 1: Measure Page ko strict boundaries dena
             const measurePage = document.createElement('div');
             measurePage.className = 'page-right measure-page';
+            // Inline styling to force strict height measurement
+            measurePage.style.position = 'absolute';
+            measurePage.style.visibility = 'hidden';
+            measurePage.style.height = '100%'; 
+            measurePage.style.maxHeight = '100%';
+            measurePage.style.overflow = 'hidden';
             bookFrame.appendChild(measurePage);
 
             let currentPage = null;
+            
+            // 🛠️ FIX 2: Page number aur safe zone ke liye buffer (approx 50px)
+            const bottomBuffer = 50; 
 
             sourcePages.forEach(sourcePage => {
                 if (currentPage && currentPage.items.length) {
@@ -107,7 +118,8 @@
                     currentPage.items.push(...group.items);
                     measurePage.innerHTML = renderMeasuredPage(currentPage);
 
-                    if (measurePage.scrollHeight > measurePage.clientHeight) {
+                    // 🛠️ FIX 3: Buffer apply karna in height checking
+                    if (measurePage.scrollHeight > (measurePage.clientHeight - bottomBuffer)) {
                         currentPage.items = previousItems;
 
                         if (currentPage.items.length) {
@@ -132,7 +144,6 @@
 
             return displayPages;
         }
-
         function createDisplayPage(heading, showHeading = true) {
             return {
                 page: 0,
@@ -199,7 +210,7 @@
             `;
         }
 
-        function renderPage(page, side) {
+       function renderPage(page, side) {
             const sideClass = side === 'left' ? 'page-left' : 'page-right';
             const pageNumClass = side === 'left' ? 'page-num-left' : 'page-num-right';
             const pageNumber = page?.page ?? '';
@@ -209,7 +220,7 @@
             const headingHtml = page?.showHeading === false ? '' : `<h1 class="book-title">${heading}</h1>`;
 
             return `
-                <div class="${sideClass}">
+                <div class="${sideClass}" style="position: relative; height: 100%;">
                     <span class="chapter-header">Chapter 1</span>
                     ${headingHtml}
                     ${contentHtml}
