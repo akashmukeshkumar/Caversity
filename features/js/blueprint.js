@@ -29,19 +29,25 @@ async function initSystem() {
     }
 
     try {
-        const res = await fetch('/api/divine_blueprint.json');
-        divineData = await res.json();
-        divineData.forEach(item => {
-            const titleEl = document.getElementById(`sidebarParaTitle-${item.day}`);
-            if(titleEl) titleEl.innerText = item.para_name;
-        });
-    } catch(e) {
-        console.error("⚠️ Error loading Divine Blueprint JSON:", e);
-    }
+    // 1. Purane path ki jagah naya secure API link
+    const res = await fetch('/api/get-data?file=divine_blueprint');
+    const result = await res.json();
+    
+    // 2. 'atob' use karke ajeeb alphabets ko wapis sahi JSON banayen
+    divineData = JSON.parse(atob(result.payload));
 
-    loadStation(1);
+    // 3. UI update karne ka logic (pehle jaisa hi hai)
+    divineData.forEach(item => {
+        const titleEl = document.getElementById(`sidebarParaTitle-${item.day}`);
+        if(titleEl) titleEl.innerText = item.para_name;
+    });
+} catch(e) {
+    console.error("⚠️ Secure Load Error (Divine Blueprint):", e);
 }
 
+// Station load karein
+loadStation(1);
+    
 async function loadStation(dayNumber) {
     currentStation = dayNumber;
     ayahDatabase = {}; 
