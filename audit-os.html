@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firm OS - Virtual Audit Workspace</title>
+    
+    <!-- 🔥 UNIVERSAL SECURITY LOCK 🔥 -->
+    <meta name="page-id" content="audit-os">
+    <meta name="page-type" content="premium">
+    <style id="page-lock">body { display: none !important; }</style>
+    <script type="module" src="js/security.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- 🔥 EXTERNAL CSS 🔥 -->
+    <link rel="stylesheet" href="subjects/caf8_audit/features/css/audit-os.css">
+</head>
+<body>
+
+    <div id="boot-screen">
+        <div class="brand-logo"><i class="fas fa-fingerprint logo-icon"></i><h1>FIRM OS</h1><div class="loader-track"><div class="loader-bar"></div></div></div>
+    </div>
+
+    <div id="lock-screen" class="hidden">
+        <div class="lock-header"><div class="lock-time" id="lock-time">12:00</div><div id="lock-date" style="font-size:20px;">Saturday, Feb 14</div></div>
+        <div class="login-container"><div class="user-avatar"></div><h3>Authorized Auditor Only</h3><div class="input-group"><input type="text" id="username-input" placeholder="Auditor ID"><button onclick="unlockOS()"><i class="fas fa-arrow-right"></i></button></div></div>
+    </div>
+
+    <div id="desktop-screen" class="hidden">
+        <div class="desktop-icons">
+            <div class="d-icon" onclick="openApp('briefing')"><i class="fas fa-clipboard-list" style="color: #e67e22;"></i><span>Briefing</span></div>
+            <div class="d-icon" onclick="openApp('pc')"><i class="fas fa-desktop" style="color: #4db8ff;"></i><span>This PC</span></div>
+            <div class="d-icon" onclick="openApp('outlook')"><i class="fas fa-envelope" style="color: #0078d4;"></i><span>Outlook</span></div>
+            <div class="d-icon" onclick="openApp('erp')"><i class="fas fa-database" style="color: #c0392b;"></i><span>Oracle ERP</span></div>
+            <div class="d-icon" onclick="openApp('audit')"><i class="fas fa-file-contract" style="color: #27ae60;"></i><span>Audit File</span></div>
+        </div>
+
+        <div id="window-briefing" class="os-window hidden" style="top: 10vh; left: calc(50vw - 225px); width: 450px; height: 550px; z-index: 100;">
+            <div class="win-title-bar" style="background: #d35400;">
+                <span>Today's Assignment</span>
+                <div class="window-controls">
+                    <span id="case-timer" style="font-size:11px; background:#fff; color:#d35400; padding:2px 8px; border-radius:10px; margin-right:10px; font-weight:bold;">New Case: 00:00:00</span>
+                    <span onclick="toggleMinimize('briefing')" title="Minimize">-</span>
+                    <span onclick="closeApp('briefing')" class="close-btn" title="Close">X</span>
+                </div>
+            </div>
+            <div style="padding: 25px; background: #fff; height: 100%; overflow-y: auto;">
+                <h2 id="briefing-client" style="border-bottom: 2px solid #333; padding-bottom: 10px;">Loading Client...</h2>
+                <p id="briefing-content" style="margin-top: 15px; font-size: 14px; line-height: 1.6;"></p>
+                <button onclick="acceptMission()" id="accept-btn" style="width: 100%; padding: 12px; background: #222; color: white; border: none; margin-top: 20px; cursor: pointer; font-weight: bold;">ACCEPT ASSIGNMENT & START</button>
+            </div>
+        </div>
+
+        <div id="window-audit" class="os-window hidden" style="top: 5vh; left: calc(50vw - 450px); width: 900px; height: 650px;">
+            <div class="win-title-bar" style="background: #27ae60;">
+                <span><i class="fas fa-file-contract"></i> Comprehensive Audit Working Papers</span>
+                <div class="window-controls">
+                    <span onclick="toggleMinimize('audit')">-</span>
+                    <span onclick="closeApp('audit')" class="close-btn">X</span>
+                </div>
+            </div>
+            <div style="background: #f1f1f1; padding: 10px 10px 0 10px; display: flex; gap: 5px; border-bottom: 1px solid #ccc;">
+                <button class="audit-tab active" onclick="switchTab('planning', event)">1. Planning & Risk</button>
+                <button class="audit-tab" onclick="switchTab('execution', event)">2. Execution & Evidence</button>
+                <button class="audit-tab" onclick="switchTab('reporting', event)">3. Conclusion & Reporting</button>
+            </div>
+            <div class="audit-body">
+                <div id="tab-planning" class="audit-section">
+                    <h4 style="color:#2c3e50;">A. Risk Assessment Procedures</h4>
+                    <div class="wp-row">
+                        <label>1. Audit Risk & Materiality (ISA 315/320):</label>
+                        <textarea id="input-risk" placeholder="Type your analysis here..."></textarea>
+                    </div>
+                    <div class="wp-row">
+                        <label>2. Fraud Risk Assessment (ISA 240):</label>
+                        <textarea id="input-fraud" placeholder="Type your analysis here..."></textarea>
+                    </div>
+                    <div class="wp-row">
+                        <label>3. Audit Strategy & Approach:</label>
+                        <textarea id="input-strategy" placeholder="Type your analysis here..."></textarea>
+                    </div>
+                </div>
+                <div id="tab-execution" class="audit-section hidden">
+                    <h4 style="color:#2980b9;">B. Evidence Gathering</h4>
+                    <div class="wp-row">
+                        <label>4. Substantive Procedures (ISA 500):</label>
+                        <textarea id="input-procedures" placeholder="Type your analysis here..."></textarea>
+                    </div>
+                    <div class="wp-row">
+                        <label>5. Internal Controls (ISA 315):</label>
+                        <textarea id="input-controls" placeholder="Type your analysis here..."></textarea>
+                    </div>
+                    <div class="wp-row">
+                        <label>6. Related Parties (ISA 550):</label>
+                        <textarea id="input-related" placeholder="Type your analysis here..."></textarea>
+                    </div>
+                    <div class="wp-row">
+                        <label>7. Going Concern Indicators (ISA 570):</label>
+                        <textarea id="input-going" placeholder="Type your analysis here..."></textarea>
+                    </div>
+                </div>
+                <div id="tab-reporting" class="audit-section hidden">
+                    <h4 style="color:#c0392b;">C. Completion & Reporting</h4>
+                    <div class="wp-row">
+                        <label>8. Subsequent Events (ISA 560):</label>
+                        <textarea id="input-subsequent" placeholder="Type your analysis here..."></textarea>
+                    </div>
+                    <div class="wp-row">
+                        <label>9. Code of Ethics (IESBA):</label>
+                        <textarea id="input-ethics" placeholder="Type your analysis here..."></textarea>
+                    </div>
+                    <div class="wp-row">
+                        <label>10. Final Opinion (ISA 700/705):</label>
+                        <select id="input-opinion">
+                            <option value="Unmodified (Clean Opinion)">Unmodified (Clean Opinion)</option>
+                            <option value="Qualified (Material but Not Pervasive)">Qualified (Material but Not Pervasive)</option>
+                            <option value="Adverse (Material AND Pervasive)">Adverse (Material AND Pervasive)</option>
+                            <option value="Disclaimer (Unable to Obtain Evidence)">Disclaimer (Unable to Obtain Evidence)</option>
+                        </select>
+                    </div>
+                    <button onclick="finalSubmit()" id="submit-btn" class="submit-audit-btn"><i class="fas fa-check-circle"></i> SUBMIT AUDIT FILE FOR EVALUATION</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="window-pc" class="os-window hidden" style="top: 15vh; left: calc(50vw - 325px); width: 650px; height: 450px;">
+            <div class="win-title-bar"><span><i class="fas fa-laptop"></i> This PC</span><div class="window-controls"><span onclick="toggleMinimize('pc')">-</span><span onclick="closeApp('pc')" class="close-btn">X</span></div></div>
+            <div style="display:flex; flex: 1; background: white;">
+                <div style="width: 180px; background: #f5f5f5; padding: 10px; border-right: 1px solid #ddd;">
+                    <div style="padding: 8px; background-color: #cce8ff; border: 1px solid #99d1ff; border-radius: 3px; font-size: 13px;"><i class="fas fa-hdd"></i> Local Disk (D:)</div>
+                    <div style="padding: 8px; color:#aaa; font-size: 13px; cursor:not-allowed;"><i class="fas fa-lock"></i> System (C:)</div>
+                </div>
+                <div id="pc-file-grid" style="flex: 1; padding: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 15px; align-content: start;"></div>
+            </div>
+        </div>
+
+        <div id="window-erp" class="os-window hidden" style="top: 8vh; left: calc(50vw - 425px); width: 850px; height: 550px;">
+            <div class="win-title-bar" style="background: #c0392b;"><span>Oracle Financials - Read Only</span><div class="window-controls"><span onclick="toggleMinimize('erp')">-</span><span onclick="closeApp('erp')" class="close-btn">X</span></div></div>
+            <div id="erp-body" style="background: #fff; padding: 20px; overflow: auto; height:100%;"></div>
+        </div>
+
+        <div id="window-outlook" class="os-window hidden" style="top: 12vh; left: calc(50vw - 350px); width: 700px; height: 450px;">
+            <div class="win-title-bar" style="background: #0078d4;"><span>Outlook - Corporate</span><div class="window-controls"><span onclick="toggleMinimize('outlook')">-</span><span onclick="closeApp('outlook')" class="close-btn">X</span></div></div>
+            <div style="display:flex; height:100%; background: white;">
+                <div style="width: 200px; border-right: 1px solid #eee; background: #f9f9f9; padding: 10px;"><b>Inbox</b><hr><div style="padding:10px; background:#e1f0ff; font-size:12px; border-radius:4px; margin-top:5px; cursor:pointer;"><b>Client Mails</b><br>Unread (1)</div></div>
+                <div id="email-view" style="flex:1; padding: 20px; overflow-y: auto;"></div>
+            </div>
+        </div>
+
+        <div class="news-ticker"><marquee id="news-text">Syncing Live Market Data...</marquee></div>
+        
+        <div class="taskbar">
+            <div onclick="shutdown()"><i class="fas fa-power-off" style="color:#ff4444; cursor:pointer; font-size: 18px;"></i></div>
+            
+            <div class="task-apps" id="taskbar-apps">
+                </div>
+            
+            <div class="system-tray">
+                <i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters"></i>
+                <span id="taskbar-clock" style="color:white; font-weight:bold;">12:00 PM</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="doc-viewer" class="hidden">
+        <div style="background: #333; color: white; padding: 10px; display: flex; justify-content: space-between;">
+            <span id="doc-title">Document</span><button onclick="closeDocument()" style="background:red; color:white; border:none; padding:5px 15px; cursor:pointer;">X</button>
+        </div>
+        <div style="flex:1; overflow:auto;"><div id="doc-content"></div></div>
+    </div>
+    
+    <!-- 🔥 EXTERNAL OS LOGIC 🔥 -->
+    <script src="subjects/caf8_audit/features/js/audit-os.js"></script>
+</body>
+</html>
