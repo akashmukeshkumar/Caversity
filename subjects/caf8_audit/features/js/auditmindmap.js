@@ -24,7 +24,7 @@
 
         async function loadExplorer() {
             try {
-                const res = await fetch('subjects/caf8_audit/features/assets/mindmaps.json');
+                const res = await fetch('/api/mindmaps.json');
                 const data = await res.json();
                 const list = document.getElementById('chapter-list');
                 
