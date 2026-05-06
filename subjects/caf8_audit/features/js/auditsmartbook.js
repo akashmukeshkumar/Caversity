@@ -372,4 +372,8 @@
                 closeDrawer();
             }
         });
+
+        // Expose functions globally for inline HTML onclick events
+        window.turnSpread = turnSpread;
+        window.closeDrawer = closeDrawer;
     
