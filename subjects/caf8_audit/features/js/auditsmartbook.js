@@ -21,6 +21,9 @@
 
         async function loadChapter() {
             try {
+                // 🔥 FIX 1: Wait for custom fonts to load so text measurement is 100% accurate
+                if (document.fonts) await document.fonts.ready;
+
                 const chapterData = await fetchChapterJson();
                 bookDatabase = chapterData.smart_lines || {};
                 renderBook(chapterData);
@@ -92,9 +95,18 @@
         function paginateChapter(data) {
             const sourcePages = Array.isArray(data.pages) ? data.pages : [];
             const displayPages = [];
+            
+            // 🔥 FIX 2: Wrap in a mock spread to guarantee exact CSS layout mimicking & restrict height
+            const measureSpread = document.createElement('div');
+            measureSpread.className = 'book-spread active';
+            measureSpread.style.cssText = 'position: absolute; width: 100%; height: 100%; visibility: hidden; z-index: -1000; top: 0; left: 0;';
+
             const measurePage = document.createElement('div');
             measurePage.className = 'page-right measure-page';
-            bookFrame.appendChild(measurePage);
+            measurePage.style.height = '100%'; // Ensure tight boundary
+            
+            measureSpread.appendChild(measurePage);
+            spreadContainer.appendChild(measureSpread);
 
             let currentPage = null;
 
@@ -129,7 +141,7 @@
                 displayPages.push(currentPage);
             }
 
-            measurePage.remove();
+            measureSpread.remove();
             displayPages.forEach((page, index) => {
                 page.page = index + 2;
             });
