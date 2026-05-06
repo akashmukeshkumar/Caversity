@@ -193,7 +193,7 @@ function applyMobileFix() {
 // =========================================
 // 📜 EXAM SIMULATOR
 // =========================================
-const GPT_LINK = "https://chatgpt.com/g/g-693edbc115288191b7d6c2d11bd622b8-audit-by-akash-kumar-q-a-only";
+const GPT_LINK = "https://chatgpt.com/g/g-69f8aa4560088191a3b2f98536946226-audit-by-caversity-ai-solution-checker";
 const READING_TIME_SEC = 15 * 60; 
 const WRITING_TIME_SEC = 3 * 60 * 60; 
 let timer, timeLeft, currentPaper;
