@@ -24,9 +24,15 @@
 
         async function loadExplorer() {
             try {
-                const res = await fetch('/api/mindmaps.json');
-                const data = await res.json();
-                const list = document.getElementById('chapter-list');
+                // 1. Purane direct link ki jagah naya Secure API link
+    const res = await fetch('/api/get-data?file=mindmaps');
+    const result = await res.json();
+
+    // 2. 'atob' use karke ajeeb alphabets ko wapis normal JSON banayein
+    const data = JSON.parse(atob(result.payload));
+
+    // 3. Aapka purana list element wala logic
+    const list = document.getElementById('chapter-list');
                 
                 Object.keys(data).forEach((key, idx) => {
                     const btn = document.createElement('button');
