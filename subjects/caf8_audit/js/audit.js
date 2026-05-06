@@ -11,8 +11,9 @@ let currentRecall = {};
 async function initRecallSystem() {
     try {
         // Naya API link lagaya
-        const response = await fetch('/api/concept.json');
-        shuffledAuditData = await response.json();
+       const response = await fetch('/api/get-data?file=concept');
+    const result = await response.json();
+    shuffledAuditData = JSON.parse(atob(result.payload));
         
         if (!shuffledAuditData || shuffledAuditData.length === 0) throw new Error("Empty");
         
@@ -96,9 +97,10 @@ const SUB_INTERVAL = 30 * 60 * 1000; // 30 Mins
 
 async function initSubstantive() {
     try {
-        const response = await fetch(JSON_URL);
+        const response = await fetch('/api/get-data?file=procedure');
         if (!response.ok) throw new Error("Network response was not ok");
-        productionDb = await response.json();
+        const result = await response.json();
+    productionDb = JSON.parse(atob(result.payload));
         updateSubContent();
         setInterval(updateSubTimer, 1000);
     } catch (error) {
@@ -355,9 +357,9 @@ const AUDIT_DOSE_INTERVAL = 30 * 60 * 1000;
 
 async function initAutoAudit() {
     try {
-        // Naya API link lagaya
-        const response = await fetch('/api/mcq.json');
-        auditData = await response.json();
+       const response = await fetch('/api/get-data?file=mcq');
+    const result = await response.json();
+    auditData = JSON.parse(atob(result.payload));
 
         if (!auditData || !auditData.length) {
             console.error("Audit Data not loaded for MCQs");
