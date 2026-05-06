@@ -85,25 +85,27 @@
             `;
         }
 
-       function paginateChapter(data) {
+        function paginateChapter(data) {
             const sourcePages = Array.isArray(data.pages) ? data.pages : [];
             const displayPages = [];
             
-            // 🛠️ FIX 1: Measure Page ko strict boundaries dena
+            const tempSpread = document.createElement('div');
+            tempSpread.className = 'book-spread active';
+            tempSpread.style.position = 'absolute';
+            tempSpread.style.visibility = 'hidden';
+            tempSpread.style.zIndex = '-9999';
+            tempSpread.style.width = '100%';
+            tempSpread.style.height = '100%';
+            
             const measurePage = document.createElement('div');
             measurePage.className = 'page-right measure-page';
-            // Inline styling to force strict height measurement
-            measurePage.style.position = 'absolute';
-            measurePage.style.visibility = 'hidden';
-            measurePage.style.height = '100%'; 
-            measurePage.style.maxHeight = '100%';
-            measurePage.style.overflow = 'hidden';
-            bookFrame.appendChild(measurePage);
+            // 🛠️ DOM FIX: Measure page ko real page se 40px chota kar diya taake buffer naturally ban jaye
+            measurePage.style.height = 'calc(100% - 40px)';
+            
+            tempSpread.appendChild(measurePage);
+            bookFrame.appendChild(tempSpread);
 
             let currentPage = null;
-            
-            // 🛠️ FIX 2: Page number aur safe zone ke liye buffer (approx 50px)
-            const bottomBuffer = 50; 
 
             sourcePages.forEach(sourcePage => {
                 if (currentPage && currentPage.items.length) {
@@ -118,8 +120,8 @@
                     currentPage.items.push(...group.items);
                     measurePage.innerHTML = renderMeasuredPage(currentPage);
 
-                    // 🛠️ FIX 3: Buffer apply karna in height checking
-                    if (measurePage.scrollHeight > (measurePage.clientHeight - bottomBuffer)) {
+                    // 🛠️ EXACT SSS.HTML LOGIC: Ab normal comparison hogi, text neechay se nahi katega!
+                    if (measurePage.scrollHeight > measurePage.clientHeight) {
                         currentPage.items = previousItems;
 
                         if (currentPage.items.length) {
@@ -137,13 +139,14 @@
                 displayPages.push(currentPage);
             }
 
-            measurePage.remove();
+            tempSpread.remove();
             displayPages.forEach((page, index) => {
                 page.page = index + 2;
             });
 
             return displayPages;
         }
+
         function createDisplayPage(heading, showHeading = true) {
             return {
                 page: 0,
@@ -210,7 +213,7 @@
             `;
         }
 
-       function renderPage(page, side) {
+        function renderPage(page, side) {
             const sideClass = side === 'left' ? 'page-left' : 'page-right';
             const pageNumClass = side === 'left' ? 'page-num-left' : 'page-num-right';
             const pageNumber = page?.page ?? '';
@@ -220,7 +223,7 @@
             const headingHtml = page?.showHeading === false ? '' : `<h1 class="book-title">${heading}</h1>`;
 
             return `
-                <div class="${sideClass}" style="position: relative; height: 100%;">
+                <div class="${sideClass}">
                     <span class="chapter-header">Chapter 1</span>
                     ${headingHtml}
                     ${contentHtml}
