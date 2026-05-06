@@ -78,7 +78,7 @@ function loadApps() {
     let story = CASE_DATA.briefing || CASE_DATA.background_story;
     document.getElementById('briefing-client').innerText = "Client: " + CASE_DATA.client_name;
     document.getElementById('briefing-content').innerText = story;
-    document.getElementById('news-text').innerText = CASE_DATA.news_headline;
+    document.getElementById('news-text').innerHTML = `<i class="fas fa-exclamation-triangle" style="color: #facc15; margin-right: 8px;"></i> ${CASE_DATA.news_headline}`;
     document.getElementById('erp-body').innerHTML = CASE_DATA.evidence_files["1_GL_Detailed.html"] || "No Data";
 
     const emailKey = Object.keys(CASE_DATA.evidence_files).find(key => key.includes('Email') || key.includes('Memo'));
