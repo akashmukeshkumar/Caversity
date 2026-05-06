@@ -150,32 +150,52 @@
             sections.forEach(section => {
                 const paragraphs = Array.isArray(section?.paragraphs) ? section.paragraphs : [];
                 const smartIds = Array.isArray(section?.smart_line_ids) ? section.smart_line_ids : [];
-                const paragraphItems = paragraphs.map((paragraph, index) => {
+                
+                let isFirstInSection = true;
+
+                paragraphs.forEach((paragraph, index) => {
                     let paragraphSmartIds = smartIds.slice(index, index + 1);
                     if (index === paragraphs.length - 1 && smartIds.length > paragraphs.length) {
                         paragraphSmartIds = smartIds.slice(index);
                     }
 
-                    return {
-                        type: 'paragraph',
-                        text: paragraph,
-                        smartIds: paragraphSmartIds
-                    };
-                });
-
-                if (section?.title && paragraphItems.length) {
-                    groups.push({
-                        items: [
-                            { type: 'sectionTitle', text: section.title },
-                            paragraphItems[0]
-                        ]
+                    // 🔥 CRITICAL FIX: Massive paragraphs ko sentences mein tor diya taake lines kutt (cut) na hon!
+                    const sentences = paragraph.match(/[^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$/g) || [paragraph];
+                    const chunks = [];
+                    let currentChunk = "";
+                    
+                    sentences.forEach(sentence => {
+                        currentChunk += sentence;
+                        if (currentChunk.length > 250) { // Approx 3-4 lines ka chunk banega
+                            chunks.push(currentChunk.trim());
+                            currentChunk = "";
+                        }
                     });
-                    paragraphItems.slice(1).forEach(item => groups.push({ items: [item] }));
-                } else if (section?.title) {
-                    groups.push({ items: [{ type: 'sectionTitle', text: section.title }] });
-                } else {
-                    paragraphItems.forEach(item => groups.push({ items: [item] }));
-                }
+                    if (currentChunk.trim().length > 0) {
+                        chunks.push(currentChunk.trim());
+                    }
+
+                    chunks.forEach((chunk, chunkIndex) => {
+                        const item = {
+                            type: 'paragraph',
+                            text: chunk,
+                            smartIds: paragraphSmartIds
+                        };
+
+                        if (isFirstInSection && chunkIndex === 0 && section?.title) {
+                            groups.push({
+                                items: [
+                                    { type: 'sectionTitle', text: section.title },
+                                    item
+                                ]
+                            });
+                        } else {
+                            groups.push({ items: [item] });
+                        }
+                    });
+                    
+                    isFirstInSection = false;
+                });
             });
 
             return groups;
@@ -188,8 +208,6 @@
                 <span class="chapter-header">Chapter 1</span>
                 ${headingHtml}
                 ${page.items.map(renderPageItem).join('')}
-                <!-- 🛠️ GHOST SPACER FIX: System ko dhoka dega ke text neeche tak poanch gaya hai, taake wo real page par 70px safe margin chor de! -->
-                <div style="height: 70px; width: 100%; display: block; clear: both;"></div>
             `;
         }
 
