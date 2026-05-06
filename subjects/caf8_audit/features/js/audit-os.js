@@ -108,7 +108,7 @@ function loadApps() {
         document.getElementById('doc-title').innerText = "AUDIT ISAs Reference Book";
         document.getElementById('doc-content').style.padding = "0"; 
         // PDF Path Updated
-        document.getElementById('doc-content').innerHTML = `<iframe src="subjects/caf8_audit/features/assets/audit_isas.pdf" width="100%" height="1100px" style="border:none;"></iframe>`;
+        document.getElementById('doc-content').innerHTML = `<iframe src="subjects/caf8_audit/features/assets/AUDIT ISAs.pdf" width="100%" height="1100px" style="border:none;"></iframe>`;
         checkDesktopState();
     };
     grid.appendChild(isa);
