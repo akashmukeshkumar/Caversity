@@ -392,36 +392,6 @@ function bindSmartLines() {
     });
 }
 
-// 🔥 SEAMLESS CHAPTER FLOW LOGIC ADDED HERE 🔥
-function turnSpread(direction) {
-    if (direction === 1 && currentSpread >= totalSpreads) return;
-    if (direction === -1 && currentSpread <= 1) return;
-
-    pageFlipSound.currentTime = 0;
-    pageFlipSound.play().catch(() => {});
-
-    document.querySelectorAll('.book-spread').forEach(spread => {
-        spread.classList.remove('active', 'flip-anim');
-    });
-
-    currentSpread += direction;
-    
-    // Agar Chapter 1 ka pehla page hai to single page mode karo, warna double page (remove cover-mode)
-    if (window.currentChapterNum === 1 && currentSpread === 1) {
-        bookFrame.classList.add('cover-mode');
-    } else {
-        bookFrame.classList.remove('cover-mode');
-    }
-
-    const newSpread = document.getElementById(`spread-${currentSpread}`);
-    if (newSpread) {
-        newSpread.classList.add('active', 'flip-anim');
-    }
-
-    updateNavigation();
-    closeDrawer();
-}
-
 // 🔥 NAVIGATION UPDATE: Show next/prev buttons at chapter edges for continuous flow
 function updateNavigation() {
     const isVeryFirstPage = (currentSpread === 1 && window.currentChapterNum === 1);
