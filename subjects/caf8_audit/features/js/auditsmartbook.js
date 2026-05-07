@@ -21,21 +21,21 @@ const decContent = document.getElementById('dec-content');
 const pageFlipSound = new Audio('subjects/caf8_audit/features/assets/book curl.mp3');
 
 / REPLACE THIS EXISTING STYLE BLOCK
-// 🔥 SMART LINES CLEAN STYLING (No initial lines, No highlight) 🔥
+// 🔥 STEP 1: REPLACE EXISTING STYLE BLOCK 🔥
 const style = document.createElement('style');
 style.innerHTML = `
     .smart-line { 
         cursor: pointer; 
-        transition: all 0.3s ease-in-out; /* Smooth animation */
-        border-bottom: 2px solid transparent; /* Pehle se koi line show nahi hogi */
+        transition: all 0.3s ease-in-out; 
+        border-bottom: 2px solid transparent; 
         padding-bottom: 1px; 
     } 
     .smart-line:hover { 
-        border-bottom: 2px dotted #b88645; /* Cursor upar jane par light brown dotted line */
-        background-color: transparent !important; /* Koi background highlight nahi */
+        border-bottom: 2px dotted #b88645; 
+        background-color: transparent !important; 
     } 
     .smart-line.active { 
-        background-color: transparent !important; /* Click hone par bhi highlight nahi */
+        background-color: transparent !important; 
         border-bottom: 2px dashed #b88645; 
         color: #000; 
         font-weight: bold; 
@@ -282,7 +282,7 @@ function renderPageItem(item) {
         let text = item.text || '';
         
         // Bullet points detect karne ka logic (* ya - se shuru hone wali line)
-        const isBullet = /^[\*\-\•]\s/.test(text.trim());
+       const isBullet = /^[*\-•]\s/.test(text.trim());
         if (isBullet) {
             text = text.trim().substring(1).trim(); // Remove the '*' or '-' 
             return `<ul style="margin-left: 20px; margin-bottom: 10px; list-style-type: disc;"><li class="reading-text" style="margin-bottom: 5px;">${renderInteractiveParagraph(text, item.context)}</li></ul>`;
@@ -445,13 +445,14 @@ function escapeHtml(value) {
     return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
-// REPLACE EXISTING callGrokForDecode FUNCTION
+// 🔥 STEP 3: REPLACE ENTIRE callGrokForDecode FUNCTION 🔥
 async function callGrokForDecode(englishText, chapterTitle, lineContext) {
     const API_KEY = "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"; 
     const url = "https://api.groq.com/openai/v1/chat/completions";
     
+    // Prompt mein 'expert in auditing standards' add kar diya hai
     const prompt = `
-You are an expert CA Audit Tutor. We are studying "${chapterTitle}".
+You are an expert CA Audit Tutor and an expert in auditing standards. We are studying "${chapterTitle}".
 [CURRENT TOPIC]: "${lineContext}"
 [TEXT TO EXPLAIN]: "${englishText}"
 
@@ -465,10 +466,10 @@ Return ONLY a valid JSON object in this format:
             method: "POST",
             headers: { "Authorization": `Bearer ${API_KEY}`, "Content-Type": "application/json" },
             body: JSON.stringify({
-                model: "llama3-8b-8192", // Fast and reliable model
+                model: "llama-3.3-70b-versatile", // 🔥 Naya fast aur smart model
                 messages: [{ role: "user", content: prompt }],
                 temperature: 0.5,
-                max_tokens: 200 // Prevent API from timing out
+                max_tokens: 300 
             })
         });
 
@@ -490,9 +491,9 @@ Return ONLY a valid JSON object in this format:
         return JSON.parse(content);
         
     } catch (error) {
-                console.error("AI Decoder Error:", error);
-                decUrdu.innerText = "⚠️ API Error: " + error.message;
-            }
+        console.error("Grok API Error Details:", error);
+        throw error; 
+    }
 }
 
 window.turnSpread = turnSpread;
