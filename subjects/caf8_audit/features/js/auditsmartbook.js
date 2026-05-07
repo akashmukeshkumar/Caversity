@@ -93,12 +93,12 @@ async function fetchChapterJson(chapterNumber) {
 }
 
 
-// 🔥 STEP 2: REPLACE renderBook FUNCTION 🔥
+// 🔥 STEP 1: REPLACE renderBook FUNCTION 🔥
 function renderBook(data) {
     const spreads = [];
-    if (window.currentChapterNum === 1) {
-        spreads.push(renderCoverSpread(data));
-    }
+    
+    // Ab cover page HAR chapter pe aayega
+    spreads.push(renderCoverSpread(data));
 
     const pages = paginateChapter(data);
     for (let i = 0; i < pages.length; i += 2) {
@@ -109,29 +109,20 @@ function renderBook(data) {
     currentSpread = 1; 
     spreadContainer.innerHTML = spreads.join('');
     
-    if (window.currentChapterNum === 1) {
-        bookFrame.classList.add('cover-mode');
-    } else {
-        bookFrame.classList.remove('cover-mode');
-    }
+    // Har naya chapter load hone par cover-mode on kar do
+    bookFrame.classList.add('cover-mode');
 
-    // 🔴 THE FIX: Ensure all spreads are hidden first, then strictly show Spread 1
     document.querySelectorAll('.book-spread').forEach(s => s.classList.remove('active', 'flip-anim'));
     const firstSpread = document.getElementById('spread-1');
     if (firstSpread) {
         firstSpread.classList.add('active', 'flip-anim');
     }
 }
+// 🔥 STEP 3: REPLACE turnSpread FUNCTION 🔥
 function turnSpread(direction) {
-    // Continuous flow: Chapter end par agla load ho
-    if (direction === 1 && currentSpread >= totalSpreads) {
-        if (window.currentChapterNum < 16) loadSpecificChapter(window.currentChapterNum + 1);
-        return;
-    }
-    if (direction === -1 && currentSpread <= 1) {
-        if (window.currentChapterNum > 1) loadSpecificChapter(window.currentChapterNum - 1);
-        return;
-    }
+    // Auto-Next chapter pe jana band kar diya hai
+    if (direction === 1 && currentSpread >= totalSpreads) return;
+    if (direction === -1 && currentSpread <= 1) return;
 
     pageFlipSound.currentTime = 0;
     pageFlipSound.play().catch(() => {});
@@ -139,7 +130,8 @@ function turnSpread(direction) {
     document.querySelectorAll('.book-spread').forEach(s => s.classList.remove('active', 'flip-anim'));
     currentSpread += direction;
 
-    if (window.currentChapterNum === 1 && currentSpread === 1) {
+    // Jab spread 1 (Cover Page) ho to cover mode lagao, warna hata do
+    if (currentSpread === 1) {
         bookFrame.classList.add('cover-mode');
     } else {
         bookFrame.classList.remove('cover-mode');
@@ -150,22 +142,24 @@ function turnSpread(direction) {
     updateNavigation();
 }
 
+// 🔥 STEP 2: REPLACE renderCoverSpread FUNCTION 🔥
 function renderCoverSpread(data) {
     return `
-        <div class="book-spread active" id="spread-1" data-chp="AUDIT">
+        <div class="book-spread active" id="spread-1" data-chp="${escapeHtml(currentChapterName)}">
             <div class="page-left blank-page"></div>
             <div class="page-right cover-content">
                 <i class="fa-solid fa-scale-balanced" style="font-size: 3.5rem; color: var(--accent-blue); margin-bottom: 20px;"></i>
                 <h1 class="book-title" style="font-size: 4rem; letter-spacing: 2px;">AUDIT</h1>
-                <p class="cover-subtitle">An Interactive Guide to Core Auditing Concepts</p>
-                <div class="cover-author">Audit by Caversity</div>
+                
+                <p class="cover-subtitle" style="font-size: 1.3rem; color: var(--accent-blue); font-weight: 800; margin-bottom: 8px;">${escapeHtml(currentChapterName)}</p>
+                <p class="cover-subtitle" style="font-size: 1.1rem; line-height: 1.4; padding: 0 20px;">${escapeHtml(currentChapterTitle)}</p>
+                
+                <div class="cover-author" style="margin-top: 35px;">Audit by Caversity</div>
                 <div class="page-num-right">1</div>
             </div>
         </div>
     `;
 }
-
-// 🔥 STEP 1: PAGINATION HEIGHT FIX 🔥
 // 🔥 STEP 2: REPLACE paginateChapter FUNCTION 🔥
 function paginateChapter(data) {
     const sourcePages = Array.isArray(data.pages) ? data.pages : [];
@@ -292,22 +286,18 @@ function renderPage(page, side) {
     `;
 }
 
-// 🔥 STEP 3: REPLACE renderBlankPage FUNCTION 🔥
+// 🔥 STEP 4: REPLACE renderBlankPage FUNCTION 🔥
 function renderBlankPage(side) {
     const sideClass = side === 'left' ? 'page-left' : 'page-right';
-    const nextChp = window.currentChapterNum + 1;
     
     return `
         <div class="${sideClass} blank-page" style="text-align: center;">
             <h2 style="color: var(--accent-blue); font-size: 2.2rem; margin-bottom: 10px; font-family: 'Merriweather', serif;">The End</h2>
-            <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 25px; color: #64748b;">Chapter ${window.currentChapterNum} Completed</p>
-            ${nextChp <= 16 
-                ? `<a href="#" onclick="event.preventDefault(); loadSpecificChapter(${nextChp})" style="color: #d97706; font-weight: bold; text-decoration: underline; font-size: 1.05rem; cursor: pointer; transition: 0.2s;">Click here to load Chapter ${nextChp}</a>` 
-                : '<p style="color: #10b981; font-weight: bold;">Course Completed!</p>'}
+            <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 25px; color: #64748b;">${escapeHtml(currentChapterName)} Completed</p>
+            <p style="color: #d97706; font-size: 0.95rem; font-style: italic;">Please select the next chapter from the Table of Contents.</p>
         </div>
     `;
 }
-
 function renderPageItem(item) {
     if (item.type === 'chapterMainTitle') {
         return `<div style="text-align:center; margin-bottom:25px; padding-bottom:15px; border-bottom:2px solid #e2e8f0;"><h2 style="color:var(--accent-blue); font-size:1.3rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin:0;">${escapeHtml(item.text)}</h2></div>`;
