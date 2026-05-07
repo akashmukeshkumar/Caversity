@@ -20,12 +20,26 @@ const decExampleBox = document.getElementById('dec-example-box');
 const decContent = document.getElementById('dec-content');
 const pageFlipSound = new Audio('subjects/caf8_audit/features/assets/book curl.mp3');
 
-// Smart lines warm styling
+/ REPLACE THIS EXISTING STYLE BLOCK
+// 🔥 SMART LINES CLEAN STYLING (No initial lines, No highlight) 🔥
 const style = document.createElement('style');
 style.innerHTML = `
-    .smart-line { cursor: pointer; transition: all 0.2s; border-bottom: 1px dashed #94a3b8; padding-bottom: 2px; } 
-    .smart-line:hover { border-bottom: 2px dotted #f59e0b; background-color: rgba(253, 224, 71, 0.4); } 
-    .smart-line.active { background-color: rgba(253, 224, 71, 0.8); border-bottom: 2px dashed #d97706; color: #000; }
+    .smart-line { 
+        cursor: pointer; 
+        transition: all 0.3s ease-in-out; /* Smooth animation */
+        border-bottom: 2px solid transparent; /* Pehle se koi line show nahi hogi */
+        padding-bottom: 1px; 
+    } 
+    .smart-line:hover { 
+        border-bottom: 2px dotted #b88645; /* Cursor upar jane par light brown dotted line */
+        background-color: transparent !important; /* Koi background highlight nahi */
+    } 
+    .smart-line.active { 
+        background-color: transparent !important; /* Click hone par bhi highlight nahi */
+        border-bottom: 2px dashed #b88645; 
+        color: #000; 
+        font-weight: bold; 
+    }
 `;
 document.head.appendChild(style);
 
@@ -79,9 +93,14 @@ async function fetchChapterJson(chapterNumber) {
     return await response.json();
 }
 
+// REPLACE EXISTING renderBook FUNCTION
 function renderBook(data) {
     const spreads = [];
-    spreads.push(renderCoverSpread(data));
+    
+    // Cover Page Sirf Chapter 1 pe show hoga
+    if (window.currentChapterNum === 1) {
+        spreads.push(renderCoverSpread(data));
+    }
 
     const pages = paginateChapter(data);
     for (let i = 0; i < pages.length; i += 2) {
@@ -93,7 +112,13 @@ function renderBook(data) {
     totalSpreads = spreads.length;
     currentSpread = 1;
     spreadContainer.innerHTML = spreads.join('');
-    bookFrame.classList.add('cover-mode');
+    
+    // Agar chapter 1 hai to layout thora different hoga cover ki wajah se
+    if (window.currentChapterNum === 1) {
+        bookFrame.classList.add('cover-mode');
+    } else {
+        bookFrame.classList.remove('cover-mode');
+    }
 }
 
 function renderCoverSpread(data) {
@@ -254,7 +279,16 @@ function renderPageItem(item) {
         return `<h2 class="section-title">${escapeHtml(item.text)}</h2>`;
     }
     if (item.type === 'paragraph') {
-        return `<p class="reading-text">${renderInteractiveParagraph(item.text, item.context)}</p>`;
+        let text = item.text || '';
+        
+        // Bullet points detect karne ka logic (* ya - se shuru hone wali line)
+        const isBullet = /^[\*\-\•]\s/.test(text.trim());
+        if (isBullet) {
+            text = text.trim().substring(1).trim(); // Remove the '*' or '-' 
+            return `<ul style="margin-left: 20px; margin-bottom: 10px; list-style-type: disc;"><li class="reading-text" style="margin-bottom: 5px;">${renderInteractiveParagraph(text, item.context)}</li></ul>`;
+        }
+        
+        return `<p class="reading-text">${renderInteractiveParagraph(text, item.context)}</p>`;
     }
     return '';
 }
@@ -264,10 +298,15 @@ function renderInteractiveParagraph(text, context) {
     const sentences = rawText.match(/[^.!?]+[.!?]*/g) || [rawText];
     
     return sentences.map(sentence => {
-        const trimmed = sentence.trim();
+        let trimmed = sentence.trim();
         if (!trimmed) return '';
+        
         const hashId = "line_" + Math.abs(hashCode(trimmed)).toString(36);
-        return `<span class="smart-line" data-id="${hashId}" data-context="${escapeHtml(context || '')}" data-english="${escapeHtml(trimmed)}">${escapeHtml(trimmed)} </span>`;
+        
+        // JSON ke **bold** text ko real Bold (strong) mein convert karna
+        let formattedText = escapeHtml(trimmed).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        
+        return `<span class="smart-line" data-id="${hashId}" data-context="${escapeHtml(context || '')}" data-english="${escapeHtml(trimmed)}">${formattedText} </span>`;
     }).join('');
 }
 
@@ -406,54 +445,55 @@ function escapeHtml(value) {
     return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
+// REPLACE EXISTING callGrokForDecode FUNCTION
 async function callGrokForDecode(englishText, chapterTitle, lineContext) {
     const API_KEY = "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"; 
     const url = "https://api.groq.com/openai/v1/chat/completions";
     
     const prompt = `
 You are an expert CA Audit Tutor. We are studying "${chapterTitle}".
+[CURRENT TOPIC]: "${lineContext}"
+[TEXT TO EXPLAIN]: "${englishText}"
 
-[CURRENT TOPIC / HEADING CONTEXT]:
-"${lineContext}"
-
-[TEXT TO EXPLAIN]:
-"${englishText}"
-
-Read the context heading above, and explain the exact [TEXT TO EXPLAIN] in easy Roman Urdu (1-2 lines). 
-Provide a short corporate practical example relevant to this text.
+Explain the [TEXT TO EXPLAIN] in easy Roman Urdu (1-2 lines). Provide a short practical corporate example.
 Return ONLY a valid JSON object in this format:
 {"urdu": "asaan urdu explanation here", "example": "practical corporate example here"}
 `;
 
-    const response = await fetch(url, {
-        method: "POST",
-        headers: { "Authorization": `Bearer ${API_KEY}`, "Content-Type": "application/json" },
-        body: JSON.stringify({
-            model: "mixtral-8x7b-32768",
-            messages: [{ role: "user", content: prompt }],
-            temperature: 0.7
-        })
-    });
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: { "Authorization": `Bearer ${API_KEY}`, "Content-Type": "application/json" },
+            body: JSON.stringify({
+                model: "llama3-8b-8192", // Fast and reliable model
+                messages: [{ role: "user", content: prompt }],
+                temperature: 0.5,
+                max_tokens: 200 // Prevent API from timing out
+            })
+        });
 
-    if (!response.ok) throw new Error("API Network Error");
-    const json = await response.json();
-    if (!json || !json.choices || json.choices.length === 0) {
-        throw new Error("Invalid AI Response format");
-    }
-    
-    let content = json.choices[0].message.content;
-    const jsonMatch = content.match(/\{[\s\S]*\}/);
-    if (jsonMatch) content = jsonMatch[0];
-    else content = content.replace(/```json/g, '').replace(/```/g, '').trim();
-    
-    return JSON.parse(content);
+        if (!response.ok) {
+            const errData = await response.json();
+            throw new Error(errData.error?.message || "API Error: " + response.status);
+        }
+        
+        const json = await response.json();
+        if (!json || !json.choices || json.choices.length === 0) {
+            throw new Error("Invalid AI Response format");
+        }
+        
+        let content = json.choices[0].message.content;
+        const jsonMatch = content.match(/\{[\s\S]*\}/);
+        if (jsonMatch) content = jsonMatch[0];
+        else content = content.replace(/```json/g, '').replace(/```/g, '').trim();
+        
+        return JSON.parse(content);
+        
+    } catch (error) {
+                console.error("AI Decoder Error:", error);
+                decUrdu.innerText = "⚠️ API Error: " + error.message;
+            }
 }
-
-document.addEventListener('click', function(event) {
-    if (!drawer.contains(event.target) && drawer.classList.contains('open')) {
-        closeDrawer();
-    }
-});
 
 window.turnSpread = turnSpread;
 window.closeDrawer = closeDrawer;
