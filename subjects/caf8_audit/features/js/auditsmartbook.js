@@ -55,6 +55,7 @@ window.loadSpecificChapter = function(chapterNumber) {
     loadChapter(chapterNumber);
 };
 
+// 🔥 STEP 1: REPLACE loadChapter FUNCTION 🔥
 async function loadChapter(chapterNumber) {
     spreadContainer.innerHTML = `
         <div class="load-message">
@@ -65,7 +66,9 @@ async function loadChapter(chapterNumber) {
     try {
         window.currentChapterNum = parseInt(chapterNumber); 
 
+        // Font load hone ka intezar aur thora sa delay taake CSS layout proper ho jaye
         if (document.fonts) await document.fonts.ready;
+        await new Promise(resolve => setTimeout(resolve, 50)); 
 
         const chapterData = await fetchChapterJson(chapterNumber);
         currentChapterTitle = chapterData.source?.title || `Chapter ${chapterNumber}`;
@@ -92,31 +95,35 @@ async function fetchChapterJson(chapterNumber) {
     return await response.json();
 }
 
-// REPLACE EXISTING renderBook FUNCTION
+// 🔥 STEP 2: REPLACE renderBook AND turnSpread FUNCTIONS 🔥
 function renderBook(data) {
     const spreads = [];
+    let spreadCount = 1;
     
-    // Cover Page Sirf Chapter 1 pe show hoga
+    // Cover Page Sirf Chapter 1 mein aayega
     if (window.currentChapterNum === 1) {
         spreads.push(renderCoverSpread(data));
+        spreadCount++;
     }
 
     const pages = paginateChapter(data);
     for (let i = 0; i < pages.length; i += 2) {
         const leftPage = pages[i];
         const rightPage = pages[i + 1];
-        spreads.push(renderContentSpread(spreads.length + 1, leftPage, rightPage, data));
+        spreads.push(renderContentSpread(spreadCount, leftPage, rightPage, data));
+        spreadCount++;
     }
 
     totalSpreads = spreads.length;
     currentSpread = 1;
     spreadContainer.innerHTML = spreads.join('');
     
-    // Agar chapter 1 hai to layout thora different hoga cover ki wajah se
+    // Layout check: Cover mode sirf Chp 1 pehli spread k liye
     if (window.currentChapterNum === 1) {
         bookFrame.classList.add('cover-mode');
     } else {
         bookFrame.classList.remove('cover-mode');
+        document.getElementById('spread-1').classList.add('active'); // Chp 2+ direct open
     }
 }
 
@@ -258,14 +265,18 @@ function renderPage(page, side) {
     `;
 }
 
+// 🔥 STEP 3: REPLACE renderBlankPage FUNCTION 🔥
 function renderBlankPage(side) {
     const sideClass = side === 'left' ? 'page-left' : 'page-right';
     const nextChp = window.currentChapterNum + 1;
+    
     return `
-        <div class="${sideClass} blank-page">
-            <i class="fa-solid fa-check-circle" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 15px;"></i>
-            <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">End of Chapter ${window.currentChapterNum}</p>
-            ${nextChp <= 16 ? `<button onclick="loadSpecificChapter(${nextChp})" style="background: var(--accent-blue); color: white; border: none; padding: 10px 22px; border-radius: 50px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(37,99,235,0.3); transition: transform 0.2s;">Turn Page to Start Chapter ${nextChp} <i class="fa-solid fa-arrow-right"></i></button>` : '<p>Course Completed!</p>'}
+        <div class="${sideClass} blank-page" style="text-align: center;">
+            <h2 style="color: var(--accent-blue); font-size: 2.2rem; margin-bottom: 10px; font-family: 'Merriweather', serif;">The End</h2>
+            <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 25px; color: #64748b;">Chapter ${window.currentChapterNum} Completed</p>
+            ${nextChp <= 16 
+                ? `<a href="#" onclick="event.preventDefault(); loadSpecificChapter(${nextChp})" style="color: #d97706; font-weight: bold; text-decoration: underline; font-size: 1.05rem; cursor: pointer; transition: 0.2s;">Click here to load Chapter ${nextChp}</a>` 
+                : '<p style="color: #10b981; font-weight: bold;">Course Completed!</p>'}
         </div>
     `;
 }
@@ -373,21 +384,8 @@ function bindSmartLines() {
 
 // 🔥 SEAMLESS CHAPTER FLOW LOGIC ADDED HERE 🔥
 function turnSpread(direction) {
-    // Agar chapter k aakhri page pe next dabaya jaye
-    if (direction === 1 && currentSpread >= totalSpreads) {
-        if (window.currentChapterNum < 16) {
-            loadSpecificChapter(window.currentChapterNum + 1);
-        }
-        return;
-    }
-    
-    // Agar chapter k pehle page pe previous dabaya jaye
-    if (direction === -1 && currentSpread <= 1) {
-        if (window.currentChapterNum > 1) {
-            loadSpecificChapter(window.currentChapterNum - 1);
-        }
-        return;
-    }
+    if (direction === 1 && currentSpread >= totalSpreads) return;
+    if (direction === -1 && currentSpread <= 1) return;
 
     pageFlipSound.currentTime = 0;
     pageFlipSound.play().catch(() => {});
@@ -397,7 +395,13 @@ function turnSpread(direction) {
     });
 
     currentSpread += direction;
-    bookFrame.classList.toggle('cover-mode', currentSpread === 1);
+    
+    // Agar Chapter 1 ka pehla page hai to single page mode karo, warna double page (remove cover-mode)
+    if (window.currentChapterNum === 1 && currentSpread === 1) {
+        bookFrame.classList.add('cover-mode');
+    } else {
+        bookFrame.classList.remove('cover-mode');
+    }
 
     const newSpread = document.getElementById(`spread-${currentSpread}`);
     if (newSpread) {
@@ -444,56 +448,59 @@ function escapeHtml(value) {
     return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
-// 🔥 STEP 3: REPLACE ENTIRE callGrokForDecode FUNCTION 🔥
+// 🔥 STEP 4: REPLACE callGrokForDecode FUNCTION COMPLETELY 🔥
 async function callGrokForDecode(englishText, chapterTitle, lineContext) {
-    const API_KEY = "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"; 
-    const url = "https://api.groq.com/openai/v1/chat/completions";
+    // TUMHARI DIRECT GROQ API KEY
+    const GROQ_API_KEY = "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";
     
-    // Prompt mein 'expert in auditing standards' add kar diya hai
     const prompt = `
-You are an expert CA Audit Tutor and an expert in auditing standards. We are studying "${chapterTitle}".
-[CURRENT TOPIC]: "${lineContext}"
-[TEXT TO EXPLAIN]: "${englishText}"
+You are "Atya" a CA Audit Tutor.
+- Expert in Auditing Standards (ISAs).
+- We are studying "${chapterTitle}". Context: "${lineContext}"
+- Explain the following text in easy Roman Urdu (1-2 sentences). 
+- Provide a short practical corporate example.
+- Return ONLY a valid JSON object in this exact format: {"urdu": "asaan urdu explanation", "example": "practical example"}
 
-Explain the [TEXT TO EXPLAIN] in easy Roman Urdu (1-2 lines). Provide a short practical corporate example.
-Return ONLY a valid JSON object in this format:
-{"urdu": "asaan urdu explanation here", "example": "practical corporate example here"}
+Text to explain: "${englishText}"
 `;
 
     try {
-        const response = await fetch(url, {
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
-            headers: { "Authorization": `Bearer ${API_KEY}`, "Content-Type": "application/json" },
+            headers: {
+                "Authorization": `Bearer ${GROQ_API_KEY}`,
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
-                model: "llama-3.3-70b-versatile", // 🔥 Naya fast aur smart model
-                messages: [{ role: "user", content: prompt }],
+                model: "llama-3.3-70b-versatile", // Tumhara super fast model
+                messages: [{"role": "user", "content": prompt}],
                 temperature: 0.5,
-                max_tokens: 300 
+                max_tokens: 300
             })
         });
 
-        if (!response.ok) {
-            const errData = await response.json();
-            throw new Error(errData.error?.message || "API Error: " + response.status);
+        const data = await response.json();
+        
+        if (data.error) {
+            throw new Error(data.error.message);
+        }
+
+        let aiReply = data.choices[0].message.content;
+        
+        // JSON Extract karna (safely)
+        const jsonMatch = aiReply.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+            aiReply = jsonMatch[0];
+        } else {
+            aiReply = aiReply.replace(/```json/g, '').replace(/```/g, '').trim();
         }
         
-        const json = await response.json();
-        if (!json || !json.choices || json.choices.length === 0) {
-            throw new Error("Invalid AI Response format");
-        }
-        
-        let content = json.choices[0].message.content;
-        const jsonMatch = content.match(/\{[\s\S]*\}/);
-        if (jsonMatch) content = jsonMatch[0];
-        else content = content.replace(/```json/g, '').replace(/```/g, '').trim();
-        
-        return JSON.parse(content);
+        return JSON.parse(aiReply);
         
     } catch (error) {
-        console.error("Grok API Error Details:", error);
-        throw error; 
+        console.error("AI Error:", error);
+        throw error;
     }
 }
-
 window.turnSpread = turnSpread;
 window.closeDrawer = closeDrawer;
