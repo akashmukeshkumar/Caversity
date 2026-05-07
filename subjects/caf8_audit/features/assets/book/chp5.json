@@ -13,8 +13,7 @@
           "paragraphs": [
             "The auditor is required by ISA 315 (revised 2019) to make an assessment of risk. This is made at both the financial statement level and at the assertion level.",
             "The auditor is then required by ISA 330 to respond to those risks. The overall responses in relation to the financial statement level risks were discussed in a separate chapter.",
-            "The responses at the assertion level involve the auditor selecting appropriate audit procedures. The choice of",
-            "audit procedures will depend on the auditor's assessment of both:",
+            "The responses at the assertion level involve the auditor selecting appropriate audit procedures. The choice of audit procedures will depend on the auditor's assessment of both:",
             "* inherent risk, and",
             "* control risk.",
             "This chapter looks at this requirement in detail and considers how the auditor's assessment of internal controls",
@@ -42,8 +41,7 @@
             "In other words, the systems-based audit approach is based on the premise that accounting systems and their related internal controls are sufficient to record transactions properly. However, the auditor should first test the controls, in order to satisfy himself that this approach to the audit is valid.",
             "The degree of effectiveness of an internal control system will depend on the following two factors:",
             "* The design of the internal control system and the individual internal controls. Is the control system able to prevent material misstatements, or is it able to detect and correct material misstatements if they occur?",
-            "* The proper implementation of the controls. Are the controls operated properly by the client's",
-            "management and other employees?",
+            "* The proper implementation of the controls. Are the controls operated properly by the client's management and other employees?",
             "The outcome of this evaluation helps the auditor to assess control risk - which is one of the key elements in the audit risk model (described in an earlier chapter)."
           ]
         },
@@ -127,8 +125,7 @@
           "paragraphs": [
             "This aspect of the auditor's work will involve identifying and understanding the following:",
             "* the entity's principal business transactions;",
-            "* how these transactions and other events relevant to the financial reporting process are 'captured' (identified",
-            "and recorded) by the entity;",
+            "* how these transactions and other events relevant to the financial reporting process are 'captured' (identified and recorded) by the entity;",
             "* the processing methods, both manual and computerised, applied to those transactions;",
             "* the accounting records used, both manual and computerised, to support the figures appearing in the financial statements; and",
             "* the processes used in the preparation of the financial statements."
@@ -156,8 +153,7 @@
             "Internal controls within IT systems can be categorised into general controls and specific application controls.",
             "General IT controls",
             "General IT controls are policies and procedures that relate to many different applications (such as revenue, purchases and payroll). They support the effective functioning of application controls (explained later) by ensuring the continued proper operation of IT systems.",
-            "Because these general IT controls will apply to most or all of the entity's IT applications, if general IT controls",
-            "are weak, it is unlikely that the processing undertaken by the system will be complete and accurate.",
+            "Because these general IT controls will apply to most or all of the entity's IT applications, if general IT controls are weak, it is unlikely that the processing undertaken by the system will be complete and accurate.",
             "The auditor will therefore firstly review and test the general IT controls, in order to reach a conclusion on their effectiveness. This will enable him to assess the control risk attached to the entity's IT systems as a whole. If control risk is assessed as low he will then move on and test application controls, in order to decide if he can rely on specific systems and reduce his substantive testing.",
             "Many of the general controls apply to large computer systems that are written, developed and maintained by the client company. However, some general controls also apply to smaller entities and users of off-the-shelf accounting software.",
             "The main categories of general controls that an auditor would expect to find in a computer-based information system are:",
@@ -233,8 +229,7 @@
           "title": "2.8 System logs",
           "paragraphs": [
             "A log file is a file that records events taking place in the execution of a system. This generates an audit trail that can be used to understand the activity of the system and to diagnose problems.",
-            "Logs are essential for understanding the activities of complex systems and for analysing a system's performance,",
-            "particularly where there is little user interaction. Examples of system logs include:",
+            "Logs are essential for understanding the activities of complex systems and for analysing a system's performance, particularly where there is little user interaction. Examples of system logs include:",
             "* Which user logged-in, when and where from",
             "* Failed log-in attempts",
             "* Who accessed and amended data in a file",
@@ -345,8 +340,7 @@
           "paragraphs": [
             "Having established the control systems that are in place, and having recorded them in the audit working papers, the auditor should now evaluate the controls and establish their effectiveness. The results of this evaluation will allow the auditor to identify the control risk (which is an element of audit risk). The auditor can then decide on a systems-based or a transactions-based approach to the audit.",
             "The evaluation of accounting and control systems is a two-stage process. The auditor will need to establish:",
-            "* Whether controls are effective 'on paper'. This means that if it can be assumed that the controls are applied",
-            "properly in practice, are they sufficient?",
+            "* Whether controls are effective 'on paper'. This means that if it can be assumed that the controls are applied properly in practice, are they sufficient?",
             "* Whether the controls are applied properly, and so whether they are actually working and operating effectively. Controls may be adequate if they are applied properly, but in practice they might not be applied as they should be. This aspect of the auditor's evaluation is described in more detail in a later chapter on tests of controls."
           ]
         },
@@ -355,8 +349,7 @@
           "paragraphs": [
             "The auditor should obtain a general picture of the effectiveness of the controls established by management, by reviewing his documentation of the internal control system. This is the evaluation of the controls 'on paper'.",
             "If this 'paper' review of the controls indicates that major weaknesses exist, the auditor will probably take the view that the audit approach will have to focus on tests of transactions (substantive tests) rather than on tests of controls (a systems-based approach). A systems-based audit approach will not be appropriate if there is a high level of control risk.",
-            "If the auditor's initial assessment of the control systems shows that those systems are weak, then he will move",
-            "straight to substantive testing and will not bother to carry out tests of controls.",
+            "If the auditor's initial assessment of the control systems shows that those systems are weak, then he will move straight to substantive testing and will not bother to carry out tests of controls.",
             "Even if the controls appear to be acceptable on paper, the auditor cannot rely on them and perform a systems- based audit unless he is confident that the controls are actually working. In this situation, the next stage in the audit process is to carry out tests of controls.",
             "If the outcome of the tests of controls indicates that controls are actually operating effectively, the audit can be systems based, with a reduced amount of substantive testing. Remember that the auditor will always need to perform some substantive testing - because of the inherent limitations in any system of internal controls.",
             "In view of this ISA 330 requires that substantive procedures are carried out for each material class of transactions, account balances and disclosure. These terms are considered in a later chapter on substantive procedures.",
@@ -373,3 +366,4 @@
       ]
     }
   ]
+}
