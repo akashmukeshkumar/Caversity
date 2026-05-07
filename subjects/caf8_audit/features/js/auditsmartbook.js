@@ -28,8 +28,12 @@ const db = getFirestore(app);
         const decContent = document.getElementById('dec-content');
         const pageFlipSound = new Audio('subjects/caf8_audit/features/assets/book curl.mp3');
 
-        // Yahan par Default Chapter Load Hoga
-        document.addEventListener('DOMContentLoaded', () => loadChapter(1));
+        // 🔥 FIX: Module script hone ki wajah se direct run karo agar DOM load ho chuka ho
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => loadChapter(1));
+        } else {
+            loadChapter(1);
+        }
 
         // Table of Contents Drawer Logic
         window.openTocDrawer = function() {
@@ -66,11 +70,17 @@ const db = getFirestore(app);
         }
 
         async function fetchChapterJson(chapterNumber) {
-            const path = `subjects/caf8_audit/features/assets/book/chp${chapterNumber}.json`;
-                    const response = await fetch(path, { cache: 'no-store' });
-                    if (!response.ok) {
-                        throw new Error(path + ' returned ' + response.status);
-                    }
+            let path = `subjects/caf8_audit/features/assets/book/chp${chapterNumber}.json`;
+            let response = await fetch(path, { cache: 'no-store' });
+            
+            if (!response.ok) {
+                // 🔥 Fallback: Agar local testing mein JSON file same folder mein hai
+                path = `chp${chapterNumber}.json`;
+                response = await fetch(path, { cache: 'no-store' });
+            }
+            if (!response.ok) {
+                throw new Error('JSON load failed: ' + path);
+            }
                 const result = await response.json();
                 
                 // 🔥 Encrypted Payload Base64 Decoding Logic
