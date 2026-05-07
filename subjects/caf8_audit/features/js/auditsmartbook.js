@@ -1,6 +1,22 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAeIvzRYa7G2f0iqfpgmRaaRRoDDb-OBZ8",
+    authDomain: "caversity-48b29.firebaseapp.com",
+    projectId: "caversity-48b29",
+    storageBucket: "caversity-48b29.firebasestorage.app",
+    messagingSenderId: "836067330285",
+    appId: "1:836067330285:web:b20c125a385f7a2107e4e4"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
         let currentSpread = 1;
         let totalSpreads = 1;
         let bookDatabase = {};
+        let currentChapterTitle = ""; // Grok API ko context dene ke liye
 
         const bookFrame = document.getElementById('book-frame');
         const spreadContainer = document.getElementById('spread-container');
@@ -12,33 +28,45 @@
         const decContent = document.getElementById('dec-content');
         const pageFlipSound = new Audio('subjects/caf8_audit/features/assets/book curl.mp3');
 
-        const JSON_PATHS = [
-            '/api/data/auditbook.json',
-            '/api/get-data?file=auditbook'
-        ];
+        // Yahan par Default Chapter Load Hoga
+        document.addEventListener('DOMContentLoaded', () => loadChapter(1));
 
-        document.addEventListener('DOMContentLoaded', loadChapter);
+        // Table of Contents Drawer Logic
+        window.openTocDrawer = function() {
+            document.getElementById('toc-drawer').style.transform = 'translateX(0)';
+        };
+        window.closeTocDrawer = function() {
+            document.getElementById('toc-drawer').style.transform = 'translateX(-100%)';
+        };
+        window.loadSpecificChapter = function(chapterNumber) {
+            closeTocDrawer();
+            loadChapter(chapterNumber);
+        };
 
-        async function loadChapter() {
+        async function loadChapter(chapterNumber) {
+            spreadContainer.innerHTML = `
+                <div class="load-message">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <strong>Loading Chapter ${chapterNumber}...</strong>
+                </div>`;
+            
             try {
                 // 🔥 FIX 1: Wait for custom fonts to load so text measurement is 100% accurate
                 if (document.fonts) await document.fonts.ready;
 
-                const chapterData = await fetchChapterJson();
+                const chapterData = await fetchChapterJson(chapterNumber);
                 bookDatabase = chapterData.smart_lines || {};
+                currentChapterTitle = chapterData.source?.title || `Chapter ${chapterNumber}`; // Save title for AI
                 renderBook(chapterData);
                 bindSmartLines();
                 updateNavigation();
             } catch (error) {
-                showLoadError(error);
+                showLoadError(error, chapterNumber);
             }
         }
 
-        async function fetchChapterJson() {
-            let lastError = null;
-
-            for (const path of JSON_PATHS) {
-                try {
+        async function fetchChapterJson(chapterNumber) {
+            const path = `subjects/caf8_audit/features/assets/book/chp${chapterNumber}.json`;
                     const response = await fetch(path, { cache: 'no-store' });
                     if (!response.ok) {
                         throw new Error(path + ' returned ' + response.status);
@@ -50,12 +78,6 @@
                     return JSON.parse(atob(result.payload));
                 }
                 return result; // Fallback directly agar raw JSON aye
-                } catch (error) {
-                    lastError = error;
-                }
-            }
-
-        throw lastError || new Error('auditbook.json could not be loaded');
         }
 
         function renderBook(data) {
@@ -85,7 +107,7 @@
                         <i class="fa-solid fa-scale-balanced" style="font-size: 3.5rem; color: var(--accent-blue); margin-bottom: 20px;"></i>
                         <h1 class="book-title">${title}</h1>
                         <p class="cover-subtitle">An Interactive Guide to Core Auditing Concepts</p>
-                        <div class="cover-author">Audit by Caversity</div>
+                        <div class="cover-author">Audit by ATS</div>
                         <div class="page-num-right">1</div>
                     </div>
                 </div>
@@ -164,19 +186,10 @@
 
             sections.forEach(section => {
                 const paragraphs = Array.isArray(section?.paragraphs) ? section.paragraphs : [];
-                const smartIds = Array.isArray(section?.smart_line_ids) ? section.smart_line_ids : [];
-                const paragraphItems = paragraphs.map((paragraph, index) => {
-                    let paragraphSmartIds = smartIds.slice(index, index + 1);
-                    if (index === paragraphs.length - 1 && smartIds.length > paragraphs.length) {
-                        paragraphSmartIds = smartIds.slice(index);
-                    }
-
-                    return {
-                        type: 'paragraph',
-                        text: paragraph,
-                        smartIds: paragraphSmartIds
-                    };
-                });
+                const paragraphItems = paragraphs.map(paragraph => ({
+                    type: 'paragraph',
+                    text: paragraph
+                }));
 
                 if (section?.title && paragraphItems.length) {
                     groups.push({
@@ -250,65 +263,88 @@
             }
 
             if (item.type === 'paragraph') {
-                return `<p class="reading-text">${renderParagraphWithSmartLines(item.text, item.smartIds || [])}</p>`;
+                return `<p class="reading-text">${renderInteractiveParagraph(item.text)}</p>`;
             }
 
             return '';
         }
 
-        function renderParagraphWithSmartLines(text, smartIds) {
+        function renderInteractiveParagraph(text) {
             const rawText = String(text || '');
-            let html = escapeHtml(rawText);
-
-            smartIds.forEach(id => {
-                const data = bookDatabase[id];
-                if (!data?.english) return;
-
-                const smartText = escapeHtml(data.english);
-                const smartHtml = `<span class="smart-line" data-id="${escapeHtml(id)}" data-english="${smartText}">${smartText}</span>`;
-
-                if (html.includes(smartText)) {
-                    html = html.replace(smartText, smartHtml);
-                } else {
-                    html = wrapExistingSentence(html, id);
-                }
-            });
-
-            return html;
+            // Split paragraph into sentences logically
+            const sentences = rawText.match(/[^.!?]+[.!?]*/g) || [rawText];
+            
+            return sentences.map(sentence => {
+                const trimmed = sentence.trim();
+                if (!trimmed) return '';
+                // Generate a unique 10-character ID based on the text hash
+                const hashId = "line_" + Math.abs(hashCode(trimmed)).toString(36);
+                return `<span class="smart-line" data-id="${hashId}" data-english="${escapeHtml(trimmed)}">${escapeHtml(trimmed)} </span>`;
+            }).join('');
         }
 
-        function wrapExistingSentence(html, id) {
-            const sentenceMatch = html.match(/[^.!?]+[.!?]/);
-            const sentence = sentenceMatch ? sentenceMatch[0].trim() : html.trim();
-            if (!sentence) return html;
-
-            const wrapped = `<span class="smart-line" data-id="${escapeHtml(id)}" data-english="${escapeHtml(sentence)}">${sentence}</span>`;
-            return html.replace(sentence, wrapped);
+        function hashCode(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = (hash << 5) - hash + str.charCodeAt(i);
+                hash |= 0;
+            }
+            return hash;
         }
 
         function bindSmartLines() {
             document.querySelectorAll('.smart-line').forEach(line => {
-                line.addEventListener('click', function(event) {
+                line.addEventListener('click', async function(event) {
                     event.stopPropagation();
                     document.querySelectorAll('.smart-line').forEach(item => item.classList.remove('active'));
                     this.classList.add('active');
 
                     const lineId = this.getAttribute('data-id');
-                    const data = bookDatabase[lineId];
+                    const englishText = this.getAttribute('data-english') || this.innerText;
 
-                    if (data) {
-                        const visibleEnglish = this.getAttribute('data-english') || this.innerText || data.english || '';
-                        decEnglish.innerText = '"' + visibleEnglish + '"';
-                        decUrdu.innerText = data.urdu || 'Is concept ki explanation JSON mein available nahi.';
-                        if (data.example) {
-                            decExample.innerText = data.example;
-                            decExampleBox.style.display = 'block';
+                    // 1. Loading State UI
+                    decEnglish.innerText = '"' + englishText + '"';
+                    decUrdu.innerText = "⏳ Caversity AI is decoding this standard...";
+                    decExample.innerText = "";
+                    decExampleBox.style.display = 'none';
+                    decContent.style.display = 'block';
+                    drawer.classList.add('open');
+
+                    try {
+                        // 2. Check Firebase Database
+                        const docRef = doc(db, "book_decodes", lineId);
+                        const docSnap = await getDoc(docRef);
+
+                        if (docSnap.exists()) {
+                            // 🟢 FOUND IN DATABASE - Instant Load
+                            const data = docSnap.data();
+                            decUrdu.innerText = data.urdu;
+                            if (data.example) {
+                                decExample.innerText = data.example;
+                                decExampleBox.style.display = 'block';
+                            }
                         } else {
-                            decExample.innerText = '';
-                            decExampleBox.style.display = 'none';
+                            // 🔴 NOT IN DATABASE - Call Grok API
+                            const aiResponse = await callGrokForDecode(englishText, currentChapterTitle);
+                            
+                            // Save to Firebase for future students
+                            await setDoc(docRef, {
+                                english: englishText,
+                                urdu: aiResponse.urdu,
+                                example: aiResponse.example,
+                                created_at: new Date()
+                            });
+
+                            // Update UI
+                            decUrdu.innerText = aiResponse.urdu;
+                            if (aiResponse.example) {
+                                decExample.innerText = aiResponse.example;
+                                decExampleBox.style.display = 'block';
+                            }
                         }
-                        decContent.style.display = 'block';
-                        drawer.classList.add('open');
+                    } catch (error) {
+                        console.error(error);
+                        decUrdu.innerText = "⚠️ Connection error or AI limit reached. Please try again.";
                     }
                 });
             });
@@ -357,12 +393,12 @@
             }, 400);
         }
 
-        function showLoadError(error) {
+        function showLoadError(error, chapterNumber) {
             spreadContainer.innerHTML = `
                 <div class="load-message">
                     <i class="fa-solid fa-triangle-exclamation"></i>
-                <strong>auditbook.json load nahi ho rahi</strong>
-                <span>JSON ko <b>/api/data/auditbook.json</b> mein check karein ya API route verify karein.</span>
+                <strong>Chapter ${chapterNumber} Load Nahi Hua</strong>
+                <span>File <b>subjects/caf8_audit/features/assets/book/chp${chapterNumber}.json</b> missing hai.</span>
                     <span style="font-size: 0.8rem; opacity: 0.75;">${escapeHtml(error?.message || 'Unknown error')}</span>
                 </div>
             `;
@@ -377,6 +413,39 @@
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;')
                 .replace(/'/g, '&#039;');
+        }
+
+        async function callGrokForDecode(englishText, chapterTitle) {
+            // Groq API Key
+            const API_KEY = "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"; 
+            const url = "https://api.groq.com/openai/v1/chat/completions";
+            
+            const prompt = `
+            You are a CA Audit Tutor. We are currently studying the topic: "${chapterTitle}".
+            Explain the following text in easy Roman Urdu (1-2 lines), and give a short corporate practical example related to this topic.
+            Return ONLY a valid JSON object:
+            {
+                "urdu": "asaan urdu text",
+                "example": "practical example"
+            }
+            Text: "${englishText}"
+            `;
+
+            const response = await fetch(url, {
+                method: "POST",
+                headers: { "Authorization": `Bearer ${API_KEY}`, "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    model: "mixtral-8x7b-32768",
+                    messages: [{ role: "user", content: prompt }],
+                    temperature: 0.7
+                })
+            });
+
+            if (!response.ok) throw new Error("API Error");
+            const json = await response.json();
+            let content = json.choices[0].message.content;
+            content = content.replace(/```json/g, '').replace(/```/g, '').trim();
+            return JSON.parse(content);
         }
 
         document.addEventListener('click', function(event) {
