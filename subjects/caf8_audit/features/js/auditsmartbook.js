@@ -55,21 +55,17 @@ window.loadSpecificChapter = function(chapterNumber) {
     loadChapter(chapterNumber);
 };
 
-// 🔥 STEP 1: REPLACE loadChapter FUNCTION 🔥
-// 🔥 STEP 1: REPLACE loadChapter FUNCTION 🔥
+
+// 🔥 LAYOUT FIX: LOAD WITH STRICTOR DELAY 🔥
 async function loadChapter(chapterNumber) {
-    spreadContainer.innerHTML = `
-        <div class="load-message">
-            <i class="fa-solid fa-spinner fa-spin"></i>
-            <strong>Loading Chapter ${chapterNumber}...</strong>
-        </div>`;
+    spreadContainer.innerHTML = `<div class="load-message"><i class="fa-solid fa-spinner fa-spin"></i><strong>Loading...</strong></div>`;
     
     try {
         window.currentChapterNum = parseInt(chapterNumber); 
 
-        // Fonts load hone ka intezar aur CSS apply hone k liye 300ms ka buffer
         if (document.fonts) await document.fonts.ready;
-        await new Promise(resolve => setTimeout(resolve, 300)); 
+        // 500ms delay taake browser ka layout engine thanda ho jaye
+        await new Promise(res => setTimeout(res, 500)); 
 
         const chapterData = await fetchChapterJson(chapterNumber);
         currentChapterTitle = chapterData.source?.title || `Chapter ${chapterNumber}`;
@@ -78,6 +74,9 @@ async function loadChapter(chapterNumber) {
         renderBook(chapterData);
         bindSmartLines();
         updateNavigation();
+        
+        // Ek dafa force layout recalculation
+        window.dispatchEvent(new Event('resize'));
     } catch (error) {
         showLoadError(error, chapterNumber);
     }
