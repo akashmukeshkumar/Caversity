@@ -15,8 +15,8 @@ const db = getFirestore(app);
 
         let currentSpread = 1;
         let totalSpreads = 1;
-        let bookDatabase = {};
         let currentChapterTitle = ""; // Grok API ko context dene ke liye
+        let currentChapterName = ""; 
 
         const bookFrame = document.getElementById('book-frame');
         const spreadContainer = document.getElementById('spread-container');
@@ -28,12 +28,17 @@ const db = getFirestore(app);
         const decContent = document.getElementById('dec-content');
         const pageFlipSound = new Audio('subjects/caf8_audit/features/assets/book curl.mp3');
 
-        // 🔥 FIX: Module script hone ki wajah se direct run karo agar DOM load ho chuka ho
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => loadChapter(1));
-        } else {
-            loadChapter(1);
-        }
+        // 🔥 Inject CSS for Hover Interactivity 🔥
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .smart-line { cursor: pointer; transition: all 0.2s; border-bottom: 1px solid transparent; } 
+            .smart-line:hover { border-bottom: 2px dotted #ef4444; background-color: rgba(239,68,68,0.05); } 
+            .smart-line.active { background-color: rgba(250,204,21,0.3); border-bottom: 2px dashed #f59e0b; }
+        `;
+        document.head.appendChild(style);
+
+        // Yahan par Default Chapter Load Hoga
+        document.addEventListener('DOMContentLoaded', () => loadChapter(1));
 
         // Table of Contents Drawer Logic
         window.openTocDrawer = function() {
@@ -59,8 +64,8 @@ const db = getFirestore(app);
                 if (document.fonts) await document.fonts.ready;
 
                 const chapterData = await fetchChapterJson(chapterNumber);
-                bookDatabase = chapterData.smart_lines || {};
                 currentChapterTitle = chapterData.source?.title || `Chapter ${chapterNumber}`; // Save title for AI
+                currentChapterName = chapterData.source?.chapter || `Chapter ${chapterNumber}`;
                 renderBook(chapterData);
                 bindSmartLines();
                 updateNavigation();
@@ -70,17 +75,11 @@ const db = getFirestore(app);
         }
 
         async function fetchChapterJson(chapterNumber) {
-            let path = `subjects/caf8_audit/features/assets/book/chp${chapterNumber}.json`;
-            let response = await fetch(path, { cache: 'no-store' });
-            
-            if (!response.ok) {
-                // 🔥 Fallback: Agar local testing mein JSON file same folder mein hai
-                path = `chp${chapterNumber}.json`;
-                response = await fetch(path, { cache: 'no-store' });
-            }
-            if (!response.ok) {
-                throw new Error('JSON load failed: ' + path);
-            }
+            const path = `subjects/caf8_audit/features/assets/book/chp${chapterNumber}.json`;
+                    const response = await fetch(path, { cache: 'no-store' });
+                    if (!response.ok) {
+                        throw new Error(path + ' returned ' + response.status);
+                    }
                 const result = await response.json();
                 
                 // 🔥 Encrypted Payload Base64 Decoding Logic
@@ -108,16 +107,14 @@ const db = getFirestore(app);
         }
 
         function renderCoverSpread(data) {
-            const title = escapeHtml(data.source?.title || 'Audit Chapter');
-
             return `
-                <div class="book-spread active" id="spread-1" data-chp="${title}">
+                <div class="book-spread active" id="spread-1" data-chp="AUDIT">
                     <div class="page-left blank-page"></div>
                     <div class="page-right cover-content">
                         <i class="fa-solid fa-scale-balanced" style="font-size: 3.5rem; color: var(--accent-blue); margin-bottom: 20px;"></i>
-                        <h1 class="book-title">${title}</h1>
+                        <h1 class="book-title" style="font-size: 4rem; letter-spacing: 2px;">AUDIT</h1>
                         <p class="cover-subtitle">An Interactive Guide to Core Auditing Concepts</p>
-                        <div class="cover-author">Audit by ATS</div>
+                        <div class="cover-author">Audit by Caversity</div>
                         <div class="page-num-right">1</div>
                     </div>
                 </div>
@@ -131,16 +128,17 @@ const db = getFirestore(app);
             // 🔥 FIX 2: Wrap in a mock spread to guarantee exact CSS layout mimicking & restrict height
             const measureSpread = document.createElement('div');
             measureSpread.className = 'book-spread active';
-            measureSpread.style.cssText = 'position: absolute; width: 100%; height: 100%; visibility: hidden; z-index: -1000; top: 0; left: 0;';
+            measureSpread.style.cssText = 'position: absolute; width: 1200px; height: 100%; visibility: hidden; z-index: -1000; top: 0; left: 0; display: flex;';
 
             const measurePage = document.createElement('div');
             measurePage.className = 'page-right measure-page';
-            measurePage.style.height = '100%'; // Ensure tight boundary
+            measurePage.style.cssText = 'height: 100%; width: 50%; padding: 42px 50px 60px 60px; box-sizing: border-box; overflow: hidden;';
             
             measureSpread.appendChild(measurePage);
-            spreadContainer.appendChild(measureSpread);
+            bookFrame.appendChild(measureSpread);
 
             let currentPage = null;
+            let isFirstContent = true;
 
             sourcePages.forEach(sourcePage => {
                 if (currentPage && currentPage.items.length) {
@@ -155,7 +153,9 @@ const db = getFirestore(app);
                     currentPage.items.push(...group.items);
                     measurePage.innerHTML = renderMeasuredPage(currentPage);
 
-                    if (measurePage.scrollHeight > measurePage.clientHeight) {
+                    const isOverflowing = measurePage.scrollHeight > measurePage.clientHeight;
+                    // Safey Guard: Don't pop item if it's the only one (prevents text dropping)
+                    if (isOverflowing && previousItems.length > 0) {
                         currentPage.items = previousItems;
 
                         if (currentPage.items.length) {
@@ -223,7 +223,7 @@ const db = getFirestore(app);
             const headingHtml = page.showHeading ? `<h1 class="book-title">${escapeHtml(page.heading || 'Chapter Page')}</h1>` : '';
 
             return `
-                <span class="chapter-header">Chapter 1</span>
+                <span class="chapter-header">${escapeHtml(currentChapterName)}</span>
                 ${headingHtml}
                 ${page.items.map(renderPageItem).join('')}
             `;
@@ -249,7 +249,7 @@ const db = getFirestore(app);
 
             return `
                 <div class="${sideClass}">
-                    <span class="chapter-header">Chapter 1</span>
+                    <span class="chapter-header">${escapeHtml(currentChapterName)}</span>
                     ${headingHtml}
                     ${contentHtml}
                     <div class="${pageNumClass}">${escapeHtml(pageNumber)}</div>
@@ -268,6 +268,9 @@ const db = getFirestore(app);
         }
 
         function renderPageItem(item) {
+            if (item.type === 'chapterMainTitle') {
+                return `<div style="text-align:center; margin-bottom:25px; padding-bottom:15px; border-bottom:2px solid #e2e8f0;"><h2 style="color:var(--accent-blue); font-size:1.3rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin:0;">${escapeHtml(item.text)}</h2></div>`;
+            }
             if (item.type === 'sectionTitle') {
                 return `<h2 class="section-title">${escapeHtml(item.text)}</h2>`;
             }
@@ -314,7 +317,7 @@ const db = getFirestore(app);
 
                     // 1. Loading State UI
                     decEnglish.innerText = '"' + englishText + '"';
-                    decUrdu.innerText = "⏳ Caversity AI is decoding this standard...";
+                    decUrdu.innerText = "⏳ AI is decoding this standard...";
                     decExample.innerText = "";
                     decExampleBox.style.display = 'none';
                     decContent.style.display = 'block';
