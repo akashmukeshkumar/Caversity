@@ -22,10 +22,43 @@
 
     <header>
         <div class="logo"><i class="fa-solid fa-book-open-reader"></i> Audit Smart Book</div>
-        <a href="audit.html" class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i> Back to Home
-        </a>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <button class="back-btn" onclick="openTocDrawer()" style="background: rgba(255,255,255,0.2); border: none; padding: 8px 15px; border-radius: 8px; color: white; cursor: pointer; font-weight: 600;">
+                <i class="fa-solid fa-list-ul"></i> Table of Contents
+            </button>
+            <a href="audit.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
     </header>
+
+    <!-- 🔥 TABLE OF CONTENTS DRAWER 🔥 -->
+    <div class="magic-drawer" id="toc-drawer" style="left: 0; right: auto; transform: translateX(-100%);">
+        <div class="drawer-header">
+            <h3><i class="fa-solid fa-bookmark"></i> Chapters Index</h3>
+            <button class="btn-close" onclick="closeTocDrawer()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="drawer-body" style="overflow-y: auto; padding: 15px;">
+            <ul id="toc-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                <li onclick="loadSpecificChapter(1)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 1: Concept and need for audit</li>
+                <li onclick="loadSpecificChapter(2)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 2: Obtaining an engagement</li>
+                <li onclick="loadSpecificChapter(3)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 3: Planning and risk assessment</li>
+                <li onclick="loadSpecificChapter(4)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 4: Evidence and sampling</li>
+                <li onclick="loadSpecificChapter(5)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 5: Internal control</li>
+                <li onclick="loadSpecificChapter(6)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 6: Tests of controls</li>
+                <li onclick="loadSpecificChapter(7)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 7: Introduction to substantive procedures</li>
+                <li onclick="loadSpecificChapter(8)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 8: Substantive procedures: Non-current assets</li>
+                <li onclick="loadSpecificChapter(9)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 9: Substantive procedures: Current assets</li>
+                <li onclick="loadSpecificChapter(10)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 10: Substantive procedures: Other areas</li>
+                <li onclick="loadSpecificChapter(11)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 11: Related party transactions</li>
+                <li onclick="loadSpecificChapter(12)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 12: Reliance on others</li>
+                <li onclick="loadSpecificChapter(13)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 13: Professional ethics and code of conduct</li>
+                <li onclick="loadSpecificChapter(14)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 14: Audit finalisation - Reporting</li>
+                <li onclick="loadSpecificChapter(15)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 15: Audit finalisation - Final evaluation</li>
+                <li onclick="loadSpecificChapter(16)" style="padding: 12px; background: #f8fafc; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; font-weight: 600; color: #1e3a8a;"><i class="fa-solid fa-book" style="margin-right: 8px;"></i> Chapter 16: Review and assurance engagements</li>
+            </ul>
+        </div>
+    </div>
 
     <div class="book-environment">
         <div class="book-frame cover-mode" id="book-frame">
