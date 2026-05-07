@@ -56,6 +56,7 @@ window.loadSpecificChapter = function(chapterNumber) {
 };
 
 // 🔥 STEP 1: REPLACE loadChapter FUNCTION 🔥
+// 🔥 STEP 1: REPLACE loadChapter FUNCTION 🔥
 async function loadChapter(chapterNumber) {
     spreadContainer.innerHTML = `
         <div class="load-message">
@@ -66,9 +67,9 @@ async function loadChapter(chapterNumber) {
     try {
         window.currentChapterNum = parseInt(chapterNumber); 
 
-        // Font load hone ka intezar aur thora sa delay taake CSS layout proper ho jaye
+        // Fonts load hone ka intezar aur CSS apply hone k liye 300ms ka buffer
         if (document.fonts) await document.fonts.ready;
-        await new Promise(resolve => setTimeout(resolve, 50)); 
+        await new Promise(resolve => setTimeout(resolve, 300)); 
 
         const chapterData = await fetchChapterJson(chapterNumber);
         currentChapterTitle = chapterData.source?.title || `Chapter ${chapterNumber}`;
@@ -164,6 +165,7 @@ function renderCoverSpread(data) {
 }
 
 // 🔥 STEP 1: PAGINATION HEIGHT FIX 🔥
+// 🔥 STEP 2: REPLACE paginateChapter FUNCTION 🔥
 function paginateChapter(data) {
     const sourcePages = Array.isArray(data.pages) ? data.pages : [];
     const displayPages = [];
@@ -174,15 +176,19 @@ function paginateChapter(data) {
 
     const measurePage = document.createElement('div');
     measurePage.className = 'page-right'; 
-    // Yahan 60px minus kar diya taake page number k liye jagah bache
-    measurePage.style.cssText = 'height: calc(100% - 60px); overflow: auto; padding-bottom: 20px;'; 
+    // Inline math hata diya, ab yeh exactly CSS file ki 80px padding uthayega
+    measurePage.style.cssText = 'height: 100%; overflow: auto;'; 
     
     measureSpread.appendChild(measurePage);
     bookFrame.appendChild(measureSpread);
 
     let currentPage = null;
+
     sourcePages.forEach(sourcePage => {
-        if (currentPage && currentPage.items.length) displayPages.push(currentPage);
+        if (currentPage && currentPage.items.length) {
+            displayPages.push(currentPage);
+        }
+
         currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', true);
         const groups = buildPageGroups(sourcePage);
 
@@ -191,10 +197,14 @@ function paginateChapter(data) {
             currentPage.items.push(...group.items);
             measurePage.innerHTML = renderMeasuredPage(currentPage);
 
-            // Strict height check
+            // Strict measurement based purely on CSS
             if (measurePage.scrollHeight > measurePage.clientHeight) { 
                 currentPage.items = previousItems;
-                if (currentPage.items.length) displayPages.push(currentPage);
+
+                if (currentPage.items.length) {
+                    displayPages.push(currentPage);
+                }
+
                 currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', false);
                 currentPage.items.push(...group.items);
                 measurePage.innerHTML = renderMeasuredPage(currentPage);
@@ -202,9 +212,15 @@ function paginateChapter(data) {
         });
     });
 
-    if (currentPage && currentPage.items.length) displayPages.push(currentPage);
+    if (currentPage && currentPage.items.length) {
+        displayPages.push(currentPage);
+    }
+
     measureSpread.remove(); 
-    displayPages.forEach((page, index) => { page.page = index + 2; });
+    displayPages.forEach((page, index) => {
+        page.page = index + 2;
+    });
+
     return displayPages;
 }
 
@@ -432,7 +448,7 @@ function escapeHtml(value) {
 async function callGrokForDecode(englishText, chapterTitle, lineContext) {
     const GROQ_API_KEY = "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";
     
-    const prompt = `You are Atya, a CA Audit Expert. Explain this audit concept in 2 lines of Roman Urdu and give 1 corporate example. Return ONLY JSON: {"urdu": "...", "example": "..."}. Context: ${chapterTitle} -> ${lineContext}. Text: "${englishText}"`;
+    const prompt = `You are Caversity AI, a CA Audit Expert. Explain this audit concept in 2 lines of Roman Urdu English and give 1 practical example. Return ONLY JSON: {"urdu": "...", "example": "..."}. Context: ${chapterTitle} -> ${lineContext}. Text: "${englishText}"`;
 
     try {
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
