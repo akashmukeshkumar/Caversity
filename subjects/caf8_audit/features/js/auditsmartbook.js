@@ -56,27 +56,51 @@ window.loadSpecificChapter = function(chapterNumber) {
 };
 
 
-// 🔥 LAYOUT FIX: LOAD WITH STRICTOR DELAY 🔥
+// 🔥 THE ULTIMATE JUGAR: REPLACE loadChapter FUNCTION 🔥
 async function loadChapter(chapterNumber) {
-    spreadContainer.innerHTML = `<div class="load-message"><i class="fa-solid fa-spinner fa-spin"></i><strong>Loading...</strong></div>`;
+    spreadContainer.innerHTML = `
+        <div class="load-message">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <strong>Loading Chapter ${chapterNumber}...</strong>
+        </div>`;
     
     try {
         window.currentChapterNum = parseInt(chapterNumber); 
 
         if (document.fonts) await document.fonts.ready;
-        // 500ms delay taake browser ka layout engine thanda ho jaye
-        await new Promise(res => setTimeout(res, 500)); 
 
         const chapterData = await fetchChapterJson(chapterNumber);
         currentChapterTitle = chapterData.source?.title || `Chapter ${chapterNumber}`;
         currentChapterName = chapterData.source?.chapter || `Chapter ${chapterNumber}`;
         
+        // 🔥 JUGAR PHASE 1: Kacha (Rough) Render taake browser CSS aur Fonts pakar le
         renderBook(chapterData);
-        bindSmartLines();
-        updateNavigation();
-        
-        // Ek dafa force layout recalculation
-        window.dispatchEvent(new Event('resize'));
+
+        // 🔥 JUGAR PHASE 2: 400ms baad background mein full magic trick
+        setTimeout(() => {
+            // 1. Poori book naye aur perfect CSS measurement k sath dobara banao
+            renderBook(chapterData); 
+            
+            // 2. Ajeeb awaz na aaye is liye background page turn ka sound off kiya
+            const oldVol = pageFlipSound.volume;
+            pageFlipSound.volume = 0; 
+
+            // 3. CODE KO DHOKA: Code khud 2 page aagay jayega
+            if (totalSpreads > 1) turnSpread(1);
+            if (totalSpreads > 2) turnSpread(1);
+
+            // 4. CODE KO DHOKA: Code khud foran wapis pehle page par aayega
+            if (totalSpreads > 2) turnSpread(-1);
+            if (totalSpreads > 1) turnSpread(-1);
+
+            // 5. Sound wapas on kar do
+            pageFlipSound.volume = oldVol; 
+            
+            // 6. Ab AI aur Clicks k functions on kar do
+            bindSmartLines();
+            updateNavigation();
+        }, 400); // 0.4 seconds ke andar yeh sara hack chal jayega
+
     } catch (error) {
         showLoadError(error, chapterNumber);
     }
@@ -470,9 +494,9 @@ function escapeHtml(value) {
 
 // 🔥 STEP 3: GROK API RELIABILITY FIX 🔥
 async function callGrokForDecode(englishText, chapterTitle, lineContext) {
-    const GROQ_API_KEY = "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";
+    const GROQ_API_KEY = "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";
     
-    const prompt = `You are Caversity AI, a CA Audit Expert. Explain this audit concept in 2 lines of Roman Urdu English and give 1 practical example. Return ONLY JSON: {"urdu": "...", "example": "..."}. Context: ${chapterTitle} -> ${lineContext}. Text: "${englishText}"`;
+    const prompt = `You are Caversity AI, a CA Audit Expert. Explain this audit concept in 2 lines of Roman Urdu English and give 1 practical example(dont use any hindi word). Return ONLY JSON: {"urdu": "...", "example": "..."}. Context: ${chapterTitle} -> ${lineContext}. Text: "${englishText}"`;
 
     try {
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
