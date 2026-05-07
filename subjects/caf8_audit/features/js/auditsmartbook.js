@@ -1,16 +1,7 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAeIvzRYa7G2f0iqfpgmRaaRRoDDb-OBZ8",
-    authDomain: "caversity-48b29.firebaseapp.com",
-    projectId: "caversity-48b29",
-    storageBucket: "caversity-48b29.firebasestorage.app",
-    messagingSenderId: "836067330285",
-    appId: "1:836067330285:web:b20c125a385f7a2107e4e4"
-};
-
-const app = initializeApp(firebaseConfig);
+const app = getApp(); // security.js pehle hi isay initialize kar chuka hai
 const db = getFirestore(app);
 
         let currentSpread = 1;
@@ -75,11 +66,15 @@ const db = getFirestore(app);
         }
 
         async function fetchChapterJson(chapterNumber) {
-            const path = `subjects/caf8_audit/features/assets/book/chp${chapterNumber}.json`;
-                    const response = await fetch(path, { cache: 'no-store' });
-                    if (!response.ok) {
-                        throw new Error(path + ' returned ' + response.status);
-                    }
+            let path = `subjects/caf8_audit/features/assets/book/chp${chapterNumber}.json`;
+            let response = await fetch(path, { cache: 'no-store' });
+            if (!response.ok) {
+                path = `chp${chapterNumber}.json`;
+                response = await fetch(path, { cache: 'no-store' });
+            }
+            if (!response.ok) {
+                throw new Error('Chapter JSON file not found: ' + path);
+            }
                 const result = await response.json();
                 
                 // 🔥 Encrypted Payload Base64 Decoding Logic
