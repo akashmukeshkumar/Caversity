@@ -20,7 +20,6 @@ const decExampleBox = document.getElementById('dec-example-box');
 const decContent = document.getElementById('dec-content');
 const pageFlipSound = new Audio('subjects/caf8_audit/features/assets/book curl.mp3');
 
-/ REPLACE THIS EXISTING STYLE BLOCK
 // 🔥 STEP 1: REPLACE EXISTING STYLE BLOCK 🔥
 const style = document.createElement('style');
 style.innerHTML = `
