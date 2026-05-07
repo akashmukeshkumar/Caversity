@@ -95,36 +95,57 @@ async function fetchChapterJson(chapterNumber) {
     return await response.json();
 }
 
-// 🔥 STEP 2: REPLACE renderBook AND turnSpread FUNCTIONS 🔥
+// 🔥 STEP 2: NAVIGATION & SPREAD SYNC 🔥
 function renderBook(data) {
     const spreads = [];
-    let spreadCount = 1;
-    
-    // Cover Page Sirf Chapter 1 mein aayega
     if (window.currentChapterNum === 1) {
         spreads.push(renderCoverSpread(data));
-        spreadCount++;
     }
 
     const pages = paginateChapter(data);
     for (let i = 0; i < pages.length; i += 2) {
-        const leftPage = pages[i];
-        const rightPage = pages[i + 1];
-        spreads.push(renderContentSpread(spreadCount, leftPage, rightPage, data));
-        spreadCount++;
+        // spreads.length + 1 dynamic index rakha hai taake jump na ho
+        spreads.push(renderContentSpread(spreads.length + 1, pages[i], pages[i + 1], data));
     }
 
     totalSpreads = spreads.length;
-    currentSpread = 1;
+    currentSpread = 1; // Hamesha reset to 1
     spreadContainer.innerHTML = spreads.join('');
     
-    // Layout check: Cover mode sirf Chp 1 pehli spread k liye
     if (window.currentChapterNum === 1) {
         bookFrame.classList.add('cover-mode');
     } else {
         bookFrame.classList.remove('cover-mode');
-        document.getElementById('spread-1').classList.add('active'); // Chp 2+ direct open
     }
+    document.getElementById('spread-1').classList.add('active');
+}
+
+function turnSpread(direction) {
+    // Continuous flow: Chapter end par agla load ho
+    if (direction === 1 && currentSpread >= totalSpreads) {
+        if (window.currentChapterNum < 16) loadSpecificChapter(window.currentChapterNum + 1);
+        return;
+    }
+    if (direction === -1 && currentSpread <= 1) {
+        if (window.currentChapterNum > 1) loadSpecificChapter(window.currentChapterNum - 1);
+        return;
+    }
+
+    pageFlipSound.currentTime = 0;
+    pageFlipSound.play().catch(() => {});
+
+    document.querySelectorAll('.book-spread').forEach(s => s.classList.remove('active', 'flip-anim'));
+    currentSpread += direction;
+
+    if (window.currentChapterNum === 1 && currentSpread === 1) {
+        bookFrame.classList.add('cover-mode');
+    } else {
+        bookFrame.classList.remove('cover-mode');
+    }
+
+    const nextOne = document.getElementById(`spread-${currentSpread}`);
+    if (nextOne) nextOne.classList.add('active', 'flip-anim');
+    updateNavigation();
 }
 
 function renderCoverSpread(data) {
@@ -142,28 +163,26 @@ function renderCoverSpread(data) {
     `;
 }
 
+// 🔥 STEP 1: PAGINATION HEIGHT FIX 🔥
 function paginateChapter(data) {
     const sourcePages = Array.isArray(data.pages) ? data.pages : [];
     const displayPages = [];
     
     const measureSpread = document.createElement('div');
     measureSpread.className = 'book-spread active';
-    measureSpread.style.cssText = 'position: absolute; width: 100%; height: 100%; visibility: hidden; z-index: -1000; top: 0; left: 0; display: flex; flex-direction: row;';
+    measureSpread.style.cssText = 'position: absolute; width: 100%; height: 100%; visibility: hidden; z-index: -1000; top: 0; left: 0; display: flex;';
 
     const measurePage = document.createElement('div');
     measurePage.className = 'page-right'; 
-    measurePage.style.cssText = 'height: 100%; overflow: auto;'; 
+    // Yahan 60px minus kar diya taake page number k liye jagah bache
+    measurePage.style.cssText = 'height: calc(100% - 60px); overflow: auto; padding-bottom: 20px;'; 
     
     measureSpread.appendChild(measurePage);
     bookFrame.appendChild(measureSpread);
 
     let currentPage = null;
-
     sourcePages.forEach(sourcePage => {
-        if (currentPage && currentPage.items.length) {
-            displayPages.push(currentPage);
-        }
-
+        if (currentPage && currentPage.items.length) displayPages.push(currentPage);
         currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', true);
         const groups = buildPageGroups(sourcePage);
 
@@ -172,13 +191,10 @@ function paginateChapter(data) {
             currentPage.items.push(...group.items);
             measurePage.innerHTML = renderMeasuredPage(currentPage);
 
-            if (measurePage.scrollHeight > measurePage.clientHeight + 2) { 
+            // Strict height check
+            if (measurePage.scrollHeight > measurePage.clientHeight) { 
                 currentPage.items = previousItems;
-
-                if (currentPage.items.length) {
-                    displayPages.push(currentPage);
-                }
-
+                if (currentPage.items.length) displayPages.push(currentPage);
                 currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', false);
                 currentPage.items.push(...group.items);
                 measurePage.innerHTML = renderMeasuredPage(currentPage);
@@ -186,15 +202,9 @@ function paginateChapter(data) {
         });
     });
 
-    if (currentPage && currentPage.items.length) {
-        displayPages.push(currentPage);
-    }
-
+    if (currentPage && currentPage.items.length) displayPages.push(currentPage);
     measureSpread.remove(); 
-    displayPages.forEach((page, index) => {
-        page.page = index + 2;
-    });
-
+    displayPages.forEach((page, index) => { page.page = index + 2; });
     return displayPages;
 }
 
@@ -448,21 +458,11 @@ function escapeHtml(value) {
     return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
-// 🔥 STEP 4: REPLACE callGrokForDecode FUNCTION COMPLETELY 🔥
+// 🔥 STEP 3: GROK API RELIABILITY FIX 🔥
 async function callGrokForDecode(englishText, chapterTitle, lineContext) {
-    // TUMHARI DIRECT GROQ API KEY
     const GROQ_API_KEY = "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";
     
-    const prompt = `
-You are "Atya" a CA Audit Tutor.
-- Expert in Auditing Standards (ISAs).
-- We are studying "${chapterTitle}". Context: "${lineContext}"
-- Explain the following text in easy Roman Urdu (1-2 sentences). 
-- Provide a short practical corporate example.
-- Return ONLY a valid JSON object in this exact format: {"urdu": "asaan urdu explanation", "example": "practical example"}
-
-Text to explain: "${englishText}"
-`;
+    const prompt = `You are Atya, a CA Audit Expert. Explain this audit concept in 2 lines of Roman Urdu and give 1 corporate example. Return ONLY JSON: {"urdu": "...", "example": "..."}. Context: ${chapterTitle} -> ${lineContext}. Text: "${englishText}"`;
 
     try {
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -472,31 +472,18 @@ Text to explain: "${englishText}"
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "llama-3.3-70b-versatile", // Tumhara super fast model
+                model: "llama-3.3-70b-versatile",
                 messages: [{"role": "user", "content": prompt}],
-                temperature: 0.5,
-                max_tokens: 300
+                temperature: 0.5
             })
         });
 
         const data = await response.json();
-        
-        if (data.error) {
-            throw new Error(data.error.message);
-        }
+        if (data.error) throw new Error(data.error.message);
 
         let aiReply = data.choices[0].message.content;
-        
-        // JSON Extract karna (safely)
         const jsonMatch = aiReply.match(/\{[\s\S]*\}/);
-        if (jsonMatch) {
-            aiReply = jsonMatch[0];
-        } else {
-            aiReply = aiReply.replace(/```json/g, '').replace(/```/g, '').trim();
-        }
-        
-        return JSON.parse(aiReply);
-        
+        return JSON.parse(jsonMatch ? jsonMatch[0] : aiReply);
     } catch (error) {
         console.error("AI Error:", error);
         throw error;
