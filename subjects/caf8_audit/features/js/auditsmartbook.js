@@ -96,7 +96,8 @@ async function fetchChapterJson(chapterNumber) {
     return await response.json();
 }
 
-// 🔥 STEP 2: NAVIGATION & SPREAD SYNC 🔥
+
+// 🔥 STEP 2: REPLACE renderBook FUNCTION 🔥
 function renderBook(data) {
     const spreads = [];
     if (window.currentChapterNum === 1) {
@@ -105,12 +106,11 @@ function renderBook(data) {
 
     const pages = paginateChapter(data);
     for (let i = 0; i < pages.length; i += 2) {
-        // spreads.length + 1 dynamic index rakha hai taake jump na ho
         spreads.push(renderContentSpread(spreads.length + 1, pages[i], pages[i + 1], data));
     }
 
     totalSpreads = spreads.length;
-    currentSpread = 1; // Hamesha reset to 1
+    currentSpread = 1; 
     spreadContainer.innerHTML = spreads.join('');
     
     if (window.currentChapterNum === 1) {
@@ -118,9 +118,14 @@ function renderBook(data) {
     } else {
         bookFrame.classList.remove('cover-mode');
     }
-    document.getElementById('spread-1').classList.add('active');
-}
 
+    // 🔴 THE FIX: Ensure all spreads are hidden first, then strictly show Spread 1
+    document.querySelectorAll('.book-spread').forEach(s => s.classList.remove('active', 'flip-anim'));
+    const firstSpread = document.getElementById('spread-1');
+    if (firstSpread) {
+        firstSpread.classList.add('active', 'flip-anim');
+    }
+}
 function turnSpread(direction) {
     // Continuous flow: Chapter end par agla load ho
     if (direction === 1 && currentSpread >= totalSpreads) {
@@ -355,6 +360,7 @@ function hashCode(str) {
     return hash;
 }
 
+// 🔥 STEP 3: REPLACE bindSmartLines FUNCTION (BULLETPROOF FIREBASE) 🔥
 function bindSmartLines() {
     document.querySelectorAll('.smart-line').forEach(line => {
         line.addEventListener('click', async function(event) {
@@ -373,6 +379,9 @@ function bindSmartLines() {
             decContent.style.display = 'block';
             drawer.classList.add('open');
 
+            let foundInFirebase = false;
+
+            // 1st Try: Firebase se check karo (Agar net issue hua to crash nahi hoga)
             try {
                 const docRef = doc(db, "book_decodes", lineId);
                 const docSnap = await getDoc(docRef);
@@ -384,25 +393,41 @@ function bindSmartLines() {
                         decExample.innerText = data.example;
                         decExampleBox.style.display = 'block';
                     }
-                } else {
+                    foundInFirebase = true;
+                }
+            } catch (firebaseError) {
+                console.warn("Firebase Offline/Error. Direct AI ko call kar rahay hain...");
+                // Yahan error ko ignore kar diya taake next step (AI) chal sake
+            }
+
+            // 2nd Try: Agar Firebase mein nahi mila ya Firebase offline tha
+            if (!foundInFirebase) {
+                try {
                     const aiResponse = await callGrokForDecode(englishText, currentChapterTitle, lineContext);
                     
-                    await setDoc(docRef, {
-                        english: englishText,
-                        urdu: aiResponse.urdu,
-                        example: aiResponse.example,
-                        created_at: new Date()
-                    });
-
                     decUrdu.innerText = aiResponse.urdu;
                     if (aiResponse.example) {
                         decExample.innerText = aiResponse.example;
                         decExampleBox.style.display = 'block';
                     }
+
+                    // Answer aane k baad background mein save karne ki koshish karo
+                    try {
+                        const docRef = doc(db, "book_decodes", lineId);
+                        await setDoc(docRef, {
+                            english: englishText,
+                            urdu: aiResponse.urdu,
+                            example: aiResponse.example,
+                            created_at: new Date()
+                        });
+                    } catch (saveError) {
+                        console.log("Answer aa gaya, par Firebase mein save nahi ho saka (Offline).");
+                    }
+
+                } catch (apiError) {
+                    console.error("AI API Error:", apiError);
+                    decUrdu.innerText = "⚠️ Connection Issue: " + apiError.message;
                 }
-            } catch (error) {
-                console.error("AI Decoder Error:", error);
-                decUrdu.innerText = "⚠️ Connection error or API issue. Please try again.";
             }
         });
     });
