@@ -120,7 +120,8 @@ registerForm.addEventListener('submit', async (e) => {
             deviceToken: deviceToken,
             subscriptions: {
                 caf1: false, caf2: false, caf3: false, caf4: false,
-                caf5: false, caf6: false, caf7: false, caf8: false
+                caf5: false, caf6: false, caf7: false, caf8: false,
+                mock_interview: false
             }
         });
 
@@ -194,7 +195,8 @@ signinForm.addEventListener('submit', async (e) => {
                 deviceToken: newDeviceToken,
                 subscriptions: {
                     caf1: false, caf2: false, caf3: false, caf4: false,
-                    caf5: false, caf6: false, caf7: false, caf8: false
+                    caf5: false, caf6: false, caf7: false, caf8: false,
+                    mock_interview: false
                 }
             });
         }
