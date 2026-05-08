@@ -45,6 +45,18 @@ style.innerHTML = `
     }
     .page-left::-webkit-scrollbar, .page-right::-webkit-scrollbar { width: 4px; }
     .page-left::-webkit-scrollbar-thumb, .page-right::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+    /* 🔥 Page Numbers ko Bottom se Top par shift kiya 🔥 */
+    .page-num-left {
+        position: absolute !important;
+        top: 25px !important;
+        bottom: auto !important;
+    }
+    .page-num-right {
+        position: absolute !important;
+        top: 25px !important;
+        bottom: auto !important;
+    }
 `;
 document.head.appendChild(style);
 
@@ -351,8 +363,29 @@ function renderTable(mdText, context) {
         cells.forEach(cell => {
             let c = cell.trim();
             let isHeader = !isBody;
-            let cellHtml = renderInteractiveParagraph(c, context);
-            cellHtml = cellHtml.replace(/&lt;br\s*\/?[&gt;>]/gi, '<br><br>');
+            
+            // 🔥 Table ke andar line breaks aur bullets ka clean parser 🔥
+            c = c.replace(/&lt;br\s*\/?[&gt;>]/gi, '<br>').replace(/<br\s*\/?>/gi, '<br>');
+            let linesInCell = c.split('<br>');
+            let formattedLines = linesInCell.map(line => {
+                let l = line.trim();
+                if (!l) return '';
+                
+                let isBullet = false;
+                if (l.startsWith('*') || l.startsWith('-')) {
+                    isBullet = true;
+                    l = l.substring(1).trim();
+                }
+                
+                let interactiveHtml = renderInteractiveParagraph(l, context);
+                if (isBullet) {
+                    return `<div style="display:flex; gap:6px; margin-top:4px;"><span style="color:var(--accent-blue); font-size:14px;">•</span><div style="flex:1;">${interactiveHtml}</div></div>`;
+                }
+                return interactiveHtml;
+            }).filter(l => l !== '');
+            
+            let cellHtml = formattedLines.join('<div style="height:6px;"></div>');
+            
             if (isHeader) {
                 html += `<th style="padding: 10px 12px; background: #f8fafc; color: #0f172a; border-right: 1px solid #cbd5e1; font-weight: 700;">${cellHtml}</th>`;
             } else {
