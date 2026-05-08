@@ -25,6 +25,7 @@ const academicSubjects = [
     { id: 'caf6', name: 'CAF 6: Managerial and Financial Analysis', description: 'Strategic financial analysis and managerial decision-making tools.', price: 200, type: 'premium', url: 'subjects/caf6/index.html' },
     { id: 'caf7', name: 'CAF 7: Company Law', description: 'Corporate law principles and company governance structures.', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
     { id: 'caf8', name: 'CAF 8: Audit and Assurance', description: 'Audit methodologies and assurance services in professional practice.', price: 200, type: 'premium', url: 'audit.html' },
+    { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Face a realistic 5-minute technical and psychological interview with a strict AI Partner.', price: 200, type: 'premium', url: 'live-audit-chat.html' },
     { id: 'resume', name: 'CA Resume Builder', description: 'Craft a standout, ATS-friendly resume tailored specifically for CA & ACCA students.', price: 0, type: 'free', url: 'resume.html' },
     { id: 'sanctuary', name: 'The Sanctuary', description: 'Spiritual guidance and ethical foundations for professional excellence.', price: 0, type: 'free', url: 'blueprint.html' }
 ];
@@ -34,8 +35,6 @@ let currentSubjectContext = null;
 let isMultiSubjectMode = false;
 let appliedCouponDiscount = 0;
 let appliedCouponCode = '';
-
-const mockFirebaseCoupons = { 'DISCOUNT50': 50, 'CAVERSITY100': 100, 'OFF200': 200 };
 
 // 🔥 THE BRAIN: Security, Expiry Dates & Database Link
 onAuthStateChanged(auth, async (user) => {
@@ -186,25 +185,64 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('subscription-modal').classList.remove('show');
     });
 
-    document.getElementById('apply-coupon-btn')?.addEventListener('click', () => {
+    // 🔥 DYNAMIC FIREBASE COUPON LOGIC 🔥
+    document.getElementById('apply-coupon-btn')?.addEventListener('click', async () => {
         const code = document.getElementById('coupon-code').value.trim().toUpperCase();
         const msg = document.getElementById('coupon-message');
+        
         if (!code) {
             msg.textContent = 'Please enter a coupon code.';
             msg.className = 'coupon-message error';
             return;
         }
-        if (mockFirebaseCoupons[code]) {
-            appliedCouponDiscount = mockFirebaseCoupons[code];
-            appliedCouponCode = code;
-            msg.textContent = `Coupon applied successfully! (Rs. ${appliedCouponDiscount} off)`;
-            msg.className = 'coupon-message success';
-        } else {
+        
+        msg.textContent = 'Verifying coupon...';
+        msg.className = 'coupon-message';
+
+        try {
+            // Firebase se 'coupons' collection mein is code ko dhoondo
+            const couponDoc = await getDoc(doc(db, "coupons", code));
+            
+            if (couponDoc.exists()) {
+                const couponData = couponDoc.data();
+                
+                // Check if coupon is restricted to specific subjects
+                let allowedSubjects = couponData.applicableFor || couponData.subjectId || "all";
+                if (allowedSubjects !== "all") {
+                    // Agar Firebase mein array ke bajaye string di hai, toh usay array bana lo
+                    if (typeof allowedSubjects === 'string') {
+                        allowedSubjects = allowedSubjects.split(',').map(s => s.trim());
+                    }
+                    let isValid = true;
+                    if (isMultiSubjectMode) {
+                        const checked = document.getElementById('subject-checkboxes').querySelectorAll('input:checked');
+                        checked.forEach(chk => { if (!allowedSubjects.includes(chk.value)) isValid = false; });
+                    } else {
+                        if (!allowedSubjects.includes(currentSubjectContext.id)) isValid = false;
+                    }
+                    
+                    if (!isValid) {
+                        msg.textContent = 'This coupon is not valid for the selected subject(s).';
+                        msg.className = 'coupon-message error';
+                        return;
+                    }
+                }
+
+                // 🔥 Force convert string to number, even if Firebase sends it as a string
+                appliedCouponDiscount = parseInt(couponData.discountValue, 10) || 0;
+                appliedCouponCode = code;
+                msg.textContent = `Coupon applied! (Rs. ${appliedCouponDiscount} off)`;
+                msg.className = 'coupon-message success';
+            } else {
+                throw new Error("Invalid");
+            }
+        } catch (error) {
             appliedCouponDiscount = 0;
             appliedCouponCode = '';
             msg.textContent = 'Invalid or expired coupon code.';
             msg.className = 'coupon-message error';
         }
+        
         calculateTotal();
     });
 
@@ -397,27 +435,9 @@ window.revealSurprise = function() {
     let appResources = [];
     const niceColors = ["linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%)", "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)", "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)", "linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)", "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)", "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)", "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)", "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)", "linear-gradient(135deg, #fa709a 0%, #fee140 100%)", "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)", "linear-gradient(135deg, #ff0844 0%, #ffb199 100%)", "linear-gradient(135deg, #b721ff 0%, #21d4fd 100%)", "linear-gradient(135deg, #20E2D7 0%, #F9FEA5 100%)"];
     
-   // 🛡️ Naya Secure tareeqa
-async function loadAdhkarData() {
-    try {
-        // Emotions mangwao (ajeeb alphabets mein aayenge)
-        const resEmo = await fetch('/api/get-data?file=emotion');
-        const dataEmo = await resEmo.json();
-        appEmotions = JSON.parse(atob(dataEmo.payload)); // yahan seedha ho jayega
+    // Fetch resources directly from 'assets' folder
+    fetch('assets/emotion.json').then(r => r.json()).then(d => { appEmotions = d; return fetch('assets/resource.json'); }).then(r => r.json()).then(d => { appResources = d; initGrid(); }).catch(e => { console.error(e); const gridArea = document.getElementById('adhkar-grid-area'); if(gridArea) gridArea.innerHTML = '<p style="color:red; text-align:center;">Error loading Adhkar data.</p>'; });
 
-        // Resources mangwao
-        const resRes = await fetch('/api/get-data?file=resource');
-        const dataRes = await resRes.json();
-        appResources = JSON.parse(atob(dataRes.payload)); // yahan seedha ho jayega
-
-        initGrid(); // Grid bana do
-    } catch (e) {
-        console.error("Data Load Error:", e);
-    }
-}
-
-// Is function ko foran chala dein
-loadAdhkarData();
     function initGrid() {
         const gridArea = document.getElementById('adhkar-grid-area');
         if(!gridArea) return;
