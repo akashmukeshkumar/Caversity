@@ -16,8 +16,7 @@
             "The responses at the assertion level involve the auditor selecting appropriate audit procedures. The choice of audit procedures will depend on the auditor's assessment of both:",
             "* inherent risk, and",
             "* control risk.",
-            "This chapter looks at this requirement in detail and considers how the auditor's assessment of internal controls",
-            "will influence his selection of the approach to the audit."
+            "This chapter looks at this requirement in detail and considers how the auditor's assessment of internal controls will influence his selection of the approach to the audit."
           ]
         },
         {
@@ -33,8 +32,7 @@
         {
           "title": "1.3 How the auditor uses internal controls",
           "paragraphs": [
-            "Modern auditing is, wherever possible, based on a 'systems' based approach. With this approach, the auditor",
-            "relies on the accounting systems and the related controls to ensure that transactions are properly recorded.",
+            "Modern auditing is, wherever possible, based on a 'systems' based approach. With this approach, the auditor relies on the accounting systems and the related controls to ensure that transactions are properly recorded.",
             "* His assumption is that if the systems and the internal controls are adequate, the transactions should be processed correctly.",
             "* The audit emphasis is therefore, as much as possible, on the systems processing the transactions rather than on the transactions themselves.",
             "Before the auditor can rely on the systems and controls that are in place, he must establish what those systems and controls are, and carry out an evaluation of the effectiveness of the controls.",
@@ -81,8 +79,7 @@
         {
           "title": "2.2 The control environment",
           "paragraphs": [
-            "The 'control environment' is often referred to as the general 'attitude' to internal control of management and",
-            "employees in the organisation.",
+            "The 'control environment' is often referred to as the general 'attitude' to internal control of management and employees in the organisation.",
             "The control environment includes the views, awareness and actions of management regarding an entity's internal control. It also includes the governance and functions of management and asserts the premise of an organisation. It is the basis for good internal control, providing guidance and structure.",
             "The control environment includes the following elements:",
             "* Communication and enforcement of integrity and ethical values",
@@ -134,13 +131,16 @@
         {
           "title": "2.6 Control activities",
           "paragraphs": [
-            "Control activities are the policies and procedures, other than the control environment, used to ensure that the",
-            "entity's objectives are achieved. They are the application of internal controls.",
+            "Control activities are the policies and procedures, other than the control environment, used to ensure that the entity's objectives are achieved. They are the application of internal controls.",
             "Control activities are the specific procedures designed:",
             "* to prevent errors that may arise in processing information, or",
-            "* to detect and correct errors that may arise in processing information.",
-            "Categories of control activities (internal controls)",
-            "* Performance reviews. These include reviews and analyses of actual performance against budgets, forecasts and prior period performance. . They include supervision by management of the work of subordinates, management review of performance and control reporting (including management accounting techniques such as variance analysis).",
+            "* to detect and correct errors that may arise in processing information."
+          ]
+        },
+        {
+          "title": "Categories of control activities (internal controls)",
+          "paragraphs": [
+            "* Performance reviews. These include reviews and analyses of actual performance against budgets, forecasts and prior period performance. They include supervision by management of the work of subordinates, management review of performance and control reporting (including management accounting techniques such as variance analysis).",
             "* Information processing. A variety of controls are used to check the accuracy, completeness and authorisation of transactions.",
             "* Physical controls. These include controls over the physical security of assets and records to prevent unauthorised use, theft or damage. Examples include limiting access to inventory areas to a restricted number of authorised personnel, and requiring authorisation for access to computer programs and data files.",
             "* Segregation of duties. This control involves assigning different people the responsibilities of authorising and recording transactions and maintaining the custody of assets. This reduces the likelihood of an employee being able to both carry out and conceal errors or fraud. This type of control is explained further below.",
@@ -150,8 +150,12 @@
         {
           "title": "2.7 Internal controls in IT systems: general controls and application controls",
           "paragraphs": [
-            "Internal controls within IT systems can be categorised into general controls and specific application controls.",
-            "General IT controls",
+            "Internal controls within IT systems can be categorised into general controls and specific application controls."
+          ]
+        },
+        {
+          "title": "General IT controls",
+          "paragraphs": [
             "General IT controls are policies and procedures that relate to many different applications (such as revenue, purchases and payroll). They support the effective functioning of application controls (explained later) by ensuring the continued proper operation of IT systems.",
             "Because these general IT controls will apply to most or all of the entity's IT applications, if general IT controls are weak, it is unlikely that the processing undertaken by the system will be complete and accurate.",
             "The auditor will therefore firstly review and test the general IT controls, in order to reach a conclusion on their effectiveness. This will enable him to assess the control risk attached to the entity's IT systems as a whole. If control risk is assessed as low he will then move on and test application controls, in order to decide if he can rely on specific systems and reduce his substantive testing.",
@@ -162,65 +166,42 @@
             "* the prevention or detection of unauthorised changes to programs (for example, by an employee committing fraud or by a 'hacker' accessing the system)",
             "* controls to prevent the use of incorrect data files or programs",
             "* controls to prevent unauthorised amendments to data files",
-            "* controls to ensure that there will be continuity in computer operations (and that the system will not 'break down' and cease to be operational).",
-            "⯈  Examples of general controls",
+            "* controls to ensure that there will be continuity in computer operations (and that the system will not 'break down' and cease to be operational)."
+          ]
+        },
+        {
+          "title": "Examples of general controls",
+          "paragraphs": [
             "Examples of each of these categories of general controls are set out in the table below:",
-            "Control area",
-            "Controls",
-            "Development of computer-based information systems and applications",
-            "* New computer systems may be designed and developed for a 'computer user' (the client company) by an in-house IT department or by an external software company.",
-            "* Appropriate IT Standards should be used when designing, developing, programming and documenting a new computer system.",
-            "* There should be controls to ensure that tests are carried out on new systems before they are introduced.",
-            "* A new computer system design should be formally approved by the system 'user'.",
-            "* There should be a segregation of duties between the designers and testers of systems.",
-            "* Staff should be given training in the use of a new system before they use it for",
-            "'live' operations.",
-            "Documentation and testing of program changes",
-            "* When a computer system is operational, it may be necessary to update and amend some of the programs in the system. There should be suitable general controls over the development of new versions of programs.",
-            "* There should be controls to ensure that formal testing procedures on new",
-            "program versions before they are used for 'live' operations",
-            "* All new versions of programs must be authorised at an appropriate level of management.",
-            "* Staff should be given training, where appropriate, in the use of a new program",
-            "version before they use it for 'live' operations.",
-            "Prevention or detection of unauthorised program changes",
-            "* There is a risk that new programs will be introduced without proper authorisation. The risks are particularly serious in companies that have large purpose-written computer systems, and where the computer systems are operated on large computers (mainframe computers or minicomputers) in a centralised computer centre.",
-            "* There should be a segregation between the tasks of programmers (who write new programs) and computer operators (who use the programs).",
-            "* There should be full documentation of all program changes.",
-            "* There should be restricted access to programs (program files), and only authorised programmers should have access to them.",
-            "* Program logs should be maintained, to record which programs and which versions are used.",
-            "* There should be virus protection for programs (using anti-virus software) and there should be back-up copies of all programs (in the event of 'malicious' changes to programs used in operations).",
-            "Prevention of the use of incorrect programs or data files",
-            "* In large computer systems, there may be several versions of a program at any time, not just one 'current version'. For example, when a new version is written, the 'old' version may be kept. It is important to ensure that the correct version of the program is used.",
-            "* Computer operating staff should be suitably trained, and should follow standard operating procedures for checking the version of the program they are using.",
-            "* Job scheduling: there should be formal job scheduling in large computer centres, and a job schedule should specify the version of the program to be used.",
-            "* Supervision. Supervisors should monitor the activities of operating staff.",
-            "* Reviews by management. Management should carry out periodic reviews, to make sure that the correct versions of programs are being used.",
-            "Prevention of unauthorised amendments to data files",
-            "In addition to the risk that there may be unauthorised access to program files and unauthorised amendment of programs, there is also a risk that data files will be accessed without authorisation (by an employee or an external 'hacker').",
-            "* Physical access to computer terminals may be restricted to authorized employees.",
-            "* Access to programs and data files may be restricted using passwords. There should be rigorous checks by management to ensure that a password system is being used effectively by employees (so that passwords are not easy to 'guess')",
-            "* Firewalls (software and hardware) can be used to prevent unauthorised external access via the internet.",
-            "Ensuring continuity of operations",
-            "* When problems occur in a computer system, the system may be at risk of ceasing to function. This could happen if there is physical damage to computer equipment or files, or if program files or data files are 'corrupted' or altered without authorisation.",
-            "* There should be controls over maintaining secure second copies of all programs and data files ('back-up copies'). The back-up copies can be used if the original copies are damaged or corrupted.",
-            "* There should be measures for the protection of equipment against fire, power failure and other hazards.",
-            "* The company should have disaster recovery plans, such as an agreement with another entity to make use of its computer centre in the event of a disaster such as a fire or flood.",
-            "* The company should make suitable maintenance and service agreements with software companies, to provide 'technical support' in the event of operating difficulties with the system.",
-            "Application controls",
+            "| **Control Area** | **Controls** |\n|---|---|\n| **Development of computer-based information systems and applications** | * New computer systems may be designed and developed either by an in-house IT department or by an external software company.<br>* Appropriate IT standards should be used when designing, developing, programming, and documenting a new computer system.<br>* Controls should ensure that tests are carried out on new systems before live implementation.<br>* A new computer system design should be formally approved by the system user.<br>* There should be segregation of duties between system designers and testers.<br>* Staff should receive training before using the new system in live operations. |\n| **Documentation and testing of program changes** | * Operational systems may require updates and amendments; therefore, suitable controls should exist over development of new program versions.<br>* Formal testing procedures should be performed before new program versions are used in live operations.<br>* All new program versions should be authorised at an appropriate management level.<br>* Staff should be trained where appropriate before using the updated version. |\n| **Prevention or detection of unauthorised program changes** | * There is a risk that unauthorised programs may be introduced, especially in large centralised systems.<br>* Duties of programmers and computer operators should be segregated.<br>* All program changes should be fully documented.<br>* Access to program files should be restricted to authorised programmers only.<br>* Program logs should record programs and versions used.<br>* Anti-virus protection and backup copies of programs should be maintained. |\n| **Prevention of the use of incorrect programs or data files** | * Multiple versions of programs may exist, so controls are needed to ensure the correct version is used.<br>* Operating staff should be properly trained and follow standard procedures.<br>* Formal job scheduling should specify which program version is to be used.<br>* Supervisors should monitor operating staff activities.<br>* Management should periodically review program versions being used. |\n| **Prevention of unauthorised amendments to data files** | * There is a risk of unauthorised access to data files by employees or external hackers.<br>* Physical access to computer terminals should be restricted to authorised employees.<br>* Password protection should restrict access to programs and data files, with strong password management controls.<br>* Firewalls (hardware and software) should prevent unauthorised external internet access. |\n| **Ensuring continuity of operations** | * Computer systems may fail due to physical damage, corruption, or unauthorised changes.<br>* Backup copies of all programs and data files should be maintained securely.<br>* Equipment should be protected against fire, power failure, and other hazards.<br>* Disaster recovery plans should exist, such as agreements to use another organisation's computer centre during emergencies.<br>* Maintenance and technical support agreements should be in place with software providers. |"
+          ]
+        },
+        {
+          "title": "Application controls",
+          "paragraphs": [
             "Application controls apply to the processing of individual applications (such as revenue, purchases or payroll). These controls help to ensure that transactions occurred, are authorised and are completely and accurately recorded and processed. These controls could be manual or computerised, depending on the system in question. Examples include:",
             "* Existence Check: Data are entered correctly and agree with valid predetermined criteria. An existence check is similar, but the program checks the actual existence of a particular code.",
             "* For example, in a payroll system, input transactions may include a department code for each employee. Department codes may be B, C and P. A program check can be carried out on the department code for all input transactions, and if the code is not B, C or P, an error report will be produced.",
-            "Range Check: Data should be within a predetermined range of values. For example, inventory codes may be within the range 2000 - 3999. If so, the program can be written so that it checks the inventory code for every transaction, and produces an error report if the code is not within that range.",
-            "Sequence Check: the documents are sequentially numbered",
-            "Completeness Check: A field should always contain a data rather than zero or blank",
-            "Duplicate check: New transactions are matched to those previously input to ensure that they have not already been entered",
-            "Batch total: Verification that total of values, items or documents of output matched with the total of values, items or documents of input.",
+            "* Range Check: Data should be within a predetermined range of values. For example, inventory codes may be within the range 2000 - 3999. If so, the program can be written so that it checks the inventory code for every transaction, and produces an error report if the code is not within that range.",
+            "* Sequence Check: the documents are sequentially numbered",
+            "* Completeness Check: A field should always contain a data rather than zero or blank",
+            "* Duplicate check: New transactions are matched to those previously input to ensure that they have not already been entered",
+            "* Batch total: Verification that total of values, items or documents of output matched with the total of values, items or documents of input.",
             "A batch total is a form of control total. Transaction data is input to the computer system in batches, and a control total is calculated. It may simply be a total of the number of transactions in the batch. The batch total is input to the computer system for processing, and the computer program will check the batch total that has been input with its own batch total count.",
             "The program will report any discrepancy between batch total and its own batch total, as an error report.",
-            "Batch totals can be useful in helping to make sure that every transaction in a batch is actually input for processing and is actually processed.",
-            "Check digits",
+            "Batch totals can be useful in helping to make sure that every transaction in a batch is actually input for processing and is actually processed."
+          ]
+        },
+        {
+          "title": "Check digits",
+          "paragraphs": [
             "Check digits are checks within a computer program on the validity of key numerical codes, such as customer codes, supplier codes and employee identification numbers.",
             "When check digits are used, every code is given an extra digit, the check digit. This is a unique digit obtained from the other digits in the code.",
+            "An example might illustrate how check digits operate. In this example, a Modulus 11 check digit system is used, where the check digit can be any of 11 'numbers' - 0 to 9 or X (10).",
+            "The basic coding system is for a five-digit code, and a sixth digit (the check digit) will be added to complete the code. Suppose that a customer's five-digit code is 23467. The check digit is calculated as follows (in the Modulus 11 system).",
+            "| **Code Digit** | **Weighting** | **Result** |\n|---|---|---|\n| 2 | × 6 | 12 |\n| 3 | × 5 | 15 |\n| 4 | × 4 | 16 |\n| 6 | × 3 | 18 |\n| 7 | × 2 | 14 |\n| | | **75** |\n| **Check Digit = 2** | × 1 | 2 |\n| | | **77** |",
+            "In a Modulus 11 system, the check digit is given a weighting of 1, and it is calculated so that the total of all the digits in the code multiplied by their weightings will add up to a multiple of 11. In this example, the multiple of 11 is 77, and the check digit 2 makes the total add up to 77.",
+            "The six-digit customer code is therefore 234672.",
             "A computer program can carry out a mathematical check on the code for every transaction input for processing. The program will check that the total of the code digits, when weighted as shown above, is a multiple of 11.",
             "If the weighted total is not a multiple of 11, there must be an error in the code. This means that the computer program will detect any errors in input data for the particular code, and will not process the transaction. Instead, the program will output an error report, so that the error can be investigated and corrected."
           ]
@@ -240,8 +221,7 @@
             "* Broadband speed",
             "* Which web pages a user accessed",
             "* Attempted cyber intrusions",
-            "All of the above logs provide essential information that can assist in analysing and improving a system's",
-            "performance."
+            "All of the above logs provide essential information that can assist in analysing and improving a system's performance."
           ]
         },
         {
@@ -249,50 +229,75 @@
           "paragraphs": [
             "The need to record internal control systems",
             "The auditor must gain an understanding of each of the five elements that make up the client's internal control system. This is to enable the auditor to carry out an evaluation of the systems and to conduct an audit risk assessment. The outcome of this assessment and evaluation will establish his overall approach to the audit - whether it will be systems-based or transactions-based.",
-            "The auditor's work on internal control is therefore an important element of gathering audit evidence, because it influences the direction that the audit work will take. As with all other significant audit evidence, it must be properly documented in the audit working papers - probably in the permanent audit file.",
-            "Recording methods",
+            "The auditor's work on internal control is therefore an important element of gathering audit evidence, because it influences the direction that the audit work will take. As with all other significant audit evidence, it must be properly documented in the audit working papers - probably in the permanent audit file."
+          ]
+        },
+        {
+          "title": "Recording methods",
+          "paragraphs": [
             "The principal methods available to the auditor for recording internal control systems are:",
             "* narrative notes",
             "* questionnaires",
-            "* systems flowcharts",
-            "Narrative notes",
+            "* systems flowcharts"
+          ]
+        },
+        {
+          "title": "Narrative notes",
+          "paragraphs": [
             "Narrative notes are a written description of the control system and the controls that are in place. They are used mainly to make a record of the control activities involved in processing transactions.",
             "Narrative notes are simple to prepare, but can become lengthy. They may be time-consuming to prepare initially. When narrative notes are long, it may also be time-consuming to update them when the system or the controls change.",
-            "Ideally, narrative notes should be written clearly, but should not be longer than necessary to provide a full description.",
-            "Questionnaires",
+            "Ideally, narrative notes should be written clearly, but should not be longer than necessary to provide a full description."
+          ]
+        },
+        {
+          "title": "Questionnaires",
+          "paragraphs": [
             "Questionnaires are widely used by auditors to document systems. Questionnaires can be prepared in advance as standard documents. They are also ideally suited for use by the auditor in an electronic form, which means that standard questionnaires are available and ready for use on the auditor's laptop computer.",
             "A questionnaire is a list of questions about controls in a particular aspect of operations or accounting. There are two main types of questionnaire. Each has a different objective. They are:",
             "* the internal control questionnaire (ICQ)",
-            "* the internal control evaluation questionnaire (ICEQ).",
-            "Internal control questionnaire (ICQ)",
+            "* the internal control evaluation questionnaire (ICEQ)."
+          ]
+        },
+        {
+          "title": "Internal control questionnaire (ICQ)",
+          "paragraphs": [
             "An internal control questionnaire (ICQ) is designed to establish whether appropriate controls exist, that meet specific control objectives. Each question requires a 'Yes' or a 'No' answer, and deals with a particular type of control. The auditor has to establish the answer to each of the questions, and fill in the questionnaire.",
             "ICQs are usually drawn up in such a way that:",
             "* a 'Yes' answer to a question indicates a control strength, and",
             "* a 'No' answer to a question indicates a control weakness.",
             "For example, the following ICQ questions might be included in a questionnaire dealing with procedures for assessing the credit-worthiness of potential new customers:",
-            "Are credit references taken on all potential new customers?",
-            "YES/NO",
-            "Are credit limits set for customers?",
-            "YES/NO",
-            "Checking ICQs",
+            "Are credit references taken on all potential new customers? YES/NO",
+            "Are credit limits set for customers? YES/NO"
+          ]
+        },
+        {
+          "title": "Checking ICQs",
+          "paragraphs": [
             "Instead of preparing new internal control questionnaires each year, it is often more practical and sensible to take the ICQs from the previous year's audit, check their accuracy and where appropriate bring them up to date. To do this the following steps should be taken:",
             "* Obtain the ICQs from the previous year's audit file.",
             "* Look at any control weaknesses that are indicated in these ICQs and find out whether the client entity has taken any action during the year to deal with them.",
             "* Check the accuracy of each ICQ through a series of checks and enquiries: review the system documentation, interview the staff responsible for the controls and carry out walk-through tests. Identify the controls that apply and compare these with the findings in the ICQ. Make any amendments and updates as necessary.",
-            "* Having obtained an up-to-date set of ICQs, assess whether control weaknesses exist.",
-            "Internal control evaluation questionnaire (ICEQ)",
+            "* Having obtained an up-to-date set of ICQs, assess whether control weaknesses exist."
+          ]
+        },
+        {
+          "title": "Internal control evaluation questionnaire (ICEQ)",
+          "paragraphs": [
             "In recent years the auditing profession has responded to this by developing a second type of questionnaire, the internal control evaluation questionnaire (ICEQ).",
             "The idea behind the ICEQ is to draw up a small number of key control questions designed to establish whether major weaknesses may exist in a control system:",
             "* Using an ICQ, the auditor is looking for 'good news' and expects to find particular controls in place.",
             "* Using an ICEQ, the auditor is on the look-out for 'bad news' and the possibility that controls may be weak.",
             "Like an ICQ, an ICEQ contains a (shorter) list of questions, for which the answer is Yes or No. A questionnaire is normally designed so that a Yes answer indicates good controls and a No answer indicates weak controls.",
             "An earlier example showed how ICQ questions might be written, relating to controls over the creditworthiness of customers. An ICEQ approach in this same area might consider just one key control question, as follows:",
-            "Is there reasonable assurance that goods can only be despatched to authorised customers whose account balance is within their credit limit?",
-            "YES/NO",
+            "Is there reasonable assurance that goods can only be despatched to authorised customers whose account balance is within their credit limit? YES/NO",
             "Although the ICEQ approach typically produces a document that is shorter than an ICQ, ICEQs may suffer from the disadvantage that the questions are less precise and may need more knowledge and experience on the part of the auditor to answer them.",
             "Choosing which type of questionnaire to use is a matter of preference for the auditor or the audit firm.",
-            "As in the case of the ICQ, the ICEQ approach also serves a dual purpose for the auditor - both to record and to evaluate the internal control system.",
-            "Systems Flowcharts",
+            "As in the case of the ICQ, the ICEQ approach also serves a dual purpose for the auditor - both to record and to evaluate the internal control system."
+          ]
+        },
+        {
+          "title": "Systems Flowcharts",
+          "paragraphs": [
             "Systems flowcharts provide a representation of accounting systems in the form of a diagram. For each type of transaction, they show the documents generated, the processes applied to the documents and the flow of the documents between the various departments involved. Flowcharts therefore show the flow of work by showing how documents are transferred within a system (and filed) and how they are used.",
             "As they are in the form of a diagram, flowcharts present an immediate visual impact of the system. This can sometimes help the auditor to identify weaknesses in controls more easily than by reading narrative notes.",
             "However, some expertise is needed to draw a good flowchart and to use it to assess the effectiveness of controls. In addition, although flowcharts work well with standard accounting systems and transactions, they may not be appropriate for documenting specialised areas of accounting."
@@ -352,8 +357,7 @@
             "If the auditor's initial assessment of the control systems shows that those systems are weak, then he will move straight to substantive testing and will not bother to carry out tests of controls.",
             "Even if the controls appear to be acceptable on paper, the auditor cannot rely on them and perform a systems- based audit unless he is confident that the controls are actually working. In this situation, the next stage in the audit process is to carry out tests of controls.",
             "If the outcome of the tests of controls indicates that controls are actually operating effectively, the audit can be systems based, with a reduced amount of substantive testing. Remember that the auditor will always need to perform some substantive testing - because of the inherent limitations in any system of internal controls.",
-            "In view of this ISA 330 requires that substantive procedures are carried out for each material class of transactions, account balances and disclosure. These terms are considered in a later chapter on substantive procedures.",
-            "The amount of substantive testing will depend on the outcome of the tests of controls"
+            "In view of this ISA 330 requires that substantive procedures are carried out for each material class of transactions, account balances and disclosure. These terms are considered in a later chapter on substantive procedures."
           ]
         },
         {
