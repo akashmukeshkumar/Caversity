@@ -47,15 +47,16 @@ style.innerHTML = `
     .page-left::-webkit-scrollbar-thumb, .page-right::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
 
     /* 🔥 Page Numbers ko Bottom se Top par shift kiya 🔥 */
-    .page-num-left {
+    .page-num-left, .page-num-right {
         position: absolute !important;
-        top: 25px !important;
+        top: 20px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
         bottom: auto !important;
-    }
-    .page-num-right {
-        position: absolute !important;
-        top: 25px !important;
-        bottom: auto !important;
+        right: auto !important;
+        font-size: 0.95rem !important;
+        font-weight: 800 !important;
+        color: #94a3b8 !important;
     }
 `;
 document.head.appendChild(style);
@@ -400,12 +401,14 @@ function renderInteractiveParagraph(text, context) {
         let trimmed = sentence.trim();
         if (!trimmed) return '';
         
-        const hashId = "line_" + Math.abs(hashCode(trimmed)).toString(36);
+        let cleanEnglish = trimmed.replace(/\*\*/g, '');
+        const hashId = "line_" + Math.abs(hashCode(cleanEnglish)).toString(36);
         
-        // JSON ke **bold** text ko real Bold (strong) mein convert karna
-        let formattedText = escapeHtml(trimmed).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        // JSON ke **bold** text ko real Bold (strong) mein convert karna, 
+        // newlines bhi cover hongi aur aakhir mein bacha kucha ** remove ho jayega taake clean rahay.
+        let formattedText = escapeHtml(trimmed).replace(/\*\*([\s\S]*?)\*\*/g, '<strong>$1</strong>').replace(/\*\*/g, '');
         
-        return `<span class="smart-line" data-id="${hashId}" data-context="${escapeHtml(context || '')}" data-english="${escapeHtml(trimmed)}">${formattedText} </span>`;
+        return `<span class="smart-line" data-id="${hashId}" data-context="${escapeHtml(context || '')}" data-english="${escapeHtml(cleanEnglish)}">${formattedText} </span>`;
     }).join('');
 }
 
