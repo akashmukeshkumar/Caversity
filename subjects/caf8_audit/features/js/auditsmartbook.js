@@ -1,490 +1,553 @@
 import { getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const app = getApp(); 
+const app = getApp(); // security.js pehle hi isay initialize kar chuka hai
 const db = getFirestore(app);
 
-let currentSpread = 1;
-let totalSpreads = 1;
-let currentChapterTitle = ""; 
-let currentChapterName = ""; 
-window.currentChapterNum = 1; 
+        let currentSpread = 1;
+        let totalSpreads = 1;
+        let currentChapterTitle = ""; // Grok API ko context dene ke liye
+        let currentChapterName = ""; 
 
-const bookFrame = document.getElementById('book-frame');
-const spreadContainer = document.getElementById('spread-container');
-const drawer = document.getElementById('magic-drawer');
-const decEnglish = document.getElementById('dec-english');
-const decUrdu = document.getElementById('dec-urdu');
-const decExample = document.getElementById('dec-example');
-const decExampleBox = document.getElementById('dec-example-box');
-const decContent = document.getElementById('dec-content');
-const pageFlipSound = new Audio('subjects/caf8_audit/features/assets/book curl.mp3');
+        const bookFrame = document.getElementById('book-frame');
+        const spreadContainer = document.getElementById('spread-container');
+        const drawer = document.getElementById('magic-drawer');
+        const decEnglish = document.getElementById('dec-english');
+        const decUrdu = document.getElementById('dec-urdu');
+        const decExample = document.getElementById('dec-example');
+        const decExampleBox = document.getElementById('dec-example-box');
+        const decContent = document.getElementById('dec-content');
+        const pageFlipSound = new Audio('subjects/caf8_audit/features/assets/book curl.mp3');
 
-// 🔥 STEP 1: REPLACE EXISTING STYLE BLOCK 🔥
-const style = document.createElement('style');
-style.innerHTML = `
-    .smart-line { 
-        cursor: pointer; 
-        transition: all 0.3s ease-in-out; 
-        border-bottom: 2px solid transparent; 
-        padding-bottom: 1px; 
-    } 
-    .smart-line:hover { 
-        border-bottom: 2px dotted #b88645; 
-        background-color: transparent !important; 
-    } 
-    .smart-line.active { 
-        background-color: transparent !important; 
-        border-bottom: 2px dashed #b88645; 
-        color: #000; 
-        font-weight: bold; 
-    }
-`;
-document.head.appendChild(style);
+        // 🔥 Inject CSS for Hover Interactivity 🔥
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .smart-line { cursor: pointer; transition: all 0.2s; border-bottom: 1px solid transparent; } 
+            .smart-line:hover { border-bottom: 2px dotted #ef4444; background-color: rgba(239,68,68,0.05); } 
+            .smart-line.active { background-color: rgba(250,204,21,0.3); border-bottom: 2px dashed #f59e0b; }
+            
+            /* 🚀 FIX FOR OVERFLOW & STUCK PAGES */
+            .page-left, .page-right {
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                padding-bottom: 40px !important;
+            }
+            .page-left::-webkit-scrollbar, .page-right::-webkit-scrollbar { width: 4px; }
+            .page-left::-webkit-scrollbar-thumb, .page-right::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        `;
+        document.head.appendChild(style);
 
-document.addEventListener('DOMContentLoaded', () => loadChapter(1));
+        // Yahan par Default Chapter Load Hoga
+        document.addEventListener('DOMContentLoaded', () => loadChapter(1));
 
-window.openTocDrawer = function() {
-    document.getElementById('toc-drawer').classList.add('open');
-};
-window.closeTocDrawer = function() {
-    document.getElementById('toc-drawer').classList.remove('open');
-};
-window.loadSpecificChapter = function(chapterNumber) {
-    closeTocDrawer();
-    loadChapter(chapterNumber);
-};
-// 🔥 LAYOUT FIX: LOAD WITH STRICTOR DELAY 🔥
-async function loadChapter(chapterNumber) {
-    spreadContainer.innerHTML = `<div class="load-message"><i class="fa-solid fa-spinner fa-spin"></i><strong>Loading...</strong></div>`;
-    
-    try {
-        window.currentChapterNum = parseInt(chapterNumber); 
+        // Table of Contents Drawer Logic
+        window.openTocDrawer = function() {
+            document.getElementById('toc-drawer').style.transform = 'translateX(0)';
+        };
+        window.closeTocDrawer = function() {
+            document.getElementById('toc-drawer').style.transform = 'translateX(-100%)';
+        };
+        window.loadSpecificChapter = function(chapterNumber) {
+            closeTocDrawer();
+            loadChapter(chapterNumber);
+        };
 
-        if (document.fonts) await document.fonts.ready;
-        // 500ms delay taake browser ka layout engine thanda ho jaye
-        await new Promise(res => setTimeout(res, 500)); 
+        async function loadChapter(chapterNumber) {
+            spreadContainer.innerHTML = `
+                <div class="load-message">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <strong>Loading Chapter ${chapterNumber}...</strong>
+                </div>`;
+            
+            try {
+                window.currentChapterNum = chapterNumber; // Save current chapter number for auto-next
 
-        const chapterData = await fetchChapterJson(chapterNumber);
-        currentChapterTitle = chapterData.source?.title || `Chapter ${chapterNumber}`;
-        currentChapterName = chapterData.source?.chapter || `Chapter ${chapterNumber}`;
-        
-        renderBook(chapterData);
-        bindSmartLines();
-        updateNavigation();
-        
-        // Ek dafa force layout recalculation
-        window.dispatchEvent(new Event('resize'));
-    } catch (error) {
-        showLoadError(error, chapterNumber);
-    }
-}
-async function fetchChapterJson(chapterNumber) {
-    let path = `subjects/caf8_audit/features/assets/book/chp${chapterNumber}.json`;
-    let response = await fetch(path, { cache: 'no-store' });
-    if (!response.ok) {
-        path = `chp${chapterNumber}.json`; 
-        response = await fetch(path, { cache: 'no-store' });
-    }
-    if (!response.ok) {
-        throw new Error('Chapter JSON file not found: ' + path);
-    }
-    return await response.json();
-}
+                // 🔥 FIX 1: Wait for custom fonts to load so text measurement is 100% accurate
+                if (document.fonts) await document.fonts.ready;
 
-
-// 🔥 STEP 1: REPLACE renderBook FUNCTION 🔥
-function renderBook(data) {
-    const spreads = [];
-    
-    // Ab cover page HAR chapter pe aayega
-    spreads.push(renderCoverSpread(data));
-
-    const pages = paginateChapter(data);
-    for (let i = 0; i < pages.length; i += 2) {
-        spreads.push(renderContentSpread(spreads.length + 1, pages[i], pages[i + 1], data));
-    }
-
-    totalSpreads = spreads.length;
-    currentSpread = 1; 
-    spreadContainer.innerHTML = spreads.join('');
-    
-    // Har naya chapter load hone par cover-mode on kar do
-    bookFrame.classList.add('cover-mode');
-
-    document.querySelectorAll('.book-spread').forEach(s => s.classList.remove('active', 'flip-anim'));
-    const firstSpread = document.getElementById('spread-1');
-    if (firstSpread) {
-        firstSpread.classList.add('active', 'flip-anim');
-    }
-}
-// 🔥 STEP 3: REPLACE turnSpread FUNCTION 🔥
-function turnSpread(direction) {
-    // Auto-Next chapter pe jana band kar diya hai
-    if (direction === 1 && currentSpread >= totalSpreads) return;
-    if (direction === -1 && currentSpread <= 1) return;
-
-    pageFlipSound.currentTime = 0;
-    pageFlipSound.play().catch(() => {});
-
-    document.querySelectorAll('.book-spread').forEach(s => s.classList.remove('active', 'flip-anim'));
-    currentSpread += direction;
-
-    // Jab spread 1 (Cover Page) ho to cover mode lagao, warna hata do
-    if (currentSpread === 1) {
-        bookFrame.classList.add('cover-mode');
-    } else {
-        bookFrame.classList.remove('cover-mode');
-    }
-
-    const nextOne = document.getElementById(`spread-${currentSpread}`);
-    if (nextOne) nextOne.classList.add('active', 'flip-anim');
-    updateNavigation();
-}
-
-// 🔥 STEP 2: REPLACE renderCoverSpread FUNCTION 🔥
-function renderCoverSpread(data) {
-    return `
-        <div class="book-spread active" id="spread-1" data-chp="${escapeHtml(currentChapterName)}">
-            <div class="page-left blank-page"></div>
-            <div class="page-right cover-content">
-                <i class="fa-solid fa-scale-balanced" style="font-size: 3.5rem; color: var(--accent-blue); margin-bottom: 20px;"></i>
-                <h1 class="book-title" style="font-size: 4rem; letter-spacing: 2px;">AUDIT</h1>
-                
-                <p class="cover-subtitle" style="font-size: 1.3rem; color: var(--accent-blue); font-weight: 800; margin-bottom: 8px;">${escapeHtml(currentChapterName)}</p>
-                <p class="cover-subtitle" style="font-size: 1.1rem; line-height: 1.4; padding: 0 20px;">${escapeHtml(currentChapterTitle)}</p>
-                
-                <div class="cover-author" style="margin-top: 35px;">Audit by Caversity</div>
-                <div class="page-num-right">1</div>
-            </div>
-        </div>
-    `;
-}
-// 🔥 STEP 2: REPLACE paginateChapter FUNCTION 🔥
-function paginateChapter(data) {
-    const sourcePages = Array.isArray(data.pages) ? data.pages : [];
-    const displayPages = [];
-    
-    const measureSpread = document.createElement('div');
-    measureSpread.className = 'book-spread active';
-    measureSpread.style.cssText = 'position: absolute; width: 100%; height: 100%; visibility: hidden; z-index: -1000; top: 0; left: 0; display: flex;';
-
-    const measurePage = document.createElement('div');
-    measurePage.className = 'page-right'; 
-    // Inline math hata diya, ab yeh exactly CSS file ki 80px padding uthayega
-    measurePage.style.cssText = 'height: 100%; overflow: auto;'; 
-    
-    measureSpread.appendChild(measurePage);
-    bookFrame.appendChild(measureSpread);
-
-    let currentPage = null;
-
-    sourcePages.forEach(sourcePage => {
-        if (currentPage && currentPage.items.length) {
-            displayPages.push(currentPage);
+                const chapterData = await fetchChapterJson(chapterNumber);
+                currentChapterTitle = chapterData.source?.title || `Chapter ${chapterNumber}`; // Save title for AI
+                currentChapterName = chapterData.source?.chapter || `Chapter ${chapterNumber}`;
+                renderBook(chapterData);
+                bindSmartLines();
+                updateNavigation();
+            } catch (error) {
+                showLoadError(error, chapterNumber);
+            }
         }
 
-        currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', true);
-        const groups = buildPageGroups(sourcePage);
+        async function fetchChapterJson(chapterNumber) {
+            let path = `subjects/caf8_audit/features/assets/book/chp${chapterNumber}.json`;
+            let response = await fetch(path, { cache: 'no-store' });
+            if (!response.ok) {
+                path = `chp${chapterNumber}.json`;
+                response = await fetch(path, { cache: 'no-store' });
+            }
+            if (!response.ok) {
+                throw new Error('Chapter JSON file not found: ' + path);
+            }
+                const result = await response.json();
+                
+                return result;
+        }
 
-        groups.forEach(group => {
-            const previousItems = currentPage.items.slice();
-            currentPage.items.push(...group.items);
-            measurePage.innerHTML = renderMeasuredPage(currentPage);
+        function renderBook(data) {
+            const spreads = [];
+            spreads.push(renderCoverSpread(data));
 
-            // Strict measurement based purely on CSS
-            if (measurePage.scrollHeight > measurePage.clientHeight) { 
-                currentPage.items = previousItems;
+            const pages = paginateChapter(data);
+            for (let i = 0; i < pages.length; i += 2) {
+                const leftPage = pages[i];
+                const rightPage = pages[i + 1];
+                spreads.push(renderContentSpread(spreads.length + 1, leftPage, rightPage, data));
+            }
 
-                if (currentPage.items.length) {
+            totalSpreads = spreads.length;
+            currentSpread = 1;
+            spreadContainer.innerHTML = spreads.join('');
+            bookFrame.classList.add('cover-mode');
+        }
+
+        function renderCoverSpread(data) {
+            return `
+                <div class="book-spread active" id="spread-1" data-chp="AUDIT">
+                    <div class="page-left blank-page"></div>
+                    <div class="page-right cover-content">
+                        <i class="fa-solid fa-scale-balanced" style="font-size: 3.5rem; color: var(--accent-blue); margin-bottom: 20px;"></i>
+                        <h1 class="book-title" style="font-size: 4rem; letter-spacing: 2px;">AUDIT</h1>
+                        <p class="cover-subtitle">An Interactive Guide to Core Auditing Concepts</p>
+                        <div class="cover-author">Audit by Caversity</div>
+                        <div class="page-num-right">1</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function paginateChapter(data) {
+            const sourcePages = Array.isArray(data.pages) ? data.pages : [];
+            const displayPages = [];
+            
+            const measureSpread = document.createElement('div');
+            measureSpread.className = 'book-spread active';
+            measureSpread.style.cssText = 'position: absolute; width: 100%; height: 100%; visibility: hidden; z-index: -1000; top: 0; left: 0;';
+
+            const measurePage = document.createElement('div');
+            measurePage.className = 'page-right measure-page';
+            measurePage.style.height = '100%'; // Ensure tight boundary
+            
+            measureSpread.appendChild(measurePage);
+            spreadContainer.appendChild(measureSpread);
+
+            let currentPage = null;
+            let isFirstContent = true;
+
+            sourcePages.forEach(sourcePage => {
+                if (currentPage && currentPage.items.length) {
                     displayPages.push(currentPage);
                 }
 
-                currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', false);
-                currentPage.items.push(...group.items);
-                measurePage.innerHTML = renderMeasuredPage(currentPage);
-            }
-        });
-    });
+                currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', true);
+                const groups = buildPageGroups(sourcePage);
 
-    if (currentPage && currentPage.items.length) {
-        displayPages.push(currentPage);
-    }
+                groups.forEach(group => {
+                    const previousItems = currentPage.items.slice();
+                    currentPage.items.push(...group.items);
+                    measurePage.innerHTML = renderMeasuredPage(currentPage);
 
-    measureSpread.remove(); 
-    displayPages.forEach((page, index) => {
-        page.page = index + 2;
-    });
+                    if (measurePage.scrollHeight > measurePage.clientHeight) {
+                        currentPage.items = previousItems;
 
-    return displayPages;
-}
+                        if (currentPage.items.length) {
+                            displayPages.push(currentPage);
+                        }
 
-function createDisplayPage(heading, showHeading = true) {
-    return { page: 0, heading, showHeading, items: [] };
-}
-
-function buildPageGroups(page) {
-    const groups = [];
-    const sections = Array.isArray(page?.sections) ? page.sections : [];
-
-    sections.forEach(section => {
-        const currentSectionTitle = section?.title || '';
-        const paragraphs = Array.isArray(section?.paragraphs) ? section.paragraphs : [];
-        const paragraphItems = paragraphs.map(paragraph => ({
-            type: 'paragraph',
-            text: paragraph,
-            context: currentSectionTitle
-        }));
-
-        if (section?.title && paragraphItems.length) {
-            groups.push({ items: [{ type: 'sectionTitle', text: section.title }, paragraphItems[0]] });
-            paragraphItems.slice(1).forEach(item => groups.push({ items: [item] }));
-        } else if (section?.title) {
-            groups.push({ items: [{ type: 'sectionTitle', text: section.title }] });
-        } else {
-            paragraphItems.forEach(item => groups.push({ items: [item] }));
-        }
-    });
-
-    return groups;
-}
-
-function renderMeasuredPage(page) {
-    const headingHtml = page.showHeading ? `<h1 class="book-title">${escapeHtml(page.heading || 'Chapter Page')}</h1>` : '';
-    return `
-        <span class="chapter-header">${escapeHtml(currentChapterName)}</span>
-        ${headingHtml}
-        ${page.items.map(renderPageItem).join('')}
-    `;
-}
-
-function renderContentSpread(spreadNumber, leftPage, rightPage, data) {
-    return `
-        <div class="book-spread" id="spread-${spreadNumber}" data-chp="${escapeHtml(data.source?.title || '')}">
-            ${renderPage(leftPage, 'left')}
-            ${rightPage ? renderPage(rightPage, 'right') : renderBlankPage('right')}
-        </div>
-    `;
-}
-
-function renderPage(page, side) {
-    const sideClass = side === 'left' ? 'page-left' : 'page-right';
-    const pageNumClass = side === 'left' ? 'page-num-left' : 'page-num-right';
-    const pageNumber = page?.page ?? '';
-    const heading = escapeHtml(page?.heading || 'Chapter Page');
-    const items = Array.isArray(page?.items) ? page.items : [];
-    const contentHtml = items.map(renderPageItem).join('');
-    const headingHtml = page?.showHeading === false ? '' : `<h1 class="book-title">${heading}</h1>`;
-
-    return `
-        <div class="${sideClass}">
-            <span class="chapter-header">${escapeHtml(currentChapterName)}</span>
-            ${headingHtml}
-            ${contentHtml}
-            <div class="${pageNumClass}">${escapeHtml(pageNumber)}</div>
-        </div>
-    `;
-}
-
-// 🔥 STEP 4: REPLACE renderBlankPage FUNCTION 🔥
-function renderBlankPage(side) {
-    const sideClass = side === 'left' ? 'page-left' : 'page-right';
-    
-    return `
-        <div class="${sideClass} blank-page" style="text-align: center;">
-            <h2 style="color: var(--accent-blue); font-size: 2.2rem; margin-bottom: 10px; font-family: 'Merriweather', serif;">The End</h2>
-            <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 25px; color: #64748b;">${escapeHtml(currentChapterName)} Completed</p>
-            <p style="color: #d97706; font-size: 0.95rem; font-style: italic;">Please select the next chapter from the Table of Contents.</p>
-        </div>
-    `;
-}
-function renderPageItem(item) {
-    if (item.type === 'chapterMainTitle') {
-        return `<div style="text-align:center; margin-bottom:25px; padding-bottom:15px; border-bottom:2px solid #e2e8f0;"><h2 style="color:var(--accent-blue); font-size:1.3rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin:0;">${escapeHtml(item.text)}</h2></div>`;
-    }
-    if (item.type === 'sectionTitle') {
-        return `<h2 class="section-title">${escapeHtml(item.text)}</h2>`;
-    }
-    if (item.type === 'paragraph') {
-        let text = item.text || '';
-        
-        // Bullet points detect karne ka logic (* ya - se shuru hone wali line)
-       const isBullet = /^[*\-•]\s/.test(text.trim());
-        if (isBullet) {
-            text = text.trim().substring(1).trim(); // Remove the '*' or '-' 
-            return `<ul style="margin-left: 20px; margin-bottom: 10px; list-style-type: disc;"><li class="reading-text" style="margin-bottom: 5px;">${renderInteractiveParagraph(text, item.context)}</li></ul>`;
-        }
-        
-        return `<p class="reading-text">${renderInteractiveParagraph(text, item.context)}</p>`;
-    }
-    return '';
-}
-
-function renderInteractiveParagraph(text, context) {
-    const rawText = String(text || '');
-    const sentences = rawText.match(/[^.!?]+[.!?]*/g) || [rawText];
-    
-    return sentences.map(sentence => {
-        let trimmed = sentence.trim();
-        if (!trimmed) return '';
-        
-        const hashId = "line_" + Math.abs(hashCode(trimmed)).toString(36);
-        
-        // JSON ke **bold** text ko real Bold (strong) mein convert karna
-        let formattedText = escapeHtml(trimmed).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        
-        return `<span class="smart-line" data-id="${hashId}" data-context="${escapeHtml(context || '')}" data-english="${escapeHtml(trimmed)}">${formattedText} </span>`;
-    }).join('');
-}
-
-function hashCode(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-        hash = (hash << 5) - hash + str.charCodeAt(i);
-        hash |= 0;
-    }
-    return hash;
-}
-
-// 🔥 STEP 3: REPLACE bindSmartLines FUNCTION (BULLETPROOF FIREBASE) 🔥
-function bindSmartLines() {
-    document.querySelectorAll('.smart-line').forEach(line => {
-        line.addEventListener('click', async function(event) {
-            event.stopPropagation();
-            document.querySelectorAll('.smart-line').forEach(item => item.classList.remove('active'));
-            this.classList.add('active');
-
-            const lineId = this.getAttribute('data-id');
-            const lineContext = this.getAttribute('data-context');
-            const englishText = this.getAttribute('data-english') || this.innerText;
-
-            decEnglish.innerText = '"' + englishText + '"';
-            decUrdu.innerText = "⏳ AI is decoding this concept...";
-            decExample.innerText = "";
-            decExampleBox.style.display = 'none';
-            decContent.style.display = 'block';
-            drawer.classList.add('open');
-
-            let foundInFirebase = false;
-
-            // 1st Try: Firebase se check karo (Agar net issue hua to crash nahi hoga)
-            try {
-                const docRef = doc(db, "book_decodes", lineId);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    decUrdu.innerText = data.urdu;
-                    if (data.example) {
-                        decExample.innerText = data.example;
-                        decExampleBox.style.display = 'block';
+                        currentPage = createDisplayPage(sourcePage.heading || 'Chapter Page', false);
+                        currentPage.items.push(...group.items);
+                        measurePage.innerHTML = renderMeasuredPage(currentPage);
                     }
-                    foundInFirebase = true;
+                });
+            });
+
+            if (currentPage && currentPage.items.length) {
+                displayPages.push(currentPage);
+            }
+
+            measureSpread.remove();
+            displayPages.forEach((page, index) => {
+                page.page = index + 2;
+            });
+
+            return displayPages;
+        }
+
+        function createDisplayPage(heading, showHeading = true) {
+            return {
+                page: 0,
+                heading,
+                showHeading,
+                items: []
+            };
+        }
+
+        function buildPageGroups(page) {
+            const groups = [];
+            const sections = Array.isArray(page?.sections) ? page.sections : [];
+
+            sections.forEach(section => {
+                const currentSectionTitle = section?.title || '';
+                const paragraphs = Array.isArray(section?.paragraphs) ? section.paragraphs : [];
+                const paragraphItems = paragraphs.map(paragraph => ({
+                    type: 'paragraph',
+                    text: paragraph,
+                    context: currentSectionTitle
+                }));
+
+                if (section?.title && paragraphItems.length) {
+                    groups.push({
+                        items: [
+                            { type: 'sectionTitle', text: section.title },
+                            paragraphItems[0]
+                        ]
+                    });
+                    paragraphItems.slice(1).forEach(item => groups.push({ items: [item] }));
+                } else if (section?.title) {
+                    groups.push({ items: [{ type: 'sectionTitle', text: section.title }] });
+                } else {
+                    paragraphItems.forEach(item => groups.push({ items: [item] }));
                 }
-            } catch (firebaseError) {
-                console.warn("Firebase Offline/Error. Direct AI ko call kar rahay hain...");
-                // Yahan error ko ignore kar diya taake next step (AI) chal sake
+            });
+
+            return groups;
+        }
+
+        function renderMeasuredPage(page) {
+            const headingHtml = page.showHeading ? `<h1 class="book-title">${escapeHtml(page.heading || 'Chapter Page')}</h1>` : '';
+
+            return `
+                <span class="chapter-header">${escapeHtml(currentChapterName)}</span>
+                ${headingHtml}
+                ${page.items.map(renderPageItem).join('')}
+            `;
+        }
+
+        function renderContentSpread(spreadNumber, leftPage, rightPage, data) {
+            return `
+                <div class="book-spread" id="spread-${spreadNumber}" data-chp="${escapeHtml(data.source?.title || '')}">
+                    ${renderPage(leftPage, 'left')}
+                    ${rightPage ? renderPage(rightPage, 'right') : renderBlankPage('right')}
+                </div>
+            `;
+        }
+
+        function renderPage(page, side) {
+            const sideClass = side === 'left' ? 'page-left' : 'page-right';
+            const pageNumClass = side === 'left' ? 'page-num-left' : 'page-num-right';
+            const pageNumber = page?.page ?? '';
+            const heading = escapeHtml(page?.heading || 'Chapter Page');
+            const items = Array.isArray(page?.items) ? page.items : [];
+            const contentHtml = items.map(renderPageItem).join('');
+            const headingHtml = page?.showHeading === false ? '' : `<h1 class="book-title">${heading}</h1>`;
+
+            return `
+                <div class="${sideClass}">
+                    <span class="chapter-header">${escapeHtml(currentChapterName)}</span>
+                    ${headingHtml}
+                    ${contentHtml}
+                    <div class="${pageNumClass}">${escapeHtml(pageNumber)}</div>
+                </div>
+            `;
+        }
+
+        function renderBlankPage(side) {
+            const sideClass = side === 'left' ? 'page-left' : 'page-right';
+            const nextChp = window.currentChapterNum + 1;
+            return `
+                <div class="${sideClass} blank-page">
+                    <i class="fa-solid fa-check-circle" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 15px;"></i>
+                    <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">End of Chapter</p>
+                    ${nextChp <= 16 ? `<button onclick="loadSpecificChapter(${nextChp})" style="background: var(--accent-blue); color: white; border: none; padding: 10px 22px; border-radius: 50px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(37,99,235,0.3); transition: transform 0.2s;">Next Chapter <i class="fa-solid fa-arrow-right"></i></button>` : ''}
+                </div>
+            `;
+        }
+
+        function renderPageItem(item) {
+            if (item.type === 'chapterMainTitle') {
+                return `<div style="text-align:center; margin-bottom:25px; padding-bottom:15px; border-bottom:2px solid #e2e8f0;"><h2 style="color:var(--accent-blue); font-size:1.3rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin:0;">${escapeHtml(item.text)}</h2></div>`;
+            }
+            if (item.type === 'sectionTitle') {
+                return `<h2 class="section-title">${escapeHtml(item.text)}</h2>`;
             }
 
-            // 2nd Try: Agar Firebase mein nahi mila ya Firebase offline tha
-            if (!foundInFirebase) {
-                try {
-                    const aiResponse = await callGrokForDecode(englishText, currentChapterTitle, lineContext);
-                    
-                    decUrdu.innerText = aiResponse.urdu;
-                    if (aiResponse.example) {
-                        decExample.innerText = aiResponse.example;
-                        decExampleBox.style.display = 'block';
-                    }
+            if (item.type === 'paragraph') {
+            let text = String(item.text || '').trim();
+            let context = item.context || '';
 
-                    // Answer aane k baad background mein save karne ki koshish karo
+            // 1. Table Formatting
+            if (text.startsWith('|') && text.includes('|---')) {
+                return renderTable(text, context);
+            }
+
+            // 2. Beautiful Bullet Lists
+            if (text.startsWith('* ') || text.startsWith('- ')) {
+                let isSub = text.startsWith('- ');
+                let cleanText = text.substring(2).trim();
+                
+                let displayText = cleanText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                let cleanEnglish = cleanText.replace(/\*\*(.*?)\*\*/g, '$1');
+                
+                let hashId = "line_" + Math.abs(hashCode(cleanEnglish)).toString(36);
+                let margin = isSub ? 'margin-left: 25px;' : 'margin-left: 5px;';
+                let bullet = isSub ? '<i class="fa-regular fa-circle" style="font-size: 6px; position:relative; top:-2px;"></i>' : '<i class="fa-solid fa-circle" style="font-size: 8px; position:relative; top:2px;"></i>';
+                
+                return `
+                    <div style="display:flex; gap:12px; ${margin} margin-bottom:12px; align-items: flex-start; line-height: 1.6;">
+                        <span style="color:var(--accent-blue); margin-top: 2px;">${bullet}</span> 
+                        <div style="flex:1;">
+                            <span class="smart-line" data-id="${hashId}" data-context="${escapeHtml(context)}" data-english="${escapeHtml(cleanEnglish)}">${displayText}</span>
+                        </div>
+                    </div>`;
+            }
+
+            // 3. Normal Paragraphs with Bold detection
+            let hasBold = text.includes('**');
+            let displayText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            if (hasBold) {
+                let cleanEnglish = text.replace(/\*\*(.*?)\*\*/g, '$1');
+                let hashId = "line_" + Math.abs(hashCode(cleanEnglish)).toString(36);
+                return `<p class="reading-text"><span class="smart-line" data-id="${hashId}" data-context="${escapeHtml(context)}" data-english="${escapeHtml(cleanEnglish)}">${displayText}</span></p>`;
+            }
+
+            return `<p class="reading-text">${renderInteractiveParagraph(text, context)}</p>`;
+            }
+
+            return '';
+        }
+    
+    function renderTable(mdText, context) {
+        let lines = mdText.split('\n').map(l => l.trim()).filter(l => l);
+        let html = '<div style="margin-bottom: 20px; width: 100%; overflow-x: auto;"><table class="audit-table" style="width: 100%; border-collapse: collapse; border: 1px solid #cbd5e1; font-size: 0.9rem; text-align: left;">';
+        let isBody = false;
+        for(let i = 0; i < lines.length; i++) {
+            let line = lines[i];
+            if(line.includes('|---|') || line.includes('|---')) {
+                isBody = true; continue;
+            }
+            let cells = line.split('|').filter((_, index, arr) => index !== 0 && index !== arr.length - 1);
+            html += '<tr style="border-bottom: 1px solid #e2e8f0;">';
+            cells.forEach(cell => {
+                let c = cell.trim();
+                let displayText = c.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/<br\s*\/?>/gi, '<br>');
+                let cleanEnglish = c.replace(/\*\*(.*?)\*\*/g, '$1').replace(/<[^>]*>?/gm, ' ');
+                if(!isBody) {
+                    html += `<th style="padding: 10px 12px; background: #f8fafc; color: #0f172a; border-right: 1px solid #cbd5e1;">${displayText}</th>`;
+                } else {
+                    let hashId = "line_" + Math.abs(hashCode(cleanEnglish)).toString(36);
+                    html += `<td style="padding: 10px 12px; color: #334155; border-right: 1px solid #cbd5e1; vertical-align: top;"><span class="smart-line" style="display:block;" data-id="${hashId}" data-context="${escapeHtml(context)}" data-english="${escapeHtml(cleanEnglish)}">${displayText}</span></td>`;
+                }
+            });
+            html += '</tr>';
+        }
+        html += '</table></div>';
+        return html;
+    }
+
+        function renderInteractiveParagraph(text, context) {
+            const rawText = String(text || '');
+            // Split paragraph into sentences logically
+            const sentences = rawText.match(/[^.!?]+[.!?]*/g) || [rawText];
+            
+            return sentences.map(sentence => {
+                const trimmed = sentence.trim();
+                if (!trimmed) return '';
+                // Generate a unique 10-character ID based on the text hash
+                const hashId = "line_" + Math.abs(hashCode(trimmed)).toString(36);
+                return `<span class="smart-line" data-id="${hashId}" data-context="${escapeHtml(context || '')}" data-english="${escapeHtml(trimmed)}">${escapeHtml(trimmed)} </span>`;
+            }).join('');
+        }
+
+        function hashCode(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = (hash << 5) - hash + str.charCodeAt(i);
+                hash |= 0;
+            }
+            return hash;
+        }
+
+        function bindSmartLines() {
+            document.querySelectorAll('.smart-line').forEach(line => {
+                line.addEventListener('click', async function(event) {
+                    event.stopPropagation();
+                    document.querySelectorAll('.smart-line').forEach(item => item.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const lineId = this.getAttribute('data-id');
+                    const lineContext = this.getAttribute('data-context');
+                    const englishText = this.getAttribute('data-english') || this.innerText;
+
+                    // 1. Loading State UI
+                    decEnglish.innerText = '"' + englishText + '"';
+                    decUrdu.innerText = "⏳ AI is decoding this standard...";
+                    decExample.innerText = "";
+                    decExampleBox.style.display = 'none';
+                    decContent.style.display = 'block';
+                    drawer.classList.add('open');
+
                     try {
+                        // 2. Check Firebase Database
                         const docRef = doc(db, "book_decodes", lineId);
-                        await setDoc(docRef, {
-                            english: englishText,
-                            urdu: aiResponse.urdu,
-                            example: aiResponse.example,
-                            created_at: new Date()
-                        });
-                    } catch (saveError) {
-                        console.log("Answer aa gaya, par Firebase mein save nahi ho saka (Offline).");
-                    }
+                        const docSnap = await getDoc(docRef);
 
-                } catch (apiError) {
-                    console.error("AI API Error:", apiError);
-                    decUrdu.innerText = "⚠️ Connection Issue: " + apiError.message;
-                }
+                        if (docSnap.exists()) {
+                            // 🟢 FOUND IN DATABASE - Instant Load
+                            const data = docSnap.data();
+                            decUrdu.innerText = data.urdu;
+                            if (data.example) {
+                                decExample.innerText = data.example;
+                                decExampleBox.style.display = 'block';
+                            }
+                        } else {
+                            // 🔴 NOT IN DATABASE - Call Grok API
+                            const aiResponse = await callGrokForDecode(englishText, currentChapterTitle, lineContext);
+                            
+                            // Save to Firebase for future students
+                            await setDoc(docRef, {
+                                english: englishText,
+                                urdu: aiResponse.urdu,
+                                example: aiResponse.example,
+                                created_at: new Date()
+                            });
+
+                            // Update UI
+                            decUrdu.innerText = aiResponse.urdu;
+                            if (aiResponse.example) {
+                                decExample.innerText = aiResponse.example;
+                                decExampleBox.style.display = 'block';
+                            }
+                        }
+                    } catch (error) {
+                        console.error(error);
+                        decUrdu.innerText = "⚠️ Connection error or AI limit reached. Please try again.";
+                    }
+                });
+            });
+        }
+
+        function turnSpread(direction) {
+            if (direction === 1 && currentSpread >= totalSpreads) return;
+            if (direction === -1 && currentSpread <= 1) return;
+
+            pageFlipSound.currentTime = 0;
+            pageFlipSound.play().catch(() => {});
+
+            document.querySelectorAll('.book-spread').forEach(spread => {
+                spread.classList.remove('active', 'flip-anim');
+            });
+
+            currentSpread += direction;
+
+            if (currentSpread === 1) {
+                bookFrame.classList.add('cover-mode');
+            } else {
+                bookFrame.classList.remove('cover-mode');
+            }
+
+            const newSpread = document.getElementById(`spread-${currentSpread}`);
+            if (newSpread) {
+                newSpread.classList.add('active', 'flip-anim');
+            }
+
+            updateNavigation();
+            closeDrawer();
+        }
+
+        function updateNavigation() {
+            document.getElementById('btn-prev').style.display = currentSpread === 1 ? 'none' : 'block';
+            document.getElementById('btn-next').style.display = currentSpread === totalSpreads ? 'none' : 'block';
+        }
+
+        function closeDrawer() {
+            drawer.classList.remove('open');
+            document.querySelectorAll('.smart-line').forEach(line => line.classList.remove('active'));
+            setTimeout(() => {
+                decContent.style.display = 'none';
+                decExampleBox.style.display = 'none';
+                decEnglish.innerText = 'Click on any dashed line in the book to see its meaning.';
+            }, 400);
+        }
+
+        function showLoadError(error, chapterNumber) {
+            spreadContainer.innerHTML = `
+                <div class="load-message">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                <strong>Chapter ${chapterNumber} Load Nahi Hua</strong>
+                <span>File <b>subjects/caf8_audit/features/assets/book/chp${chapterNumber}.json</b> missing hai.</span>
+                    <span style="font-size: 0.8rem; opacity: 0.75;">${escapeHtml(error?.message || 'Unknown error')}</span>
+                </div>
+            `;
+            totalSpreads = 1;
+            updateNavigation();
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        async function callGrokForDecode(englishText, chapterTitle, lineContext) {
+            // Groq API Key
+            const API_KEY = "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"; 
+            const url = "https://api.groq.com/openai/v1/chat/completions";
+            
+            const prompt = `
+            You are a CA Audit Tutor. We are currently studying: "${chapterTitle}".
+            Sub-topic/Context: "${lineContext}"
+            Explain the following text in easy Roman Urdu (1-2 lines), and give a short corporate practical example related to this topic.
+            Return ONLY a valid JSON object:
+            {
+                "urdu": "asaan urdu text",
+                "example": "practical example"
+            }
+            Text: "${englishText}"
+            `;
+
+            const response = await fetch(url, {
+                method: "POST",
+                headers: { "Authorization": `Bearer ${API_KEY}`, "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    model: "mixtral-8x7b-32768",
+                    messages: [{ role: "user", content: prompt }],
+                    temperature: 0.7
+                })
+            });
+
+            if (!response.ok) throw new Error("API Error");
+            const json = await response.json();
+            if (!json || !json.choices || json.choices.length === 0) {
+                throw new Error("Invalid AI Response format");
+            }
+            let content = json.choices[0].message.content;
+            
+            // 🔥 Robust JSON extraction: Ignorning extra conversational text from AI
+            const jsonMatch = content.match(/\{[\s\S]*\}/);
+            if (jsonMatch) content = jsonMatch[0];
+            else content = content.replace(/```json/g, '').replace(/```/g, '').trim();
+            
+            return JSON.parse(content);
+        }
+
+        document.addEventListener('click', function(event) {
+            if (!drawer.contains(event.target) && drawer.classList.contains('open')) {
+                closeDrawer();
             }
         });
-    });
-}
 
-// 🔥 NAVIGATION UPDATE: Show next/prev buttons at chapter edges for continuous flow
-function updateNavigation() {
-    const isVeryFirstPage = (currentSpread === 1 && window.currentChapterNum === 1);
-    const isVeryLastPage = (currentSpread === totalSpreads && window.currentChapterNum === 16);
+        // Expose functions globally for inline HTML onclick events
+        window.turnSpread = turnSpread;
+        window.closeDrawer = closeDrawer;
     
-    document.getElementById('btn-prev').style.display = isVeryFirstPage ? 'none' : 'block';
-    document.getElementById('btn-next').style.display = isVeryLastPage ? 'none' : 'block';
-}
-
-function closeDrawer() {
-    drawer.classList.remove('open');
-    document.querySelectorAll('.smart-line').forEach(line => line.classList.remove('active'));
-    setTimeout(() => {
-        decContent.style.display = 'none';
-        decExampleBox.style.display = 'none';
-        decEnglish.innerText = 'Click on any dashed line in the book to see its meaning.';
-    }, 400);
-}
-
-function showLoadError(error, chapterNumber) {
-    spreadContainer.innerHTML = `
-        <div class="load-message">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <strong>Chapter ${chapterNumber} Load Nahi Hua</strong>
-            <span>File <b>chp${chapterNumber}.json</b> missing hai.</span>
-            <span style="font-size: 0.8rem; opacity: 0.75;">${escapeHtml(error?.message || 'Unknown error')}</span>
-        </div>
-    `;
-    totalSpreads = 1;
-    updateNavigation();
-}
-
-function escapeHtml(value) {
-    return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-}
-
-// 🔥 STEP 3: GROK API RELIABILITY FIX 🔥
-async function callGrokForDecode(englishText, chapterTitle, lineContext) {
-    const GROQ_API_KEY = "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";
-    
-    const prompt = `You are Caversity AI, a CA Audit Expert. Explain this audit concept in 2 lines of Roman Urdu English mix and give 1 practical example(dont use any hindi word). Return ONLY JSON: {"urdu": "...", "example": "..."}. Context: ${chapterTitle} -> ${lineContext}. Text: "${englishText}"`;
-
-    try {
-        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${GROQ_API_KEY}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                model: "llama-3.3-70b-versatile",
-                messages: [{"role": "user", "content": prompt}],
-                temperature: 0.5
-            })
-        });
-
-        const data = await response.json();
-        if (data.error) throw new Error(data.error.message);
-
-        let aiReply = data.choices[0].message.content;
-        const jsonMatch = aiReply.match(/\{[\s\S]*\}/);
-        return JSON.parse(jsonMatch ? jsonMatch[0] : aiReply);
-    } catch (error) {
-        console.error("AI Error:", error);
-        throw error;
-    }
-}
-window.turnSpread = turnSpread;
-window.closeDrawer = closeDrawer;
