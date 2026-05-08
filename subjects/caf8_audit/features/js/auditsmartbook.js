@@ -371,20 +371,14 @@ function renderTable(mdText, context) {
                 let l = line.trim();
                 if (!l) return '';
                 
-                let isBullet = false;
-                if (l.startsWith('*') || l.startsWith('-')) {
-                    isBullet = true;
-                    l = l.substring(1).trim();
+                if (l.startsWith('* ') || l.startsWith('- ')) {
+                    l = '• ' + l.substring(2).trim();
                 }
                 
-                let interactiveHtml = renderInteractiveParagraph(l, context);
-                if (isBullet) {
-                    return `<div style="display:flex; gap:6px; margin-top:4px;"><span style="color:var(--accent-blue); font-size:14px;">•</span><div style="flex:1;">${interactiveHtml}</div></div>`;
-                }
-                return interactiveHtml;
+                return renderInteractiveParagraph(l, context);
             }).filter(l => l !== '');
             
-            let cellHtml = formattedLines.join('<div style="height:6px;"></div>');
+            let cellHtml = formattedLines.join('<br>');
             
             if (isHeader) {
                 html += `<th style="padding: 10px 12px; background: #f8fafc; color: #0f172a; border-right: 1px solid #cbd5e1; font-weight: 700;">${cellHtml}</th>`;
