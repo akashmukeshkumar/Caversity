@@ -39,6 +39,12 @@ style.innerHTML = `
         color: #000; 
         font-weight: bold; 
     }
+    .page-left, .page-right {
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+    .page-left::-webkit-scrollbar, .page-right::-webkit-scrollbar { width: 4px; }
+    .page-left::-webkit-scrollbar-thumb, .page-right::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
 `;
 document.head.appendChild(style);
 
@@ -308,6 +314,11 @@ function renderPageItem(item) {
     if (item.type === 'paragraph') {
         let text = item.text || '';
         
+        // Table detection logic
+        if (text.trim().startsWith('|') && text.includes('|---')) {
+            return renderTable(text, item.context);
+        }
+
         // Bullet points detect karne ka logic (* ya - se shuru hone wali line)
        const isBullet = /^[*\-•]\s/.test(text.trim());
         if (isBullet) {
@@ -318,6 +329,40 @@ function renderPageItem(item) {
         return `<p class="reading-text">${renderInteractiveParagraph(text, item.context)}</p>`;
     }
     return '';
+}
+
+function renderTable(mdText, context) {
+    let lines = mdText.trim().split('\n').map(l => l.trim()).filter(l => l);
+    let html = '<div style="margin-bottom: 20px; width: 100%; overflow-x: auto;"><table class="audit-table" style="width: 100%; border-collapse: collapse; border: 1px solid #cbd5e1; font-size: 0.85rem; text-align: left; line-height: 1.4;">';
+    let isBody = false;
+    
+    for(let i = 0; i < lines.length; i++) {
+        let line = lines[i];
+        if(line.includes('|---|') || line.includes('|---')) {
+            isBody = true; 
+            continue;
+        }
+        
+        let cells = line.split('|');
+        if(cells.length > 0 && cells[0].trim() === '') cells.shift();
+        if(cells.length > 0 && cells[cells.length - 1].trim() === '') cells.pop();
+        
+        html += '<tr style="border-bottom: 1px solid #e2e8f0;">';
+        cells.forEach(cell => {
+            let c = cell.trim();
+            let isHeader = !isBody;
+            let cellHtml = renderInteractiveParagraph(c, context);
+            cellHtml = cellHtml.replace(/&lt;br\s*\/?[&gt;>]/gi, '<br><br>');
+            if (isHeader) {
+                html += `<th style="padding: 10px 12px; background: #f8fafc; color: #0f172a; border-right: 1px solid #cbd5e1; font-weight: 700;">${cellHtml}</th>`;
+            } else {
+                html += `<td style="padding: 10px 12px; color: #334155; border-right: 1px solid #cbd5e1; vertical-align: top;">${cellHtml}</td>`;
+            }
+        });
+        html += '</tr>';
+    }
+    html += '</table></div>';
+    return html;
 }
 
 function renderInteractiveParagraph(text, context) {
