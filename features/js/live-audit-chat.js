@@ -4,6 +4,7 @@
 
 import { getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 // 1. 🔥 MULTIPLE API KEYS (FALLBACK SYSTEM) 🔥
 const GROQ_API_KEYS = [
@@ -26,6 +27,7 @@ let silenceTimer; // 🔥 FOR SILENCE DETECTION
 // 🔥 FIREBASE SETUP FOR ROOM LOCK 🔥
 const app = getApp();
 const db = getFirestore(app);
+const auth = getAuth(app);
 const roomDocRef = doc(db, "app_state", "interview_room");
 
 // 3. SPEECH ENGINES (Built-in Browser APIs)
@@ -45,10 +47,16 @@ if (recognition) {
 // ==========================================
 let serverState = { is_busy: false, current_student: null };
 
-onSnapshot(roomDocRef, (docSnap) => {
-    if (docSnap.exists()) {
-        serverState = docSnap.data();
-        updateLobbyStatus();
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        onSnapshot(roomDocRef, (docSnap) => {
+            if (docSnap.exists()) {
+                serverState = docSnap.data();
+                updateLobbyStatus();
+            }
+        }, (error) => {
+            console.warn("Room listener error (Check Firebase Rules):", error);
+        });
     }
 });
 
