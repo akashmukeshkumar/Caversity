@@ -2,21 +2,21 @@
   "id": "caf8_chapter_2",
   "source": {
     "chapter": "Chapter 2",
-    "title": "Obtaining an engagement"
+    "title": "OBTAINING AN ENGAGEMENT"
   },
   "pages": [
     {
-      "heading": "OBTAINING AND ACCEPTING A NEW AUDIT ENGAGEMENT",
+      "heading": "1 OBTAINING AND ACCEPTING A NEW AUDIT ENGAGEMENT",
       "sections": [
         {
-          "title": "Introduction",
+          "title": "1.1 Introduction",
           "paragraphs": [
             "Several commercial and ethical matters should be considered by an external auditor when considering the acceptance of a new audit engagement. Auditors and clients must also follow the legal requirements set out in the Companies Act, 2017.",
             "Audit practices are a business, and their objective is to make a profit. However, this does not mean that the practice should automatically accept every audit engagement that is offered to it, in order to maximise profit. Circumstances may arise where it is appropriate to decline the offer of an audit appointment, for either commercial or ethical reasons."
           ]
         },
         {
-          "title": "Accepting an audit appointment: ethical matters",
+          "title": "1.2 Accepting an audit appointment: ethical matters",
           "paragraphs": [
             "The ICAP Code of Ethics [Section 320] includes procedures that auditors must follow to assure that their appointment is valid.",
             "Note: You should refer to the later chapter on ethics for explanation of the ethical terms and principles referred to below."
@@ -49,7 +49,7 @@
           ]
         },
         {
-          "title": "Changes in professional appointment",
+          "title": "320.4 Changes in professional appointment",
           "paragraphs": [
             "There might be reasons for not accepting an engagement. One such reason might be if a threat created by the facts and circumstances cannot be addressed by applying safeguards. For example, there might be a self-interest threat to compliance with the principle of professional competence and due care if a chartered accountant accepts the engagement before knowing all the relevant facts."
           ]
@@ -85,10 +85,10 @@
       ]
     },
     {
-      "heading": "AGREEING THE TERMS OF AUDIT ENGAGEMENTS (ISA 210)",
+      "heading": "2 AGREEING THE TERMS OF AUDIT ENGAGEMENTS (ISA 210)",
       "sections": [
         {
-          "title": "Preconditions",
+          "title": "2.1 Preconditions",
           "paragraphs": [
             "The objective of the auditor, per ISA 210 Agreeing the terms of audit engagements, is to accept or continue an audit engagement only when the basis upon which it is to be performed has been agreed. This is done by:",
             "* establishing whether the preconditions for an audit are present; and",
@@ -111,7 +111,7 @@
           ]
         },
         {
-          "title": "Engagement letters",
+          "title": "2.2 Engagement letters",
           "paragraphs": [
             "Having accepted an appointment as auditor of a client company, the audit firm should submit an engagement letter to the board of directors of the client company. The engagement letter can be seen as the basis for the contract between the company and the auditor."
           ]
@@ -138,21 +138,6 @@
             "* a request for management to acknowledge receipt of the engagement letter and to agree to its terms",
             "* A reference to any further agreements between the auditor and the entity",
             "* Any obligations to provide audit working papers to other parties"
-          ]
-        },
-        {
-          "title": "Example",
-          "paragraphs": [
-            "Explain why the auditor might wish to include each of the following points in the engagement letter:",
-            "* Basis on which fees are charged",
-            "* Outline timetable",
-            "* Formal acknowledgement of the contents of the letter",
-            "* Arrangements for the involvement of client staff",
-            "Answer:",
-            "Basis on which fees are charged - to ensure that there is no misunderstanding (for example that more senior staff cost more and that \"time is money\"). This may help to encourage the client to provide as much assistance as possible and not to insist that all work is carried out by more senior members of the team.",
-            "Outline timetable - to ensure that the client will be prepared for the arrival of the audit team (for example, draft financial statements and supporting schedules of all ready and key staff available (and not on holiday). If necessary, the audit timetable could be changed at this stage.",
-            "Formal acknowledgement of the contents of the letter- to ensure that the directors cannot later claim that they did not understand the scope of the audit and their responsibility for the financial statements.",
-            "Arrangements for the involvement of client staff - to ensure that the client is able to plan for the involvement of the necessary staff and that they are available at the required time."
           ]
         },
         {
@@ -184,10 +169,10 @@
       ]
     },
     {
-      "heading": "QUALITY MANAGEMENT FOR AN AUDIT OF FINANCIAL STATEMENTS (ISA 220 REVISED)",
+      "heading": "3 QUALITY MANAGEMENT FOR AN AUDIT OF FINANCIAL STATEMENTS (ISA 220 REVISED)",
       "sections": [
         {
-          "title": "Objective",
+          "title": "3.1 Objective",
           "paragraphs": [
             "The objective of the auditor is to manage quality at the engagement level to obtain reasonable assurance that quality has been achieved such that:",
             "* The auditor has fulfilled the auditor's responsibilities, and has conducted the audit, in accordance with professional standards and applicable legal and regulatory requirements; and",
@@ -195,7 +180,7 @@
           ]
         },
         {
-          "title": "Leadership Responsibilities for Managing and Achieving Quality on Audits",
+          "title": "3.2 Leadership Responsibilities for Managing and Achieving Quality on Audits",
           "paragraphs": [
             "It is engagement partner's responsibility to manage and achieve quality on the audit engagement, in doing so, the engagement partner shall be sufficiently and appropriately involved throughout the audit engagement.",
             "The engagement partner shall take responsibility for clear, consistent and effective actions including emphasizing:",
@@ -206,7 +191,7 @@
           ]
         },
         {
-          "title": "Relevant Ethical Requirements, Including Those Related to Independence",
+          "title": "3.3 Relevant Ethical Requirements, Including Those Related to Independence",
           "paragraphs": [
             "The engagement partner should:",
             "* Have an understanding of the relevant ethical requirements, including those related to independence",
@@ -216,7 +201,7 @@
           ]
         },
         {
-          "title": "Acceptance and Continuance of Client Relationships and Audit Engagements",
+          "title": "3.4 Acceptance and Continuance of Client Relationships and Audit Engagements",
           "paragraphs": [
             "The engagement partner should:",
             "* Determine that the firm's policies or procedures for the acceptance and continuance of client relationships and audit engagements have been followed, and that conclusions reached in this regard are appropriate.",
@@ -225,7 +210,7 @@
           ]
         },
         {
-          "title": "Engagement Resources",
+          "title": "3.5 Engagement Resources",
           "paragraphs": [
             "The engagement partner shall determine that:",
             "* Sufficient and appropriate resources to perform the engagement are assigned or made available to the engagement team in a timely manner;",
@@ -234,7 +219,7 @@
           ]
         },
         {
-          "title": "Direction, Supervision and Review",
+          "title": "3.6 Direction, Supervision and Review",
           "paragraphs": [
             "The engagement partner shall:",
             "* Take responsibility for the direction and supervision of the members of the engagement team and the review of their work.",
@@ -242,34 +227,26 @@
             "* Review audit documentation at appropriate points in time during the audit engagement",
             "* Determine, on or before the date of the auditor's report, that sufficient appropriate audit evidence has been obtained to support the conclusions reached and for the auditor's report to be issued.",
             "* Review the financial statements and the auditor's report, prior to dating the auditor's report.",
-            "* Review, prior to their issuance, formal written communications to management, those charged with governance or regulatory authorities."
-          ]
-        },
-        {
-          "title": "CONSULTATIONS",
-          "paragraphs": [
+            "* Review, prior to their issuance, formal written communications to management, those charged with governance or regulatory authorities.",
+            "CONSULTATIONS",
             "The engagement partner shall:",
             "* Take responsibility for the engagement team undertaking consultation on:",
-            "i. Difficult or contentious matters and matters on which the firm's policies or procedures require consultation; and",
-            "ii. Other matters that, in the engagement partner's professional judgment, require consultation;",
+            "- i. Difficult or contentious matters and matters on which the firm's policies or procedures require consultation; and",
+            "- ii. Other matters that, in the engagement partner's professional judgment, require consultation;",
             "* Determine that members of the engagement team have undertaken appropriate consultation during the audit engagement, both within the engagement team, and between the engagement team and others at the appropriate level within or outside the firm;",
             "* Determine that the nature and scope of, and conclusions resulting from, such consultations are agreed with the party consulted; and",
             "* Determine that conclusions agreed have been implemented."
           ]
         },
         {
-          "title": "Engagement Quality Review",
+          "title": "3.7 Engagement Quality Review",
           "paragraphs": [
             "For audit engagements for which an engagement quality review is required, the engagement partner shall:",
             "* Determine that an engagement quality reviewer has been appointed;",
             "* Cooperate with the engagement quality reviewer and inform other members of the engagement team of their responsibility to do so;",
             "* Discuss significant matters and significant judgments arising during the audit engagement, including those identified during the engagement quality review, with the engagement quality reviewer; and",
-            "* Not date the auditor's report until the completion of the engagement quality review"
-          ]
-        },
-        {
-          "title": "Differences of Opinion",
-          "paragraphs": [
+            "* Not date the auditor's report until the completion of the engagement quality review",
+            "Differences of Opinion",
             "If differences of opinion arise within the engagement team, or between the engagement team and the engagement quality reviewer or individuals performing activities within the firm's system of quality management, including those who provide consultation, the engagement team shall follow the firm's policies or procedures for dealing with and resolving such differences of opinion.",
             "The engagement partner shall:",
             "* Take responsibility for differences of opinion being addressed and resolved in accordance with the firm's policies or procedures;",
@@ -278,26 +255,22 @@
           ]
         },
         {
-          "title": "Monitoring and Remediation",
+          "title": "3.8 Monitoring and Remediation",
           "paragraphs": [
             "The engagement partner shall take responsibility for:",
             "* Obtaining an understanding of the information from the firm's monitoring and remediation process, determine its relevance and effect on the audit engagement and take appropriate action; and",
-            "* Remaining alert throughout the audit engagement for information that may be relevant to the firm's monitoring and remediation process and communicate such information to those responsible for the process."
-          ]
-        },
-        {
-          "title": "Taking Overall Responsibility for Managing and Achieving Quality",
-          "paragraphs": [
+            "* Remaining alert throughout the audit engagement for information that may be relevant to the firm's monitoring and remediation process and communicate such information to those responsible for the process.",
+            "Taking Overall Responsibility for Managing and Achieving Quality",
             "Prior to dating the auditor's report, the engagement partner shall determine that the engagement partner has taken overall responsibility for managing and achieving quality on the audit engagement."
           ]
         },
         {
-          "title": "Documentation",
+          "title": "3.9 Documentation",
           "paragraphs": [
             "In applying ISA 230, Audit Documentation, the auditor shall include in the audit documentation:",
             "* Matters identified, relevant discussions with personnel, and conclusions reached with respect to:",
-            "i. Fulfilment of responsibilities relating to relevant ethical requirements, including those related to independence.",
-            "ii. The acceptance and continuance of the client relationship and audit engagement.",
+            "- i. Fulfilment of responsibilities relating to relevant ethical requirements, including those related to independence.",
+            "- ii. The acceptance and continuance of the client relationship and audit engagement.",
             "* The nature and scope of, and conclusions resulting from, consultations undertaken during the audit engagement and how such conclusions were implemented.",
             "* If the audit engagement is subject to an engagement quality review, that the engagement quality review has been completed on or before the date of the auditor's report."
           ]
@@ -305,4 +278,3 @@
       ]
     }
   ]
-}
