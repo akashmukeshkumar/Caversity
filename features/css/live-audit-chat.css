@@ -1,8 +1,8 @@
         /* 🔥 INTERVIEW SIMULATOR UI 🔥 */
         body {
             margin: 0; padding: 0; font-family: 'Inter', sans-serif;
-            background: #f8fafc; 
-            color: #0f172a;
+            background: radial-gradient(circle at 50% 0%, #1e40af 0%, #0f172a 100%); 
+            color: #ffffff;
             height: 100vh; display: flex; justify-content: center; align-items: center;
         }
 
@@ -18,18 +18,18 @@
 
         /* --- SLEEK EXIT LOBBY BUTTON --- */
         .exit-lobby-btn {
-            position: fixed; top: 30px; left: 30px; color: #475569; text-decoration: none; 
+            position: fixed; top: 30px; left: 30px; color: #ffffff; text-decoration: none; 
             font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; 
-            padding: 10px 20px; background: #ffffff; border-radius: 50px;
-            border: 1px solid #e2e8f0; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.05); z-index: 100000;
+            padding: 10px 20px; background: rgba(255, 255, 255, 0.1); border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 100000; backdrop-filter: blur(10px);
         }
-        .exit-lobby-btn:hover { color: #2563eb; background: #f8fafc; border-color: #cbd5e1; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(37, 99, 235, 0.1); }
+        .exit-lobby-btn:hover { color: #60a5fa; background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
 
         /* --- LOBBY STYLES --- */
         #lobby-screen { justify-content: center; align-items: center; }
         .lobby-card {
             background: #ffffff; padding: 40px; border-radius: 20px; width: 100%; max-width: 450px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5); border: 1px solid #e2e8f0; color: #0f172a;
         }
         .lobby-header { text-align: center; margin-bottom: 30px; }
         .lobby-header i { font-size: 40px; color: #3b82f6; margin-bottom: 10px; }
@@ -53,7 +53,7 @@
         .status-msg { text-align: center; font-size: 13px; margin-top: 15px; color: #facc15; font-weight: 500; }
 
         /* --- INTERVIEW ROOM STYLES --- */
-        #interview-screen { background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 25px 60px rgba(0,0,0,0.05); }
+        #interview-screen { background: #ffffff; border-radius: 24px; overflow: hidden; border: 4px solid rgba(255, 255, 255, 0.2); box-shadow: 0 30px 60px rgba(0,0,0,0.6); background-clip: padding-box; }
         
         .room-branding { position: absolute; top: 15px; left: 25px; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; z-index: 100; color: #1e3a8a; }
         .room-branding svg { width: 30px; height: 30px; }
@@ -66,7 +66,7 @@
         .exit-btn { background: #334155; border: none; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer; }
 
         .video-grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; padding-bottom: 100px; }
-        .video-box { background: #f1f5f9; border-radius: 16px; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 1px solid #e2e8f0; }
+        .video-box { background: #020617; border-radius: 16px; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 2px solid #cbd5e1; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); }
         
         .ai-video img { width: 140px; height: 140px; border-radius: 50%; border: 3px solid #3b82f6; object-fit: cover; }
         .ai-speaking img { box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); animation: speak-pulse 1s infinite alternate; }
@@ -84,9 +84,9 @@
 
         .subtitle-box {
             position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%);
-            background: #ffffff; color: #0f172a; text-align: center; padding: 12px 30px;
+            background: #1e40af; color: #ffffff; text-align: center; padding: 12px 30px;
             font-size: 15px; font-weight: 600; border-radius: 50px; 
-            max-width: 80%; z-index: 10; border: 1px solid #e2e8f0; box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 80%; z-index: 10; border: 2px solid #3b82f6; box-shadow: 0 10px 30px rgba(30, 64, 175, 0.4);
         }
 
         /* --- 🔥 TRANSCRIPT SIDEBAR STYLES 🔥 --- */
@@ -112,8 +112,8 @@
         .ai-msg { background: #f1f5f9; color: #0f172a; align-self: flex-start; border-bottom-left-radius: 2px; }
         .user-msg { background: #3b82f6; color: #ffffff; align-self: flex-end; border-bottom-right-radius: 2px; }
         
-        .transcript-btn { background: #f8fafc; color: #475569; padding: 10px 20px; border-radius: 50px; font-size: 14px; border: 1px solid #e2e8f0; }
-        .transcript-btn:hover { background: #f1f5f9; color: #2563eb; border-color: #cbd5e1; }
+        .transcript-btn { background: #eff6ff; color: #1d4ed8; padding: 10px 20px; border-radius: 50px; font-size: 14px; border: 1px solid #bfdbfe; font-weight: 700; }
+        .transcript-btn:hover { background: #2563eb; color: #ffffff; border-color: #2563eb; }
         
         /* --- Send Helper Tooltip --- */
         .send-helper { position: absolute; top: -40px; left: 50%; transform: translateX(-50%); background: #10b981; color: white; padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; white-space: nowrap; pointer-events: none; opacity: 0; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4); z-index: 50; }
@@ -122,11 +122,11 @@
         @keyframes bounceHelper { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -5px); } }
 
         /* --- NEW AUTOMATIC CONTROLS --- */
-        .controls-bar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: #ffffff; padding: 12px 25px; border-radius: 50px; display: flex; justify-content: center; align-items: center; gap: 15px; border: 1px solid #e2e8f0; box-shadow: 0 15px 40px rgba(0,0,0,0.1); z-index: 20; }
+        .controls-bar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: #ffffff; padding: 12px 25px; border-radius: 50px; display: flex; justify-content: center; align-items: center; gap: 15px; border: 2px solid #e2e8f0; box-shadow: 0 15px 40px rgba(0,0,0,0.2); z-index: 20; }
         
-        .mic-indicator { width: 55px; height: 55px; border-radius: 50%; background: #f1f5f9; display: flex; justify-content: center; align-items: center; color: #64748b; font-size: 20px; transition: 0.3s; cursor: pointer; border: 1px solid #e2e8f0; }
-        .mic-indicator:hover { background: #e2e8f0; color: #334155; }
-        .mic-indicator.active { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; box-shadow: 0 0 20px rgba(16, 185, 129, 0.5); }
+        .mic-indicator { width: 55px; height: 55px; border-radius: 50%; background: #f8fafc; display: flex; justify-content: center; align-items: center; color: #475569; font-size: 20px; transition: 0.3s; cursor: pointer; border: 2px solid #cbd5e1; }
+        .mic-indicator:hover { background: #e2e8f0; color: #0f172a; border-color: #94a3b8; }
+        .mic-indicator.active { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-color: #059669; box-shadow: 0 0 20px rgba(16, 185, 129, 0.5); }
         .mic-indicator.active i { animation: mic-breathe 1.5s infinite alternate; }
         @keyframes mic-breathe { from { transform: scale(1); } to { transform: scale(1.15); } }
 
