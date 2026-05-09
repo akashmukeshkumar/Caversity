@@ -80,7 +80,8 @@ onAuthStateChanged(auth, async (user) => {
                         dStr = "2099-12-31";
                     }
                     
-                    if (new Date(dStr) <= new Date() || sCount <= 0) {
+                    // 🔥 EXTRA STRICT: Check invalid dates and absolute 0 sessions
+                    if (isNaN(new Date(dStr).getTime()) || new Date(dStr) <= new Date() || sCount <= 0) {
                         alert("⚠️ Access Denied! Your subscription has expired or you have 0 sessions left.");
                         redirectTo("portal.html");
                         return;
