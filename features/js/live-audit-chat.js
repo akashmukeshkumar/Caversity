@@ -222,7 +222,7 @@ async function handleSilence() {
             document.getElementById('subtitle-box').innerText = "Partner is waiting...";
             interviewMemory.push({ "role": "system", "content": "[Candidate was silent for 20 seconds. Ask them if they are still there.]" });
             const reply = await askGroqWithFallback();
-            speakResponse(reply);
+                setTimeout(() => speakResponse(reply), 1000);
         }
     }
 }
@@ -420,7 +420,7 @@ function appendToTranscript(role, text) {
 
 async function triggerPartnerGreeting() {
     const reply = await askGroqWithFallback();
-    speakResponse(reply);
+    setTimeout(() => speakResponse(reply), 1000);
 }
 
 function speakResponse(text) {
@@ -468,13 +468,58 @@ function speakResponse(text) {
 // 🔥 AUTOMATIC HANDS-FREE MIC LOGIC 🔥
 function startAutoListening() {
     if (!isInterviewActive || synth.speaking) return;
+
+    isMicOpen = true;
+    finalAnswer = ""; // Reset answer text
+    document.getElementById('send-response-btn').style.display = 'inline-flex';
+    document.getElementById('subtitle-box').innerText = "Listening... (Click 'Send' when done)";
+
+    const helper = document.getElementById('send-helper');
+    if(helper) {
+        helper.classList.add('show');
+        setTimeout(() => helper.classList.remove('show'), 5000); // Hide after 5 seconds
+    }
+
+    updateMicUI(true);
+
     try {
-        isListeningMode = true;
         if(recognition) recognition.start();
-        resetSilenceTimer(); // Start 15s countdown
-        updateMicUI(true);
-        document.getElementById('subtitle-box').innerText = "Listening...";
     } catch (e) { /* Ignore if already started */ }
+
+    clearTimeout(silenceTimer);
+    silenceTimer = setTimeout(handleSilence, 20000); // Wait 20 seconds for activity
+}
+
+// 🔥 MANUAL SEND BUTTON LOGIC 🔥
+document.getElementById('send-response-btn')?.addEventListener('click', sendUserResponse);
+
+async function sendUserResponse() {
+    if (!isMicOpen) return;
+    if (finalAnswer.trim().length < 2) {
+        document.getElementById('subtitle-box').innerText = "Please say something before sending.";
+        return;
+    }
+
+    isMicOpen = false;
+    clearTimeout(silenceTimer);
+    try { recognition.stop(); } catch(e){}
+    updateMicUI(false);
+    document.getElementById('send-response-btn').style.display = 'none';
+    
+    const helper = document.getElementById('send-helper');
+    if(helper) helper.classList.remove('show');
+
+    silenceStrikes = 0; // Reset strikes since user responded
+
+    document.getElementById('subtitle-box').innerText = "Processing your response...";
+    interviewMemory.push({ "role": "user", "content": finalAnswer });
+    appendToTranscript('user', finalAnswer);
+
+    const reply = await askGroqWithFallback();
+    // Delay AI response by 1 second to make it natural
+    setTimeout(() => {
+        speakResponse(reply);
+    }, 1000);
 }
 
 function updateMicUI(isListening) {
@@ -491,31 +536,21 @@ function updateMicUI(isListening) {
 if(recognition) {
     recognition.onend = () => {
         // Auto-restart if browser drops it before timer or user speaks
-        if (isListeningMode && isInterviewActive) {
+        if (isMicOpen && isInterviewActive) {
             try { recognition.start(); } catch(e){}
         }
     };
 
     recognition.onresult = async (event) => {
-        isListeningMode = false;
-        clearTimeout(silenceTimer); // Stop countdown
-        updateMicUI(false);
-        
-        const transcript = event.results[0][0].transcript;
-        
-        // Mumbling / Noise filter (Agar bacha darr ke theek na bole)
-        if (transcript.trim().length < 2) {
-            document.getElementById('subtitle-box').innerText = "Couldn't hear properly. Try again.";
-            setTimeout(startAutoListening, 1000); // Try again
-            return;
+        let interimTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+                finalAnswer += event.results[i][0].transcript + ' ';
+            } else {
+                interimTranscript += event.results[i][0].transcript;
+            }
         }
-        
-        document.getElementById('subtitle-box').innerText = "Processing your response...";
-        interviewMemory.push({ "role": "user", "content": transcript });
-        appendToTranscript('user', transcript); // Add User message to Sidebar
-        
-        const reply = await askGroqWithFallback();
-        speakResponse(reply);
+        document.getElementById('subtitle-box').innerText = finalAnswer + interimTranscript;
     };
 } else {
     alert("Your browser does not support Speech Recognition. Please use Chrome.");
