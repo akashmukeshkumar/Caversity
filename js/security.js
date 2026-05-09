@@ -61,8 +61,19 @@ onAuthStateChanged(auth, async (user) => {
             if (PAGE_TYPE === "premium" && PAGE_ID) {
                 const subExpiry = userData.subscriptions?.[PAGE_ID];
                 if (PAGE_ID === 'mock_interview') {
-                    if (subExpiry === undefined || subExpiry === false || (!isNaN(subExpiry) && Number(subExpiry) <= 0)) {
-                        alert("⚠️ Access Denied! You do not have any active sessions left for the Interview Simulator.");
+                    let dStr = subExpiry;
+                    let sCount = 10;
+                    if (typeof subExpiry === 'string' && subExpiry.includes(',')) {
+                        let parts = subExpiry.split(',');
+                        dStr = parts[0];
+                        sCount = parseInt(parts[1], 10);
+                    } else if (!isNaN(subExpiry)) {
+                        sCount = Number(subExpiry);
+                        dStr = "2099-12-31";
+                    }
+                    
+                    if (!subExpiry || subExpiry === false || new Date(dStr) <= new Date() || sCount <= 0) {
+                        alert("⚠️ Access Denied! Your subscription has expired or you have 0 sessions left.");
                         redirectTo("portal.html");
                         return;
                     }
