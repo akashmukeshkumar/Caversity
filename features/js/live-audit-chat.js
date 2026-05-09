@@ -218,9 +218,20 @@ function startInterviewRoom() {
         getDoc(userRef).then(snap => {
             if (snap.exists()) {
                 let subs = snap.data().subscriptions || {};
-                let sessionsLeft = Number(subs['mock_interview']);
-                if (!isNaN(sessionsLeft) && sessionsLeft > 0) {
-                    subs['mock_interview'] = sessionsLeft - 1;
+                let subVal = subs['mock_interview'];
+                let dStr = subVal;
+                let sCount = 10;
+                if (typeof subVal === 'string' && subVal.includes(',')) {
+                    let parts = subVal.split(',');
+                    dStr = parts[0];
+                    sCount = parseInt(parts[1], 10);
+                } else if (!isNaN(subVal)) {
+                    sCount = Number(subVal);
+                    dStr = "2099-12-31";
+                }
+                
+                if (sCount > 0) {
+                    subs['mock_interview'] = `${dStr},${sCount - 1}`;
                     updateDoc(userRef, { subscriptions: subs }).catch(e => console.warn(e));
                 }
             }
