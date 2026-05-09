@@ -61,6 +61,30 @@ onAuthStateChanged(auth, (user) => {
         }, (error) => {
             console.warn("Room listener error (Check Firebase Rules):", error);
         });
+
+        // 🔥 REAL-TIME SESSION COUNTER LISTENER 🔥
+        const userRef = doc(db, "users", user.uid);
+        onSnapshot(userRef, (userSnap) => {
+            if (userSnap.exists()) {
+                let subs = userSnap.data().subscriptions || {};
+                let subVal = subs['mock_interview'];
+                let sCount = 0;
+                if (typeof subVal === 'string' && subVal.includes(',')) {
+                    sCount = parseInt(subVal.split(',')[1], 10);
+                } else if (!isNaN(subVal) && subVal !== false) {
+                    sCount = Number(subVal);
+                }
+                
+                const badge = document.getElementById('sessions-badge');
+                const countEl = document.getElementById('sessions-count');
+                if (badge && countEl) {
+                    badge.style.display = 'flex';
+                    countEl.innerText = sCount;
+                    // Warn if low sessions
+                    countEl.style.color = sCount <= 2 ? '#ef4444' : '#38bdf8';
+                }
+            }
+        });
     }
 });
 
