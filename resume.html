@@ -18,40 +18,61 @@
   <link rel="stylesheet" href="features/css/resume-builder.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
-  .exit-home-btn {
+  .top-right-actions {
     position: fixed;
     top: 14px;
     right: 14px;
-    z-index: 999;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .exit-home-btn, .focus-mode-btn {
     display: inline-flex;
     align-items: center;
     gap: 7px;
     padding: 9px 13px;
-    border: 1px solid rgba(15, 118, 110, 0.22);
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.92);
-    color: #115e59;
     font: 700 13px Inter, Arial, sans-serif;
     text-decoration: none;
     box-shadow: 0 8px 22px rgba(23, 33, 43, 0.12);
     backdrop-filter: blur(8px);
     transition: 0.18s ease;
+    cursor: pointer;
   }
 
+  .exit-home-btn {
+    border: 1px solid rgba(15, 118, 110, 0.22);
+    color: #115e59;
+  }
   .exit-home-btn:hover {
     background: #e8f5f3;
     border-color: #0f766e;
     transform: translateY(-1px);
   }
 
-  .exit-home-btn i {
+  .focus-mode-btn {
+    border: 1px solid rgba(37, 99, 235, 0.22);
+    color: #2563eb;
+  }
+  .focus-mode-btn:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    transform: translateY(-1px);
+  }
+
+  .exit-home-btn i, .focus-mode-btn i {
     font-size: 12px;
   }
 
   @media (max-width: 560px) {
-    .exit-home-btn {
+    .top-right-actions {
       top: 10px;
       right: 10px;
+      gap: 8px;
+    }
+    .exit-home-btn, .focus-mode-btn {
       padding: 8px 10px;
       font-size: 12px;
     }
@@ -59,14 +80,19 @@
 </style>
 </head>
 <body>
-  <a href="portal.html" class="exit-home-btn" aria-label="Exit to home">
-    <i class="fas fa-arrow-left"></i>
-    Exit
-  </a>
+  <div class="top-right-actions">
+    <button id="focus-mode-btn" title="Enable Focus Mode" class="focus-mode-btn">
+      <i class="fas fa-headphones"></i> Focus Mode
+    </button>
+    <a href="portal.html" class="exit-home-btn" aria-label="Exit to home">
+      <i class="fas fa-arrow-left"></i> Exit
+    </a>
+  </div>
 
   <aside class="builder-panel">
     <div class="builder-header">
       <h2><i class="fas fa-file-signature"></i> <span id="builder-title">CA &amp; ACCA Resume Builder</span></h2>
+      <audio id="focus-audio" loop src="features/assets/resume.mp3"></audio>
       <p>Leave a field blank and it will disappear from your CV automatically.</p>
     </div>
 
