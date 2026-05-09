@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const discount = subtotal - total;
         
         // GENERATE WHATSAPP MESSAGE
-        let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? 'month (10 Sessions)' : 'month';
+        let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? '10 Sessions' : 'month';
         if (isMultiSubjectMode) period = 'month';
 
         let msg = `Hello Caversity Team,\n\nI want to subscribe to:\nStudent: ${name}\n\n📚 Subjects:\n- ${selected.join('\n- ')}\n\n`;
@@ -336,7 +336,7 @@ function openSubscriptionModal() {
         multiDisplay.innerHTML = '';
         academicSubjects.filter(s => s.type === 'premium').forEach(s => {
             const isSub = currentUserProfile.subscriptions.includes(s.id);
-            const priceLabel = s.id === 'mock_interview' ? `(Rs. ${s.price} / month - 10 Sessions)` : `(Rs. ${s.price} / month)`;
+            const priceLabel = s.id === 'mock_interview' ? `(Rs. ${s.price} / 10 Sessions)` : `(Rs. ${s.price} / month)`;
             multiDisplay.innerHTML += `
                 <div class="checkbox-item">
                     <input type="checkbox" id="chk-${s.id}" value="${s.id}" ${isSub ? 'disabled' : ''}>
@@ -348,7 +348,7 @@ function openSubscriptionModal() {
         multiDisplay.style.display = 'none';
         couponContainer.style.display = 'block';
         document.getElementById('modal-subject-name').innerText = currentSubjectContext.name;
-        document.getElementById('modal-subject-price').innerText = currentSubjectContext.id === 'mock_interview' ? `Rs. ${currentSubjectContext.price} / month (10 Sessions)` : `Rs. ${currentSubjectContext.price} / month`;
+        document.getElementById('modal-subject-price').innerText = currentSubjectContext.id === 'mock_interview' ? `Rs. ${currentSubjectContext.price} / 10 Sessions` : `Rs. ${currentSubjectContext.price} / month`;
     }
 
     calculateTotal();
@@ -382,7 +382,7 @@ function calculateTotal() {
         document.getElementById('discount-line').style.display = 'none';
     }
 
-    let periodText = (currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode) ? ' / month (10 Sessions)' : ' / month';
+    let periodText = (currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode) ? ' / 10 Sessions' : ' / month';
     document.getElementById('total-amount').innerText = `Rs. ${grandTotal}${periodText}`;
     document.getElementById('total-amount').dataset.subtotal = subtotal;
     document.getElementById('total-amount').dataset.grand = grandTotal;
