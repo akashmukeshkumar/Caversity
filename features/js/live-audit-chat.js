@@ -69,10 +69,10 @@ onAuthStateChanged(auth, (user) => {
             if (userSnap.exists()) {
                 let subs = userSnap.data().subscriptions || {};
                 let subVal = subs['mock_interview'];
-                let sCount = 0;
+                let sCount = 3; // 🔥 FIX: Match security.js default to prevent Desync Illusion
                 if (typeof subVal === 'string' && subVal.includes(',')) {
                     sCount = parseInt(subVal.split(',')[1], 10);
-                } else if (!isNaN(subVal) && subVal !== false) {
+                } else if (!isNaN(subVal) && subVal !== false && subVal !== "") {
                     sCount = Number(subVal);
                 }
                 
