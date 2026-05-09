@@ -112,6 +112,40 @@ function updateLobbyStatus() {
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
+// 🔥 PRE-FLIGHT API CHECK (SMART JUGAR) 🔥
+async function checkPartnerAvailability() {
+    // Reset index if we previously exhausted all keys, to allow retrying
+    if (currentKeyIndex >= GROQ_API_KEYS.length) currentKeyIndex = 0;
+    let attempts = 0;
+
+    while (currentKeyIndex < GROQ_API_KEYS.length && attempts < GROQ_API_KEYS.length) {
+        try {
+            const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${GROQ_API_KEYS[currentKeyIndex]}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    model: "llama-3.3-70b-versatile",
+                    messages: [{"role": "system", "content": "ping"}],
+                    max_tokens: 1
+                })
+            });
+
+            if (response.ok) return true; // Partner is free!
+            
+            currentKeyIndex++;
+            attempts++;
+        } catch (e) {
+            currentKeyIndex++;
+            attempts++;
+        }
+    }
+    if (currentKeyIndex >= GROQ_API_KEYS.length) currentKeyIndex = 0;
+    return false; // All keys hit limit
+}
+
 document.getElementById('start-interview-btn').addEventListener('click', async () => {
     const name = document.getElementById('candidate-name').value.trim();
     updateLobbyStatus(); // re-check
@@ -157,6 +191,14 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
         const cvText = await extractTextFromPDF(cvFile);
         if(cvText.length < 50) throw new Error("CV seems empty or unreadable.");
         
+        // 🔥 SMART JUGAR: Pre-flight Limit Check before entering room 🔥
+        statusMsg.innerText = "⏳ Checking Partner's Schedule...";
+        const isPartnerFree = await checkPartnerAvailability();
+        if (!isPartnerFree) {
+            statusMsg.style.color = "#f59e0b"; // Warning Orange
+            return statusMsg.innerText = "⚠️ The Partner is currently occupied with another interview. Please try joining again after 30 to 60 minutes.";
+        }
+
         // Acquire Room Lock
         await setDoc(roomDocRef, {
             is_busy: true,
@@ -491,7 +533,7 @@ async function askGroqWithFallback() {
             currentKeyIndex++; 
         }
     }
-    return "Sorry, I am facing a technical issue. Let's wrap this up.";
+    return "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately.";
 }
 
 // ==========================================
