@@ -458,9 +458,7 @@ async function askGroqWithFallback() {
     const subtitle = document.getElementById('subtitle-box');
     if (subtitle) subtitle.innerText = "Partner is reviewing...";
     
-    let attempts = 0;
-    
-    while (attempts < GROQ_API_KEYS.length) {
+    while (currentKeyIndex < GROQ_API_KEYS.length) {
         try {
             const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
@@ -479,9 +477,7 @@ async function askGroqWithFallback() {
             if (!response.ok) {
                 if (response.status === 429) { 
                     console.warn(`Key ${currentKeyIndex} Limit Hit. Switching key...`);
-                    currentKeyIndex = (currentKeyIndex + 1) % GROQ_API_KEYS.length; // Loop back to 0
-                    attempts++;
-                    await new Promise(r => setTimeout(r, 500)); // Half second delay to prevent spam
+                    currentKeyIndex++; 
                     continue; 
                 }
                 throw new Error(`API Error: ${response.status}`);
@@ -492,9 +488,7 @@ async function askGroqWithFallback() {
 
         } catch (error) {
             console.warn(`Error with key ${currentKeyIndex}:`, error);
-            currentKeyIndex = (currentKeyIndex + 1) % GROQ_API_KEYS.length;
-            attempts++;
-            await new Promise(r => setTimeout(r, 500)); // Half second delay
+            currentKeyIndex++; 
         }
     }
     return "Sorry, I am facing a technical issue. Let's wrap this up.";
