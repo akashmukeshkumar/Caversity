@@ -372,8 +372,8 @@ function setSystemPrompt() {
     1. You MUST act exactly like a human interviewer. 
     2. Ask ONLY ONE short question at a time (Max 2 sentences). NEVER ramble, NEVER give long explanations, and NEVER talk to yourself.
     3. WAIT for the candidate to answer. DO NOT generate the candidate's response.
-    4. Mix behavioral and technical questions. You can start with an introduction OR dive straight into a CV/technical question. Keep it unpredictable.
-    5. You are primarily an evaluator. If they give a wrong answer, act disappointed and move on, but occasionally you can give a very brief 1-line correction or professional insight, just like a real human partner.
+    4. IMPORTANT START: For the very first question, ask them to introduce themselves or walk you through their CV. Do this 90% of the time.
+    5. PSYCHOLOGICAL REALISM & ANGER: If the candidate misbehaves, speaks disrespectfully, or gives a very bad attitude, YOU MUST GET ANGRY. Scold them professionally but harshly. If they cross the line or use inappropriate language, explicitly say 'I am ending this interview right now due to your unprofessional behavior.' and nothing else.
     6. Speak plainly. NO markdown, NO bold text, NO bullet points, NO long paragraphs.
     `;
     
@@ -448,8 +448,12 @@ function appendToTranscript(role, text) {
 // ==========================================
 
 async function triggerPartnerGreeting() {
-    const reply = await askGroqWithFallback();
-    setTimeout(() => speakResponse(reply), 1000);
+    // Add a natural delay (pretending to read CV) before speaking
+    document.getElementById('subtitle-box').innerText = "Partner is reviewing your profile...";
+    setTimeout(async () => {
+        const reply = await askGroqWithFallback();
+        setTimeout(() => speakResponse(reply), 1000);
+    }, 3500); // Wait 3.5 seconds before the first interaction
 }
 
 function speakResponse(text) {
@@ -469,7 +473,11 @@ function speakResponse(text) {
     if (bestVoice) utterance.voice = bestVoice;
     
     // 🔥 DYNAMIC TONE & PITCH SHIFT 🔥
-    if (text.includes('!') || text.includes('?')) {
+    const lowerText = text.toLowerCase();
+    if (lowerText.includes('unprofessional') || lowerText.includes('ending this interview') || lowerText.includes('disrespect')) {
+        utterance.pitch = 0.25; // Very Deep & Angry tone
+        utterance.rate = 0.9;
+    } else if (text.includes('!') || text.includes('?')) {
         utterance.pitch = 0.45; // Deeper, more intimidating for cross-questions/anger
         utterance.rate = 0.95; // Slightly faster but slow enough to be natural
     } else {
@@ -483,8 +491,8 @@ function speakResponse(text) {
         appendToTranscript('assistant', text); // Add AI message to Sidebar
         if (isInterviewActive) {
             // 🔥 PRO-LEVEL FIX 3: Auto-detect AI failure and safely exit instead of looping 🔥
-            if (secondsElapsed >= 300 || text.includes("technical issue")) {
-                endInterview(); // Cut the call after AI finishes its last sentence
+            if (secondsElapsed >= 300 || lowerText.includes("technical issue") || lowerText.includes("ending this interview") || lowerText.includes("wrap this up")) {
+                setTimeout(endInterview, 1000); // Cut the call if angry or time's up
             } else {
                 startAutoListening(); // 🔥 AI finished, turn Mic ON
             }
