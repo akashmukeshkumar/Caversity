@@ -31,15 +31,20 @@
         .exit-lobby-btn:hover { color: #60a5fa; background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
 
         /* --- LOBBY STYLES --- */
-        #lobby-screen { justify-content: center; align-items: center; }
+        #lobby-screen { 
+            justify-content: center; align-items: center; 
+            position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; max-width: none;
+            background: radial-gradient(circle at 50% 0%, #1e40af 0%, #0f172a 100%); 
+            z-index: 50; 
+        }
         .lobby-card {
-            background: rgba(30, 41, 59, 0.4); padding: 40px; border-radius: 20px; width: 100%; max-width: 450px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255, 255, 255, 0.08); color: #f8fafc;
+            background: rgba(255, 255, 255, 0.08); padding: 40px; border-radius: 20px; width: 100%; max-width: 450px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff;
             backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
         }
         .lobby-header { text-align: center; margin-bottom: 30px; }
-        .lobby-header i { font-size: 40px; color: #60a5fa; margin-bottom: 10px; }
-        .lobby-header h2 { margin: 0 0 5px 0; font-size: 24px; color: #f8fafc; font-weight: 800; }
+        .lobby-header i { font-size: 40px; color: #38bdf8; margin-bottom: 10px; filter: drop-shadow(0 0 10px rgba(56,189,248,0.5)); }
+        .lobby-header h2 { margin: 0 0 5px 0; font-size: 24px; color: #ffffff; font-weight: 800; }
         .lobby-header p { margin: 0; color: #94a3b8; font-size: 14px; }
 
         .form-group { margin-bottom: 20px; }
@@ -158,15 +163,16 @@
             position: relative;
             box-sizing: border-box;
             border-top: 20px solid #1e40af; /* Corporate Blue Header */
+            overflow: hidden; /* To contain watermark */
         }
 
-        /* Background Caversity Watermark */
-        .official-paper::before {
-            content: 'CAVERSITY';
+        /* Background Caversity Watermark (Moved to HTML for PDF support) */
+        .official-paper::before { display: none; }
+        .watermark-bg {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 80px;
+            font-size: 100px;
             font-weight: 900;
             color: rgba(0, 0, 0, 0.03);
             white-space: nowrap;
