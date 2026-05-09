@@ -12,7 +12,12 @@ const GROQ_API_KEYS = [
     "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",
     "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",
     "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",
-    "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"
+    "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",
+    "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",
+    "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",
+    "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",
+    "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",
+    "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"
 ];
 let currentKeyIndex = 0;
 
@@ -282,14 +287,13 @@ function startInterviewRoom() {
     timerInterval = setInterval(() => {
         secondsElapsed++;
         
-        // Limit display to max 5:00
-        let displaySeconds = secondsElapsed > 300 ? 300 : secondsElapsed;
+        let displaySeconds = secondsElapsed > 600 ? 600 : secondsElapsed;
         let m = Math.floor(displaySeconds / 60).toString().padStart(2, '0');
         let s = (displaySeconds % 60).toString().padStart(2, '0');
         document.getElementById('call-timer').innerText = `${m}:${s}`;
         
-        // 🔥 AUTO-END AT 5 MINUTES 🔥
-        if (secondsElapsed >= 300 && !synth.speaking && isInterviewActive) {
+        // 🔥 AUTO-END AT 10 MINUTES 🔥
+        if (secondsElapsed >= 600 && !synth.speaking && isInterviewActive) {
             endInterview(); // Cut call immediately if partner is silent
         }
     }, 1000);
@@ -431,7 +435,7 @@ function setSystemPrompt() {
     }
 
     let prompt = `
-    You are a highly experienced and strict Senior Partner conducting a 5-minute final interview for a CA Articleship / Trainee position at ${candidateData.firm}.
+    You are a highly experienced and strict Senior Partner conducting a 10-minute final interview for an Articleship (Trainee) position at ${candidateData.firm}.
     CRITICAL CONTEXT: The candidate is a "CAF Qualified" student (Certificate in Accounting and Finance). They are NOT a fully qualified Chartered Accountant yet. They are applying for a 3.5-year training contract. Do NOT ask generic senior-level HR questions like "Why should we hire you?". Instead, focus heavily on their student background, CV details, number of attempts, and foundational CAF knowledge.
     
     ${firmPersonality}
@@ -443,8 +447,8 @@ function setSystemPrompt() {
     1. You MUST act exactly like a human interviewer. 
     2. Ask ONLY ONE short question at a time (Max 2 sentences). NEVER ramble, NEVER give long explanations, and NEVER talk to yourself.
     3. WAIT for the candidate to answer. DO NOT generate the candidate's response.
-        4. IMPORTANT START: Start by asking them to introduce themselves OR walk you through their CV. SCRUTINIZE THEIR CV HEAVILY. Pick a specific detail or gap from their resume extract and ask them to explain it.
-        5. THE PERFECT MIX: Test a mix of Psychological pressure, CV-based cross-questioning, and Core CAF Technicals (IFRS, Tax, Audit, CMA). Ask about their studies, their articleship motivations, and test their academic concepts practically.
+    4. IMPORTANT START: Start by asking them to introduce themselves OR walk you through their CV. SCRUTINIZE THEIR CV HEAVILY. Pick a specific detail or gap from their resume extract and ask them to explain it.
+    5. THE PERFECT MIX: Spend significant time heavily grilling them on Core CAF Technicals (IFRS, Tax, Audit, CMA). Test a mix of Psychological pressure, CV-based cross-questioning, and tough academic concepts. Ask about their studies and articleship motivations, but DO NOT ask how they would apply concepts practically at the firm.
     6. PSYCHOLOGICAL REALISM & ANGER: If the candidate misbehaves, speaks disrespectfully, or gives a very bad attitude, YOU MUST GET ANGRY. Scold them professionally but harshly. If they cross the line or use inappropriate language, explicitly say 'I am ending this interview right now due to your unprofessional behavior.' and nothing else.
     7. Speak plainly. NO markdown, NO bold text, NO bullet points, NO long paragraphs.
     `;
@@ -563,7 +567,7 @@ function speakResponse(text) {
         appendToTranscript('assistant', text); // Add AI message to Sidebar
         if (isInterviewActive) {
             // 🔥 PRO-LEVEL FIX 3: Auto-detect AI failure and safely exit instead of looping 🔥
-            if (secondsElapsed >= 300 || lowerText.includes("technical issue") || lowerText.includes("ending this interview") || lowerText.includes("wrap this up")) {
+            if (secondsElapsed >= 600 || lowerText.includes("technical issue") || lowerText.includes("ending this interview") || lowerText.includes("wrap this up")) {
                 setTimeout(endInterview, 1000); // Cut the call if angry or time's up
             } else {
                 startAutoListening(); // 🔥 AI finished, turn Mic ON
