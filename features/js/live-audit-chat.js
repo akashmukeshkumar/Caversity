@@ -180,12 +180,9 @@ window.downloadReportPDF = function() {
     element.style.maxWidth = '794px';
 
     const opt = {
-        margin:       [0, 0, 0, 0],
         margin:       0,
         filename:     `${candidateData.name ? candidateData.name.replace(/\s+/g, '_') : 'Candidate'}_Assessment_Report.pdf`,
         image:        { type: 'jpeg', quality: 1 },
-        html2canvas:  { scale: 2, useCORS: true, logging: false },
-        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
         html2canvas:  { scale: 2, useCORS: true, scrollY: 0 },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
