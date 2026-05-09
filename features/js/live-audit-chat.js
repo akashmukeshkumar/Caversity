@@ -211,6 +211,13 @@ function startInterviewRoom() {
     document.getElementById('partner-name').innerText = `Partner (${candidateData.firm.toUpperCase()})`;
     isInterviewActive = true;
 
+    // 🔥 Show Instructions Toast 🔥
+    const toast = document.getElementById('interview-toast');
+    if(toast) {
+        toast.classList.add('show');
+        setTimeout(() => { toast.classList.remove('show'); }, 15000); // Auto hide after 15 seconds
+    }
+
     // Clear previous transcript
     const tsContent = document.getElementById('ts-content');
     if (tsContent) tsContent.innerHTML = '';
@@ -382,7 +389,7 @@ function setSystemPrompt() {
     1. You MUST act exactly like a human interviewer. 
     2. Ask ONLY ONE short question at a time (Max 2 sentences). NEVER ramble, NEVER give long explanations, and NEVER talk to yourself.
     3. WAIT for the candidate to answer. DO NOT generate the candidate's response.
-    4. IMPORTANT START: For the very first question, ask them to introduce themselves or walk you through their CV. Do this 90% of the time.
+    4. IMPORTANT START: 80% of the time, start by asking them to introduce themselves, walk you through their CV, OR explain their role at their previous firm. VARY YOUR PHRASING every time so it feels completely natural and unscripted. 20% of the time, surprise them by diving straight into a technical or HR question based on their CV.
     5. PSYCHOLOGICAL REALISM & ANGER: If the candidate misbehaves, speaks disrespectfully, or gives a very bad attitude, YOU MUST GET ANGRY. Scold them professionally but harshly. If they cross the line or use inappropriate language, explicitly say 'I am ending this interview right now due to your unprofessional behavior.' and nothing else.
     6. Speak plainly. NO markdown, NO bold text, NO bullet points, NO long paragraphs.
     `;
