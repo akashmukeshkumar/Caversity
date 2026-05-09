@@ -370,12 +370,12 @@ function setSystemPrompt() {
     let firmPersonality = "";
     const firmTarget = candidateData.firm.toLowerCase();
     
-    if (firmTarget.includes("pwc") || firmTarget.includes("ey") || firmTarget.includes("kpmg")) {
+    if (firmTarget.includes("pwc") || firmTarget.includes("ey") || firmTarget.includes("kpmg") || firmTarget.includes("deloitte")) {
         firmPersonality = "FIRM PROFILE (Big 4): Be extremely strict and highly technical. Focus heavily on complex IFRS scenarios, Taxation, high-pressure situations, and ethical dilemmas. Do NOT make generic statements about budgets or finances; ruthlessly test their technical knowledge in IFRS, Tax, Corporate Law, and Audit methodology.";
-    } else if (firmTarget.includes("unilever") || firmTarget.includes("p&g")) {
+    } else if (firmTarget.includes("unilever") || firmTarget.includes("p&g") || firmTarget.includes("nestle") || firmTarget.includes("engro") || firmTarget.includes("jazz") || firmTarget.includes("ptcl") || firmTarget.includes("coca") || firmTarget.includes("bank")) {
         firmPersonality = "FIRM PROFILE (Industry): Focus heavily on internal controls, business risk, process optimization, financial reporting, and practical accounting rather than just strict statutory audit rules.";
     } else {
-        firmPersonality = "FIRM PROFILE (Top 10): Be strict but practical. Focus on identifying CV gaps, testing loyalty, and asking tricky general knowledge or mid-level CA topics like Accounting Standards (IFRS), Tax, and Audit.";
+        firmPersonality = "FIRM PROFILE (Top 10 / Mid-Tier): Be strict but practical. Focus on identifying CV gaps, testing loyalty, and asking tricky general knowledge or mid-level CA topics like Accounting Standards (IFRS), Tax, and Audit.";
     }
 
     let prompt = `
