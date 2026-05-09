@@ -67,6 +67,24 @@
         
         .status-msg { text-align: center; font-size: 13px; margin-top: 15px; color: #facc15; font-weight: 500; }
 
+        /* --- 🔥 INSTRUCTIONS TOAST 🔥 --- */
+        .interview-instructions-toast {
+            position: absolute; top: 20px; left: 50%; transform: translate(-50%, -20px);
+            background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); border-radius: 12px; padding: 15px 25px;
+            color: #f8fafc; font-size: 13px; font-weight: 500; z-index: 200;
+            width: 90%; max-width: 600px; display: flex; flex-direction: column; gap: 8px;
+            opacity: 0; visibility: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(15px);
+        }
+        .interview-instructions-toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+        .toast-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 5px; }
+        .toast-header h4 { margin: 0; color: #38bdf8; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+        .close-toast-btn { background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 16px; transition: 0.2s; }
+        .close-toast-btn:hover { color: #ef4444; }
+        .toast-body ul { margin: 0; padding-left: 20px; line-height: 1.6; }
+        .toast-body li { margin-bottom: 5px; }
+
         /* --- INTERVIEW ROOM STYLES --- */
         #interview-screen { background: rgba(30, 41, 59, 0.4); border-radius: 24px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 30px 60px rgba(0,0,0,0.5); background-clip: padding-box; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); }
         
@@ -162,11 +180,17 @@
             min-height: 1050px; /* Exact A4 Proportion */
             margin: 0 auto;
             padding: 60px 70px;
-            box-shadow: inset 0 20px 0 0 #1e40af, 0 25px 60px rgba(0,0,0,0.6);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
             position: relative;
             box-sizing: border-box;
-            border-top: none; /* Replaced with inset shadow for perfect edge-to-edge PDF rendering */
+            border-top: none; 
             overflow: hidden; /* To contain watermark */
+        }
+        
+        /* 🔥 Perfect Edge-to-Edge Blue Header for PDF 🔥 */
+        .official-paper::after {
+            content: ''; position: absolute; top: 0; left: 0; 
+            width: 100%; height: 20px; background: #1e40af; z-index: 10;
         }
 
         /* Background Caversity Watermark (Moved to HTML for PDF support) */
