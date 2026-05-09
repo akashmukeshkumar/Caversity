@@ -286,7 +286,7 @@ function startInterviewRoom() {
                 let subs = snap.data().subscriptions || {};
                 let subVal = subs['mock_interview'];
                 let dStr = subVal;
-                let sCount = 10;
+                let sCount = 3;
                 if (typeof subVal === 'string' && subVal.includes(',')) {
                     let parts = subVal.split(',');
                     dStr = parts[0];
