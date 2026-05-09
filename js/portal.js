@@ -302,16 +302,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const discount = subtotal - total;
         
         // GENERATE WHATSAPP MESSAGE
-        let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? '10 Sessions' : 'month';
+        let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? 'month (10 Sessions)' : 'month';
         if (isMultiSubjectMode) period = 'month';
 
-        let msg = `Hello Caversity Team,\n\nI want to subscribe to:\nStudent: ${name}\n\n📚 Subjects:\n- ${selected.join('\n- ')}\n\n`;
+        let msg = `Hello Caversity Team, 👋\n\nI would like to request premium access. Here are my details:\n\n`;
+        msg += `👤 *Student Name:* ${name}\n`;
+        msg += `📚 *Subject(s) Selected:*\n- ${selected.join('\n- ')}\n\n`;
+        
+        msg += `💳 *Payment Summary:*\n`;
         if (discount > 0) {
-            msg += `💰 Payment Details:\nSubtotal: Rs. ${subtotal}\nDiscount: -Rs. ${discount}\nFinal Amount: Rs. ${total} / ${period}\n\n`;
+            msg += `Subtotal: Rs. ${subtotal}\n`;
+            if (appliedCouponCode) {
+                msg += `Discount: -Rs. ${discount} (Coupon: ${appliedCouponCode})\n`;
+            } else {
+                msg += `Discount: -Rs. ${discount} (Bundle Offer)\n`;
+            }
+            msg += `-----------------------------\n`;
+            msg += `*Total Payable: Rs. ${total} / ${period}*\n`;
+            msg += `-----------------------------\n\n`;
         } else {
-            msg += `💰 Total: Rs. ${total} / ${period}\n\n`;
+            msg += `-----------------------------\n`;
+            msg += `*Total Payable: Rs. ${total} / ${period}*\n`;
+            msg += `-----------------------------\n\n`;
         }
-        msg += `📸 (I have attached my payment screenshot)`;
+        msg += `📸 _(I have attached my payment screenshot below)_`;
         
         window.open(`https://wa.me/923164156249?text=${encodeURIComponent(msg)}`, '_blank');
         document.getElementById('subscription-modal').classList.remove('show');
@@ -336,7 +350,7 @@ function openSubscriptionModal() {
         multiDisplay.innerHTML = '';
         academicSubjects.filter(s => s.type === 'premium').forEach(s => {
             const isSub = currentUserProfile.subscriptions.includes(s.id);
-            const priceLabel = s.id === 'mock_interview' ? `(Rs. ${s.price} / 10 Sessions)` : `(Rs. ${s.price} / month)`;
+            const priceLabel = s.id === 'mock_interview' ? `(Rs. ${s.price} / month - 10 Sessions)` : `(Rs. ${s.price} / month)`;
             multiDisplay.innerHTML += `
                 <div class="checkbox-item">
                     <input type="checkbox" id="chk-${s.id}" value="${s.id}" ${isSub ? 'disabled' : ''}>
@@ -348,7 +362,7 @@ function openSubscriptionModal() {
         multiDisplay.style.display = 'none';
         couponContainer.style.display = 'block';
         document.getElementById('modal-subject-name').innerText = currentSubjectContext.name;
-        document.getElementById('modal-subject-price').innerText = currentSubjectContext.id === 'mock_interview' ? `Rs. ${currentSubjectContext.price} / 10 Sessions` : `Rs. ${currentSubjectContext.price} / month`;
+        document.getElementById('modal-subject-price').innerText = currentSubjectContext.id === 'mock_interview' ? `Rs. ${currentSubjectContext.price} / month (10 Sessions)` : `Rs. ${currentSubjectContext.price} / month`;
     }
 
     calculateTotal();
