@@ -25,7 +25,7 @@ const academicSubjects = [
     { id: 'caf6', name: 'CAF 6: Managerial and Financial Analysis', description: 'Strategic financial analysis and managerial decision-making tools.', price: 200, type: 'premium', url: 'subjects/caf6/index.html' },
     { id: 'caf7', name: 'CAF 7: Company Law', description: 'Corporate law principles and company governance structures.', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
     { id: 'caf8', name: 'CAF 8: Audit and Assurance', description: 'Audit methodologies and assurance services in professional practice.', price: 200, type: 'premium', url: 'audit.html' },
-    { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Face a realistic 5-minute technical and psychological interview with a strict AI Partner.', price: 200, type: 'premium', url: 'live-audit-chat.html' },
+    { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Get 10 complete realistic 5-minute technical and psychological interviews with a strict AI Partner.', price: 200, type: 'premium', url: 'live-audit-chat.html' },
     { id: 'resume', name: 'CA Resume Builder', description: 'Craft a standout, ATS-friendly resume tailored specifically for CA & ACCA students.', price: 0, type: 'free', url: 'resume.html' },
     { id: 'sanctuary', name: 'The Sanctuary', description: 'Spiritual guidance and ethical foundations for professional excellence.', price: 0, type: 'free', url: 'blueprint.html' }
 ];
@@ -65,12 +65,22 @@ onAuthStateChanged(auth, async (user) => {
             const activeSubs = [];
 
             for (let subId in dbSubs) {
-                const expiryDateString = dbSubs[subId];
-                // Check agar value true ya koi purani false toh nahi hai
-                if (expiryDateString && expiryDateString !== false) {
-                    const expiryDate = new Date(expiryDateString);
-                    if (expiryDate > today) {
-                        activeSubs.push(subId); // Date abhi pass nahi hui, access de do!
+                const expiryValue = dbSubs[subId];
+                if (expiryValue && expiryValue !== false) {
+                    if (subId === 'mock_interview') {
+                        // Sessions logic: Check if it's a number and greater than 0
+                        if (!isNaN(expiryValue) && Number(expiryValue) > 0) {
+                            activeSubs.push(subId);
+                        } else if (isNaN(expiryValue) && new Date(expiryValue) > today) {
+                            // Fallback if old logic (date) was used
+                            activeSubs.push(subId);
+                        }
+                    } else {
+                        // Normal monthly expiry logic
+                        const expiryDate = new Date(expiryValue);
+                        if (expiryDate > today) {
+                            activeSubs.push(subId);
+                        }
                     }
                 }
             }
@@ -229,10 +239,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // 🔥 Force convert string to number, even if Firebase sends it as a string
-                appliedCouponDiscount = parseInt(couponData.discountValue, 10) || 0;
+                appliedCouponDiscount = Number(couponData.discountValue) || Number(couponData.discount) || Number(couponData.amount) || parseInt(couponData.discountValue, 10) || 0;
                 appliedCouponCode = code;
-                msg.textContent = `Coupon applied! (Rs. ${appliedCouponDiscount} off)`;
-                msg.className = 'coupon-message success';
+                if (appliedCouponDiscount > 0) {
+                    msg.textContent = `Coupon applied! (Rs. ${appliedCouponDiscount} off)`;
+                    msg.className = 'coupon-message success';
+                } else {
+                    msg.textContent = 'Coupon applied but no discount value found in database.';
+                    msg.className = 'coupon-message error';
+                }
             } else {
                 throw new Error("Invalid");
             }
@@ -267,11 +282,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const discount = subtotal - total;
         
         // GENERATE WHATSAPP MESSAGE
+        let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? '10 Sessions' : 'month';
+        if (isMultiSubjectMode) period = 'month';
+
         let msg = `Hello Caversity Team,\n\nI want to subscribe to:\nStudent: ${name}\n\n📚 Subjects:\n- ${selected.join('\n- ')}\n\n`;
         if (discount > 0) {
-            msg += `💰 Payment Details:\nSubtotal: Rs. ${subtotal}\nDiscount: -Rs. ${discount}\nFinal Amount: Rs. ${total} / month\n\n`;
+            msg += `💰 Payment Details:\nSubtotal: Rs. ${subtotal}\nDiscount: -Rs. ${discount}\nFinal Amount: Rs. ${total} / ${period}\n\n`;
         } else {
-            msg += `💰 Total: Rs. ${total} / month\n\n`;
+            msg += `💰 Total: Rs. ${total} / ${period}\n\n`;
         }
         msg += `📸 (I have attached my payment screenshot)`;
         
@@ -298,10 +316,11 @@ function openSubscriptionModal() {
         multiDisplay.innerHTML = '';
         academicSubjects.filter(s => s.type === 'premium').forEach(s => {
             const isSub = currentUserProfile.subscriptions.includes(s.id);
+            const priceLabel = s.id === 'mock_interview' ? `(Rs. ${s.price} / 10 Sessions)` : `(Rs. ${s.price} / month)`;
             multiDisplay.innerHTML += `
                 <div class="checkbox-item">
                     <input type="checkbox" id="chk-${s.id}" value="${s.id}" ${isSub ? 'disabled' : ''}>
-                    <label for="chk-${s.id}">${s.name} (Rs. ${s.price}) ${isSub ? '<span style="color:#059669; font-size:12px;">(Subscribed)</span>' : ''}</label>
+                    <label for="chk-${s.id}">${s.name} ${priceLabel} ${isSub ? '<span style="color:#059669; font-size:12px;">(Subscribed)</span>' : ''}</label>
                 </div>`;
         });
     } else {
@@ -309,7 +328,7 @@ function openSubscriptionModal() {
         multiDisplay.style.display = 'none';
         couponContainer.style.display = 'block';
         document.getElementById('modal-subject-name').innerText = currentSubjectContext.name;
-        document.getElementById('modal-subject-price').innerText = `Rs. ${currentSubjectContext.price} / month`;
+        document.getElementById('modal-subject-price').innerText = currentSubjectContext.id === 'mock_interview' ? `Rs. ${currentSubjectContext.price} / 10 Sessions` : `Rs. ${currentSubjectContext.price} / month`;
     }
 
     calculateTotal();
@@ -343,7 +362,8 @@ function calculateTotal() {
         document.getElementById('discount-line').style.display = 'none';
     }
 
-    document.getElementById('total-amount').innerText = `Rs. ${grandTotal} / month`;
+    let periodText = (currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode) ? ' / 10 Sessions' : ' / month';
+    document.getElementById('total-amount').innerText = `Rs. ${grandTotal}${periodText}`;
     document.getElementById('total-amount').dataset.subtotal = subtotal;
     document.getElementById('total-amount').dataset.grand = grandTotal;
 }
