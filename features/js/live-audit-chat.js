@@ -3,7 +3,7 @@
 // ==========================================
 
 import { getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 // 1. 🔥 MULTIPLE API KEYS (FALLBACK SYSTEM) 🔥
@@ -210,6 +210,22 @@ function startInterviewRoom() {
     document.getElementById('interview-screen').classList.add('active-screen');
     document.getElementById('partner-name').innerText = `Partner (${candidateData.firm.toUpperCase()})`;
     isInterviewActive = true;
+
+    // 🔥 DEDUCT ONE SESSION FROM FIREBASE 🔥
+    const user = auth.currentUser;
+    if (user) {
+        const userRef = doc(db, "users", user.uid);
+        getDoc(userRef).then(snap => {
+            if (snap.exists()) {
+                let subs = snap.data().subscriptions || {};
+                let sessionsLeft = Number(subs['mock_interview']);
+                if (!isNaN(sessionsLeft) && sessionsLeft > 0) {
+                    subs['mock_interview'] = sessionsLeft - 1;
+                    updateDoc(userRef, { subscriptions: subs }).catch(e => console.warn(e));
+                }
+            }
+        }).catch(e => console.warn(e));
+    }
 
     // 🔥 Show Instructions Toast 🔥
     const toast = document.getElementById('interview-toast');
