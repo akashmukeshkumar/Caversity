@@ -22,8 +22,10 @@ let interviewMemory = [];
 let isInterviewActive = false;
 let timerInterval;
 let secondsElapsed = 0;
-let silenceTimer; // 🔥 FOR SILENCE DETECTION
-let isListeningMode = false; // 🔥 Auto-Listen State
+let silenceTimer;
+let isMicOpen = false;
+let finalAnswer = ""; // 🔥 Stores text safely even if you pause
+let silenceStrikes = 0; // 🔥 To auto-cut the call
 
 // 🔥 FIREBASE SETUP FOR ROOM LOCK 🔥
 const app = getApp();
@@ -38,8 +40,8 @@ const synth = window.speechSynthesis;
 
 // Setup STT
 if (recognition) {
-    recognition.continuous = false;
-    recognition.interimResults = false;
+    recognition.continuous = false; // We auto-restart it safely in onend
+    recognition.interimResults = true; // Captures while you pause
     recognition.lang = 'en-PK';
 }
 
@@ -199,20 +201,30 @@ function startInterviewRoom() {
 }
 
 // 🔥 SILENCE HANDLER 🔥
-function resetSilenceTimer() {
-    clearTimeout(silenceTimer);
-    if (!isInterviewActive) return;
-    silenceTimer = setTimeout(async () => {
-        isListeningMode = false;
+async function handleSilence() {
+    if (!isMicOpen) return;
+    
+    if (finalAnswer.trim().length > 2) {
+        // If user spoke but forgot to click send, auto-send it
+        sendUserResponse();
+    } else {
+        silenceStrikes++;
+        isMicOpen = false;
         if(recognition) recognition.stop();
         updateMicUI(false);
-        document.getElementById('subtitle-box').innerText = "Partner is waiting for your response...";
-        const promptStr = "The candidate has been completely silent for 15 seconds. Sound impatient and pressure them to answer quickly. Use strict tone. Keep it to 1 short sentence.";
-        interviewMemory.push({ "role": "system", "content": "[The candidate is silent and taking too long to respond.]" });
-        interviewMemory.push({ "role": "system", "content": promptStr });
-        const reply = await askGroqWithFallback();
-        speakResponse(reply);
-    }, 15000); // 15 seconds limit
+        document.getElementById('send-response-btn').style.display = 'none';
+        
+        if (silenceStrikes >= 2) {
+            document.getElementById('subtitle-box').innerText = "Ending interview due to no response...";
+            speakResponse("You are not responding. We will wrap up the interview here.");
+            setTimeout(endInterview, 4000);
+        } else {
+            document.getElementById('subtitle-box').innerText = "Partner is waiting...";
+            interviewMemory.push({ "role": "system", "content": "[Candidate was silent for 20 seconds. Ask them if they are still there.]" });
+            const reply = await askGroqWithFallback();
+            speakResponse(reply);
+        }
+    }
 }
 
 // 🔥 WINDOW CLOSE PROTECTION (Releases lock if user closes tab) 🔥
@@ -259,12 +271,16 @@ window.endInterview = endInterview; // Export for HTML onclick
 async function generateEvaluationReport() {
     const evalPrompt = `
     Based on the interview transcript above, evaluate the candidate strictly.
-    Return ONLY a valid JSON object with no markdown formatting or extra text. Use this exact structure:
+    
+    CRITICAL PENALTY RULE: 
+    Analyze the candidate's actual spoken responses. If the candidate remained completely silent, gave 0 or 1 meaningful response, or abandoned the interview early without answering the questions properly, you MUST give a technical_score between 5 and 15, a confidence_score between 5 and 15, the overall_verdict MUST be "REJECTED", and the feedback MUST clearly state "Candidate abandoned the interview or failed to participate."
+
+    Return ONLY a raw valid JSON object with no markdown formatting or backticks. Use this exact structure:
     {
         "technical_score": 85,
         "confidence_score": 70,
-        "overall_verdict": "SHORTLISTED", // Strictly use either "SHORTLISTED", "HIRED", or "REJECTED"
-        "feedback": "Write a 3-4 line detailed feedback paragraph mentioning their specific mistakes or strong points."
+        "overall_verdict": "SHORTLISTED",
+        "feedback": "Feedback paragraph here."
     }
     `;
     
@@ -272,12 +288,14 @@ async function generateEvaluationReport() {
     
     try {
         const reply = await askGroqWithFallback();
-        const jsonMatch = reply.match(/\{[\s\S]*\}/);
-        const report = JSON.parse(jsonMatch ? jsonMatch[0] : reply);
+        // 🔥 BULLETPROOF JSON PARSER 🔥
+        const cleanedReply = reply.replace(/```json/g, '').replace(/```/g, '').trim();
+        const jsonMatch = cleanedReply.match(/\{[\s\S]*\}/);
+        const report = JSON.parse(jsonMatch ? jsonMatch[0] : cleanedReply);
         
-        const tClass = report.technical_score >= 70 ? 'score-value' : (report.technical_score >= 50 ? 'score-value mid' : 'score-value low');
-        const cClass = report.confidence_score >= 70 ? 'score-value' : (report.confidence_score >= 50 ? 'score-value mid' : 'score-value low');
-        const vClass = report.overall_verdict === 'REJECTED' ? 'verdict-badge verdict-rejected' : 'verdict-badge verdict-hired';
+        const tClass = (report.technical_score || 50) >= 70 ? 'score-value' : 'score-value low';
+        const cClass = (report.confidence_score || 50) >= 70 ? 'score-value' : 'score-value low';
+        const vClass = (report.overall_verdict || 'REJECTED').includes('REJECTED') ? 'verdict-badge verdict-rejected' : 'verdict-badge verdict-hired';
 
         document.getElementById('eval-content').innerHTML = `
             <div class="eval-grid">
@@ -285,11 +303,11 @@ async function generateEvaluationReport() {
                 <div class="score-box"><h3>Confidence & Tone</h3><div class="${cClass}">${report.confidence_score}%</div></div>
                 <div class="verdict-box">
                     <h3>Final Partner Decision</h3>
-                    <div class="${vClass}">${report.overall_verdict}</div>
+                    <div class="${vClass}">${report.overall_verdict || 'REVIEW NEEDED'}</div>
                 </div>
                 <div class="feedback-box">
                     <strong>Partner's Detailed Feedback:</strong><br><br>
-                    ${report.feedback}
+                    ${report.feedback || 'Could not generate detailed feedback.'}
                 </div>
             </div>
         `;
@@ -303,18 +321,31 @@ async function generateEvaluationReport() {
 // ==========================================
 
 function setSystemPrompt() {
+    let firmPersonality = "";
+    const firmTarget = candidateData.firm.toLowerCase();
+    
+    if (firmTarget.includes("pwc") || firmTarget.includes("ey") || firmTarget.includes("kpmg")) {
+        firmPersonality = "FIRM PROFILE (Big 4): Be extremely strict and highly technical. Focus heavily on complex IFRS scenarios, high-pressure situations, and ethical dilemmas. Do NOT make generic statements about budgets or finances; ruthlessly test their deep audit methodology knowledge.";
+    } else if (firmTarget.includes("unilever") || firmTarget.includes("p&g")) {
+        firmPersonality = "FIRM PROFILE (Industry): Focus heavily on internal controls, business risk, process optimization, and practical accounting rather than strict statutory audit rules.";
+    } else {
+        firmPersonality = "FIRM PROFILE (Top 10): Be strict but practical. Focus on identifying CV gaps, testing loyalty, and asking tricky general knowledge or mid-level auditing standard questions.";
+    }
+
     let prompt = `
     You are a highly experienced and strict Senior Partner conducting a 5-minute final interview for ${candidateData.firm}.
-    Candidate Name: ${candidateData.name}
-    Candidate's Resume Text (Extract): ${candidateData.cvText.substring(0, 1000)}...
+    ${firmPersonality}
     
-    PSYCHOLOGICAL PROFILE & RULES:
-    1. Be 100% natural, professional, intimidating, and unpredictable. Use short, sharp English sentences (1-2 lines max). Keep it strictly in formal English.
-    2. Start with a brief intro. Then immediately attack a gap, weakness, or random hobby in their CV.
-    3. Use exclamation marks (!) when annoyed or strict. Use question marks (?) for aggressive cross-questioning.
-    4. Ask SPECIFICALLY about the firm: "Why do you want to join ${candidateData.firm}?" Challenge their loyalty.
-    5. Ask a highly technical audit/IFRS scenario. If they answer right, change the scenario to confuse them.
-    6. Do NOT sound like an AI. You are a stressed Partner testing if this candidate can survive corporate pressure.
+    Candidate Name: ${candidateData.name}
+    Candidate's Resume Text (Extract): ${candidateData.cvText.substring(0, 800)}...
+    
+    STRICT RULES (OBEY THESE OR FAIL):
+    1. You MUST act exactly like a human interviewer. 
+    2. Ask ONLY ONE short question at a time (Max 2 sentences). NEVER ramble, NEVER give financial advice, and NEVER talk to yourself.
+    3. WAIT for the candidate to answer. DO NOT generate the candidate's response.
+    4. Stay focused on their CV, standard auditing topics, and why they want to join ${candidateData.firm}.
+    5. If they give a good answer, cross-question them sharply. If bad, act disappointed.
+    6. Speak plainly. NO markdown, NO bold text, NO bullet points, NO long paragraphs.
     `;
     
     interviewMemory.push({ "role": "system", "content": prompt });
