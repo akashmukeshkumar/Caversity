@@ -163,6 +163,35 @@ async function extractTextFromPDF(file) {
 }
 
 // ==========================================
+// 🖨️ SMART PDF GENERATOR (No Browser Headers)
+// ==========================================
+window.downloadReportPDF = function() {
+    const element = document.querySelector('.official-paper');
+    const btn = document.querySelector('.eval-actions button');
+    const oldHtml = btn.innerHTML;
+    
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+    btn.disabled = true;
+
+    const opt = {
+        margin:       [0, 0, 0, 0],
+        filename:     `${candidateData.name ? candidateData.name.replace(/\s+/g, '_') : 'Candidate'}_Assessment_Report.pdf`,
+        image:        { type: 'jpeg', quality: 1 },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save().then(() => {
+        btn.innerHTML = oldHtml;
+        btn.disabled = false;
+    }).catch(err => {
+        console.error("PDF generation failed:", err);
+        btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error';
+        setTimeout(() => { btn.innerHTML = oldHtml; btn.disabled = false; }, 3000);
+    });
+};
+
+// ==========================================
 // 🎥 INTERVIEW ROOM LOGIC
 // ==========================================
 
@@ -310,6 +339,7 @@ async function generateEvaluationReport() {
                 </div>
             </div>
         `;
+        
     } catch (e) {
         document.getElementById('eval-content').innerHTML = `<p style="color:red; text-align:center;">Failed to generate report. Please try again. Error: ${e.message}</p>`;
     }
@@ -340,10 +370,10 @@ function setSystemPrompt() {
     
     STRICT RULES (OBEY THESE OR FAIL):
     1. You MUST act exactly like a human interviewer. 
-    2. Ask ONLY ONE short question at a time (Max 2 sentences). NEVER ramble, NEVER give financial advice, and NEVER talk to yourself.
+    2. Ask ONLY ONE short question at a time (Max 2 sentences). NEVER ramble, NEVER give long explanations, and NEVER talk to yourself.
     3. WAIT for the candidate to answer. DO NOT generate the candidate's response.
-    4. Stay focused on their CV. Note: "CAF Qualified" means they passed all 8 core CA subjects. Ask mostly about Accounting Standards (IFRS), Audit, and Tax, but occasionally surprise them with a question from Cost Accounting, Business Law, or Economics. Also ask why they want to join ${candidateData.firm}.
-    5. If they give a good answer, cross-question them sharply. If bad, act disappointed.
+    4. Mix behavioral and technical questions. You can start with an introduction OR dive straight into a CV/technical question. Keep it unpredictable.
+    5. You are primarily an evaluator. If they give a wrong answer, act disappointed and move on, but occasionally you can give a very brief 1-line correction or professional insight, just like a real human partner.
     6. Speak plainly. NO markdown, NO bold text, NO bullet points, NO long paragraphs.
     `;
     
@@ -355,7 +385,7 @@ speechSynthesis.onvoiceschanged = () => { window.availableVoices = speechSynthes
 
 async function askGroqWithFallback() {
     const subtitle = document.getElementById('subtitle-box');
-    subtitle.innerText = "Partner is thinking...";
+    subtitle.innerText = "Partner is reviewing...";
     
     while (currentKeyIndex < GROQ_API_KEYS.length) {
         try {
