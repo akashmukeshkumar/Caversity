@@ -1,7 +1,11 @@
         /* 🔥 INTERVIEW SIMULATOR UI 🔥 */
         body {
             margin: 0; padding: 0; font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at 50% 0%, #1e40af 0%, #0f172a 100%); 
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(37, 99, 235, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(124, 58, 237, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 0%, #1e40af 0%, #0f172a 100%); 
+            background-attachment: fixed;
             color: #ffffff;
             height: 100vh; display: flex; justify-content: center; align-items: center;
         }
@@ -28,21 +32,23 @@
         /* --- LOBBY STYLES --- */
         #lobby-screen { justify-content: center; align-items: center; }
         .lobby-card {
-            background: #ffffff; padding: 40px; border-radius: 20px; width: 100%; max-width: 450px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5); border: 1px solid #e2e8f0; color: #0f172a;
+            background: rgba(15, 23, 42, 0.65); padding: 40px; border-radius: 20px; width: 100%; max-width: 450px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6); border: 1px solid rgba(255, 255, 255, 0.15); color: #ffffff;
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
         }
         .lobby-header { text-align: center; margin-bottom: 30px; }
-        .lobby-header i { font-size: 40px; color: #3b82f6; margin-bottom: 10px; }
-        .lobby-header h2 { margin: 0 0 5px 0; font-size: 24px; color: #0f172a; font-weight: 800; }
-        .lobby-header p { margin: 0; color: #64748b; font-size: 14px; }
+        .lobby-header i { font-size: 40px; color: #60a5fa; margin-bottom: 10px; }
+        .lobby-header h2 { margin: 0 0 5px 0; font-size: 24px; color: #ffffff; font-weight: 800; }
+        .lobby-header p { margin: 0; color: #94a3b8; font-size: 14px; }
 
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #cbd5e1; font-weight: 600; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #e2e8f0; font-weight: 600; }
         .form-group input[type="text"], .form-group select {
-            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #cbd5e1; background: #f8fafc; color: #0f172a; outline: none; box-sizing: border-box; transition: 0.3s; font-family: 'Inter', sans-serif;
+            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.2); color: #ffffff; outline: none; box-sizing: border-box; transition: 0.3s; font-family: 'Inter', sans-serif;
         }
-        .form-group input[type="text"]:focus, .form-group select:focus { border-color: #2563eb; background: #ffffff; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
-        .file-input { width: 100%; padding: 10px; background: #f8fafc; border-radius: 10px; border: 1px dashed #94a3b8; color: #475569; cursor: pointer; }
+        .form-group input[type="text"]:focus, .form-group select:focus { border-color: #38bdf8; background: rgba(0, 0, 0, 0.4); box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2); }
+        .form-group select option { background: #0f172a; color: #ffffff; }
+        .file-input { width: 100%; padding: 10px; background: rgba(0, 0, 0, 0.2); border-radius: 10px; border: 1px dashed rgba(255, 255, 255, 0.3); color: #cbd5e1; cursor: pointer; }
         
         .primary-btn {
             width: 100%; padding: 14px; border-radius: 10px; border: none; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: white; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
@@ -53,16 +59,16 @@
         .status-msg { text-align: center; font-size: 13px; margin-top: 15px; color: #facc15; font-weight: 500; }
 
         /* --- INTERVIEW ROOM STYLES --- */
-        #interview-screen { background: #ffffff; border-radius: 24px; overflow: hidden; border: 4px solid rgba(255, 255, 255, 0.2); box-shadow: 0 30px 60px rgba(0,0,0,0.6); background-clip: padding-box; }
+        #interview-screen { background: rgba(15, 23, 42, 0.65); border-radius: 24px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 30px 60px rgba(0,0,0,0.7); background-clip: padding-box; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); }
         
-        .room-branding { position: absolute; top: 15px; left: 25px; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; z-index: 100; color: #1e3a8a; }
-        .room-branding svg { width: 30px; height: 30px; }
+        .room-branding { position: absolute; top: 15px; left: 25px; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; z-index: 100; color: #ffffff; }
+        .room-branding svg { width: 30px; height: 30px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
         
-        .interview-header { padding: 20px 25px; display: flex; justify-content: center; align-items: center; background: #f8fafc; border-bottom: 1px solid #e2e8f0; position: relative; }
-        .timer { position: absolute; right: 25px; font-family: monospace; font-size: 16px; color: #ef4444; font-weight: bold; display: flex; align-items: center; gap: 8px; background: #fee2e2; padding: 5px 12px; border-radius: 50px; border: 1px solid #fca5a5; }
+        .interview-header { padding: 20px 25px; display: flex; justify-content: center; align-items: center; background: rgba(0, 0, 0, 0.3); border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: relative; }
+        .timer { position: absolute; right: 25px; font-family: monospace; font-size: 16px; color: #ef4444; font-weight: bold; display: flex; align-items: center; gap: 8px; background: rgba(239, 68, 68, 0.15); padding: 5px 12px; border-radius: 50px; border: 1px solid rgba(239, 68, 68, 0.3); }
         .pulse-rec { width: 10px; height: 10px; background: #ef4444; border-radius: 50%; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
-        .interview-header h2 { margin: 0; font-size: 16px; color: #334155; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .interview-header h2 { margin: 0; font-size: 16px; color: #e2e8f0; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
         .exit-btn { background: #334155; border: none; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer; }
 
         .video-grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; padding-bottom: 100px; }
@@ -75,44 +81,45 @@
         .user-video video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
         
         .face-tracker-overlay {
-            position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.9); color: #10b981;
-            padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; border: 1px solid #10b981; 
-            display: flex; align-items: center; gap: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: absolute; top: 15px; right: 15px; background: rgba(15, 23, 42, 0.8); color: #38bdf8;
+            padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); 
+            display: flex; align-items: center; gap: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); backdrop-filter: blur(5px);
         }
 
-        .name-tag { position: absolute; bottom: 15px; left: 15px; background: rgba(255,255,255,0.9); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; border: 1px solid #e2e8f0; color: #0f172a; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .name-tag { position: absolute; bottom: 15px; left: 15px; background: rgba(15, 23, 42, 0.8); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; border: 1px solid rgba(255, 255, 255, 0.1); color: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.3); backdrop-filter: blur(5px); }
 
         .subtitle-box {
             position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%);
-            background: #1e40af; color: #ffffff; text-align: center; padding: 12px 30px;
+            background: rgba(30, 64, 175, 0.85); color: #ffffff; text-align: center; padding: 12px 30px;
             font-size: 15px; font-weight: 600; border-radius: 50px; 
-            max-width: 80%; z-index: 10; border: 2px solid #3b82f6; box-shadow: 0 10px 30px rgba(30, 64, 175, 0.4);
+            max-width: 80%; z-index: 10; border: 1px solid rgba(96, 165, 250, 0.4); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
         }
 
         /* --- 🔥 TRANSCRIPT SIDEBAR STYLES 🔥 --- */
         .transcript-sidebar {
             position: absolute; top: 0; left: 0; width: 340px; height: 100%;
-            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(0,0,0,0.1); z-index: 150;
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(25px);
+            border-right: 1px solid rgba(255,255,255,0.1); z-index: 150;
             transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; flex-direction: column; box-shadow: 10px 0 30px rgba(0,0,0,0.15);
         }
         .transcript-sidebar.open { transform: translateX(0); }
         
-        .ts-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .ts-header h3 { margin: 0; color: #0f172a; font-size: 16px; display: flex; align-items: center; gap: 8px; font-weight: 700; }
-        .close-ts-btn { background: none; border: none; font-size: 24px; color: #64748b; cursor: pointer; transition: 0.2s; }
+        .ts-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .ts-header h3 { margin: 0; color: #ffffff; font-size: 16px; display: flex; align-items: center; gap: 8px; font-weight: 700; }
+        .close-ts-btn { background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer; transition: 0.2s; }
         .close-ts-btn:hover { color: #ef4444; }
         
         .ts-content { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
         .ts-content::-webkit-scrollbar { width: 5px; }
-        .ts-content::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 5px; }
+        .ts-content::-webkit-scrollbar-thumb { background: #475569; border-radius: 5px; }
         
-        .ts-msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 13px; line-height: 1.5; font-weight: 500; word-wrap: break-word; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .ai-msg { background: #f1f5f9; color: #0f172a; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .ts-msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 13px; line-height: 1.5; font-weight: 500; word-wrap: break-word; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .ai-msg { background: rgba(255, 255, 255, 0.1); color: #e2e8f0; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid rgba(255, 255, 255, 0.05); }
         .user-msg { background: #3b82f6; color: #ffffff; align-self: flex-end; border-bottom-right-radius: 2px; }
         
-        .transcript-btn { background: #eff6ff; color: #1d4ed8; padding: 10px 20px; border-radius: 50px; font-size: 14px; border: 1px solid #bfdbfe; font-weight: 700; }
+        .transcript-btn { background: rgba(255, 255, 255, 0.1); color: #e2e8f0; padding: 10px 20px; border-radius: 50px; font-size: 14px; border: 1px solid rgba(255, 255, 255, 0.2); font-weight: 600; }
         .transcript-btn:hover { background: #2563eb; color: #ffffff; border-color: #2563eb; }
         
         /* --- Send Helper Tooltip --- */
@@ -122,10 +129,10 @@
         @keyframes bounceHelper { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -5px); } }
 
         /* --- NEW AUTOMATIC CONTROLS --- */
-        .controls-bar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: #ffffff; padding: 12px 25px; border-radius: 50px; display: flex; justify-content: center; align-items: center; gap: 15px; border: 2px solid #e2e8f0; box-shadow: 0 15px 40px rgba(0,0,0,0.2); z-index: 20; }
+        .controls-bar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(15, 23, 42, 0.85); padding: 12px 25px; border-radius: 50px; display: flex; justify-content: center; align-items: center; gap: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 15px 40px rgba(0,0,0,0.5); z-index: 20; backdrop-filter: blur(20px); }
         
-        .mic-indicator { width: 55px; height: 55px; border-radius: 50%; background: #f8fafc; display: flex; justify-content: center; align-items: center; color: #475569; font-size: 20px; transition: 0.3s; cursor: pointer; border: 2px solid #cbd5e1; }
-        .mic-indicator:hover { background: #e2e8f0; color: #0f172a; border-color: #94a3b8; }
+        .mic-indicator { width: 55px; height: 55px; border-radius: 50%; background: rgba(255, 255, 255, 0.1); display: flex; justify-content: center; align-items: center; color: #cbd5e1; font-size: 20px; transition: 0.3s; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.2); }
+        .mic-indicator:hover { background: rgba(255, 255, 255, 0.2); color: #ffffff; border-color: rgba(255, 255, 255, 0.3); }
         .mic-indicator.active { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-color: #059669; box-shadow: 0 0 20px rgba(16, 185, 129, 0.5); }
         .mic-indicator.active i { animation: mic-breathe 1.5s infinite alternate; }
         @keyframes mic-breathe { from { transform: scale(1); } to { transform: scale(1.15); } }
