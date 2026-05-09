@@ -61,8 +61,8 @@
         /* --- INTERVIEW ROOM STYLES --- */
         #interview-screen { background: rgba(15, 23, 42, 0.65); border-radius: 24px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 30px 60px rgba(0,0,0,0.7); background-clip: padding-box; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); }
         
-        .room-branding { position: absolute; top: 15px; left: 25px; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; z-index: 100; color: #ffffff; }
-        .room-branding svg { width: 30px; height: 30px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+        .room-branding { position: absolute; top: 20px; left: 25px; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; z-index: 100; color: #1e40af; background: rgba(255, 255, 255, 0.95); padding: 6px 20px 6px 8px; border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-family: 'Inter', sans-serif; }
+        .room-branding svg { width: 35px; height: 35px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
         
         .interview-header { padding: 20px 25px; display: flex; justify-content: center; align-items: center; background: rgba(0, 0, 0, 0.3); border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: relative; }
         .timer { position: absolute; right: 25px; font-family: monospace; font-size: 16px; color: #ef4444; font-weight: bold; display: flex; align-items: center; gap: 8px; background: rgba(239, 68, 68, 0.15); padding: 5px 12px; border-radius: 50px; border: 1px solid rgba(239, 68, 68, 0.3); }
@@ -98,7 +98,7 @@
 
         /* --- 🔥 TRANSCRIPT SIDEBAR STYLES 🔥 --- */
         .transcript-sidebar {
-            position: absolute; top: 0; left: 0; width: 340px; height: 100%;
+            position: fixed; top: 0; left: 0; width: 340px; height: 100vh;
             background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(25px);
             border-right: 1px solid rgba(255,255,255,0.1); z-index: 150;
             transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -119,8 +119,9 @@
         .ai-msg { background: rgba(255, 255, 255, 0.1); color: #e2e8f0; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid rgba(255, 255, 255, 0.05); }
         .user-msg { background: #3b82f6; color: #ffffff; align-self: flex-end; border-bottom-right-radius: 2px; }
         
-        .transcript-btn { background: rgba(255, 255, 255, 0.1); color: #e2e8f0; padding: 10px 20px; border-radius: 50px; font-size: 14px; border: 1px solid rgba(255, 255, 255, 0.2); font-weight: 600; }
-        .transcript-btn:hover { background: #2563eb; color: #ffffff; border-color: #2563eb; }
+        /* --- FIXED TRANSCRIPT BUTTON --- */
+        .fixed-ts-btn { position: fixed; bottom: 30px; right: 30px; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); color: #e2e8f0; padding: 12px 25px; border-radius: 50px; font-size: 14px; border: 1px solid rgba(255, 255, 255, 0.2); font-weight: 600; cursor: pointer; z-index: 100; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .fixed-ts-btn:hover { background: #3b82f6; color: #ffffff; border-color: #3b82f6; transform: translateY(-3px); box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4); }
         
         /* --- Send Helper Tooltip --- */
         .send-helper { position: absolute; top: -40px; left: 50%; transform: translateX(-50%); background: #10b981; color: white; padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; white-space: nowrap; pointer-events: none; opacity: 0; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4); z-index: 50; }
@@ -129,17 +130,17 @@
         @keyframes bounceHelper { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -5px); } }
 
         /* --- NEW AUTOMATIC CONTROLS --- */
-        .controls-bar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(15, 23, 42, 0.85); padding: 12px 25px; border-radius: 50px; display: flex; justify-content: center; align-items: center; gap: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 15px 40px rgba(0,0,0,0.5); z-index: 20; backdrop-filter: blur(20px); }
+        .controls-bar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(15, 23, 42, 0.85); padding: 10px 20px; border-radius: 50px; display: flex; justify-content: center; align-items: center; gap: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 15px 40px rgba(0,0,0,0.5); z-index: 20; backdrop-filter: blur(20px); }
         
-        .mic-indicator { width: 55px; height: 55px; border-radius: 50%; background: rgba(255, 255, 255, 0.1); display: flex; justify-content: center; align-items: center; color: #cbd5e1; font-size: 20px; transition: 0.3s; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.2); }
+        .mic-indicator { width: 55px; height: 55px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); display: flex; justify-content: center; align-items: center; color: #cbd5e1; font-size: 20px; transition: 0.3s; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.1); }
         .mic-indicator:hover { background: rgba(255, 255, 255, 0.2); color: #ffffff; border-color: rgba(255, 255, 255, 0.3); }
-        .mic-indicator.active { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-color: #059669; box-shadow: 0 0 20px rgba(16, 185, 129, 0.5); }
-        .mic-indicator.active i { animation: mic-breathe 1.5s infinite alternate; }
+        .mic-indicator.active { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white; border-color: #60a5fa; box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+        .mic-indicator.active i { animation: mic-breathe 1.2s infinite alternate; }
         @keyframes mic-breathe { from { transform: scale(1); } to { transform: scale(1.15); } }
 
-        .ctrl-btn { border: none; cursor: pointer; transition: 0.3s; color: white; display: flex; justify-content: center; align-items: center; font-weight: 600; gap: 8px; }
-        .end-btn { background: #ef4444; padding: 10px 20px; border-radius: 50px; font-size: 14px; }
-        .end-btn:hover { background: #dc2626; }
+        .ctrl-btn { border: none; cursor: pointer; transition: 0.3s; color: #cbd5e1; display: flex; justify-content: center; align-items: center; font-weight: 600; gap: 8px; }
+        .end-btn { background: rgba(255, 255, 255, 0.05); padding: 12px 24px; border-radius: 50px; font-size: 14px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .end-btn:hover { background: rgba(239, 68, 68, 0.9); border-color: #ef4444; color: white; box-shadow: 0 5px 20px rgba(239, 68, 68, 0.4); transform: translateY(-2px); }
 
         /* --- EVALUATION DASHBOARD STYLES (A4 Corporate Report) --- */
         #evaluation-screen { align-items: center; justify-content: flex-start; padding: 40px 20px; overflow-y: auto; }
