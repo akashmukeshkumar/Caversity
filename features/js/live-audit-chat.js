@@ -27,6 +27,7 @@ let absoluteSilenceTimer;
 let isMicOpen = false;
 let finalAnswer = ""; // 🔥 Stores text safely even if you pause
 let silenceStrikes = 0; // 🔥 To auto-cut the call
+let globalSessionCount = 0; // 🔥 Track sessions globally to prevent bypass
 
 // 🔥 FIREBASE SETUP FOR ROOM LOCK 🔥
 const app = getApp();
@@ -81,7 +82,30 @@ onAuthStateChanged(auth, (user) => {
                     badge.style.display = 'flex';
                     countEl.innerText = sCount;
                     // Warn if low sessions
-                    countEl.style.color = sCount <= 2 ? '#ef4444' : '#38bdf8';
+                countEl.style.color = sCount <= 0 ? '#ef4444' : (sCount <= 2 ? '#f59e0b' : '#38bdf8');
+            }
+
+            globalSessionCount = sCount; // Update global state
+            
+            // 🔥 REAL-TIME BUTTON LOCK IF SESSIONS REACH 0 🔥
+            const btn = document.getElementById('start-interview-btn');
+            const statusMsg = document.getElementById('lobby-status');
+            if (sCount <= 0) {
+                if (btn) {
+                    btn.disabled = true;
+                    btn.innerText = "Sessions Exhausted";
+                    btn.style.background = "#ef4444";
+                }
+                if (statusMsg && !isInterviewActive) {
+                    statusMsg.style.color = "#ef4444";
+                    statusMsg.innerText = "⚠️ You have 0 sessions left. Please renew your access from the dashboard.";
+                }
+            } else {
+                if (btn && btn.innerText === "Sessions Exhausted") {
+                    btn.disabled = false;
+                    btn.innerText = "Join Interview Room";
+                    btn.style.background = "";
+                }
                 }
             }
         });
@@ -152,6 +176,11 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
     const firm = document.getElementById('target-firm').value;
     const cvFile = document.getElementById('cv-upload').files[0];
     const statusMsg = document.getElementById('lobby-status');
+
+    if (globalSessionCount <= 0) {
+        statusMsg.style.color = "#ef4444";
+        return statusMsg.innerText = "⚠️ You have 0 sessions left. Please renew your access from the dashboard.";
+    }
 
     if (!name) return statusMsg.innerText = "⚠️ Please enter your name.";
     if (!cvFile) return statusMsg.innerText = "⚠️ Please upload your CV (PDF).";
