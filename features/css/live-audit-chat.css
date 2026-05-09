@@ -56,7 +56,8 @@
             width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.2); color: #ffffff; outline: none; box-sizing: border-box; transition: 0.3s; font-family: 'Inter', sans-serif;
         }
         .form-group input[type="text"]:focus, .form-group select:focus { border-color: #38bdf8; background: rgba(0, 0, 0, 0.4); box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2); }
-        .form-group select option { background: #0f172a; color: #ffffff; }
+        .form-group select option { background: #1e293b; color: #ffffff; font-weight: 500; }
+        .form-group select optgroup { background: #020617; color: #38bdf8; font-weight: 800; }
         .file-input { width: 100%; padding: 10px; background: rgba(0, 0, 0, 0.2); border-radius: 10px; border: 1px dashed rgba(255, 255, 255, 0.3); color: #cbd5e1; cursor: pointer; }
         
         .primary-btn {
