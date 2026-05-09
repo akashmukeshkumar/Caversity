@@ -436,18 +436,28 @@ window.revealSurprise = function() {
     let appResources = [];
     const niceColors = ["linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%)", "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)", "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)", "linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)", "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)", "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)", "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)", "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)", "linear-gradient(135deg, #fa709a 0%, #fee140 100%)", "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)", "linear-gradient(135deg, #ff0844 0%, #ffb199 100%)", "linear-gradient(135deg, #b721ff 0%, #21d4fd 100%)", "linear-gradient(135deg, #20E2D7 0%, #F9FEA5 100%)"];
     
+    // 🔥 SAFELY DECODE BASE64 UTF-8 (Arabic Fix) 🔥
+    function decodeBase64UTF8(base64Str) {
+        const binary = atob(base64Str);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+            bytes[i] = binary.charCodeAt(i);
+        }
+        return new TextDecoder('utf-8').decode(bytes);
+    }
+
     async function loadAdhkarData() {
         try {
             // 🔥 API se data load karo aur atob se base64 decode karo 🔥
             const emoRes = await fetch('/api/get-data?file=emotion');
             if (!emoRes.ok) throw new Error("emotion data not found via API");
             const emoResult = await emoRes.json();
-            appEmotions = JSON.parse(atob(emoResult.payload));
+            appEmotions = JSON.parse(decodeBase64UTF8(emoResult.payload));
 
             const resRes = await fetch('/api/get-data?file=resource');
             if (!resRes.ok) throw new Error("resource data not found via API");
             const resResult = await resRes.json();
-            appResources = JSON.parse(atob(resResult.payload));
+            appResources = JSON.parse(decodeBase64UTF8(resResult.payload));
 
             initGrid();
         } catch (e) {
