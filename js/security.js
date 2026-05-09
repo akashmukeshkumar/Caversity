@@ -62,7 +62,7 @@ onAuthStateChanged(auth, async (user) => {
                 const subExpiry = userData.subscriptions?.[PAGE_ID];
                 if (PAGE_ID === 'mock_interview') {
                     let dStr = subExpiry;
-                    let sCount = 10;
+                    let sCount = 3;
                     if (typeof subExpiry === 'string' && subExpiry.includes(',')) {
                         let parts = subExpiry.split(',');
                         dStr = parts[0];
