@@ -25,7 +25,7 @@ const academicSubjects = [
     { id: 'caf6', name: 'CAF 6: Managerial and Financial Analysis', description: 'Strategic financial analysis and managerial decision-making tools.', price: 200, type: 'premium', url: 'subjects/caf6/index.html' },
     { id: 'caf7', name: 'CAF 7: Company Law', description: 'Corporate law principles and company governance structures.', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
     { id: 'caf8', name: 'CAF 8: Audit and Assurance', description: 'Audit methodologies and assurance services in professional practice.', price: 200, type: 'premium', url: 'audit.html' },
-    { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Get 10 complete realistic 5-minute technical and psychological interviews with a strict AI Partner.', price: 200, type: 'premium', url: 'live-audit-chat.html' },
+    { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Face a realistic 5-minute technical and psychological interview with a strict AI Partner.', price: 200, type: 'premium', url: 'live-audit-chat.html' },
     { id: 'resume', name: 'CA Resume Builder', description: 'Craft a standout, ATS-friendly resume tailored specifically for CA & ACCA students.', price: 0, type: 'free', url: 'resume.html' },
     { id: 'sanctuary', name: 'The Sanctuary', description: 'Spiritual guidance and ethical foundations for professional excellence.', price: 0, type: 'free', url: 'blueprint.html' }
 ];
@@ -68,11 +68,18 @@ onAuthStateChanged(auth, async (user) => {
                 const expiryValue = dbSubs[subId];
                 if (expiryValue && expiryValue !== false) {
                     if (subId === 'mock_interview') {
-                        // Sessions logic: Check if it's a number and greater than 0
-                        if (!isNaN(expiryValue) && Number(expiryValue) > 0) {
-                            activeSubs.push(subId);
-                        } else if (isNaN(expiryValue) && new Date(expiryValue) > today) {
-                            // Fallback if old logic (date) was used
+                        // 🔥 DUAL LOGIC: Month + Sessions (Format: "2024-12-31,10") 🔥
+                        let dStr = expiryValue;
+                        let sCount = 10; // Default sessions if only date is typed
+                        if (typeof expiryValue === 'string' && expiryValue.includes(',')) {
+                            const parts = expiryValue.split(',');
+                            dStr = parts[0];
+                            sCount = parseInt(parts[1], 10);
+                        } else if (!isNaN(expiryValue)) {
+                            sCount = Number(expiryValue);
+                            dStr = "2099-12-31"; // Never expires if only number is typed
+                        }
+                        if (new Date(dStr) > today && sCount > 0) {
                             activeSubs.push(subId);
                         }
                     } else {
@@ -238,8 +245,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
-                // 🔥 Force convert string to number, even if Firebase sends it as a string
-                appliedCouponDiscount = Number(couponData.discountValue) || Number(couponData.discount) || Number(couponData.amount) || parseInt(couponData.discountValue, 10) || 0;
+                // 🔥 BULLETPROOF COUPON EXTRACTOR 🔥
+                let discountFound = 0;
+                for (let key in couponData) {
+                    let k = key.toLowerCase();
+                    if (k.includes('discount') || k.includes('amount') || k.includes('value') || k.includes('val')) {
+                        let parsed = parseInt(couponData[key], 10);
+                        if (!isNaN(parsed) && parsed > 0) {
+                            discountFound = parsed;
+                            break;
+                        }
+                    }
+                }
+                appliedCouponDiscount = discountFound;
                 appliedCouponCode = code;
                 if (appliedCouponDiscount > 0) {
                     msg.textContent = `Coupon applied! (Rs. ${appliedCouponDiscount} off)`;
@@ -282,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const discount = subtotal - total;
         
         // GENERATE WHATSAPP MESSAGE
-        let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? '10 Sessions' : 'month';
+        let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? 'month (10 Sessions)' : 'month';
         if (isMultiSubjectMode) period = 'month';
 
         let msg = `Hello Caversity Team,\n\nI want to subscribe to:\nStudent: ${name}\n\n📚 Subjects:\n- ${selected.join('\n- ')}\n\n`;
@@ -316,7 +334,7 @@ function openSubscriptionModal() {
         multiDisplay.innerHTML = '';
         academicSubjects.filter(s => s.type === 'premium').forEach(s => {
             const isSub = currentUserProfile.subscriptions.includes(s.id);
-            const priceLabel = s.id === 'mock_interview' ? `(Rs. ${s.price} / 10 Sessions)` : `(Rs. ${s.price} / month)`;
+            const priceLabel = s.id === 'mock_interview' ? `(Rs. ${s.price} / month - 10 Sessions)` : `(Rs. ${s.price} / month)`;
             multiDisplay.innerHTML += `
                 <div class="checkbox-item">
                     <input type="checkbox" id="chk-${s.id}" value="${s.id}" ${isSub ? 'disabled' : ''}>
@@ -328,7 +346,7 @@ function openSubscriptionModal() {
         multiDisplay.style.display = 'none';
         couponContainer.style.display = 'block';
         document.getElementById('modal-subject-name').innerText = currentSubjectContext.name;
-        document.getElementById('modal-subject-price').innerText = currentSubjectContext.id === 'mock_interview' ? `Rs. ${currentSubjectContext.price} / 10 Sessions` : `Rs. ${currentSubjectContext.price} / month`;
+        document.getElementById('modal-subject-price').innerText = currentSubjectContext.id === 'mock_interview' ? `Rs. ${currentSubjectContext.price} / month (10 Sessions)` : `Rs. ${currentSubjectContext.price} / month`;
     }
 
     calculateTotal();
@@ -362,7 +380,7 @@ function calculateTotal() {
         document.getElementById('discount-line').style.display = 'none';
     }
 
-    let periodText = (currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode) ? ' / 10 Sessions' : ' / month';
+    let periodText = (currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode) ? ' / month (10 Sessions)' : ' / month';
     document.getElementById('total-amount').innerText = `Rs. ${grandTotal}${periodText}`;
     document.getElementById('total-amount').dataset.subtotal = subtotal;
     document.getElementById('total-amount').dataset.grand = grandTotal;
@@ -540,21 +558,3 @@ window.revealSurprise = function() {
         overlay.classList.remove('active');
         document.body.style.overflow = 'auto';
     }
-    window.triggerShare = function(type) {
-        const siteUrl = new URL('login.html', window.location.href).href;
-        let text = "";
-        switch(type) {
-            case 'cv':
-                text = `Elevate your professional profile with Caversity's ATS-friendly Resume Builder, designed specifically for CA and ACCA students. Create your standout resume for free today!\n\nAccess here: ${siteUrl}`;
-                break;
-            case 'qarcs':
-                text = `Discover Q-ARCS at Caversity—a groundbreaking 3D visual engine connecting corporate ethics with deep Quranic insights. A truly profound perspective awaits.\n\nExplore here: ${siteUrl}`;
-                break;
-            case 'adhkar':
-                text = `Find spiritual comfort and guidance tailored to your emotional state. Caversity's Adhkar portal provides relevant supplications to help calm the mind and soul during stressful times.\n\nFind your peace here: ${siteUrl}`;
-                break;
-        }
-        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
-        window.open(whatsappUrl, '_blank');
-    }
-})();
