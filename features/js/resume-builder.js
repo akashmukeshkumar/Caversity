@@ -327,6 +327,28 @@ document.addEventListener("DOMContentLoaded", () => {
     input.addEventListener("input", updatePreview);
   });
 
+  // 🔥 FOCUS MODE MUSIC LOGIC 🔥
+  const focusBtn = byId("focus-mode-btn");
+  const focusAudio = byId("focus-audio");
+  if (focusBtn && focusAudio) {
+    focusAudio.volume = 0.25; // 25% volume for smooth lo-fi vibe
+    focusBtn.addEventListener("click", () => {
+      if (focusAudio.paused) {
+        focusAudio.play();
+        focusBtn.style.background = "#eff6ff";
+        focusBtn.style.color = "#1d4ed8";
+        focusBtn.style.borderColor = "#3b82f6";
+        focusBtn.innerHTML = '<i class="fas fa-volume-up"></i> Playing...';
+      } else {
+        focusAudio.pause();
+        focusBtn.style.background = "rgba(255, 255, 255, 0.92)";
+        focusBtn.style.color = "#2563eb";
+        focusBtn.style.borderColor = "rgba(37, 99, 235, 0.22)";
+        focusBtn.innerHTML = '<i class="fas fa-headphones"></i> Focus Mode';
+      }
+    });
+  }
+
   setProgram("ca", byId("btn-program-ca"), true);
   setTheme("theme-modern", document.querySelector(".theme-btn.active"), true);
 });
