@@ -60,6 +60,14 @@ onAuthStateChanged(auth, async (user) => {
             // 2. PREMIUM SUBSCRIPTION CHECK (Sirf Premium Pages ke liye)
             if (PAGE_TYPE === "premium" && PAGE_ID) {
                 const subExpiry = userData.subscriptions?.[PAGE_ID];
+                
+                // 🔥 BULLETPROOF CHECK: KICK OUT if false, null, undefined, or empty string 🔥
+                if (subExpiry === false || subExpiry == null || subExpiry === "") {
+                    alert("⚠️ Access Denied! You do not have an active subscription for this premium content.");
+                    redirectTo("portal.html");
+                    return;
+                }
+
                 if (PAGE_ID === 'mock_interview') {
                     let dStr = subExpiry;
                     let sCount = 3;
@@ -72,13 +80,14 @@ onAuthStateChanged(auth, async (user) => {
                         dStr = "2099-12-31";
                     }
                     
-                    if (!subExpiry || subExpiry === false || new Date(dStr) <= new Date() || sCount <= 0) {
+                    if (new Date(dStr) <= new Date() || sCount <= 0) {
                         alert("⚠️ Access Denied! Your subscription has expired or you have 0 sessions left.");
                         redirectTo("portal.html");
                         return;
                     }
                 } else {
-                    if (!subExpiry || new Date(subExpiry) <= new Date()) {
+                    const expDate = new Date(subExpiry);
+                    if (isNaN(expDate.getTime()) || expDate <= new Date()) {
                         alert("⚠️ Access Denied! You do not have an active subscription for this subject.");
                         redirectTo("portal.html");
                         return;
