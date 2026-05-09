@@ -25,7 +25,7 @@ const academicSubjects = [
     { id: 'caf6', name: 'CAF 6: Managerial and Financial Analysis', description: 'Strategic financial analysis and managerial decision-making tools.', price: 200, type: 'premium', url: 'subjects/caf6/index.html' },
     { id: 'caf7', name: 'CAF 7: Company Law', description: 'Corporate law principles and company governance structures.', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
     { id: 'caf8', name: 'CAF 8: Audit and Assurance', description: 'Audit methodologies and assurance services in professional practice.', price: 200, type: 'premium', url: 'audit.html' },
-    { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Face a realistic 5-minute technical and psychological interview with a strict AI Partner.', price: 200, type: 'premium', url: 'live-audit-chat.html' },
+    { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Face a realistic 5-minute technical and psychological interview with a strict AI Partner.', price: 400, type: 'premium', url: 'live-audit-chat.html' },
     { id: 'resume', name: 'CA Resume Builder', description: 'Craft a standout, ATS-friendly resume tailored specifically for CA & ACCA students.', price: 0, type: 'free', url: 'resume.html' },
     { id: 'sanctuary', name: 'The Sanctuary', description: 'Spiritual guidance and ethical foundations for professional excellence.', price: 0, type: 'free', url: 'blueprint.html' }
 ];
@@ -70,7 +70,7 @@ onAuthStateChanged(auth, async (user) => {
                     if (subId === 'mock_interview') {
                         // 🔥 DUAL LOGIC: Month + Sessions (Format: "2024-12-31,10") 🔥
                         let dStr = expiryValue;
-                        let sCount = 10; // Default sessions if only date is typed
+                        let sCount = 3; // Default sessions if only date is typed
                         if (typeof expiryValue === 'string' && expiryValue.includes(',')) {
                             const parts = expiryValue.split(',');
                             dStr = parts[0];
@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const discount = subtotal - total;
         
         // GENERATE WHATSAPP MESSAGE
-        let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? 'month (10 Sessions)' : 'month';
+        let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? 'month (3 Sessions)' : 'month';
         if (isMultiSubjectMode) period = 'month';
 
         let msg = `Hello Caversity Team, 👋\n\nI would like to request premium access. Here are my details:\n\n`;
@@ -350,7 +350,7 @@ function openSubscriptionModal() {
         multiDisplay.innerHTML = '';
         academicSubjects.filter(s => s.type === 'premium').forEach(s => {
             const isSub = currentUserProfile.subscriptions.includes(s.id);
-            const priceLabel = s.id === 'mock_interview' ? `(Rs. ${s.price} / month - 10 Sessions)` : `(Rs. ${s.price} / month)`;
+            const priceLabel = s.id === 'mock_interview' ? `(Rs. ${s.price} / month - 3 Sessions)` : `(Rs. ${s.price} / month)`;
             multiDisplay.innerHTML += `
                 <div class="checkbox-item">
                     <input type="checkbox" id="chk-${s.id}" value="${s.id}" ${isSub ? 'disabled' : ''}>
@@ -362,7 +362,7 @@ function openSubscriptionModal() {
         multiDisplay.style.display = 'none';
         couponContainer.style.display = 'block';
         document.getElementById('modal-subject-name').innerText = currentSubjectContext.name;
-        document.getElementById('modal-subject-price').innerText = currentSubjectContext.id === 'mock_interview' ? `Rs. ${currentSubjectContext.price} / month (10 Sessions)` : `Rs. ${currentSubjectContext.price} / month`;
+        document.getElementById('modal-subject-price').innerText = currentSubjectContext.id === 'mock_interview' ? `Rs. ${currentSubjectContext.price} / month (3 Sessions)` : `Rs. ${currentSubjectContext.price} / month`;
     }
 
     calculateTotal();
@@ -375,7 +375,11 @@ function calculateTotal() {
 
     if (isMultiSubjectMode) {
         const checked = document.getElementById('subject-checkboxes').querySelectorAll('input:checked');
-        subtotal = checked.length * 200;
+        subtotal = 0;
+        checked.forEach(chk => {
+            const subj = academicSubjects.find(s => s.id === chk.value);
+            if (subj) subtotal += subj.price;
+        });
         if (checked.length >= 3) bundleDiscount = 100;
     } else {
         subtotal = currentSubjectContext ? currentSubjectContext.price : 0;
@@ -396,7 +400,7 @@ function calculateTotal() {
         document.getElementById('discount-line').style.display = 'none';
     }
 
-    let periodText = (currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode) ? ' / 10 Sessions' : ' / month';
+    let periodText = (currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode) ? ' / 3 Sessions' : ' / month';
     document.getElementById('total-amount').innerText = `Rs. ${grandTotal}${periodText}`;
     document.getElementById('total-amount').dataset.subtotal = subtotal;
     document.getElementById('total-amount').dataset.grand = grandTotal;
