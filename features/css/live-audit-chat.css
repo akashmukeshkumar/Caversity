@@ -119,6 +119,12 @@
         .send-btn { background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 10px 25px; border-radius: 50px; font-size: 14px; box-shadow: 0 4px 15px rgba(16,185,129,0.3); font-weight: 700; color: white; }
         .send-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,0.4); }
 
+        /* --- Send Helper Tooltip --- */
+        .send-helper { position: absolute; top: -40px; left: 50%; transform: translateX(-50%); background: #10b981; color: white; padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; white-space: nowrap; pointer-events: none; opacity: 0; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4); z-index: 50; }
+        .send-helper::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: #10b981 transparent transparent transparent; }
+        .send-helper.show { opacity: 1; top: -50px; animation: bounceHelper 1.5s infinite; }
+        @keyframes bounceHelper { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -5px); } }
+
         /* --- NEW AUTOMATIC CONTROLS --- */
         .controls-bar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(15, 23, 42, 0.85); padding: 12px 25px; border-radius: 50px; display: flex; justify-content: center; align-items: center; gap: 15px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 20; backdrop-filter: blur(20px); }
         
