@@ -60,10 +60,18 @@ onAuthStateChanged(auth, async (user) => {
             // 2. PREMIUM SUBSCRIPTION CHECK (Sirf Premium Pages ke liye)
             if (PAGE_TYPE === "premium" && PAGE_ID) {
                 const subExpiry = userData.subscriptions?.[PAGE_ID];
-                if (!subExpiry || new Date(subExpiry) <= new Date()) {
-                    alert("⚠️ Access Denied! You do not have an active subscription for this subject.");
-                    redirectTo("portal.html");
-                    return;
+                if (PAGE_ID === 'mock_interview') {
+                    if (subExpiry === undefined || subExpiry === false || (!isNaN(subExpiry) && Number(subExpiry) <= 0)) {
+                        alert("⚠️ Access Denied! You do not have any active sessions left for the Interview Simulator.");
+                        redirectTo("portal.html");
+                        return;
+                    }
+                } else {
+                    if (!subExpiry || new Date(subExpiry) <= new Date()) {
+                        alert("⚠️ Access Denied! You do not have an active subscription for this subject.");
+                        redirectTo("portal.html");
+                        return;
+                    }
                 }
             }
 
