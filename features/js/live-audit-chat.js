@@ -11,8 +11,8 @@ const GROQ_API_KEYS = [
     "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",
     "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",
     "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",
-    "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",
-    "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"
+    "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",
+    "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"
 ];
 let currentKeyIndex = 0;
 
