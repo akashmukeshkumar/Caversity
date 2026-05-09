@@ -22,7 +22,8 @@ let interviewMemory = [];
 let isInterviewActive = false;
 let timerInterval;
 let secondsElapsed = 0;
-let silenceTimer;
+let speechPauseTimer;
+let absoluteSilenceTimer;
 let isMicOpen = false;
 let finalAnswer = ""; // 🔥 Stores text safely even if you pause
 let silenceStrikes = 0; // 🔥 To auto-cut the call
@@ -200,30 +201,27 @@ function startInterviewRoom() {
     triggerPartnerGreeting();
 }
 
-// 🔥 SILENCE HANDLER 🔥
-async function handleSilence() {
+// 🔥 ABSOLUTE SILENCE HANDLER 🔥
+async function handleAbsoluteSilence() {
     if (!isMicOpen) return;
     
-    if (finalAnswer.trim().length > 2) {
-        // If user spoke but forgot to click send, auto-send it
-        sendUserResponse();
+    silenceStrikes++;
+    isMicOpen = false;
+    if(recognition) recognition.stop();
+    updateMicUI(false);
+    
+    const helper = document.getElementById('mic-helper');
+    if(helper) helper.classList.remove('show');
+    
+    if (silenceStrikes >= 2) {
+        document.getElementById('subtitle-box').innerText = "Ending interview due to no response...";
+        speakResponse("You are not responding. We will wrap up the interview here.");
+        setTimeout(endInterview, 4000);
     } else {
-        silenceStrikes++;
-        isMicOpen = false;
-        if(recognition) recognition.stop();
-        updateMicUI(false);
-        document.getElementById('send-response-btn').style.display = 'none';
-        
-        if (silenceStrikes >= 2) {
-            document.getElementById('subtitle-box').innerText = "Ending interview due to no response...";
-            speakResponse("You are not responding. We will wrap up the interview here.");
-            setTimeout(endInterview, 4000);
-        } else {
-            document.getElementById('subtitle-box').innerText = "Partner is waiting...";
-            interviewMemory.push({ "role": "system", "content": "[Candidate was silent for 20 seconds. Ask them if they are still there.]" });
-            const reply = await askGroqWithFallback();
-                setTimeout(() => speakResponse(reply), 1000);
-        }
+        document.getElementById('subtitle-box').innerText = "Partner is waiting...";
+        interviewMemory.push({ "role": "system", "content": "[Candidate was silent for 20 seconds. Ask them if they are still there.]" });
+        const reply = await askGroqWithFallback();
+        setTimeout(() => speakResponse(reply), 1000);
     }
 }
 
@@ -239,7 +237,8 @@ window.addEventListener('beforeunload', () => {
 async function endInterview() {
     isInterviewActive = false;
     clearInterval(timerInterval);
-    clearTimeout(silenceTimer);
+    clearTimeout(absoluteSilenceTimer);
+    clearTimeout(speechPauseTimer);
     synth.cancel(); // Stop speaking
     const stream = document.getElementById('user-webcam').srcObject;
     if(stream) stream.getTracks().forEach(track => track.stop());
@@ -471,11 +470,11 @@ function startAutoListening() {
 
     isMicOpen = true;
     finalAnswer = ""; // Reset answer text
-    document.getElementById('send-response-btn').style.display = 'inline-flex';
     document.getElementById('subtitle-box').innerText = "Listening... (Click 'Send' when done)";
 
-    const helper = document.getElementById('send-helper');
+    const helper = document.getElementById('mic-helper');
     if(helper) {
+        helper.innerText = "Click Mic to Send";
         helper.classList.add('show');
         setTimeout(() => helper.classList.remove('show'), 5000); // Hide after 5 seconds
     }
@@ -486,27 +485,36 @@ function startAutoListening() {
         if(recognition) recognition.start();
     } catch (e) { /* Ignore if already started */ }
 
-    clearTimeout(silenceTimer);
-    silenceTimer = setTimeout(handleSilence, 20000); // Wait 20 seconds for activity
+    clearTimeout(absoluteSilenceTimer);
+    clearTimeout(speechPauseTimer);
+    absoluteSilenceTimer = setTimeout(handleAbsoluteSilence, 20000); // Wait 20 seconds for activity
 }
 
-// 🔥 MANUAL SEND BUTTON LOGIC 🔥
-document.getElementById('send-response-btn')?.addEventListener('click', sendUserResponse);
+// 🔥 CLICK MIC TO SEND LOGIC 🔥
+document.getElementById('auto-mic-indicator')?.addEventListener('click', () => {
+    if (isMicOpen) {
+        const currentSub = document.getElementById('subtitle-box').innerText;
+        if (finalAnswer.trim().length > 1 || currentSub.length > 5) {
+            if (currentSub !== "Listening... (Speak naturally)" && !currentSub.includes("Please say")) {
+                finalAnswer = currentSub;
+            }
+            sendUserResponse();
+        } else {
+            document.getElementById('subtitle-box').innerText = "Please say something before sending.";
+        }
+    }
+});
 
 async function sendUserResponse() {
     if (!isMicOpen) return;
-    if (finalAnswer.trim().length < 2) {
-        document.getElementById('subtitle-box').innerText = "Please say something before sending.";
-        return;
-    }
 
     isMicOpen = false;
-    clearTimeout(silenceTimer);
+    clearTimeout(absoluteSilenceTimer);
+    clearTimeout(speechPauseTimer);
     try { recognition.stop(); } catch(e){}
     updateMicUI(false);
-    document.getElementById('send-response-btn').style.display = 'none';
     
-    const helper = document.getElementById('send-helper');
+    const helper = document.getElementById('mic-helper');
     if(helper) helper.classList.remove('show');
 
     silenceStrikes = 0; // Reset strikes since user responded
@@ -550,7 +558,23 @@ if(recognition) {
                 interimTranscript += event.results[i][0].transcript;
             }
         }
-        document.getElementById('subtitle-box').innerText = finalAnswer + interimTranscript;
+        
+        let currentText = finalAnswer + interimTranscript;
+        document.getElementById('subtitle-box').innerText = currentText;
+        
+        if (currentText.trim().length > 0) {
+            clearTimeout(absoluteSilenceTimer);
+            clearTimeout(speechPauseTimer);
+            
+            speechPauseTimer = setTimeout(() => {
+                if (currentText.trim().length > 2) {
+                    finalAnswer = currentText; // Ensure we get everything
+                    sendUserResponse();
+                } else {
+                    absoluteSilenceTimer = setTimeout(handleAbsoluteSilence, 20000);
+                }
+            }, 4000); // 4-second pause to auto-send
+        }
     };
 } else {
     alert("Your browser does not support Speech Recognition. Please use Chrome.");
