@@ -228,14 +228,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (allowedSubjects !== "all") {
                     // Agar Firebase mein array ke bajaye string di hai, toh usay array bana lo
                     if (typeof allowedSubjects === 'string') {
-                        allowedSubjects = allowedSubjects.split(',').map(s => s.trim());
+                        allowedSubjects = allowedSubjects.split(',').map(s => s.trim().toLowerCase());
+                    } else if (Array.isArray(allowedSubjects)) {
+                        allowedSubjects = allowedSubjects.map(s => s.toLowerCase());
                     }
                     let isValid = true;
                     if (isMultiSubjectMode) {
                         const checked = document.getElementById('subject-checkboxes').querySelectorAll('input:checked');
-                        checked.forEach(chk => { if (!allowedSubjects.includes(chk.value)) isValid = false; });
+                        checked.forEach(chk => { if (!allowedSubjects.includes(chk.value.toLowerCase())) isValid = false; });
                     } else {
-                        if (!allowedSubjects.includes(currentSubjectContext.id)) isValid = false;
+                        if (!allowedSubjects.includes(currentSubjectContext.id.toLowerCase())) isValid = false;
                     }
                     
                     if (!isValid) {
