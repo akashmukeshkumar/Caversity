@@ -577,21 +577,3 @@ window.revealSurprise = function() {
         window.open(whatsappUrl, '_blank');
     }
 })();
-    window.triggerShare = function(type) {
-        const siteUrl = new URL('login.html', window.location.href).href;
-        let text = "";
-        switch(type) {
-            case 'cv':
-                text = `Elevate your professional profile with Caversity's ATS-friendly Resume Builder, designed specifically for CA and ACCA students. Create your standout resume for free today!\n\nAccess here: ${siteUrl}`;
-                break;
-            case 'qarcs':
-                text = `Discover Q-ARCS at Caversity—a groundbreaking 3D visual engine connecting corporate ethics with deep Quranic insights. A truly profound perspective awaits.\n\nExplore here: ${siteUrl}`;
-                break;
-            case 'adhkar':
-                text = `Find spiritual comfort and guidance tailored to your emotional state. Caversity's Adhkar portal provides relevant supplications to help calm the mind and soul during stressful times.\n\nFind your peace here: ${siteUrl}`;
-                break;
-        }
-        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
-        window.open(whatsappUrl, '_blank');
-    }
-})();
