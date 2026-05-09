@@ -114,15 +114,12 @@
                 <i class="fas fa-file-alt"></i> Transcript
             </button>
 
-            <!-- Auto Listening Indicator -->
-            <div id="auto-mic-indicator" class="mic-indicator" title="Mic Status">
-                <i class="fas fa-microphone-slash"></i>
-            </div>
-            
-            <!-- NEW: Manual Send Button -->
+            <!-- Clickable Mic Indicator -->
             <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-                <div id="send-helper" class="send-helper">Click here after speaking</div>
-                <button id="send-response-btn" class="ctrl-btn send-btn" style="display:none;" title="Send your answer"><i class="fas fa-paper-plane"></i> Send</button>
+                <div id="mic-helper" class="send-helper">Click Mic to Send</div>
+                <div id="auto-mic-indicator" class="mic-indicator" title="Click to send your response">
+                    <i class="fas fa-microphone-slash"></i>
+                </div>
             </div>
 
             <button id="end-btn" class="ctrl-btn end-btn" onclick="endInterview()" title="Leave Interview"><i class="fas fa-sign-out-alt"></i> End</button>
