@@ -1,8 +1,8 @@
         /* 🔥 INTERVIEW SIMULATOR UI 🔥 */
         body {
             margin: 0; padding: 0; font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%); 
-            color: white;
+            background: #f8fafc; 
+            color: #0f172a;
             height: 100vh; display: flex; justify-content: center; align-items: center;
         }
 
@@ -18,32 +18,31 @@
 
         /* --- SLEEK EXIT LOBBY BUTTON --- */
         .exit-lobby-btn {
-            position: absolute; top: 30px; left: 30px; color: #94a3b8; text-decoration: none; 
-            font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; 
-            padding: 8px 16px; background: rgba(255,255,255,0.05); border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
+            position: fixed; top: 30px; left: 30px; color: #475569; text-decoration: none; 
+            font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; 
+            padding: 10px 20px; background: #ffffff; border-radius: 50px;
+            border: 1px solid #e2e8f0; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.05); z-index: 100000;
         }
-        .exit-lobby-btn:hover { color: #ffffff; background: rgba(255,255,255,0.15); transform: translateX(-3px); }
+        .exit-lobby-btn:hover { color: #2563eb; background: #f8fafc; border-color: #cbd5e1; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(37, 99, 235, 0.1); }
 
         /* --- LOBBY STYLES --- */
         #lobby-screen { justify-content: center; align-items: center; }
         .lobby-card {
-            background: rgba(30, 41, 59, 0.7); padding: 40px; border-radius: 20px; width: 100%; max-width: 450px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3); border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            background: #ffffff; padding: 40px; border-radius: 20px; width: 100%; max-width: 450px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;
         }
         .lobby-header { text-align: center; margin-bottom: 30px; }
         .lobby-header i { font-size: 40px; color: #3b82f6; margin-bottom: 10px; }
-        .lobby-header h2 { margin: 0 0 5px 0; font-size: 24px; }
-        .lobby-header p { margin: 0; color: #94a3b8; font-size: 14px; }
+        .lobby-header h2 { margin: 0 0 5px 0; font-size: 24px; color: #0f172a; font-weight: 800; }
+        .lobby-header p { margin: 0; color: #64748b; font-size: 14px; }
 
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #cbd5e1; font-weight: 600; }
         .form-group input[type="text"], .form-group select {
-            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white; outline: none; box-sizing: border-box; transition: 0.3s;
+            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #cbd5e1; background: #f8fafc; color: #0f172a; outline: none; box-sizing: border-box; transition: 0.3s; font-family: 'Inter', sans-serif;
         }
-        .form-group input[type="text"]:focus, .form-group select:focus { border-color: #3b82f6; background: rgba(0,0,0,0.4); }
-        .file-input { width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 10px; border: 1px dashed rgba(255,255,255,0.2); color: #94a3b8; cursor: pointer; }
+        .form-group input[type="text"]:focus, .form-group select:focus { border-color: #2563eb; background: #ffffff; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+        .file-input { width: 100%; padding: 10px; background: #f8fafc; border-radius: 10px; border: 1px dashed #94a3b8; color: #475569; cursor: pointer; }
         
         .primary-btn {
             width: 100%; padding: 14px; border-radius: 10px; border: none; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: white; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
@@ -54,20 +53,20 @@
         .status-msg { text-align: center; font-size: 13px; margin-top: 15px; color: #facc15; font-weight: 500; }
 
         /* --- INTERVIEW ROOM STYLES --- */
-        #interview-screen { background: rgba(15, 23, 42, 0.6); border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(20px); box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+        #interview-screen { background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 25px 60px rgba(0,0,0,0.05); }
         
-        .room-branding { position: absolute; top: 15px; left: 25px; display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; z-index: 100; color: white; }
+        .room-branding { position: absolute; top: 15px; left: 25px; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; z-index: 100; color: #1e3a8a; }
         .room-branding svg { width: 30px; height: 30px; }
         
-        .interview-header { padding: 20px 25px; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.2); position: relative; }
-        .timer { position: absolute; right: 25px; font-family: monospace; font-size: 16px; color: #ef4444; font-weight: bold; display: flex; align-items: center; gap: 8px; background: rgba(239, 68, 68, 0.1); padding: 5px 12px; border-radius: 50px; border: 1px solid rgba(239, 68, 68, 0.2); }
+        .interview-header { padding: 20px 25px; display: flex; justify-content: center; align-items: center; background: #f8fafc; border-bottom: 1px solid #e2e8f0; position: relative; }
+        .timer { position: absolute; right: 25px; font-family: monospace; font-size: 16px; color: #ef4444; font-weight: bold; display: flex; align-items: center; gap: 8px; background: #fee2e2; padding: 5px 12px; border-radius: 50px; border: 1px solid #fca5a5; }
         .pulse-rec { width: 10px; height: 10px; background: #ef4444; border-radius: 50%; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
-        .interview-header h2 { margin: 0; font-size: 16px; color: #cbd5e1; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+        .interview-header h2 { margin: 0; font-size: 16px; color: #334155; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
         .exit-btn { background: #334155; border: none; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer; }
 
         .video-grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; padding-bottom: 100px; }
-        .video-box { background: rgba(0,0,0,0.4); border-radius: 16px; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+        .video-box { background: #f1f5f9; border-radius: 16px; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 1px solid #e2e8f0; }
         
         .ai-video img { width: 140px; height: 140px; border-radius: 50%; border: 3px solid #3b82f6; object-fit: cover; }
         .ai-speaking img { box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); animation: speak-pulse 1s infinite alternate; }
@@ -76,24 +75,24 @@
         .user-video video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
         
         .face-tracker-overlay {
-            position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); color: #e2e8f0;
-            padding: 5px 12px; border-radius: 20px; font-size: 11px; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px);
-            display: flex; align-items: center; gap: 5px;
+            position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.9); color: #10b981;
+            padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; border: 1px solid #10b981; 
+            display: flex; align-items: center; gap: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        .name-tag { position: absolute; bottom: 15px; left: 15px; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); }
+        .name-tag { position: absolute; bottom: 15px; left: 15px; background: rgba(255,255,255,0.9); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; border: 1px solid #e2e8f0; color: #0f172a; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
 
         .subtitle-box {
             position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%);
-            background: rgba(0,0,0,0.7); color: #e2e8f0; text-align: center; padding: 12px 30px;
-            font-size: 15px; font-weight: 500; border-radius: 50px; backdrop-filter: blur(10px);
-            max-width: 80%; z-index: 10; border: 1px solid rgba(255,255,255,0.05);
+            background: #ffffff; color: #0f172a; text-align: center; padding: 12px 30px;
+            font-size: 15px; font-weight: 600; border-radius: 50px; 
+            max-width: 80%; z-index: 10; border: 1px solid #e2e8f0; box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
         /* --- 🔥 TRANSCRIPT SIDEBAR STYLES 🔥 --- */
         .transcript-sidebar {
             position: absolute; top: 0; left: 0; width: 340px; height: 100%;
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px);
             border-right: 1px solid rgba(0,0,0,0.1); z-index: 150;
             transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; flex-direction: column; box-shadow: 10px 0 30px rgba(0,0,0,0.15);
@@ -113,8 +112,8 @@
         .ai-msg { background: #f1f5f9; color: #0f172a; align-self: flex-start; border-bottom-left-radius: 2px; }
         .user-msg { background: #3b82f6; color: #ffffff; align-self: flex-end; border-bottom-right-radius: 2px; }
         
-        .transcript-btn { background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 50px; font-size: 14px; }
-        .transcript-btn:hover { background: rgba(59, 130, 246, 0.5); }
+        .transcript-btn { background: #f8fafc; color: #475569; padding: 10px 20px; border-radius: 50px; font-size: 14px; border: 1px solid #e2e8f0; }
+        .transcript-btn:hover { background: #f1f5f9; color: #2563eb; border-color: #cbd5e1; }
         
         /* --- Send Helper Tooltip --- */
         .send-helper { position: absolute; top: -40px; left: 50%; transform: translateX(-50%); background: #10b981; color: white; padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; white-space: nowrap; pointer-events: none; opacity: 0; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4); z-index: 50; }
@@ -123,10 +122,10 @@
         @keyframes bounceHelper { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -5px); } }
 
         /* --- NEW AUTOMATIC CONTROLS --- */
-        .controls-bar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(15, 23, 42, 0.85); padding: 12px 25px; border-radius: 50px; display: flex; justify-content: center; align-items: center; gap: 15px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 20; backdrop-filter: blur(20px); }
+        .controls-bar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: #ffffff; padding: 12px 25px; border-radius: 50px; display: flex; justify-content: center; align-items: center; gap: 15px; border: 1px solid #e2e8f0; box-shadow: 0 15px 40px rgba(0,0,0,0.1); z-index: 20; }
         
-        .mic-indicator { width: 55px; height: 55px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; justify-content: center; align-items: center; color: #64748b; font-size: 20px; transition: 0.3s; cursor: pointer; }
-        .mic-indicator:hover { background: rgba(255,255,255,0.2); }
+        .mic-indicator { width: 55px; height: 55px; border-radius: 50%; background: #f1f5f9; display: flex; justify-content: center; align-items: center; color: #64748b; font-size: 20px; transition: 0.3s; cursor: pointer; border: 1px solid #e2e8f0; }
+        .mic-indicator:hover { background: #e2e8f0; color: #334155; }
         .mic-indicator.active { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; box-shadow: 0 0 20px rgba(16, 185, 129, 0.5); }
         .mic-indicator.active i { animation: mic-breathe 1.5s infinite alternate; }
         @keyframes mic-breathe { from { transform: scale(1); } to { transform: scale(1.15); } }
@@ -154,7 +153,7 @@
 
         /* Background Caversity Watermark */
         .official-paper::before {
-            content: 'CAVERSITY AI';
+            content: 'CAVERSITY';
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-45deg);
@@ -202,14 +201,4 @@
             .official-paper { padding: 40px 20px; min-height: auto; }
             .paper-title h2 { font-size: 22px; }
             .score-value { font-size: 36px; }
-        }
-
-        /* 🔥 PRINT MODE FOR PDF DOWNLOAD 🔥 */
-        @media print {
-            body { background: white !important; }
-            .eval-actions, .screen-container:not(#evaluation-screen) { display: none !important; }
-            #evaluation-screen { display: block !important; padding: 0 !important; overflow: visible !important; height: auto !important; }
-            .official-paper { box-shadow: none !important; border: none !important; max-width: 100% !important; padding: 20px !important; min-height: auto !important; background-image: none !important; border-top: 10px solid #1e40af !important; }
-            .official-paper::before { display: none !important; }
-            .score-box, .feedback-box { box-shadow: none !important; }
         }
