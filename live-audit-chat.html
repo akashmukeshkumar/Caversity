@@ -70,10 +70,28 @@
 
     <!-- 🎥 INTERVIEW ROOM SCREEN -->
     <div id="interview-screen" class="screen-container">
+        
+        <!-- 🔥 Caversity Branding Top Left 🔥 -->
+        <div class="room-branding">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30" cy="30" r="28" fill="url(#logoGradient)" stroke="#ffffff" stroke-width="2"/>
+                <text x="30" y="38" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">C</text>
+            </svg>
+            <span>Caversity AI</span>
+        </div>
+
+        <!-- 🔥 TRANSCRIPT SIDEBAR 🔥 -->
+        <div id="transcript-sidebar" class="transcript-sidebar">
+            <div class="ts-header">
+                <h3><i class="fas fa-history"></i> Live Transcript</h3>
+                <button id="close-transcript-btn" class="close-ts-btn">&times;</button>
+            </div>
+            <div id="ts-content" class="ts-content"></div>
+        </div>
+
         <div class="interview-header">
             <div class="timer"><span class="pulse-rec"></span> <span id="call-timer">00:00</span></div>
-            <h2>Live Assessment</h2>
-            <button class="exit-btn" onclick="endInterview()"><i class="fas fa-times"></i> Leave</button>
+            <h2>Virtual Assessment</h2>
         </div>
 
         <div class="video-grid">
@@ -83,17 +101,25 @@
             </div>
             <div class="video-box user-video">
                 <video id="user-webcam" autoplay muted playsinline></video>
-                <div class="face-tracker-overlay" id="tracker-overlay"><i class="fas fa-expand-arrows-alt"></i> Face Tracking Active</div>
+                <div class="face-tracker-overlay" id="tracker-overlay"><i class="fas fa-shield-alt"></i> Secure Session</div>
                 <div class="name-tag">You</div>
             </div>
         </div>
 
         <div class="subtitle-box" id="subtitle-box">System is analyzing your profile...</div>
-        <div class="mic-hint" id="mic-hint">Click the Mic to speak, click again to send.</div>
 
         <div class="controls-bar">
-            <button id="mic-btn" class="ctrl-btn mic-btn" title="Toggle Microphone"><i class="fas fa-microphone-slash"></i></button>
-            <button id="end-btn" class="ctrl-btn end-btn" onclick="endInterview()" title="Leave Interview"><i class="fas fa-phone-slash"></i></button>
+            <!-- Transcript Toggle -->
+            <button id="transcript-toggle-btn" class="ctrl-btn transcript-btn" title="View Transcript">
+                <i class="fas fa-file-alt"></i> Transcript
+            </button>
+
+            <!-- Auto Listening Indicator -->
+            <div id="auto-mic-indicator" class="mic-indicator" title="Mic Status">
+                <i class="fas fa-microphone-slash"></i>
+            </div>
+            
+            <button id="end-btn" class="ctrl-btn end-btn" onclick="endInterview()" title="Leave Interview"><i class="fas fa-sign-out-alt"></i> End</button>
         </div>
     </div>
 
