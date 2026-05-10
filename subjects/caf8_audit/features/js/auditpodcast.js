@@ -1,40 +1,3 @@
-        let PODCAST_DATA = []; // This will store our secure data
-
-        // This function fetches data from the backend and builds the podcast list
-        async function loadPodcasts() {
-            const listContainer = document.getElementById('podcast-list-container');
-            if (!listContainer) return;
-        
-            try {
-                const res = await fetch('/api/auditpodcast', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'get_podcast_data' })
-                });
-                if (!res.ok) throw new Error("API Limit");
-                PODCAST_DATA = await res.json();
-        
-                listContainer.innerHTML = ''; // Clear loading state
-                PODCAST_DATA.forEach((podcast, index) => {
-                    const card = document.createElement('div');
-                    card.className = 'podcast-card';
-                    card.innerHTML = `
-                        <div class="card-play-icon"><i class="fas fa-play"></i></div>
-                        <div class="card-info">
-                            <div class="card-title">${podcast.title}</div>
-                            <div class="card-subtitle">${podcast.subtitle}</div>
-                        </div>
-                        <div class="card-duration">${podcast.duration}</div>
-                    `;
-                    card.onclick = () => openTheater(index); // Pass index to the player
-                    listContainer.appendChild(card);
-                });
-        
-            } catch (e) {
-                listContainer.innerHTML = '<p style="color:red; text-align:center; padding: 40px;">Failed to load podcast library. Please check API connection.</p>';
-            }
-        }
-
         const audio = document.getElementById('main-audio');
         const overlay = document.getElementById('theater-overlay');
         const playBtn = document.getElementById('t-play-btn');
@@ -52,10 +15,7 @@
         let audioContext, analyser, source;
         let isAudioSetup = false;
 
-        function openTheater(podcastIndex) {
-            const podcast = PODCAST_DATA[podcastIndex];
-            if (!podcast) return;
-
+        function openTheater(audioUrl, title, sub) {
             if(!isAudioSetup) {
                 setupAudioVisualizer();
                 isAudioSetup = true;
@@ -66,12 +26,12 @@
             spotlight.classList.remove('broadcast-live');
             canvas.classList.remove('broadcast-live');
 
-            document.getElementById('t-title').innerText = podcast.title;
-            document.getElementById('t-sub').innerText = podcast.subtitle;
+            document.getElementById('t-title').innerText = title;
+            document.getElementById('t-sub').innerText = sub;
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
 
-            audio.src = podcast.audioUrl;
+            audio.src = audioUrl;
             audio.play().catch(e => console.log("Play prevented.", e));
             isPlaying = true;
             updatePlayBtn();
@@ -210,8 +170,4 @@
             isPlaying = false;
             updatePlayBtn();
         });
-
-        // Load everything when the page is ready
-        document.addEventListener('DOMContentLoaded', loadPodcasts);
-    
     
