@@ -61,15 +61,13 @@
             treemap = d3.tree().nodeSize([55, 420]);
             root = d3.hierarchy(chapter.treeData, d => d.children);
             root.x0 = height / 2; root.y0 = 0;
-            
             isAllExpanded = false;
             root.children.forEach(collapse);
-            
             // 🔥 Center the map properly
             const initialPos = d3.zoomIdentity.translate(window.innerWidth/4, height/2.2).scale(0.6);
             svg.transition().duration(1000).call(zoom.transform, initialPos);
             update(root);
-        }
+    }
 
         function collapse(d) { 
             if(d.children) { d._children = d.children; d._children.forEach(collapse); d.children = null; } 
@@ -132,4 +130,3 @@
         d3.select("#zoom-out").on("click", () => svg.transition().duration(400).call(zoom.scaleBy, 0.7));
 
         loadExplorer();
-    
