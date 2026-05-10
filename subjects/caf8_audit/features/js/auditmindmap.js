@@ -30,7 +30,10 @@
                     body: JSON.stringify({ action: 'get_mindmaps' })
                 });
                 
-                if (!res.ok) throw new Error("API Limit");
+                if (!res.ok) {
+                    const errData = await res.json();
+                    throw new Error(errData.details || "API Crashed (500)");
+                }
                 const data = await res.json();
 
                 const list = document.getElementById('chapter-list');
@@ -47,7 +50,10 @@
                     list.appendChild(btn);
                     if(idx === 0) renderMindmap(data[key], btn);
                 });
-            } catch (e) { alert("Check mindmaps.json file structure!"); }
+            } catch (e) { 
+                console.error("Mindmap Load Error:", e);
+                alert("Mindmap Error: " + e.message); 
+            }
         }
 
         function renderMindmap(chapter, btn) {
