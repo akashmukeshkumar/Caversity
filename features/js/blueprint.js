@@ -237,16 +237,6 @@ async function toggleTafsirLang() {
         box.innerHTML = '<div class="text-center text-sky-400 py-4"><i class="fas fa-circle-notch fa-spin"></i> Fetching Urdu Tafsir...</div>';
         
         try {
-        const res = await fetch('/api/blueprint', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'get_tafsir', verseKey: verseKey, lang: 'en' })
-        });
-            const res = await fetch('/api/blueprint', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action: 'get_translation', verseKey: currentVerseKey, lang: 'ur' })
-            });
             const res = await fetch('/api/blueprint', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
