@@ -6,15 +6,7 @@ import { getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.j
 import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// 1. 🔥 MULTIPLE API KEYS (FALLBACK SYSTEM) 🔥
-const GROQ_API_KEYS = [
-    "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",
-    "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",
-    "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",
-    "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",
-    "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"
-];
-let currentKeyIndex = 0;
+// API Keys and System Prompts are now securely hosted in the Vercel Backend (/api/live-audit-chat.js)
 
 // 2. STATE VARIABLES
 let candidateData = { name: "", firm: "", cvText: "" };
@@ -139,35 +131,14 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs
 
 // 🔥 PRE-FLIGHT API CHECK (SMART JUGAR) 🔥
 async function checkPartnerAvailability() {
-    // Reset index if we previously exhausted all keys, to allow retrying
-    if (currentKeyIndex >= GROQ_API_KEYS.length) currentKeyIndex = 0;
-    let attempts = 0;
-
-    while (currentKeyIndex < GROQ_API_KEYS.length && attempts < GROQ_API_KEYS.length) {
-        try {
-            const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${GROQ_API_KEYS[currentKeyIndex]}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    model: "llama-3.3-70b-versatile",
-                    messages: [{"role": "system", "content": "ping"}],
-                    max_tokens: 1
-                })
-            });
-
-            if (response.ok) return true; // Partner is free!
-            
-            currentKeyIndex++;
-            attempts++;
-        } catch (e) {
-            currentKeyIndex++;
-            attempts++;
-        }
-    }
-    if (currentKeyIndex >= GROQ_API_KEYS.length) currentKeyIndex = 0;
+    try {
+        const response = await fetch("/api/live-audit-chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "ping" })
+        });
+        if (response.ok) return true;
+    } catch(e) {}
     return false; // All keys hit limit
 }
 
@@ -448,29 +419,9 @@ window.endInterview = endInterview; // Export for HTML onclick
 // 📊 EVALUATION REPORT ENGINE
 // ==========================================
 async function generateEvaluationReport() {
-    const evalPrompt = `
-    Based on the interview transcript above, evaluate the candidate and generate a final report.
-
-    GRADING CRITERIA:
-    1. technical_score (0-100): Evaluate the accuracy, depth, and relevance of their answers regarding core CAF subjects (IFRS, Audit/ISA, Tax, CMA). Did they apply the right concepts to the scenarios?
-    2. confidence_score (0-100): Evaluate their communication style, professionalism, and ability to handle pressure. Deduct points for excessive hesitation, extremely short/vague answers, or unprofessional tone.
-    
-    CRITICAL PENALTY RULE: 
-    If the candidate remained completely silent, gave less than 2 meaningful responses, or abandoned the interview early, both scores MUST be severely penalized (between 5 and 15), and the verdict MUST be "REJECTED".
-
-    Return ONLY a raw valid JSON object with no markdown formatting or backticks. Calculate the scores dynamically based on the actual transcript. Use this exact structure:
-    {
-        "technical_score": <calculated_number_0_to_100>,
-        "confidence_score": <calculated_number_0_to_100>,
-        "overall_verdict": "<HIRED, SHORTLISTED, REVIEW NEEDED, or REJECTED>",
-        "feedback": "<Detailed paragraph explaining the scores, strengths, and weaknesses based on their actual answers.>"
-    }
-    `;
-    
-    interviewMemory.push({ "role": "user", "content": evalPrompt });
     
     try {
-        const reply = await askGroqWithFallback();
+        const reply = await askGroqWithFallback('evaluate');
         // 🔥 BULLETPROOF JSON PARSER 🔥
         const cleanedReply = reply.replace(/```json/g, '').replace(/```/g, '').trim();
         const jsonMatch = cleanedReply.match(/\{[\s\S]*\}/);
@@ -505,81 +456,35 @@ async function generateEvaluationReport() {
 // ==========================================
 
 function setSystemPrompt() {
-    let firmPersonality = "";
-    const firmTarget = candidateData.firm.toLowerCase();
-    const industryList = ["unilever", "p&g", "nestle", "engro", "jazz", "ptcl", "coca", "bank", "pepsi", "electric", "fatima", "lucky", "pso", "telenor", "l'oréal", "l'oreal", "mcb", "ubl", "standard", "corporate"];
-    
-    if (firmTarget.includes("pwc") || firmTarget.includes("ey") || firmTarget.includes("kpmg") || firmTarget.includes("deloitte")) {
-        firmPersonality = "FIRM PROFILE (Big 4): Be extremely strict, intimidating, and highly technical. Ruthlessly test their core CAF technical knowledge (IFRS/Financial Reporting, Taxation, Audit, and Cost/Management Accounting). Throw them into high-pressure ethical or client-conflict scenarios.";
-    } else if (industryList.some(kw => firmTarget.includes(kw))) {
-        firmPersonality = "FIRM PROFILE (Industry): Focus heavily on practical application of CAF subjects (Financial Reporting, Costing/CMA, Internal Controls) rather than just statutory audit. Test their psychological readiness and cultural fit for the corporate sector.";
-    } else {
-        firmPersonality = "FIRM PROFILE (Top 10 / Mid-Tier): Be strict but practical. Focus on identifying CV gaps, testing loyalty, and asking tricky mid-level CAF topics (Accounting Standards, Tax, Audit, and CMA). Put pressure to see how they handle stress.";
-    }
-
-    let prompt = `
-    You are a highly experienced and strict Senior Partner conducting a 10-minute final interview for an Articleship (Trainee) position at ${candidateData.firm}.
-    CRITICAL CONTEXT: The candidate is a "CAF Qualified" student (Certificate in Accounting and Finance). They are NOT a fully qualified Chartered Accountant yet. They are applying for a 3.5-year training contract. Do NOT ask generic senior-level HR questions like "Why should we hire you?". Instead, focus heavily on their student background, CV details, number of attempts, and foundational CAF knowledge.
-    
-    ${firmPersonality}
-    
-    Candidate Name: ${candidateData.name}
-    Candidate's Resume Text (Extract): ${candidateData.cvText.substring(0, 800)}...
-    
-    STRICT RULES (OBEY THESE OR FAIL):
-    1. You MUST act exactly like a human interviewer. 
-    2. Ask ONLY ONE short question at a time (Max 2 sentences). NEVER ramble, NEVER give long explanations, and NEVER talk to yourself.
-    3. WAIT for the candidate to answer. DO NOT generate the candidate's response.
-    4. IMPORTANT START: Start by asking them to introduce themselves OR walk you through their CV. SCRUTINIZE THEIR CV HEAVILY. Pick a specific detail or gap from their resume extract and ask them to explain it.
-    5. THE PERFECT MIX: Test a mix of Psychological pressure, CV-based cross-questioning, and Core CAF Technicals (IFRS, Tax, Audit, CMA). Ask about their studies, their articleship motivations, and test their academic concepts.
-    6. PSYCHOLOGICAL REALISM & ANGER: If the candidate misbehaves, speaks disrespectfully, or gives a very bad attitude, YOU MUST GET ANGRY. Scold them professionally but harshly. If they cross the line or use inappropriate language, explicitly say 'I am ending this interview right now due to your unprofessional behavior.' and nothing else.
-    7. Speak plainly. NO markdown, NO bold text, NO bullet points, NO long paragraphs.
-    `;
-    
-    interviewMemory.push({ "role": "system", "content": prompt });
+    // System prompt and personality are securely injected by the Vercel Backend now.
+    // This keeps the frontend memory clean.
 }
 
 // Expose for voice load
 speechSynthesis.onvoiceschanged = () => { window.availableVoices = speechSynthesis.getVoices(); };
 
-async function askGroqWithFallback() {
+async function askGroqWithFallback(action = 'chat') {
     const subtitle = document.getElementById('subtitle-box');
-    if (subtitle) subtitle.innerText = "Partner is reviewing...";
+    if (subtitle && action === 'chat') subtitle.innerText = "Partner is reviewing...";
     
-    while (currentKeyIndex < GROQ_API_KEYS.length) {
-        try {
-            const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${GROQ_API_KEYS[currentKeyIndex]}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    model: "llama-3.3-70b-versatile",
-                    messages: interviewMemory,
-                    temperature: 0.6,
-                    max_tokens: 150
-                })
-            });
+    try {
+        const response = await fetch("/api/live-audit-chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                action: action,
+                candidateData: candidateData,
+                messages: interviewMemory
+            })
+        });
 
-            if (!response.ok) {
-                if (response.status === 429) { 
-                    console.warn(`Key ${currentKeyIndex} Limit Hit. Switching key...`);
-                    currentKeyIndex++; 
-                    continue; 
-                }
-                throw new Error(`API Error: ${response.status}`);
-            }
-
-            const data = await response.json();
-            return data.choices[0].message.content;
-
-        } catch (error) {
-            console.warn(`Error with key ${currentKeyIndex}:`, error);
-            currentKeyIndex++; 
-        }
+        const data = await response.json();
+        if(data.error) throw new Error(data.error);
+        return data.reply;
+    } catch (error) {
+        console.error("API Call Failed:", error);
+        return "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately.";
     }
-    return "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately.";
 }
 
 // ==========================================
