@@ -449,17 +449,21 @@ window.endInterview = endInterview; // Export for HTML onclick
 // ==========================================
 async function generateEvaluationReport() {
     const evalPrompt = `
-    Based on the interview transcript above, evaluate the candidate strictly.
+    Based on the interview transcript above, evaluate the candidate and generate a final report.
+
+    GRADING CRITERIA:
+    1. technical_score (0-100): Evaluate the accuracy, depth, and relevance of their answers regarding core CAF subjects (IFRS, Audit/ISA, Tax, CMA). Did they apply the right concepts to the scenarios?
+    2. confidence_score (0-100): Evaluate their communication style, professionalism, and ability to handle pressure. Deduct points for excessive hesitation, extremely short/vague answers, or unprofessional tone.
     
     CRITICAL PENALTY RULE: 
-    Analyze the candidate's actual spoken responses. If the candidate remained completely silent, gave 0 or 1 meaningful response, or abandoned the interview early without answering the questions properly, you MUST give a technical_score between 5 and 15, a confidence_score between 5 and 15, the overall_verdict MUST be "REJECTED", and the feedback MUST clearly state "Candidate abandoned the interview or failed to participate."
+    If the candidate remained completely silent, gave less than 2 meaningful responses, or abandoned the interview early, both scores MUST be severely penalized (between 5 and 15), and the verdict MUST be "REJECTED".
 
-    Return ONLY a raw valid JSON object with no markdown formatting or backticks. Use this exact structure:
+    Return ONLY a raw valid JSON object with no markdown formatting or backticks. Calculate the scores dynamically based on the actual transcript. Use this exact structure:
     {
-        "technical_score": 85,
-        "confidence_score": 70,
-        "overall_verdict": "SHORTLISTED",
-        "feedback": "Feedback paragraph here."
+        "technical_score": <calculated_number_0_to_100>,
+        "confidence_score": <calculated_number_0_to_100>,
+        "overall_verdict": "<HIRED, SHORTLISTED, REVIEW NEEDED, or REJECTED>",
+        "feedback": "<Detailed paragraph explaining the scores, strengths, and weaknesses based on their actual answers.>"
     }
     `;
     
