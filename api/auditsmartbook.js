@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const { englishText, chapterTitle, lineContext } = req.body;
     
     // 🔥 GROQ KEY AUR PROMPT AB BACKEND PAR MEHFOOZ HAI 🔥
-    const GROQ_API_KEY = "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";
+    const GROQ_API_KEY = "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";
     // FIX: '-&gt;' ko wapis '->' kar diya taake AI confuse na ho
     const prompt = `You are Caversity AI, a CA Audit Expert. Explain this audit concept in 2 lines of Roman Urdu English mix and give 1 practical example(dont use any hindi word). Return ONLY JSON: {"urdu": "...", "example": "..."}. Context: ${chapterTitle} -> ${lineContext}. Text: "${englishText}"`;
 
