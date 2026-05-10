@@ -5,16 +5,16 @@
         // 🛡️ Secure Bootstrap for AuditNinja
 async function bootstrapApp() {
     try {
-        const response = await fetch('/api/auditsanctum', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'get_sanctum_data' })
-        });
+        // 1. Naya Secure API link (get-data script use karein)
+        const response = await fetch('/api/get-data?file=auditninja');
         if(!response.ok) throw new Error("JSON Fetch Failed");
         
-        // The backend now securely decodes the data and sends clean JSON directly
-        auditData = await response.json();
+        const result = await response.json();
         
+        // 2. 'atob' use karke ajeeb alphabets ko wapis normal JSON banayein
+        auditData = JSON.parse(atob(result.payload));
+        
+        // 3. Render logic (pehle jaisa hi hai)
         processAndRenderReel();
     } catch (error) {
         console.error("Secure Load Error:", error);
