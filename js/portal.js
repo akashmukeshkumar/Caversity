@@ -285,7 +285,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('confirm-subscription')?.addEventListener('click', () => {
         const name = document.getElementById('student-name').value.trim();
-        if (!name) return alert("Please enter your name.");
+        const email = document.getElementById('student-email').value.trim();
+        const senderTitle = document.getElementById('sender-title').value.trim();
+        const trxId = document.getElementById('trx-id').value.trim();
+
+        if (!name || !email) return alert("Please enter your name and email address.");
+        if (!senderTitle || !trxId) return alert("Please enter the Account Title and Transaction ID to proceed.");
 
         let selected = [];
         const multiDisplay = document.getElementById('subject-checkboxes');
@@ -301,34 +306,48 @@ document.addEventListener('DOMContentLoaded', () => {
         const subtotal = document.getElementById('total-amount').dataset.subtotal;
         const discount = subtotal - total;
         
-        // GENERATE WHATSAPP MESSAGE
-        let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? 'month (3 Sessions)' : 'month';
-        if (isMultiSubjectMode) period = 'month';
+        // Fetch Payment Method Chosen
+        const selectedMethodBtn = document.querySelector('.pay-badge.active');
+        const selectedMethod = selectedMethodBtn ? selectedMethodBtn.getAttribute('data-method') : 'Easypaisa';
 
-        let msg = `Hello Caversity Team, 👋\n\nI would like to request premium access. Here are my details:\n\n`;
-        msg += `👤 *Student Name:* ${name}\n`;
-        msg += `📚 *Subject(s) Selected:*\n- ${selected.join('\n- ')}\n\n`;
-        
-        msg += `💳 *Payment Summary:*\n`;
-        if (discount > 0) {
-            msg += `Subtotal: Rs. ${subtotal}\n`;
-            if (appliedCouponCode) {
-                msg += `Discount: -Rs. ${discount} (Coupon: ${appliedCouponCode})\n`;
+        // Loading State for Premium Feel
+        const btn = document.getElementById('confirm-subscription');
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            // GENERATE WHATSAPP MESSAGE
+            let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? 'month (3 Sessions)' : 'month';
+            if (isMultiSubjectMode) period = 'month';
+
+            let msg = `Hello Caversity Team, 👋\n\nI have successfully made a payment for premium access. Here are my details:\n\n`;
+            msg += `👤 *Name:* ${name}\n`;
+            msg += `📧 *Email:* ${email}\n`;
+            msg += `📚 *Subject(s):*\n- ${selected.join('\n- ')}\n\n`;
+            
+            msg += `💳 *Order Summary:*\n`;
+            if (discount > 0) {
+                msg += `Subtotal: Rs. ${subtotal}\n`;
+                msg += `Discount: -Rs. ${discount} (${appliedCouponCode ? 'Coupon: ' + appliedCouponCode : 'Bundle Offer'})\n`;
+                msg += `*Total Paid: Rs. ${total}*\n\n`;
             } else {
-                msg += `Discount: -Rs. ${discount} (Bundle Offer)\n`;
+                msg += `*Total Paid: Rs. ${total}*\n\n`;
             }
-            msg += `-----------------------------\n`;
-            msg += `*Total Payable: Rs. ${total} / ${period}*\n`;
-            msg += `-----------------------------\n\n`;
-        } else {
-            msg += `-----------------------------\n`;
-            msg += `*Total Payable: Rs. ${total} / ${period}*\n`;
-            msg += `-----------------------------\n\n`;
-        }
-        msg += `📸 _(I have attached my payment screenshot below)_`;
-        
-        window.open(`https://wa.me/923164156249?text=${encodeURIComponent(msg)}`, '_blank');
-        document.getElementById('subscription-modal').classList.remove('show');
+            
+            msg += `🧾 *Transaction Details:*\n`;
+            msg += `Sent to: ${selectedMethod}\n`;
+            msg += `Account Title: ${senderTitle}\n`;
+            msg += `Trx ID: ${trxId}\n\n`;
+            
+            msg += `📸 _(Payment screenshot attached below)_`;
+            
+            window.open(`https://wa.me/923164156249?text=${encodeURIComponent(msg)}`, '_blank');
+            
+            btn.innerHTML = originalHtml;
+            btn.disabled = false;
+            document.getElementById('subscription-modal').classList.remove('show');
+        }, 1200); // Wait 1.2s to show processing effect
     });
 });
 
@@ -338,6 +357,10 @@ function openSubscriptionModal() {
     const couponContainer = document.getElementById('coupon-container');
     
     document.getElementById('student-name').value = currentUserProfile.name !== "Loading..." ? currentUserProfile.name : "";
+    document.getElementById('student-email').value = auth.currentUser ? auth.currentUser.email : "";
+    document.getElementById('sender-title').value = "";
+    document.getElementById('trx-id').value = "";
+    if(typeof switchPayment === 'function') switchPayment('ep');
     document.getElementById('coupon-message').textContent = "";
     document.getElementById('coupon-code').value = "";
     appliedCouponDiscount = 0;
