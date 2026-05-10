@@ -9,10 +9,10 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 // 1. 🔥 MULTIPLE API KEYS (FALLBACK SYSTEM) 🔥
 const GROQ_API_KEYS = [
     "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",
-    "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",
-    "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",
-    "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",
-    "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"
+    "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",
+    "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",
+    "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",
+    "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"
 ];
 let currentKeyIndex = 0;
 
@@ -28,6 +28,7 @@ let isMicOpen = false;
 let finalAnswer = ""; // 🔥 Stores text safely even if you pause
 let silenceStrikes = 0; // 🔥 To auto-cut the call
 let globalSessionCount = 0; // 🔥 Track sessions globally to prevent bypass
+let hasTriggeredWrapUp = false; // 🔥 Auto wrap-up flag
 
 // 🔥 FIREBASE SETUP FOR ROOM LOCK 🔥
 const app = getApp();
@@ -305,6 +306,7 @@ function startInterviewRoom() {
     document.getElementById('interview-screen').classList.add('active-screen');
     document.getElementById('partner-name').innerText = `Partner (${candidateData.firm.toUpperCase()})`;
     isInterviewActive = true;
+    hasTriggeredWrapUp = false;
 
     // 🔥 DEDUCT ONE SESSION FROM FIREBASE 🔥
     const user = auth.currentUser;
@@ -340,6 +342,13 @@ function startInterviewRoom() {
         setTimeout(() => { toast.classList.remove('show'); }, 15000); // Auto hide after 15 seconds
     }
 
+    // 🔥 HIDE TIMER FRONTEND 🔥
+    const timerEl = document.getElementById('call-timer');
+    if (timerEl) {
+        timerEl.style.display = 'none';
+        if (timerEl.parentElement) timerEl.parentElement.style.display = 'none'; 
+    }
+
     // Clear previous transcript
     const tsContent = document.getElementById('ts-content');
     if (tsContent) tsContent.innerHTML = '';
@@ -353,13 +362,17 @@ function startInterviewRoom() {
     timerInterval = setInterval(() => {
         secondsElapsed++;
         
-        let displaySeconds = secondsElapsed > 300 ? 300 : secondsElapsed;
-        let m = Math.floor(displaySeconds / 60).toString().padStart(2, '0');
-        let s = (displaySeconds % 60).toString().padStart(2, '0');
-        document.getElementById('call-timer').innerText = `${m}:${s}`;
+        // 🔥 8 MINUTE SMART WRAP-UP TRIGGER 🔥
+        if (secondsElapsed === 480 && !hasTriggeredWrapUp) {
+            hasTriggeredWrapUp = true;
+            interviewMemory.push({
+                "role": "system",
+                "content": "CRITICAL TIME ALERT: 8 minutes have passed. You MUST conclude the interview NOW in your very next response. Do NOT ask any new questions. Thank the candidate, give brief final remarks, and you MUST EXACTLY SAY 'That concludes our interview. Goodbye.' to end the call."
+            });
+        }
         
-        // 🔥 AUTO-END AT 5 MINUTES 🔥
-        if (secondsElapsed >= 300 && !synth.speaking && isInterviewActive) {
+        // 🔥 AUTO-END AT 10 MINUTES 🔥
+        if (secondsElapsed >= 600 && !synth.speaking && isInterviewActive) {
             endInterview(); // Cut call immediately if partner is silent
         }
     }, 1000);
@@ -501,7 +514,7 @@ function setSystemPrompt() {
     }
 
     let prompt = `
-    You are a highly experienced and strict Senior Partner conducting a 5-minute final interview for an Articleship (Trainee) position at ${candidateData.firm}.
+    You are a highly experienced and strict Senior Partner conducting a 10-minute final interview for an Articleship (Trainee) position at ${candidateData.firm}.
     CRITICAL CONTEXT: The candidate is a "CAF Qualified" student (Certificate in Accounting and Finance). They are NOT a fully qualified Chartered Accountant yet. They are applying for a 3.5-year training contract. Do NOT ask generic senior-level HR questions like "Why should we hire you?". Instead, focus heavily on their student background, CV details, number of attempts, and foundational CAF knowledge.
     
     ${firmPersonality}
@@ -632,8 +645,10 @@ function speakResponse(text) {
         interviewMemory.push({ "role": "assistant", "content": text });
         appendToTranscript('assistant', text); // Add AI message to Sidebar
         if (isInterviewActive) {
-            // 🔥 PRO-LEVEL FIX 3: Auto-detect AI failure and safely exit instead of looping 🔥
-            if (secondsElapsed >= 300 || lowerText.includes("technical issue") || lowerText.includes("ending this interview") || lowerText.includes("wrap this up")) {
+            // 🔥 AUTO-CUT CALL LOGIC 🔥
+            const isTimeUpOrEnding = secondsElapsed >= 600 || lowerText.includes("technical issue") || lowerText.includes("ending this interview") || lowerText.includes("wrap this up") || lowerText.includes("concludes our interview") || (hasTriggeredWrapUp && lowerText.includes("goodbye"));
+            
+            if (isTimeUpOrEnding) {
                 setTimeout(endInterview, 1000); // Cut the call if angry or time's up
             } else {
                 startAutoListening(); // 🔥 AI finished, turn Mic ON
