@@ -6,6 +6,7 @@ export default async function handler(req, res) {
     
     // 🔥 GROQ KEY AUR PROMPT AB BACKEND PAR MEHFOOZ HAI 🔥
     const GROQ_API_KEY = "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";
+    // FIX: '-&gt;' ko wapis '->' kar diya taake AI confuse na ho
     const prompt = `You are Caversity AI, a CA Audit Expert. Explain this audit concept in 2 lines of Roman Urdu English mix and give 1 practical example(dont use any hindi word). Return ONLY JSON: {"urdu": "...", "example": "..."}. Context: ${chapterTitle} -> ${lineContext}. Text: "${englishText}"`;
 
     try {
@@ -23,12 +24,12 @@ export default async function handler(req, res) {
         });
 
         const data = await response.json();
-        if (data.error) throw new Error(data.error.message);
+        if (data.error) throw new Error(data.error.message || "Groq API Error");
 
         let aiReply = data.choices[0].message.content;
         const jsonMatch = aiReply.match(/\{[\s\S]*\}/);
         return res.status(200).json(JSON.parse(jsonMatch ? jsonMatch[0] : aiReply));
     } catch (error) {
-        return res.status(500).json({ error: "Failed to decode text." });
+        return res.status(500).json({ error: error.message || "Failed to decode text." });
     }
 }
