@@ -1,239 +1,171 @@
-let CASE_DATA = null;
-let ALL_SCENARIOS = [];
+        let auditData = [];
+        let groupedData = {};
+        let currentQuestion = null;
 
-const APP_NAMES = { 'briefing': 'Briefing', 'pc': 'This PC', 'outlook': 'Outlook', 'erp': 'Oracle ERP', 'audit': 'Audit File' };
-
-// 🎧 SMART AUDIO SETUP (Path Updated)
-let firmAudio = new Audio('subjects/caf8_audit/features/assets/office-ambience.mp3');
-firmAudio.loop = true;
-firmAudio.volume = 0.2;
-
-// 🎯 MASTER RADAR
-function checkDesktopState() {
-    setTimeout(() => {
-        let shouldMute = false;
-        const windows = document.querySelectorAll('.os-window');
-        windows.forEach(win => {
-            if (!win.classList.contains('hidden')) {
-                shouldMute = true;
-            }
-        });
-
-        const docViewer = document.getElementById('doc-viewer');
-        if (docViewer && !docViewer.classList.contains('hidden')) {
-            shouldMute = true;
-        }
-
-        if (shouldMute) {
-            firmAudio.pause();
-        } else {
-            if(document.getElementById('lock-screen') && document.getElementById('lock-screen').classList.contains('hidden')) {
-                firmAudio.play().catch(e => console.log("User interaction needed"));
-            }
-        }
-    }, 100); 
-}
-
-function closeDocument() {
-    document.getElementById('doc-viewer').classList.add('hidden');
-    checkDesktopState();
-}
-
-window.onload = () => { 
-    updateClock(); 
-    setTimeout(() => { 
-        document.getElementById('boot-screen').classList.add('hidden'); 
-        document.getElementById('lock-screen').classList.remove('hidden'); 
-    }, 2000); 
-};
-
-// ==========================================
-// 🔒 SECURE DATA FETCH
-// ==========================================
-async function unlockOS() {
-    if(!document.getElementById('username-input').value) return alert("Enter Auditor ID");
+        // 🛡️ Secure Bootstrap for AuditNinja
+async function bootstrapApp() {
     try {
-        // Secure JSON payload
-        const res = await fetch('/api/get-data?file=questionbank');
-        const result = await res.json();
+        const response = await fetch('/api/auditsanctum', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'get_sanctum_data' })
+        });
+        if(!response.ok) throw new Error("JSON Fetch Failed");
         
-        // 🛠️ UTF-8 FIX: atob akela apostrophes (') ko "â" aur dabbon (boxes) mein badal deta hai.
-        const decodedPayload = new TextDecoder("utf-8").decode(Uint8Array.from(atob(result.payload), c => c.charCodeAt(0)));
-        ALL_SCENARIOS = JSON.parse(decodedPayload);
+        // The backend now securely decodes the data and sends clean JSON directly
+        auditData = await response.json();
         
-        const now = new Date();
-        const dateBlockString = `${now.getFullYear()}${now.getMonth()}${now.getDate()}${now.getHours() >= 12 ? 1 : 0}`;
-        const localBlockNumber = parseInt(dateBlockString);
-        
-        const caseIndex = localBlockNumber % ALL_SCENARIOS.length;
-        CASE_DATA = ALL_SCENARIOS[caseIndex];
-        
-        document.getElementById('lock-screen').classList.add('hidden');
-        document.getElementById('desktop-screen').classList.remove('hidden');
-        
-        loadApps(); 
-        openApp('briefing'); 
-        firmAudio.play().catch(e => console.log(e));
-    } catch(e) { console.error(e); alert("SYSTEM ERROR: Unable to securely fetch live cases."); }
-}
-
-function loadApps() {
-    let story = CASE_DATA.briefing || CASE_DATA.background_story;
-    document.getElementById('briefing-client').innerText = "Client: " + CASE_DATA.client_name;
-    document.getElementById('briefing-content').innerText = story;
-    document.getElementById('news-text').innerText = CASE_DATA.news_headline;
-    document.getElementById('erp-body').innerHTML = CASE_DATA.evidence_files["1_GL_Detailed.html"] || "No Data";
-
-    const emailKey = Object.keys(CASE_DATA.evidence_files).find(key => key.includes('Email') || key.includes('Memo'));
-    document.getElementById('email-view').innerHTML = CASE_DATA.evidence_files[emailKey] || "No Emails";
-
-    const grid = document.getElementById('pc-file-grid'); 
-    grid.innerHTML = "";
-    
-    for(let filename in CASE_DATA.evidence_files) {
-        if(filename.includes("GL") || filename === emailKey) continue;
-        const el = document.createElement('div'); el.className = "d-icon";
-        el.innerHTML = `<i class="fas fa-file-pdf" style="color:#e74c3c;"></i><span style="color:black; font-size:10px;">${filename}</span>`;
-        el.onclick = () => {
-            document.getElementById('doc-viewer').classList.remove('hidden');
-            document.getElementById('doc-title').innerText = filename;
-            document.getElementById('doc-content').style.padding = "50px";
-            document.getElementById('doc-content').innerHTML = CASE_DATA.evidence_files[filename];
-            checkDesktopState();
-        };
-        grid.appendChild(el);
+        processAndRenderReel();
+    } catch (error) {
+        console.error("Secure Load Error:", error);
+        document.getElementById('reel-container').innerHTML = `<p style="color:var(--color-trap);">Error: Security Error or Missing <b>auditninja.json</b>.</p>`;
     }
-    
-    const isa = document.createElement('div'); isa.className = "d-icon";
-    isa.innerHTML = `<i class="fas fa-book" style="color:#d35400;"></i><span style="color:black; font-size:10px;">ISAs.pdf</span>`;
-    isa.onclick = () => {
-        document.getElementById('doc-viewer').classList.remove('hidden');
-        document.getElementById('doc-title').innerText = "AUDIT ISAs Reference Book";
-        document.getElementById('doc-content').style.padding = "0"; 
-        // PDF Path Updated
-        document.getElementById('doc-content').innerHTML = `<iframe src="subjects/caf8_audit/features/assets/AUDIT ISAs.pdf" width="100%" height="1100px" style="border:none;"></iframe>`;
-        checkDesktopState();
-    };
-    grid.appendChild(isa);
 }
 
-function switchTab(t, e) {
-    document.getElementById('tab-planning').classList.add('hidden'); document.getElementById('tab-execution').classList.add('hidden'); document.getElementById('tab-reporting').classList.add('hidden');
-    document.querySelectorAll('.audit-tab').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-'+t).classList.remove('hidden'); e.currentTarget.classList.add('active');
-}
+        // 2. Process Data
+        function processAndRenderReel() {
+            groupedData = auditData.reduce((acc, item) => {
+                if (!acc[item.attempt]) acc[item.attempt] = [];
+                acc[item.attempt].push(item);
+                return acc;
+            }, {});
 
-function finalSubmit() {
-    if(!confirm("Submit Analysis?")) return;
-    const answerKeys = Object.keys(CASE_DATA.answers);
-    answerKeys.forEach(key => {
-        let inputElement = document.getElementById(key);
-        if(inputElement && (!inputElement.nextElementSibling || !inputElement.nextElementSibling.classList.contains('feedback-box'))) {
-            let feedback = document.createElement('div');
-            feedback.className = 'feedback-box';
-            feedback.innerHTML = `<strong>Partner's Expected Answer:</strong>${CASE_DATA.answers[key]}`;
-            inputElement.parentNode.insertBefore(feedback, inputElement.nextSibling);
+            const reel = document.getElementById('reel-container');
+            reel.innerHTML = '';
+            
+            const attemptsList = Object.keys(groupedData).reverse();
+
+            attemptsList.forEach((attemptName, index) => {
+                const season = attemptName.split(' ')[0];
+                const year = attemptName.split(' ')[1] || '';
+                const qCount = groupedData[attemptName].length;
+
+                const card = document.createElement('div');
+                card.className = 'attempt-card';
+                card.innerHTML = `
+                    <h3>${season} ${year}</h3>
+                    <p><span>${qCount} Knowledge Nodes</span> <i class="fa-solid fa-arrow-right"></i></p>
+                `;
+                card.onclick = () => openAttemptEpisodes(attemptName, card);
+                reel.appendChild(card);
+            });
+
+            setupHorizontalScroll(reel);
         }
-    });
-    alert("Evaluation Completed.");
-}
 
-function openApp(appId) { 
-    let win = document.getElementById('window-'+appId);
-    win.classList.remove('hidden'); 
-    bringToFront(win);
-    updateTaskbar(appId, true);
-    checkDesktopState(); 
-}
+        function setupHorizontalScroll(slider) {
+            let isDown = false; let startX, scrollLeft;
+            slider.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
+            slider.addEventListener('mouseleave', () => isDown = false);
+            slider.addEventListener('mouseup', () => isDown = false);
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const walk = (e.pageX - slider.offsetLeft - startX) * 2;
+                slider.scrollLeft = scrollLeft - walk;
+            });
+        }
 
-function closeApp(appId) { 
-    document.getElementById('window-'+appId).classList.add('hidden'); 
-    updateTaskbar(appId, false);
-    checkDesktopState(); 
-}
+        // 3. Open Episodes
+        function openAttemptEpisodes(attemptName, cardElement) {
+            document.querySelectorAll('.attempt-card').forEach(c => c.classList.remove('active'));
+            cardElement.classList.add('active');
 
-function toggleMinimize(appId) {
-    const win = document.getElementById('window-'+appId);
-    win.classList.toggle('hidden');
-    if(!win.classList.contains('hidden')) bringToFront(win);
-    checkDesktopState();
-}
+            const wrapper = document.getElementById('episodes-wrapper');
+            wrapper.style.display = 'block';
 
-function bringToFront(winElement) {
-    document.querySelectorAll('.os-window').forEach(w => w.style.zIndex = 100);
-    winElement.style.zIndex = 101;
-}
+            const grid = document.getElementById('episodes-grid');
+            grid.innerHTML = '';
 
-function updateTaskbar(appId, isOpen) {
-    const tb = document.getElementById('taskbar-apps');
-    let tab = document.getElementById('tab-app-'+appId);
-    if(isOpen && !tab) {
-        tab = document.createElement('div');
-        tab.id = 'tab-app-'+appId;
-        tab.className = 'task-tab active';
-        tab.innerHTML = `<i class="fas fa-window-maximize"></i> ${APP_NAMES[appId]}`;
-        tab.onclick = () => toggleMinimize(appId);
-        tb.appendChild(tab);
-    } else if (!isOpen && tab) {
-        tb.removeChild(tab);
-    }
-}
+            groupedData[attemptName].forEach((q, index) => {
+                const chip = document.createElement('div');
+                chip.className = 'episode-chip';
+                
+                let shortTopic = q.topic.split(':')[0].split('-')[0].trim();
+                chip.innerHTML = `<span class="ep-id">${q.question_id}</span> <span class="ep-title">${shortTopic}</span>`;
+                
+                chip.onclick = () => openArena(q, chip);
+                grid.appendChild(chip);
 
-function acceptMission() { 
-    document.getElementById('accept-btn').innerText = "ACCEPTED ✅"; 
-    setTimeout(() => toggleMinimize('briefing'), 800); 
-}
+                if (index === 0) openArena(q, chip);
+            });
 
-function shutdown() { 
-    if(confirm("Return to Main Website?")) window.location.href = 'audit.html'; 
-}
+            wrapper.scrollIntoView({behavior: 'smooth', block: 'center'});
+        }
 
-function updateClock() { 
-    setInterval(() => { 
-        const now = new Date(); 
-        const timeStr = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        if(document.getElementById('lock-time')) document.getElementById('lock-time').innerText = timeStr; 
-        if(document.getElementById('taskbar-clock')) document.getElementById('taskbar-clock').innerText = timeStr; 
-        
-        const dateOptions = { weekday: 'long', month: 'short', day: 'numeric' };
-        if(document.getElementById('lock-date')) document.getElementById('lock-date').innerText = now.toLocaleDateString('en-US', dateOptions);
+        // 4. Open Arena
+        function openArena(qData, chipElement) {
+            currentQuestion = qData;
 
-        const nextCycle = new Date(now);
-        now.getHours() < 12 ? nextCycle.setHours(12, 0, 0, 0) : nextCycle.setHours(24, 0, 0, 0);
-        const diff = nextCycle - now;
-        const h = Math.floor(diff / 3600000);
-        const m = Math.floor((diff % 3600000) / 60000);
-        const s = Math.floor((diff % 60000) / 1000);
-        if(document.getElementById('case-timer')) document.getElementById('case-timer').innerText = `New Case in: ${h}h ${m}m ${s}s`;
-    }, 1000); 
-}
+            document.querySelectorAll('.episode-chip').forEach(c => c.classList.remove('active'));
+            chipElement.classList.add('active');
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll('.os-window').forEach(win => {
-        const titleBar = win.querySelector('.win-title-bar');
-        if (titleBar) dragElement(win, titleBar);
-    });
-});
+            const arena = document.getElementById('arena');
+            arena.style.display = 'grid';
 
-function dragElement(elmnt, header) {
-    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    header.onmousedown = (e) => {
-        e.preventDefault();
-        pos3 = e.clientX; pos4 = e.clientY;
-        document.onmouseup = () => { document.onmouseup = null; document.onmousemove = null; };
-        document.onmousemove = (e) => {
-            e.preventDefault();
-            pos1 = pos3 - e.clientX; pos2 = pos4 - e.clientY;
-            pos3 = e.clientX; pos4 = e.clientY;
-            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-        };
-        bringToFront(elmnt);
-    };
-}
+            document.getElementById('doc-title').innerText = qData.topic;
+            document.getElementById('doc-marks').innerText = `${qData.marks} MARKS`;
+            
+            const scenarioEl = document.getElementById('doc-scenario');
+            scenarioEl.className = 'scenario-text';
+            scenarioEl.innerHTML = qData.scenario;
 
-// Window Objects
-window.unlockOS = unlockOS; window.openApp = openApp; window.closeApp = closeApp;
-window.toggleMinimize = toggleMinimize; window.switchTab = switchTab;
-window.acceptMission = acceptMission; window.finalSubmit = finalSubmit;
-window.shutdown = shutdown; window.closeDocument = closeDocument;
+            document.getElementById('analysis-locked').style.display = 'flex';
+            document.getElementById('analysis-results').style.display = 'none';
+            [1,2,3,4].forEach(i => document.getElementById(`card-${i}`).classList.remove('slide-in'));
+
+            const btn = document.getElementById('btn-scan');
+            btn.classList.remove('processing');
+            btn.querySelector('span').innerText = "Decrypt Examiner's Strategy";
+            btn.querySelector('i').className = "fa-solid fa-wand-magic-sparkles";
+
+            setTimeout(() => { arena.scrollIntoView({behavior: 'smooth', block: 'start'}); }, 200);
+        }
+
+        // 5. Decryption Scan
+        function triggerDecryption() {
+            const btn = document.getElementById('btn-scan');
+            const laser = document.getElementById('scanner-laser');
+            const scenarioEl = document.getElementById('doc-scenario');
+
+            if(btn.classList.contains('processing')) return;
+
+            btn.classList.add('processing');
+            btn.querySelector('span').innerText = "Running Forensic Analysis...";
+            btn.querySelector('i').className = "fa-solid fa-circle-notch fa-spin";
+
+            laser.classList.remove('scanning');
+            void laser.offsetWidth;
+            laser.classList.add('scanning');
+
+            setTimeout(() => {
+                btn.classList.remove('processing');
+                btn.style.background = "#10b981";
+                btn.style.boxShadow = "0 10px 30px rgba(16, 185, 129, 0.4)";
+                btn.querySelector('span').innerText = "Decryption Complete";
+                btn.querySelector('i').className = "fa-solid fa-check-double";
+
+                scenarioEl.classList.add('revealed');
+
+                const xray = currentQuestion.xray_analysis;
+                document.getElementById('ans-mindset').innerText = xray.examiner_mindset;
+                document.getElementById('ans-trap').innerText = xray.the_trap_red;
+                document.getElementById('ans-ninja').innerText = xray.ninja_technique || xray.pro_tip;
+                
+                const bpList = document.getElementById('ans-blueprint');
+                bpList.innerHTML = xray.solution_blueprint.map(bp => `<li>${bp}</li>`).join('');
+
+                document.getElementById('analysis-locked').style.display = 'none';
+                document.getElementById('analysis-results').style.display = 'flex';
+
+                const delay = 150;
+                setTimeout(() => document.getElementById('card-1').classList.add('slide-in'), delay * 1);
+                setTimeout(() => document.getElementById('card-2').classList.add('slide-in'), delay * 2);
+                setTimeout(() => document.getElementById('card-3').classList.add('slide-in'), delay * 3);
+                setTimeout(() => document.getElementById('card-4').classList.add('slide-in'), delay * 4);
+
+            }, 2500);
+        }
+
+        window.onload = bootstrapApp;
+    
