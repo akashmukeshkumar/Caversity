@@ -1,0 +1,364 @@
+{
+  "id": "caf8_chapter_4",
+  "source": {
+    "chapter": "Chapter 4",
+    "title": "EVIDENCE AND SAMPLING"
+  },
+  "pages": [
+    {
+      "heading": "1 AUDIT EVIDENCE: ISA 500",
+      "sections": [
+        {
+          "title": "1.1 General principles of gathering audit evidence",
+          "paragraphs": [
+            "ISA 500 Audit evidence sets out the objective of the auditor as being to design and perform audit procedures in such a way to enable him to:",
+            "* obtain sufficient, appropriate audit evidence",
+            "* to be able to draw reasonable conclusions",
+            "* on which to base his audit opinion.",
+            "Following on from this, the auditor is required by ISA 500 to design and perform appropriate audit procedures for the purpose of obtaining sufficient, appropriate audit evidence.",
+            "Other requirements of ISA 500 are as follows:",
+            "* Consider the relevance and reliability of the information to be used as audit evidence.",
+            "* If information to be used as audit evidence has been prepared using the work of a management's expert:",
+            "- evaluate the competence, capabilities and objectivity of that expert",
+            "- obtain an understanding of the expert's work, and",
+            "- evaluate the appropriateness of his report as audit evidence.",
+            "* When using information produced by the entity evaluate whether the information is sufficiently reliable (accurate, complete, precise and detailed).",
+            "* Use effective means of selecting items for testing (covered in detail later in this chapter under ISA 530 Audit sampling).",
+            "* If audit evidence from one source is inconsistent with that obtained from another source, or the auditor has doubts over the reliability of evidence - consider:",
+            "- what additional audit procedures are needed, and",
+            "- the effects on any other aspects of the audit."
+          ]
+        },
+        {
+          "title": "1.2 Sufficient and appropriate audit evidence",
+          "paragraphs": [
+            "Sufficient relates to the quantity of evidence.",
+            "Appropriate relates to the quality (relevance and reliability - see below) of the evidence.",
+            "The auditor will need to exercise professional judgement on both of these aspects; the quantity and the quality of evidence.",
+            "* When is there enough evidence to support a conclusion?",
+            "* What is the quality of a given piece of evidence, and is this sufficient to justify the audit opinion?"
+          ]
+        },
+        {
+          "title": "1.3 The quality of audit evidence - Relevant",
+          "paragraphs": [
+            "There are a number of general principles set out in ISA 500 to assist the auditor in assessing the relevance of audit evidence. These can be summarised as follows:",
+            "* Relevance deals with the logical connection with, or bearing upon, the purpose of the audit procedure, and, where appropriate, the assertion under consideration. E.g. Relevance may be affected by the direction of testing, say when testing for overstatement in the existence or valuation of accounts payable, testing the recorded accounts payable may be a relevant audit procedure.",
+            "On the other hand, when testing for understatement, testing the recorded accounts payable would not be relevant, but rather testing subsequent disbursements, unpaid invoices, suppliers' statements and unmatched receiving reports may be relevant.",
+            "* A given set of audit procedures may provide audit evidence that is relevant to certain assertions, but not others. E.g. Inspection of documents related to the collection of receivables after the period end may provide audit evidence regarding existence and valuation, but not necessarily cut-off.",
+            "* Tests of controls are designed to evaluate the operating effectiveness of controls in preventing, or detecting and correcting, material misstatements at the assertion level. Relevant audit evidence would include identifying conditions that indicate performance of a control, and deviation conditions. The presence or absence of those conditions can then be tested by the auditor.",
+            "* Substantive procedures are designed to detect material misstatements at the assertion level. Designing substantive procedures includes identifying conditions relevant to the purpose of the test that constitute a misstatement in the relevant assertion."
+          ]
+        },
+        {
+          "title": "Reliable",
+          "paragraphs": [
+            "There are a number of general principles set out in ISA 500 to assist the auditor in assessing the reliability of audit evidence. These can be summarised as follows:",
+            "* Audit evidence is more reliable when it is obtained from independent sources outside the entity under audit.",
+            "* Internally generated audit evidence is more reliable when the related controls are effective.",
+            "* Audit evidence obtained directly by the auditor is more reliable than audit evidence obtained indirectly or by inference. For example, observation of the operation of a control by the auditor is more reliable than inquiry about the operation of that control.",
+            "* Audit evidence is more reliable when it exists in documentary form. This could be paper, electronic or other medium. For example, a written record of a meeting made at the time is more reliable than a subsequent oral representation of the matters discussed.",
+            "* Audit evidence provided by original documents is more reliable than audit evidence provided by photocopies, or documents that have been filmed, or otherwise transformed into electronic form. This is because the reliability of those other forms may depend on the controls over their preparation and maintenance."
+          ]
+        },
+        {
+          "title": "1.4 Procedures for generating audit evidence",
+          "paragraphs": [
+            "A number of audit testing procedures are available to the auditor as a means of generating audit evidence. Note that:",
+            "* more than one procedure may be used in collecting evidence in a particular area.",
+            "* not all procedures may be appropriate to a given objective of the audit.",
+            "The auditor should select the most appropriate procedures in each situation. ISA 500 identifies seven main testing procedures for gathering audit evidence:",
+            "* Inspection (of an item)",
+            "* Observation (of a procedure)",
+            "* Inquiry (of a personnel)",
+            "* External confirmation",
+            "* Recalculation",
+            "* Re-performance",
+            "* Analytical procedures.",
+            "For your exam, you need to learn this list of audit procedures and what each of them means. A case study-type exam question may ask you to discuss which audit procedures would be most appropriate for obtaining audit evidence in a specific situation.",
+            "The table below explains these seven main procedures, and gives examples of how they are used and applied.",
+            "| **Procedure** | **Explanation / Application** |\n|---|---|\n| **Inspection (looking at an item)** | * Inspection of tangible assets.<br>* Inspection of entries in accounting records.<br>* Inspection of documents (e.g., invoices). |\n| **Observation** | * Watching a procedure being performed (e.g., physical inventory counts, distribution of wages, opening of mail).<br>* Limited to the point in time when the observation takes place.<br>* The person being observed may act differently during observation. |\n| **Inquiry** | * Seeking information from knowledgeable persons inside or outside the entity.<br>* Evaluating responses to enquiries.<br>* Corroborating responses with other audit evidence. |\n| **External Confirmation** | * A specific type of inquiry involving confirmation from a third party (e.g., a bank or trade receivable customer). |\n| **Recalculation** | * Checking the mathematical accuracy of documents or records (e.g., adding the list of year-end trade receivables). |\n| **Reperformance** | * Independently carrying out procedures or controls originally performed by the client (e.g., reperforming the ageing of year-end trade receivables). |\n| **Analytical Procedures** | * Evaluating and comparing financial and/or non-financial data for plausible relationships and investigating unexpected fluctuations.<br>* Example: Comparing last year's gross profit percentage with the current year's percentage and ensuring changes are reasonable. |"
+          ]
+        },
+        {
+          "title": "Types of audit procedures",
+          "paragraphs": [
+            "6 Types of audit procedures",
+            "In order to gather audit evidence on the above financial statement assertions, the auditor will have to choose what types of procedures to carry out. ISA 500 identifies the following types of procedures:",
+            "* Tests of controls",
+            "* Substantive procedures",
+            "Tests of controls are designed to evaluate the operating effectiveness of controls in preventing, or detecting and correcting, material misstatements at the assertion level.",
+            "Substantive procedures are designed to detect material misstatements at the assertion level.",
+            "In general, the auditor will carry out tests of controls to assess the system under audit. If those tests show that the system is working effectively then he will carry out a reduced amount of substantive procedures. If the results are poor then he will carry out more substantive procedures. Substantive procedures include both tests of detail and analytical procedures.",
+            "Tests of controls and substantive procedures are considered in detail in later chapters."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "2 AUDIT DOCUMENTATION: ISA 230",
+      "sections": [
+        {
+          "title": "2.1 Audit documentation (audit file)",
+          "paragraphs": [
+            "Audit documentation is the record of:",
+            "* audit procedures performed",
+            "* audit evidence obtained, and",
+            "* conclusions reached.",
+            "Terms such as audit working papers are also used.",
+            "The audit file is one or more folders (or other storage media) in physical or electronic form, containing the records that comprise the audit documentation for the whole engagement.",
+            "The objective of the auditor in respect of ISA 230 Audit documentation is to prepare documentation that provides:",
+            "* a sufficient and appropriate record of the basis for the auditor's report, and",
+            "* evidence that the audit was planned and performed in accordance with ISAs and applicable legal and regulatory requirements.",
+            "ISA 230 requires the auditor to prepare documentation on a timely basis, sufficient to enable an experienced auditor, with no previous connection with the audit to understand:",
+            "* the nature, timing and extent of the audit procedures performed",
+            "* the results of the audit procedures and the audit evidence obtained, and",
+            "* significant matters arising during the audit and the conclusions reached thereon. The auditor is also required to document:",
+            "* discussions of all significant matters",
+            "* how any inconsistencies with the final conclusion on significant matters were resolved",
+            "* and justify any departure from a basic principle or relevant procedure specified by an ISA."
+          ]
+        },
+        {
+          "title": "2.2 Reasons for preparing sufficient and appropriate audit documentation",
+          "paragraphs": [
+            "Preparing sufficient and appropriate audit documentation on a timely basis helps to:",
+            "* enhance the quality of the audit, and",
+            "* facilitate the effective review and evaluation of the audit evidence obtained and conclusions reached, before the audit report is finalised.",
+            "Documentation prepared at the time the work is performed is likely to be more accurate than documentation prepared later.",
+            "Other purposes of audit documentation include the following.",
+            "* Assisting the audit team to plan and perform the audit.",
+            "* Assisting supervisors in directing and supervising audit work.",
+            "* Ensuring members of the audit team are accountable for their work.",
+            "* Keeping a record of matters of continuing significance to future audits.",
+            "* Enabling an experienced auditor, with no previous connection with that audit, to conduct quality reviews or other inspections i.e. by understanding the work that has been performed and the conclusions that have been reached."
+          ]
+        },
+        {
+          "title": "2.3 The form, content and extent of audit documentation",
+          "paragraphs": [
+            "Audit documentation may be recorded on paper, or on electronic or other media. The audit documentation for a specific engagement is assembled in an audit file. The precise contents of the audit file varies, depending on the nature and size of the client and the complexity of the audit processes required to reach a conclusion but will include:",
+            "* audit programs",
+            "* analyses",
+            "* summaries of significant matters",
+            "* letters of confirmation and representation",
+            "* checklists, and",
+            "* correspondence.",
+            "All audit working papers should clearly show the following (where relevant):",
+            "* The name of the client",
+            "* The accounting date",
+            "* A file reference",
+            "* The name of the person preparing the working paper",
+            "* The date the paper was prepared",
+            "* The name of any person reviewing the work and the extent of such review",
+            "* The date of the review",
+            "* A key to 'audit ticks' or other symbols used in the papers",
+            "* A listing of any errors or omissions identified",
+            "* A conclusion on the area."
+          ]
+        },
+        {
+          "title": "Assembly of the final audit file",
+          "paragraphs": [
+            "The auditor is required to assemble the final audit file(s) on a timely basis after the date of the auditor's report. Not more than 60 days after the date of auditor's report This usually excludes drafts of working papers or financial statements, or notes that reflect incomplete or preliminary thinking. After the assembly of the final audit file has been completed, the auditor must not delete or discard audit documentation before the end of its retention period (see below)."
+          ]
+        },
+        {
+          "title": "Modifications in the documentation",
+          "paragraphs": [
+            "If it does become necessary to modify existing or add new documentation after this stage, the auditor is required to document:",
+            "* when and by whom the modifications were made",
+            "* the reasons for making them.",
+            "If exceptional circumstances arise after the date of the audit report, such that the auditor:",
+            "* has to perform new or additional procedures, or",
+            "* reaches new conclusions",
+            "the auditor is required to document:",
+            "* the circumstances",
+            "* the new or additional procedures performed, audit evidence obtained, conclusions reached and their effect on the auditor's report, and",
+            "* when and by whom the resulting changes to audit documentation were made and who reviewed them."
+          ]
+        },
+        {
+          "title": "2.5 Ownership, custody and confidentiality",
+          "paragraphs": [
+            "Ownership of the audit documentation rests with the auditor. The working papers do not form part of the accounting records of the client, and do not belong to the client.",
+            "In relation to retention, auditors are required to comply with both International Standards on Auditing (ISAs) and applicable national requirements. ISA 230 stipulates that audit documentation must be retained for a minimum period of five years from the date of the auditor's report. In addition, auditing standards require that working papers be kept secure and confidential, and that access to such documentation be granted to third parties only in accordance with relevant ethical guidelines.",
+            "However, where national laws, regulations, or professional requirements prescribe a longer retention period, auditors must comply with those requirements. Accordingly, to meet legal and regulatory obligations in addition to ISA requirements, ICAP has directed in its directive 4.19, that audit working papers be retained for at least six years. This ensures compliance with both international standards and relevant national requirements.",
+            "Auditing standards require the auditor to ensure that working papers are kept safe and their contents are kept confidential. Information should only be made available to third parties in accordance with ethical guidelines (described in an earlier chapter)."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "3 AUDIT SAMPLING: ISA 530",
+      "sections": [
+        {
+          "title": "3.1 Definitions",
+          "paragraphs": [
+            "Audit sampling (sampling)",
+            "The application of audit procedures to less than 100% of items within a population of audit relevance such that all sampling units have a chance of selection in order to provide the auditor with a reasonable basis on which to draw conclusions about the entire population.",
+            "Population",
+            "The entire set of data from which a sample is selected and about which the auditor wishes to draw conclusions.",
+            "Sampling risk",
+            "The risk that the auditor's conclusion based on a sample may be different from the conclusion if the entire population were subjected to the same audit procedure. Sampling risk can lead to two types of erroneous conclusions:",
+            "In the case of a TOC, that controls are more effective than they actually are, or in the case of a TOD, that a material misstatement does not exist when in fact it does. The auditor is primarily concerned with this type of erroneous conclusion because it affects audit effectiveness and is more likely to lead to an inappropriate audit opinion.",
+            "In the case of a TOC, that controls are less effective than they actually are, or in the case of a test of details, that a material misstatement exists when in fact it does not. This type of erroneous conclusion affects audit efficiency as it would usually lead to additional work to establish that initial conclusions were incorrect.",
+            "Non-sampling risk",
+            "The risk that the auditor reaches an erroneous conclusion for any reason not related to sampling risk.",
+            "Examples of non-sampling risk include use of inappropriate audit procedures, or misinterpretation of audit evidence and failure to recognise a misstatement or deviation.",
+            "Anomaly",
+            "A misstatement or deviation that is demonstrably not representative of misstatements or deviations in a population.",
+            "Sampling unit",
+            "The individual items constituting a population. The sampling units might be physical items.",
+            "Statistical sampling",
+            "An approach to sampling that has the following characteristics:",
+            "i. Random selection of the sample items; and",
+            "ii. The use of probability theory to evaluate sample results, including measurement of sampling risk.",
+            "Non-Statistical Sampling: A sampling approach that does not have characteristics (i) and (ii) is considered non-statistical sampling. (also known as judgemental sampling) is any sampling technique not based on probability theory. Instead, it is based on a judgemental opinion by the auditor about the results of the sample.",
+            "Stratification",
+            "The process of dividing a population into sub-populations, each of which is a group of sampling units which have similar characteristics (often monetary value).",
+            "Tolerable misstatement",
+            "A monetary amount set by the auditor in respect of which the auditor seeks to obtain an appropriate level of assurance that the monetary amount set by the auditor is not exceeded by the actual misstatement in the population.",
+            "When designing a sample, the auditor determines tolerable misstatement in order to address the risk that the aggregate of individually immaterial misstatements may cause the financial statements to be materially misstated and provide a margin for possible undetected misstatements. Tolerable misstatement is the application of performance materiality, as defined in ISA 320, to a particular sampling procedure. Tolerable misstatement may be the same amount or an amount lower than performance materiality.",
+            "Tolerable rate of deviation",
+            "A rate of deviation from prescribed internal control procedures set by the auditor in respect of which the auditor seeks to obtain an appropriate level of assurance that the rate of deviation set by the auditor is not exceeded by the actual rate of deviation in the population."
+          ]
+        },
+        {
+          "title": "3.4 Sample design, size and selection of items for testing",
+          "paragraphs": [
+            "If an audit sampling exercise is to be effective - if sampling risk is to be reduced and therefore detection risk reduced - the sample must be designed in an appropriate way.",
+            "When designing a sample, the auditor is required by ISA 530 to:",
+            "* consider the purpose of the audit procedure and the population from which the sample will be drawn",
+            "* determine a sample size sufficient to reduce sampling risk to an acceptably low level",
+            "* select items for the sample in such a way that each sampling unit in the population has an equal chance of selection.",
+            "The auditor will therefore have to make a number of key decisions:",
+            "* the sampling approach to be used (statistical or non-statistical)",
+            "* the characteristics of the population from which the sample is to be drawn",
+            "* the sample selection method",
+            "* what constitutes a misstatement or deviation",
+            "* the 'tolerable' misstatement or rate of deviation",
+            "* the 'expected' misstatement or rate of deviation."
+          ]
+        },
+        {
+          "title": "Statistical sampling or non-statistical sampling?",
+          "paragraphs": [
+            "Statistical sampling techniques are now widely used in auditing. However, not all audit practices are convinced of their value and worth.",
+            "The benefits of statistical sampling techniques are as follows:",
+            "* Statistical sampling provides an objective, mathematically precise basis for the sampling process.",
+            "* The required sample size can be calculated precisely (using statistical probability techniques).",
+            "* There may be circumstances where statistical sampling is the only means of auditing efficiently (for example, in the case of very large 'populations' of items).",
+            "The disadvantages of statistical sampling techniques are as follows:",
+            "* A degree of training and technical expertise is required if auditors are to use statistical sampling techniques effectively.",
+            "* This requires an investment in the necessary training for audit staff.",
+            "* Sample sizes may be larger than under a judgemental approach, thus increasing the time (and the cost) involved in the audit.",
+            "* Some auditors take the view that it is preferable to rely on the skill, experience and judgement of the auditor, rather than on mathematical/statistical models."
+          ]
+        },
+        {
+          "title": "The characteristics of the population from which the sample is to be drawn",
+          "paragraphs": [
+            "The population is defined by ISA 530 as the entire set of data from which a sample is to be selected and about which the auditor wishes to draw conclusions.",
+            "The population from which a sample is to be drawn should be appropriate for the audit objective to be achieved, and the population should be complete. (In other words, all relevant items must be included in the population.)",
+            "For example, if the objective of the audit testing is to confirm the accuracy of trade receivable balances, the population should include all trade receivables balances as at a specified date. Alternatively, the audit objective might be more limited in scope - perhaps to confirm the accuracy of those trade receivables balances in excess of Rs.500,000. The population should then consist of all receivables balances over Rs.500,000."
+          ]
+        },
+        {
+          "title": "The sample selection method",
+          "paragraphs": [
+            "ISA 530 requires auditors to select a sample in such a way that each item in the population (each 'sampling unit') has an equal chance of being selected.",
+            "A wide range of sample selection methods is available to the auditor:",
+            "* Random sampling: All items in the population have an equal chance of selection. This is typically achieved by the use of random numbers to select items for testing.",
+            "* Systematic sampling: With systematic sampling, a random starting point is chosen from the population and then items are selected with a standard gap between them (for example, every 10th item). For example, suppose that a sample will be 10% of the items in a population and the items in the population can be arranged in a sequence, such as listed in invoice number order, or account number order or date order. A systematic sample would be to select one of the first 10 items in the list at random, and then to select every 10th item in the list for testing in order to obtain the 10% sample.",
+            "* Haphazard sampling: The auditor selects the sample on an arbitrary basis, for example, choosing any 100 invoices from a file. This is not a scientifically valid method and the resulting sample may contain a degree of bias. It is therefore not recommended for use with statistical sampling techniques.",
+            "* Block sampling: The auditor selects a complete block of sampling units from the population (for example all invoices of the month of May)."
+          ]
+        },
+        {
+          "title": "Selecting Items for testing to obtain Audit Evidence",
+          "paragraphs": [
+            "An effective test provides appropriate audit evidence to an extent that, taken with other audit obtained or to be obtained, will be sufficient for the auditor's purpose. In selecting items for testing the auditor is required by paragraph 7 to determine the relevance and reliability of information to be used as audit evidence; the other aspect of effectiveness (sufficiency) is an important consideration in selecting items to test. This means available to the auditor for selecting items for testing are:",
+            "a) Selecting all items (100% examinations)",
+            "b) Selecting specific items; and",
+            "c) Audit sampling",
+            "The application of any one or combination of these means may be appropriate depending on the particular circumstances, for example, the risks of material misstatement related to the assertion being tested, and the practicality and efficiency of the different means."
+          ]
+        },
+        {
+          "title": "Selecting All Items",
+          "paragraphs": [
+            "The auditor will decide that it will be not appropriate to examine the entire population of items that make up a class of transactions or account balance (or a stratum within that population). 100% examination is unlikely in the case of test of controls; however, it is more common for test of details. 100% examination may be appropriate when, for example:",
+            "* The population constitutes of small number of large value items",
+            "* There is a significant risk and other means do not provide sufficient appropriate audit evidence",
+            "* The repetitive nature of calculation or other process performed automatically by an information system makes 100% examination cost effective."
+          ]
+        },
+        {
+          "title": "Selecting Specific items",
+          "paragraphs": [
+            "The auditor may decide to select specific items from population. In making this decision factors that may be relevant include the auditor's understanding of the entity, the assessed risk of material misstatement, and the characteristics of the population being tested. The judgmental selection of specific items is subject to non-sampling risk. Specific items selected may include:",
+            "* High value or key items; The auditor may decide to select specific items within a population because they are of high value, or exhibit some other characteristics for example items that are suspicious, unusual, particularly risk prone or that have a history.",
+            "* All items over a certain amount: The auditor may decide to examine items whose recorded value exceeds a certain amount so as to verify a large proportion of the total amount of a class of transactions or account balance.",
+            "* Items to obtain information: The auditor may examine items to obtain information about certain matters such as the nature of the entity or the nature of the transactions.",
+            "While selective examinations of specific items from a class of transactions or account balance will often be an efficient means of obtaining audit evidence, it does not constitute audit sampling. The results of audit procedures applied to items selected in this way cannot be projected to the entire population accordingly selective examination of items does not provide audit evidence on concerning the remainder of the population."
+          ]
+        },
+        {
+          "title": "Stratification",
+          "paragraphs": [
+            "* Audit efficiency may be improved if the auditor stratifies a population by dividing it into discrete sub-populations which have an identifying characteristic. The objective of stratification is to reduce the variability of items within each stratum and therefore allow sample size to be reduced without increasing sampling risk.",
+            "* When performing tests of details, the population is often stratified by monetary value. This allows greater audit effort to be directed to the larger value items, as these items may contain the greatest potential misstatement in terms of overstatement. Similarly, a population may be stratified according to a particular characteristic that indicates a higher risk of misstatement, for example, when testing the allowance for doubtful accounts in the valuation of accounts receivable, balances may be stratified by age.",
+            "* The results of audit procedures applied to a sample of items within a stratum can only be projected to the items that make up that stratum. To draw a conclusion on the entire population, the auditor will need to consider the risk of material misstatement in relation to whatever other strata make up the entire population. For example, 20% of the items in a population may make up 90% of the value of an account balance. The auditor may decide to examine a sample of these items. The auditor evaluates the results of this sample and reaches a conclusion on the 90% of value separately from the remaining 10% (on which a further sample or other means of gathering audit evidence will be used, or which may be considered immaterial).",
+            "* If a class of transactions or account balance has been divided into strata, the misstatement is projected for each stratum separately. Projected misstatements for each stratum are then combined when considering the possible effect of misstatements on the total class of transactions or account balance."
+          ]
+        },
+        {
+          "title": "What constitutes a misstatement or deviation",
+          "paragraphs": [
+            "ISA 530's requirement for the auditor to consider the purpose of the audit procedure means that the auditor needs a clear understanding of what constitutes a misstatement or deviation.",
+            "For example, if the purpose of the audit procedure is to gain evidence on the accuracy of the statement of financial position figure for trade receivables, an error involving the posting of an invoice to a wrong customer account does not affect the statement of financial position total and has no impact on the objective of the testing. (The total trade receivables will not be wrong. Only the balances on the individual accounts of two customers will be wrong.)",
+            "The meanings of \"misstatement\" and \"deviation\" are only set out in ISA 530 in the context of \"tolerable\" misstatements or rates of deviations."
+          ]
+        },
+        {
+          "title": "Sample Size - Test of details",
+          "paragraphs": [
+            "* The auditor shall determine a sample size sufficient to reduce sampling risk to an acceptably low level.",
+            "* The level of sampling risk that the auditor is willing to accept affects the sample size required. The lower the risk the auditor is willing to accept, the greater the sample size will need to be.",
+            "| **Factors Influencing Sample Size** | **Effect on Sample Size** |\n|---|---|\n| **1. Increase in auditor's assessment of the risk of material misstatement** | **Increase** |\n| **2. Number of sampling units in population** | **Negligible** |\n| **3. Increase in use of other substantive procedures for the same assertion** | **Decrease** |\n| **4. Stratification of population** | **Decrease** |"
+          ]
+        },
+        {
+          "title": "Sample Size - Test of Controls",
+          "paragraphs": [
+            "| **Factors Influencing Sample Size** | **Effect on Sample Size** |\n|---|---|\n| **1. Increase in extent to which auditor's risk assessment takes into account relevant controls** | **Increase** |\n| **2. Increase in expected rate of deviation of the population to be tested** | **Increase** |\n| **3. Number of sampling units in population** | **Negligible** |"
+          ]
+        },
+        {
+          "title": "3.5 Performing audit procedures on the sample",
+          "paragraphs": [
+            "When designing a sample, the auditor is required by ISA 530 to:",
+            "* perform appropriate audit procedures on each item selected",
+            "* if the audit procedure is not applicable to the selected item, the auditor must perform the procedure on a replacement item. For example, the auditor might select a sample of cheques to test for evidence of authorisation. One of these might be a cheque which has been cancelled. Provided the cheque has been legitimately and properly cancelled then the auditor may choose another cheque number to test in its place",
+            "* if the auditor is unable to get the desired results after applying the procedure (or a suitable alternative) to the selected item (for example, because a document has been lost), that item must be treated as a misstatement/deviation.",
+            "The auditor is also required to:",
+            "* investigate the nature and cause of any misstatements/deviations and evaluate their possible effect.",
+            "* Investigation of the nature and cause of the misstatements/deviations may lead the auditor to conclude that the problem lies within one time period, type of transaction, or location (for example, perhaps when a temporary member of staff was being employed). In this case he might decide to extend audit procedures performed on that time-period/type of transaction/location.",
+            "* if the auditor considers the misstatement or deviation to be an anomaly he must obtain a high degree of certainty about this and perform additional audit procedures to obtain sufficient evidence that the misstatement or deviation does not affect the rest of the population.",
+            "* An anomaly is defined by ISA 530 as a misstatement or deviation that is demonstrably not representative of misstatements or deviations in a population."
+          ]
+        },
+        {
+          "title": "3.6 Projecting misstatements and evaluating the results of audit sampling",
+          "paragraphs": [
+            "The auditor is required to evaluate:",
+            "* the results of the sample. For tests of details this will include projecting the misstatements found in the sample to the entire population",
+            "* whether the use of audit sampling has provided a reasonable basis for conclusions about the population that has been tested. If the conclusion is that it has not then the auditor will need to consider carrying out additional audit procedures.",
+            "The auditor wants to reach a conclusion about the population as a whole from the results of the sample. As required above, for tests of details this will mean using the sample results to estimate the likely misstatement that exists in the population. This is done by extrapolating the error found in the sample over the whole population."
+          ]
+        }
+      ]
+    }
+  ]
+}

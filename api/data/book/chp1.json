@@ -1,0 +1,361 @@
+{
+  "id": "caf8_chapter_1",
+  "source": {
+    "chapter": "Chapter 1",
+    "title": "CONCEPT AND NEED FOR AUDIT"
+  },
+  "pages": [
+    {
+      "heading": "1 THE MEANING OF AUDIT",
+      "sections": [
+        {
+          "title": "1.1 Definition and objective of audit",
+          "paragraphs": [
+            "An audit is an official examination of the accounts (or accounting systems) of an entity (by an auditor). When an auditor examines the accounts of an entity, what is he looking for?",
+            "The main objective of an audit is to enable an auditor to convey an opinion as to whether or not the financial statements of an entity are prepared according to an applicable financial reporting framework.",
+            "Financial statements - A structured representation of historical financial information, including disclosures, intended to communicate an entity's economic resources or obligations at a point in time, or the changes therein for a period of time, in accordance with a financial reporting framework. Financial statements have the following components (as per IAS-1):",
+            "* Statement of Financial Position (Balance Sheet)",
+            "* Statement of Profit or Loss and other comprehensive income",
+            "* Statement of Changes in Equity",
+            "* Cash Flow Statement",
+            "* Notes to the Financial Statements",
+            "* Comparative information prescribed by the standard",
+            "Applicable financial reporting framework - The financial reporting framework adopted by management and, where appropriate, those charged with governance in the preparation of the financial statements that is acceptable in view of the nature of the entity and the objective of the financial statements, or that is required by law or regulation.",
+            "The applicable financial reporting framework is decided by:",
+            "* legislative or regulatory environment within each individual country, and",
+            "* accounting standards (for example, International Accounting Standards / International Financial Reporting Standards).",
+            "The auditor seeks to express an opinion as the result of the audit work that he does. The type of work carried out by an auditor in order to reach his opinion is described in later chapters."
+          ]
+        },
+        {
+          "title": "1.2 Concepts of accountability, stewardship and agency",
+          "paragraphs": [
+            "An audit of a company's accounts is needed because in companies, the owners of the business are often not the same persons as the individuals who manage and control that business.",
+            "* The shareholders own the company.",
+            "* The company is managed and controlled by its directors.",
+            "The directors have a stewardship role. They look after the assets of the company and manage them on behalf of the shareholders. In small companies the shareholders may be the same people as the directors. However, in most large companies, the two groups are different.",
+            "The relationship between the shareholders of a company and the board of directors is also an application of the general legal principle of agency. The concept of agency applies whenever one person or group of individuals acts as an agent on behalf of someone else (the principal). The agent has a legal duty to act in the best interests of the principal, and should be accountable to the principal for everything that he does as agent.",
+            "As agents for the shareholders, the board of directors should be accountable to the shareholders. In order for the directors to show their accountability to the shareholders, it is a general principle of company law that the directors are required to prepare annual financial statements, which are presented to the shareholders for their approval."
+          ]
+        },
+        {
+          "title": "1.3 The audit report: independence, materiality and true and fair",
+          "paragraphs": [
+            "Audit has a very long history. The concept of an audit goes back to the times of the Egyptian and Roman empires. In medieval times, independent auditors were employed by the feudal barons to ensure that the returns from their stewards and their tenants were accurate.",
+            "Over time, the annual audit was developed as a way of adding credibility to the financial statements produced by management. The statutory audit is now a key feature of company law throughout the world.",
+            "An auditor reports to the shareholders on the financial statements produced by a company's management.",
+            "The key features of the audit report are as follows:",
+            "* The auditors producing the report are independent from the directors producing the financial statements.",
+            "* The report gives an opinion on whether the financial statements \"give a true and fair view\", or \"present fairly\" the position and results of the entity.",
+            "* The report considers whether the financial statements give a true and fair view in all material respects. The concept of materiality is applied in reaching an audit opinion."
+          ]
+        },
+        {
+          "title": "Independence of the auditor",
+          "paragraphs": [
+            "The external auditor must be independent from the directors; otherwise his report will have little value. If he is not independent, his opinion is likely to be influenced by the directors.",
+            "In contrast to external auditors, internal auditors may not be fully independent from the directors, although they may be able to achieve a sufficient degree of independence.",
+            "The concept of 'internal auditors' shall be described in details in a later chapter."
+          ]
+        },
+        {
+          "title": "True and fair view (fair presentation)",
+          "paragraphs": [
+            "The auditor reports on whether (or not) the financial statements give a true and fair view, or present fairly, the position of the entity as at the end of the financial period and the performance of the entity during the period. The auditor does not certify or guarantee that the financial statements are correct.",
+            "In preparing the financial statements, a large amount of judgement is exercised by the directors. Similarly, judgement is exercised by the auditor in reaching his opinion. The phrases 'true and fair view' and 'present fairly' indicate that a judgement is being given that the financial statements can be relied upon and have been properly prepared in accordance with an appropriate financial reporting framework."
+          ]
+        },
+        {
+          "title": "Materiality concept",
+          "paragraphs": [
+            "The auditor reports in accordance with the concept of materiality. He gives an opinion on whether the financial statements present fairly in all material respects the financial position and performance of the entity.",
+            "Information is material if, on the basis of the financial statements, it could influence the economic decisions of users should it be omitted or misstated.",
+            "For example, the shareholders of a company with assets of Rs.1 million will not be interested if petty cash was miscounted with the result that the amount of petty cash is overstated by Rs.100. This is immaterial. However, they will be interested if there are receivables in the statement of financial position of Rs. 200,000 which are not in fact recoverable and which should therefore have been written off as a bad debt.",
+            "Applying the concept of materiality means that the auditor will not aim to examine every number in the financial statements. He will concentrate his efforts on the more significant items in the financial statements, either:",
+            "* because of their (high) value, or",
+            "* because there is a greater risk that they could be stated incorrectly."
+          ]
+        },
+        {
+          "title": "1.4 The statutory requirement for audit",
+          "paragraphs": [
+            "Most countries impose a statutory requirement for an annual (external) audit to be carried out on the financial statements of most companies.",
+            "However, in many countries, smaller companies are exempt from this requirement for an audit. Other entities, such as sole traders, partnerships, clubs and societies are usually not subject to a statutory audit requirement. Small companies and these other entities may decide to have a voluntary audit, even though this is not required by law. (e.g. In Pakistan, Companies Act 2017 exempts a private company having paid up share capital not exceeding Rs. 1 million or such higher amount as may be notified by the Commission (SECP) from the legal requirements of carrying out a statutory Audit)."
+          ]
+        }
+      ]
+      },
+      {
+      "heading": "2 STATUTORY AUDIT - THE REGULATORY FRAMEWORK",
+      "sections": [
+        {
+          "title": "2.1 Appointment, removal and remuneration of auditors (section 246 CA17)",
+          "paragraphs": [
+            "First auditor",
+            "The first auditor or auditors of a company shall be appointed by the board within ninety days of the date of incorporation of the company; and the auditor or auditors so appointed shall hold office until the conclusion of the first annual general meeting.",
+            "Subsequent auditors",
+            "Every company shall at each annual general meeting appoint an auditor or auditors on the recommendation of the board after obtaining consent of the auditors to hold office from the conclusion of that meeting until the conclusion of the next annual general meeting.",
+            "The Commission may appoint a person to fill the vacancy in the cases if the company fails to appoint:",
+            "* the first auditors within a period of 90 days of the date of incorporation of the company; or",
+            "* the auditors at an annual general meeting; or",
+            "* an auditor in the office to fill up a casual vacancy within thirty days after the occurrence of the vacancy; and",
+            "* appointed auditors are unwilling to act as auditors of the company.",
+            "Casual vacancy",
+            "The board will fill any casual vacancy in the office of an auditor within thirty days but, while any such vacancy continues, the surviving or continuing auditor or auditors, if any, may act.",
+            "Moreover, any auditor appointed to fill in any casual vacancy shall hold office until the conclusion of the next annual general meeting.",
+            "However, where the auditors are removed during their tenure, the board shall appoint the auditors with prior approval of the Commission.",
+            "Appointment of Auditor by the Commission (SECP) - Default Cases (Sec 246(7) Companies Act 2017)",
+            "If the company, fails to appoint:",
+            "a) the first auditors within a period of ninety days of the date of incorporation of the company;",
+            "b) the auditors at an annual general meeting; or",
+            "c) an auditor in the office to fill up a casual vacancy within thirty days after the occurrence of the vacancy; and",
+            "d) if the appointed auditors are unwilling to act as auditors of the company;",
+            "the Commission may, of its own motion or on an application made to it by the company or any of its members direct to make good the default within such time as may be specified in the order. In case the company fails to report compliance within the period so specified, the Commission shall appoint auditors of the company who shall hold office till conclusion of the next annual general meeting.",
+            "Remuneration of the auditors",
+            "The remuneration of the auditors of a company shall be fixed:",
+            "* by the company in the general meeting",
+            "* in the case of an auditor appointed by the board or by the Commission, by the board or by the Commission, as the case may be."
+          ]
+        },
+        {
+          "title": "2.2 Resolutions relating to the appointment or removal of auditors - s246 CA17",
+          "paragraphs": [
+            "Whilst the Companies Act does not give specific guidance as to the resignation of auditors it does address the mechanics of resolutions relating to the appointment and removal of auditors.",
+            "The Act states:",
+            "* A notice shall be required for a resolution at a company's annual general meeting appointing as auditor a person other than a retiring auditor.",
+            "* A member or members having not less than 10% shareholding of the company will be entitled to propose any auditor for appointment whose consent has been obtained by him. A notice in this regard will be given to the company not less than seven days before the date of the annual general meeting. The company shall forthwith send a copy of such notice to the retiring auditor and will also post it on its website.",
+            "* Where an auditor, other than the retiring auditor is proposed to be appointed, the retiring auditor will have a right to make a representation in writing to the company at least two days before the date of general meeting. Such representation will be read out at the meeting before taking up the agenda for appointment of the auditor:",
+            "However, where such representation is made, it will be mandatory for the auditor or a person authorized by him in writing to attend the general meeting in person.",
+            "* Every company shall, within fourteen days from the date of any appointment of an auditor, send to the registrar intimation thereof, together with the consent in writing of the auditor concerned."
+          ]
+        },
+        {
+          "title": "2.3 Removal of auditors",
+          "paragraphs": [
+            "The auditor or auditors appointed by the board or the members in an annual general meeting may be removed through a special resolution."
+          ]
+        },
+        {
+          "title": "2.4 Qualification and disqualification of auditors (Section 247 CA17)",
+          "paragraphs": [
+            "A person shall not be qualified for appointment as an auditor-",
+            "e) in the case of a public company or a private company which is subsidiary of a public company or a private company having paid up capital of three million rupees or more unless such person is a chartered accountant having valid certificate of practice from the Institute of Chartered Accountants of Pakistan or a firm of chartered accountants; and",
+            "f) in the case of a company other than that specified above, unless such person, is a chartered accountant or cost and management accountant having valid certificate of practice from the respective institute or a firm of chartered accountants or cost and management accountants, having such criteria as may be specified:",
+            "It should be noted that for the purposes of (a) and (b) above, a firm where majority of practicing partners are qualified for appointment shall be appointed by its firm name to be auditors of the company.",
+            "Where a partnership firm is appointed as auditor of a company, only the partners who meet the qualification requirements as given above will be authorized to act and sign on behalf of the firm.",
+            "None of the following persons will be appointed as auditor of a company:",
+            "a) *a person who is, or at any time during the preceding three years was, a director, other officer or employee of the company;",
+            "b) *a person who is a partner of, or in the employment of, a director, officer or employee of the company;",
+            "c) the spouse of a director of the company;",
+            "d) a person who is indebted to the company other than in the ordinary course of business of such entities. The following persons will not be deemed to be indebted to the company:",
+            "* a person who owes a sum of money not exceeding one million rupees to a credit card issuer; or",
+            "* a person who owes a sum to a utility company in the form of unpaid dues for a period not exceeding ninety days shall not be deemed to be indebted to the company.",
+            "e) a person who has given a guarantee or provided any security in connection with the indebtedness of any third person to the company other than in the ordinary course of business of such entities;",
+            "f) a person or a firm who, whether directly or indirectly, has business relationship with the company other than in the ordinary course of business of such entities;",
+            "g) a person who has been convicted by a court of an offence involving fraud and a period of ten years has not elapsed from the date of such conviction;",
+            "h) a body corporate;",
+            "i) a person who is not eligible to act as auditor under the code of ethics as adopted by the Institute of Chartered Accountants of Pakistan and the Institute of Cost and Management Accountants of Pakistan; and",
+            "j) a person or his spouse or minor children, or in case of a firm, all partners of such firm who hold any shares of an audit client or any of its associated companies:",
+            "Provided that if such a person holds shares prior to his appointment as auditor, whether as an individual or a partner in a firm, the fact shall be disclosed on his appointment as auditor and such person shall disinvest such shares within ninety days of such appointment.",
+            "A person will not be qualified for appointment as auditor of a company if he is due to the above mentioned disqualifications is disqualified for appointment as auditor of any other company which is that company's subsidiary or holding company or a subsidiary of that holding company.",
+            "If, after his appointment, an auditor becomes subject to any of the disqualifications due to any reason mentioned above, he will be deemed to have vacated his office as auditor with effect from the date of disqualification.",
+            "A person who is not qualified to be an auditor of a company, acts as auditor of a company shall be liable to a penalty of level 2 on the standard scale.",
+            "The appointment as auditor of a company of an unqualified person, or of a person who is subject to any disqualifications to act as such, shall be void, and, where such an appointment is made by a company, the Commission may appoint a qualified person in place of the auditor appointed by the company.",
+            "* A reference to officer or employee will not be interpreted as reference to auditor."
+          ]
+        },
+        {
+          "title": "2.5 Rights and duties of auditors (Section 248 & 249 of CA17)",
+          "paragraphs": [
+            "An auditor of a company has a right:",
+            "* of access at all times to the company's books, accounts and vouchers (in whatever form they are held); and",
+            "* of access to such copies of, an extracts from, the books and accounts of the branch as have been transmitted to the principal office of the company;",
+            "* to require any of the following persons to provide him with such information or explanations as he thinks necessary for the performance of his duties as auditor:",
+            "i. any director, officer or employee of the company;",
+            "ii. any person holding or accountable for any of the company's books, accounts or vouchers;",
+            "iii. any subsidiary undertaking of the company; and",
+            "iv. any officer, employee or auditor of any such subsidiary undertaking of the company or any person holding or accountable for any books, accounts or vouchers of any such subsidiary undertaking of the company.",
+            "If any officer of a company refuses or fails, without lawful justification, the onus whereof will lie on him, to allow any auditor access to any books and papers in his custody or power, or to give any such information possessed by him as and when required, or otherwise hinders, obstructs or delays an auditor in the performance of his duties or the exercise of his powers or fails to give notice of any general meeting to the auditor or provides false or incorrect information, he shall be liable to penalty of level 3 on the standard scale.",
+            "Duties of auditor",
+            "A company's auditor will conduct the audit and prepare his report in compliance with the requirements of International Standards on Auditing as adopted by the Institute of Chartered Accountants of Pakistan.",
+            "A company's auditor must carry out such examination to enable him to form an opinion as to:",
+            "a) whether adequate accounting records have been kept by the company and returns adequate for their audit have been received from branches not visited by him; and",
+            "b) whether the company's financial statements are in agreement with the accounting records and returns.",
+            "The auditor will make out a report to the members of the company on the accounts and books of accounts of the company and on every financial statements and on every other document forming part of such statements including notes, statements or schedules appended thereto, which are to be laid before the company in general meeting and the report will state:",
+            "a) whether or not they have obtained all the information and explanations which to the best of their knowledge and belief were necessary for the purposes of the audit and if not, the details thereof and the effect of such information on the financial statements;",
+            "b) whether or not in their opinion proper books of accounts as required by this Act have been kept by the company;",
+            "c) whether or not in their opinion the statement of financial position and profit and loss account and other comprehensive income or the income and expenditure account and the cash flows have been drawn up in conformity with the requirements of accounting and reporting standards as notified under this Act and are in agreement with the books of accounts and returns;",
+            "d) whether or not in their opinion and to the best of their information and according to the explanations given to them, the said accounts give the information required by this Act in the manner so required and give a true and fair view:",
+            "i. in the case of the statement of financial position, of the state of affairs of the company as at the end of the financial year;",
+            "ii. in the case of the profit and loss account and other comprehensive income or the income and expenditure account, of the profit or loss and other comprehensive income or surplus or deficit, as the case may be, for its financial year; and",
+            "iii. in the case of statement of cash flows, of the generation and utilisation of the cash and cash equivalents of the company for its financial year;",
+            "e) whether or not in their opinion:",
+            "i. investments made, expenditure incurred and guarantees extended, during the year, were for the purpose of company's business; and",
+            "ii. zakat deductible at source under the Zakat and Usher Ordinance, 1980 (XVIII of 1980), was deducted by the company and deposited in the Central Zakat Fund established under section 7 of that Act.",
+            "Explanation. -Where the auditor's report contains a reference to any other report, statement or remarks which they have made on the financial statements examined by them, such statement or remarks will be annexed to the auditor's report and will be deemed to be a part of the auditor's report.",
+            "Where any of the matters referred above is answered in the negative or with a qualification, the report will state the reason for such answer along with the factual position to the best of the auditor's information.",
+            "The Commission may, by general or special order, direct that, in the case of all companies generally or such class or description of companies as may be specified in the order, the auditor's report will also include a statement of such additional matters as may be so specified.",
+            "The auditor will express unmodified or modified opinion in his report in compliance with the requirements of International Standards on Auditing as adopted by the Institute of Chartered Accountants of Pakistan.",
+            "The Commission may by general or special order, direct, that the statement of compliance as contained in the Act is reviewed by the auditor who will issue a review report to the members on the format specified by the Commission.",
+            "The auditor of a company will be entitled to attend any general meeting of the company, and to receive all notices of, and any communications relating to, any general meeting which any member of the company is entitled to receive, and to be heard at any general meeting which he attends on any part of the business which concerns him as auditor:",
+            "Provided that, in the case of a listed company, the auditor or a person authorised by him in writing will be present in the general meeting in which the financial statements and the auditor's report are to be considered."
+          ]
+        },
+        {
+          "title": "2.6 Audit report signature (s251 CA17)",
+          "paragraphs": [
+            "The auditor's report must state the name of the auditor, engagement partner, be signed, dated and indicate the place at which it is signed.",
+            "Where the auditor is an individual, the report must be signed by him.",
+            "Where the auditor is a firm, the report must be signed by the partnership firm with the name of the engagement partner."
+          ]
+        },
+        {
+          "title": "2.7 Audit of cost accounts (s250 CA17)",
+          "paragraphs": [
+            "Where any company or class of companies is required under the Act to include in its books of account the particulars referred to therein, the Commission may direct that an audit of cost accounts of the company should be conducted as may be specified in the order by an auditor who is a chartered accountant within the meaning of the Chartered Accountants Ordinance, 1961 (X of 1961), or a cost and management accountant within the meaning of the Cost and Management Accountants Act, 1966 (XIV of 1966); and such auditor will have the same powers, duties and liabilities as an auditor of a company and such other powers, duties and liabilities as may be specified.",
+            "The audit of cost accounts of the company under the circumstances mentioned above will be directed by the Commission subject to the recommendation of the regulatory authority supervising the business of relevant sector or any entity of the sector"
+          ]
+        },
+        {
+          "title": "2.8 Penalty for non-compliance with the Companies Act, 2017",
+          "paragraphs": [
+            "Company default (s252 CA17)",
+            "If a company defaults on complying with the requirements of sections 246, 247, 248 and 250, it shall be liable to a penalty of offense of level 3 on the standard scale, i.e., up to Rs. 100 million and up to Rs. 500,000 per day if the default continues.",
+            "Auditor default (s253 CA17)",
+            "If any auditor's report or review report is made, or any document of the company is signed or authenticated otherwise than in conformity with the requirements of (sections 131, 249 and 251 of the Act), or is otherwise untrue or fails to bring out material facts about the affairs of the company or matters to which it purports to relate, the auditor concerned and the person, if any, other than the auditor who signs the report or signs or authenticates the document, and in the case of a firm all partners of the firm, shall be punishable to a penalty of level 2 on the standard scale i.e., up to Rs. 500,000 and up to Rs. 1,000 per day if the default continues.",
+            "If the auditor's report is made with the intent to profit the auditor or any other person or to put another person to a disadvantage or loss or for a material consideration, the auditor shall, in addition to the penalty provided above, be punishable with imprisonment for a term which may extend two years and with a penalty which may extend to one million rupees."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "3 INTERNATIONAL STANDARDS ON AUDITING (ISAS)",
+      "sections": [
+        {
+          "title": "3.1 The role of auditing standards",
+          "paragraphs": [
+            "The role of the audit is to provide a high level of assurance to the users of the financial statements. This assurance will be of greater value to users if they know that the audit has been carried out in accordance with established standards of practice.",
+            "In addition, if users compare the financial statements of a number of companies, it is important that the user has confidence that consistent auditing standards have been applied to the audits of all of the companies.",
+            "International Standards on Auditing (known as ISAs) apply primarily to the external audit process. However, their provisions can also often be seen as good practice for relevant areas of the work of the internal auditor."
+          ]
+        },
+        {
+          "title": "3.2 Introduction to IAASB and IFEA",
+          "paragraphs": [
+            "The International Foundation for Ethics and Audit (IFEA) is a non-profit organization that supports high-quality, international standard setting in ethics, audit, and assurance in the public interest. IFEA fulfils its mission through its two standard-setting boards:",
+            "* International Auditing and Assurance Standards Board (IAASB); and",
+            "* International Ethics Standards Board for Accountants.",
+            "⯈ Definition: IAASB (International Auditing and Assurance Standards Board)",
+            "The IAASB is one of the boards within IFEA. It is an independent standard-setting body that serves the public interest by setting high-quality international standards for auditing, assurance, and other related standards, and by facilitating the convergence of international and national auditing and assurance standards. In doing so, the IAASB enhances the quality and consistency of practice throughout the world and strengthens public confidence in the global auditing and assurance profession."
+          ]
+        },
+        {
+          "title": "3.3 The process of issuing auditing standards",
+          "paragraphs": [
+            "Responsibility for ISAs",
+            "The Institute of Chartered Accountant of Pakistan adopts the International Standards on Auditing (ISAs) issued by the IAASB. The examination of this paper is based on the knowledge of ISAs.",
+            "Developing a new ISA",
+            "The process of developing an ISA is as follows:",
+            "* A subject is selected for detailed study, with a view to eventually issuing an ISA.",
+            "* After a period of study and research, if there is agreement to proceed, an exposure draft is produced. The exposure draft is approved by the IAASB and then distributed widely amongst the profession and others for comment.",
+            "* Comments and proposed amendments are considered by the IAASB. The draft standard is then modified and approved by the IAASB.",
+            "* The new ISA is then published."
+          ]
+        },
+        {
+          "title": "3.4 International Auditing Practice Statements",
+          "paragraphs": [
+            "In addition to ISAs, the IAASB also issues International Auditing Practice Statements (IAPSs). These do not have the same authority as ISAs.",
+            "IAPSs aim to:",
+            "* provide help to auditors in implementing ISAs",
+            "* promote good auditing practice in general."
+          ]
+        },
+        {
+          "title": "3.5 Preface to International Standards on Quality Management, Auditing, Review, Other Assurance and Related Services",
+          "paragraphs": [
+            "The IAASB issues a number of other international standards, in addition to ISAs. The table below sets out these standards, including ISAs, and when the preface says they are to be applied.",
+            "| Type of standard | When applied |\n|---|---|\n| International Standards on Auditing (ISAs) | In the audit of historical financial information |\n| International Standards on Review Engagements (ISREs) | In the review of historical financial information |\n| International Standards on Assurance Engagements (ISAEs) | In assurance engagements other than audits or reviews of historical financial information |\n| International Standards on Related Services (ISRSs) | On compilation engagements, engagements to apply agreed upon procedures to information and other related services engagements |\n| International Standards on Quality Management (ISQMs) | For all the above services |",
+            "The IAASB's pronouncements do not override local laws or regulations. If local laws or regulations differ from, or conflict with, the IAASB's standards then a professional accountant should not state that he has complied with the IAASB's standards unless he has fully complied with all of those relevant to the engagement.",
+            "International Standards on Auditing (ISAs)",
+            "ISAs are written in the context of an audit of financial statements by an independent auditor. They are to be adapted as necessary when applied to audits of other historical financial statements.",
+            "International Standards on Quality Management (ISQMs)",
+            "ISQMs apply to all services carried out under the IAASB's engagement standards (ISAs, ISREs, ISAEs and ISRSs).",
+            "Other International Standards",
+            "The other international standards (ISREs, ISAEs and ISRSs) contain:",
+            "* basic principles and essential procedures (identified in bold type and by the word \"should\"), and",
+            "* related guidance in the form of explanatory and other material, including appendices.",
+            "The basic principles and procedures must be followed. In exceptional circumstances, a professional accountant may judge it necessary not to follow a relevant essential procedure in order to achieve their objectives. In these circumstances, the auditor must be prepared to justify the departure from the requirements of the standard."
+          ]
+        },
+        {
+          "title": "3.6 ISA 200: Overall objectives of the independent auditor and the conduct of an audit in accordance with International Standards on Auditing",
+          "paragraphs": [
+            "The objectives of the auditor are formally specified in ISA 200 as:",
+            "* to obtain reasonable assurance about whether the financial statements as a whole are free from material misstatement, whether due to fraud or error, thereby enabling the auditor to express an opinion on whether the financial statements are prepared, in all material respects, in accordance with the applicable financial reporting framework.",
+            "* to report on the financial statements, and communicate as required by the ISAs, in accordance with the auditor's findings.",
+            "ISA 200 requires the auditor to:",
+            "* comply with all ISAs relevant to the audit",
+            "* comply with relevant ethical requirements",
+            "* plan and perform an audit with professional scepticism",
+            "* exercise professional judgement in planning and performing an audit",
+            "* obtain sufficient appropriate audit evidence to allow him to obtain reasonable assurance",
+            "Professional skepticism - An attitude that includes a questioning mind, being alert to conditions which may indicate possible misstatement due to error or fraud, and a critical assessment of audit evidence.",
+            "Examples of Professional Skepticism",
+            "* Audit evidence that contradicts other audit evidence",
+            "* Information that bring into question the reliability of documents",
+            "* Condition that may indicate possibility of fraud",
+            "Advantages of Maintaining Professional Skepticism",
+            "Maintaining Professional Skepticism throughout the audit is necessary to reduce the risk of:",
+            "* Overlooking unusual transaction",
+            "* Over generalising when drawing conclusion from audit observation",
+            "* Using inappropriate assumptions in determining the nature, timing and extent of audit procedures and evaluating result thereof",
+            "Professional judgment - The application of relevant training, knowledge and experience, within the context provided by auditing, accounting and ethical standards, in making informed decisions about the courses of action that are appropriate in the circumstances of the audit engagement.",
+            "Uses of Professional Judgement",
+            "* Materiality and audit risk",
+            "* Nature, timing and extent of audit procedures used to obtain audit evidence",
+            "* Evaluate whether sufficient appropriate audit evidence has been obtained",
+            "* Evaluation of management judgement in applying appropriate financial reporting framework",
+            "* Drawing conclusion based on audit evidence obtained. For e.g. assessing the reasonableness of the estimates by the management",
+            "Sufficient appropriate audit evidence - Sufficiency is the measure of the quantity of audit evidence. Appropriateness is the measure of the quality of audit evidence in terms of its relevance and reliability. The sufficiency and appropriateness of audit evidence are interrelated, obtaining more audit evidence may not compensate for its poor quality."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "4 ADVANTAGES AND LIMITATIONS OF STATUTORY AUDITS",
+      "sections": [
+        {
+          "title": "Overview",
+          "paragraphs": [
+            "There are several advantages in having an external audit, but there are also some limitations."
+          ]
+        },
+        {
+          "title": "4.1 Advantages of statutory audits",
+          "paragraphs": [
+            "An external audit provides the following benefits:",
+            "* It increases the credibility of published financial statements.",
+            "* It confirms to management that they have performed their statutory duties correctly.",
+            "* It provides assurance to management that they have complied with non-statutory requirements, such as corporate governance requirements (where these are subject to audit or review).",
+            "* It provides feedback on the effectiveness of internal controls. Where internal controls are weak or inadequate, the auditor will give recommendations for improvement. This will assist management in reducing risk and improving the performance of the company.",
+            "Even where a statutory audit is not required, for example due to small company statutory exemption limits (in some countries), an audit will increase the credibility of published financial statements. This may be important for potential lenders to the company. Potential lenders, such as banks, may insist on the company having an audit as a pre-condition for lending money."
+          ]
+        },
+        {
+          "title": "4.2 Limitations of statutory audits",
+          "paragraphs": [
+            "The main limitations of an audit are as follows:",
+            "* Its cost. The cost of an audit can be very high. However, if the audit firm is already hired to carry out non- audit work such as advisory work, the additional cost of an audit may be fairly small.",
+            "* The disruption caused to a company's staff during the audit. The company's staff may be required to assist the auditors by answering questions, providing documents and other information.",
+            "* Some items in the subject matter might be estimates whose truth and fairness will not be known with certainty until some point in the future. This means the assurance opinion is ultimately subjective and judgmental.",
+            "* Most fraud will include an attempt to deliberately conceal the truth or misrepresent information.",
+            "* In order to balance cost and efficiency the auditor routinely uses sampling rather than tests every item.",
+            "* Irrespective of how robust a client's systems are they will always incorporate some degree of inherent limitation.",
+            "* Audit evidence is persuasive rather than conclusive, i.e., they persuade the auditor to believe that a particular assertion has been justified instead of providing a conclusion"
+          ]
+        }
+      ]
+    }
+  ]
+}

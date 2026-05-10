@@ -1,0 +1,696 @@
+{
+  "id": "caf8_chapter_3",
+  "source": {
+    "chapter": "Chapter 3",
+    "title": "PLANNING AND RISK ASSESSMENT"
+  },
+  "pages": [
+    {
+      "heading": "1 PLANNING AN AUDIT: ISA 300",
+      "sections": [
+        {
+          "title": "1.1 Introduction to ISA 300 Overview",
+          "paragraphs": [
+            "The objective of the auditor, as per ISA 300 Planning an audit of financial statements is to plan the audit work so that the audit will be performed in an effective manner. ISA 300 is written primarily in the context of recurring audits. Additional considerations in an initial audit engagement are separately identified too.",
+            "Adequate planning benefits the audit by:",
+            "* helping the auditor to devote appropriate attention to important areas of the audit",
+            "* helping the auditor to identify and resolve potential problems on a timely basis",
+            "* helping the auditor organise and manage the audit engagement so that it is performed in an effective and efficient manner",
+            "* assisting in the selection of staff with appropriate experience to respond to anticipated risk and the proper assignment of work to them",
+            "* allowing for the direction and supervision of staff and review of their work.",
+            "ISA 300 requires the auditor to:",
+            "* involve the whole engagement team in planning the audit",
+            "* performing procedures regarding the continuance of the client relationship, specific audit engagement, evaluating compliance with relevant ethical requirements and independence, in accordance with ISA 220 (revised)",
+            "* establish an understanding of the terms of the engagement as required by ISA 210",
+            "* establish an overall strategy for the audit that sets the scope, timing and direction of the audit and that guides the development of the audit plan",
+            "* develop an audit plan which includes a description of the nature, timing and extent of planned risk assessment procedures and planned further audit procedures",
+            "* document the overall audit strategy and the audit plan, including any significant changes made during the audit.",
+            "The above requirements are discussed in detail as follows:"
+          ]
+        },
+        {
+          "title": "Involvement of key engagement team members",
+          "paragraphs": [
+            "* ISA 300 requires the engagement partner and other key members of the engagement team to be involved in planning the audit, including planning and participating in the discussion among engagement team members to enhance the efficiency and effectiveness of the planning process."
+          ]
+        },
+        {
+          "title": "Preliminary engagement activities",
+          "paragraphs": [
+            "The auditor shall undertake the following activities at the beginning of each audit engagement:",
+            "* Perform procedures required by ISA 220 (revised) Quality Management for an Audit of Financial Statements regarding the continuance of the client relationship and the specific audit engagement. This will involve establishing whether the auditor:",
+            "- is competent to perform the engagement and has the capabilities, including time and resources, to do so;",
+            "- can comply with relevant ethical requirements;",
+            "- has considered the integrity of the client, and does not have information that would lead it to conclude that the client lacks integrity; and",
+            "- has considered significant matters that have arisen during the current or previous audit engagement, and their implications for continuing the relationship.",
+            "* Evaluate compliance with relevant ethical requirements, including independence, in accordance with ISA 220 (revised).",
+            "* Establish an understanding of the terms of the engagement, as required by ISA 210 (see chapter 2)."
+          ]
+        },
+        {
+          "title": "Planning Activities",
+          "paragraphs": [
+            "The auditor shall establish an overall audit strategy that sets the scope, timing and direction of the audit, and that guides the development of the audit plan.",
+            "* In establishing the overall audit strategy, the auditor shall: identify the characteristics of the engagement that define its scope;",
+            "* ascertain the reporting objectives of the engagement to plan the timing of the audit and the nature of the communications required;",
+            "* consider the factors that, in the auditor's professional judgment, are significant in directing the engagement team's efforts;",
+            "* consider the results of preliminary engagement activities and, where applicable, whether knowledge gained on other engagements performed by the engagement partner for the entity is relevant; and",
+            "* ascertain the nature, timing and extent of resources necessary to perform the engagement. The overall audit strategy and audit plan are considered in greater detail below."
+          ]
+        },
+        {
+          "title": "1.4 Contents of the overall audit strategy and the audit plan",
+          "paragraphs": [
+            "The overall audit strategy",
+            "As set out above, the overall audit strategy sets the scope, timing and direction of the audit and guides the development of the more detailed audit plan. The establishment of the overall audit strategy involves the following:",
+            "* Determining the characteristics of the engagement that define its scope such as:",
+            "- The financial reporting framework used (for example, international financial reporting standards)",
+            "- Any industry specific reporting requirements",
+            "- The location of the components of the entity (for example, there might be overseas branches).",
+            "- The nature of the business segments to be audited, including the need for specialized knowledge.",
+            "- The reporting currency to be used, including any need for currency translation for the financial information audited.",
+            "- The need for a statutory audit of standalone financial statements in addition to an audit for consolidation purposes.",
+            "- Whether the entity has an internal audit function and, if so, whether, in which areas and to what extent, the work of the function can be used, or internal auditors can be used to provide direct assistance, for purposes of the audit.",
+            "- The expected use of audit evidence obtained in previous audits, for example, Audit evidence related to risk assessment procedures and tests of controls.",
+            "- The effect of information technology on the audit procedures, including the availability of data and the expected use of computer-assisted audit techniques.",
+            "* The coordination of the expected coverage and timing of the audit work with any reviews of interim financial information and the effect on the audit of the information obtained during such reviews.",
+            "* The availability of client personnel and data.",
+            "* Ascertaining the reporting objectives of the engagement establishing deadlines for completion of work and key dates for expected communication.",
+            "* The entity's timetable for reporting such as at interim and final stages.",
+            "* The organization of meetings with management and those charged with governance to discuss the nature, timing and extent of the audit work.",
+            "* The discussion with management and those charged with governance regarding the expected type and timing of reports to be issued and other communications both written and oral including the auditor's report management letters and communication to those charged with governance.",
+            "* The discussion with management regarding the expected communication on the status of audit work throughout the engagement.",
+            "* The expected nature and timing of communication among the engagement team members including the nature and timing of team meetings and timings of the review of work performed",
+            "* Considering important factors which will determine the focus of the audit team's efforts, such as:",
+            "* materiality thresholds",
+            "* high risk areas of the audit",
+            "* impact of assessed risk of material misstatement at the overall financial statement level on direction, supervision and review",
+            "* the audit approach (for example, whether the auditor is planning to rely on the entity's internal controls)",
+            "* emphasis of maintaining questioning mind and professional scepticism",
+            "* volume of transaction and whether to rely on internal control",
+            "The above will then allow the auditor to decide on the nature, extent and timing of resources needed to perform the engagement. In particular, the auditor should consider:",
+            "* The selection of the engagement team and the assignment of the audit work to the team members, including the assignment of appropriately experienced team members to areas where there may be a higher risk of material misstatement",
+            "Engagement budgeting including considering the appropriate level of time for areas where there may be higher risk of material misstatement"
+          ]
+        },
+        {
+          "title": "The audit plan",
+          "paragraphs": [
+            "Once the overall audit strategy has been established the auditor can develop the more detailed audit plan. The audit plan will set out:",
+            "* the procedures to be used in order to assess the risk of misstatement in the entity's accounting records/financial statements, and",
+            "* planned further audit procedures for each material audit area. These audit procedures might be in response to the risks assessed, or specific procedures to be carried out to ensure that the engagement complies with ISAs.",
+            "The audit procedures to be performed by audit team members will be those needed in order to:",
+            "* obtain sufficient appropriate audit evidence, and",
+            "* reduce audit risk to an acceptably low level.",
+            "Audit risk is considered in detail in the next section. What constitutes \"sufficient appropriate audit evidence\" is considered in a later chapter.",
+            "These procedures will be set out in a series of audit programmes. Audit programmes are sets of instructions to the audit team, specifying the audit procedures that should be performed in each area of the audit."
+          ]
+        },
+        {
+          "title": "Documentation",
+          "paragraphs": [
+            "The auditor shall include in the audit documentation:",
+            "* The overall audit strategy;",
+            "* The audit plan; and",
+            "* Any significant changes made during the audit engagement to the overall strategy or the audit plan along with reasons thereof."
+          ]
+        },
+        {
+          "title": "1.5 Interim audit and final audit",
+          "paragraphs": [
+            "Most large audits will be split into two phases. Much of the systems assessment work and transaction testing will be carried out on the interim audit (taking place perhaps two-thirds of the way through the year) with the balance of the work and testing of statement of financial position items taking place at the final audit shortly after the year end.",
+            "A number of key benefits may arise from spreading the work across interim and final audit such as:",
+            "* More flexible resource planning within the firm - the timing of interim audit is typically more flexible than the timing of final audit. This helps reduce demand for audit staff during 'busy season' (traditionally the first few months of a calendar year when many clients require their final audit to take place)",
+            "* Earlier identification of significant matters",
+            "* Shareholders and other users receive audited accounts earlier",
+            "* Increased audit efficiency ISA 330 also states:",
+            "\"The higher the risk of material misstatement, the more likely it is that the auditor may decide it is more effective to perform substantive procedures nearer to, or at, the period end rather than at an earlier date\".",
+            "Typical interim audit procedures include:",
+            "* Obtaining an understanding of the entity and its environment including its internal control.",
+            "* Determining materiality",
+            "* Response to the assessed risk of material misstatement",
+            "* Test the operating effectiveness of control",
+            "* Perform preliminary analytical procedures",
+            "* Perform substantive procedures on transaction occurred till date. Typical final audit procedures include:",
+            "Substantive testing. Note that where substantive testing was performed at the interim phase auditors typically test the subsequent period between interim audit and period end",
+            "* Subsequent events Procedures",
+            "* Going concern procedures",
+            "* Final analytical procedure",
+            "* Tests to ensure conclusions formed at interim audit remain valid",
+            "* Obtaining third party confirmations such as bank letters and trade receivables confirmations",
+            "* Obtaining written representations",
+            "* ISA 330 specifically states that the following procedures can only be performed at or after the period end:",
+            "- Agreeing the financial statements to the accounting records;",
+            "- Examining adjustments made during the course of preparing the financial statements; and",
+            "- Procedures to respond to a risk that, at the period end, the entity may have entered into improper sales contracts, or transactions may not have been finalized."
+          ]
+        },
+        {
+          "title": "1.6 Additional considerations in initial audit engagements",
+          "paragraphs": [
+            "The purpose and objective of planning the audit are the same whether the audit is an initial or recurring engagement. However, for an initial audit, the auditor may need to expand the planning activities because the auditor does not ordinarily have the previous experience with the entity that is considered when planning recurring engagements. For an initial audit engagement, additional matters the auditor may consider in establishing the overall audit strategy and audit plan include the following:",
+            "* Unless prohibited by law or regulation, arrangements to be made with the predecessor auditor, for example, to review the predecessor auditor's working papers;",
+            "* Any major issues (including the application of accounting principles or of auditing and reporting standards) discussed with management in connection with the initial selection as auditor, the communication of these matters to those charged with governance and how these matters affect the overall audit strategy and audit plan;",
+            "* The audit procedures necessary to obtain sufficient appropriate audit evidence regarding opening balances;",
+            "* Other procedures required by the firm's system of quality management for initial audit engagements (for example, the firm's system of quality management may require the involvement of another partner or senior individual to review the overall audit strategy prior to commencing significant audit procedures or to review reports prior to their issuance)."
+          ]
+        },
+        {
+          "title": "Documentation (Initial Audit)",
+          "paragraphs": [
+            "The auditor shall include in the audit documentation:",
+            "* The overall audit strategy;",
+            "* The audit plan; and",
+            "* Any significant changes made during the audit engagement to the overall strategy or the audit plan along with reasons thereof."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "2 UNDERSTANDING THE BUSINESS AND MATERIALITY: ISAS 315(REVISED 2019) AND 320",
+      "sections": [
+        {
+          "title": "Auditor's Risk Assessment Process",
+          "paragraphs": [
+            "The auditor performs risk assessment procedures to provide a basis for the identification and assessment of risks of material misstatement. ISA 315(Revised 2019) requires the auditor's risk assessment procedures to include the following:",
+            "* Inquiries (i.e. asking questions and getting answers) of:",
+            "- management;",
+            "- appropriate individuals within the internal audit function if such a function exists (irrespective of whether the external auditor plans to use the work of internal audit and/or use them for direct assistance, as such inquiry will assist the external auditor's understanding of the role that internal audit plays in the monitoring of controls); and",
+            "- others who may have information that is likely to assist in identifying risks of material misstatement due to fraud or error.",
+            "* Analytical procedures,",
+            "Analytical procedures may help identify the existence of unusual transactions or events, and amounts, ratios, and trends that might indicate matters that have audit implications. Unusual or unexpected relationships that are identified may assist the auditor in identifying risks of material misstatement, especially risks of material misstatement due to fraud",
+            "* Observation and inspection",
+            "Observation and inspection may support inquiries of management and others, and may also provide information about the entity and its environment. (for example, entity's operations, internal control manuals, entity's premises and plant facilities).",
+            "Using automated tools and techniques, the auditor may perform risk assessment procedures on large volumes of data (from the general ledger, sub-ledgers or other operational data) including for analysis, recalculations, reperformance or reconciliations."
+          ]
+        },
+        {
+          "title": "2.1 Understanding the Entity, its Environment, Applicable Financial Reporting Framework and the Entity's System of Internal Control",
+          "paragraphs": [
+            "The auditor is required to identify and assess the risks of misstatement, whether due to fraud or error, through understanding the entity and its environment, including its internal controls.",
+            "The auditor will perform risk assessment procedures to obtain an understanding of:",
+            "Entity and its environment",
+            "* The organizational structure, ownership and governance, and its business model, including the extent to which the business model integrates the use of IT;",
+            "* Relevant industry, regulatory and other external factors;",
+            "* The measures used internally and externally to assess the entity's financial performance.",
+            "Financial Reporting Framework",
+            "The applicable financial reporting framework, and the entity's accounting policies and the reasons for any changes;",
+            "How inherent risk factors affect susceptibility of assertions to misstatement and the degree to which they do so, in the preparation of the financial statements in accordance with the applicable financial reporting framework.",
+            "Business risks are risks occurring as a result of significant conditions, events, circumstances, actions or inactions that could affect an entity's ability to reach its objectives and carry out its strategies. Business risks can also occur as a result of setting of inappropriate objectives, strategies or goals."
+          ]
+        },
+        {
+          "title": "2.2 Understanding the accounting and internal control systems",
+          "paragraphs": [
+            "ISA 315 (Revised 2019) requires the auditor to obtain an understanding of internal controls relevant to the audit. Although most of the entity's internal controls will relate to financial reporting, not all will be relevant to the audit."
+          ]
+        },
+        {
+          "title": "2.3 The financial statement assertions (ISA 315(Revised 2019))",
+          "paragraphs": [
+            "⯈ Definition: Assertions",
+            "Representations, explicit or otherwise, with respect to the recognition, measurement, presentation and disclosure of information in the financial statements which are inherent in management representing that the financial statements are prepared in accordance with the applicable financial reporting framework. Assertions are used by the auditor to consider the different types of potential misstatements that may occur when identifying, assessing and responding to the risks of material misstatement.",
+            "IAASB Handbook - Glossary of terms",
+            "Modern auditing theory takes the view that the financial statements prepared by the management comprise a number of 'assertions' or representations. These assertions are set out in ISA 315(Revised 2019) and fall into the following categories:",
+            "* Assertions about classes of transactions and events and related disclosures for the period under audit (i.e. income statement assertions)",
+            "* Assertions about account balances and related disclosures at the period end (i.e. statement of financial position assertions)",
+            "Assertions about classes of transactions and events and related disclosures are as follows:",
+            "* Occurrence: Transactions and events that have been recorded or disclosed have occurred and relate to the entity.",
+            "* Completeness: There are no unrecorded transactions, events and disclosures.",
+            "* Accuracy: Amounts and other data relating to recorded transactions and events have been recorded appropriately and related disclosures have been appropriately measured and described.",
+            "* Cut-off: Transactions and events have been recorded in the correct accounting period.",
+            "* Classification: Transactions and events have been recorded in the proper accounts.",
+            "* Presentation: Transactions and events are appropriately aggregated or disaggregated and clearly described and related disclosures are relevant and understandable.",
+            "Assertions about account balances and related disclosures are as follows:",
+            "* Existence: Assets, liabilities and equity interests exist.",
+            "* Rights and obligations: The entity holds or controls the rights to assets, and liabilities are those of the entity.",
+            "* Completeness: There are no unrecorded assets, liabilities or equity interests and all related disclosures have been included.",
+            "* Accuracy, valuation and allocation: Assets, liabilities and equity interests are included in the financial statements at appropriate amounts and any resulting valuation or allocation adjustments are appropriately recorded and related disclosures have been appropriately measured and described.",
+            "* Classification: Assets, liabilities and equity interests are appropriately aggregated or disaggregated and clearly described, and related disclosures are relevant and understandable.",
+            "For each financial statement item being audited, the auditor should therefore generate evidence designed to reach a conclusion on the reliability of the appropriate assertions.",
+            "| **About Transactions / Events and Related Disclosures** | **About Account Balances and Related Disclosures** |\n|---|---|\n| **Occurrence** | **Existence** |\n| **Completeness** | **Rights and Obligations** |\n| **Accuracy** | **Completeness** |\n| **Cut-off** | **Accuracy, Valuation and Allocation** |\n| **Classification & Presentation** | **Classification & Presentation** |"
+          ]
+        },
+        {
+          "title": "2.4 Risk and materiality",
+          "paragraphs": [
+            "The auditor is required by ISA 315 (Revised 2019) to identify and assess the risks of material misstatement at both the financial statement and assertion levels.",
+            "The financial statement level refers to risks which are pervasive to the financial statements as a whole and which potentially affect many assertions (see below). An example might be if management have a tendency to override internal controls - this would affect all areas of the accounting systems.",
+            "The assertion level refers to specific objectives of the financial statements, for example, that all liabilities have been recorded and that recorded assets exist.",
+            "WHAT TO DOCUMENT",
+            "* The discussion among the engagement team and the significant decisions reached",
+            "* Key elements of the auditor's understanding, the sources of information from which the understanding was obtained and the risk assessment procedure performed",
+            "* The evaluation of the design of identified controls, and determination whether such controls have been implemented; and",
+            "* The identified and assessed risk of material misstatement at financial statement level and assertion level"
+          ]
+        },
+        {
+          "title": "ISA 320 - MATERIALITY",
+          "paragraphs": [
+            "SCOPE:",
+            "Auditor's responsibility to apply the concept of materiality appropriately in planning and performing an audit of Financial Statements What is Materiality?",
+            "As an auditor, our objective is to provide level of confidence to the user of the financial statements. Therefore, when auditor is determining materiality the auditor should consider what could be material for user not management.",
+            "DEFINITION OF MATERIALITY",
+            "\"Misstatement, including omissions, are considered to be material if they, individually or in aggregate, could reasonably be expected to influence the economic decision of the users taken on the basis of the Financial statement.\"",
+            "Exam Tip: Never use the word like we \"calculate\" the materiality. It's not the clerical exercise. We always \"determine\" materiality because it is a matter of professional judgement.",
+            "The auditor's determination of materiality is a matter of professional judgment, and is affected by the auditor's perception of the financial information needs of users of the financial statements. In this context, it is reasonable for the auditor to assume that users:",
+            "* Have a reasonable knowledge of business and economic activities and accounting and a willingness to study the information in the financial statements with reasonable diligence;",
+            "* Understand that financial statements are prepared, presented and audited to levels of materiality;",
+            "* Recognise the uncertainties inherent in the measurement of amounts based on the use of estimates, judgment and the consideration of future events; and",
+            "* Make reasonable economic decisions on the basis of the information in the financial statements",
+            "Determining Materiality",
+            "If the determination of materiality is not the mechanical exercise, then how should we determine materiality?",
+            "STEPS FOR DETERMING MATERIALITY",
+            "STEP 01: Understand the ownership structure and users of the financial statements.",
+            "STEP 02: Determine the elements of the financial statements.",
+            "STEP 03: Identify the benchmark of most importance to users",
+            "STEP 04: Determine the appropriate percentage to apply to the selected benchmark",
+            "STEP 05: Determine performance materiality and clearly trivial threshold"
+          ]
+        },
+        {
+          "title": "STEP 01: Understand the ownership structure and users of the financial statements",
+          "paragraphs": [
+            "As per the definition of materiality, auditor consider what could be material for USER. So the first step to determine materiality is to understand and identify who is the user of the financial statement.",
+            "Materiality is initially determined at planning stage so during that phase had we ever consider who the user of the FS is? As per ISA 315(Revised 2019) Auditor is required to obtain an understanding of the entity and its environment.",
+            "Auditor is required to obtain an understanding of the entity and its economic environment, the industry in which it operates, its ownership structure including the means by which the entity is financed to determine the users of the financial statements",
+            "Auditor shall also consider who receives or uses the financial statements and why an audit is required Common examples of primary users of the financial statements may include: shareholders and debt holders.",
+            "⯈ Example:",
+            "As an audit partner you are planning the audit of A Company. While obtaining the understanding of the entity and its environment you came across with the following facts.",
+            "* Company is a listed entity",
+            "* Company does not have any external borrowing",
+            "Based on the above facts Engagement Partner has concluded that User of the financial statements are shareholders",
+            "⯈ Example:",
+            "As an audit partner you are planning the audit of Company B. While obtaining the understanding of the entity and its environment you came across with the following facts.",
+            "* Company is a listed entity",
+            "* Company had obtained heavy financing from Banks",
+            "* Debt equity ratio is 80: 20",
+            "Based on the above facts Engagement Partner has concluded that User of the financial statements are Banks / Lenders",
+            "⯈ Example:",
+            "As an audit Partner you are planning the audit of Company C. While obtaining the understanding of the entity and its environment you came across with the following facts.",
+            "* Company is the non for profit organization",
+            "* Company's business is to provide the education service to the Pakistan",
+            "* Company is not listed neither obtained loans from banks",
+            "Based on the above facts Engagement Partner has concluded that User of the financial statements are member / trustee of the Company"
+          ]
+        },
+        {
+          "title": "STEP 02: Determine the elements of the financial statements.",
+          "paragraphs": [
+            "In the Step 01 we have determined the user of the financial statement. Now the next step is to determine the elements of financial statements such as PPE, Inventory, Borrowings, Intangible, Net asset, Total Asset, Revenue, Gross Profit, Expenses and etc.",
+            "⯈ Example:",
+            "If we are doing the audit of Bank, PPE and Inventory may not be the elements of the financial statements therefore we could not determine materiality based on the PPE and Inventory.",
+            "⯈ Example:",
+            "If we are doing the audit of Manufacturing Company, PPE and Inventory might be the elements of the financial statements therefore we may determine materiality based on the PPE and Inventory."
+          ]
+        },
+        {
+          "title": "STEP 03: Identify the benchmark of most important to users",
+          "paragraphs": [
+            "As in the step 02 there are so many elements of the financial statements. To determine the benchmark requires careful consideration of available information on the focus of the users of the financial statements.",
+            "⯈ Example:",
+            "The engagement team of Company A is in the planning phase. One of the key phase of planning is to determine materiality. While obtaining the understanding of the entity and its environment you came across with the following facts.",
+            "* The entity is a listed entity in the textile business.",
+            "* The Company does not have any significant borrowing from lenders / banks",
+            "* As per the draft financial statement, Company has reported the profit",
+            "* The Company has history to pay dividend",
+            "The engagement partner has determined that due to the fact that the entity is listed and does not have any extensive borrowing therefore user of the financial statements are shareholder and shareholder focus more on Profit before tax. It is the most appropriate benchmark for the user because economic decision of the user such as sale and purchase of shares and dividend income are based on profit before tax.",
+            "⯈ Example:",
+            "The engagement team of Company B is a listed entity that engaged in the business of power generation. While obtaining the understanding of the entity and its environment you came across with the following facts.",
+            "* It has been investing heavily in plant and machinery over the past years",
+            "* The investment has been financed ongoing through borrowings from banks.",
+            "Based on the above facts and circumstances, the engagement partner using the professional judgement has determined that user of the financial statements are lenders / banks.",
+            "The main focus of the readers of the entity's financial statements is net assets because if the company fails to repay the loan the bank may recover the amount by selling the assets of the Company.",
+            "| **Benchmark** | **Justification** |\n|---|---|\n| **Profit Before Tax** | * Listed entity with issued equity securities.<br>* Dividend-paying entity.<br>* Profit-oriented entity. |\n| **Revenue** | * Not-for-profit entity.<br>* A company incurring losses. |\n| **Cash Flow from Operations** | * Where the primary user is a bank and is focused on the ability of the entity to repay. |\n| **Expenses** | * Public sector entity.<br>* Not-for-profit entity. |\n| **Net Assets** | * Unitholders of mutual funds.<br>* Company with strategic investments having various subsidiaries and associates. |\n| **Total Assets** | * Highly leveraged entity with assets secured against financing. |"
+          ]
+        },
+        {
+          "title": "STEP 04: Determine the appropriate percentage to apply to the selected benchmarks",
+          "paragraphs": [
+            "Once the appropriate benchmark is identified, a percentage is applied to assist in determination of materiality. There is a relationship and involves the exercise of professional judgement to determine a percentage to be applied to a chosen benchmark.",
+            "Following guidelines may assist the auditor to determine materiality. Please note that these percentages haven't specified by the ISA 320 expressly, rather these are some of the best practices used by a majority of audit firms worldwide.",
+            "| **Benchmark** | **Percentage** |\n|---|---|\n| **Profit Before Tax** | **5%** |\n| **Revenue** | **1% to 5%** |\n| **Total Assets** | **Up to 1%** |\n| **Net Assets** | **Up to 3%** |\n| **Expenses** | **3% to 5%** |\n| **Cash Flow from Operations** | **3% to 5%** |"
+          ]
+        },
+        {
+          "title": "STEP 05: Determine Performance Materiality",
+          "paragraphs": [
+            "Once the materiality has been determined, we will determine performance materiality.",
+            "What is Performance Materiality?",
+            "The amount set by the auditor at less than materiality for the financial statements as a whole to reduce to an appropriately low level the probability that the aggregate of uncorrected and undetected misstatements exceeds materiality for the financial statements as a whole.",
+            "Planning the audit solely to detect individually material misstatements overlooks the fact that the aggregate of individually immaterial misstatements may cause the financial statements to be materially misstated, and leaves no margin for possible undetected misstatements",
+            "How to determine performance materiality?",
+            "The determination of Performance Materiality involves the exercise of professional judgement and is not a simple mechanical calculation. We determine performance materiality by deducting from materiality the total amount of uncorrected misstatement that we anticipate identifying and that we believe management will not correct in the financial statements.",
+            "It is affected by the:",
+            "* Auditor's understanding of the entity and its environment",
+            "* Nature and extent of misstatements identified in previous audits and thereby auditor's expectation in relation to misstatements in the current period",
+            "* The reliability of Entity's internal control over financial reporting",
+            "* Increased engagement risk",
+            "* Any changes in the business",
+            "What is the use of Materiality?",
+            "Materiality is considered throughout the audit such as:",
+            "Planning",
+            "In planning the audit, the auditor makes judgments about the size of misstatements that will be considered material. These judgments provide a basis for:",
+            "* Determining the nature, timing and extent of risk assessment procedures",
+            "* Identifying and assessing the risks of material misstatement; and",
+            "Performing",
+            "Determining the nature, timing and extent of further audit procedures.",
+            "Concluding",
+            "Evaluating the effect of uncorrected misstatements, if any, on the financial statements and in forming the opinion in the auditor's report.",
+            "Materiality level for particular class of transaction, account balance and disclosure",
+            "If, in the specific circumstances of the entity, there is one or more particular classes of transactions, account balances or disclosures for which misstatements of lesser amounts than materiality for the financial statements as a whole could reasonably be expected to influence the economic decisions of users taken on the basis of the financial statements, the auditor shall also determine the materiality level or levels to be applied to those particular classes of transactions, account balances or disclosures.",
+            "Factors that may indicate the existence of one or more particular classes of transactions, account balances or disclosures for which misstatements of lesser amounts than materiality for the financial statements as a whole could reasonably be expected to influence the economic decisions of users taken on the basis of the financial statements include the following:",
+            "* Whether law, regulation or the applicable financial reporting framework affect users' expectations regarding the measurement or disclosure of certain items (for example, related party transactions, and the remuneration of management and those charged with governance).",
+            "* The key disclosures in relation to the industry in which the entity operates (for example, research and development costs for a pharmaceutical company).",
+            "* Whether attention is focused on a particular aspect of the entity's business that is separately disclosed in the financial statements (for example, a newly acquired business).",
+            "Revision as the audit progress",
+            "The auditor shall revise materiality for the financial statements as a whole (and, if applicable, the materiality level or levels for particular classes of transactions, account balances or disclosures) in the event of becoming aware of information during the audit that would have caused the auditor to have determined a different amount (or amounts) initially.",
+            "Reasons for change in materiality",
+            "* Result of change in circumstances that occurred during the audit (for e.g. a decision to dispose a major part of the entity's business",
+            "* New information",
+            "* Change in the auditors understanding of the entity and its operation as a result of performing further audit procedures",
+            "For e.g. if during the audit it appears as though actual financial result are likely to be substantially different from the anticipated period-end financial result that were used initially to determine materiality for the financial statement as a whole, the auditor revises that materiality.",
+            "Documentation",
+            "The auditor shall include in the audit documentation the following amounts and the factors considered in their determination:",
+            "* Materiality for the financial statements as a whole",
+            "* If applicable, the materiality level or levels for particular classes of transactions, account balances or disclosures",
+            "* Performance materiality",
+            "* Any revision of Materiality and Performance Materiality as the audit progressed",
+            "Performance Materiality:",
+            "Performance materiality means the amount or amounts set by the auditor at less than materiality for the financial statements as a whole to reduce to an appropriately low level the probability that the aggregate of uncorrected and undetected misstatements exceeds materiality for the financial statements as a whole. If applicable, performance materiality also refers to the amount or amounts set by the auditor at less than the materiality level or levels for particular classes of transactions, account balances or disclosures. Performance materiality recognises the fact that errors/omissions detected in a particular area may not breach the overall materiality level but when all the errors/omissions in all the areas is combined or added together, the overall materiality could be breached."
+          ]
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "heading": "3 AUDIT RISK: ISA 330",
+      "sections": [
+        {
+          "title": "3.1 Risk-based approach to auditing",
+          "paragraphs": [
+            "As discussed above, a key feature of modern auditing is the 'risk-based' approach that is taken in most audits. At the planning stage, as required by ISA 315(Revised 2019), the auditor will identify and assess the main risks associated with the business to be audited. He will prepare an overall audit strategy and an audit plan, as required by ISA 300, to focus the audit work on the high risk areas.",
+            "This area of risk assessment is also covered by ISA 330 The auditor's responses to assessed risks. The objective of ISA 330 is to gather adequate appropriate audit evidence about assessed risks of material misstatement, by designing and putting in place appropriate responses to the risks."
+          ]
+        },
+        {
+          "title": "3.2 Responses to assessed risks: ISA 330",
+          "paragraphs": [
+            "At the financial statement level these \"responses\" are overall ones, which may include:",
+            "* emphasising to the audit team the need to maintain an attitude of professional scepticism",
+            "* assigning more experienced staff",
+            "* Providing more supervision",
+            "* the use of experts",
+            "* Incorporating additional elements of unpredictability in the selection of further audit procedures to be performed.",
+            "* changing the nature, timing and extent of audit procedures (for example, performing more substantive procedures at the final rather than at the interim audit, or obtaining more \"persuasive\" audit evidence).",
+            "The assessment of the risks at this level and therefore the auditor's response is very much affected by the auditor's assessment of the control environment. An effective control environment will be likely to increase the auditor's confidence in controls in all areas and allow him to carry out more procedures at the interim audit and to carry out less tests of detail. Both of these terms are considered in later chapters.",
+            "At the assertion level these \"responses\" take the form of further audit procedures, discussed in detail in later chapters. Audit procedures can take the form of tests of controls and/or substantive procedures. In summary, the auditor is required to:",
+            "* assess the risks involved in the audit",
+            "* plan the audit work so that any material misstatements are identified and corrected if necessary.",
+            "This should then ensure that a 'true and fair view' is presented by the financial statements."
+          ]
+        },
+        {
+          "title": "3.3 The audit risk model",
+          "paragraphs": [
+            "A standard audit risk model is available to help auditors identify and quantify the main elements making up overall audit risk.",
+            "⯈ Definition: Audit risk",
+            "The risk that the auditor expresses an inappropriate audit opinion when the financial statements are materially misstated. Audit risk is a function of the risks of material misstatement and detection risk.",
+            "IAASB Handbook - Glossary of terms",
+            "Audit risk is the risk (chance) that the auditor reaches an inappropriate (wrong) conclusion on the area under audit. The audit risk is derived from errors arising out of inherent risk which are not prevented/detected by entity's internal controls and are not detected by further audit procedures. For example, if the audit risk is 5%, this means that the auditor accepts that there will be a 5% risk that the audited item will be misstated in the financial statements, and only a 95% probability that it is materially correct.",
+            "This model can be stated as a formula:",
+            "AR = IR × CR × DR",
+            "where:",
+            "AR = audit risk IR = inherent risk CR = control risk, and DR = detection risk.",
+            "Risks are expressed as proportions, so a risk of 10% would be included in the formula as 0.10."
+          ]
+        },
+        {
+          "title": "Inherent risk",
+          "paragraphs": [
+            "⯈ Definition: Inherent risk",
+            "The susceptibility of an assertion about a class of transaction, account balance or disclosure to a misstatement that could be material, either individually or when aggregated with other misstatements, before consideration of any related controls.",
+            "IAASB Handbook - Glossary of terms",
+            "Inherent risk is the risk that items may be misstated as a result of their inherent characteristics. Inherent risk may result from either:",
+            "* the nature of the items themselves. For example, estimated items are inherently risky because their measurement depends on an estimate rather than a precise measure; or",
+            "* the nature of the entity and the industry in which it operates. For example, a company in the construction industry operates in a volatile and high-risk environment, and items in its financial statements are more likely to be misstated than items in the financial statements of companies in a more low-risk environment, such as a manufacturer of food and drinks.",
+            "When inherent risk is high, this means that there is a high risk of misstatement of an item in the financial statements.",
+            "Inherent risk operates independently of controls. It cannot be controlled. The auditor must accept that the risk exists and will not 'go away'."
+          ]
+        },
+        {
+          "title": "Auditor shall:",
+          "paragraphs": [
+            "For each identified risk of material misstatement at the assertion level, the auditor is required:",
+            "* to assess the likelihood and magnitude of material misstatement. The auditor will take into account how and the degree to which:",
+            "* Inherent risk factors affect the susceptibility of relevant assertions to the misstatement",
+            "* Risk of material misstatement at the financial statement level affect the assessment of inherent risk for the risks of material misstatement at the assertion level",
+            "- whether identified risks of material misstatement are significant risks.",
+            "- whether substantive procedures alone cannot provide sufficient appropriate audit evidence for any of the risks of material misstatements at the assertion level.",
+            "It is the combination of likelihood and magnitude that will determine where inherent risk is assessed on the spectrum of inherent risk. For the inherent risk to be determined as a significant risk, it does not require to be high up on the scale for both likelihood and magnitude, even one will do",
+            "Significant risk: is an identified risk of material misstatements for which the assessment of inherent risk is close to the upper end of the spectrum of inherent risks.",
+            "⯈ Examples of Events or Conditions that May Give Rise to the Existence of Risks of Material Misstatement at assertion level",
+            "Inherent Risk Factor - Complexity",
+            "* Operations that are subject to a high degree of complex regulation.",
+            "* The existence of complex alliances and joint ventures.",
+            "* Accounting measurements that involve complex processes.",
+            "Inherent Risk Factor - Subjectivity",
+            "* A wide range of possible measurement criteria of an accounting estimate. For example, management's recognition of depreciation or construction income and expenses.",
+            "* Management's selection of a valuation technique or model for a non- current asset, such as investment properties.",
+            "Inherent Risk Factor - Change",
+            "* Operations exposed to volatile markets, for example, futures trading.",
+            "* Going concern and liquidity issues including loss of significant customers.",
+            "* Changes in the industry in which the entity operates.",
+            "* Developing or offering new products or services, or moving into new lines of business.",
+            "* Expanding into new locations.",
+            "* Entities or business segments likely to be sold.",
+            "* Changes in key personnel including departure of key executives.",
+            "* Changes in the IT environment.",
+            "* Installation of significant new IT systems related to financial reporting.",
+            "* Application of new accounting pronouncements.",
+            "* Impact of new legislation related to environmental protection."
+          ]
+        },
+        {
+          "title": "Control risk",
+          "paragraphs": [
+            "⯈ Definition: Control risk",
+            "The risk that a misstatement that could occur in an assertion about a class of transaction, account balance or disclosure and that could be material, either individually or when aggregated with other misstatements, will not be prevented, or detected and corrected, on a timely basis by the entity's internal control.",
+            "IAASB Handbook - Glossary of terms",
+            "Control risk is the risk that a misstatement would not be prevented or detected by the internal control systems that the client has in operation.",
+            "In preparing an audit plan, the auditor needs to make an assessment of control risk for different areas of the audit. Evidence about control risk can be obtained through 'tests of control'.",
+            "The initial assumption should be that control risk is very high, and that existing internal controls are insufficient to prevent the risk of material misstatement. However, tests of control may provide sufficient evidence to justify a reduction in the estimated control risk, for the purpose of audit planning. Tests of control are covered in detail in a later chapter."
+          ]
+        },
+        {
+          "title": "Detection risk",
+          "paragraphs": [
+            "⯈ Definition: Detection risk",
+            "The risk that the procedures performed by the auditor to reduce audit risk to an acceptably low level will not detect a misstatement that exists and that could be material, either individually or when aggregated with other misstatements.",
+            "IAASB Handbook - Glossary of terms",
+            "Detection risk is the risk that the audit testing procedures will fail to detect a misstatement in a transaction or in an account balance. For example, if detection risk is 10%, this means that there is a 10% probability that the audit tests will fail to detect a material misstatement.",
+            "Detection risk can be lowered by carrying out more tests in the audit. For example, to reduce the detection risk from 10% to 5%, the auditor should carry out more tests.",
+            "In preparing an audit plan, the auditor will usually:",
+            "* set an overall level of audit risk which he judges to be acceptable for the particular audit,",
+            "* assess the levels of inherent risk and control risk, and then",
+            "* adjust the level of detection risk in order to achieve the overall required level of risk in the audit.",
+            "In other words, the detection risk can be managed by the auditor in order to control the overall audit risk that can be reduced by increasing testing, and reducing detection risk."
+          ]
+        },
+        {
+          "title": "3.4 Exam technique: identifying risks",
+          "paragraphs": [
+            "In the exam, you could be presented with an audit scenario and a requirement to identify and explain the risks in this scenario. You should view such a scenario as containing a number of \"clues\". These clues will be matters which would impact on the auditor's assessment of the inherent, control and, possibly, detection, risks at this particular client. Your answer needs to demonstrate that you can spot these clues (identify) and understand why they represent risks (explain)."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "4 FRAUD: ISA 240",
+      "sections": [
+        {
+          "title": "4.1 Overall Responsibility of management and those charged with governance",
+          "paragraphs": [
+            "With respect to the audit and contrary to what many members of the public think, it is management and those charged with governance which are responsible for:",
+            "* Prevention and detection of fraud",
+            "* Preparation of the financial statements",
+            "* Design and implementation of effective internal controls - for example authorising payments above a certain amount, monthly bank reconciliation and a monthly trade payables control account reconciliation.",
+            "They are also responsible for:",
+            "* Providing the auditor with:",
+            "- Access to information relevant to the preparation of the financial statements",
+            "- Additional information relevant to the audit",
+            "- Unrestricted access to persons whom the auditor needs access to in order to complete the audit",
+            "* Providing written representations to the auditor at the end of the audit (see later chapter for details)"
+          ]
+        },
+        {
+          "title": "4.2 Fraud and the role of the external auditor",
+          "paragraphs": [
+            "Fraud is an intentional act by one or more persons, involving the use of deception to gain an unjust or illegal advantage.",
+            "Fraud is distinguished from error. Error results from a genuine mistake or omission, and is not intentional.",
+            "The objective of a statutory audit (an external audit) is to express an opinion on the truth and fairness of the view presented by the financial statements. Its objective is not primarily the prevention or detection of fraud. The auditor will be concerned with fraud only to the extent that it might impact on the view shown by the financial statements. He will therefore be concerned with the risk of material fraud. This is discussed below in the context of ISA 240.",
+            "It is primarily the responsibility of management to establish systems and controls to prevent or detect fraud (and errors). These systems and controls may then be monitored by internal audit. Internal audit may also be required by management to specifically review the entity's exposure to error or fraud or to undertake a special investigation to look into suspected error or fraud."
+          ]
+        },
+        {
+          "title": "4.3 The auditor's responsibilities relating to fraud: ISA 240",
+          "paragraphs": [
+            "The role of the external auditor with regard to fraud is covered by ISA 240. The auditor's responsibilities relating to fraud in an audit of financial statements.",
+            "The objectives of the auditor under ISA 240 are the same as for any other area: to identify and assess the risks of material misstatement and to obtain sufficient appropriate evidence about those risks through appropriate audit procedures. He must also respond appropriately to fraud or suspected fraud identified during the audit.",
+            "However, it is particularly important in relation to fraud that the auditor maintains an attitude of professional scepticism as required by ISA 200. ISA 240 states that:",
+            "* unless the auditor has reason to believe the contrary, he may accept records and documents as genuine; and",
+            "* where responses to inquiries of management are inconsistent, the auditor shall investigate the inconsistencies (as this could indicate potential fraud).",
+            "Two types of fraud are identified by ISA 240: fraudulent financial reporting and misappropriation of assets.",
+            "Fraudulent financial reporting includes:",
+            "* manipulating, forging or altering accounting records or supporting documentation which form the basis of the financial statements",
+            "* misrepresenting or intentionally omitting events or transactions from the financial statements",
+            "* intentionally misapplying accounting principles,",
+            "Fraudulent financial reporting often involves management override of controls.",
+            "Misappropriation of assets includes:",
+            "* embezzling receipts (for example, diverting them to personal bank accounts)",
+            "* stealing physical assets (such as inventory) or intellectual property (for example, by selling \"trade secrets\" to a competitor)",
+            "* causing an entity to pay for goods and services not received (for example, by the creation of fictitious suppliers)",
+            "* using an entity's assets for personal use."
+          ]
+        },
+        {
+          "title": "Presumed significant risk on revenue recognition",
+          "paragraphs": [
+            "Material misstatement due to fraudulent financial reporting relating to revenue recognition often results from an overstatement of revenue through for example, premature revenue recognition or recording of fictitious revenues. It may result also from an understatement of revenue through for example improperly shifting revenues to a later period. The risk of fraud in revenue recognition may be greater in some entities than others. For example, there may be pressure or incentive on management to commit fraudulent financial reporting through inappropriate revenue recognition in case of listed entities. The presumption that there are risks of fraud in revenue recognition may be rebutted. For example, the auditor may conclude that there is no risk of material misstatement due to fraud relating to revenue recognition in the case where a there is a single type of simple revenue transaction, for example, leasehold revenue from a single unit rental property."
+          ]
+        },
+        {
+          "title": "Management override of controls",
+          "paragraphs": [
+            "Management is in a unique position to perpetrate fraud because of management's ability to manipulate accounting records and prepare fraudulent financial statements by overriding controls that otherwise appear to be operating effectively. Although the level of risk of management override of controls will vary from entity to entity, the risk is nevertheless present in all entities. Due to the unpredictable way in which such override could occur, it is a risk of material misstatement due to fraud and thus a significant risk.",
+            "Fraudulent financial reporting often involves management override of controls that otherwise may appear to be operating effectively. Fraud can be committed by management overriding controls using such techniques as:",
+            "* Recording fictitious journal entries, particularly close to the end of an accounting period, to manipulate operating results or achieve other objectives.",
+            "* Inappropriately adjusting assumptions and changing judgments used to estimate account balances.",
+            "* Omitting, advancing or delaying recognition in the financial statements of events and transactions that have occurred during the reporting period.",
+            "* Concealing, or not disclosing, facts that could affect the amounts recorded in the financial statements.",
+            "* Engaging in complex transactions that are structured to misrepresent the financial position or financial performance of the entity.",
+            "* Altering records and terms related to significant and unusual transactions.",
+            "Irrespective of the auditor's assessment of the risks of management override of controls, the auditor shall design and perform audit procedures to:",
+            "a) Test the appropriateness of journal entries recorded in the general ledger and other adjustments made in the preparation of the financial statements. In designing and performing audit procedures for such tests, the auditor shall:",
+            "i. Make inquiries of individuals involved in the financial reporting process about inappropriate or unusual activity relating to the processing of journal entries and other adjustments;",
+            "ii. Select journal entries and other adjustments made at the end of a reporting period; and",
+            "iii. Consider the need to test journal entries and other adjustments throughout the period.",
+            "b) Review accounting estimates for biases and evaluate whether the circumstances producing the bias, if any, represent a risk of material misstatements due to fraud. In performing this review, the auditor shall:",
+            "i. Evaluate whether the judgements and decisions made by management in making the accounting estimates included in the financial statements, even, if they are individually reasonable, indicate a possible bias on the part of the entity's management that may represent a risk of material misstatement due to fraud. If so, the auditor shall re-evaluate the accounting estimates taken as a whole; and",
+            "ii. Perform a retrospective review of management judgments and assumptions related to significant accounting estimates reflected in the financial statements of the prior year.",
+            "c) for significant transactions that are outside the normal course of business for the entity, or that otherwise appear to be unusual given the auditor's understanding of the entity or its environment and other information obtained during the audit, the auditor shall evaluate whether the business rationale (or the lack thereof) of the transactions suggests that they may have been entered into to engage in fraudulent financial reporting or to conceal misappropriation of assets."
+          ]
+        },
+        {
+          "title": "Procedures to identify risk of material misstatement",
+          "paragraphs": [
+            "ISA 240 requires the auditor to perform the following procedures to identify the risks of material misstatement due to fraud:",
+            "* Make enquiries of management in respect of:",
+            "- their assessment of the risk of material fraud",
+            "- their process in place for identifying and responding to the risks of fraud including any specific risks of fraud identified or likely to exist any communications within the entity in respect of fraud (including to employees regarding management's views on business practices and ethical behaviour).",
+            "- Management's communication, if any, those charged with governance regarding its processes for identifying and responding to the risks of fraud in the entity; and",
+            "- Management's communication, if any, to employees regarding its views on business practices and ethical behaviour.",
+            "* Make inquiries of management and others within the entity as to whether they have any knowledge of any actual, suspected or alleged frauds and to obtain views about the risks of fraud.",
+            "* Inquiries with those charged with governance",
+            "- Obtain an understanding of how those charged with governance exercise oversight of management's processes for identifying and responding to the risks of fraud and the internal control that management has established to mitigate these risks.",
+            "- Whether they have knowledge of any actual, suspected or alleged fraud affecting the entity. These inquiries are made in part to corroborate the responses to the inquiries of management.",
+            "* Make inquiries of internal audit.",
+            "* Evaluate any unusual or unexpected relationships identified in performing analytical procedures (covered in a later chapter) which might indicate a risk of material fraud.",
+            "* Evaluate information obtained from other risk assessment procedures to see if any fraud risk factors are present."
+          ]
+        },
+        {
+          "title": "4.4 Fraud risk factors relating to misstatements arising from fraudulent financial reporting and misappropriation of assets",
+          "paragraphs": [
+            "ISA 240 states that fraud involves:",
+            "* Incentive or pressure to commit fraud - for example, management may be under pressure from sources outside or inside the entity to achieve an expected (and perhaps unrealistic) earnings target or financial outcome. This may be necessary to trigger a management bonus, or to avoid breaching a loan covenant.",
+            "* The opportunity to commit fraud - for example, a perceived opportunity to commit fraud may exist when an individual believes internal control can be overridden because the individual is in a position of trust or has knowledge of specific deficiencies in internal control.",
+            "* Rationalisation for committing a fraudulent act. Some individuals may possess an attitude, character or set of ethical values that allow them knowingly and intentionally to commit a dishonest act. For example, someone may feel aggrieved that they did not receive a bonus they think they were entitled to and hence rationalise theft as taking 'what is owed'.",
+            "The following are examples of risk factors relating to misstatements arising from fraudulent financial reporting and misappropriation of assets.",
+            "| **Fraud Risk Factors** | **Fraudulent Financial Reporting** | **Misappropriation of Assets** |\n|---|---|---|\n| **Incentives / Pressures** | * Financial stability or profitability threatened by economic, industry, or operating conditions such as:<br>  - High competition or declining margins.<br>  - Rapid technological changes or product obsolescence.<br>  - Declining customer demand or increasing business failures.<br>  - Operating losses creating risk of bankruptcy or takeover.<br>  - Negative operating cash flows despite reported profits.<br>  - Rapid growth or unusual profitability.<br>  - New accounting, statutory, or regulatory requirements.<br><br>* Excessive pressure on management to meet third-party expectations such as:<br>  - Aggressive profit or growth expectations.<br>  - Need for additional debt or equity financing.<br>  - Difficulty meeting listing or debt covenant requirements.<br>  - Adverse effects of poor results on pending transactions.<br><br>* Personal financial pressure on management due to:<br>  - Significant financial interests in the entity.<br>  - Bonuses or incentives linked to aggressive targets.<br>  - Personal guarantees of company debts.<br><br>* Pressure to meet financial targets set by those charged with governance. | * Personal financial obligations.<br><br>* Adverse relationship between employees and the entity due to:<br>  - Expected layoffs.<br>  - Changes in compensation or benefits.<br>  - Promotions or rewards inconsistent with expectations. |\n| **Opportunities** | * Significant related party transactions outside normal business.<br>* Assets, liabilities, revenues, or expenses based on subjective estimates.<br>* Significant unusual or highly complex transactions near year-end.<br><br>* Ineffective monitoring of management due to:<br>  - Domination by one person or small group.<br>  - Weak oversight by those charged with governance.<br><br>* Deficiencies in internal controls such as:<br>  - Weak monitoring of controls.<br>  - High turnover in accounting or IT staff.<br>  - Ineffective accounting and IT systems. | * Large amounts of cash on hand.<br>* Small, valuable, or high-demand inventory items.<br>* Easily convertible assets such as diamonds, bearer bonds, or computer chips.<br>* Small marketable fixed assets lacking ownership identification.<br><br>* Inadequate controls over assets such as:<br>  - Poor segregation of duties.<br>  - Weak oversight of senior management expenses.<br>  - Poor supervision of employees handling assets.<br>  - Inadequate employee background checks.<br>  - Weak record keeping.<br>  - Weak authorisation procedures.<br>  - Weak physical safeguards.<br>  - Lack of reconciliations.<br>  - Lack of proper documentation.<br>  - No mandatory vacations for key staff.<br>  - Weak IT access controls and monitoring. |\n| **Attitudes / Rationalisations** | * Ineffective communication or enforcement of ethical values.<br>* Excessive focus on accounting policies or estimates.<br>* Excessive interest in maintaining stock price or earnings trends.<br>* Unrealistic forecasts promised to analysts or creditors.<br>* Failure to correct internal control deficiencies promptly.<br>* Low morale among senior management.<br>* No distinction between personal and business transactions by owner-manager.<br>* Repeated justification of questionable accounting based on materiality.<br><br>* Strained relationship with auditors shown by:<br>  - Frequent disputes.<br>  - Unrealistic deadlines.<br>  - Restrictions on auditor access.<br>  - Attempts to influence audit scope or personnel. | * Disregard for monitoring or reducing risks of asset misappropriation.<br>* Overriding existing controls or ignoring control deficiencies.<br>* Employee dissatisfaction or resentment toward the entity.<br>* Changes in employee behaviour or lifestyle suggesting theft.<br>* Tolerance of petty theft. |"
+          ]
+        },
+        {
+          "title": "4.5 Examples of circumstances that indicate the possibility of fraud",
+          "paragraphs": [
+            "The following are examples of circumstances that may indicate the possibility that the financial statements may contain a material misstatement resulting from fraud.",
+            "Discrepancies in the accounting records, including:",
+            "* Transactions that are not recorded in a complete or timely manner or are improperly recorded as to amount, accounting period, classification, or entity policy.",
+            "* Unsupported or unauthorized balances or transactions.",
+            "* Last-minute adjustments that significantly affect financial results.",
+            "* Evidence of employees' access to systems and records inconsistent with that necessary to perform their authorized duties.",
+            "* Tips or complaints to the auditor about alleged fraud.",
+            "Conflicting or missing evidence, including:",
+            "* Missing documents.",
+            "* Documents that appear to have been altered.",
+            "* Unavailability of other than photocopied or electronically transmitted documents when documents in original form are expected to exist.",
+            "* Significant unexplained items on reconciliations.",
+            "* Unusual balance sheet changes, or changes in trends or important financial statement ratios or relationships - for example, receivables growing faster than revenues.",
+            "* Inconsistent, vague, or implausible responses from management or employees arising from inquiries or analytical procedures.",
+            "* Unusual discrepancies between the entity's records and confirmation replies.",
+            "* Large numbers of credit entries and other adjustments made to accounts receivable records.",
+            "* Unexplained or inadequately explained differences between the accounts receivable sub-ledger and the control account, or between the customer statements and the accounts receivable sub-ledger.",
+            "* Missing or non-existent cancelled checks in circumstances where cancelled checks are ordinarily returned to the entity with the bank statement.",
+            "* Missing inventory or physical assets of significant magnitude.",
+            "* Unavailable or missing electronic evidence, inconsistent with the entity's record retention practices or policies.",
+            "* Fewer responses to confirmations than anticipated or a greater number of responses than anticipated.",
+            "* Inability to produce evidence of key systems development and program change testing and implementation activities for current-year system changes and deployments.",
+            "Problematic or unusual relationships between the auditor and management, including:",
+            "* Denial of access to records, facilities, certain employees, customers, vendors, or others from whom audit evidence might be sought.",
+            "* Undue time pressures imposed by management to resolve complex or contentious issues.",
+            "* Complaints by management about the conduct of the audit or management intimidation of engagement team members, particularly in connection with the auditor's critical assessment of audit evidence or in the resolution of potential disagreements with management.",
+            "* Unusual delays by the entity in providing requested information.",
+            "* Unwillingness to facilitate auditor access to key electronic files for testing through the use of computer- assisted audit techniques.",
+            "* Denial of access to key IT operations staff and facilities, including security, operations, and systems development personnel.",
+            "* An unwillingness to add or revise disclosures in the financial statements to make them more complete and understandable.",
+            "* An unwillingness to address identified deficiencies in internal control on a timely basis.",
+            "Other",
+            "* Unwillingness by management to permit the auditor to meet privately with those charged with governance.",
+            "* Accounting policies that appear to be at variance with industry norms.",
+            "* Frequent changes in accounting estimates that do not appear to result from changed circumstances.",
+            "* Tolerance of violations of the entity's code of conduct."
+          ]
+        },
+        {
+          "title": "4.6 Communications to Management and Those Charged with Governance",
+          "paragraphs": [
+            "When the auditor has obtained evidence that fraud exists or may exist, it is important that the matter is brought to the attention of the appropriate level of management as soon as practicable, even if the matter is considered inconsequential. Whilst determination of an appropriate level of management is a matter of professional judgment, ordinarily the appropriate level of management is at least one level above the person(s) who appear to be involved with the suspected fraud.",
+            "Whilst ISA 260 communication with Those Charged with Governance is outside the scope of the CAF-9 syllabus you should be aware that there may be instances where it is appropriate for the auditor to communicate with Those Charged with Governance regarding an actual or suspected fraud. Ordinarily such instances would always include cases where management were involved in the fraud or suspected fraud, but the auditors may also judge that cases where those other than management were involved also need communicating.In the exceptional circumstances where the auditor has doubts about the integrity or honesty of management or those charged with governance, the auditor may consider it appropriate to obtain legal advice to assist in determining the appropriate course of action."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "5 NOT-FOR-PROFIT ORGANISATIONS",
+      "sections": [
+        {
+          "title": "5.1 Auditing of not-for-profit organisations (NFPOs)",
+          "paragraphs": [
+            "In any audit or review, it is important to understand the entity and its environment. A key aspect of an audit or review may be the objective that the entity is trying to achieve.",
+            "* In commercial organisations, the objective is to make a profit for the shareholders.",
+            "* In the case of not-for-profit organisations (NFPOs), the objective is very different. It is usually the provision of a service to society as a whole or to a group in society. Examples are charities, clubs and societies and publicly-owned organisations.",
+            "* The service provided by an NFPO will have to be provided within the constraints of the resources it has at its disposal. In other words, an NFPO will seek to achieve its objective as far as possible with the money and other resources available."
+          ]
+        },
+        {
+          "title": "5.2 NFPOs: the audit approach",
+          "paragraphs": [
+            "The auditor should recognise the specific features of the NFPO. However, it is important to realise that the auditor is still performing an audit, and the overall structure of the audit of an NFPO will be similar to the audit of a commercial organisation. However, the detail of the audit will probably differ.",
+            "The main points to bear in mind with the audit of an NFPO are summarised below. These are general principles. They should be modified as appropriate to reflect the circumstances of each particular NFPO.",
+            "| **Audit Area** | **Comments** |\n|---|---|\n| **Planning** | Consider:<br><br>* The objectives and scope of the audit work.<br>* Any local regulations that apply.<br>* The environment in which the organisation operates.<br>* The form and content of the final financial statements and the audit opinion.<br>* Key audit areas, including risk. |\n| **Risk** | Carry out an audit risk analysis under the headings of inherent risk, control risk, and detection risk:<br><br>* **Inherent risk** - reflects the nature of the entity's activities and environment.<br>* **Control risk** - risk that internal controls are inadequate. For example, controls over cash collections and cash payments may be a key area in an NFPO such as a charity because volunteers may collect large amounts of cash from the public.<br>* **Detection risk** - risk that the auditor fails to identify a material error or misstatement during the audit. |\n| **Internal Control** | Key areas of internal control in an NFPO may include:<br><br>* Segregation of duties (although difficult in small NFPOs with few employees).<br>* Authorisation of spending.<br>* Cash controls.<br>* Controls over income such as donations, cash collections, membership fees, and grants.<br>* Ensuring funds are used only for authorised purposes. |\n| **Audit Evidence** | * A substantive testing approach rather than a systems-based approach is likely to be necessary in a small NFPO because of weaknesses in internal controls.<br><br>* Key areas may include:<br>  - Completeness of recording transactions, assets, and liabilities.<br>  - Possibility of misuse of funds.<br><br>* Analytical procedures may be used to make sense of reported figures.<br>* Final financial statements should be reviewed, including the appropriateness of accounting policies. |\n| **Reporting** | * If a report on an NFPO is required by law, the standard external audit report may apply.<br>* If the audit is voluntary, the report should reflect the agreed audit objective. However, good practice is to follow the general structure laid down by ISA 700. |",
+            "Reporting * If a report on an NFPO is required by law, the standard external audit report may be applicable.",
+            "* If the audit is performed on a voluntary basis, the report needs to reflect the agreed objective of the audit. However, it is good practice for the report to follow the general structure laid down by ISA 700 (see later chapter)",
+            "Other factors to consider include:",
+            "* Cash may be significant in small NFPOs and controls are likely to be limited.",
+            "* Income could be a risk area, particularly where money is donated or raised informally.",
+            "* There may be a limitation on the scope of the audit if obtaining audit evidence is a problem.",
+            "* There may be a lack of predictable income or identifiable relationship between expenditure and income which could make analytical review less appropriate.",
+            "* Restricted funds may exist where the organisation is only allowed to use certain funds for specific purposes.",
+            "* There may be sensitivity to key statistics such as the proportion of revenue used in administration (particularly for a charity)."
+          ]
+        }
+      ]
+    }
+  ]
+}

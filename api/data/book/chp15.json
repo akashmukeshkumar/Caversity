@@ -1,0 +1,358 @@
+{
+  "id": "caf8_chapter_15",
+  "source": {
+    "chapter": "Chapter 15",
+    "title": "AUDIT FINALISATION - FINAL EVALUATION"
+  },
+  "pages": [
+    {
+      "heading": "1 EVALUATION OF MISSTATEMENTS IDENTIFIED DURING THE AUDIT (ISA 450)",
+      "sections": [
+        {
+          "title": "⯈ Definitions:",
+          "paragraphs": [
+            "Misstatement",
+            "A difference between the amount, classification, presentation, or disclosure of a reported financial statement item and the amount, classification, presentation, or disclosure that is required for the item to be in accordance with the applicable financial reporting framework. Misstatements can arise from error or fraud.",
+            "When the auditor expresses an opinion on whether the financial statements are presented fairly, in all material respects, or give a true and fair view, misstatements also include those adjustments of amounts, classifications, presentation, or disclosures that, in the auditor’s judgment, are necessary for the financial statements to be presented fairly, in all material respects, or to give a true and fair view.",
+            "Uncorrected Misstatement",
+            "Misstatements that the auditor has accumulated during audit and that have not been corrected."
+          ]
+        },
+        {
+          "title": "1.1 Accumulation of Identified Misstatements",
+          "paragraphs": [
+            "Auditor shall accumulate misstatements identified during the audit, other than those that are clearly trivial. Auditor may designate an amount below which misstatements would be clearly trivial and would not need to be accumulated.",
+            "Type of Misstatements",
+            "* Factual misstatements: Misstatements about which there is no doubt.",
+            "* Judgmental misstatements: Differences arising from the judgments of management concerning. accounting estimates, or selection or application of accounting policies that the auditor considers inappropriate.",
+            "* Projected misstatements: Auditor’s best estimate of misstatements in populations. (See ISA 530)."
+          ]
+        },
+        {
+          "title": "1.2 Consideration of Identified Misstatements as the Audit Progresses",
+          "paragraphs": [
+            "Auditor shall determine whether the overall audit strategy and audit plan need to be revised if:",
+            "* The nature of identified misstatements and circumstances of their occurrence indicate the existence of other similar misstatements. (e.g. misstatement arose from a breakdown in internal control or from inappropriate assumptions or valuation methods that have been widely applied by the entity)",
+            "* Aggregate of misstatements accumulated during audit approaches materiality.",
+            "If management has examined and corrected misstatements that were detected, the auditor shall perform additional procedures to determine whether misstatements remain."
+          ]
+        },
+        {
+          "title": "1.3 Communication and Correction of Misstatements",
+          "paragraphs": [
+            "Auditor shall communicate on a timely basis all misstatements accumulated during the audit with the appropriate level of management, unless prohibited by law or regulation.",
+            "Auditor shall request management to correct those misstatements. (Such correction enables management to maintain accurate accounting books and records).",
+            "If management refuses to correct some or all of the misstatements communicated by the auditor, the auditor shall:",
+            "* Obtain an understanding of management’s reasons for not making the corrections; and",
+            "* Take that understanding into account when evaluating whether the financial statements are free from material misstatement."
+          ]
+        },
+        {
+          "title": "1.4 Evaluating the Effect of Uncorrected Misstatements",
+          "paragraphs": [
+            "Prior to evaluating effect of uncorrected misstatements, auditor shall reassess materiality to confirm whether it remains appropriate in the context of the entity’s actual financial results.",
+            "If reassessment gives rise to a lower amount, then performance materiality and appropriateness of the nature, timing and extent of the further audit procedures shall also be reconsidered.",
+            "Auditor shall determine whether uncorrected misstatements are material, individually or in aggregate. In making this determination, the auditor shall consider:",
+            "* Size and nature of the misstatements, both in relation to particular classes of transactions, account balances or disclosures and the financial statements as a whole, and the particular circumstances of their occurrence; and",
+            "* Effect of uncorrected misstatements related to prior periods on the relevant classes of transactions, account balances or disclosures and the financial statements as a whole.",
+            "Examples of Particular Circumstances (nature of misstatement)",
+            "Circumstances that may affect the evaluation of any misstatement as material, include the extent to which the misstatement:",
+            "* Affects compliance with regulatory requirements;",
+            "* Affects compliance with debt covenants or other contractual requirements;",
+            "* Relates to the incorrect selection or application of an accounting policy that has an immaterial effect on the current period’s financial statements but is likely to have a material effect on future periods’ financial statements;",
+            "* Masks a change in earnings or other trends, especially in the context of general economic and industry conditions;",
+            "* Affects ratios used to evaluate entity’s financial position, results of operations or cash flows;",
+            "* Affects segment information presented in financial statements;",
+            "* Has the effect of increasing management compensation, for example, by ensuring that the requirements for the award of bonuses or other incentives are satisfied;",
+            "* Is significant having regard to auditor’s understanding of the known previous communications to users, for example, in relation to forecast earnings;",
+            "* Relates to items involving particular parties (for example, whether external parties to the transaction are related to members of the entity’s management); or",
+            "* Is an omission of information not specifically required by applicable financial reporting framework but which, in the judgment of auditor, is important to users’ understanding of financial position & performance etc."
+          ]
+        },
+        {
+          "title": "1.5 Communication with those charged with governance",
+          "paragraphs": [
+            "* Auditor shall communicate with those charged with governance uncorrected misstatements and the effect that they may have on the auditor’s opinion (unless prohibited by law or regulation).",
+            "* Where there is a large number of individual immaterial uncorrected misstatements, auditor may communicate the number and overall monetary effect of uncorrected misstatements.",
+            "* Auditor shall identify material uncorrected misstatements individually.",
+            "* Auditor shall request that uncorrected misstatements be corrected."
+          ]
+        },
+        {
+          "title": "1.6 Written Representations",
+          "paragraphs": [
+            "Auditor shall request a written representation from management and, where appropriate, those charged with governance whether they believe the effects of uncorrected misstatements are immaterial, individually and in aggregate, to the financial statements as a whole.",
+            "A summary of such items shall be included in or attached to the written representation.",
+            "They may add to their written representation words such as: “We do not agree that items … and … constitute misstatements because [description of reasons].”",
+            "Obtaining representation does not, however, relieve the auditor from his responsibilities."
+          ]
+        },
+        {
+          "title": "1.7 Documentation",
+          "paragraphs": [
+            "Auditor shall include in the audit documentation:",
+            "* Amount below which misstatements would be regarded as clearly trivial;",
+            "* All misstatements accumulated during audit and whether they have been corrected; and",
+            "* Auditor’s conclusion as to whether uncorrected misstatements are material, individually or in aggregate and the basis for that conclusion."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "2 SUBSEQUENT EVENTS: ISA 560",
+      "sections": [
+        {
+          "title": "2.1 IAS 10 and ISA 560",
+          "paragraphs": [
+            "It is not possible to prepare financial statements that present a true and fair view by considering only those events and transactions that take place before the date at which the balance sheet is prepared. Material events that occur after the reporting period should also be considered when preparing the financial statements for the year.",
+            "Purpose of IAS 10",
+            "IAS 10 Events after the reporting period has two main objectives:",
+            "* to specify when an entity should adjust its financial statements for events that occur after the reporting period, but before the financial statements are authorised for issue, and",
+            "* to specify the disclosures that should be given about events that have occurred after the reporting period but before the financial statements were authorised for issue.",
+            "Events after the reporting period are defined in IAS 10 as ‘those events, favourable and unfavourable that occur between the end of the reporting period and the date when the financial statements are authorised for issue.’",
+            "There are two types of events after the reporting period:",
+            "* Adjusting events. These are events that provide evidence of conditions that already existed at the end of the reporting period.",
+            "* Non-adjusting events. These are events that have occurred due to conditions arising after the reporting period.",
+            "The role of the auditor: ISA 560",
+            "The work of the external auditor in this area is covered by ISA 560 Subsequent events. The objectives of the auditor, as stated in ISA 560 are as follows:",
+            "* The auditor should obtain sufficient, appropriate evidence about whether events occurring between the date of the financial statements and the date of the audit report are appropriately reflected in those financial statements.",
+            "* The auditor should also respond appropriately to facts that become known to him after the date of the audit report that, had they been known to him at that date, may have caused him to amend his report."
+          ]
+        },
+        {
+          "title": "2.2 Events occurring up to the date of the audit report",
+          "paragraphs": [
+            "Between the end of the reporting period and the date of the audit report, the auditor is required to obtain sufficient appropriate evidence that all events that require adjustment of or disclosure in the financial statements:",
+            "* have been identified, and",
+            "* are suitably reported in the financial statements.",
+            "Normal audit verification work",
+            "The auditor may find sufficient evidence of subsequent events in the course of his normal audit verification work. Where this is the case he is not required to perform additional audit procedures.",
+            "Such normal audit verification work might include the following:",
+            "* The audit of receivables will consider whether receivables at the end of the reporting period are collectable. Cash receipts after the year-end may indicate a significant non-payment, suggesting the need to write off a debt as irrecoverable.",
+            "* The audit of inventory includes a review of the net realisable value of inventory. Sales of inventory after the year-end may indicate that some inventory in the balance sheet is over-valued (because subsequent events have shown that its NRV was less than cost).",
+            "* A search for unrecorded liabilities may discover the existence of some unrecorded liabilities, from invoices received after the reporting period but relating to the period covered by the financial statements.",
+            "* A review of the entity’s cash position at the end of the reporting period may find that a cheque from a customer, recorded as part of the bank balances, was dishonoured after the reporting period.",
+            "Procedures aimed specifically at identifying subsequent events",
+            "The auditor should also actively look for ‘subsequent events’, up to the time that he prepares the audit report.",
+            "Taking into account his risk assessment of this area, he should:",
+            "* obtain an understanding of management’s procedures for identifying subsequent events",
+            "* inquire of management as to whether any subsequent events have occurred which might affect the financial statements",
+            "* read the entity’s latest subsequent financial statements",
+            "* read minutes of shareholders’ meetings, meetings of the board of directors and senior management meetings held after the date of the financial statements and inquire about matters discussed at any such meetings where minutes are not yet available",
+            "* obtain written representations in respect of subsequent events (covered in a later section).",
+            "Additional audit procedures or above procedures could not be performed:",
+            "* Review or testing of accounting records or transactions occurring between the date of financial statements and the date of auditor’s report.",
+            "* Where no subsequent interim and minutes are prepared, inspect available books and records including bank statement.",
+            "* Read the entity’s latest available budgets, cash flow forecast and other related management reports for periods after the date of the financial statements.",
+            "* Inquire or extend previous oral or written inquiries of the entity’s legal counsel concerning litigation and claims."
+          ]
+        },
+        {
+          "title": "2.3 Facts discovered after the date of the audit report",
+          "paragraphs": [
+            "Between the date of the audit report and the issue of the financial statements",
+            "The auditor has no obligation to perform any audit procedures after the date of his audit report. However, if he becomes aware of a fact that had it been known to him at the date of his report, may have caused him to amend his report then he is required to:",
+            "* discuss the matter with management",
+            "* determine whether the financial statements need amending, and",
+            "* inquire how management intend to address the matter in the financial statements.",
+            "If the financial statements are amended, the auditor is required to:",
+            "* carry out the necessary audit procedures on the amendment",
+            "* extend his review of subsequent events up to the date of the new audit report.",
+            "If management do not amend the financial statements for the subsequent event, but the auditor believes that an amendment should be made, the auditor is required to take the following action:",
+            "* If the audit report has not yet been provided to the entity, modify his opinion as appropriate.",
+            "* If the audit report has been provided to the entity:",
+            "- notify management not to issue the financial statements before the necessary amendments have been made",
+            "- if they do so, take appropriate action to prevent reliance on the audit report, after taking legal advice.",
+            "Facts discovered after the financial statements have been issued",
+            "As above, the auditor has no obligation to perform any audit procedures after the financial statements have been issued. However, if he becomes aware of a fact that had it been known to him at the date of his report, may have caused him to amend his report then he is required to:",
+            "* discuss the matter with management",
+            "* determine whether the financial statements need amending, and",
+            "* inquire how management intend to address the matter in the financial statements.",
+            "If the financial statements are amended, the auditor is required to:",
+            "* carry out the necessary audit procedures on the amendment",
+            "* review the steps taken by management to inform anyone who received the original financial statements and audit report of the situation",
+            "* extend his review of subsequent events up to the date of the new audit report",
+            "* issue a new audit report, containing an emphasis of matter paragraph or other matter paragraph. This should refer to a note in the revised financial statements that explains in more detail the reason for the re- issue of the financial statements.",
+            "As usual, in the real exam, you are likely to be asked to apply your knowledge to a given scenario.",
+            "Note",
+            "Where law, regulation or the financial reporting framework does not prohibit management from restricting the amendment of financial statements to the effects of the subsequent events, events causing that amendment and those responsible for approving the financial statements are not prohibited from restricting their approval to that amendment, the auditor is permitted to restrict the audit procedures on subsequent events required in paragraph 11(b)(i) to that amendment. In such cases the auditor shall either:",
+            "a) Amend the auditor’s report to include an additional date restricted to that amendment that thereby indicates that the audit procedures on subsequent events are restricted solely to the amendment of the financial statements described in the relevant note to the financial statements; or",
+            "b) Provide a new or amended auditor’s report that includes a statement in an Emphasis of Matter paragraph or Other Matter paragraph that conveys that the auditor’s procedures on subsequent events are restricted solely to the amendment of the financial statements as described in the relevant note to the financial statements.",
+            "Dual Dating",
+            "Auditor is permitted to apply audit procedures on subsequent events to that amendment where:",
+            "* Law, regulation or financial reporting framework does not prohibit management (i.e. allows) from amending the financial statements to the effects of subsequent event; and",
+            "* Those responsible for approving financial statements are not prohibited from approving that amendment. In such cases, the auditor shall either:",
+            "* Amend report to include an additional date restricted to that amendment indicating that auditor's procedures are restricted solely to amendment of financial statements; or",
+            "* Provide a new or amended report that including an Emphasis of Matter paragraph or Other Matter paragraph highlighting that auditor's procedures are restricted solely to amendment."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "3 WRITTEN REPRESENTATIONS: ISA 580",
+      "sections": [
+        {
+          "title": "3.1 Definition and objectives",
+          "paragraphs": [
+            "⯈ Definition: Written representation",
+            "A written statement by management provided to confirm certain matters or to support other audit evidence. It does not include financial statements, assertions, or supporting books and records.",
+            "The objectives of the auditor in this area, per ISA 580, are to:",
+            "* obtain written representations from management that it has fulfilled its responsibilities in respect of the financial statements and the audit",
+            "* obtain written representations as appropriate to support other audit evidence as required by other ISA’s",
+            "* respond appropriately to written representations provided by management or if management refuse to provide the written representations requested.",
+            "ISA 580 requires appropriate written representations from management (often referred to as “management representations”) to be in the form of a letter of representation, addressed to the auditor.",
+            "These written representations may be an important source of audit evidence."
+          ]
+        },
+        {
+          "title": "3.2 Written representations as audit evidence",
+          "paragraphs": [
+            "If the auditor considers that written representations are needed to support other audit evidence he is required to request such other written representations.",
+            "During the course of the audit, management will make many representations to the auditor. Some of these will be unsolicited but some will be given in response to specific enquiries from the auditor. The auditor will have recorded such verbal discussions with management in the audit working papers. However, verbal evidence is not strong audit evidence. In order to improve the quality of this evidence, the auditor will ask for any significant discussions to be confirmed in writing.",
+            "Such representations are likely to be needed:",
+            "* to support the auditor’s understanding of management’s intention or judgment (for example, in respect of future plans for the business or a specific matter such as the net realisable value of inventory), or",
+            "* in respect of the completeness of a specific item (for example, that all liabilities have been provided for).",
+            "However, although such written representations provide necessary audit evidence, they do not provide sufficient appropriate evidence on their own.",
+            "If a representation by management is contradicted by other audit evidence, the auditor should: Perform audit procedures to resolve matters",
+            "* perform other audit procedures (consider whether his risk assessment remains appropriate and if not revise the risk assessment and determine nature, timing and extent audit procedures) to resolve the matter.",
+            "If the matter not resolved the auditor shall reconsider the assessment of the competence, integrity, ethical values of management, the auditor shall determine the effect that this may have on the reliability of representations and audit evidence in general.",
+            "* consider whether the risk assessment remains appropriate",
+            "* if not revise the risk assessment and determine nature timing and extent of further audit procedures to resolve matter",
+            "if Auditor has concerns about the integrity and ethical values of management, auditor shall determine the effect that such concerns may have on the reliability of representations (oral or written) and audit evidence in general. It may cause the auditor to conclude that the risk of management misrepresentation in the financial statements is such that audit cannot be conducted.",
+            "In such case auditor may consider withdrawing from engagement where withdrawal is possible under applicable law or regulation, unless:",
+            "The auditor is also required by specific other ISAs to request certain other written representations. These requirements are illustrated in the example letter set out below."
+          ]
+        },
+        {
+          "title": "3.3 Written representations about management’s responsibilities",
+          "paragraphs": [
+            "The auditor is also required by ISA 580 to obtain certain other specific written representations from management. In these representations management acknowledges that:",
+            "* it has fulfilled its responsibility for the preparation and fair presentation of the financial statements in accordance with the applicable financial reporting framework",
+            "* it has provided the auditor with all relevant information and access",
+            "* all transactions have been recorded and are reflected in the financial statements. The auditor shall disclaim an opinion in accordance with ISA 705:",
+            "* if management do not provide written representation about management responsibilities; or",
+            "* there is sufficient doubt about the integrity of management such that written representation about management responsibility are not reliable.",
+            "Again, these points are illustrated in the example letter set out below."
+          ]
+        },
+        {
+          "title": "3.4 Form and contents of the letter of representation",
+          "paragraphs": [
+            "The letter of representation is:",
+            "* usually drafted by the auditor (since he knows the areas on which he requires written representations)",
+            "* addressed to the auditor",
+            "* dated as near as practicable (but not after) the date of the audit report.",
+            "Written representations may be requested from the entity’s chief financial officer and chief executive officer or other equivalent persons in entities that do not use such titles. In some circumstances other parties such as those charge with governance, are also responsible for the preparation of the financial statements.",
+            "Can management modify the language of written representation? It is appropriate to do so only in following circumstances:",
+            "* Due to fire – management said that except for the information destroyed in fire we have provided all the information",
+            "* Except for recording impairment – we have prepared the financial statements in accordance with the IFRS"
+          ]
+        },
+        {
+          "title": "3.5 Refusal to provide requested written representations",
+          "paragraphs": [
+            "If management refuses to provide requested written representations the auditor is required to:",
+            "* discuss the matter with management",
+            "* re-evaluate the integrity of management and reconsider the impact on other representations and audit evidence",
+            "* take appropriate action, including considering the effect on the audit report."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "4 GOING CONCERN BASIS AND THE AUDIT REPORT: ISA 570",
+      "sections": [
+        {
+          "title": "4.1 Going concern basis and the Financial Statements",
+          "paragraphs": [
+            "As discussed in the previous studies, the financial statements of the entity are normally prepared on a going concern basis. In the going concern basis it is assumed that the entity will continue to be in existence for foreseeable future (at least 12 months as per IAS 1).",
+            "IAS 1 requires management to make an assessment of the entity's ability to continue as a going concern. If management has some significant concerns about the entity's ability to continue as a going concern due to some material uncertainties, the uncertainties must be disclosed in a note to the financial statements.",
+            "If management concludes that the entity is not a going concern, the financial statements should not be prepared on a going concern basis."
+          ]
+        },
+        {
+          "title": "4.2 Risk Assessment Procedures and the Related Activities",
+          "paragraphs": [
+            "Auditor shall consider whether events or conditions exist that may cast significant doubt on entity’s ability to continue as going concern.",
+            "EVALUATING MANAGEMENT ASSESSMENT",
+            "* Shall evaluate management assessment to continue as going concern.",
+            "* Shall cover the same period as used by management but should not be less than 12 months",
+            "* Assumptions on which assessment is based.",
+            "* If less than 12 months, request management for future action and whether such plan are feasible.",
+            "* Whether all information which auditor is aware are included in assessment. Period beyond Management Assessment",
+            "* Inquire management of its knowledge of events or condition beyond the period of management assessment.",
+            "* Remain alert for events or condition beyond management assessment.",
+            "* Request management to consider that events or condition if it is significant.",
+            "* Other than inquiry auditor does not have responsibility to perform any other procedures on period beyond management assessment.",
+            "Examples of such events or conditions Financial",
+            "* Net liability or net current liability position.",
+            "* Fixed-term borrowings approaching maturity without realistic prospects of renewal or repayment or excessive reliance on short-term borrowings to finance long-term assets.",
+            "* Indications of withdrawal of financial support by creditors.",
+            "* Negative operating cash flows (indicated by historical or prospective financial statements)",
+            "* Adverse key financial ratios.",
+            "* Substantial operating losses or deterioration in value of assets used to generate cash flows.",
+            "* Arrears or discontinuance of dividends.",
+            "* Inability to pay creditors on due dates.",
+            "* Inability to comply with the terms of loan agreements.",
+            "* Change from credit to cash transactions with suppliers.",
+            "* Inability to obtain financing for essential new product development or other essential investments.",
+            "Operating",
+            "* Management intentions to liquidate entity or to cease operations.",
+            "* Loss of key management without replacement.",
+            "* Loss of a major market, key customer(s), franchise, license, or principal supplier(s).",
+            "* Labour difficulties.",
+            "* Shortages of important supplies.",
+            "* Emergence of a highly successful competitor.",
+            "Other",
+            "* Non-compliance with capital or other statutory requirements.",
+            "* Pending legal or regulatory proceedings against entity that may result in claims that entity is unlikely to be able to satisfy.",
+            "* Changes in law or regulation or government policy expected to adversely affect the entity.",
+            "* Uninsured or underinsured disasters when they occur.",
+            "Auditor shall also determine whether management has already performed a preliminary assessment of continuance as going concern:",
+            "* If such assessment has been performed, auditor shall discuss with management and determine whether management has identified such events or conditions and, if so, what are the plans to address those.",
+            "* If such assessment has not yet been performed, auditor shall discuss with management basis for the intended use of the going concern basis of accounting, and inquire whether events or conditions exist that may cast significant doubt on going concern."
+          ]
+        },
+        {
+          "title": "4.3 Additional Procedures when Events or Conditions are Identified",
+          "paragraphs": [
+            "Auditor shall obtain sufficient appropriate audit evidence to determine whether or not a material uncertainty exists related to events or conditions that may cast significant doubt on going concern through additional audit procedures, including following factors:",
+            "* Analysing and discussing the cash flow, profit and other relevant forecasts with the management.",
+            "* Analysing and discussing latest available interim financial statements.",
+            "* Reading the terms of debentures and loan agreements.",
+            "* Reading minutes of the meetings of shareholders, those charged with governance and relevant committees for reference to financing difficulties.",
+            "* Inquiring entity’s legal counsel regarding existence of litigation and claims and reasonableness of management’s assessments of their outcome and estimate of their financial implications.",
+            "* Performing audit procedures regarding subsequent events.",
+            "* Confirming existence, terms and adequacy of the borrowing facilities.",
+            "* Obtaining and reviewing reports of regulatory actions.",
+            "Requesting written representations from management and those charged with governance regarding their plans for the future actions and feasibility of those plans."
+          ]
+        },
+        {
+          "title": "4.4 Implications for the Auditor’s Report",
+          "paragraphs": [
+            "| **Scenario** | **Implication** |",
+            "|---|---|",
+            "| **Going Concern Basis is inappropriate and financial statements have been appropriately amended to reflect an alternate basis of accounting** | Unmodified Opinion with an **Emphasis of Matter Paragraph** highlighting the alternate basis of accounting used. |",
+            "| **Going Concern Basis is inappropriate but financial statements are still prepared under the assumption of going concern** | Adverse Opinion |",
+            "| **Going Concern Basis is appropriate but a material uncertainty exists and adequate disclosure is made in the financial statements** | Unmodified Opinion with a **Material Uncertainty Related to Going Concern** paragraph referring to the disclosure(s) of the material uncertainty. |",
+            "| **Going Concern Basis is appropriate but a material uncertainty exists and adequate disclosure is not given in the financial statements** | Qualified Opinion or Adverse Opinion |",
+            "| **Management is unwilling to make or extend its assessment** | Qualified Opinion or Disclaimer of Opinion |"
+          ]
+        },
+        {
+          "title": "4.5 Communication with Those Charged with Governance",
+          "paragraphs": [
+            "Auditor shall communicate with those charged with governance about the events or conditions identified that may cast significant doubt on going concern. Such communication shall include:",
+            "* Whether events or conditions constitute a material uncertainty",
+            "* Whether use of going concern basis is appropriate",
+            "* Adequacy of related disclosures in the financial statements",
+            "* Implications for the auditor’s report.",
+            "Significant Delay in the Approval of Financial Statements",
+            "If there is significant delay in approval of the financial statements by management or those charged with governance after the date of financial statements, auditor shall inquire the reasons for the delay. If the auditor believes that the delay could be related to events or conditions relating to the going concern assessment, the auditor shall perform necessary additional audit procedures."
+          ]
+        }
+      ]
+    }
+  ]
+}

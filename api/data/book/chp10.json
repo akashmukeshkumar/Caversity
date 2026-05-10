@@ -1,0 +1,248 @@
+{
+  "id": "caf8_chapter_10",
+  "source": {
+    "chapter": "Chapter 10",
+    "title": "SUBSTANTIVE PROCEDURES: OTHER AREAS"
+  },
+  "pages": [
+    {
+      "heading": "1 SUBSTANTIVE PROCEDURES: TRADE PAYABLES",
+      "sections": [
+        {
+          "title": "1.1 Principal risks of misstatement in the audit of liabilities",
+          "paragraphs": [
+            "As discussed in previous chapters, directional testing is an approach to audit testing that an auditor may use to improve the efficiency of an audit. With directional testing, liabilities, income and equity are usually tested for understatement only. This is testing the financial statement assertion of completeness. The reason for this approach is that an auditor will consider it much more likely that an entity will understate its liabilities (in order to present a better financial position) than overstate its liabilities.",
+            "Because auditing liabilities involves testing for completeness, auditing liabilities is often more difficult than auditing assets (where the emphasis of audit testing is on overstatement/existence). The auditor is looking for something that is not recorded, rather than verifying something that has been recorded. This influences the audit approach and the type of audit work performed.",
+            "The principal risks of misstatement in respect of liabilities are therefore due to the following:",
+            "* Not all liabilities of the reporting entity being included in the financial statements. This is considered to be the main risk.",
+            "* Non-existent liabilities being included in the financial statements (the existence and rights and obligations assertions).",
+            "* Liabilities not being properly disclosed in the financial statements (the classification and presentation assertion)."
+          ]
+        },
+        {
+          "title": "1.2 The general approach to the substantive testing of trade payables",
+          "paragraphs": [
+            "Trade payables are a material item in the statement of financial position of many entities. Therefore, this area is likely to receive a significant level of audit attention."
+          ]
+        },
+        {
+          "title": "1.3 Substantive procedures for trade payables",
+          "paragraphs": [
+            "The following substantive procedures can be used to gather audit evidence on trade payables:",
+            "* Obtain or prepare a listing of balances on supplier accounts in the payables ledger (a listing of trade payables) and match the balance with the GL",
+            "* Select sample from trade payable listing (selection of nil balances and low balances) is important), send confirmation",
+            "* In selecting the sample of balances for testing, the auditor should consider the following points:",
+            "- It is not important to select large balances, as the main audit emphasis is on completeness and understatement (not existence and overstatement).",
+            "- For the same reason, it is important to select a number of accounts showing nil balances and debit balances. (When there is a debit balance, the supplier owes the client entity, presumably because goods have been returned and a credit note has been issued by the supplier, or because an invoice was over-paid or paid twice.)",
+            "- Include major suppliers in the sample. Identification of major suppliers should be based on the auditor's knowledge of the business. This knowledge may be derived from information gained at the inventory count or from audit work on the purchases system.",
+            "As with trade receivables, for an IT-based system, audit software can be used to assist in sample selection.",
+            "* If there is a difference between the balance in the payables listing and the balance shown in the supplier's statement, the auditor should ask the client company to prepare a reconciliation to explain the difference. The auditor should then check these reconciling items with the relevant supporting documentation.",
+            "In order to gain additional assurance about the completeness of trade payables balances, the auditor should also carry out the following procedures:",
+            "* Review the list of account balances for any suppliers who are not in the listing of trade payables, but who would be expected to be in the listing. These would include regular suppliers of frequently-purchased items.",
+            "* Compare the list of trade payables balances with the listing that was prepared for the previous year's audit (at the same date in the previous year). Look for explanations as to why any major balances do not appear on the current year's listing when a major balance for the same supplier is in the listing in the previous year.",
+            "* Apply other analytical procedures and obtain explanations for any significant differences identified with this method of testing. For example, the auditor might compare the ratio of trade payables to purchases in the year, and compare this with the same ratio in previous years. He might expect the ratio to remain fairly stable between one year and the next.",
+            "* Perform test of unrecorded liability"
+          ]
+        },
+        {
+          "title": "1.4 Purchases cut-off",
+          "paragraphs": [
+            "Purchases cut-off was explained in an earlier chapter. It is concerned with making sure that purchases transactions just before or after the year end are allocated to the correct financial year, so that purchases (for the income statement/statement of comprehensive income) and inventory and trade payables (for the statement of financial position) are correctly recorded.",
+            "* Work performed on cut-off (and recorded at the physical inventory count) will provide evidence as to the accuracy of purchases cut-off.",
+            "* This work is based on preparing a list of the goods received notes that were prepared by the client entity immediately before and after the end of the reporting period. The auditor should confirm that goods included in closing inventory have also been recorded as a liability (trade payable) and that purchased goods not recorded in closing inventory have not generated such a liability."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "2 SUBSTANTIVE PROCEDURES: ACCRUALS, PROVISIONS AND CONTINGENCIES",
+      "sections": [
+        {
+          "title": "2.1 Difficulties of obtaining evidence in this area",
+          "paragraphs": [
+            "The audit of accruals, provisions and contingencies can also be difficult areas for the auditor. Accruals are usually estimated amounts and will be subject to audit techniques which are similar to those applied to prepayments. Provisions and contingencies can be highly subjective areas where a considerable amount of judgement may be called for. Evidence may be needed from outside experts such as legal advisors."
+          ]
+        },
+        {
+          "title": "2.2 Accruals",
+          "paragraphs": [
+            "Accruals balances are difficult to audit as the figures reported are often based on estimates. However, the amounts involved may not be material, in which case the auditor will not devote a significant amount of time and resources to this area.",
+            "As with all liabilities, the emphasis will be on completeness. The nature of the items involved means that analytical procedures and the auditor’s knowledge of the business are useful in reaching a conclusion on this area.",
+            "Substantive procedures include the following:",
+            "* Obtain or prepare a listing of accruals as at the end of the reporting period.",
+            "* If the list is prepared by the client company, check the calculations and additions for arithmetical accuracy. Check the amounts in the listing against the balances in the relevant main ledger expense accounts and ensure that the amounts are the same.",
+            "* Where invoices have been received, or payments made, after the year end, confirm that the amount accrued appears reasonable in relation to this evidence. For example, suppose that a company makes an accrual for two months of electricity charges, and receives an invoice for three months’ supply of electricity one month after the year-end. If the accrual for electricity is, say, Rs. 60,000 (Rs. 30,000 per month), the auditor should expect the total invoice to be for about Rs. 90,000.",
+            "* Compare the list of accruals with the list that was prepared at the same date in the previous financial year, and enquire about items not listed in the current year that were in the list in the previous year.",
+            "* Review the list of accruals for completeness, based on the auditor’s knowledge of the business.",
+            "* Relate items on the list of accruals to other audit areas, such as the bank confirmation letter (which might provide details of unpaid/accrued bank charges).",
+            "Accrued wages and salaries may be more material than other items and may require a higher level of audit attention:",
+            "* Consider what items should be accrued for at the end of the reporting period, such as unpaid wages, overtime, holiday pay, bonuses.",
+            "* Check the amounts for accrued wages and salaries by comparing them with personnel records and payroll records (records of time worked, records of wage rates and salaries, details of dates for the payment of wages and salaries, and so on) and to payments made after the year end.",
+            "* Confirm that any additional costs (such as employer’s payroll taxes) have been accounted for.",
+            "* Perform analytical procedures on accrued wages and salaries. For example, the auditor might measure the ratio of accrued payroll expenses to total payroll costs for the year, and compare this with the similar ratio in previous years. Significant differences should be investigated."
+          ]
+        },
+        {
+          "title": "2.3 Provisions and contingencies: substantive procedures",
+          "paragraphs": [
+            "The auditor needs to be satisfied that the client has correctly distinguished between provisions (included in the financial statements), contingent liabilities (not included in the financial statements but disclosed in a note) and items that should not even be disclosed.",
+            "Similarly, it may be necessary to assess whether an item is an actual asset (included in the financial statements), a contingent asset (not included in the financial statements but disclosed in a note) or not likely to happen and so not disclosed.",
+            "The auditor must also be satisfied about the measurement/valuation of the items in the financial statements or disclosed by way of a note.",
+            "Provisions",
+            "Substantive procedures to provide evidence on provisions such as warranty other than legal should normally include the following:",
+            "* Obtain a listing of provisions that the client has included in the (draft) financial statements.",
+            "* Obtain an understanding of management process to record provision and ensure that it is consistent with the requirement of IAS 37",
+            "* For each item in the listing, confirm that the accounting provisions of IAS 37 have been complied with. Does the item meet the definition of provision?",
+            "* Review the changes in the provision for the period during the financial period.",
+            "* Review the measurement of the closing balance for each provision and discuss these with management if appropriate. Consider whether it might be appropriate to take expert advice on the existence or measurement of a provision.",
+            "* Review the list for possible omissions, based on the auditor’s knowledge of the business and the industry in which it operates.",
+            "* Compare provisions for the current financial year with provisions in previous years, and investigate any major differences or omissions.",
+            "* Ensure that assumptions are reasonable.",
+            "* Perform subsequent event procedures.",
+            "Contingencies",
+            "The audit approach to gathering evidence on contingencies may be as follows:",
+            "* Ascertain the approach taken by the client’s management to identifying contingencies.",
+            "* Review the minutes of board meetings (where such matters are likely to be discussed).",
+            "* Review relevant sections of the business press and trade journals for areas in which possible industry-wide contingencies may arise.",
+            "* Review the client’s correspondence with lawyers and invoices for legal services. These may help the auditor to identify contingencies that the client has not disclosed in the notes to the draft financial statements, or that provide additional information for the auditor about contingencies that have been disclosed.",
+            "* Consider direct confirmation from lawyers of matters handled on behalf of the entity under audit. Any letter should be sent by management with an instruction for the reply to be sent directly to the auditor. It is more likely that lawyers will respond if the letter lists specific areas where contingencies may exist, together with an assessment by management of the possible outcome. The lawyers should then be asked to comment on the information in the letter.",
+            "* Consider whether expert advice may be required from outside sources other than lawyers."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "3 SUBSTANTIVE PROCEDURES: NON-CURRENT LIABILITIES",
+      "sections": [
+        {
+          "title": "3.1 Aspects of reporting non-current liabilities",
+          "paragraphs": [
+            "Non-current liabilities are liabilities repayable after more than one year from the end of the reporting period. They may include:",
+            "* debentures",
+            "* loan stock",
+            "* loan notes",
+            "* bank loans",
+            "* finance lease obligations.",
+            "It may be that loans are repayable at regular intervals throughout the term of the loan, in which case a part of the overall balance owing may be a current liability (repayable within the next 12 months) with the remaining part being a non-current liability. This is an important point for the auditor to consider, in terms of ensuring the proper disclosure of information in the financial statements (and the classification of liabilities as non-current or current).",
+            "The agreements under which these non-current liabilities are taken out may impose conditions on the company which, if broken, may give the lender the right to impose penalties or possibly withdraw the finance. This is another significant consideration for the auditor."
+          ]
+        },
+        {
+          "title": "3.2 Substantive procedures for non-current liabilities",
+          "paragraphs": [
+            "Substantive procedures in respect of non-current liabilities may be as follows:",
+            "* Obtain or prepare a listing of long-term borrowings/non-current liabilities. The listing should include, for each item, details of the lender and the movement on the borrowing in the financial period. (Opening balance plus interest charges minus payments on the loan equals closing balance.)",
+            "* If the list is obtained from the client entity, check it for accuracy.",
+            "* Agree the opening balances on the listing with the amount for non-current liabilities in last year's statement of financial position.",
+            "* Agree the details of each loan with the loan agreement/documentation.",
+            "* Check whether any restrictions contained in the lending agreements have been complied with. For example, check that the client entity has not been in breach of any covenant in a borrowing agreement.",
+            "* Confirm loan repayments in the listing with payments recorded in the cash book, entries in bank statements and also with any correspondence or receipts or statements from lenders.",
+            "* Check the interest calculations and confirm that the correct accounting entries for interest have been made, recognising any opening and closing accruals for interest expenses.",
+            "* Obtain direct confirmation from lenders of amounts outstanding.",
+            "* Confirm that any relevant statutory requirements have been complied with (such as whether charges on assets have been properly registered, if there is a legal obligation to register charges).",
+            "* Confirm the correct allocation of the total amounts outstanding between current liabilities (repayable within 12 months) and non-current.",
+            "* Review cash book entries for unusual cash receipts that may represent new loans taken out during the period. Where unusual cash book entries are found, obtain an explanation."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "4 THE AUDIT OF EQUITY",
+      "sections": [
+        {
+          "title": "4.1 Introduction",
+          "paragraphs": [
+            "To some extent, the nature of the specific audit work performed on equity in the statement of financial position will be dictated by the requirements of local company law. The procedures described here cover general audit principles which are likely to be relevant in most countries.",
+            "The amount of audit work performed on this area is usually not significant. If the auditor is confident that assets and liabilities are correctly stated, the total of equity (capital and reserves = assets minus liabilities) must also be correct."
+          ]
+        },
+        {
+          "title": "4.2 Substantive procedures: share capital",
+          "paragraphs": [
+            "The auditor will usually carry out the following substantive procedures on share capital:",
+            "* Where local law requires that companies should have an authorised share capital, the auditor should check that the total authorised capital in the draft financial statements is consistent with the company's constitution.",
+            "* The auditor should check the nominal value of shares issued during the year, by reading the supporting documentation, and should ensure terms of issue were properly complied with.",
+            "* If new shares were issued during the year, check that cash received for them has been properly recorded in the main ledger.",
+            "* Check that the amount reported as issued share capital agrees with the amount recorded in the register of members/shareholders, if the company has such a register. (In some countries there is a legal requirement to maintain a register of members.)"
+          ]
+        },
+        {
+          "title": "4.3 Substantive procedures: reserves",
+          "paragraphs": [
+            "The auditor will usually carry out the following substantive procedures on reserves:",
+            "* Obtain an analysis of movements on all reserves during the period.",
+            "* Check the accuracy of these movements by checking supporting documentation.",
+            "* Ensure that any specific legal requirements relating to reserves have been complied with. (For example, check that the entity has not breached legal restrictions on use of the share premium account.)",
+            "* Confirm that dividends have been deducted only from those reserves that are legally distributable (usually the accumulated profits reserve/retained earnings).",
+            "* Check the authorisation for the amount of dividends paid.",
+            "* Check the dividend calculations and check that the total dividends paid are consistent with the amount of issued share capital at the relevant date."
+          ]
+        },
+        {
+          "title": "4.4 The audit of statutory books",
+          "paragraphs": [
+            "Most countries require companies to maintain certain 'books' or records containing defined information, in addition to their normal accounting records. The nature of these 'statutory books' varies from country to country, but they may include the following:",
+            "* Minutes of board meetings and minutes of general meetings of the company.",
+            "* Register of members/shareholders.",
+            "* Register of directors and their interests in the shares and loan capital of the company.",
+            "* Register of charges on the company's assets.",
+            "* Copies of directors' service contracts and details of directors' remuneration packages. (Audit work on this area can be included in payroll testing procedures. The auditor should confirm that national company law disclosure requirements are complied with.)",
+            "The auditor should confirm that the required statutory records are maintained by the client company and are up-to-date."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "5 KEY INCOME STATEMENT FIGURES",
+      "sections": [
+        {
+          "title": "5.1 Introduction",
+          "paragraphs": [
+            "Tests of controls on key income statement figures were covered in a previous chapter. Whatever the results of those tests, some degree of substantive procedures will need to be performed. For some clients, with strong internal controls, this could be limited to analytical procedures. These and other possible substantive procedures are considered below."
+          ]
+        },
+        {
+          "title": "5.2 Sales",
+          "paragraphs": [
+            "| **Assertion** | **Audit Procedure** |\n|---|---|\n| **Occurrence** | Select a sample of recorded transactions from the Sales Journal and vouch for the complete audit trail, i.e. from recording in the journal to the initiating document such as G/L, Sales Invoice, Delivery Note, and Customer Order. |\n| **Completeness** | Select a sample of Shipping Documents and vouch for the complete audit trail, i.e. from shipping documents to Sales Invoice and recording in the General Ledger to obtain evidence that all goods dispatched have been accounted for. |\n| **Accuracy** | Recalculate the amount of the bill for a sample of sales invoices by using quantities from the Dispatch Note, rates from the authorised rate list, and also check the mathematical accuracy of invoices. |\n| **Classification & Presentation** | Examine a sample of sales invoices and inspect journal vouchers (JV) for proper classification into revenue accounts. |\n| **Cut-off** | Perform a cut-off test, i.e. select a sample of sales invoices just before and after year-end and compare shipment dates with the dates they were recorded in the sales journal. |"
+          ]
+        },
+        {
+          "title": "5.3 Cost of Sales",
+          "paragraphs": [
+            "| **Assertion** | **Audit Procedure** |\n|---|---|\n| **Occurrence** | * Verify supporting documents (e.g., GRNs, invoices, delivery notes) for a sample of cost of sales transactions to confirm goods were actually sold.<br>* Perform cut-off testing to ensure cost of sales near year-end relate to valid sales in the correct period. |\n| **Completeness** | * Review post-year-end inventory dispatches and related sales invoices to identify any unrecorded cost of sales.<br>* Perform analytical procedures, such as comparing gross profit margins to prior periods or budgets, to identify potential understatement. |\n| **Accuracy** | * Recalculate cost of sales using:<br>  - Opening Inventory + Purchases - Closing Inventory, and compare to the ledger.<br>* Agree unit costs used in the costing system to supplier invoices or standard cost records. |\n| **Classification & Presentation** | * Review general ledger postings to confirm that only relevant items are included in the cost of sales accounts.<br>* Inspect journal entries affecting COS for appropriate descriptions and categorisation. |\n| **Cut-off** | * Check dispatch dates and invoice dates for sales around year-end to ensure proper period recognition.<br>* Examine GRNs and receiving reports to verify correct inclusion/exclusion in period-end cost of sales. |"
+          ]
+        },
+        {
+          "title": "5.4 Payroll costs",
+          "paragraphs": [
+            "Analytical procedures are often carried out on payroll costs as there is a strong relationship between rates of pay and numbers of employees (for gross pay) and between gross pay and deductions (such as employer's national insurance and pension deductions).",
+            "An example of analytical procedures for payroll costs is as follows. For a department where employees all receive fixed salaries, compare salary costs in the current year with salary costs in the preceding year. Unless there has been a significant change in staff numbers, the two totals should be similar, except for any inflationary increase in salaries during the year and any bonuses, new hiring and resignation Another check would be to compare total salary payments for the same department between one month and the next. Except for a month in which a salary increase is applied, total salary costs for the department should be constant from one month to the next.",
+            "Other substantive procedures to verify payroll costs might include selecting a sample of payroll records and checking that:",
+            "* the employee exists (by reference to personnel records)",
+            "* gross pay has been correctly calculated (by reference to personnel records for salaries or time worked multiplied by documented rates of pay)",
+            "* deductions have been correctly calculated (by re-performance on a sample of payroll payments)."
+          ]
+        },
+        {
+          "title": "5.5 Interest Expense",
+          "paragraphs": [
+            "| **Assertion** | **Audit Procedure** |\n|---|---|\n| **Occurrence** | * Trace interest expense entries to loan agreements and bank statements.<br>* Inspect payment vouchers and verify authorisation. |\n| **Completeness** | * Review loan agreements for any unrecorded obligations and accrued interest.<br>* Examine interest accrual calculations at year-end. |\n| **Accuracy** | * Recalculate interest expense based on loan terms and outstanding balances.<br>* Match recorded amounts with bank confirmations. |\n| **Cut-off** | * Inspect payments and accruals near year-end to ensure correct period recognition.<br>* Check bank statements for late payments. |\n| **Classification** | * Verify that the expense is recorded under finance costs and not operating expenses.<br>* Review general ledger account mapping. |"
+          ]
+        },
+        {
+          "title": "5.6 Interest Income",
+          "paragraphs": [
+            "| **Assertion** | **Audit Procedure** |\n|---|---|\n| **Occurrence** | * Trace interest income to investment agreements or bank deposit confirmations.<br>* Inspect received bank advices or credit notes. |\n| **Completeness** | * Review investment schedules for completeness.<br>* Examine post-year-end receipts for interest income not yet recorded. |\n| **Accuracy** | * Recalculate accrued interest using applicable rates and principal amounts.<br>* Agree recorded income to investment terms. |\n| **Cut-off** | * Review timing of interest receipts to ensure proper cut-off.<br>* Examine accruals to confirm they relate to the reporting period. |\n| **Classification** | * Ensure income is classified under finance income.<br>* Review general ledger postings to detect misclassified interest income. |"
+          ]
+        },
+        {
+          "title": "5.7 Operating, Selling & Administrative Expenses",
+          "paragraphs": [
+            "| **Assertion** | **Audit Procedure** |\n|---|---|\n| **Occurrence** | Select a sample of transactions from the expense account and perform the following procedures:<br><br>* Check supporting documents.<br>* Check mathematical accuracy.<br>* Check acknowledgement of receipt of goods/services.<br>* Check approval and authorisation (e.g., invoices).<br>* Check tax deduction.<br>* Check evidence of payment (e.g., copy of cheque, receiving signature, and/or payment in bank statement).<br>* Check supporting documents are duly stamped \"Processed\" or \"Paid\".<br>* Ensure that the expense relates to the year and the business. |\n| **Completeness** | * Review the period-end accrual of expenses.<br>* Search for unrecorded liabilities. |\n| **Accuracy** | * Recalculate invoices and ensure preparation of vouchers is accurate on the basis of invoices.<br>* Test that calculation of expenses is based on reasonable rates according to market rates. |\n| **Cut-off** | * From the selected sample of transactions, check the date of acknowledgement of receipt of goods/services. |\n| **Classification & Presentation** | * Check allocation of payments between expenses and prepayments.<br>* Scan accounts in the General Ledger for unusual transactions, e.g., credit items in expense accounts or unusually large amounts in the Repairs and Maintenance Account. |"
+          ]
+        }
+      ]
+    }
+  ]
+}

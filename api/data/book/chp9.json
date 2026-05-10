@@ -1,0 +1,355 @@
+{
+  "id": "caf8_chapter_9",
+  "source": {
+    "chapter": "Chapter 9",
+    "title": "SUBSTANTIVE PROCEDURES: CURRENT ASSETS"
+  },
+  "pages": [
+    {
+      "heading": "1 INTRODUCTION TO SUBSTANTIVE PROCEDURES FOR INVENTORY",
+      "sections": [
+        {
+          "title": "1.1 The importance of closing inventory for audit testing",
+          "paragraphs": [
+            "For many businesses (although service organisations are often an exception) inventory is one of the areas needing most attention from the auditor. The reasons for the importance of closing inventory for the auditor include the following:",
+            "* Inventory is often a material item in the financial statements.",
+            "* Inventory may be a high risk area, involving a high degree of judgement in areas such as valuation. For example, judgement may be needed to estimate the stage of completion of work in progress.",
+            "* Inventory may suffer from deterioration, loss or theft that may not be recognised in the client company's financial statements.",
+            "* Inventory may be highly technical in nature. Where inventory is complex, the auditor may need to consider whether to rely on the work of an expert.",
+            "* Establishing a closing inventory figure may be a lengthy and complex process for the client, with a high risk of error.",
+            "* Closing inventory is often not part of the double entry system, so directional testing (tests on other areas and other balances) may not reveal misstatements in inventory.",
+            "Audit work on inventory is often given to more experienced members of the audit team. The work will typically be subject to a process of rigorous review and quality management. In addition, analytical procedures are widely used to obtain evidence to supplement the detailed substantive testing on inventory in the audit."
+          ]
+        },
+        {
+          "title": "1.2 Principal risks of misstatement",
+          "paragraphs": [
+            "The principal risks of inventory being misstated are due to the following:",
+            "* Not all inventory that is owned by the reporting entity being included in the financial statements (the completeness assertion).",
+            "* Inventory in the financial statements not actually existing (the existence assertion).",
+            "* Inventory being recorded at inappropriate amounts (which could be due to incorrect recording of costs, or failing to value at net realisable value, if lower, or miscalculation or relevant overheads not being added in the cost) (the accuracy, valuation and allocation assertion).",
+            "* Inventory being included in the financial statements which actually belongs to third parties (the rights and obligations assertion).",
+            "* Inventory being incorrectly disclosed in the financial statements (the classification and presentation assertion)."
+          ]
+        },
+        {
+          "title": "1.3 Substantive procedures for inventory",
+          "paragraphs": [
+            "The figure for inventory in the financial statements reflects:",
+            "* the quantity of inventory on hand at the end of the reporting period, and",
+            "* the value of each item of that inventory.",
+            "Substantive procedures for inventory will therefore focus largely on the existence and valuation assertions and these are covered in the following sections. However, by carrying out test counts in both directions (see section on the physical inventory count below) the completeness assertion will also be covered.",
+            "In order to satisfy the rights and obligations assertion the auditor will need to check, when he attends the year- end physical inventory count (see below), that inventory belonging to third parties is separated and not included in the count.",
+            "To satisfy the classification and presentation assertion the auditor will need to ensure that:",
+            "* the schedule of year-end inventory (on which he bases his substantive procedures below) agrees to the financial statements",
+            "* inventory is correctly presented and classified (e.g. between raw materials, work in progress and finished goods) in the financial statements."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "2 VALUATION OF INVENTORY",
+      "sections": [
+        {
+          "title": "2.1 IAS 2: Inventories",
+          "paragraphs": [
+            "IAS 2 requires that inventory should be valued at the lower of cost or net realisable value, on an item-by-item basis:",
+            "* Cost includes the costs of purchase and all other costs incurred in bringing inventories to their present location and condition. In the case of work-in-progress and manufactured finished goods, this includes an amount for production overheads. (The absorption rate for production overheads should be based on normal levels of activity). Cost can be estimated by using a number of methods (such as first-in-first-out or average cost). The method chosen should provide a close approximation to the actual cost of the inventory.",
+            "* Net realisable value (NRV) is the estimated selling price of the inventory in the ordinary course of business, minus (1) any estimated costs to complete the items (and make them available for sale) and (2) the estimated costs of making the sale."
+          ]
+        },
+        {
+          "title": "2.2 Substantive procedures",
+          "paragraphs": [
+            "Substantive procedures on inventory should be designed to allow for the nature of the inventory and the nature of the situation that the auditor is facing.",
+            "* If the entity is a retailing organisation, the only major component of the cost of inventory is likely to be the purchase cost of the goods for resale.",
+            "* If the entity is involved in manufacturing or processing, the cost of inventory will include an amount for direct labour and production overhead, in addition to the cost of the raw materials and components.",
+            "Substantive procedures for the valuation of inventory items are suggested below. In the exam, which procedures are the most appropriate will depend on the particular scenario given.",
+            "Cost of raw materials or the cost of goods purchased for resale",
+            "For raw materials and goods held for resale, the cost of inventory will be the actual purchase cost of the items (plus any costs of delivery that the entity may have had to pay). The auditor should carry out the following tests for valuation:",
+            "* Confirm the approach adopted by the client company to estimate the cost of materials or goods used/sold (for example first-in-first-out, or weighted average cost).",
+            "* Check the figures for the cost of inventory by comparing them with prices in purchase invoices",
+            "Cost of manufactured goods and work in progress",
+            "For work-in-progress and items of finished (manufactured) goods, the auditor needs to check each of the elements in the cost: direct materials, direct labour and production overheads. He should therefore carry out the following tests:",
+            "* Obtain schedules showing the make-up of the cost figures for each item of work-in-progress and finished goods.",
+            "* Check the accuracy of the calculations.",
+            "* Materials",
+            "- Perform the same substantive tests as for raw materials, shown above.",
+            "- Check that the correct quantity of materials has been used in the valuation.",
+            "* Labour",
+            "- Check pay rates for direct labour cost against payroll/personnel records for the employees who produced the work-in-progress or finished goods items.",
+            "- Check the hours worked (and used to calculate labour costs in the inventory) with the time records for the employees concerned.",
+            "* Production overheads",
+            "- Confirm that only production overheads (as opposed to selling and administration overheads) are included in the valuation.",
+            "- Confirm that overhead absorption rates are based on normal levels of output.",
+            "* Work in progress: in addition to the above tests, the auditor may also need to check the stage of completion of the work in progress, in respect of both materials and conversion costs (labour and overheads)."
+          ]
+        },
+        {
+          "title": "2.3 Cost or net realisable value?",
+          "paragraphs": [
+            "In his substantive testing of inventory, the auditor should also look at the procedures of the client entity for deciding whether each item of inventory should be valued at cost or at net realisable value (NRV). Considering that estimation of NRV will require judgement, the auditor should apply ISA 540(revised) Auditing accounting estimates and related disclosures (out of the scope of syllabus)."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "3 INVENTORY QUANTITY: THE PHYSICAL INVENTORY COUNT AND ISA 501",
+      "sections": [
+        {
+          "title": "3.1 Physical inventory counts: purpose and responsibilities",
+          "paragraphs": [
+            "Many organisations rely on a physical inventory count at the end of their financial year in order to arrive at a figure for inventory in their financial statements. Even if an entity maintains 'sophisticated' inventory records, with continuous accounting records for inventory, the accuracy of these records should be checked by means of regular physical counts of inventory.",
+            "There are several reasons for physical counts of inventory:",
+            "* Physical counts may be fairly easy to arrange, particularly where most items of inventory are held in a limited number of physical locations.",
+            "* Physical counts provide evidence of the actual existence of the inventory. This evidence is important to the client company (for preparing the financial statements) as well as for the auditor (for checking the reliability of those statements).",
+            "* Physical counts can be used by the entity to check the accuracy of its inventory records, where it maintains continuous inventory records.",
+            "* Where the entity does not have continuous inventory records, a physical count of inventory is probably the only way of establishing the quantity of inventory at the year-end.",
+            "* Discrepancies between the physical count of inventory and the entity's inventory records may indicate weaknesses in physical controls over inventory, and losses due to theft or for losses from other causes.",
+            "* A physical count of inventory can also be used to check the physical condition of inventory, and whether there has been any deterioration in condition.",
+            "It is important to appreciate the relative responsibilities of management and auditors with respect to inventory counts.",
+            "* It is the responsibility of management to arrange for physical counts to be made and to establish appropriate procedures for counting, to ensure that a complete and accurate count is taken. (It is the responsibility of the company's directors to ensure that the valuation of inventory in the financial statements is reliable.)",
+            "* It is the responsibility of the auditor to gather evidence from which he can reach a conclusion on the figure for inventory in the financial statements. Observation and other audit procedures performed by the auditor at the inventory count will provide some of this audit evidence.",
+            "The auditor's attendance at the physical inventory count is covered by ISA 501 Audit evidence - Additional considerations for specific items. The requirements of ISA 501 in respect of inventory state that if inventory is material to the financial statements, the auditor should obtain sufficient appropriate audit evidence regarding the existence and condition of inventory by attendance at physical inventory counting unless impracticable. The purpose of such attendance is given as being to:",
+            "* Evaluate management's instructions and procedures for recording and controlling the results of the count.",
+            "* Observe the performance of management's count procedures.",
+            "* Inspect the inventory.",
+            "* Perform tests counts.",
+            "* Perform audit procedures over the final inventory records to determine whether they accurately reflect the results of the count."
+          ]
+        },
+        {
+          "title": "3.2 Audit work after the count: follow up",
+          "paragraphs": [
+            "The final audit work on inventory may take place several weeks after the inventory count itself. In the intervening period the client should have calculated a final inventory figure for the financial statements.",
+            "One of the main objectives of the audit work on inventory quantity at this stage is to ensure that the inventory quantities that existed at the count date are properly reflected in the final inventory figure in the financial statements (the completeness and classification & presentation assertions). (Note: At this stage, the auditor should also carry out his checks on the valuation of inventory items, as described earlier.)",
+            "The audit work involved in verifying inventory quantities will include the following:",
+            "* Obtaining the final inventory sheets that were prepared by the client's staff during their inventory count.",
+            "* Check the numerical sequence of the sheets and the auditor's record of the last sheet number, to confirm that no sheets are missing.",
+            "* Check the numerical sequence of tag numbers listed on the sheets and the auditor's record of the final tag number, to confirm that no inventory items are missing from the sheets.",
+            "* Check the arithmetical accuracy of the calculations on the sheets.",
+            "* Confirm that inventory records have been amended as appropriate. For some inventory items, there is likely to be a difference between the physical count numbers and the quantity of stock shown in the client's inventory records (where a continuous recording system is used). In these situations, the client's inventory records will be incorrect. The auditor should therefore check that the inventory records were amended.",
+            "* Confirm that inventory belonging to the client, but held by third parties, is included on the inventory sheets.",
+            "* Confirm that inventory belonging to third parties, but on the client's premises at the date of the count, is not included on the inventory sheets.",
+            "* Check that cut-off is correct. This is done by reference to the cut-off information recorded at the time of the count.",
+            "Having done all this work, the auditor should be able to reach a final conclusion on the quantity of inventory held at the end of the reporting period."
+          ]
+        },
+        {
+          "title": "3.3 Possible control weaknesses in an inventory count",
+          "paragraphs": [
+            "Control weaknesses in the client's inventory counting procedures may be observed by the auditor. These might include:",
+            "* Failure to pre-number the count sheets. All count sheets should be pre-numbered, so that they can all be accounted for at the end of the count and none are 'lost' (and none are counted twice).",
+            "* Including on the count sheet for each inventory item the quantity of the inventory as recorded in the entity's inventory records. The counters should not be told what quantity of inventory to 'expect' for each item, because this may influence them to expect in advance how much inventory to 'look for'.",
+            "* Entering the quantities counted on the count sheets in pencil. Entries in pencil can be erased and altered later, fraudulently, without leaving trace of the alteration.",
+            "* Stores staff is commonly used to do the counting. However, if all the counters are from the stores staff, there is a risk that they may collaborate to hide errors or missing inventory. The client should therefore use some other non-stores staff to assist in the count, such as some employees from the accounts department.",
+            "* Inventory may not be marked when it is counted. This gives rise to a risk that items of inventory will be counted twice, and possibly that some items will not be counted at all.",
+            "* Count sheets may not be signed by the individual counter who prepared them. If there is no signature on the count sheet, it may be difficult to refer queries back to the counter if a problem arises.",
+            "* Lack of precise instructions to the counting team. The counting team must be given precise and specific instructions about how to perform the count. If the counting team is left to decide itself how the count should be conducted, this will increase the risk of mistakes in counting - such as missing out some items and double counting others."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "4 SUBSTANTIVE PROCEDURES: TRADE RECEIVABLES AND PREPAYMENTS",
+      "sections": [
+        {
+          "title": "4.1 Confirmation of receivables balances",
+          "paragraphs": [
+            "The balance for trade receivables is usually a material amount in a company's statement of financial position. A significant amount of audit work on trade receivables is therefore likely to be needed to check the reliability of this amount.",
+            "The principal risks of misstatement of the trade receivables balance are due to:",
+            "* receivables being irrecoverable (the valuation assertion)",
+            "* receivables being contested by customers (the existence and rights and obligations assertions)",
+            "* cut-off between goods outwards and receivables recording being incorrect (the cut-off assertion - an income statement assertion that has a knock-on effect to the audit of trade receivables (see below)).",
+            "Because assets are typically tested for overstatement, the completeness assertion is less relevant.",
+            "An important audit technique for trade receivables is direct confirmation of balances with customers. This is sometimes known as 'circularisation'.",
+            "Direct confirmation involves asking customers to provide written confirmation, direct to the auditors, of their account balance with the client entity. Written confirmation by customers can normally be taken as high-quality audit evidence because it is a strong source of written, external audit evidence.",
+            "However, the reliability of this evidence depends on two factors that are not entirely within the auditor's control:",
+            "* A large proportion of the customers who are asked to provide written confirmation should do so. Customers are not obliged to provide confirmation, and some time and effort may be required to get some customers to provide the information required.",
+            "* Some customers may provide written confirmation without properly checking the details.",
+            "As discussed above, the auditor will be concerned to check that the balance for trade receivables is not overstated. The confirmation process is therefore based on the company's own list of receivables ledger balances (customer account balances). This is the main accounting record used in this part of the audit.",
+            "A direct confirmation of receivables is intended to check the following assertions:",
+            "* Existence assertion. That the receivables do in fact exist, and there is no over-statement of receivables in the financial statements.",
+            "* Rights and obligations assertion. That the client entity has the legal right to the amounts receivable.",
+            "* Accuracy, valuation and allocation assertion. That the receivables are stated at their appropriate amount."
+          ]
+        },
+        {
+          "title": "4.2 ISA 505: External confirmations",
+          "paragraphs": [
+            "The confirmation process is covered by ISA 505 External confirmations. In line with the generalisations about the reliability of audit evidence in ISA 500, audit evidence in the form of external confirmations received directly by the auditor are likely to be more reliable than evidence generated within the client entity.",
+            "It is therefore likely that, where it is reasonable to expect customers to respond to requests for confirmation of their balance, direct confirmation of balances will be a part of the substantive testing process for trade receivables.",
+            "The requirements of ISA 505",
+            "The auditor should maintain control over external confirmation requests, including:",
+            "* deciding on the information to be confirmed/requested;",
+            "* selecting the \"confirming party\" (e.g. the financial director/controller at the entity contacted);",
+            "* designing the confirmation requests (including an instruction for responses to be sent directly to the auditor); and",
+            "* Follow up confirmation request",
+            "Although the letter to customers is sent out by the auditor, it must contain authorisation from the client's management for the customer to provide the required information direct to the auditor. (An example of the form that this letter might take is shown later.)",
+            "Various requirements are set out in relation to the results of the external confirmation procedures:",
+            "* If there are doubts about the reliability of any response the auditor should obtain further evidence to resolve those doubts. Factors identified that may give rise doubt over the reliability of confirmation request such as:",
+            "- Was received by the auditor indirectly",
+            "- Appeared not to come from originally intended confirming party",
+            "- Responses received electronically because proof of origin and authority of the respondent is difficult to establish.",
+            "* Obtain further audit evidence to resolve those doubts such as:",
+            "- request management for direct confirmation",
+            "- contacting the CP - when CP responds by electronic email",
+            "- encryption and other information transmission technology",
+            "- If received from third party - perform procedure such as - response is from proper source, respondent is authorized, integrity over transmission has not compromised",
+            "* If a response is determined not to be reliable, the auditor should consider the implications of this on risk assessment and other audit procedures.",
+            "* For any non-response, the auditor should perform alternative audit procedures (though for a non-response to a vital positive confirmation request (see below) the auditor will need to consider the implications for his audit report).",
+            "* The auditor should investigate all exceptions to determine whether they indicate misstatements. They could indicate fraud or a breakdown in internal control or might just be due to timing differences and therefore not indicative of misstatements.",
+            "* The auditor should evaluate the results as a whole to decide whether they provide relevant and reliable audit evidence or whether further evidence is needed.",
+            "Management's refusal to allow the auditor to send a confirmation request",
+            "If management refuse to allow the auditor to send a confirmation request the auditor should:",
+            "* inquire as to management's reasons for the refusal, and seek audit evidence as to the validity and reasonableness of those reasons;",
+            "* evaluate the implications of management's refusal on the auditor's assessment of the relevant risks of material misstatement, including the risk of fraud, and on the nature, timing and extent of other audit procedures; and",
+            "* perform alternative audit procedures designed to obtain relevant and reliable audit evidence. (Possible alternative audit procedures are considered in a later section).",
+            "If the auditor concludes that management's refusal to allow the auditor to send a confirmation request is unreasonable, or the auditor is unable to obtain relevant and reliable audit evidence from alternative audit procedures, the auditor shall communicate with those charged with governance in accordance with ISA 260. The auditor also shall determine the implications for the audit and the auditor's opinion in accordance with ISA 705 given such a limitation on scope (see chapter 15)."
+          ]
+        },
+        {
+          "title": "4.4 Positive or negative confirmation?",
+          "paragraphs": [
+            "The confirmation will be either positive or negative. The auditor should decide which type of confirmation to obtain.",
+            "Positive confirmation",
+            "A positive confirmation request asks the customer to reply to the auditor whether or not he agrees with the balance on his account that is in the client company's accounting records (receivables ledger) as at the date selected for the confirmation. Positive confirmation can be obtained in either of two ways:",
+            "* Method 1. By providing the customer with details of the balance on his account, and asking him to indicate his agreement that this information is correct, or to indicate that it is wrong.",
+            "* Method 2. By asking the respondent to provide details of his balance at the selected date, but not providing any details of the balance in the client company's receivables ledger.",
+            "This should provide reliable audit evidence. However, there is a risk with Method 1 that a customer may reply to a confirmation request without checking that the information is correct. This risk can be reduced by using Method 2. However, with Method 2 there may be a lower response rate from customers, because they are being asked to do more work to provide the confirmation.",
+            "Negative confirmation",
+            "A negative confirmation request asks the customer to reply to the auditor only where he disagrees with the balance recorded by the company. If no reply is received, there is no explicit audit evidence in respect of the customer's balance. The absence of a reply could mean that the customer agrees with the balance, but is not required to provide written evidence. On the other hand, the absence of a reply could mean that the customer has not carried out any check of the balance at all.",
+            "The use of negative confirmation requests therefore provides audit evidence that is less reliable than evidence obtained with positive confirmation requests.",
+            "ISA 505 only permits the sole use of negative confirmation where all of the following conditions are met:",
+            "* The risk of material misstatement has been assessed as low and controls have been tested.",
+            "* The population is comprised of a large number of small account balances or transactions.",
+            "* A very low exception rate is expected.",
+            "* The auditor is not aware of circumstances which would case the respondent to ignore his request for confirmation."
+          ]
+        },
+        {
+          "title": "4.5 Sample selection and performing the confirmation exercise",
+          "paragraphs": [
+            "The auditor will normally select a sample of customers who will be asked to provide a confirmation of the balance on their account with the client company. The audit procedures for selecting the sample and for the confirmation process are as follows:",
+            "* Obtain or prepare an aged listing of receivables ledger balances at the chosen date.",
+            "* If the list is prepared by the client, check the completeness and accuracy of the list of balances and the total of the balances in the list. This can be done by checking the list against (1) the total balance for trade receivables in the receivables control account in the main ledger and (2) a sample of customers' account balances in the receivables ledger.",
+            "* A suitable sampling method should be chosen. As with all sampling, the sample selection process should as far as possible ensure that the sample is representative of the 'population' of receivables.",
+            "* If the 'population' of receivables ledger balances is not homogeneous, stratified sampling might be used. (Stratified sampling was explained in an earlier chapter.)",
+            "* In selecting the sample, certain types of account should be considered for inclusion:",
+            "- Overdue accounts",
+            "- Credit balances or 'negative balances' (accounts where the client entity owes money to its customer, having issued credit notes to the customer)",
+            "- Accounts on which round sum payments are received (for example, where the customer makes payments of Rs.5,000, or Rs.10,000 or Rs.30,000, instead of paying specific invoices)",
+            "- Nil balances. (A check on nil balances provides a check on the completeness of trade receivables.)",
+            "- Any individual balances that are considered 'material'.",
+            "In an IT system, with many year-end receivables balances audit software can be used to help select the main sample (for by selecting every 500th Rupee for sampling or selecting all balances over a certain amount, as well as nil and credit balances).",
+            "* Having selected items for circularisation, details should be extracted from the receivables ledger, and letters to the customer should be prepared.",
+            "* In the case of an external audit, the confirmation requests are issued by the auditor, not by the client, and replies are sent directly to the auditor. However, the request will need to contain management's authorisation to the customer to disclose the necessary information. Should the client refuse to give permission for a confirmation letter to be sent to a particular customer, the auditor should look for a reason for the refusal. As that customer has been included in the sample selection, the auditor will need to carry out alternative audit work (see below) to verify that customer balance.",
+            "* The letters should be sent out by post.",
+            "* With positive confirmation requests, if the auditor does not receive a reply from a customer within a reasonable period of time, follow-up procedures should be initiated. For example, second request and third request letters could be sent, or the client could be asked to contact the customer and ask for a reply."
+          ]
+        },
+        {
+          "title": "4.6 Audit procedures following the receipt of replies (with positive confirmation requests)",
+          "paragraphs": [
+            "On receipt of the replies from customers, the auditor should check that the letters are signed by a responsible official. The replies are filed in the receivables section of the current audit file. The current audit file should classify the customers in the sample as follows:",
+            "* Balance agreed. The customer has replied and agrees with the balance in the client entity's accounting records (or has provided a balance that corresponds with the entity's accounting records - depending on whether Method 1 or Method 2 of positive confirmation is used). No further audit work is required.",
+            "* Balance not agreed. The customer has replied but does not agree with the balance in the client entity's accounting records. The auditor should ask the client to review the replies and try to reconcile the balance in their records with the balance confirmed by the customer. The auditor should then check the reconciliation, looking for evidence of errors in the client company's figures which may represent misstatements of their accounts receivable balances. However, many of the reconciling items will often be 'timing differences' - invoices, credit notes or cash may be recorded in the accounts of one party (the customer or the client entity), but not yet recorded by the other. Provided that the auditor is confident that the difference in the balances is due to timing differences, they should not be seen as evidence of errors in receivables balances.",
+            "* No reply received. No reply has been received from the customer. The auditor cannot ignore these customer accounts. They have been chosen as part of a representative sample and the auditor needs to reach a conclusion on the accuracy of the balances on all the accounts included in the sample for the confirmation process.",
+            "Further checking where no reply is received",
+            "Where no reply has been received, the auditor should therefore perform alternative procedures in order to obtain evidence to confirm the customer's balance.",
+            "* If the customer has subsequently paid all of the amount due at the confirmation date, this is strong evidence of the validity of the receivable.",
+            "* If no payment (or only part-payment) has been received, all the relevant documentation supporting the amount still due should be examined. For each invoice outstanding at the confirmation date, the auditor should examine:",
+            "- a signed customer purchase order",
+            "- signed delivery documentation (the customer's signature on the delivery note)",
+            "- a sales invoice addressed to the customer."
+          ]
+        },
+        {
+          "title": "4.7 Preparing a summary and reaching a conclusion",
+          "paragraphs": [
+            "On completion of the confirmation exercise, the auditor should produce a summary of the responses. This should clearly indicate the amounts of the balances subject to confirmation for which the auditor has not been able to establish supporting evidence. These amounts indicate misstatement of receivables balances. In particular, they may indicate the existence of irrecoverable receivables.",
+            "As always with a sampling exercise, the auditor should draw a conclusion on the likely level of misstatement in the total population of receivables balances based on the result of the sample, and whether this is material.",
+            "Note: The cumulative errors schedule is a list of items where the auditor's view of the amount of the item differs from the amount in the client company's accounting records/draft financial statements. The auditor builds up this schedule as the audit progresses, and will use it when reaching his final audit opinion."
+          ]
+        },
+        {
+          "title": "4.8 Other audit procedures for receivables",
+          "paragraphs": [
+            "In addition to the confirmation process, the auditor should consider the following additional audit procedures in respect of trade receivables:",
+            "Irrecoverable receivables",
+            "The auditor needs to be satisfied that the amount of irrecoverable receivables written off and any allowance made for receivables are reliable. These will affect the amount included in the statement of financial position for trade receivables. The following substantive procedures should therefore be performed:",
+            "* Review the company's procedures for identifying irrecoverable and doubtful receivables.",
+            "* Review aged listings of receivables balances ('aged receivables lists'). Irrecoverable receivables and allowances for doubtful receivables should only relate to overdue accounts. The auditor should enquire as to whether the overdue receivables are collectable.",
+            "* Review any correspondence of the client company with customers, lawyers and collection agencies that deal with unpaid or disputed debts.",
+            "* Review the assumption used for calculation of any allowances against doubtful receivables.",
+            "* Check the subsequent clearance.",
+            "Classification and Presentation",
+            "To satisfy the classification and presentation assertion the auditor will need to ensure that:",
+            "* the list of receivables ledger balances (on which he bases his substantive procedures below) agrees to the financial statements.",
+            "* receivables are correctly classified and presented in the financial statements."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "5 SUBSTANTIVE PROCEDURES: BANK AND CASH BALANCES",
+      "sections": [
+        {
+          "title": "5.1 Features of the audit of bank and cash balances",
+          "paragraphs": [
+            "For the purpose of this chapter, bank balances are amounts held in a bank account, and cash balances are bank notes and coins (although coins are likely to be immaterial).",
+            "Assets held as bank balances and cash can be at risk of loss. There may be fraudulent activity, or the misappropriation of money by employees or others, particularly when many individuals have authority for dealing with receipts and payments.",
+            "However, bank balances and cash are also easily checked and verified. Bank balances can be confirmed directly in writing by the banks (third parties) and cash can be physically counted.",
+            "Bank balances and cash are also usually subject to rigorous internal controls, to prevent loss and theft. In many countries, it is regular practice for business entities to receive regular bank statements from their bank. A feature of internal control for bank balances is the reconciliation of the balance shown in a bank statement with the balance recorded in the entity's own accounting records (cash book).",
+            "The audit work on cash balances will be determined largely by materiality (how much cash does the entity hold and is it a material amount?) and the effectiveness of the client's internal controls for cash."
+          ]
+        },
+        {
+          "title": "5.2 Bank balances: confirmation of balances",
+          "paragraphs": [
+            "Checking the accuracy of bank balances can be done effectively by means of direct confirmation to the auditor by the banks at which the entity's bank accounts are held. This is similar to written confirmation of balances from customers, in order to check trade receivables.",
+            "The bank confirmation letter",
+            "The auditor must decide, taking a risk-based approach, which banks to contact for confirmation. Typically, all banks that hold accounts for the client entity are contacted. However, the auditor may choose to omit some banks for reasons of immateriality.",
+            "The auditor can use either of two possible approaches to the confirmation of bank balances:",
+            "* Method 1. The auditor lists information about the bank balances from the client's accounting records and asks each bank to confirm that the balances are correct. (Note: Banks may operate several different accounts for the same customer.)",
+            "* Method 2. The auditor requests confirmation of the relevant bank balance(s) without providing any details to the bank. This method provides stronger audit evidence but it may be more time-consuming for the bank to provide the required confirmation.",
+            "The two methods are similar to the two methods of positive confirmation of balances from customers for trade receivables.",
+            "In the case of the external audit, permission must be given to the bank by the client to release information to the auditor. The letter should be written in a standard form that is acceptable to banks and should include the client entity's authorisation to the bank to release the information to the auditor. (The client entity may give standing authority to the bank to release the information to the auditor each year: if so, the letter should refer to this standing authority.) The letter should be sent by the auditor to the bank.",
+            "The reply should be sent by the bank direct to the auditor. (This is also the same as for the confirmation of balances from customers for trade receivables.)",
+            "Typical areas covered by the confirmation letter include the following:",
+            "* Confirmation of balances on all bank accounts at the end of the reporting period.",
+            "* Details of any unpaid bank charges.",
+            "* Details of any liens (charges) over assets of the client entity.",
+            "* Details of any assets of the client entity held by the bank as security for lending.",
+            "* Details of any other client bank accounts that are known to the bank but not listed in the request to the bank for confirmation of balances."
+          ]
+        },
+        {
+          "title": "5.3 Audit work on receipt of the banks' replies",
+          "paragraphs": [
+            "The main audit work will focus on the confirmation letters from the bank (or the confirmation letter from the client's bank, if there is just one bank) and the client company's bank reconciliation statement. A statement should be provided by the bank for the end of the reporting period.",
+            "* Obtain or prepare a bank reconciliation statement for each bank account.",
+            "* If the reconciliation is prepared by the company, check it for arithmetical accuracy.",
+            "* Check the bank balance confirmed in the bank's confirmation letter against the balance used in the bank reconciliation statement.",
+            "* Relate other information contained in the confirmation letter to other areas of the audit (for example, accrued bank charges must be provided for in the financial statements).",
+            "* Check items appearing in the bank reconciliation statement against any available supporting evidence (for example, unpresented cheques in the bank reconciliation statement should be shown as having been presented in a subsequent bank statement).",
+            "* Review the cash book and bank statements for unusual items, including unusual delays between cash book and bank statement entries. Investigate the reasons for any unusual item.",
+            "* Review the confirmation letter from the bank for any other information to be disclosed in the financial statements (for example, charges on assets and security for loans)."
+          ]
+        },
+        {
+          "title": "5.4 Cash balances: physical count",
+          "paragraphs": [
+            "The audit work performed on cash balances (as opposed to bank balances) will be largely dictated by materiality considerations. In this context, materiality should be considered not only in terms of the statement of financial position amount, but also in terms of the value of total transactions passing through the cash account during the period.",
+            "In addition, the auditor needs to appreciate that certain businesses hold cash in a large number of locations (for example, in a company that operates a chain of hotels or supermarkets). In total, these balances may be material, whereas the amount of cash held in any single location may be insignificant.",
+            "The main audit work involved in verifying cash balances is a physical count. Audit procedures include the following:",
+            "* The auditor should count cash at all locations simultaneously and in the presence of a company official. (Simultaneous counting is necessary, to prevent the client from moving cash that has been counted at one location to another location ready for the next count.)",
+            "* After the count the auditor should obtain a signed receipt for the amount of cash returned to the official, after the count.",
+            "* The auditor should check the cash balance obtained from the count against the client's cash records and cash balance in the draft financial statements.",
+            "* Where appropriate, the auditor should also investigate the treatment of any money advances to employees (for example, against wages or salary)."
+          ]
+        }
+      ]
+    }
+  ]
+}
