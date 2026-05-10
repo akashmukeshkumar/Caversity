@@ -1,4 +1,5 @@
 let CASE_DATA = null;
+let ALL_SCENARIOS = [];
 
 const APP_NAMES = { 'briefing': 'Briefing', 'pc': 'This PC', 'outlook': 'Outlook', 'erp': 'Oracle ERP', 'audit': 'Audit File' };
 
@@ -52,13 +53,20 @@ window.onload = () => {
 async function unlockOS() {
     if(!document.getElementById('username-input').value) return alert("Enter Auditor ID");
     try {
-        const res = await fetch('/api/audit-os', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'get_daily_case' })
-        });
-        if (!res.ok) throw new Error("API Limit");
-        CASE_DATA = await res.json();
+        // Secure JSON payload
+        const res = await fetch('/api/get-data?file=questionbank');
+        const result = await res.json();
+        
+        // 🛠️ UTF-8 FIX: atob akela apostrophes (') ko "â" aur dabbon (boxes) mein badal deta hai.
+        const decodedPayload = new TextDecoder("utf-8").decode(Uint8Array.from(atob(result.payload), c => c.charCodeAt(0)));
+        ALL_SCENARIOS = JSON.parse(decodedPayload);
+        
+        const now = new Date();
+        const dateBlockString = `${now.getFullYear()}${now.getMonth()}${now.getDate()}${now.getHours() >= 12 ? 1 : 0}`;
+        const localBlockNumber = parseInt(dateBlockString);
+        
+        const caseIndex = localBlockNumber % ALL_SCENARIOS.length;
+        CASE_DATA = ALL_SCENARIOS[caseIndex];
         
         document.getElementById('lock-screen').classList.add('hidden');
         document.getElementById('desktop-screen').classList.remove('hidden');
