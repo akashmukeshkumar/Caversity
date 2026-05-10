@@ -1,4 +1,4 @@
-        // --- 📱 Sidebar Toggle Function ---
+ // --- 📱 Sidebar Toggle Function ---
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('open');
@@ -10,7 +10,7 @@
             { box: "#eff6ff", stroke: "#3b82f6", text: "#1e40af", line: "#3b82f6" }, 
             { box: "#f0fdf4", stroke: "#22c55e", text: "#166534", line: "#22c55e" }, 
             { box: "#fdf2f8", stroke: "#ec4899", text: "#9d174d", line: "#ec4899" }, 
-            { box: "#f5f3ff", stroke: "a#8b5cf6", text: "#5b21b6", line: "#8b5cf6" }, 
+            { box: "#f5f3ff", stroke: "#8b5cf6", text: "#5b21b6", line: "#8b5cf6" }, 
             { box: "#fff7ed", stroke: "#f97316", text: "#9a3412", line: "#f97316" }  
         ];
 
@@ -24,15 +24,15 @@
 
         async function loadExplorer() {
             try {
-                const res = await fetch('/api/auditmindmap', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'get_mindmaps' })
-                });
-                if (!res.ok) throw new Error("API failed");
-                const data = await res.json();
+                // 1. Purane direct link ki jagah naya Secure API link
+    const res = await fetch('/api/get-data?file=mindmaps');
+    const result = await res.json();
 
-                const list = document.getElementById('chapter-list');
+    // 2. 'atob' use karke ajeeb alphabets ko wapis normal JSON banayein
+    const data = JSON.parse(atob(result.payload));
+
+    // 3. Aapka purana list element wala logic
+    const list = document.getElementById('chapter-list');
                 
                 Object.keys(data).forEach((key, idx) => {
                     const btn = document.createElement('button');
@@ -60,6 +60,7 @@
             treemap = d3.tree().nodeSize([55, 420]);
             root = d3.hierarchy(chapter.treeData, d => d.children);
             root.x0 = height / 2; root.y0 = 0;
+            
             isAllExpanded = false;
             root.children.forEach(collapse);
             
@@ -130,3 +131,4 @@
         d3.select("#zoom-out").on("click", () => svg.transition().duration(400).call(zoom.scaleBy, 0.7));
 
         loadExplorer();
+    
