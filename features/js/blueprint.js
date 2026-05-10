@@ -183,7 +183,11 @@ async function openDrawer(verseKey, element) {
 
     try {
         // Fetch Default English Tafsir
-        const res = await fetch(`${API_BASE}/tafsirs/${TAFSIR_ID}/by_ayah/${verseKey}`);
+        const res = await fetch('/api/blueprint', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'get_tafsir', verseKey: verseKey, lang: 'en' })
+        });
         const data = await res.json();
         if (data && data.tafsir) {
             currentTafsirEng = data.tafsir.text;
@@ -210,7 +214,11 @@ async function toggleTrans() {
         box.innerHTML = '<div class="text-center text-indigo-400 py-2"><i class="fas fa-circle-notch fa-spin"></i> Fetching Urdu...</div>';
         
         try {
-            const res = await fetch(`${API_BASE}/verses/by_key/${currentVerseKey}?language=ur&translations=97`);
+            const res = await fetch('/api/blueprint', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'get_translation', verseKey: currentVerseKey, lang: 'ur' })
+            });
             const data = await res.json();
             const urduText = data.verse.translations[0].text.replace(/<sup.*?<\/sup>/g, '');
             
