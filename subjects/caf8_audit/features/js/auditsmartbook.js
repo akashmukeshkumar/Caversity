@@ -99,16 +99,22 @@ async function loadChapter(chapterNumber) {
     }
 }
 async function fetchChapterJson(chapterNumber) {
-    let path = `/api/data/book/chp${chapterNumber}.json`;
-    let response = await fetch(path, { cache: 'no-store' });
-    if (!response.ok) {
-        path = `chp${chapterNumber}.json`; 
-        response = await fetch(path, { cache: 'no-store' });
+    try {
+        // 🔥 Calling your secure get-data API instead of direct JSON path
+        let response = await fetch(`/api/get-data?file=book/chp${chapterNumber}`);
+        
+        if (!response.ok) throw new Error("API Route Failed");
+        
+        const result = await response.json();
+        
+        // Agar API encrypted payload (base64) bhej rahi hai
+        if (result.payload) return JSON.parse(atob(result.payload));
+        
+        // Agar API direct saaf JSON bhej rahi hai
+        return result;
+    } catch (error) {
+        throw new Error('Failed to load chapter securely via get-data API.');
     }
-    if (!response.ok) {
-        throw new Error('Chapter JSON file not found: ' + path);
-    }
-    return await response.json();
 }
 
 
