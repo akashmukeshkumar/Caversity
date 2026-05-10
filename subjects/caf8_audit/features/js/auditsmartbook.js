@@ -532,24 +532,30 @@ function escapeHtml(value) {
 
 // 🔥 STEP 3: GROK API RELIABILITY FIX 🔥
 async function callGrokForDecode(englishText, chapterTitle, lineContext) {
+    const GROQ_API_KEY = "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";
+    
+    const prompt = `You are Caversity AI, a CA Audit Expert. Explain this audit concept in 2 lines of Roman Urdu English mix and give 1 practical example(dont use any hindi word). Return ONLY JSON: {"urdu": "...", "example": "..."}. Context: ${chapterTitle} -> ${lineContext}. Text: "${englishText}"`;
 
     try {
-        const response = await fetch("/api/auditsmartbook", {
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: {
+                "Authorization": `Bearer ${GROQ_API_KEY}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                englishText: englishText,
-                chapterTitle: chapterTitle,
-                lineContext: lineContext
+                model: "llama-3.3-70b-versatile",
+                messages: [{"role": "user", "content": prompt}],
+                temperature: 0.5
             })
         });
 
         const data = await response.json();
         if (data.error) throw new Error(data.error.message);
 
-        return data;
+        let aiReply = data.choices[0].message.content;
+        const jsonMatch = aiReply.match(/\{[\s\S]*\}/);
+        return JSON.parse(jsonMatch ? jsonMatch[0] : aiReply);
     } catch (error) {
         console.error("AI Error:", error);
         throw error;
