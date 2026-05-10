@@ -24,15 +24,16 @@
 
         async function loadExplorer() {
             try {
-                // 1. Purane direct link ki jagah naya Secure API link
-    const res = await fetch('/api/get-data?file=mindmaps');
-    const result = await res.json();
+                const res = await fetch('/api/auditmindmap', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'get_mindmaps' })
+                });
+                
+                if (!res.ok) throw new Error("API Limit");
+                const data = await res.json();
 
-    // 2. 'atob' use karke ajeeb alphabets ko wapis normal JSON banayein
-    const data = JSON.parse(atob(result.payload));
-
-    // 3. Aapka purana list element wala logic
-    const list = document.getElementById('chapter-list');
+                const list = document.getElementById('chapter-list');
                 
                 Object.keys(data).forEach((key, idx) => {
                     const btn = document.createElement('button');
