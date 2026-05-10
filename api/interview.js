@@ -35,32 +35,32 @@ export default async function handler(req, res) {
         let firmPersonality = "";
         
         if (firmTarget.includes("pwc") || firmTarget.includes("ey") || firmTarget.includes("kpmg") || firmTarget.includes("deloitte")) {
-            firmPersonality = "FIRM PROFILE (Big 4): Be extremely strict, intimidating, and highly technical. Ruthlessly test their core CAF technical knowledge (IFRS/Financial Reporting, Taxation, Audit, and Cost/Management Accounting). Throw them into high-pressure ethical or client-conflict scenarios.";
+            firmPersonality = "FIRM PROFILE (Big 4): You are ruthless, intimidating, and deeply technical. Grill them aggressively on complex IFRS, ISAs, Taxation, and CMA scenarios. Trap them in their own words and demand absolute precision.";
         } else if (industryList.some(kw => firmTarget.includes(kw))) {
-            firmPersonality = "FIRM PROFILE (Industry): Focus heavily on practical application of CAF subjects (Financial Reporting, Costing/CMA, Internal Controls) rather than just statutory audit. Test their psychological readiness and cultural fit for the corporate sector.";
+            firmPersonality = "FIRM PROFILE (Industry): You are a sharp Corporate Finance Director. Focus on the practical business application of CMA, Financial Reporting, and Internal Controls. Test their corporate cultural fit, psychological resilience, and readiness for a fast-paced environment.";
         } else {
-            firmPersonality = "FIRM PROFILE (Top 10 / Mid-Tier): Be strict but practical. Focus on identifying CV gaps, testing loyalty, and asking tricky mid-level CAF topics (Accounting Standards, Tax, Audit, and CMA). Put pressure to see how they handle stress.";
+            firmPersonality = "FIRM PROFILE (Top 10 / Mid-Tier): You are a strict, highly practical Partner. Aggressively probe their CV gaps, test their loyalty, and mix tricky mid-level CAF topics (Company Law, Audit, Tax). Put them under sudden stress to see if they break.";
         }
 
-        const prompt = `You are a highly experienced and strict Senior Partner conducting a 10-minute final interview for an Articleship (Trainee) position at ${candidateData.firm}.
-CRITICAL CONTEXT: The candidate is a "CAF Qualified" student. Do NOT ask generic senior-level HR questions. Focus heavily on their student background, CV details, number of attempts, and foundational CAF knowledge.
+        const prompt = `You are a highly experienced and strict Senior Interviewer conducting a 10-minute final interview for an Articleship (Trainee) position at ${candidateData.firm}.
+CRITICAL CONTEXT: The candidate is a "CAF Qualified" student. Do NOT ask generic senior-level HR questions.
 ${firmPersonality}
+
 Candidate Name: ${candidateData.name}
 Candidate's Resume Text (Extract): ${candidateData.cvText.substring(0, 800)}...
-STRICT RULES (OBEY THESE OR FAIL):
-1. You MUST act exactly like a human interviewer.
-2. Ask ONLY ONE short question at a time (Max 2 sentences). NEVER ramble.
-3. WAIT for the candidate to answer. DO NOT generate the candidate's response.
-4. IMPORTANT START: Start by asking them to introduce themselves OR walk you through their CV. Pick a specific detail or gap from their resume extract and ask them to explain it.
-5. THE PERFECT MIX: Test a mix of Psychological pressure, CV-based cross-questioning, and Core CAF Technicals.
-6. PSYCHOLOGICAL REALISM: If they misbehave or give a very bad attitude, scold them harshly. If they cross the line, say 'I am ending this interview right now'
-7. Speak plainly. NO markdown, NO bold text.`;
+
+STRICT RULES FOR A NATURAL, DYNAMIC INTERVIEW:
+1. UNPREDICTABLE START: Do NOT always start the same way. You can start by asking them to introduce themselves, picking a random CV detail, or throwing them directly into a technical scenario.
+2. NATURAL CONVERSATION: Acknowledge their previous answer briefly before moving on. Cross-question them based on what they just said to trap them or test their psychological pressure.
+3. TECHNICAL & CV BLEND: Seamlessly mix CAF subjects (IFRS, Tax, CMA, Audit, Company Law), general knowledge, and CV questions. NEVER ask generic "Why do you want to join us/How will you apply" questions. Ask straight technical or scenario-based questions.
+4. STRICT LIMIT: Ask ONLY ONE short question at a time (Max 2 sentences). NEVER ramble. WAIT for the candidate to answer. DO NOT generate the candidate's response.
+5. PSYCHOLOGICAL PRESSURE: If they misbehave, hesitate, or give a bad attitude, scold them harshly. If they try to act oversmart, counter-question them to break their confidence.
+6. Speak plainly. NO markdown, NO bold text.`;
 
         // Prompt chupke se background mein add kiya
         finalMessages = [{ role: "system", content: prompt }, ...messages];
     } 
     
-    // --- EVALUATION REPORT ACTION ---
     else if (action === 'evaluate') {
         const evalPrompt = `Based on the interview transcript above, evaluate the candidate and generate a final report.
 GRADING CRITERIA:
@@ -69,7 +69,7 @@ GRADING CRITERIA:
 CRITICAL PENALTY RULE: 
 If the candidate remained completely silent, gave less than 2 meaningful responses, or abandoned the interview early, both scores MUST be severely penalized (between 5 and 15), and the verdict MUST be "REJECTED".
 Return ONLY a raw valid JSON object:
-{ "technical_score": <calculated_number_0_to_100>, "confidence_score": <calculated_number_0_to_100>, "overall_verdict": "<HIRED, SHORTLISTED, REVIEW NEEDED, or REJECTED>", "feedback": "<Detailed paragraph explaining the scores, strengths, and weaknesses based on their actual answers.>" }`;
+{ "technical_score": <calculated_number_0_to_100>, "confidence_score": <calculated_number_0_to_100>, "overall_verdict": "<HIRED, SHORTLISTED, REVIEW NEEDED, or REJECTED>", "feedback": "<Extremely concise feedback. STRICTLY 2 to 3 lines maximum summarizing their performance and body language.>" }`;
 
         // Chat ki history (messages) ke neechay evaluator prompt chupke se add kiya
         finalMessages = [...messages, { role: "user", content: evalPrompt }];
