@@ -99,7 +99,7 @@ async function loadChapter(chapterNumber) {
     }
 }
 async function fetchChapterJson(chapterNumber) {
-    let path = `subjects/caf8_audit/features/assets/book/chp${chapterNumber}.json`;
+    let path = `/api/data/book/chp${chapterNumber}.json`;
     let response = await fetch(path, { cache: 'no-store' });
     if (!response.ok) {
         path = `chp${chapterNumber}.json`; 
