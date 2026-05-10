@@ -1,4 +1,4 @@
- // --- 📱 Sidebar Toggle Function ---
+        // --- 📱 Sidebar Toggle Function ---
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('open');
@@ -10,7 +10,7 @@
             { box: "#eff6ff", stroke: "#3b82f6", text: "#1e40af", line: "#3b82f6" }, 
             { box: "#f0fdf4", stroke: "#22c55e", text: "#166534", line: "#22c55e" }, 
             { box: "#fdf2f8", stroke: "#ec4899", text: "#9d174d", line: "#ec4899" }, 
-            { box: "#f5f3ff", stroke: "#8b5cf6", text: "#5b21b6", line: "#8b5cf6" }, 
+            { box: "#f5f3ff", stroke: "a#8b5cf6", text: "#5b21b6", line: "#8b5cf6" }, 
             { box: "#fff7ed", stroke: "#f97316", text: "#9a3412", line: "#f97316" }  
         ];
 
@@ -29,11 +29,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ action: 'get_mindmaps' })
                 });
-                
-                if (!res.ok) {
-                    const errData = await res.json();
-                    throw new Error(errData.details || "API Crashed (500)");
-                }
+                if (!res.ok) throw new Error("API failed");
                 const data = await res.json();
 
                 const list = document.getElementById('chapter-list');
@@ -50,10 +46,7 @@
                     list.appendChild(btn);
                     if(idx === 0) renderMindmap(data[key], btn);
                 });
-            } catch (e) { 
-                console.error("Mindmap Load Error:", e);
-                alert("Mindmap Error: " + e.message); 
-            }
+            } catch (e) { alert("Check mindmaps.json file structure!"); }
         }
 
         function renderMindmap(chapter, btn) {
@@ -69,11 +62,12 @@
             root.x0 = height / 2; root.y0 = 0;
             isAllExpanded = false;
             root.children.forEach(collapse);
+            
             // 🔥 Center the map properly
             const initialPos = d3.zoomIdentity.translate(window.innerWidth/4, height/2.2).scale(0.6);
             svg.transition().duration(1000).call(zoom.transform, initialPos);
             update(root);
-    }
+        }
 
         function collapse(d) { 
             if(d.children) { d._children = d.children; d._children.forEach(collapse); d.children = null; } 
