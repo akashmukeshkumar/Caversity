@@ -120,16 +120,14 @@ onAuthStateChanged(auth, async (user) => {
     } catch (e) { console.error("Auth check failed:", e); }
 });
 
-// 🔥 UNIVERSAL SHIELD: DISABLE INSPECT, COPY & RIGHT CLICK 🔥
-document.addEventListener('contextmenu', event => event.preventDefault()); // Right Click Block
+document.addEventListener('contextmenu', e => e.preventDefault());
 
-document.onkeydown = function(e) {
-    if(e.keyCode == 123) { return false; } // F12 Block
-    if(e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0))) { return false; }
-    if(e.ctrlKey && (e.keyCode == 'U'.charCodeAt(0) || e.keyCode == 'S'.charCodeAt(0))) { return false; } // View Source & Save Block
+document.onkeydown = function(x) {
+    if(x.keyCode === 123) return false;
+    if(x.ctrlKey && x.shiftKey && [73, 74, 67].includes(x.keyCode)) return false;
+    if(x.ctrlKey && [85, 83].includes(x.keyCode)) return false;
 };
 
-// Text Selection Disable
 document.addEventListener("DOMContentLoaded", () => {
     document.body.style.userSelect = "none";
     document.body.style.webkitUserSelect = "none";
