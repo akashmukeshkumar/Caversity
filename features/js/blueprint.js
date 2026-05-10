@@ -1,6 +1,3 @@
-const API_BASE = "https://api.quran.com/api/v4";
-const TRANSLATION_IDS = "131,20"; 
-const TAFSIR_ID = 169; // English Ibn Kathir
 
 let divineData = []; 
 let currentStation = 1;
@@ -76,16 +73,14 @@ async function loadStation(dayNumber) {
 
     let allVerses = [];
     try {
-        for (let p = startPage; p <= endPage; p++) {
-            console.log("Fetching Quran Page: ", p); // 🔥 Helps you see API working in console
-            const url = `${API_BASE}/verses/by_page/${p}?language=en&words=true&word_fields=text_indopak,translation&translations=${TRANSLATION_IDS}&fields=text_indopak`;
-            const res = await fetch(url);
-            if (!res.ok) throw new Error("API Limit");
-            const data = await res.json();
-            if(data.verses) allVerses = allVerses.concat(data.verses);
-        }
-        if (allVerses.length === 0) throw new Error("Empty");
-        renderVerses(allVerses);
+        const res = await fetch('/api/blueprint', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'get_verses', startPage: startPage, endPage: endPage })
+        });
+        if (!res.ok) throw new Error("API Limit");
+        const data = await res.json();
+        if (data.verses) renderVerses(data.verses);
     } catch (err) {
         document.getElementById('quranPageContainer').innerHTML = `<div class="text-center py-12 text-red-500 font-sans"><i class="fas fa-wifi text-3xl mb-3"></i><p class="text-sm font-medium">Connection Interrupted.</p></div>`;
     }
@@ -242,7 +237,21 @@ async function toggleTafsirLang() {
         box.innerHTML = '<div class="text-center text-sky-400 py-4"><i class="fas fa-circle-notch fa-spin"></i> Fetching Urdu Tafsir...</div>';
         
         try {
-            const res = await fetch(`${API_BASE}/tafsirs/160/by_ayah/${currentVerseKey}`); 
+        const res = await fetch('/api/blueprint', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'get_tafsir', verseKey: verseKey, lang: 'en' })
+        });
+            const res = await fetch('/api/blueprint', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'get_translation', verseKey: currentVerseKey, lang: 'ur' })
+            });
+            const res = await fetch('/api/blueprint', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'get_tafsir', verseKey: currentVerseKey, lang: 'ur' })
+            });
             const data = await res.json();
             if(data && data.tafsir) {
                 const urduTafsirText = data.tafsir.text;
