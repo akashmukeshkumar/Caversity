@@ -132,7 +132,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs
 // 🔥 PRE-FLIGHT API CHECK (SMART JUGAR) 🔥
 async function checkPartnerAvailability() {
     try {
-        const response = await fetch("/api/live-audit-chat", {
+        const response = await fetch("/api/interview", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ action: "ping" })
@@ -468,7 +468,7 @@ async function askGroqWithFallback(action = 'chat') {
     if (subtitle && action === 'chat') subtitle.innerText = "Partner is reviewing...";
     
     try {
-        const response = await fetch("/api/live-audit-chat", {
+        const response = await fetch("/api/interview", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
