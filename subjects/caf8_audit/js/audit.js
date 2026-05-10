@@ -290,14 +290,19 @@ function updateTimerDisplay() {
     if(disp) disp.innerText = `${h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
 }
 
-function submitPaper() {
+async function submitPaper() {
     clearInterval(timer);
-    const today = new Date();
-    const date = String(today.getDate()).padStart(2, '0');
-    const dayIndex = today.getDay();
-    const letters = ["A", "B", "C", "D", "E", "F", "G"];
-    const secretLetter = letters[dayIndex];
-    const dailyCode = "AUDIT" + date + secretLetter;
+    
+    let dailyCode = "VERIFYING...";
+    try {
+        const response = await fetch("/api/audit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "get_access_code" })
+        });
+        const data = await response.json();
+        if(data.code) dailyCode = data.code;
+    } catch(e) {}
 
     let attemptName = pastPapers[currentPaper].title;
     let finalText = `🔑 ACCESS CODE: ${dailyCode}\n\n`;
@@ -328,15 +333,19 @@ function submitPaper() {
     }).catch(() => alert("⚠️ Copy Failed! Copy manually."));
 }
 
-function updateAccessCode() {
-    const today = new Date();
-    const date = String(today.getDate()).padStart(2, '0');
-    const dayIndex = today.getDay(); 
-    const letters = ["A", "B", "C", "D", "E", "F", "G"];
-    const secretLetter = letters[dayIndex];
-    const finalCode = "AUDIT" + date + secretLetter;
+async function updateAccessCode() {
     const codeElement = document.getElementById("dynamic-code");
-    if(codeElement) codeElement.innerText = finalCode;
+    try {
+        const response = await fetch("/api/audit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "get_access_code" })
+        });
+        const data = await response.json();
+        if(codeElement && data.code) codeElement.innerText = data.code;
+    } catch(e) {
+        if(codeElement) codeElement.innerText = "ERROR";
+    }
 }
 function copyCode() {
     const codeElement = document.getElementById("dynamic-code");
