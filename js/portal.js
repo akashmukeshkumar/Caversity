@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const couponData = couponDoc.data();
                 
                 // Check if coupon is restricted to specific subjects
-                let allowedSubjects = couponData.applicableFor || couponData.subjectId || "all";
+                let allowedSubjects = couponData.subjectId || "all";
                 if (allowedSubjects !== "all") {
                     // Agar Firebase mein array ke bajaye string di hai, toh usay array bana lo
                     if (typeof allowedSubjects === 'string') {
@@ -232,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (Array.isArray(allowedSubjects)) {
                         allowedSubjects = allowedSubjects.map(s => s.toLowerCase());
                     }
+
                     let isValid = true;
                     if (isMultiSubjectMode) {
                         const checked = document.getElementById('subject-checkboxes').querySelectorAll('input:checked');
