@@ -25,7 +25,7 @@ const academicSubjects = [
     { id: 'caf6', name: 'CAF 6: Managerial and Financial Analysis', description: 'Strategic financial analysis and managerial decision-making tools.', price: 200, type: 'premium', url: 'subjects/caf6/index.html' },
     { id: 'caf7', name: 'CAF 7: Company Law', description: 'Corporate law principles and company governance structures.', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
     { id: 'caf8', name: 'CAF 8: Audit and Assurance', description: 'Audit methodologies and assurance services in professional practice.', price: 200, type: 'premium', url: 'audit.html' },
-    { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Face a realistic technical and psychological interview with a strict AI Partner.', price: 400, type: 'premium', url: 'live-audit-chat.html' },
+    { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Face a realistic 5-minute technical and psychological interview with a strict AI Partner.', price: 400, type: 'premium', url: 'live-audit-chat.html' },
     { id: 'resume', name: 'CA Resume Builder', description: 'Craft a standout, ATS-friendly resume tailored specifically for CA & ACCA students.', price: 0, type: 'free', url: 'resume.html' },
     { id: 'sanctuary', name: 'The Sanctuary', description: 'Spiritual guidance and ethical foundations for professional excellence.', price: 0, type: 'free', url: 'blueprint.html' }
 ];
@@ -217,65 +217,37 @@ document.addEventListener('DOMContentLoaded', () => {
         msg.className = 'coupon-message';
 
         try {
-            // Firebase se 'coupons' collection mein is code ko dhoondo
-            const couponDoc = await getDoc(doc(db, "coupons", code));
-            
-            if (couponDoc.exists()) {
-                const couponData = couponDoc.data();
-                
-                // Check if coupon is restricted to specific subjects
-                let allowedSubjects = couponData.subjectId || "all";
-                if (allowedSubjects !== "all") {
-                    // Agar Firebase mein array ke bajaye string di hai, toh usay array bana lo
-                    if (typeof allowedSubjects === 'string') {
-                        allowedSubjects = allowedSubjects.split(',').map(s => s.trim().toLowerCase());
-                    } else if (Array.isArray(allowedSubjects)) {
-                        allowedSubjects = allowedSubjects.map(s => s.toLowerCase());
-                    }
-
-                    let isValid = true;
-                    if (isMultiSubjectMode) {
-                        const checked = document.getElementById('subject-checkboxes').querySelectorAll('input:checked');
-                        checked.forEach(chk => { if (!allowedSubjects.includes(chk.value.toLowerCase())) isValid = false; });
-                    } else {
-                        if (!allowedSubjects.includes(currentSubjectContext.id.toLowerCase())) isValid = false;
-                    }
-                    
-                    if (!isValid) {
-                        msg.textContent = 'This coupon is not valid for the selected subject(s).';
-                        msg.className = 'coupon-message error';
-                        return;
-                    }
-                }
-
-                // 🔥 BULLETPROOF COUPON EXTRACTOR 🔥
-                let discountFound = 0;
-                for (let key in couponData) {
-                    let k = key.toLowerCase();
-                    if (k.includes('discount') || k.includes('amount') || k.includes('value') || k.includes('val')) {
-                        let parsed = parseInt(couponData[key], 10);
-                        if (!isNaN(parsed) && parsed > 0) {
-                            discountFound = parsed;
-                            break;
-                        }
-                    }
-                }
-                appliedCouponDiscount = discountFound;
-                appliedCouponCode = code;
-                if (appliedCouponDiscount > 0) {
-                    msg.textContent = `Coupon applied! (Rs. ${appliedCouponDiscount} off)`;
-                    msg.className = 'coupon-message success';
-                } else {
-                    msg.textContent = 'Coupon applied but no discount value found in database.';
-                    msg.className = 'coupon-message error';
-                }
-            } else {
-                throw new Error("Invalid");
+            let selectedSubjects = [];
+            let currentId = currentSubjectContext ? currentSubjectContext.id : "";
+            if (isMultiSubjectMode) {
+                const checked = document.getElementById('subject-checkboxes').querySelectorAll('input:checked');
+                checked.forEach(chk => selectedSubjects.push(chk.value));
             }
+            
+            const response = await fetch("/api/portal", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    action: "verify_coupon",
+                    code: code,
+                    selectedSubjects: selectedSubjects,
+                    isMultiSubjectMode: isMultiSubjectMode,
+                    currentSubjectContextId: currentId
+                })
+            });
+
+            const data = await response.json();
+            if (data.error) throw new Error(data.error);
+
+            appliedCouponDiscount = data.discount;
+            appliedCouponCode = data.code;
+            
+            msg.textContent = `Coupon applied! (Rs. ${appliedCouponDiscount} off)`;
+            msg.className = 'coupon-message success';
         } catch (error) {
             appliedCouponDiscount = 0;
             appliedCouponCode = '';
-            msg.textContent = 'Invalid or expired coupon code.';
+            msg.textContent = error.message || 'Invalid or expired coupon code.';
             msg.className = 'coupon-message error';
         }
         
