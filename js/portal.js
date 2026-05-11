@@ -555,13 +555,15 @@ window.revealSurprise = function() {
 
     async function loadAdhkarData() {
         try {
-            // 🔥 API se data load karo aur atob se base64 decode karo 🔥
-            const emoRes = await fetch('/api/get-data?file=emotion');
+            // 🔥 Cache Busting: Mobile browser ko zabardasti fresh data fetch karwane ke liye timestamp add kiya
+            const timestamp = Date.now();
+            
+            const emoRes = await fetch(`/api/get-data?file=emotion&t=${timestamp}`);
             if (!emoRes.ok) throw new Error("emotion data not found via API");
             const emoResult = await emoRes.json();
             appEmotions = JSON.parse(decodeBase64UTF8(emoResult.payload));
 
-            const resRes = await fetch('/api/get-data?file=resource');
+            const resRes = await fetch(`/api/get-data?file=resource&t=${timestamp}`);
             if (!resRes.ok) throw new Error("resource data not found via API");
             const resResult = await resRes.json();
             appResources = JSON.parse(decodeBase64UTF8(resResult.payload));
@@ -570,9 +572,14 @@ window.revealSurprise = function() {
         } catch (e) {
             console.error("Adhkar Error:", e);
             const gridArea = document.getElementById('adhkar-grid-area');
-            if(gridArea) gridArea.innerHTML = '<p style="color:red; text-align:center;">Error loading Adhkar data. Please check asset paths.</p>';
+            if(gridArea) gridArea.innerHTML = `
+                <div style="text-align:center; width:100%; grid-column: 1 / -1; padding: 20px;">
+                    <p style="color:#ef4444; font-weight:600; margin-bottom:12px; font-size:14px;"><i class="fas fa-exclamation-circle"></i> Connection Error</p>
+                    <button onclick="loadAdhkarData()" style="padding:10px 20px; background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; border-radius:50px; cursor:pointer; font-weight:700; font-size:13px; display:inline-flex; align-items:center; gap:8px;"><i class="fas fa-redo"></i> Tap to Retry</button>
+                </div>`;
         }
     }
+    window.loadAdhkarData = loadAdhkarData;
     loadAdhkarData();
 
     function initGrid() {
