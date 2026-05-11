@@ -356,6 +356,26 @@ function openSubscriptionModal() {
     const multiDisplay = document.getElementById('subject-checkboxes');
     const couponContainer = document.getElementById('coupon-container');
     
+    let featuresContainer = document.getElementById('audit-features-wrapper');
+    if (!featuresContainer && couponContainer) {
+        featuresContainer = document.createElement('div');
+        featuresContainer.id = 'audit-features-wrapper';
+        couponContainer.parentNode.insertBefore(featuresContainer, couponContainer);
+    }
+
+    // Only show features if the student is subscribing specifically to CAF 8 Audit
+    if (!isMultiSubjectMode && currentSubjectContext && currentSubjectContext.id === 'caf8') {
+        if (featuresContainer) {
+            featuresContainer.innerHTML = getAuditFeaturesHtml();
+            featuresContainer.style.display = 'block';
+        }
+    } else {
+        if (featuresContainer) {
+            featuresContainer.style.display = 'none';
+            featuresContainer.innerHTML = '';
+        }
+    }
+
     document.getElementById('student-name').value = currentUserProfile.name !== "Loading..." ? currentUserProfile.name : "";
     document.getElementById('student-email').value = auth.currentUser ? auth.currentUser.email : "";
     document.getElementById('sender-title').value = "";
@@ -601,6 +621,103 @@ window.revealSurprise = function() {
         overlay.classList.remove('active');
         document.body.style.overflow = 'auto';
     }
+
+    window.toggleAuditFeatures = function() {
+        const content = document.getElementById('features-content');
+        const chevron = document.getElementById('features-chevron');
+        if (!content) return;
+        
+        if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+            content.style.maxHeight = '0px';
+            chevron.style.transform = 'rotate(0deg)';
+        } else {
+            content.style.maxHeight = content.scrollHeight + 'px';
+            chevron.style.transform = 'rotate(180deg)';
+        }
+    };
+
+    window.getAuditFeaturesHtml = function() {
+        return `
+        <div class="audit-features-accordion" style="margin-bottom: 20px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #f8fafc; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+            <div class="features-header" style="padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%); color: white;" onclick="toggleAuditFeatures()">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="fas fa-gem" style="color: #fbbf24; font-size: 18px;"></i>
+                    <span style="font-weight: 600; font-size: 15px; letter-spacing: 0.5px;">Unlock the Ultimate Audit Arsenal</span>
+                </div>
+                <i id="features-chevron" class="fas fa-chevron-down" style="transition: transform 0.3s ease;"></i>
+            </div>
+            <div id="features-content" style="max-height: 0px; overflow: hidden; transition: max-height 0.4s ease-out; background: #ffffff;">
+                <div style="padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                    <p style="font-size: 13px; color: #475569; font-style: italic; margin-bottom: 4px; line-height: 1.5;">Audit isn't about memorization; it's about survival. You don't fail because you didn't read; you fail because you couldn't apply. Here is your unfair advantage to crush CAF-8:</p>
+                    
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-robot" style="color: #3b82f6; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Custom AI Tutors</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Stuck on a complex concept at 2 AM? Ask our fine-tuned AI and get instant, precise clarity. Never leave a doubt unresolved.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-book-open-reader" style="color: #10b981; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">The Smart Book</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">ICAP study text feels like a maze? Click on any complex line in our interactive 3D book and decode it into simple words instantly.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-bolt" style="color: #ea580c; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Procedure Sprint</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Examiners love procedures, students hate them. Face 110+ real-world scenarios to train your brain before looking at the expert answer.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-film" style="color: #8b5cf6; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Audit Cinematic Universe</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Ditch the boring text. Watch standards come to life in Netflix-style stories. You won't just remember it; you'll experience it.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-desktop" style="color: #0ea5e9; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Audit OS (Virtual Firm)</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Rote learning fails. Step into a virtual firm, analyze real Oracle ledgers, and catch frauds practically. Build the mindset of an auditor.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-file-signature" style="color: #f59e0b; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Exam Simulator</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Panic ruins preparation. Experience the exact ICAP pressure: 15-min locked reading, 3-hour strict writing, and instant AI grading.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-user-secret" style="color: #eab308; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Skeptic’s Sanctum</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Don't just solve past papers; dissect them. We break down the exact examiner traps and core techniques required for every single question.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-brain" style="color: #ec4899; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Concept Recall & MCQs</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Conquer forgetting with automated spaced repetition. Face difficult concepts and scenario-based MCQs to solidify your logic.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-podcast" style="color: #14b8a6; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Mindmaps & Podcasts</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Visualize complex logic trees and maximize your dead time by listening to expert strategies on avoiding exam traps on the go.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    };
 
     window.triggerShare = function(type) {
         const siteUrl = new URL('login.html', window.location.href).href;
