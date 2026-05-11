@@ -1,6 +1,4 @@
 // /api/live-audit-chat.js
-import { Readable } from 'stream';
-import tts from 'edge-tts-node';
 
 export default async function handler(req, res) {
     // Sirf POST requests allow karein
@@ -107,14 +105,22 @@ Return ONLY a raw valid JSON object:
             // 🔥 DUAL VOICE (Asad/Uzma) GENERATION WITH FALLBACK 🔥
             try {
                 const voice = finalMessages.length % 2 === 0 ? 'ur-PK-UzmaNeural' : 'ur-PK-AsadNeural';
-                const audioStream = await tts.getTTS(textReply, { voice: voice });
+                // Using a reliable public API instead of a local library
+                const ttsResponse = await fetch(`https://edge-tts.vercel.app/api/tts?voice=${voice}&text=${encodeURIComponent(textReply)}`);
+
+                if (!ttsResponse.ok) {
+                    throw new Error('Public TTS API failed');
+                }
+
+                const audioBuffer = await ttsResponse.arrayBuffer();
+                
                 res.setHeader('Content-Type', 'audio/mpeg');
                 // Send text in header so frontend can show subtitles and transcript
                 res.setHeader('X-Reply-Text', encodeURIComponent(textReply));
-                Readable.from(audioStream).pipe(res);
+                res.send(Buffer.from(audioBuffer));
                 return; // Audio sent, stop here.
             } catch (ttsError) {
-                console.error("Edge-TTS failed, falling back to text:", ttsError);
+                console.error("Public TTS API failed, falling back to browser voice:", ttsError);
                 return res.status(200).json({ reply: textReply }); // Fallback: Send text
             }
 
