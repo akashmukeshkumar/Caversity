@@ -728,7 +728,7 @@ window.revealSurprise = function() {
     window.getInterviewFeaturesHtml = function() {
         return `
         <div class="audit-features-accordion" style="margin-top: 20px; margin-bottom: 20px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #f8fafc; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
-            <div class="features-header" style="padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); color: white;" onclick="toggleAuditFeatures()">
+            <div class="features-header" style="padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%); color: white;" onclick="toggleAuditFeatures()">
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <i class="fas fa-user-tie" style="color: #fbbf24; font-size: 18px;"></i>
                     <span style="font-weight: 600; font-size: 15px; letter-spacing: 0.5px;">Unlock the Interview Arsenal</span>
