@@ -172,10 +172,22 @@ ul.cv-list li { margin-bottom: 3px; padding-left: 1px; }
 /* 🔥 NATIVE MOBILE APP INTERFACE 🔥 */
 @media (max-width: 980px) {
   body { display: block; height: auto; min-height: 100vh; overflow: auto; background: var(--panel-bg); }
-  /* 80px Top Padding taake Exit aur Headphone buttons screen par overlap na karein */
-  .builder-panel { border-right: 0; padding-top: 80px; border-bottom: none; }
+  
+  /* Hide global floating buttons on mobile to keep the interface super clean */
+  .floating-dash-btn, #global-back-btn, .exit-lobby-btn, [class*="headphone"], [id*="headphone"] {
+      display: none !important;
+  }
+  
+  /* Normal Top Padding ab buttons hide ho gaye hain */
+  .builder-panel { border-right: 0; padding-top: 30px; border-bottom: none; }
   .preview-panel { min-height: auto; padding: 40px 10px; background: #eef2f5; border-top: 1px solid var(--panel-border); overflow-x: hidden; }
+  
+  /* 🔥 CV TEXT WRAPPING FIX: Force Original A4 Layout before scaling 🔥 */
+  #cv-canvas, #cv-canvas * { max-width: none !important; }
+  
   #cv-canvas {
+      width: 210mm !important;
+      min-height: 296mm !important;
       transform: scale(0.5);
       transform-origin: top center;
       margin-bottom: calc(-296mm * 0.5); /* Mathematically removes blank space */
@@ -184,8 +196,8 @@ ul.cv-list li { margin-bottom: 3px; padding-left: 1px; }
 }
 
 @media (max-width: 560px) {
-  /* Extra padding to protect floating UI from covering form header */
-  .builder-panel { padding: 90px 20px 40px; }
+  /* Normal padding */
+  .builder-panel { padding: 30px 20px 40px; }
   
   /* Buttons aur Input touch target bare kiye taake Mobile par smooth hon */
   .program-grid { grid-template-columns: 1fr; gap: 12px; }
