@@ -25,7 +25,7 @@ const academicSubjects = [
     { id: 'caf6', name: 'CAF 6: Managerial and Financial Analysis', description: 'Strategic financial analysis and managerial decision-making tools.', price: 200, type: 'premium', url: 'subjects/caf6/index.html' },
     { id: 'caf7', name: 'CAF 7: Company Law', description: 'Corporate law principles and company governance structures.', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
     { id: 'caf8', name: 'CAF 8: Audit and Assurance', description: 'Audit methodologies and assurance services in professional practice.', price: 200, type: 'premium', url: 'audit.html' },
-    { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Face a realistic technical and psychological interview with a strict AI Partner.', price: 400, type: 'premium', url: 'interview.html' },
+    { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Face a realistic 5-minute technical and psychological interview with a strict AI Partner.', price: 400, type: 'premium', url: 'interview.html' },
     { id: 'resume', name: 'CA Resume Builder', description: 'Craft a standout, ATS-friendly resume tailored specifically for CA & ACCA students.', price: 0, type: 'free', url: 'resume.html' },
     { id: 'sanctuary', name: 'The Sanctuary', description: 'Spiritual guidance and ethical foundations for professional excellence.', price: 0, type: 'free', url: 'blueprint.html' }
 ];
@@ -363,11 +363,17 @@ function openSubscriptionModal() {
         couponContainer.parentNode.insertBefore(featuresContainer, couponContainer);
     }
 
-    // Only show features if the student is subscribing specifically to CAF 8 Audit
-    if (!isMultiSubjectMode && currentSubjectContext && currentSubjectContext.id === 'caf8') {
-        if (featuresContainer) {
+    // Only show features if the student is subscribing specifically to CAF 8 Audit or Firm Interview
+    if (!isMultiSubjectMode && currentSubjectContext) {
+        if (currentSubjectContext.id === 'caf8' && featuresContainer) {
             featuresContainer.innerHTML = getAuditFeaturesHtml();
             featuresContainer.style.display = 'block';
+        } else if (currentSubjectContext.id === 'mock_interview' && featuresContainer) {
+            featuresContainer.innerHTML = getInterviewFeaturesHtml();
+            featuresContainer.style.display = 'block';
+        } else if (featuresContainer) {
+            featuresContainer.style.display = 'none';
+            featuresContainer.innerHTML = '';
         }
     } else {
         if (featuresContainer) {
@@ -711,6 +717,68 @@ window.revealSurprise = function() {
                         <div>
                             <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Mindmaps & Podcasts</h4>
                             <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Visualize complex logic trees and maximize your dead time by listening to expert strategies on avoiding exam traps on the go.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    };
+
+    window.getInterviewFeaturesHtml = function() {
+        return `
+        <div class="audit-features-accordion" style="margin-top: 20px; margin-bottom: 20px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #f8fafc; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+            <div class="features-header" style="padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); color: white;" onclick="toggleAuditFeatures()">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="fas fa-user-tie" style="color: #fbbf24; font-size: 18px;"></i>
+                    <span style="font-weight: 600; font-size: 15px; letter-spacing: 0.5px;">Unlock the Interview Arsenal</span>
+                </div>
+                <i id="features-chevron" class="fas fa-chevron-down" style="transition: transform 0.3s ease;"></i>
+            </div>
+            <div id="features-content" style="max-height: 0px; overflow: hidden; transition: max-height 0.4s ease-out; background: #ffffff;">
+                <div style="padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                    <p style="font-size: 13px; color: #475569; font-style: italic; margin-bottom: 4px; line-height: 1.5;">Going to a firm interview without practice is career suicide. Partners will reject you in 60 seconds if you can't defend your CV or panic under pressure. Kill the fear, build extreme confidence, and secure your Articleship:</p>
+                    
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-user-secret" style="color: #3b82f6; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">The Strict Partner Persona</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Get real exposure before the big day. Choose your target (Big 4, Top 10, or Industry) and experience their exact aggressive interview style and pressure.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-file-contract" style="color: #10b981; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Dynamic CV Grilling</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">If you can't defend your CV, you're out. The AI reads your actual uploaded resume and aggressively cross-questions your specific gaps and skills.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-brain" style="color: #ea580c; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">360° Technical Testing</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Seamlessly transition from basic GK questions to brutal technical scenarios covering your CAF syllabus (IFRS, ISAs, Taxation, and Company Law).</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-bolt" style="color: #8b5cf6; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Psychological Stress Test</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">The AI tests your nerves, not just your knowledge. It will interrupt, counter-question, and put you under sudden stress to see if your confidence breaks.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-chart-line" style="color: #0ea5e9; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Official Assessment Report</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Get a comprehensive post-interview diagnostic report scoring your technical knowledge and confidence, highlighting exactly what you lack and how to improve.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-microphone-alt" style="color: #f59e0b; font-size: 16px; margin-top: 3px; width: 20px; text-align: center;"></i>
+                        <div>
+                            <h4 style="font-size: 14px; color: #1e293b; margin: 0 0 4px 0; font-weight: 600;">Real-Time Voice Technology</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">Powered by lightning-fast, advanced voice AI. It feels exactly like sitting across the table from a real Firm Partner. Prepare to be amazed.</p>
                         </div>
                     </div>
                 </div>
