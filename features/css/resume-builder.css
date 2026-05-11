@@ -27,7 +27,8 @@ button, input, textarea { font: inherit; }
 .program-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 20px; }
 .program-btn { min-height: 46px; background: #fff; color: var(--ink); border: 1px solid var(--panel-border); padding: 11px 12px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 13px; transition: .18s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
 .program-btn i { color: var(--accent); }
-.program-btn.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); box-shadow: 0 6px 18px rgba(15, 118, 110, .12); }
+.program-btn.active { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 8px 20px rgba(15, 118, 110, .3); }
+.program-btn.active i { color: #fff; }
 .program-btn:hover { border-color: var(--accent); transform: translateY(-1px); }
 
 .theme-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 20px; }
@@ -168,17 +169,41 @@ ul.cv-list li { margin-bottom: 3px; padding-left: 1px; }
 ::-webkit-scrollbar-track { background: #edf1f5; }
 ::-webkit-scrollbar-thumb { background: #b9c5d1; border-radius: 4px; }
 
+/* 🔥 NATIVE MOBILE APP INTERFACE 🔥 */
 @media (max-width: 980px) {
-  body { grid-template-columns: 1fr; height: auto; min-height: 100vh; overflow: auto; }
-  .builder-panel { border-right: 0; border-bottom: 1px solid var(--panel-border); }
-  .preview-panel { min-height: 100vh; }
+  body { display: block; height: auto; min-height: 100vh; overflow: auto; background: var(--panel-bg); }
+  /* 80px Top Padding taake Exit aur Headphone buttons screen par overlap na karein */
+  .builder-panel { border-right: 0; padding-top: 80px; border-bottom: none; }
+  .preview-panel { min-height: auto; padding: 40px 10px; background: #eef2f5; border-top: 1px solid var(--panel-border); overflow-x: hidden; }
+  #cv-canvas {
+      transform: scale(0.5);
+      transform-origin: top center;
+      margin-bottom: calc(-296mm * 0.5); /* Mathematically removes blank space */
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+  }
 }
 
 @media (max-width: 560px) {
-  .builder-panel { padding: 20px 16px 26px; }
-  .row-2, .theme-grid, .program-grid { grid-template-columns: 1fr; }
-  .preview-panel { padding: 18px 10px; }
-  #cv-canvas { transform: scale(.56); transform-origin: top center; margin-bottom: -130mm; }
+  /* Extra padding to protect floating UI from covering form header */
+  .builder-panel { padding: 90px 20px 40px; }
+  
+  /* Buttons aur Input touch target bare kiye taake Mobile par smooth hon */
+  .program-grid { grid-template-columns: 1fr; gap: 12px; }
+  .program-btn, .theme-btn, .qualification-btn { min-height: 52px; font-size: 14px; border-radius: 12px; }
+  .row-2, .theme-grid { grid-template-columns: 1fr; gap: 12px; }
+  .input-group input, .input-group textarea { padding: 15px 16px; font-size: 16px; border-radius: 12px; }
+  
+  /* App-Style Sticky Download Button */
+  .btn-export { position: sticky; bottom: 20px; z-index: 100; padding: 18px; border-radius: 16px; font-size: 16px; box-shadow: 0 15px 35px rgba(15, 118, 110, 0.4); }
+  
+  /* Fix weird stretched CV logic completely */
+  .preview-panel { padding: 40px 0; overflow-x: hidden; }
+  #cv-canvas { 
+      transform: scale(0.42); 
+      transform-origin: top center; 
+      margin-bottom: calc(-296mm * 0.58); 
+      box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+  }
 }
 
 @media print {
