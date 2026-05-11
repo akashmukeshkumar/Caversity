@@ -531,8 +531,8 @@ function speakWithBrowserVoice(text, onAudioEnd) {
     const utterance = new SpeechSynthesisUtterance(text);
     const voices = speechSynthesis.getVoices();
     
-    const urduWords = ['kya', 'hai', 'mein', 'ko', 'se', 'yeh', 'woh', 'tum', 'aap', 'nahi', 'kaise', 'hota'];
-    const hasUrdu = urduWords.some(w => text.toLowerCase().includes(` ${w} `) || text.toLowerCase().startsWith(`${w} `));
+    // 🔥 Fallback intelligence: Detect actual Urdu script characters 🔥
+    const hasUrdu = /[\u0600-\u06FF]/.test(text);
     
     let bestVoice;
     if (hasUrdu) {
