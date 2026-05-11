@@ -1,4 +1,7 @@
 // /api/live-audit-chat.js
+import { Readable } from 'stream';
+import tts from 'edge-tts-node';
+
 export default async function handler(req, res) {
     // Sirf POST requests allow karein
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
@@ -79,7 +82,7 @@ Return ONLY a raw valid JSON object:
     let currentKeyIndex = 0;
     while (currentKeyIndex < GROQ_API_KEYS.length) {
         try {
-            const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            const groqResponse = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${GROQ_API_KEYS[currentKeyIndex]}`,
@@ -93,13 +96,26 @@ Return ONLY a raw valid JSON object:
                 })
             });
 
-            if (!response.ok) {
-                if (response.status === 429) { currentKeyIndex++; continue; }
-                throw new Error(`API Error: ${response.status}`);
+            if (!groqResponse.ok) {
+                if (groqResponse.status === 429) { currentKeyIndex++; continue; }
+                throw new Error(`Groq API Error: ${groqResponse.status}`);
             }
 
-            const data = await response.json();
-            return res.status(200).json({ reply: data.choices[0].message.content });
+            const data = await groqResponse.json();
+            const textReply = data.choices[0].message.content;
+
+            // 🔥 DUAL VOICE (Asad/Uzma) GENERATION WITH FALLBACK 🔥
+            try {
+                const voice = finalMessages.length % 2 === 0 ? 'ur-PK-UzmaNeural' : 'ur-PK-AsadNeural';
+                const audioStream = await tts.getTTS(textReply, { voice: voice });
+                res.setHeader('Content-Type', 'audio/mpeg');
+                Readable.from(audioStream).pipe(res);
+                return; // Audio sent, stop here.
+            } catch (ttsError) {
+                console.error("Edge-TTS failed, falling back to text:", ttsError);
+                return res.status(200).json({ reply: textReply }); // Fallback: Send text
+            }
+
         } catch (error) {
             currentKeyIndex++;
         }
