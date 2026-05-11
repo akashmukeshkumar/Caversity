@@ -130,37 +130,8 @@ Return ONLY a raw valid JSON object:
             // Clean text so the bracket tag is never spoken
             cleanText = textReply.replace(/\*?\[.*?\]\*?:?\s*/g, '').replace(/^(Christopher|Asad|Uzma):\s*/i, '').trim();
 
-            // Christopher (Pure English) uses the native browser voice (Jugar 1 / Google Voice)
-            if (partner.toLowerCase().includes("christopher") || partner.toLowerCase().includes("google")) {
-                return res.status(200).json({ reply: cleanText });
-            }
-
-            // 🔥 100% FREE VOICE (USING YOUR OWN HUGGING FACE BACKEND) 🔥
-            try {
-                const voice = partner.toLowerCase().includes("uzma") ? 'ur-PK-UzmaNeural' : 'ur-PK-AsadNeural';
-                const formData = new FormData();
-                formData.append("text", cleanText);
-                formData.append("voice", voice);
-
-                const ttsResponse = await fetch("https://jzeo123-sir-ai-backend.hf.space/interview_tts", {
-                    method: "POST",
-                    body: formData
-                });
-
-                if (!ttsResponse.ok) {
-                    throw new Error(`Hugging Face API failed with status ${ttsResponse.status}`);
-                }
-
-                const audioBuffer = await ttsResponse.arrayBuffer();
-                
-                res.setHeader('Content-Type', 'audio/mpeg');
-                res.setHeader('X-Reply-Text', encodeURIComponent(cleanText));
-                res.send(Buffer.from(audioBuffer));
-                return; // Audio sent, stop here.
-            } catch (ttsError) {
-                console.error("Hugging Face TTS failed, falling back to browser voice:", ttsError);
-                return res.status(200).json({ reply: cleanText }); // Fallback: Send text
-            }
+            // Pass the parsed partner back to the frontend to handle TTS directly
+            return res.status(200).json({ reply: cleanText, partner: partner });
 
         } catch (error) {
             currentKeyIndex++;
