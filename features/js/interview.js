@@ -609,9 +609,6 @@ async function speakResponse(replyData) {
         }
     }
 }
-    }
-}
-
 // 🔥 AUTOMATIC HANDS-FREE MIC LOGIC 🔥
 function startAutoListening() {
     if (!isInterviewActive || synth.speaking) return;
