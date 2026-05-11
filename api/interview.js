@@ -36,26 +36,32 @@ export default async function handler(req, res) {
         let firmPersonality = "";
         
         if (firmTarget.includes("pwc") || firmTarget.includes("ey") || firmTarget.includes("kpmg") || firmTarget.includes("deloitte")) {
-            firmPersonality = "FIRM PROFILE (Big 4): You are ruthless, intimidating, and deeply technical. Grill them aggressively on complex IFRS, ISAs, Taxation, and CMA scenarios. Trap them in their own words and demand absolute precision.";
+            firmPersonality = "FIRM PROFILE (Big 4): The panel is ruthless, intimidating, and deeply technical. Grill them aggressively on complex IFRS, ISAs, Taxation, and CMA scenarios. Trap them in their own words and demand absolute precision.";
         } else if (industryList.some(kw => firmTarget.includes(kw))) {
-            firmPersonality = "FIRM PROFILE (Industry): You are a sharp Corporate Finance Director. Focus on the practical business application of CMA, Financial Reporting, and Internal Controls. Test their corporate cultural fit, psychological resilience, and readiness for a fast-paced environment.";
+            firmPersonality = "FIRM PROFILE (Industry): The panel acts as sharp Corporate Finance Directors. Focus on the practical business application of CMA, Financial Reporting, and Internal Controls. Test their corporate cultural fit, psychological resilience, and readiness for a fast-paced environment.";
         } else {
-            firmPersonality = "FIRM PROFILE (Top 10 / Mid-Tier): You are a strict, highly practical Partner. Aggressively probe their CV gaps, test their loyalty, and mix tricky mid-level CAF topics (Company Law, Audit, Tax). Put them under sudden stress to see if they break.";
+            firmPersonality = "FIRM PROFILE (Top 10 / Mid-Tier): The panel is strict and highly practical. Aggressively probe their CV gaps, test their loyalty, and mix tricky mid-level CAF topics (Company Law, Audit, Tax). Put them under sudden stress to see if they break.";
         }
 
-        const prompt = `You are a highly experienced and strict Senior Interviewer conducting a 10-minute final interview for an Articleship (Trainee) position at ${candidateData.firm}.
-CRITICAL CONTEXT: The candidate is a "CAF Qualified" student. Do NOT ask generic senior-level HR questions.
+        const prompt = `You are a panel of 3 Strict Senior Interviewers conducting a 10-minute final interview for an Articleship (Trainee) position at ${candidateData.firm}.
+CRITICAL CONTEXT: The candidate is a "CAF Qualified" student.
+
+THE PANEL (Randomly choose ONE to speak for each turn):
+1. [Christopher]: Speaks ONLY pure, highly professional English.
+2. [Asad]: Speaks a mix of professional English and strict Roman Urdu.
+3. [Uzma]: Speaks a mix of professional English and strict female Roman Urdu.
+
 ${firmPersonality}
 
 Candidate Name: ${candidateData.name}
-Candidate's Resume Text (Extract): ${candidateData.cvText.substring(0, 800)}...
+CV Extract: ${candidateData.cvText.substring(0, 800)}...
 
-STRICT RULES FOR A NATURAL, DYNAMIC INTERVIEW:
-1. UNPREDICTABLE START: Do NOT always start the same way. You can start by asking them to introduce themselves, picking a random CV detail, or throwing them directly into a technical scenario.
-2. NATURAL CONVERSATION: Acknowledge their previous answer briefly before moving on. Cross-question them based on what they just said to trap them or test their psychological pressure.
-3. TECHNICAL & CV BLEND: Seamlessly mix CAF subjects (IFRS, Tax, CMA, Audit, Company Law), general knowledge, and CV questions. NEVER ask generic "Why do you want to join us/How will you apply" questions. Ask straight technical or scenario-based questions.
-4. STRICT LIMIT: Ask ONLY ONE short question at a time (Max 2 sentences). NEVER ramble. WAIT for the candidate to answer. DO NOT generate the candidate's response.
-5. PSYCHOLOGICAL PRESSURE: If they misbehave, hesitate, or give a bad attitude, scold them harshly. If they try to act oversmart, counter-question them to break their confidence.
+STRICT RULES FOR A NATURAL INTERVIEW:
+1. MANDATORY START: ALWAYS start your response with the chosen partner's name in brackets. Example: "[Uzma] Tumne CV mein kya likha hai?", or "[Christopher] Let's discuss your IFRS knowledge."
+2. UNPREDICTABLE START: Pick a random CV detail or technical scenario.
+3. NATURAL CONVERSATION: Acknowledge their previous answer briefly, then cross-question.
+4. STRICT LIMIT: Ask ONLY ONE short question (Max 2 sentences). WAIT for the candidate to answer.
+5. PSYCHOLOGICAL PRESSURE: Scold them harshly if they hesitate or act oversmart.
 6. Speak plainly. NO markdown, NO bold text.`;
 
         // Prompt chupke se background mein add kiya
@@ -102,11 +108,36 @@ Return ONLY a raw valid JSON object:
             const data = await groqResponse.json();
             const textReply = data.choices[0].message.content;
 
+            // 🔥 EVALUATION BYPASS: Do not speak the JSON report 🔥
+            if (action === 'evaluate') {
+                return res.status(200).json({ reply: textReply });
+            }
+
+            // 🔥 PANEL VOICE ROUTING LOGIC 🔥
+            let partner = "";
+            let cleanText = textReply;
+            const tagMatch = textReply.match(/^\[(.*?)\]\s*/);
+            
+            if (tagMatch) {
+                partner = tagMatch[1];
+                cleanText = textReply.replace(/^\[(.*?)\]\s*/, '').trim();
+            } else {
+                // Heuristic Fallback
+                const urduWords = ['kya', 'hai', 'mein', 'ko', 'se', 'yeh', 'woh', 'tum', 'aap', 'nahi'];
+                const hasUrdu = urduWords.some(w => textReply.toLowerCase().includes(` ${w} `) || textReply.toLowerCase().startsWith(`${w} `));
+                partner = hasUrdu ? (Math.random() > 0.5 ? "Asad" : "Uzma") : "Christopher";
+            }
+
+            // Christopher (Pure English) uses the native browser voice (Jugar 1 / Google Voice)
+            if (partner.toLowerCase().includes("christopher") || partner.toLowerCase().includes("google")) {
+                return res.status(200).json({ reply: cleanText });
+            }
+
             // 🔥 100% FREE VOICE (USING YOUR OWN HUGGING FACE BACKEND) 🔥
             try {
-                const voice = finalMessages.length % 2 === 0 ? 'ur-PK-UzmaNeural' : 'ur-PK-AsadNeural';
+                const voice = partner.toLowerCase().includes("uzma") ? 'ur-PK-UzmaNeural' : 'ur-PK-AsadNeural';
                 const formData = new FormData();
-                formData.append("text", textReply);
+                formData.append("text", cleanText);
                 formData.append("voice", voice);
 
                 const ttsResponse = await fetch("https://jzeo123-sir-ai-backend.hf.space/interview_tts", {
@@ -121,12 +152,12 @@ Return ONLY a raw valid JSON object:
                 const audioBuffer = await ttsResponse.arrayBuffer();
                 
                 res.setHeader('Content-Type', 'audio/mpeg');
-                res.setHeader('X-Reply-Text', encodeURIComponent(textReply));
+                res.setHeader('X-Reply-Text', encodeURIComponent(cleanText));
                 res.send(Buffer.from(audioBuffer));
                 return; // Audio sent, stop here.
             } catch (ttsError) {
                 console.error("Hugging Face TTS failed, falling back to browser voice:", ttsError);
-                return res.status(200).json({ reply: textReply }); // Fallback: Send text
+                return res.status(200).json({ reply: cleanText }); // Fallback: Send text
             }
 
         } catch (error) {
