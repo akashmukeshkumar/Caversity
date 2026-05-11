@@ -246,10 +246,38 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         @media (max-width: 768px) {
-            .video-grid { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; padding-bottom: 80px; }
-            .controls-bar { width: 90%; justify-content: space-evenly; }
-            .subtitle-box { width: 90%; font-size: 14px; bottom: 85px; }
-            .room-branding { display: none; }
+            /* 🔥 WHATSAPP NATIVE APP UI FOR MOBILE 🔥 */
+            body, html { height: 100vh !important; width: 100vw !important; overflow: hidden !important; }
+            
+            /* Full Screen Interview Mode */
+            #interview-screen { border: none; border-radius: 0; height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; z-index: 9999; background: #000; }
+            .room-branding, .fixed-ts-btn, .interview-instructions-toast { display: none !important; }
+            
+            /* Top Transparent Header */
+            .interview-header { position: absolute; top: 0; left: 0; width: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); border: none; z-index: 100; padding: 20px; display: flex; justify-content: center; }
+            .interview-header h2 { display: none; }
+            .timer { position: relative; right: auto; background: rgba(0, 0, 0, 0.6); border: none; font-size: 15px; }
+            
+            /* Main Video Grid Setup */
+            .video-grid { display: block; padding: 0; margin: 0; width: 100%; height: 100%; }
+            
+            /* Partner Video (Full Screen App Background) */
+            .ai-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 0; border: none; z-index: 1; background: #09090b; flex-direction: column; justify-content: center; }
+            .ai-video img { width: 180px; height: 180px; box-shadow: 0 0 50px rgba(59, 130, 246, 0.4); }
+            .ai-video .name-tag { top: 90px; bottom: auto; left: 50%; transform: translateX(-50%); background: transparent; border: none; font-size: 20px; font-weight: 800; box-shadow: none; }
+            
+            /* User Video (PiP Mode - Top Right) */
+            .user-video { position: absolute; top: 90px; right: 20px; width: 100px; height: 140px; z-index: 10; border-radius: 12px; border: 2px solid rgba(255, 255, 255, 0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+            .user-video .name-tag, .user-video .face-tracker-overlay { display: none !important; }
+            
+            /* Floating Controls */
+            .subtitle-box { bottom: 130px; width: 90%; font-size: 14px; padding: 12px 20px; background: rgba(0, 0, 0, 0.7); border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+            .controls-bar { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: auto; background: rgba(0, 0, 0, 0.6); padding: 12px 25px; border-radius: 50px; gap: 20px; border: none; backdrop-filter: blur(15px); }
+            .mic-indicator { width: 60px; height: 60px; font-size: 24px; }
+            .end-btn { width: 60px; height: 60px; border-radius: 50%; padding: 0; font-size: 0; background: #ef4444; color: white; display: flex; justify-content: center; align-items: center; border: none; }
+            .end-btn i { font-size: 22px; margin: 0; }
+            
+            /* Evaluation Screen Tweaks */
             .official-paper { padding: 40px 20px; min-height: auto; }
             .paper-title h2 { font-size: 22px; }
             .score-value { font-size: 36px; }
