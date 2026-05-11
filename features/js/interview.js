@@ -487,10 +487,10 @@ async function askGroqWithFallback(action = 'chat') {
 
         const data = await response.json();
         if(data.error) throw new Error(data.error);
-        return { type: 'text', text: data.reply, partner: data.partner || "Christopher" };
+        return { type: 'text', text: data.reply, partner: data.partner || "Asad" };
     } catch (error) {
         console.error("API Call Failed:", error);
-         return { type: 'text', text: "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately.", partner: "Christopher" };
+           return { type: 'text', text: "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately.", partner: "Asad" };
     }
 }
 
