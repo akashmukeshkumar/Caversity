@@ -47,9 +47,8 @@ export default async function handler(req, res) {
 CRITICAL CONTEXT: The candidate is a "CAF Qualified" student.
 
 THE PANEL (Randomly choose ONE to speak for each turn):
-1. [Christopher]: Speaks ONLY pure, highly professional English.
-2. [Asad]: Speaks a mix of professional English and strict Roman Urdu.
-3. [Uzma]: Speaks a mix of professional English and strict female Roman Urdu.
+1. [Asad]: Speaks a mix of professional English and strict Roman Urdu.
+2. [Uzma]: Speaks a mix of professional English and strict female Roman Urdu.
 
 ${firmPersonality}
 
@@ -57,7 +56,7 @@ Candidate Name: ${candidateData.name}
 CV Extract: ${candidateData.cvText.substring(0, 800)}...
 
 STRICT RULES (OBEY THESE OR FAIL):
-1. MANDATORY FORMAT: Your response MUST start exactly with the chosen partner's name in brackets. Example: "[Uzma] Tumne CV mein...", or "[Christopher] Let's discuss..."
+1. MANDATORY FORMAT: Your response MUST start exactly with the chosen partner's name in brackets. Example: "[Uzma] Tumne CV mein...", or "[Asad] Let's discuss..."
 2. UNPREDICTABLE START: Pick a random CV detail or technical scenario.
 3. NATURAL CONVERSATION: Acknowledge their previous answer briefly, then cross-question.
 4. STRICT LIMIT: Ask ONLY ONE short question (Max 2 sentences). WAIT for the candidate to answer.
@@ -114,21 +113,16 @@ Return ONLY a raw valid JSON object:
             }
 
             // 🔥 PANEL VOICE ROUTING LOGIC 🔥
-            let partner = "Christopher";
+            let partner = Math.random() > 0.5 ? "Asad" : "Uzma"; // Default to Pakistani partners
             let cleanText = textReply;
-            const tagMatch = textReply.match(/\[(Christopher|Asad|Uzma)\]/i);
+            const tagMatch = textReply.match(/\[(Asad|Uzma)\]/i);
             
             if (tagMatch) {
                 partner = tagMatch[1];
-            } else {
-                // Heuristic Fallback
-                const urduWords = ['kya', 'hai', 'mein', 'ko', 'se', 'yeh', 'woh', 'tum', 'aap', 'nahi', 'kaise', 'hota'];
-                const hasUrdu = urduWords.some(w => textReply.toLowerCase().includes(` ${w} `) || textReply.toLowerCase().startsWith(`${w} `));
-                partner = hasUrdu ? (Math.random() > 0.5 ? "Asad" : "Uzma") : "Christopher";
             }
             
             // Clean text so the bracket tag is never spoken
-            cleanText = textReply.replace(/\*?\[.*?\]\*?:?\s*/g, '').replace(/^(Christopher|Asad|Uzma):\s*/i, '').trim();
+            cleanText = textReply.replace(/\*?\[.*?\]\*?:?\s*/g, '').replace(/^(Asad|Uzma):\s*/i, '').trim();
 
             // Pass the parsed partner back to the frontend to handle TTS directly
             return res.status(200).json({ reply: cleanText, partner: partner });
