@@ -485,21 +485,12 @@ async function askGroqWithFallback(action = 'chat') {
             })
         });
 
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.includes("audio/mpeg")) {
-            const audioBlob = await response.blob();
-            const audioUrl = URL.createObjectURL(audioBlob);
-            const encodedText = response.headers.get("x-reply-text");
-            const replyText = encodedText ? decodeURIComponent(encodedText) : "Partner is speaking...";
-            return { type: 'audio', audioUrl, text: replyText };
-        }
-
         const data = await response.json();
         if(data.error) throw new Error(data.error);
-        return { type: 'text', text: data.reply };
+        return { type: 'text', text: data.reply, partner: data.partner || "Christopher" };
     } catch (error) {
         console.error("API Call Failed:", error);
-        return { type: 'text', text: "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately." };
+         return { type: 'text', text: "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately.", partner: "Christopher" };
     }
 }
 
@@ -536,8 +527,38 @@ async function triggerPartnerGreeting() {
     }, 3500); // Wait 3.5 seconds before the first interaction
 }
 
-function speakResponse(replyData) {
+function speakWithBrowserVoice(text, onAudioEnd) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voices = speechSynthesis.getVoices();
+    
+    const urduWords = ['kya', 'hai', 'mein', 'ko', 'se', 'yeh', 'woh', 'tum', 'aap', 'nahi', 'kaise', 'hota'];
+    const hasUrdu = urduWords.some(w => text.toLowerCase().includes(` ${w} `) || text.toLowerCase().startsWith(`${w} `));
+    
+    let bestVoice;
+    if (hasUrdu) {
+        bestVoice = voices.find(v => v.lang.includes('ur') || v.lang.includes('hi') || v.name.includes('Urdu') || v.name.includes('Hindi'));
+    }
+    if (!bestVoice) {
+        bestVoice = voices.find(v => v.name.includes('Google UK English Male') || v.name.includes('Microsoft Mark') || v.name.includes('Microsoft Guy') || (v.lang.startsWith('en') && v.name.includes('Male')));
+    }
+    if (bestVoice) utterance.voice = bestVoice;
+    
+    const lowerText = text.toLowerCase();
+    if (lowerText.includes('unprofessional') || lowerText.includes('ending this interview') || lowerText.includes('disrespect')) {
+        utterance.pitch = 0.25; utterance.rate = 0.9;
+    } else if (text.includes('!') || text.includes('?')) {
+        utterance.pitch = 0.45; utterance.rate = 0.95;
+    } else {
+        utterance.pitch = 0.6; utterance.rate = 0.85;
+    }
+    
+    utterance.onend = onAudioEnd;
+    synth.speak(utterance);
+}
+
+async function speakResponse(replyData) {
     let text = typeof replyData === 'string' ? replyData : replyData.text;
+     let partner = replyData.partner || "Christopher";
     document.getElementById('subtitle-box').innerText = text;
     document.querySelector('.ai-video').classList.add('ai-speaking');
     
@@ -558,40 +579,36 @@ function speakResponse(replyData) {
         }
     };
     
-    if (replyData.type === 'audio') {
-        currentPartnerAudio = new Audio(replyData.audioUrl);
-        currentPartnerAudio.onended = onAudioEnd;
-        currentPartnerAudio.play().catch(e => {
-            console.error("Audio block play failed, falling back to next step:", e);
-            onAudioEnd();
-        });
+    if (partner === "Christopher" || partner.toLowerCase().includes("google")) {
+        speakWithBrowserVoice(text, onAudioEnd);
     } else {
-        const utterance = new SpeechSynthesisUtterance(text);
-        const voices = speechSynthesis.getVoices();
-        // 🔥 Fallback intelligence: If text contains Urdu, use an Urdu/Hindi browser voice 🔥
-        const urduWords = ['kya', 'hai', 'mein', 'ko', 'se', 'yeh', 'woh', 'tum', 'aap', 'nahi', 'kaise', 'hota'];
-        const hasUrdu = urduWords.some(w => text.toLowerCase().includes(` ${w} `) || text.toLowerCase().startsWith(`${w} `));
-        
-        let bestVoice;
-        if (hasUrdu) {
-            bestVoice = voices.find(v => v.lang.includes('ur') || v.lang.includes('hi') || v.name.includes('Urdu') || v.name.includes('Hindi'));
+         try {
+            const voice = partner.toLowerCase().includes("uzma") ? 'ur-PK-UzmaNeural' : 'ur-PK-AsadNeural';
+            const fd = new FormData();
+            fd.append("text", text);
+            fd.append("voice", voice);
+
+            const hfResponse = await fetch("https://jzeo123-sir-ai-backend.hf.space/interview_tts", {
+                method: "POST",
+                body: fd
+            });
+
+            if (!hfResponse.ok) throw new Error("HF Server returned " + hfResponse.status);
+
+            const audioBlob = await hfResponse.blob();
+            const audioUrl = URL.createObjectURL(audioBlob);
+            currentPartnerAudio = new Audio(audioUrl);
+            currentPartnerAudio.onended = onAudioEnd;
+            await currentPartnerAudio.play().catch(e => {
+                console.error("Direct HF Call play failed:", e);
+                onAudioEnd();
+            });
+        } catch (err) {
+            console.error("Direct HF Call Failed, falling back to browser voice:", err);
+            speakWithBrowserVoice(text, onAudioEnd);
         }
-        if (!bestVoice) {
-            bestVoice = voices.find(v => v.name.includes('Google UK English Male') || v.name.includes('Microsoft Mark') || v.name.includes('Microsoft Guy') || (v.lang.startsWith('en') && v.name.includes('Male')));
-        }
-        
-        if (bestVoice) utterance.voice = bestVoice;
-        
-        if (lowerText.includes('unprofessional') || lowerText.includes('ending this interview') || lowerText.includes('disrespect')) {
-            utterance.pitch = 0.25; utterance.rate = 0.9;
-        } else if (text.includes('!') || text.includes('?')) {
-            utterance.pitch = 0.45; utterance.rate = 0.95;
-        } else {
-            utterance.pitch = 0.6; utterance.rate = 0.85;
-        }
-        
-        utterance.onend = onAudioEnd;
-        synth.speak(utterance);
+    }
+}
     }
 }
 
