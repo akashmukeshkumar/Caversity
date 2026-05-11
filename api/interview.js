@@ -102,25 +102,30 @@ Return ONLY a raw valid JSON object:
             const data = await groqResponse.json();
             const textReply = data.choices[0].message.content;
 
-            // 🔥 DUAL VOICE (Asad/Uzma) GENERATION WITH FALLBACK 🔥
+            // 🔥 100% FREE VOICE (USING YOUR OWN HUGGING FACE BACKEND) 🔥
             try {
                 const voice = finalMessages.length % 2 === 0 ? 'ur-PK-UzmaNeural' : 'ur-PK-AsadNeural';
-                // Using a reliable public API instead of a local library
-                const ttsResponse = await fetch(`https://edge-tts.vercel.app/api/tts?voice=${voice}&text=${encodeURIComponent(textReply)}`);
+                const formData = new FormData();
+                formData.append("text", textReply);
+                formData.append("voice", voice);
+
+                const ttsResponse = await fetch("https://jzeo123-sir-ai-backend.hf.space/interview_tts", {
+                    method: "POST",
+                    body: formData
+                });
 
                 if (!ttsResponse.ok) {
-                    throw new Error('Public TTS API failed');
+                    throw new Error(`Hugging Face API failed with status ${ttsResponse.status}`);
                 }
 
                 const audioBuffer = await ttsResponse.arrayBuffer();
                 
                 res.setHeader('Content-Type', 'audio/mpeg');
-                // Send text in header so frontend can show subtitles and transcript
                 res.setHeader('X-Reply-Text', encodeURIComponent(textReply));
                 res.send(Buffer.from(audioBuffer));
                 return; // Audio sent, stop here.
             } catch (ttsError) {
-                console.error("Public TTS API failed, falling back to browser voice:", ttsError);
+                console.error("Hugging Face TTS failed, falling back to browser voice:", ttsError);
                 return res.status(200).json({ reply: textReply }); // Fallback: Send text
             }
 
