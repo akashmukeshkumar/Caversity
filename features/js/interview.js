@@ -21,6 +21,7 @@ let finalAnswer = ""; // 🔥 Stores text safely even if you pause
 let silenceStrikes = 0; // 🔥 To auto-cut the call
 let globalSessionCount = 0; // 🔥 Track sessions globally to prevent bypass
 let hasTriggeredWrapUp = false; // 🔥 Auto wrap-up flag
+let currentPartnerAudio = null; // 🔥 For Audio Stream Control
 
 // 🔥 FIREBASE SETUP FOR ROOM LOCK 🔥
 const app = getApp();
@@ -391,6 +392,11 @@ async function endInterview() {
     clearTimeout(absoluteSilenceTimer);
     clearTimeout(speechPauseTimer);
     synth.cancel(); // Stop speaking
+    if (currentPartnerAudio) {
+        currentPartnerAudio.pause();
+        currentPartnerAudio.currentTime = 0;
+        currentPartnerAudio = null;
+    }
     const stream = document.getElementById('user-webcam').srcObject;
     if(stream) stream.getTracks().forEach(track => track.stop());
     
@@ -421,7 +427,8 @@ window.endInterview = endInterview; // Export for HTML onclick
 async function generateEvaluationReport() {
     
     try {
-        const reply = await askGroqWithFallback('evaluate');
+        const replyObj = await askGroqWithFallback('evaluate');
+        const reply = typeof replyObj === 'string' ? replyObj : replyObj.text;
         // 🔥 BULLETPROOF JSON PARSER 🔥
         const cleanedReply = reply.replace(/```json/g, '').replace(/```/g, '').trim();
         const jsonMatch = cleanedReply.match(/\{[\s\S]*\}/);
@@ -478,12 +485,21 @@ async function askGroqWithFallback(action = 'chat') {
             })
         });
 
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("audio/mpeg")) {
+            const audioBlob = await response.blob();
+            const audioUrl = URL.createObjectURL(audioBlob);
+            const encodedText = response.headers.get("x-reply-text");
+            const replyText = encodedText ? decodeURIComponent(encodedText) : "Partner is speaking...";
+            return { type: 'audio', audioUrl, text: replyText };
+        }
+
         const data = await response.json();
         if(data.error) throw new Error(data.error);
-        return data.reply;
+        return { type: 'text', text: data.reply };
     } catch (error) {
         console.error("API Call Failed:", error);
-        return "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately.";
+        return { type: 'text', text: "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately." };
     }
 }
 
@@ -520,43 +536,20 @@ async function triggerPartnerGreeting() {
     }, 3500); // Wait 3.5 seconds before the first interaction
 }
 
-function speakResponse(text) {
+function speakResponse(replyData) {
+    let text = typeof replyData === 'string' ? replyData : replyData.text;
     document.getElementById('subtitle-box').innerText = text;
     document.querySelector('.ai-video').classList.add('ai-speaking');
     
-    const utterance = new SpeechSynthesisUtterance(text);
-    
-    // Find Professional Voice
-    const voices = speechSynthesis.getVoices();
-    let bestVoice = voices.find(v => 
-        v.name.includes('Google UK English Male') || 
-        v.name.includes('Microsoft Mark') || 
-        v.name.includes('Microsoft Guy') || 
-        (v.lang.startsWith('en') && v.name.includes('Male'))
-    );
-    if (bestVoice) utterance.voice = bestVoice;
-    
-    // 🔥 DYNAMIC TONE & PITCH SHIFT 🔥
     const lowerText = text.toLowerCase();
-    if (lowerText.includes('unprofessional') || lowerText.includes('ending this interview') || lowerText.includes('disrespect')) {
-        utterance.pitch = 0.25; // Very Deep & Angry tone
-        utterance.rate = 0.9;
-    } else if (text.includes('!') || text.includes('?')) {
-        utterance.pitch = 0.45; // Deeper, more intimidating for cross-questions/anger
-        utterance.rate = 0.95; // Slightly faster but slow enough to be natural
-    } else {
-        utterance.pitch = 0.6; // Normal strict
-        utterance.rate = 0.85; // Slower, relaxed pace
-    }
-    
-    utterance.onend = () => {
+    const isTimeUpOrEnding = secondsElapsed >= 600 || lowerText.includes("technical issue") || lowerText.includes("ending this interview") || lowerText.includes("wrap this up") || lowerText.includes("concludes our interview") || (hasTriggeredWrapUp && lowerText.includes("goodbye"));
+
+    const onAudioEnd = () => {
         document.querySelector('.ai-video').classList.remove('ai-speaking');
         interviewMemory.push({ "role": "assistant", "content": text });
         appendToTranscript('assistant', text); // Add AI message to Sidebar
         if (isInterviewActive) {
             // 🔥 AUTO-CUT CALL LOGIC 🔥
-            const isTimeUpOrEnding = secondsElapsed >= 600 || lowerText.includes("technical issue") || lowerText.includes("ending this interview") || lowerText.includes("wrap this up") || lowerText.includes("concludes our interview") || (hasTriggeredWrapUp && lowerText.includes("goodbye"));
-            
             if (isTimeUpOrEnding) {
                 setTimeout(endInterview, 1000); // Cut the call if angry or time's up
             } else {
@@ -565,7 +558,30 @@ function speakResponse(text) {
         }
     };
     
-    synth.speak(utterance);
+    if (replyData.type === 'audio') {
+        currentPartnerAudio = new Audio(replyData.audioUrl);
+        currentPartnerAudio.onended = onAudioEnd;
+        currentPartnerAudio.play().catch(e => {
+            console.error("Audio block play failed, falling back to next step:", e);
+            onAudioEnd();
+        });
+    } else {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voices = speechSynthesis.getVoices();
+        let bestVoice = voices.find(v => v.name.includes('Google UK English Male') || v.name.includes('Microsoft Mark') || v.name.includes('Microsoft Guy') || (v.lang.startsWith('en') && v.name.includes('Male')));
+        if (bestVoice) utterance.voice = bestVoice;
+        
+        if (lowerText.includes('unprofessional') || lowerText.includes('ending this interview') || lowerText.includes('disrespect')) {
+            utterance.pitch = 0.25; utterance.rate = 0.9;
+        } else if (text.includes('!') || text.includes('?')) {
+            utterance.pitch = 0.45; utterance.rate = 0.95;
+        } else {
+            utterance.pitch = 0.6; utterance.rate = 0.85;
+        }
+        
+        utterance.onend = onAudioEnd;
+        synth.speak(utterance);
+    }
 }
 
 // 🔥 AUTOMATIC HANDS-FREE MIC LOGIC 🔥
