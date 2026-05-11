@@ -568,7 +568,18 @@ function speakResponse(replyData) {
     } else {
         const utterance = new SpeechSynthesisUtterance(text);
         const voices = speechSynthesis.getVoices();
-        let bestVoice = voices.find(v => v.name.includes('Google UK English Male') || v.name.includes('Microsoft Mark') || v.name.includes('Microsoft Guy') || (v.lang.startsWith('en') && v.name.includes('Male')));
+        // 🔥 Fallback intelligence: If text contains Urdu, use an Urdu/Hindi browser voice 🔥
+        const urduWords = ['kya', 'hai', 'mein', 'ko', 'se', 'yeh', 'woh', 'tum', 'aap', 'nahi', 'kaise', 'hota'];
+        const hasUrdu = urduWords.some(w => text.toLowerCase().includes(` ${w} `) || text.toLowerCase().startsWith(`${w} `));
+        
+        let bestVoice;
+        if (hasUrdu) {
+            bestVoice = voices.find(v => v.lang.includes('ur') || v.lang.includes('hi') || v.name.includes('Urdu') || v.name.includes('Hindi'));
+        }
+        if (!bestVoice) {
+            bestVoice = voices.find(v => v.name.includes('Google UK English Male') || v.name.includes('Microsoft Mark') || v.name.includes('Microsoft Guy') || (v.lang.startsWith('en') && v.name.includes('Male')));
+        }
+        
         if (bestVoice) utterance.voice = bestVoice;
         
         if (lowerText.includes('unprofessional') || lowerText.includes('ending this interview') || lowerText.includes('disrespect')) {
