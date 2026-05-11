@@ -109,6 +109,8 @@ Return ONLY a raw valid JSON object:
                 const voice = finalMessages.length % 2 === 0 ? 'ur-PK-UzmaNeural' : 'ur-PK-AsadNeural';
                 const audioStream = await tts.getTTS(textReply, { voice: voice });
                 res.setHeader('Content-Type', 'audio/mpeg');
+                // Send text in header so frontend can show subtitles and transcript
+                res.setHeader('X-Reply-Text', encodeURIComponent(textReply));
                 Readable.from(audioStream).pipe(res);
                 return; // Audio sent, stop here.
             } catch (ttsError) {
