@@ -279,8 +279,18 @@
             .end-btn i { font-size: 22px; margin: 0; }
             
             /* Evaluation Screen Tweaks */
-            #evaluation-screen { padding: 20px 10px; }
-            .official-paper { padding: 25px 15px; min-height: auto; }
+            #evaluation-screen { 
+                padding: 20px 10px 40px; 
+                height: 100vh !important; 
+                width: 100vw !important; 
+                position: fixed !important; 
+                top: 0; left: 0; 
+                overflow-y: auto !important; 
+                -webkit-overflow-scrolling: touch;
+                z-index: 9999;
+            }
+            #evaluation-screen.active-screen { display: block !important; }
+            .official-paper { padding: 25px 15px; min-height: auto; margin-bottom: 20px; }
             .paper-header { flex-direction: column; gap: 15px; text-align: center; margin-bottom: 25px; }
             .paper-title h2 { font-size: 18px; margin-bottom: 10px; }
             .paper-title p { font-size: 12px; padding: 10px; display: block; line-height: 1.5; }
