@@ -56,8 +56,8 @@ ${firmPersonality}
 Candidate Name: ${candidateData.name}
 CV Extract: ${candidateData.cvText.substring(0, 800)}...
 
-STRICT RULES FOR A NATURAL INTERVIEW:
-1. MANDATORY START: ALWAYS start your response with the chosen partner's name in brackets. Example: "[Uzma] Tumne CV mein kya likha hai?", or "[Christopher] Let's discuss your IFRS knowledge."
+STRICT RULES (OBEY THESE OR FAIL):
+1. MANDATORY FORMAT: Your response MUST start exactly with the chosen partner's name in brackets. Example: "[Uzma] Tumne CV mein...", or "[Christopher] Let's discuss..."
 2. UNPREDICTABLE START: Pick a random CV detail or technical scenario.
 3. NATURAL CONVERSATION: Acknowledge their previous answer briefly, then cross-question.
 4. STRICT LIMIT: Ask ONLY ONE short question (Max 2 sentences). WAIT for the candidate to answer.
@@ -114,19 +114,21 @@ Return ONLY a raw valid JSON object:
             }
 
             // 🔥 PANEL VOICE ROUTING LOGIC 🔥
-            let partner = "";
+            let partner = "Christopher";
             let cleanText = textReply;
-            const tagMatch = textReply.match(/^\[(.*?)\]\s*/);
+            const tagMatch = textReply.match(/\[(Christopher|Asad|Uzma)\]/i);
             
             if (tagMatch) {
                 partner = tagMatch[1];
-                cleanText = textReply.replace(/^\[(.*?)\]\s*/, '').trim();
             } else {
                 // Heuristic Fallback
-                const urduWords = ['kya', 'hai', 'mein', 'ko', 'se', 'yeh', 'woh', 'tum', 'aap', 'nahi'];
+                const urduWords = ['kya', 'hai', 'mein', 'ko', 'se', 'yeh', 'woh', 'tum', 'aap', 'nahi', 'kaise', 'hota'];
                 const hasUrdu = urduWords.some(w => textReply.toLowerCase().includes(` ${w} `) || textReply.toLowerCase().startsWith(`${w} `));
                 partner = hasUrdu ? (Math.random() > 0.5 ? "Asad" : "Uzma") : "Christopher";
             }
+            
+            // Clean text so the bracket tag is never spoken
+            cleanText = textReply.replace(/\*?\[.*?\]\*?:?\s*/g, '').replace(/^(Christopher|Asad|Uzma):\s*/i, '').trim();
 
             // Christopher (Pure English) uses the native browser voice (Jugar 1 / Google Voice)
             if (partner.toLowerCase().includes("christopher") || partner.toLowerCase().includes("google")) {
