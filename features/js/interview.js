@@ -294,14 +294,14 @@ function startInterviewRoom() {
                     let parts = subVal.split(',');
                     dStr = parts[0];
                     sCount = parseInt(parts[1], 10);
-                } else if (!isNaN(subVal)) {
+                } else if (!isNaN(subVal) && subVal !== false && subVal !== "") {
                     sCount = Number(subVal);
                     dStr = "2099-12-31";
                 }
                 
                 if (sCount > 0) {
-                    subs['mock_interview'] = `${dStr},${sCount - 1}`;
-                    updateDoc(userRef, { subscriptions: subs }).catch(e => console.warn(e));
+                    const newSubVal = `${dStr},${sCount - 1}`;
+                    updateDoc(userRef, { "subscriptions.mock_interview": newSubVal }).catch(e => console.warn("Failed to deduct session:", e));
                 }
             }
         }).catch(e => console.warn(e));
