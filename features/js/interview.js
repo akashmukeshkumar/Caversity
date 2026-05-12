@@ -284,27 +284,38 @@ function startInterviewRoom() {
     hasTriggeredWrapUp = false;
 
     // 🔥 DEDUCT ONE SESSION FROM FIREBASE 🔥
-    const user = auth.currentUser;
-    if (user) {
-        const userRef = doc(db, "users", user.uid);
+    if (currentUserUid) {
+        const userRef = doc(db, "users", currentUserUid);
         getDoc(userRef).then(snap => {
             if (snap.exists()) {
                 let subs = snap.data().subscriptions || {};
                 let subVal = subs['interview'];
-                let dStr = subVal;
+                let dStr = "2099-12-31";
                 let sCount = 3;
-                if (typeof subVal === 'string' && subVal.includes(',')) {
-                    let parts = subVal.split(',');
-                    dStr = parts[0];
-                    sCount = parseInt(parts[1], 10);
-                } else if (!isNaN(subVal)) {
-                    sCount = Number(subVal);
-                    dStr = "2099-12-31";
+                
+                // 🛠️ SMART PARSER: Handles Date, Number, Boolean, or Date+Sessions
+                if (typeof subVal === 'string') {
+                    if (subVal.includes(',')) {
+                        let parts = subVal.split(',');
+                        dStr = parts[0];
+                        sCount = parseInt(parts[1], 10);
+                    } else if (subVal.length >= 8) {
+                        dStr = subVal; // Example: "2024-12-31"
+                        sCount = 3;
+                    } else if (!isNaN(subVal) && subVal.trim() !== "") {
+                        sCount = parseInt(subVal, 10);
+                    }
+                } else if (subVal === true) {
+                    sCount = 3;
+                } else if (typeof subVal === 'number') {
+                    sCount = subVal;
                 }
                 
                 if (sCount > 0) {
                     subs['interview'] = `${dStr},${sCount - 1}`;
-                    updateDoc(userRef, { subscriptions: subs }).catch(e => console.warn(e));
+                    updateDoc(userRef, { subscriptions: subs })
+                        .then(() => console.log("✅ Session Deducted Successfully: Left " + (sCount - 1)))
+                        .catch(e => console.warn("❌ Failed to Deduct:", e));
                 }
             }
         }).catch(e => console.warn(e));
