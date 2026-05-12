@@ -343,7 +343,7 @@ function startInterviewRoom() {
             hasTriggeredWrapUp = true;
             interviewMemory.push({
                 "role": "system",
-                "content": "CRITICAL TIME ALERT: 8 minutes have passed. You MUST conclude the interview NOW in your very next response. Do NOT ask any new questions. Thank the candidate, give brief final remarks, and you MUST EXACTLY SAY 'That concludes our interview. Goodbye.' to end the call."
+                "content": "CRITICAL TIME ALERT: 8 minutes have passed. Start wrapping up the interview naturally. You can ask one final short question or ask if they have any questions for you. Do not drag it. When you are ready to end the call (within the next 1 minute), give your final remarks and you MUST EXACTLY SAY 'That concludes our interview. Goodbye.'"
             });
         }
         
