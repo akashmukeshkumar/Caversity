@@ -68,7 +68,7 @@ onAuthStateChanged(auth, async (user) => {
                     return;
                 }
 
-                if (PAGE_ID === 'mock_interview') {
+                if (PAGE_ID === 'interview') {
                     let dStr = subExpiry;
                     let sCount = 3;
                     if (typeof subExpiry === 'string' && subExpiry.includes(',')) {
