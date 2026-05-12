@@ -22,6 +22,8 @@ let silenceStrikes = 0; // 🔥 To auto-cut the call
 let globalSessionCount = 0; // 🔥 Track sessions globally to prevent bypass
 let hasTriggeredWrapUp = false; // 🔥 Auto wrap-up flag
 let currentPartnerAudio = null; // 🔥 For Audio Stream Control
+let globalUserId = null; // 🔥 Safely track User ID
+let globalSubVal = null; // 🔥 Store raw subscription value securely
 
 // 🔥 FIREBASE SETUP FOR ROOM LOCK 🔥
 const app = getApp();
@@ -48,6 +50,7 @@ let serverState = { is_busy: false, current_student: null };
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
+        globalUserId = user.uid; // Store it securely before any timeouts
         onSnapshot(roomDocRef, (docSnap) => {
             if (docSnap.exists()) {
                 serverState = docSnap.data();
@@ -63,6 +66,7 @@ onAuthStateChanged(auth, (user) => {
             if (userSnap.exists()) {
                 let subs = userSnap.data().subscriptions || {};
                 let subVal = subs['mock_interview'];
+                globalSubVal = subVal; // Cache it globally for instant deduction
                 let sCount = 3; // 🔥 FIX: Match security.js default to prevent Desync Illusion
                 if (typeof subVal === 'string' && subVal.includes(',')) {
                     sCount = parseInt(subVal.split(',')[1], 10);
@@ -281,30 +285,25 @@ function startInterviewRoom() {
     hasTriggeredWrapUp = false;
 
     // 🔥 DEDUCT ONE SESSION FROM FIREBASE 🔥
-    const user = auth.currentUser;
-    if (user) {
-        const userRef = doc(db, "users", user.uid);
-        getDoc(userRef).then(snap => {
-            if (snap.exists()) {
-                let subs = snap.data().subscriptions || {};
-                let subVal = subs['mock_interview'];
-                let dStr = subVal;
-                let sCount = 3;
-                if (typeof subVal === 'string' && subVal.includes(',')) {
-                    let parts = subVal.split(',');
-                    dStr = parts[0];
-                    sCount = parseInt(parts[1], 10);
-                } else if (!isNaN(subVal) && subVal !== false && subVal !== "") {
-                    sCount = Number(subVal);
-                    dStr = "2099-12-31";
-                }
-                
-                if (sCount > 0) {
-                    const newSubVal = `${dStr},${sCount - 1}`;
-                    updateDoc(userRef, { "subscriptions.mock_interview": newSubVal }).catch(e => console.warn("Failed to deduct session:", e));
-                }
-            }
-        }).catch(e => console.warn(e));
+    if (globalUserId && globalSubVal) {
+        let dStr = globalSubVal;
+        let sCount = 3;
+        if (typeof globalSubVal === 'string' && globalSubVal.includes(',')) {
+            let parts = globalSubVal.split(',');
+            dStr = parts[0];
+            sCount = parseInt(parts[1], 10);
+        } else if (!isNaN(globalSubVal) && globalSubVal !== false && globalSubVal !== "") {
+            sCount = Number(globalSubVal);
+            dStr = "2099-12-31";
+        }
+        
+        if (sCount > 0) {
+            const newSubVal = `${dStr},${sCount - 1}`;
+            const userRef = doc(db, "users", globalUserId);
+            updateDoc(userRef, { "subscriptions.mock_interview": newSubVal })
+                .then(() => console.log("✅ Session successfully deducted from Firebase!"))
+                .catch(e => console.error("❌ Failed to deduct session:", e));
+        }
     }
 
     // 🔥 Show Instructions Toast 🔥
