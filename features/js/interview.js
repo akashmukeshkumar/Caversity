@@ -22,6 +22,7 @@ let silenceStrikes = 0; // 🔥 To auto-cut the call
 let globalSessionCount = 0; // 🔥 Track sessions globally to prevent bypass
 let hasTriggeredWrapUp = false; // 🔥 Auto wrap-up flag
 let currentPartnerAudio = null; // 🔥 For Audio Stream Control
+let currentUserUid = null; // 🔥 BULLETPROOF USER ID
 
 // 🔥 FIREBASE SETUP FOR ROOM LOCK 🔥
 const app = getApp();
@@ -48,6 +49,8 @@ let serverState = { is_busy: false, current_student: null };
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
+        currentUserUid = user.uid; // Store securely
+
         onSnapshot(roomDocRef, (docSnap) => {
             if (docSnap.exists()) {
                 serverState = docSnap.data();
@@ -66,6 +69,10 @@ onAuthStateChanged(auth, (user) => {
                 let sCount = 3; // 🔥 FIX: Match security.js default to prevent Desync Illusion
                 if (typeof subVal === 'string' && subVal.includes(',')) {
                     sCount = parseInt(subVal.split(',')[1], 10);
+                } else if (subVal === true) {
+                    sCount = 3;
+                } else if (typeof subVal === 'string' && subVal.length >= 8) {
+                    sCount = 3;
                 } else if (!isNaN(subVal) && subVal !== false && subVal !== "") {
                     sCount = Number(subVal);
                 }
@@ -281,27 +288,34 @@ function startInterviewRoom() {
     hasTriggeredWrapUp = false;
 
     // 🔥 DEDUCT ONE SESSION FROM FIREBASE 🔥
-    const user = auth.currentUser;
-    if (user) {
-        const userRef = doc(db, "users", user.uid);
+    if (currentUserUid) {
+        const userRef = doc(db, "users", currentUserUid);
         getDoc(userRef).then(snap => {
             if (snap.exists()) {
-                let subs = snap.data().subscriptions || {};
-                let subVal = subs['interview'];
+                let subVal = snap.data().subscriptions?.['interview'];
                 let dStr = subVal;
                 let sCount = 3;
+                
                 if (typeof subVal === 'string' && subVal.includes(',')) {
                     let parts = subVal.split(',');
                     dStr = parts[0];
                     sCount = parseInt(parts[1], 10);
-                } else if (!isNaN(subVal)) {
+                } else if (subVal === true) {
+                    dStr = "2099-12-31";
+                    sCount = 3;
+                } else if (typeof subVal === 'string' && subVal.length >= 8) {
+                    dStr = subVal;
+                    sCount = 3;
+                } else if (!isNaN(subVal) && subVal !== false && subVal !== "") {
                     sCount = Number(subVal);
                     dStr = "2099-12-31";
                 }
                 
                 if (sCount > 0) {
-                    subs['interview'] = `${dStr},${sCount - 1}`;
-                    updateDoc(userRef, { subscriptions: subs }).catch(e => console.warn(e));
+                    // 🔥 SAFE NESTED UPDATE: Direct write to prevent map corruption 🔥
+                    updateDoc(userRef, { "subscriptions.interview": `${dStr},${sCount - 1}` })
+                        .then(() => console.log("Session deducted from backend"))
+                        .catch(e => console.warn("Failed deduction:", e));
                 }
             }
         }).catch(e => console.warn(e));
