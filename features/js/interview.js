@@ -62,7 +62,7 @@ onAuthStateChanged(auth, (user) => {
         onSnapshot(userRef, (userSnap) => {
             if (userSnap.exists()) {
                 let subs = userSnap.data().subscriptions || {};
-                let subVal = subs['mock_interview'];
+                let subVal = subs['interview'];
                 let sCount = 3; // 🔥 FIX: Match security.js default to prevent Desync Illusion
                 if (typeof subVal === 'string' && subVal.includes(',')) {
                     sCount = parseInt(subVal.split(',')[1], 10);
@@ -287,7 +287,7 @@ function startInterviewRoom() {
         getDoc(userRef).then(snap => {
             if (snap.exists()) {
                 let subs = snap.data().subscriptions || {};
-                let subVal = subs['mock_interview'];
+                let subVal = subs['interview'];
                 let dStr = subVal;
                 let sCount = 3;
                 if (typeof subVal === 'string' && subVal.includes(',')) {
@@ -300,7 +300,7 @@ function startInterviewRoom() {
                 }
                 
                 if (sCount > 0) {
-                    subs['mock_interview'] = `${dStr},${sCount - 1}`;
+                    subs['interview'] = `${dStr},${sCount - 1}`;
                     updateDoc(userRef, { subscriptions: subs }).catch(e => console.warn(e));
                 }
             }
