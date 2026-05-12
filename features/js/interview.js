@@ -300,7 +300,7 @@ function startInterviewRoom() {
         if (sCount > 0) {
             const newSubVal = `${dStr},${sCount - 1}`;
             const userRef = doc(db, "users", globalUserId);
-            updateDoc(userRef, { "subscriptions.mock_interview": newSubVal })
+            setDoc(userRef, { subscriptions: { mock_interview: newSubVal } }, { merge: true })
                 .then(() => console.log("✅ Session successfully deducted from Firebase!"))
                 .catch(e => console.error("❌ Failed to deduct session:", e));
         }
@@ -557,7 +557,6 @@ function speakWithBrowserVoice(text, onAudioEnd) {
 
 async function speakResponse(replyData) {
     let text = typeof replyData === 'string' ? replyData : replyData.text;
-     let partner = replyData.partner || "Christopher";
     document.getElementById('subtitle-box').innerText = text;
     document.querySelector('.ai-video').classList.add('ai-speaking');
     
@@ -578,35 +577,9 @@ async function speakResponse(replyData) {
         }
     };
     
-    if (partner === "Christopher" || partner.toLowerCase().includes("google")) {
-        speakWithBrowserVoice(text, onAudioEnd);
-    } else {
-         try {
-            const voice = partner.toLowerCase().includes("uzma") ? 'ur-PK-UzmaNeural' : 'ur-PK-AsadNeural';
-            const fd = new FormData();
-            fd.append("text", text);
-            fd.append("voice", voice);
-
-            const hfResponse = await fetch("https://jzeo123-sir-ai-backend.hf.space/interview_tts", {
-                method: "POST",
-                body: fd
-            });
-
-            if (!hfResponse.ok) throw new Error("HF Server returned " + hfResponse.status);
-
-            const audioBlob = await hfResponse.blob();
-            const audioUrl = URL.createObjectURL(audioBlob);
-            currentPartnerAudio = new Audio(audioUrl);
-            currentPartnerAudio.onended = onAudioEnd;
-            await currentPartnerAudio.play().catch(e => {
-                console.error("Direct HF Call play failed:", e);
-                onAudioEnd();
-            });
-        } catch (err) {
-            console.error("Direct HF Call Failed, falling back to browser voice:", err);
-            speakWithBrowserVoice(text, onAudioEnd);
-        }
-    }
+    // 🔥 COMPLETELY REMOVED EXTERNAL HUGGING FACE LINKS 🔥
+    // ALWAYS USE FAST NATIVE BROWSER VOICES
+    speakWithBrowserVoice(text, onAudioEnd);
 }
 // 🔥 AUTOMATIC HANDS-FREE MIC LOGIC 🔥
 function startAutoListening() {
