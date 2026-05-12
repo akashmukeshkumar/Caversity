@@ -22,7 +22,6 @@ let silenceStrikes = 0; // 🔥 To auto-cut the call
 let globalSessionCount = 0; // 🔥 Track sessions globally to prevent bypass
 let hasTriggeredWrapUp = false; // 🔥 Auto wrap-up flag
 let currentPartnerAudio = null; // 🔥 For Audio Stream Control
-let currentUserUid = null; // 🔥 BULLETPROOF USER ID
 
 // 🔥 FIREBASE SETUP FOR ROOM LOCK 🔥
 const app = getApp();
@@ -49,8 +48,6 @@ let serverState = { is_busy: false, current_student: null };
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        currentUserUid = user.uid; // Store securely
-
         onSnapshot(roomDocRef, (docSnap) => {
             if (docSnap.exists()) {
                 serverState = docSnap.data();
@@ -65,7 +62,7 @@ onAuthStateChanged(auth, (user) => {
         onSnapshot(userRef, (userSnap) => {
             if (userSnap.exists()) {
                 let subs = userSnap.data().subscriptions || {};
-                let subVal = subs['interview'];
+                let subVal = subs['mock_interview'];
                 let sCount = 3; // 🔥 FIX: Match security.js default to prevent Desync Illusion
                 if (typeof subVal === 'string' && subVal.includes(',')) {
                     sCount = parseInt(subVal.split(',')[1], 10);
@@ -180,8 +177,8 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
         const snap = await getDoc(roomDocRef);
         if (snap.exists() && snap.data().is_busy) {
             const lastActive = snap.data().last_active?.toMillis() || 0;
-            // Auto-unlock if frozen for more than 15 minutes (to cover 10 min interview + buffer)
-            if (Date.now() - lastActive < 15 * 60 * 1000) {
+            // Auto-unlock if frozen for more than 5 minutes
+            if (Date.now() - lastActive < 5 * 60 * 1000) {
                 return statusMsg.innerText = `⚠️ Room is busy with ${snap.data().current_student}. Please wait.`;
             }
         }
@@ -284,38 +281,27 @@ function startInterviewRoom() {
     hasTriggeredWrapUp = false;
 
     // 🔥 DEDUCT ONE SESSION FROM FIREBASE 🔥
-    if (currentUserUid) {
-        const userRef = doc(db, "users", currentUserUid);
+    const user = auth.currentUser;
+    if (user) {
+        const userRef = doc(db, "users", user.uid);
         getDoc(userRef).then(snap => {
             if (snap.exists()) {
                 let subs = snap.data().subscriptions || {};
-                let subVal = subs['interview'];
-                let dStr = "2099-12-31";
+                let subVal = subs['mock_interview'];
+                let dStr = subVal;
                 let sCount = 3;
-                
-                // 🛠️ SMART PARSER: Handles Date, Number, Boolean, or Date+Sessions
-                if (typeof subVal === 'string') {
-                    if (subVal.includes(',')) {
-                        let parts = subVal.split(',');
-                        dStr = parts[0];
-                        sCount = parseInt(parts[1], 10);
-                    } else if (subVal.length >= 8) {
-                        dStr = subVal; // Example: "2024-12-31"
-                        sCount = 3;
-                    } else if (!isNaN(subVal) && subVal.trim() !== "") {
-                        sCount = parseInt(subVal, 10);
-                    }
-                } else if (subVal === true) {
-                    sCount = 3;
-                } else if (typeof subVal === 'number') {
-                    sCount = subVal;
+                if (typeof subVal === 'string' && subVal.includes(',')) {
+                    let parts = subVal.split(',');
+                    dStr = parts[0];
+                    sCount = parseInt(parts[1], 10);
+                } else if (!isNaN(subVal)) {
+                    sCount = Number(subVal);
+                    dStr = "2099-12-31";
                 }
                 
                 if (sCount > 0) {
-                    subs['interview'] = `${dStr},${sCount - 1}`;
-                    updateDoc(userRef, { subscriptions: subs })
-                        .then(() => console.log("✅ Session Deducted Successfully: Left " + (sCount - 1)))
-                        .catch(e => console.warn("❌ Failed to Deduct:", e));
+                    subs['mock_interview'] = `${dStr},${sCount - 1}`;
+                    updateDoc(userRef, { subscriptions: subs }).catch(e => console.warn(e));
                 }
             }
         }).catch(e => console.warn(e));
