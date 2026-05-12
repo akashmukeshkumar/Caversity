@@ -180,7 +180,7 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
     try {
         const snap = await getDoc(roomDocRef);
         if (snap.exists() && snap.data().is_busy) {
-            const lastActive = snap.data().last_active?.toMillis() || 0;
+            const lastActive = snap.data().last_active ? snap.data().last_active.toMillis() : 0;
             // Auto-unlock if frozen for more than 5 minutes
             if (Date.now() - lastActive < 5 * 60 * 1000) {
                 return statusMsg.innerText = `⚠️ Room is busy with ${snap.data().current_student}. Please wait.`;
@@ -289,10 +289,14 @@ function startInterviewRoom() {
     if (globalUserId && globalSubVal) {
         let dStr = globalSubVal;
         let sCount = 3;
+        
         if (typeof globalSubVal === 'string' && globalSubVal.includes(',')) {
             let parts = globalSubVal.split(',');
             dStr = parts[0];
-            sCount = parseInt(parts[1], 10);
+            sCount = parseInt(parts[1], 10) || 3;
+        } else if (typeof globalSubVal === 'string' && isNaN(globalSubVal)) {
+            dStr = globalSubVal;
+            sCount = 3;
         } else if (!isNaN(globalSubVal) && globalSubVal !== false && globalSubVal !== "") {
             sCount = Number(globalSubVal);
             dStr = "2099-12-31";
@@ -301,7 +305,7 @@ function startInterviewRoom() {
         if (sCount > 0) {
             const newSubVal = `${dStr},${sCount - 1}`;
             const userRef = doc(db, "users", globalUserId);
-            setDoc(userRef, { subscriptions: { mock_interview: newSubVal } }, { merge: true })
+            updateDoc(userRef, { "subscriptions.mock_interview": newSubVal })
                 .then(() => console.log("✅ Session successfully deducted from Firebase!"))
                 .catch(e => console.error("❌ Failed to deduct session:", e));
         }
@@ -381,7 +385,7 @@ async function handleAbsoluteSilence() {
 window.addEventListener('beforeunload', () => {
     if (isInterviewActive) {
         setDoc(roomDocRef, {
-            is_busy: false, current_student: null, last_active: serverTimestamp()
+            is_busy: false, current_student: null, student_id: null, last_active: serverTimestamp()
         }).catch(e => console.warn("Background lock release failed", e));
     }
 });
@@ -404,6 +408,7 @@ async function endInterview() {
     setDoc(roomDocRef, {
         is_busy: false,
         current_student: null,
+        student_id: null,
         last_active: serverTimestamp()
     }).catch(e => console.warn("Failed to release lock", e));
 
