@@ -177,8 +177,8 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
         const snap = await getDoc(roomDocRef);
         if (snap.exists() && snap.data().is_busy) {
             const lastActive = snap.data().last_active?.toMillis() || 0;
-            // Auto-unlock if frozen for more than 5 minutes
-            if (Date.now() - lastActive < 5 * 60 * 1000) {
+            // Auto-unlock if frozen for more than 15 minutes (to cover 10 min interview + buffer)
+            if (Date.now() - lastActive < 15 * 60 * 1000) {
                 return statusMsg.innerText = `⚠️ Room is busy with ${snap.data().current_student}. Please wait.`;
             }
         }
