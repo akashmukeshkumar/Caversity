@@ -421,6 +421,9 @@ async function endInterview() {
     document.getElementById('report-firm-name').innerText = candidateData.firm.toUpperCase();
     document.getElementById('report-date').innerText = new Date().toLocaleDateString('en-GB');
     
+    // 🔥 Screen change hotay hi smoothly TOP par scroll karega 🔥
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     await generateEvaluationReport();
 }
 
