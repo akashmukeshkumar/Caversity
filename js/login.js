@@ -121,7 +121,7 @@ registerForm.addEventListener('submit', async (e) => {
             subscriptions: {
                 caf1: false, caf2: false, caf3: false, caf4: false,
                 caf5: false, caf6: false, caf7: false, caf8: false,
-                mock_interview: false
+                interview: false
             }
         });
 
@@ -196,7 +196,7 @@ signinForm.addEventListener('submit', async (e) => {
                 subscriptions: {
                     caf1: false, caf2: false, caf3: false, caf4: false,
                     caf5: false, caf6: false, caf7: false, caf8: false,
-                    mock_interview: false
+                    interview: false
                 }
             });
         }
