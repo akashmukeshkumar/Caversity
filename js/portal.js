@@ -25,7 +25,7 @@ const academicSubjects = [
     { id: 'caf6', name: 'CAF 6: Managerial and Financial Analysis', description: 'Strategic financial analysis and managerial decision-making tools.', price: 200, type: 'premium', url: 'subjects/caf6/index.html' },
     { id: 'caf7', name: 'CAF 7: Company Law', description: 'Corporate law principles and company governance structures.', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
     { id: 'caf8', name: 'CAF 8: Audit and Assurance', description: 'Audit methodologies and assurance services in professional practice.', price: 200, type: 'premium', url: 'audit.html' },
-    { id: 'interview', name: 'Firm Interview Simulator', description: 'Face a realistic 5-minute technical and psychological interview with a strict AI Partner.', price: 400, type: 'premium', url: 'interview.html' },
+    { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Face a realistic 5-minute technical and psychological interview with a strict AI Partner.', price: 400, type: 'premium', url: 'interview.html' },
     { id: 'resume', name: 'CA Resume Builder', description: 'Craft a standout, ATS-friendly resume tailored specifically for CA & ACCA students.', price: 0, type: 'free', url: 'resume.html' },
     { id: 'sanctuary', name: 'The Sanctuary', description: 'Spiritual guidance and ethical foundations for professional excellence.', price: 0, type: 'free', url: 'blueprint.html' }
 ];
@@ -67,7 +67,7 @@ onAuthStateChanged(auth, async (user) => {
             for (let subId in dbSubs) {
                 const expiryValue = dbSubs[subId];
                 if (expiryValue && expiryValue !== false) {
-                    if (subId === 'interview') {
+                    if (subId === 'mock_interview') {
                         // 🔥 DUAL LOGIC: Month + Sessions (Format: "2024-12-31,10") 🔥
                         let dStr = expiryValue;
                         let sCount = 3; // Default sessions if only date is typed
@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             // GENERATE WHATSAPP MESSAGE
-            let period = currentSubjectContext && currentSubjectContext.id === 'interview' && !isMultiSubjectMode ? 'month (3 Sessions)' : 'month';
+            let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? 'month (3 Sessions)' : 'month';
             if (isMultiSubjectMode) period = 'month';
 
             let msg = `Hello Caversity Team, 👋\n\nI have successfully made a payment for premium access. Here are my details:\n\n`;
@@ -368,7 +368,7 @@ function openSubscriptionModal() {
         if (currentSubjectContext.id === 'caf8' && featuresContainer) {
             featuresContainer.innerHTML = getAuditFeaturesHtml();
             featuresContainer.style.display = 'block';
-        } else if (currentSubjectContext.id === 'interview' && featuresContainer) {
+        } else if (currentSubjectContext.id === 'mock_interview' && featuresContainer) {
             featuresContainer.innerHTML = getInterviewFeaturesHtml();
             featuresContainer.style.display = 'block';
         } else if (featuresContainer) {
@@ -399,7 +399,7 @@ function openSubscriptionModal() {
         multiDisplay.innerHTML = '';
         academicSubjects.filter(s => s.type === 'premium').forEach(s => {
             const isSub = currentUserProfile.subscriptions.includes(s.id);
-            const priceLabel = s.id === 'interview' ? `(Rs. ${s.price} / month - 3 Sessions)` : `(Rs. ${s.price} / month)`;
+            const priceLabel = s.id === 'mock_interview' ? `(Rs. ${s.price} / month - 3 Sessions)` : `(Rs. ${s.price} / month)`;
             multiDisplay.innerHTML += `
                 <div class="checkbox-item">
                     <input type="checkbox" id="chk-${s.id}" value="${s.id}" ${isSub ? 'disabled' : ''}>
@@ -411,7 +411,7 @@ function openSubscriptionModal() {
         multiDisplay.style.display = 'none';
         couponContainer.style.display = 'block';
         document.getElementById('modal-subject-name').innerText = currentSubjectContext.name;
-        document.getElementById('modal-subject-price').innerText = currentSubjectContext.id === 'interview' ? `Rs. ${currentSubjectContext.price} / month (3 Sessions)` : `Rs. ${currentSubjectContext.price} / month`;
+        document.getElementById('modal-subject-price').innerText = currentSubjectContext.id === 'mock_interview' ? `Rs. ${currentSubjectContext.price} / month (3 Sessions)` : `Rs. ${currentSubjectContext.price} / month`;
     }
 
     calculateTotal();
@@ -449,7 +449,7 @@ function calculateTotal() {
         document.getElementById('discount-line').style.display = 'none';
     }
 
-    let periodText = (currentSubjectContext && currentSubjectContext.id === 'interview' && !isMultiSubjectMode) ? ' / 3 Sessions' : ' / month';
+    let periodText = (currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode) ? ' / 3 Sessions' : ' / month';
     document.getElementById('total-amount').innerText = `Rs. ${grandTotal}${periodText}`;
     document.getElementById('total-amount').dataset.subtotal = subtotal;
     document.getElementById('total-amount').dataset.grand = grandTotal;
@@ -555,15 +555,13 @@ window.revealSurprise = function() {
 
     async function loadAdhkarData() {
         try {
-            // 🔥 Cache Busting: Mobile browser ko zabardasti fresh data fetch karwane ke liye timestamp add kiya
-            const timestamp = Date.now();
-            
-            const emoRes = await fetch(`/api/get-data?file=emotion&t=${timestamp}`);
+            // 🔥 API se data load karo aur atob se base64 decode karo 🔥
+            const emoRes = await fetch('/api/get-data?file=emotion');
             if (!emoRes.ok) throw new Error("emotion data not found via API");
             const emoResult = await emoRes.json();
             appEmotions = JSON.parse(decodeBase64UTF8(emoResult.payload));
 
-            const resRes = await fetch(`/api/get-data?file=resource&t=${timestamp}`);
+            const resRes = await fetch('/api/get-data?file=resource');
             if (!resRes.ok) throw new Error("resource data not found via API");
             const resResult = await resRes.json();
             appResources = JSON.parse(decodeBase64UTF8(resResult.payload));
@@ -572,14 +570,9 @@ window.revealSurprise = function() {
         } catch (e) {
             console.error("Adhkar Error:", e);
             const gridArea = document.getElementById('adhkar-grid-area');
-            if(gridArea) gridArea.innerHTML = `
-                <div style="text-align:center; width:100%; grid-column: 1 / -1; padding: 20px;">
-                    <p style="color:#ef4444; font-weight:600; margin-bottom:12px; font-size:14px;"><i class="fas fa-exclamation-circle"></i> Connection Error</p>
-                    <button onclick="loadAdhkarData()" style="padding:10px 20px; background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; border-radius:50px; cursor:pointer; font-weight:700; font-size:13px; display:inline-flex; align-items:center; gap:8px;"><i class="fas fa-redo"></i> Tap to Retry</button>
-                </div>`;
+            if(gridArea) gridArea.innerHTML = '<p style="color:red; text-align:center;">Error loading Adhkar data. Please check asset paths.</p>';
         }
     }
-    window.loadAdhkarData = loadAdhkarData;
     loadAdhkarData();
 
     function initGrid() {
