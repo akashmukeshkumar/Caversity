@@ -126,7 +126,7 @@ function renderSubjectCards() {
                 card.classList.add('subscribed-card');
                 buttonText = 'Open Subject';
                 if (subject.id === 'mock_interview') {
-                    buttonText = `Open Subject (${currentUserProfile.interviewSessions} Sessions Left)`;
+                    // buttonText = `Open Subject (${currentUserProfile.interviewSessions} Sessions Left)`; // As requested, removed sessions count from button
                 }
                 buttonClass = 'subscribed-action';
             }
