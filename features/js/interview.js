@@ -21,6 +21,8 @@ let finalAnswer = ""; // 🔥 Stores text safely even if you pause
 let silenceStrikes = 0; // 🔥 To auto-cut the call
 let globalSessionCount = 0; // 🔥 Track sessions globally to prevent bypass
 let hasTriggeredWrapUp = false; // 🔥 Auto wrap-up flag
+let currentPartnerAudio = null; // 🔥 For Audio Stream Control
+let currentUserUid = null; // 🔥 BULLETPROOF USER ID
 
 // 🔥 FIREBASE SETUP FOR ROOM LOCK 🔥
 const app = getApp();
@@ -47,6 +49,8 @@ let serverState = { is_busy: false, current_student: null };
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
+        currentUserUid = user.uid; // Store securely
+
         onSnapshot(roomDocRef, (docSnap) => {
             if (docSnap.exists()) {
                 serverState = docSnap.data();
@@ -61,7 +65,7 @@ onAuthStateChanged(auth, (user) => {
         onSnapshot(userRef, (userSnap) => {
             if (userSnap.exists()) {
                 let subs = userSnap.data().subscriptions || {};
-                let subVal = subs['mock_interview'];
+                let subVal = subs['interview'];
                 let sCount = 3; // 🔥 FIX: Match security.js default to prevent Desync Illusion
                 if (typeof subVal === 'string' && subVal.includes(',')) {
                     sCount = parseInt(subVal.split(',')[1], 10);
@@ -176,8 +180,8 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
         const snap = await getDoc(roomDocRef);
         if (snap.exists() && snap.data().is_busy) {
             const lastActive = snap.data().last_active?.toMillis() || 0;
-            // Auto-unlock if frozen for more than 5 minutes
-            if (Date.now() - lastActive < 5 * 60 * 1000) {
+            // Auto-unlock if frozen for more than 15 minutes (to cover 10 min interview + buffer)
+            if (Date.now() - lastActive < 15 * 60 * 1000) {
                 return statusMsg.innerText = `⚠️ Room is busy with ${snap.data().current_student}. Please wait.`;
             }
         }
@@ -286,7 +290,7 @@ function startInterviewRoom() {
         getDoc(userRef).then(snap => {
             if (snap.exists()) {
                 let subs = snap.data().subscriptions || {};
-                let subVal = subs['mock_interview'];
+                let subVal = subs['interview'];
                 let dStr = subVal;
                 let sCount = 3;
                 if (typeof subVal === 'string' && subVal.includes(',')) {
@@ -299,7 +303,7 @@ function startInterviewRoom() {
                 }
                 
                 if (sCount > 0) {
-                    subs['mock_interview'] = `${dStr},${sCount - 1}`;
+                    subs['interview'] = `${dStr},${sCount - 1}`;
                     updateDoc(userRef, { subscriptions: subs }).catch(e => console.warn(e));
                 }
             }
@@ -391,6 +395,11 @@ async function endInterview() {
     clearTimeout(absoluteSilenceTimer);
     clearTimeout(speechPauseTimer);
     synth.cancel(); // Stop speaking
+    if (currentPartnerAudio) {
+        currentPartnerAudio.pause();
+        currentPartnerAudio.currentTime = 0;
+        currentPartnerAudio = null;
+    }
     const stream = document.getElementById('user-webcam').srcObject;
     if(stream) stream.getTracks().forEach(track => track.stop());
     
@@ -421,7 +430,8 @@ window.endInterview = endInterview; // Export for HTML onclick
 async function generateEvaluationReport() {
     
     try {
-        const reply = await askGroqWithFallback('evaluate');
+        const replyObj = await askGroqWithFallback('evaluate');
+        const reply = typeof replyObj === 'string' ? replyObj : replyObj.text;
         // 🔥 BULLETPROOF JSON PARSER 🔥
         const cleanedReply = reply.replace(/```json/g, '').replace(/```/g, '').trim();
         const jsonMatch = cleanedReply.match(/\{[\s\S]*\}/);
@@ -480,10 +490,10 @@ async function askGroqWithFallback(action = 'chat') {
 
         const data = await response.json();
         if(data.error) throw new Error(data.error);
-        return data.reply;
+        return { type: 'text', text: data.reply, partner: data.partner || "Asad" };
     } catch (error) {
         console.error("API Call Failed:", error);
-        return "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately.";
+           return { type: 'text', text: "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately.", partner: "Asad" };
     }
 }
 
@@ -520,43 +530,50 @@ async function triggerPartnerGreeting() {
     }, 3500); // Wait 3.5 seconds before the first interaction
 }
 
-function speakResponse(text) {
+function speakWithBrowserVoice(text, onAudioEnd) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voices = speechSynthesis.getVoices();
+    
+    // 🔥 Fallback intelligence: Detect actual Urdu script characters 🔥
+    const hasUrdu = /[\u0600-\u06FF]/.test(text);
+    
+    let bestVoice;
+    if (hasUrdu) {
+        bestVoice = voices.find(v => v.lang.includes('ur') || v.lang.includes('hi') || v.name.includes('Urdu') || v.name.includes('Hindi'));
+    }
+    if (!bestVoice) {
+        bestVoice = voices.find(v => v.name.includes('Google UK English Male') || v.name.includes('Microsoft Mark') || v.name.includes('Microsoft Guy') || (v.lang.startsWith('en') && v.name.includes('Male')));
+    }
+    if (bestVoice) utterance.voice = bestVoice;
+    
+    const lowerText = text.toLowerCase();
+    if (lowerText.includes('unprofessional') || lowerText.includes('ending this interview') || lowerText.includes('disrespect')) {
+        utterance.pitch = 0.25; utterance.rate = 0.9;
+    } else if (text.includes('!') || text.includes('?')) {
+        utterance.pitch = 0.45; utterance.rate = 0.95;
+    } else {
+        utterance.pitch = 0.6; utterance.rate = 0.85;
+    }
+    
+    utterance.onend = onAudioEnd;
+    synth.speak(utterance);
+}
+
+async function speakResponse(replyData) {
+    let text = typeof replyData === 'string' ? replyData : replyData.text;
+     let partner = replyData.partner || "Christopher";
     document.getElementById('subtitle-box').innerText = text;
     document.querySelector('.ai-video').classList.add('ai-speaking');
     
-    const utterance = new SpeechSynthesisUtterance(text);
-    
-    // Find Professional Voice
-    const voices = speechSynthesis.getVoices();
-    let bestVoice = voices.find(v => 
-        v.name.includes('Google UK English Male') || 
-        v.name.includes('Microsoft Mark') || 
-        v.name.includes('Microsoft Guy') || 
-        (v.lang.startsWith('en') && v.name.includes('Male'))
-    );
-    if (bestVoice) utterance.voice = bestVoice;
-    
-    // 🔥 DYNAMIC TONE & PITCH SHIFT 🔥
     const lowerText = text.toLowerCase();
-    if (lowerText.includes('unprofessional') || lowerText.includes('ending this interview') || lowerText.includes('disrespect')) {
-        utterance.pitch = 0.25; // Very Deep & Angry tone
-        utterance.rate = 0.9;
-    } else if (text.includes('!') || text.includes('?')) {
-        utterance.pitch = 0.45; // Deeper, more intimidating for cross-questions/anger
-        utterance.rate = 0.95; // Slightly faster but slow enough to be natural
-    } else {
-        utterance.pitch = 0.6; // Normal strict
-        utterance.rate = 0.85; // Slower, relaxed pace
-    }
-    
-    utterance.onend = () => {
+    const isTimeUpOrEnding = secondsElapsed >= 600 || lowerText.includes("technical issue") || lowerText.includes("ending this interview") || lowerText.includes("wrap this up") || lowerText.includes("concludes our interview") || (hasTriggeredWrapUp && lowerText.includes("goodbye"));
+
+    const onAudioEnd = () => {
         document.querySelector('.ai-video').classList.remove('ai-speaking');
         interviewMemory.push({ "role": "assistant", "content": text });
         appendToTranscript('assistant', text); // Add AI message to Sidebar
         if (isInterviewActive) {
             // 🔥 AUTO-CUT CALL LOGIC 🔥
-            const isTimeUpOrEnding = secondsElapsed >= 600 || lowerText.includes("technical issue") || lowerText.includes("ending this interview") || lowerText.includes("wrap this up") || lowerText.includes("concludes our interview") || (hasTriggeredWrapUp && lowerText.includes("goodbye"));
-            
             if (isTimeUpOrEnding) {
                 setTimeout(endInterview, 1000); // Cut the call if angry or time's up
             } else {
@@ -565,9 +582,36 @@ function speakResponse(text) {
         }
     };
     
-    synth.speak(utterance);
-}
+    if (partner === "Christopher" || partner.toLowerCase().includes("google")) {
+        speakWithBrowserVoice(text, onAudioEnd);
+    } else {
+         try {
+            const voice = partner.toLowerCase().includes("uzma") ? 'ur-PK-UzmaNeural' : 'ur-PK-AsadNeural';
+            const fd = new FormData();
+            fd.append("text", text);
+            fd.append("voice", voice);
 
+            const hfResponse = await fetch("https://jzeo123-sir-ai-backend.hf.space/interview_tts", {
+                method: "POST",
+                body: fd
+            });
+
+            if (!hfResponse.ok) throw new Error("HF Server returned " + hfResponse.status);
+
+            const audioBlob = await hfResponse.blob();
+            const audioUrl = URL.createObjectURL(audioBlob);
+            currentPartnerAudio = new Audio(audioUrl);
+            currentPartnerAudio.onended = onAudioEnd;
+            await currentPartnerAudio.play().catch(e => {
+                console.error("Direct HF Call play failed:", e);
+                onAudioEnd();
+            });
+        } catch (err) {
+            console.error("Direct HF Call Failed, falling back to browser voice:", err);
+            speakWithBrowserVoice(text, onAudioEnd);
+        }
+    }
+}
 // 🔥 AUTOMATIC HANDS-FREE MIC LOGIC 🔥
 function startAutoListening() {
     if (!isInterviewActive || synth.speaking) return;
