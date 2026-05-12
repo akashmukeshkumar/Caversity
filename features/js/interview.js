@@ -426,8 +426,7 @@ window.endInterview = endInterview; // Export for HTML onclick
 async function generateEvaluationReport() {
     
     try {
-        const replyObj = await askGroqWithFallback('evaluate');
-        const reply = typeof replyObj === 'string' ? replyObj : replyObj.text;
+        const reply = await askGroqWithFallback('evaluate');
         // 🔥 BULLETPROOF JSON PARSER 🔥
         const cleanedReply = reply.replace(/```json/g, '').replace(/```/g, '').trim();
         const jsonMatch = cleanedReply.match(/\{[\s\S]*\}/);
@@ -486,10 +485,10 @@ async function askGroqWithFallback(action = 'chat') {
 
         const data = await response.json();
         if(data.error) throw new Error(data.error);
-        return { type: 'text', text: data.reply, partner: data.partner || "Asad" };
+        return data.reply;
     } catch (error) {
         console.error("API Call Failed:", error);
-           return { type: 'text', text: "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately.", partner: "Asad" };
+        return "I just received an urgent message regarding a critical client issue. We will have to wrap this interview up immediately.";
     }
 }
 
@@ -530,16 +529,8 @@ function speakWithBrowserVoice(text, onAudioEnd) {
     const utterance = new SpeechSynthesisUtterance(text);
     const voices = speechSynthesis.getVoices();
     
-    // 🔥 Fallback intelligence: Detect actual Urdu script characters 🔥
-    const hasUrdu = /[\u0600-\u06FF]/.test(text);
-    
-    let bestVoice;
-    if (hasUrdu) {
-        bestVoice = voices.find(v => v.lang.includes('ur') || v.lang.includes('hi') || v.name.includes('Urdu') || v.name.includes('Hindi'));
-    }
-    if (!bestVoice) {
-        bestVoice = voices.find(v => v.name.includes('Google UK English Male') || v.name.includes('Microsoft Mark') || v.name.includes('Microsoft Guy') || (v.lang.startsWith('en') && v.name.includes('Male')));
-    }
+    // 🔥 Strict Professional English Voice 🔥
+    let bestVoice = voices.find(v => v.name.includes('Google UK English Male') || v.name.includes('Microsoft Mark') || v.name.includes('Microsoft Guy') || (v.lang.startsWith('en') && v.name.includes('Male')));
     if (bestVoice) utterance.voice = bestVoice;
     
     const lowerText = text.toLowerCase();
@@ -555,8 +546,7 @@ function speakWithBrowserVoice(text, onAudioEnd) {
     synth.speak(utterance);
 }
 
-async function speakResponse(replyData) {
-    let text = typeof replyData === 'string' ? replyData : replyData.text;
+async function speakResponse(text) {
     document.getElementById('subtitle-box').innerText = text;
     document.querySelector('.ai-video').classList.add('ai-speaking');
     
