@@ -63,6 +63,7 @@ onAuthStateChanged(auth, async (user) => {
             const today = new Date();
             const dbSubs = userData.subscriptions || {};
             const activeSubs = [];
+            let interviewSessions = 0;
 
             for (let subId in dbSubs) {
                 const expiryValue = dbSubs[subId];
@@ -81,6 +82,7 @@ onAuthStateChanged(auth, async (user) => {
                         }
                         if (new Date(dStr) > today && sCount > 0) {
                             activeSubs.push(subId);
+                            interviewSessions = sCount;
                         }
                     } else {
                         // Normal monthly expiry logic
@@ -92,7 +94,7 @@ onAuthStateChanged(auth, async (user) => {
                 }
             }
 
-            currentUserProfile = { name: userData.name, subscriptions: activeSubs };
+            currentUserProfile = { name: userData.name, subscriptions: activeSubs, interviewSessions };
             
             // Update Name in UI
             const welcomeMsg = document.getElementById('welcome-message');
@@ -123,6 +125,9 @@ function renderSubjectCards() {
             if (isSubscribed) {
                 card.classList.add('subscribed-card');
                 buttonText = 'Open Subject';
+                if (subject.id === 'mock_interview') {
+                    buttonText = `Open Subject (${currentUserProfile.interviewSessions} Sessions Left)`;
+                }
                 buttonClass = 'subscribed-action';
             }
         } else {
