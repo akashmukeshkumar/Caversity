@@ -209,6 +209,7 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
         await setDoc(roomDocRef, {
             is_busy: true,
             current_student: name,
+            student_id: globalUserId, // 🔥 SECURITY: Link lock to user ID
             last_active: serverTimestamp()
         });
 
