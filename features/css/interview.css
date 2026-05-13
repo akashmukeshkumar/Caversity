@@ -144,8 +144,6 @@
         .close-ts-btn:hover { color: #ef4444; }
         
         .ts-content { flex: 1; overflow-y: auto; padding: 25px; display: flex; flex-direction: column; gap: 18px; }
-        .ts-content::-webkit-scrollbar { width: 4px; }
-        .ts-content::-webkit-scrollbar-thumb { background: rgba(15,23,42,0.1); border-radius: 5px; }
         
         .ts-msg { max-width: 85%; padding: 14px 18px; border-radius: 16px; font-size: 13px; line-height: 1.6; font-weight: 500; word-wrap: break-word; }
         .ai-msg { background: rgba(255, 255, 255, 0.9); color: #334155; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(15, 23, 42, 0.05); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
@@ -230,3 +228,41 @@
             #evaluation-screen { padding: 20px 10px; }
             .official-paper { padding: 30px 20px; border-radius: 20px; background: rgba(255,255,255,0.95); }
         }
+
+        /* --------------------------------------------------- */
+        /* 🔥 NEW FIXES ADDED EXACTLY AS REQUESTED 🔥 */
+        /* --------------------------------------------------- */
+
+        /* 1. Mic & End Button text ONLY shows on hover now */
+        .controls-bar button span, .ctrl-btn span { display: none; font-size: 13px; font-weight: 600; }
+        .controls-bar button:hover span, .ctrl-btn:hover span { display: inline-block; margin-left: 8px; }
+
+        /* 2. Hide extra black "Caversity" loose text above the report */
+        #evaluation-screen > h1, #evaluation-screen > h2, #evaluation-screen > .room-branding, .watermark-bg { display: none !important; }
+
+        /* 3. Button fixes on Evaluation screen */
+        .eval-actions { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
+        .eval-actions button:nth-child(2) { display: none !important; } /* Hides "Back to Dashboard" */
+        
+        /* Make "Download PDF" match the colorful premium theme again */
+        .eval-actions button:nth-child(1) {
+            background: linear-gradient(135deg, #6366f1 0%, #d946ef 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 15px;
+            box-shadow: 0 10px 25px rgba(217, 70, 239, 0.3);
+            letter-spacing: 0.5px;
+        }
+        .eval-actions button:nth-child(1):hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 15px 35px rgba(217, 70, 239, 0.4); 
+        }
+
+        /* 4. Hide Ugly Default Scrollbars Everywhere (But scrolling works perfectly) */
+        ::-webkit-scrollbar { display: none !important; width: 0 !important; }
+        * { -ms-overflow-style: none !important; scrollbar-width: none !important; }
