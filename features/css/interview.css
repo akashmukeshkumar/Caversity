@@ -160,9 +160,9 @@
             font-size: 0px !important; color: transparent !important;
         }
         .controls-bar > * { color: #64748b; }
-        .controls-bar > *:not(.mic-indicator):not(.ctrl-btn):not(.end-btn):not(i):not(svg) { display: none !important; }
         
-        .mic-indicator { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); display: flex; justify-content: center; align-items: center; color: #64748b; transition: 0.3s; cursor: pointer; border: 1px solid rgba(15, 23, 42, 0.05); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .mic-indicator { width: 50px !important; height: 50px !important; border-radius: 50%; background: rgba(255, 255, 255, 0.9); display: flex !important; justify-content: center; align-items: center; color: #64748b; transition: 0.3s; cursor: pointer; border: 1px solid rgba(15, 23, 42, 0.05); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .mic-indicator i, .mic-indicator svg { font-size: 22px !important; color: inherit; }
         .mic-indicator.active { background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%); color: white; border: none; box-shadow: 0 0 25px rgba(236, 72, 153, 0.4); }
         .mic-indicator.active i { animation: mic-breathe 1.5s infinite alternate ease-in-out; }
         
