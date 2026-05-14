@@ -13,7 +13,6 @@
             background-attachment: fixed;
             color: #0f172a;
             height: 100vh; display: flex; justify-content: center; align-items: center;
-            overflow: hidden; /* Prevent extra unwanted page scrollbars */
         }
 
         .screen-container {
@@ -145,8 +144,6 @@
         .close-ts-btn:hover { color: #ef4444; }
         
         .ts-content { flex: 1; overflow-y: auto; padding: 25px; display: flex; flex-direction: column; gap: 18px; }
-        .ts-content::-webkit-scrollbar { width: 4px; }
-        .ts-content::-webkit-scrollbar-thumb { background: rgba(15,23,42,0.1); border-radius: 5px; }
         
         .ts-msg { max-width: 85%; padding: 14px 18px; border-radius: 16px; font-size: 13px; line-height: 1.6; font-weight: 500; word-wrap: break-word; }
         .ai-msg { background: rgba(255, 255, 255, 0.9); color: #334155; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(15, 23, 42, 0.05); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
@@ -157,26 +154,12 @@
         .fixed-ts-btn:hover { background: #6366f1; color: #ffffff; transform: translateY(-4px); box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3); }
         
         /* --- AUTOMATIC CONTROLS --- */
-        .controls-bar { 
-            position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); 
-            background: rgba(255, 255, 255, 0.75); padding: 12px 24px; border-radius: 50px; 
-            display: flex; justify-content: center; align-items: center; gap: 18px; 
-            border: 1px solid rgba(255, 255, 255, 1); box-shadow: 0 20px 50px rgba(15, 23, 42, 0.1); 
-            z-index: 20; backdrop-filter: blur(30px); 
-            /* 🔥 SAFE FIX: Hide stray text correctly without breaking the mic */
-            color: transparent !important; 
-        }
-        .controls-bar > * { color: #475569; }
+        .controls-bar { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); background: rgba(255, 255, 255, 0.75); padding: 10px; border-radius: 50px; display: flex; justify-content: center; align-items: center; gap: 12px; border: 1px solid rgba(255, 255, 255, 1); box-shadow: 0 20px 50px rgba(15, 23, 42, 0.1); z-index: 20; backdrop-filter: blur(30px); }
         
-        .mic-indicator { width: 58px; height: 58px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); display: flex; justify-content: center; align-items: center; color: #64748b; font-size: 22px; transition: 0.3s; cursor: pointer; border: 1px solid rgba(15, 23, 42, 0.05); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .mic-indicator:hover { background: #ffffff; color: #0f172a; }
+        .mic-indicator { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); display: flex; justify-content: center; align-items: center; color: #64748b; transition: 0.3s; cursor: pointer; border: 1px solid rgba(15, 23, 42, 0.05); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
         .mic-indicator.active { background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%); color: white; border: none; box-shadow: 0 0 25px rgba(236, 72, 153, 0.4); }
         .mic-indicator.active i { animation: mic-breathe 1.5s infinite alternate ease-in-out; }
         
-        .ctrl-btn { border: none; cursor: pointer; transition: 0.3s; color: #64748b; display: flex; justify-content: center; align-items: center; font-weight: 600; gap: 8px; }
-        .end-btn { background: rgba(255, 255, 255, 0.9); padding: 14px 28px; border-radius: 50px; font-size: 13px; border: 1px solid rgba(15, 23, 42, 0.05); text-transform: uppercase; letter-spacing: 1px; }
-        .end-btn:hover { background: #fef2f2; border-color: #fca5a5; color: #ef4444; box-shadow: 0 5px 20px rgba(239, 68, 68, 0.15); transform: translateY(-2px); }
-
         /* --- EVALUATION DASHBOARD --- */
         #evaluation-screen { align-items: center; justify-content: flex-start; padding: 50px 20px; overflow-y: auto; }
         
@@ -195,16 +178,6 @@
             border-radius: 20px;
             overflow: hidden;
             backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-        }
-        
-        /* 🔥 BUG FIX: Hide broken image alt text (small 'Caversity') and stray black text */
-        .official-paper img, .room-branding img { color: transparent !important; }
-        .paper-header [style*="black"], .room-branding [style*="black"], 
-        .paper-header [style*="#000"], .room-branding [style*="#000"], 
-        .text-black,
-        .official-paper *[style*="color: black"],
-        .official-paper *[style*="color:black"] {
-            display: none !important;
         }
         
         .official-paper::after {
@@ -236,23 +209,6 @@
 
         .spinner { width: 45px; height: 45px; border: 3px solid #e2e8f0; border-top: 3px solid #d946ef; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
         .loading-report p { color: #475569; font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-top: 20px; }
-        
-        /* --- DOWNLOAD PDF BUTTON --- */
-        .download-pdf-btn {
-            display: inline-flex; justify-content: center; align-items: center; gap: 10px;
-            padding: 16px 36px; border-radius: 50px; border: none;
-            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%) !important;
-            color: white !important; font-weight: 700; font-size: 14px; cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-top: 15px; box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3) !important;
-            letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
-        }
-        .download-pdf-btn:hover {
-            transform: translateY(-3px); box-shadow: 0 15px 35px rgba(236, 72, 153, 0.4) !important;
-        }
-        .download-pdf-btn-container {
-            text-align: center; margin-top: 45px; width: 100%;
-        }
 
         @media (max-width: 768px) {
             body, html { background-color: #ffffff; }
@@ -266,4 +222,60 @@
             
             #evaluation-screen { padding: 20px 10px; }
             .official-paper { padding: 30px 20px; border-radius: 20px; background: rgba(255,255,255,0.95); }
+        }
+
+        /* --------------------------------------------------- */
+        /* 🔥 GUARANTEED FIXES: MIC TEXT & PDF BUTTON 🔥 */
+        /* --------------------------------------------------- */
+
+        /* Fix 1: Hide Raw Text in Buttons, only show on hover expanding like a pill */
+        .ctrl-btn, .end-btn { 
+            font-size: 0px !important; /* Hides text by default completely */
+            width: 50px !important; 
+            height: 50px !important; 
+            border-radius: 50% !important; 
+            padding: 0 !important; 
+            display: flex !important; 
+            justify-content: center !important; 
+            align-items: center !important; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        .ctrl-btn i, .end-btn i { font-size: 20px !important; margin: 0 !important; }
+        
+        /* Expand to show text ONLY when mouse is on it */
+        .ctrl-btn:hover, .end-btn:hover { 
+            font-size: 13px !important; 
+            width: auto !important; 
+            border-radius: 50px !important; 
+            padding: 0 20px !important; 
+            gap: 8px !important;
+        }
+
+        /* Fix 2: Hide extra black "Caversity" loose text & old scrollbars */
+        #evaluation-screen > h1, #evaluation-screen > h2, #evaluation-screen > .room-branding, .watermark-bg { display: none !important; }
+        ::-webkit-scrollbar { display: none !important; width: 0 !important; }
+        * { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+
+        /* Fix 3: Force the exact premium gradient onto the Download PDF button */
+        .eval-actions { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
+        .eval-actions > *:nth-child(2) { display: none !important; } /* Hide old 2nd button */
+        
+        .eval-actions > *:not(:nth-child(2)) {
+            background: linear-gradient(135deg, #6366f1 0%, #d946ef 100%) !important; /* Forces the purple/pink theme */
+            color: white !important;
+            border: none !important;
+            padding: 15px 40px !important;
+            border-radius: 50px !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            font-size: 15px !important;
+            box-shadow: 0 10px 25px rgba(217, 70, 239, 0.3) !important;
+            letter-spacing: 0.5px !important;
+            text-decoration: none !important;
+            display: inline-block !important;
+        }
+        .eval-actions > *:not(:nth-child(2)):hover { 
+            transform: translateY(-2px) !important; 
+            box-shadow: 0 15px 35px rgba(217, 70, 239, 0.5) !important; 
         }
