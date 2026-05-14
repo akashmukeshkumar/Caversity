@@ -402,7 +402,10 @@ async function endInterview() {
         currentPartnerAudio = null;
     }
     const stream = document.getElementById('user-webcam').srcObject;
-    if(stream) stream.getTracks().forEach(track => track.stop());
+    if(stream) {
+        stream.getTracks().forEach(track => { track.stop(); track.enabled = false; });
+        document.getElementById('user-webcam').srcObject = null;
+    }
     
     // Release Lock
     setDoc(roomDocRef, {
@@ -556,16 +559,24 @@ function speakWithBrowserVoice(text, onAudioEnd) {
 }
 
 async function speakResponse(text) {
-    document.getElementById('subtitle-box').innerText = text;
+    let cleanText = text;
+    let isTerminated = false;
+    const termRegex = /\[INTERVIEW TERMINATED\]/ig;
+    if (termRegex.test(cleanText)) {
+        isTerminated = true;
+        cleanText = cleanText.replace(termRegex, "").trim();
+    }
+
+    document.getElementById('subtitle-box').innerText = cleanText;
     document.querySelector('.ai-video').classList.add('ai-speaking');
     
-    const lowerText = text.toLowerCase();
-    const isTimeUpOrEnding = secondsElapsed >= 600 || lowerText.includes("technical issue") || lowerText.includes("ending this interview") || lowerText.includes("wrap this up") || lowerText.includes("concludes our interview") || (hasTriggeredWrapUp && lowerText.includes("goodbye"));
+    const lowerText = cleanText.toLowerCase();
+    const isTimeUpOrEnding = isTerminated || secondsElapsed >= 600 || lowerText.includes("technical issue") || lowerText.includes("ending this interview") || lowerText.includes("wrap this up") || lowerText.includes("concludes our interview") || (hasTriggeredWrapUp && lowerText.includes("goodbye"));
 
     const onAudioEnd = () => {
         document.querySelector('.ai-video').classList.remove('ai-speaking');
         interviewMemory.push({ "role": "assistant", "content": text });
-        appendToTranscript('assistant', text); // Add AI message to Sidebar
+        appendToTranscript('assistant', cleanText); // Add clean text to Sidebar
         if (isInterviewActive) {
             // 🔥 AUTO-CUT CALL LOGIC 🔥
             if (isTimeUpOrEnding) {
@@ -578,7 +589,7 @@ async function speakResponse(text) {
     
     // 🔥 COMPLETELY REMOVED EXTERNAL HUGGING FACE LINKS 🔥
     // ALWAYS USE FAST NATIVE BROWSER VOICES
-    speakWithBrowserVoice(text, onAudioEnd);
+    speakWithBrowserVoice(cleanText, onAudioEnd);
 }
 // 🔥 AUTOMATIC HANDS-FREE MIC LOGIC 🔥
 function startAutoListening() {
@@ -590,9 +601,7 @@ function startAutoListening() {
 
     const helper = document.getElementById('mic-helper');
     if(helper) {
-        helper.innerText = "Click Mic to Send";
-        helper.classList.add('show');
-        setTimeout(() => helper.classList.remove('show'), 5000); // Hide after 5 seconds
+        helper.style.display = 'none'; // 🔥 Hide "Click Mic to Send" completely
     }
 
     updateMicUI(true);
