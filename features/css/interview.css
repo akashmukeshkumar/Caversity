@@ -13,6 +13,7 @@
             background-attachment: fixed;
             color: #0f172a;
             height: 100vh; display: flex; justify-content: center; align-items: center;
+            overflow: hidden; /* Prevent extra unwanted page scrollbars */
         }
 
         .screen-container {
@@ -187,6 +188,12 @@
             backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
         }
         
+        /* 🔥 BUG FIX: Hide broken image alt text (small 'Caversity') and stray black text */
+        .official-paper img, .room-branding img { color: transparent !important; }
+        .paper-header [style*="black"], .room-branding [style*="black"], .text-black {
+            display: none !important;
+        }
+        
         .official-paper::after {
             content: ''; position: absolute; top: 0; left: 0; 
             width: 100%; height: 8px; background: linear-gradient(90deg, #6366f1, #d946ef, #fb923c); z-index: 10;
@@ -216,6 +223,23 @@
 
         .spinner { width: 45px; height: 45px; border: 3px solid #e2e8f0; border-top: 3px solid #d946ef; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
         .loading-report p { color: #475569; font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-top: 20px; }
+        
+        /* --- DOWNLOAD PDF BUTTON --- */
+        .download-pdf-btn {
+            display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+            padding: 16px 36px; border-radius: 50px; border: none;
+            background: linear-gradient(135deg, #6366f1 0%, #d946ef 100%);
+            color: white; font-weight: 700; font-size: 14px; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 15px; box-shadow: 0 10px 25px rgba(217, 70, 239, 0.3);
+            letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+        }
+        .download-pdf-btn:hover {
+            transform: translateY(-3px); box-shadow: 0 15px 35px rgba(217, 70, 239, 0.4);
+        }
+        .download-pdf-btn-container {
+            text-align: center; margin-top: 45px; width: 100%;
+        }
 
         @media (max-width: 768px) {
             body, html { background-color: #ffffff; }
