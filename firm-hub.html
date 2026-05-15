@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CA Firm Intelligence Hub</title>
+    
+    <!-- 🔥 UNIVERSAL SECURITY LOCK 🔥 -->
+    <meta name="page-id" content="firm_hub">
+    <meta name="page-type" content="free">
+    <style id="page-lock">body { display: none !important; }</style>
+    <script type="module" src="security.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@400;600;800&display=swap');
+        
+        :root {
+            --bg-color: #0f172a;
+            --primary: #2563eb;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            background-image: radial-gradient(circle at 15% 20%, #152547 0%, transparent 50%), radial-gradient(circle at 85% 80%, #0f1c38 0%, transparent 50%);
+            color: white;
+            margin: 0; padding: 0; min-height: 100vh;
+        }
+
+        .hub-header { text-align: center; padding: 40px 20px 20px; }
+        .hub-header h1 { font-family: 'Poppins', sans-serif; font-size: 36px; margin: 0; color: #38bdf8; }
+        .hub-header p { color: #94a3b8; font-size: 15px; margin-top: 10px; max-width: 600px; margin-inline: auto; }
+
+        .main-container { max-width: 1000px; margin: 0 auto; padding: 0 20px 50px; }
+
+        /* --- MAIN TABS --- */
+        .master-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .m-tab {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8; padding: 12px 25px; border-radius: 50px;
+            cursor: pointer; font-weight: 600; font-family: 'Poppins', sans-serif;
+            transition: 0.3s; display: flex; align-items: center; gap: 8px; font-size: 14px;
+        }
+        .m-tab:hover { background: rgba(255,255,255,0.1); color: white; }
+        .m-tab.active { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 5px 15px rgba(37,99,235,0.4); }
+
+        /* --- SUB TABS (Tags) --- */
+        .tag-container { display: flex; width: fit-content; margin: 0 auto 25px auto; background: rgba(15, 23, 42, 0.6); padding: 6px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); gap: 5px; flex-wrap: wrap; justify-content: center; }
+        .tag { padding: 8px 20px; background: transparent; color: #94a3b8; border-radius: 50px; font-size: 13px; cursor: pointer; border: none; font-weight: 600; transition: 0.3s; }
+        .tag:hover { color: white; background: rgba(255,255,255,0.05); }
+        .tag.active { background: #10b981; color: white; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); }
+        .tag.hot-tag.active { background: #ef4444; color: white; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); }
+
+        /* --- SECTIONS --- */
+        .section-content { display: none; animation: fadeIn 0.4s ease; }
+        .section-content.active { display: block; }
+
+        /* --- DIRECTORY CSS --- */
+        .directory-controls { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+        .directory-controls select, .directory-controls input {
+            padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); background: rgba(15, 23, 42, 0.8); color: white; font-size: 15px; outline: none; flex: 1;
+        }
+        .dir-card { background: rgba(255, 255, 255, 0.95); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.15); margin-bottom: 20px; color: #1e293b; }
+        @media (min-width: 768px) { .dir-card { flex-direction: row; min-height: 300px; height: auto; } }
+        .dir-info { padding: 30px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .dir-info h3 { margin: 0 0 15px; color: #1e3a8a; font-size: 24px; font-family: 'Poppins'; }
+        .dir-detail { margin-bottom: 10px; font-size: 14px; color: #475569; display: flex; align-items: flex-start; gap: 10px; }
+        .dir-detail i { color: var(--primary); margin-top: 3px; width: 15px; }
+        .dir-map { flex: 1; background: #e2e8f0; min-height: 250px; }
+        .dir-map iframe { width: 100%; height: 100%; border: none; }
+
+        /* --- DEEP RESEARCH CSS --- */
+        .btn-research { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; border: 1px solid #8b5cf6; padding: 8px 15px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 15px; display: inline-flex; align-items: center; gap: 6px; width: fit-content; font-family: 'Inter', sans-serif;}
+        .btn-research:hover { background: #8b5cf6; color: white; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); }
+        .personnel-list { margin-top: 15px; display: flex; flex-direction: column; gap: 10px; }
+        .personnel-item { background: #f8fafc; border-left: 3px solid #8b5cf6; padding: 12px 15px; border-radius: 0 12px 12px 0; font-size: 13px; animation: fadeIn 0.4s ease; border: 1px solid #e2e8f0; border-left-width: 3px; }
+        .personnel-item strong { color: #1e293b; display: block; margin-bottom: 2px; font-size: 14px;}
+        .personnel-item span { color: #64748b; }
+        .personnel-item .contact { color: #2563eb; font-weight: 600; margin-top: 4px; display: block;}
+
+        /* --- TRACKER CSS --- */
+        .tracker-card { background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.15); color: #1e293b; }
+        .tracker-input { margin: 20px auto; padding: 15px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 16px; outline: none; width: 100%; max-width: 300px; display: block; }
+        .tracker-stats { display: flex; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap; }
+        .stat-box { background: #f8fafc; padding: 20px; border-radius: 15px; flex: 1; min-width: 150px; border: 1px solid #e2e8f0; }
+        .stat-box h4 { margin: 0; font-size: 36px; color: var(--primary); }
+        .stat-box p { margin: 5px 0 0; color: #64748b; font-size: 14px; font-weight: 600; text-transform: uppercase; }
+
+        /* --- SMART FILTERS AREA --- */
+        .smart-filters-container {
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 20px;
+            margin-bottom: 30px; display: none; /* Hidden on Hot tab */
+            animation: fadeIn 0.4s ease;
+        }
+        .smart-filters-container.show { display: flex; gap: 15px; flex-wrap: wrap; }
+        
+        .filter-group { flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 8px; }
+        .filter-group label { font-size: 12px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; padding-left: 5px; }
+        .filter-group select {
+            width: 100%; padding: 14px 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(15, 23, 42, 0.8); color: white; font-size: 14px; font-family: 'Inter', sans-serif;
+            outline: none; cursor: pointer; transition: 0.2s; appearance: none;
+        }
+        .filter-group select:focus { border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2); }
+        
+        /* --- FEED GRID --- */
+        .feed-grid { display: flex; flex-direction: column; gap: 20px; }
+        .feed-card {
+            background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 20px;
+            border-left: 5px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative; animation: fadeIn 0.4s ease; color: var(--text-dark);
+        }
+        .feed-card.type-ind { border-left-color: #f59e0b; }
+        .feed-card.type-hot { border-left-color: #ef4444; }
+        
+        .card-meta-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 10px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; }
+        
+        /* Auto-Extracted Badges */
+        .smart-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+        .badge-firm { background: #1e293b; color: white; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 50px; display: flex; align-items: center; gap: 5px; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .badge-city { background: #f1f5f9; color: #475569; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 50px; display: flex; align-items: center; gap: 5px; border: 1px solid #cbd5e1; }
+        .badge-type { font-size: 11px; font-weight: 800; padding: 5px 12px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; }
+        .b-ind { background: #fef3c7; color: #b45309; }
+        .b-fb { background: #dbeafe; color: #1e40af; }
+
+        .feed-date { font-weight: 600; color: var(--text-light); font-size: 13px; display: flex; align-items: center; gap: 6px; }
+        .feed-text { font-size: 15px; line-height: 1.7; white-space: pre-wrap; color: #334155; }
+
+        .loading-state { text-align: center; color: #38bdf8; padding: 40px; font-weight: 600; font-size: 16px; }
+        .empty-state { text-align: center; padding: 50px; background: rgba(255,255,255,0.05); border-radius: 20px; border: 1px dashed rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* --- QUICK APPLY BUTTON --- */
+        .quick-apply-btn { background: #e0f2fe; color: #2563eb; font-size: 11px; padding: 5px 12px; border-radius: 6px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; border: 1px solid #bae6fd; transition: 0.2s; margin-left: 10px; text-decoration: none; font-family: 'Inter', sans-serif; letter-spacing: 0.5px;}
+        .quick-apply-btn:hover { background: #2563eb; color: white; border-color: #2563eb; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3); transform: translateY(-1px);}
+        .quick-apply-btn i { font-size: 10px; }
+
+        /* --- EMAIL COMPOSER CSS --- */
+        .email-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 99999; align-items: center; justify-content: center; animation: fadeIn 0.3s ease; padding: 20px; box-sizing: border-box; }
+        .email-modal-overlay.active { display: flex; }
+        .email-card { background: white; width: 100%; max-width: 500px; padding: 30px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); color: #1e293b; }
+        .email-card h3 { margin: 0 0 10px 0; color: #1e3a8a; font-family: 'Poppins', sans-serif; display: flex; align-items: center; gap: 8px; }
+        .email-card p { font-size: 13px; color: #64748b; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 5px; text-transform: uppercase; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 14px; outline: none; box-sizing: border-box; background: #f8fafc; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #3b82f6; background: #ffffff; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .form-group textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
+        .attachment-warning { background: #fef3c7; color: #b45309; padding: 10px 15px; border-radius: 10px; font-size: 12px; font-weight: 600; display: flex; align-items: flex-start; gap: 8px; margin-bottom: 20px; border: 1px solid #fde68a; line-height: 1.4; }
+        .email-actions { display: flex; gap: 10px; }
+        .btn-em-cancel { flex: 1; padding: 12px; border: 1px solid #cbd5e1; background: transparent; color: #475569; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-em-cancel:hover { background: #f1f5f9; }
+        .btn-em-send { flex: 2; padding: 12px; border: none; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: white; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
+        .btn-em-send:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); }
+    </style>
+</head>
+<body>
+
+    <div class="hub-header">
+        <h1><i class="fas fa-brain"></i> Intelligence Hub</h1>
+        <p>Live, auto-extracted analytics from Pakistan's top CA induction groups.</p>
+    </div>
+
+    <div class="main-container">
+        
+        <!-- MAIN TABS -->
+        <div class="master-tabs">
+            <div class="m-tab active" onclick="switchMainTab('live', this)"><i class="fas fa-bolt"></i> Live Updates</div>
+            <div class="m-tab" onclick="switchMainTab('directory', this)"><i class="fas fa-building"></i> Firm Directory</div>
+            <div class="m-tab" onclick="switchMainTab('tracker', this)"><i class="fas fa-hourglass-half"></i> CA Tracker</div>
+        </div>
+
+        <!-- SECTION 1: LIVE UPDATES -->
+        <div id="live-section" class="section-content active">
+            
+            <!-- Sub Tabs (HOT / Inductions / Feedbacks) -->
+            <div class="tag-container">
+                <div class="tag hot-tag active" onclick="setLiveFilter('hot', this)">🔥 Hot (Last 48 Hrs)</div>
+                <div class="tag" onclick="setLiveFilter('Induction', this)">🚨 Inductions</div>
+                <div class="tag" onclick="setLiveFilter('Feedback', this)">🗣️ Feedbacks</div>
+            </div>
+
+            <!-- SMART FILTERS (Visible only on Induction/Feedback tabs) -->
+            <div class="smart-filters-container" id="smart-filters">
+                <div class="filter-group">
+                    <label>Filter By Firm</label>
+                    <select id="sel-firm" onchange="applyFilters()"><option value="All">All Firms</option></select>
+                </div>
+                <div class="filter-group">
+                    <label>Filter By City</label>
+                    <select id="sel-city" onchange="applyFilters()"><option value="All">All Cities</option></select>
+                </div>
+                <div class="filter-group">
+                    <label>Timeframe</label>
+                    <select id="sel-time" onchange="applyFilters()">
+                        <option value="all">All Time</option>
+                        <option value="7">Last 7 Days</option>
+                        <option value="14">Last 14 Days</option>
+                        <option value="30">Last 1 Month</option>
+                        <option value="60">Last 2 Months</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- FEED AREA -->
+            <div class="feed-grid" id="feed-container">
+                <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Fetching Live Intelligence...</div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: DIRECTORY -->
+        <div id="directory-section" class="section-content">
+            <div class="directory-controls">
+                <select id="dir-city" onchange="searchDirectory()">
+                    <option value="All">All Cities</option>
+                    <option value="Attock">Attock</option>
+                    <option value="Faisalabad">Faisalabad</option>
+                    <option value="Gujranwala">Gujranwala</option>
+                    <option value="Gujrat">Gujrat</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Islamabad">Islamabad</option>
+                    <option value="Karachi">Karachi</option>
+                    <option value="Khanewal">Khanewal</option>
+                    <option value="Lahore">Lahore</option>
+                    <option value="Mirpur (A.J.K)">Mirpur (A.J.K)</option>
+                    <option value="Multan">Multan</option>
+                    <option value="Peshawar">Peshawar</option>
+                    <option value="Quetta">Quetta</option>
+                    <option value="Rahim Yar Khan">Rahim Yar Khan</option>
+                    <option value="Rawalpindi">Rawalpindi</option>
+                    <option value="Sialkot">Sialkot</option>
+                    <option value="Swabi">Swabi</option>
+                    <option value="Toba Tek Singh">Toba Tek Singh</option>
+                    <option value="Wah Cantt">Wah Cantt</option>
+                </select>
+                <input type="text" id="dir-search" placeholder="Enter Firm Name..." onkeyup="searchDirectory()">
+            </div>
+            <div id="directory-container"></div>
+        </div>
+
+        <!-- SECTION 3: CA TRACKER -->
+        <div id="tracker-section" class="section-content">
+            <div class="tracker-card">
+                <h3 style="font-family:'Poppins'; font-size:24px; margin-top:0;">Track Your CA Journey</h3>
+                <p style="color:#64748b;">Enter the date you officially started CA (PRC/AFC/CAF registration).</p>
+                <input type="date" id="caStartDate" class="tracker-input" onchange="calculateJourney()">
+                
+                <div class="tracker-stats" id="tracker-results" style="display:none;">
+                    <div class="stat-box"><h4 id="stat-years">0</h4><p>Years Passed</p></div>
+                    <div class="stat-box"><h4 id="stat-months">0</h4><p>Total Months</p></div>
+                    <div class="stat-box"><h4 id="stat-attempts">0</h4><p>Est. Attempts Passed</p></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- QUICK EMAIL COMPOSER MODAL -->
+    <div id="email-composer" class="email-modal-overlay">
+        <div class="email-card">
+            <h3><i class="fas fa-paper-plane"></i> Quick Apply Generator</h3>
+            <p>We've drafted a professional email for you. Just fill in your details!</p>
+            
+            <input type="hidden" id="em-target" value="">
+            <input type="hidden" id="em-firm" value="">
+            <input type="hidden" id="em-person" value="">
+            
+            <div class="form-group">
+                <label>Your Full Name</label>
+                <input type="text" id="em-name" placeholder="E.g. Ali Hassan" onkeyup="updateEmailDraft()">
+            </div>
+            <div class="form-group">
+                <label>Your Current Status</label>
+                <select id="em-status" onchange="updateEmailDraft()">
+                    <option value="CAF Passed Student">CAF Passed Student</option>
+                    <option value="ACCA Affiliate">ACCA Affiliate</option>
+                    <option value="CA Finalist">CA Finalist</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Auto-Generated Cover Letter (You can edit this)</label>
+                <textarea id="em-body"></textarea>
+            </div>
+            
+            <div class="attachment-warning"><i class="fas fa-paperclip" style="margin-top:2px;"></i> Security Note: Your browser requires you to attach your CV manually after your Mail app opens.</div>
+            
+            <div class="email-actions">
+                <button class="btn-em-cancel" onclick="closeEmailComposer()">Cancel</button>
+                <button class="btn-em-send" onclick="triggerMailApp()"><i class="fab fa-google"></i> Open Mail App</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 🧠 THE BRAIN: SMART ALIAS EXTRACTION SYSTEM
+        // ==========================================
+        const FIRM_MAPPINGS = [
+            { id: "A.F. Ferguson (PwC)", aliases: ["ferguson", "aff", "pwc", "a.f. ferguson", "price waterhouse"] },
+            { id: "KPMG Taseer Hadi", aliases: ["kpmg", "taseer hadi"] },
+            { id: "EY Ford Rhodes", aliases: ["ey", "ernst & young", "ford rhodes", "ernst and young", "eyfr"] },
+            { id: "Yousuf Adil (Deloitte)", aliases: ["deloitte", "yousuf adil", "yousaf adil", "ya"] },
+            { id: "BDO Ebrahim", aliases: ["bdo", "ebrahim"] },
+            { id: "Grant Thornton", aliases: ["grant thornton", "gt", "gth"] },
+            { id: "Crowe Hussain Chaudhury", aliases: ["crowe", "hussain chaudhury"] },
+            { id: "RSM Awais Hyder", aliases: ["rsm", "awais hyder"] },
+            { id: "Baker Tilly", aliases: ["baker tilly", "mehmood idrees"] },
+            { id: "HLB Ijaz Tabussum", aliases: ["hlb", "ijaz tabussum", "ijaz tabassum"] },
+            { id: "Ilyas Saeed & Co", aliases: ["ilyas saeed", "isc"] },
+            { id: "Riaz Ahmad & Co", aliases: ["riaz ahmad", "rac"] },
+            { id: "BKR Ansari", aliases: ["bkr", "ansari"] },
+            { id: "UHY Hassan Naeem", aliases: ["uhy", "hassan naeem"] },
+            { id: "Muniff Ziauddin", aliases: ["muniff", "mz", "ziauddin"] },
+            { id: "Hameed Zahid & Co", aliases: ["hameed zahid", "hz & co"] },
+            { id: "Amir Alam Khan & Co", aliases: ["amir alam khan", "amir alam"] },
+            { id: "Tariq Abdul Ghani Maqbool", aliases: ["tagm", "tariq abdul ghani"] },
+            { id: "Fazal Mahmood & Co", aliases: ["fazal mahmood", "fazal mehmood"] },
+            { id: "Faruq Ali & Co", aliases: ["faruq ali", "farooq ali"] },
+            { id: "Parker Russell", aliases: ["parker russell"] },
+            { id: "Zahid Jamil & Co", aliases: ["zahid jamil"] }
+        ];
+
+        const CITY_MAPPINGS = [
+            { id: "Karachi", aliases: ["karachi", "khi"] },
+            { id: "Lahore", aliases: ["lahore", "lhr"] },
+            { id: "Islamabad", aliases: ["islamabad", "isb"] },
+            { id: "Faisalabad", aliases: ["faisalabad", "fsd"] },
+            { id: "Multan", aliases: ["multan", "mux"] },
+            { id: "Peshawar", aliases: ["peshawar", "pew"] }
+        ];
+
+        function extractMetadata(text) {
+            let lowerText = text.toLowerCase();
+            let firm = "Unspecified Firm";
+            let city = "Unspecified City";
+
+            // Find Firm
+            for (let f of FIRM_MAPPINGS) {
+                // Regex word boundary taake 'they' mein se 'ey' detect na ho!
+                if (f.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(lowerText))) {
+                    firm = f.id;
+                    break;
+                }
+            }
+
+            // 🔥 SMART FALLBACK AI LOGIC FOR UNKNOWN FIRMS 🔥
+            if (firm === "Unspecified Firm") {
+                const stopWords = ['to', 'at', 'in', 'for', 'from', 'with', 'by', 'the', 'a', 'an', 'is', 'was', 'of', 'any', 'top', 'good', 'best', 'my', 'our', 'their', 'firm', 'give', 'giving', 'has', 'have', 'had', 'got'];
+                
+                // 1. Catch generic "[Word] & Co" or "[Word] and Co"
+                let coMatch = text.match(/([a-zA-Z\s]+?)\s*(?:&|and)\s*co\b/i);
+                if (coMatch) {
+                    let words = coMatch[1].trim().split(/\s+/);
+                    let firmWords = words.slice(-3); // Last 3 words max
+                    while(firmWords.length > 0 && stopWords.includes(firmWords[0].toLowerCase())) firmWords.shift();
+                    if (firmWords.length > 0) firm = firmWords.join(" ").replace(/\b\w/g, l => l.toUpperCase()) + " & Co.";
+                }
+                
+                // 2. Catch generic "[Word] Chartered Accountants"
+                if (firm === "Unspecified Firm") {
+                    let caMatch = text.match(/([a-zA-Z\s]+?)\s+(?:chartered accountants?|ca firm)\b/i);
+                    if (caMatch && !caMatch[0].toLowerCase().includes("any ")) {
+                        let words = caMatch[1].trim().split(/\s+/);
+                        let firmWords = words.slice(-3);
+                        while(firmWords.length > 0 && stopWords.includes(firmWords[0].toLowerCase())) firmWords.shift();
+                        if (firmWords.length > 0 && firmWords.join(" ").length > 2) firm = firmWords.join(" ").replace(/\b\w/g, l => l.toUpperCase());
+                    }
+                }
+            }
+
+            // Find City
+            for (let c of CITY_MAPPINGS) {
+                if (c.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(lowerText))) {
+                    city = c.id;
+                    break;
+                }
+            }
+            return { firm, city };
+        }
+
+        // ==========================================
+        // 📡 FIREBASE & STATE MANAGEMENT
+        // ==========================================
+        const FIREBASE_URL = 'https://caversity-48b29-default-rtdb.firebaseio.com';
+        let allData = [];
+        let currentLiveType = 'hot'; // 'hot', 'Induction', 'Feedback'
+
+        async function loadFirebaseData() {
+            try {
+                let resInd = await fetch(`${FIREBASE_URL}/inductions.json`);
+                let dataInd = await resInd.json();
+                let arrInd = dataInd ? Object.values(dataInd).map(i => ({...i, type: 'Induction', ...extractMetadata(i.message)})) : [];
+
+                let resFb = await fetch(`${FIREBASE_URL}/feedbacks.json`);
+                let dataFb = await resFb.json();
+                let arrFb = dataFb ? Object.values(dataFb).map(i => ({...i, type: 'Feedback', ...extractMetadata(i.message)})) : [];
+
+                // Mix all, sort by newest first
+                allData = [...arrInd, ...arrFb].sort((a, b) => b.timestamp - a.timestamp);
+                
+                applyFilters(); // Initial render based on 'hot' tab
+            } catch (error) {
+                document.getElementById('feed-container').innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> Error loading intelligence data.</div>';
+            }
+        }
+
+        // ==========================================
+        // 🎛️ UI & FILTER LOGIC
+        // ==========================================
+
+        // 🔥 BULLETPROOF TIMESTAMP HELPER
+        function getValidDate(item) {
+            let dateObj;
+            let ts = parseInt(item.timestamp);
+            if (!isNaN(ts)) { dateObj = new Date(ts); } 
+            else if (item.time) { 
+                dateObj = new Date(item.time.replace(/ at /g, " ")); 
+                if (isNaN(dateObj.getTime())) dateObj = new Date(item.time.split(",")[0]);
+            }
+            if(!dateObj || isNaN(dateObj.getTime())) dateObj = new Date();
+            return dateObj;
+        }
+
+        function switchMainTab(tabId, el) {
+            document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.m-tab').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId + '-section').classList.add('active');
+            el.classList.add('active');
+        }
+
+        function setLiveFilter(type, el) {
+            currentLiveType = type;
+            
+            document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+
+            const filtersBox = document.getElementById('smart-filters');
+            if(type === 'hot') {
+                filtersBox.classList.remove('show');
+            } else {
+                filtersBox.classList.add('show');
+                updateDropdownsForCurrentTab();
+            }
+            
+            document.getElementById('sel-firm').value = 'All';
+            document.getElementById('sel-city').value = 'All';
+            document.getElementById('sel-time').value = 'all';
+
+            applyFilters();
+        }
+
+        function updateDropdownsForCurrentTab() {
+            let targetType = currentLiveType;
+            let relevantData = allData.filter(i => i.type === targetType || currentLiveType === 'hot');
+
+            // Get unique Firms and Cities that actually exist in this data
+            let firmsSet = new Set();
+            let citiesSet = new Set();
+            
+            relevantData.forEach(item => {
+                if(item.firm !== "Unspecified Firm") firmsSet.add(item.firm);
+                if(item.city !== "Unspecified City") citiesSet.add(item.city);
+            });
+
+            // Populate Firm Dropdown
+            const selFirm = document.getElementById('sel-firm');
+            selFirm.innerHTML = '<option value="All">All Firms</option>';
+            Array.from(firmsSet).sort().forEach(f => {
+                selFirm.innerHTML += `<option value="${f}">${f}</option>`;
+            });
+
+            // Populate City Dropdown
+            const selCity = document.getElementById('sel-city');
+            selCity.innerHTML = '<option value="All">All Cities</option>';
+            Array.from(citiesSet).sort().forEach(c => {
+                selCity.innerHTML += `<option value="${c}">${c}</option>`;
+            });
+        }
+
+        function applyFilters() {
+            const now = Date.now();
+            let filtered = [];
+
+            if(currentLiveType === 'hot') {
+                const FORTY_EIGHT_HRS = 48 * 60 * 60 * 1000;
+                filtered = allData.filter(item => (now - getValidDate(item).getTime()) <= FORTY_EIGHT_HRS);
+            } 
+            else {
+                const selFirm = document.getElementById('sel-firm').value;
+                const selCity = document.getElementById('sel-city').value;
+                const selTime = document.getElementById('sel-time').value;
+
+                filtered = allData.filter(item => {
+                    if(item.type !== currentLiveType) return false;
+                    
+                    // Match Firm
+                    if(selFirm !== 'All' && item.firm !== selFirm) return false;
+                    
+                    // Match City
+                    if(selCity !== 'All' && item.city !== selCity) return false;
+                    
+                    // Match Timeframe
+                    if(selTime !== 'all') {
+                        const daysInMs = parseInt(selTime) * 24 * 60 * 60 * 1000;
+                        if((now - item.timestamp) > daysInMs) return false;
+                    }
+                    
+                    return true;
+                });
+            }
+
+            renderData(filtered);
+        }
+
+        function renderData(dataToRender) {
+            const container = document.getElementById('feed-container');
+            container.innerHTML = '';
+            const now = Date.now();
+            const FORTY_EIGHT_HRS = 48 * 60 * 60 * 1000;
+
+            if(dataToRender.length === 0) {
+                if(currentLiveType === 'hot') {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-fire-extinguisher" style="font-size: 30px; margin-bottom: 10px; opacity: 0.5;"></i><br>
+                            Abhi koi live update nahi hai, jese hi hogi aapko show ho jayegi.
+                        </div>`;
+                } else {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-folder-open" style="font-size: 30px; margin-bottom: 10px; opacity: 0.5;"></i><br>
+                            No records found for the selected filters.<br>
+                            <small>Change your filters to see more results.</small>
+                        </div>`;
+                }
+                return;
+            }
+
+            dataToRender.forEach(item => {
+                
+                // 🔥 BULLETPROOF INVALID DATE FIX
+                let dateObj = getValidDate(item);
+                
+                let formattedDate = dateObj.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+                
+                let cardStyle = item.type === 'Induction' ? 'type-ind' : 'type-fb';
+                if(currentLiveType === 'hot') cardStyle = 'type-hot';
+
+                let typeBadgeClass = item.type === 'Induction' ? 'b-ind' : 'b-fb';
+                let typeIcon = item.type === 'Induction' ? '🚨' : '🗣️';
+
+                // Format WhatsApp Bold (*text*) and remove stray asterisks
+                let cleanMessage = item.message.replace(/\*([^*]+)\*/g, '<strong>$1</strong>').replace(/\*/g, '');
+
+                // UI Logic: Don't show "Unspecified" badges if we don't know them, keep it clean
+                let firmHtml = item.firm !== "Unspecified Firm" ? `<span class="badge-firm"><i class="far fa-building"></i> ${item.firm}</span>` : '';
+                let cityHtml = item.city !== "Unspecified City" ? `<span class="badge-city"><i class="fas fa-map-marker-alt"></i> ${item.city}</span>` : '';
+
+                container.innerHTML += `
+                    <div class="feed-card ${cardStyle}">
+                        <div class="card-meta-bar">
+                            <div class="smart-badges">
+                                <span class="badge-type ${typeBadgeClass}">${typeIcon} ${item.type}</span>
+                                ${firmHtml}
+                                ${cityHtml}
+                            </div>
+                            <span class="feed-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
+                        </div>
+                        <div class="feed-text">${cleanMessage}</div>
+                    </div>
+                `;
+            });
+        }
+
+        // ==========================================
+        // 🏢 FIRM DIRECTORY & AUTO-SAVE FIREBASE SYSTEM
+        // ==========================================
+        function sanitizeId(str) { return str.toLowerCase().replace(/[^a-z0-9]/g, '_'); }
+        
+        let firebaseFirms = [];
+
+        async function loadDirectoryData() {
+            // 1. Load Local JSON first
+            try {
+                let localRes = await fetch('/api/get-data?file=firms');
+                let result = await localRes.json();
+                let localFirms = JSON.parse(atob(result.payload));
+                if (localFirms && localFirms.length > 0) firebaseFirms = localFirms;
+            } catch(e) { 
+                console.warn("API firms fetch failed. Check your Vercel functions.", e); 
+            }
+
+            // 2. Load and merge Firebase live data
+            try {
+                let res = await fetch(`${FIREBASE_URL}/firms_directory.json`);
+                let data = await res.json();
+                if (data) {
+                    let dbFirms = Object.values(data);
+                    dbFirms.forEach(dbFirm => {
+                        // Filter duplicate firms
+                        let exists = firebaseFirms.some(f => f.name.toLowerCase() === dbFirm.name.toLowerCase() && f.city === dbFirm.city);
+                        if(!exists) firebaseFirms.push(dbFirm);
+                    });
+                }
+                searchDirectory(); // Re-render directory with new merged data
+            } catch(e) { console.error("Firebase Directory Load Error:", e); }
+        }
+
+        function searchDirectory() {
+            const city = document.getElementById('dir-city').value;
+            const rawQuery = document.getElementById('dir-search').value;
+            const query = rawQuery.toLowerCase().trim();
+            const container = document.getElementById('directory-container');
+            container.innerHTML = '';
+
+            const results = firebaseFirms.filter(firm => {
+                return (city === 'All' || firm.city === city) && (firm.name.toLowerCase().includes(query) || firm.address.toLowerCase().includes(query));
+            });
+
+            if(results.length === 0) {
+                if(query.length > 2) {
+                    // 🔥 SMART RADAR & FIREBASE AUTO-SAVE LOGIC 🔥
+                    let searchCity = city === 'All' ? 'Pakistan' : city;
+                    let fullCityStr = searchCity === 'Pakistan' ? 'Pakistan' : searchCity + ', Pakistan';
+                    let mapQuery = encodeURIComponent(`${rawQuery} Chartered Accountants, ${fullCityStr}`);
+                    let firmId = sanitizeId(newFirm.name + newFirm.city);
+                    
+                    let newFirm = {
+                        name: rawQuery.toUpperCase(),
+                        city: searchCity,
+                        address: "Auto-Detected via Live GPS Radar",
+                        phone: "N/A",
+                        email: ""
+                    };
+
+                    // Add to UI immediately and save to Firebase permanently
+                    firebaseFirms.push(newFirm);
+                    fetch(`${FIREBASE_URL}/firms_directory.json`, {
+                        method: 'POST',
+                        body: JSON.stringify(newFirm)
+                    }).catch(e => console.error(e));
+
+                    container.innerHTML = `
+                        <div style="background: rgba(16, 185, 129, 0.1); border: 1px dashed #10b981; padding: 15px; border-radius: 12px; margin-bottom: 20px; color: #cbd5e1; text-align: center; font-size: 14px;">
+                            <i class="fas fa-database" style="color: #10b981; margin-right: 5px;"></i> Firm not found in local DB. <strong>Auto-Detected via Live Radar & Saved to Database permanently!</strong> 👇
+                        </div>
+                        <div class="dir-card">
+                            <div class="dir-info">
+                                <h3>${newFirm.name}</h3>
+                                <div class="dir-detail"><i class="fas fa-map-marker-alt"></i> <span><strong>Location:</strong> ${fullCityStr} (${newFirm.address})</span></div>
+                                <div class="dir-detail"><i class="fas fa-info-circle"></i> <span>Phone/Email not verified in local database yet.</span></div>
+                                <button id="btn-${firmId}" class="btn-research" onclick="doDeepResearch('${newFirm.name}', '${newFirm.city}', '${firmId}')"><i class="fas fa-microchip"></i> Deep Research (Partners & HR)</button>
+                                <div id="res-${firmId}" class="personnel-list"></div>
+                            </div>
+                            <div class="dir-map"><iframe src="https://maps.google.com/maps?q=${mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
+                        </div>`;
+                } else {
+                    container.innerHTML = '<div style="color:#94a3b8; text-align:center; padding: 40px;"><i class="fas fa-search-location" style="font-size: 30px; margin-bottom: 15px; opacity: 0.5;"></i><br>Select a city or search any firm name to find its details.</div>';
+                }
+                return;
+            }
+
+            // Render Normal / Firebase Loaded Data
+            results.forEach(firm => {
+                let mapQuery = encodeURIComponent(`${firm.name}, ${firm.address}, ${firm.city}, Pakistan`);
+                let firmId = sanitizeId(firm.name + firm.city);
+                let phoneHtml = (firm.phone && firm.phone !== 'N/A') ? `<div class="dir-detail"><i class="fas fa-phone-alt"></i> <span>${firm.phone}</span></div>` : '';
+                
+                let emailHtml = '';
+                if (firm.email && firm.email !== 'N/A') {
+                    // Pick the first email if multiple exist
+                    let primaryEmail = firm.email.split(',')[0].trim();
+                    emailHtml = `<div class="dir-detail"><i class="fas fa-envelope"></i> <span><a href="mailto:${primaryEmail}" style="color:#2563eb; text-decoration:none;">${firm.email}</a></span></div>`;
+                }
+
+                container.innerHTML += `
+                    <div class="dir-card">
+                        <div class="dir-info">
+                            <h3>${firm.name}</h3>
+                            <div class="dir-detail"><i class="fas fa-map-marker-alt"></i> <span><strong>${firm.city}:</strong> ${firm.address}</span></div>
+                            ${phoneHtml}
+                            ${emailHtml}
+                            <button id="btn-${firmId}" class="btn-research" onclick="doDeepResearch('${firm.name}', '${firm.city}', '${firmId}')"><i class="fas fa-microchip"></i> Deep Research (Partners & HR)</button>
+                            <div id="res-${firmId}" class="personnel-list"></div>
+                        </div>
+                        <div class="dir-map"><iframe src="https://maps.google.com/maps?q=${mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
+                    </div>`;
+            });
+        }
+
+        // 🔥 THE DEEP RESEARCH ENGINE (GROQ + FIREBASE CACHE) 🔥
+        async function doDeepResearch(firmName, city, domId) {
+            const btn = document.getElementById('btn-' + domId);
+            const container = document.getElementById('res-' + domId);
+            
+            if(btn) btn.style.display = 'none'; // Hide button after click
+            container.innerHTML = '<div style="color:#8b5cf6; font-size:13px; font-weight:600; padding:10px;"><i class="fas fa-spinner fa-spin"></i> AI is extracting key personnel data...</div>';
+            
+            try {
+                // 1. Pehlay Firebase Cache check karein
+                let fbRes = await fetch(`${FIREBASE_URL}/firm_personnel/${domId}.json`);
+                let fbData = await fbRes.json();
+                
+                if (fbData && fbData.length > 0) {
+                    renderPersonnel(fbData, container, firmName);
+                    return;
+                }
+                
+                // 2. Agar Firebase mein nahi hai, tou GROQ AI ko Hit karein
+                const prompt = `You are a highly accurate corporate researcher. Find Key Personnel (Partners, Directors, HR Heads) and their DIRECT official email addresses for the CA Firm '${firmName}' located in '${city}', Pakistan. Return ONLY a valid JSON array of objects. Format: [{"name": "Person Name", "position": "Title", "contact": "email@address.com"}]. CRITICAL RULES: 1) NEVER return generic website links or URLs. 2) If exact email is unknown, return the general recruitment/HR email. 3) If absolutely no email is found, return "N/A" in contact. Maximum 3 results. NO markdown, ONLY valid JSON.`;
+                
+                const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                    method: "POST",
+                    headers: { "Authorization": "Bearer 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", "Content-Type": "application/json" },
+                    body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: [{ role: "system", content: prompt }], temperature: 0.2 })
+                });
+                
+                let groqData = await groqRes.json();
+                let rawJson = groqData.choices[0].message.content.replace(/```json/gi, '').replace(/```/g, '').trim();
+                let personnelData = JSON.parse(rawJson);
+                
+                // 3. Khufiya tareeqay se Firebase mein SAVE kar lein next time ke liye
+                await fetch(`${FIREBASE_URL}/firm_personnel/${domId}.json`, { method: 'PUT', body: JSON.stringify(personnelData) });
+                renderPersonnel(personnelData, container, firmName);
+                
+            } catch (e) {
+                console.error("Deep Research Error:", e);
+                container.innerHTML = '<div style="color:#ef4444; font-size:13px; font-weight:600;"><i class="fas fa-exclamation-triangle"></i> Research failed. Please refresh and try again.</div>';
+                if(btn) btn.style.display = 'inline-flex';
+            }
+        }
+
+        function renderPersonnel(data, container, firmName) {
+            if(!data || data.length === 0) { container.innerHTML = '<div style="font-size:13px; color:#64748b; font-weight:600;">No public personnel data found.</div>'; return; }
+            let html = '';
+            data.forEach(p => {
+                let contactHtml = '';
+                let cleanContact = p.contact ? p.contact.toLowerCase().trim() : '';
+                
+                if(cleanContact.includes('@') && !cleanContact.includes('http')) {
+                    contactHtml = `<span style="color:#475569;"><i class="fas fa-envelope"></i> ${p.contact}</span> <a href="javascript:void(0)" onclick="openEmailComposer('${p.contact}', '${firmName.replace(/'/g, "\\'")}', '${p.name.replace(/'/g, "\\'")}')" class="quick-apply-btn"><i class="fas fa-paper-plane"></i> Quick Apply</a>`;
+                } else if (cleanContact !== 'n/a' && cleanContact !== '') {
+                    contactHtml = `<span style="color:#475569;"><i class="fas fa-info-circle"></i> ${p.contact}</span>`;
+                } else {
+                    contactHtml = `<span style="color:#94a3b8; font-size:12px;">Email not available</span>`;
+                }
+                html += `<div class="personnel-item"><strong>${p.name}</strong><span>${p.position}</span><div class="contact" style="margin-top:8px; display:flex; align-items:center; flex-wrap:wrap; gap:5px;">${contactHtml}</div></div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // ==========================================
+        // ⏳ CA JOURNEY TRACKER
+        // ==========================================
+        function calculateJourney() {
+            const start = document.getElementById('caStartDate').value;
+            if(!start) return;
+            let m = (new Date().getFullYear() - new Date(start).getFullYear()) * 12 + new Date().getMonth() - new Date(start).getMonth();
+            if(m < 0) m = 0;
+            document.getElementById('stat-years').innerText = (m/12).toFixed(1);
+            document.getElementById('stat-months').innerText = m;
+            document.getElementById('stat-attempts').innerText = Math.floor(m/6);
+            document.getElementById('tracker-results').style.display = 'flex';
+        }
+
+        // Init
+        window.onload = () => { loadFirebaseData(); loadDirectoryData(); };
+
+        // ==========================================
+        // 📧 SMART EMAIL COMPOSER LOGIC
+        // ==========================================
+        function openEmailComposer(email, firmName, personName = "") {
+            document.getElementById('em-target').value = email;
+            document.getElementById('em-firm').value = firmName;
+            document.getElementById('em-person').value = personName;
+            document.getElementById('em-name').value = '';
+            updateEmailDraft();
+            document.getElementById('email-composer').classList.add('active');
+        }
+
+        function closeEmailComposer() {
+            document.getElementById('email-composer').classList.remove('active');
+        }
+
+        function updateEmailDraft() {
+            let name = document.getElementById('em-name').value.trim() || "[Your Name]";
+            let status = document.getElementById('em-status').value;
+            let firm = document.getElementById('em-firm').value;
+            let person = document.getElementById('em-person').value;
+            
+            let greeting = (person && person.toLowerCase() !== 'hr department') ? `Dear ${person},` : `Dear Hiring Team at ${firm},`;
+            
+            let draft = `${greeting}\n\nI am writing to express my interest in joining your esteemed firm as an Audit Trainee. I am a highly motivated ${status} with a strong foundation in accounting, auditing, and corporate laws.\n\nI have attached my updated resume for your consideration. I am eager to bring my dedication and skills to ${firm} and would welcome the opportunity for an interview.\n\nLooking forward to hearing from you.\n\nBest regards,\n${name}\n\n--\n(Sent via Caversity Platform)`;
+            document.getElementById('em-body').value = draft;
+        }
+
+        function triggerMailApp() {
+            let email = document.getElementById('em-target').value;
+            let name = document.getElementById('em-name').value.trim() || "Candidate";
+            let subject = encodeURIComponent(`Application for Audit Trainee - ${name}`);
+            let body = encodeURIComponent(document.getElementById('em-body').value);
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+            closeEmailComposer();
+        }
+    </script>
+</body>
+</html>
