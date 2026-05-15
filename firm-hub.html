@@ -830,15 +830,48 @@
         // ==========================================
         // ⏳ CA JOURNEY TRACKER
         // ==========================================
+        let motivationAudio = new Audio('features/assets/motivate.mp3');
+
         function calculateJourney() {
             const start = document.getElementById('caStartDate').value;
             if(!start) return;
             let m = (new Date().getFullYear() - new Date(start).getFullYear()) * 12 + new Date().getMonth() - new Date(start).getMonth();
             if(m < 0) m = 0;
+            let attempts = Math.floor(m/6);
             document.getElementById('stat-years').innerText = (m/12).toFixed(1);
             document.getElementById('stat-months').innerText = m;
-            document.getElementById('stat-attempts').innerText = Math.floor(m/6);
+            document.getElementById('stat-attempts').innerText = attempts;
             document.getElementById('tracker-results').style.display = 'flex';
+
+            if (attempts > 6) {
+                setTimeout(() => { document.getElementById('motivate-toast').classList.add('show'); }, 1500);
+            } else {
+                document.getElementById('motivate-toast').classList.remove('show');
+            }
+        }
+
+        function playMotivation() {
+            const inner = document.getElementById('toast-inner');
+            if (inner.classList.contains('flipped')) return; // Prevent double click
+            inner.classList.add('flipped');
+            
+            let timeLeft = 5;
+            document.getElementById('motivate-timer').innerText = timeLeft;
+            
+            let timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('motivate-timer').innerText = timeLeft;
+                if(timeLeft <= 0) {
+                    clearInterval(timer);
+                    document.getElementById('motivate-timer').innerHTML = '<i class="fas fa-volume-up pulse-audio-icon"></i>';
+                    motivationAudio.play().catch(e => console.log("Audio play error:", e));
+                    
+                    motivationAudio.onended = () => {
+                        document.getElementById('motivate-toast').classList.remove('show');
+                        setTimeout(() => { inner.classList.remove('flipped'); }, 1000); // Reset flip for future
+                    };
+                }
+            }, 1000);
         }
 
         // Init
