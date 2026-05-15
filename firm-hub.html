@@ -161,10 +161,11 @@
         .btn-em-send:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); }
 
 /* --- MOTIVATION EASTER EGG CSS --- */
-        .motivate-wrapper {
+      .motivate-wrapper {
             position: fixed;
             bottom: -200px; /* Hidden by default */
-            right: 30px;
+            left: 50%; /* NEW: Move to center */
+            transform: translateX(-50%); /* NEW: Perfectly center align */
             width: 300px;
             height: 150px;
             perspective: 1000px;
@@ -897,10 +898,12 @@
             container.innerHTML = html;
         }
 
-       // ==========================================
+      // ==========================================
         // ⏳ CA JOURNEY TRACKER & EASTER EGG
         // ==========================================
-        let motivationTriggered = false; // Taake bar bar trigger na ho
+        let motivationTimeout;
+        let motivationTriggered = false;
+        let countdownTimer;
 
         function calculateJourney() {
             const start = document.getElementById('caStartDate').value;
@@ -915,12 +918,32 @@
             document.getElementById('stat-attempts').innerText = attempts;
             document.getElementById('tracker-results').style.display = 'flex';
 
-            // 🔥 LOGIC: 6 ya zada attempts pe card slide hoga 🔥
-            if (attempts >= 6 && !motivationTriggered) {
-                motivationTriggered = true; // Taake aik hi dafa chale
-                setTimeout(() => {
-                    document.getElementById('motivate-popup').classList.add('show');
-                }, 800); // Thora sa delay de kar smooth entry
+            const popup = document.getElementById('motivate-popup');
+            const inner = document.getElementById('motivate-inner');
+            const audio = document.getElementById('motivate-audio');
+
+            // Agar user bar bar date change kar raha hai, tou pehle wala timer cancel kar do
+            clearTimeout(motivationTimeout);
+
+            // 🔥 LOGIC: 6 ya zada attempts pe card 1.5 sec delay ke baad slide hoga 🔥
+            if (attempts >= 6) {
+                if (!motivationTriggered) {
+                    motivationTimeout = setTimeout(() => {
+                        popup.classList.add('show');
+                        motivationTriggered = true; // Mark as triggered taake bar bar na aye
+                    }, 1500); // 1.5 seconds ka delay
+                }
+            } else {
+                // 🔥 LOGIC: Agar attempts 6 se kam hain (date theek kar li), tou sab ghaaib karo 🔥
+                popup.classList.remove('show');
+                motivationTriggered = false; // Reset
+                
+                // Card ko wapis seedha karo, timer roko, aur audio band karo
+                inner.classList.remove('flipped');
+                clearInterval(countdownTimer);
+                document.getElementById('motivate-timer').innerText = '5';
+                audio.pause();
+                audio.currentTime = 0; // Audio wapis start pe lay aao
             }
         }
 
@@ -932,14 +955,15 @@
             
             let timeLeft = 5;
             const timerEl = document.getElementById('motivate-timer');
+            timerEl.innerText = timeLeft; // Update UI immediately
             
             // 5 second ka countdown
-            let countdown = setInterval(() => {
+            countdownTimer = setInterval(() => {
                 timeLeft--;
                 timerEl.innerText = timeLeft;
                 
                 if (timeLeft <= 0) {
-                    clearInterval(countdown);
+                    clearInterval(countdownTimer);
                     timerEl.innerHTML = '<i class="fas fa-headphones" style="animation: pulseAudio 1.5s infinite;"></i>';
                     playMotivateAudio(); // Timer khatam hone pe play
                 }
@@ -953,14 +977,11 @@
             // Jab audio khtam ho jaye, card ko neechay wapis bhaij do
             audio.onended = () => {
                 document.getElementById('motivate-popup').classList.remove('show');
+                document.getElementById('motivate-inner').classList.remove('flipped'); // Reset for next time
+                document.getElementById('motivate-timer').innerText = '5';
+                motivationTriggered = false; // Allow it to happen again later if needed
             };
         }
-
-        // Init
-        window.onload = async () => { 
-            await loadDirectoryData(); // MUST LOAD 400+ FIRMS DB FIRST
-            await loadFirebaseData();  // THEN EXTRACT FEED WITH FULL AI BRAIN
-        };
 
         // ==========================================
         // 📧 SMART EMAIL COMPOSER LOGIC
