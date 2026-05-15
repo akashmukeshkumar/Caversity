@@ -207,10 +207,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         let focusBtn = document.getElementById("focus-mode-btn");
+        
+        // 🔥 Professional styles to match Sign Out button exactly 🔥
+        const defaultStyle = "background: rgba(255, 255, 255, 0.9); color: #334155; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 10px 18px; cursor: pointer; transition: all 0.3s ease; margin-right: 15px; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: inline-flex; align-items: center; justify-content: center;";
+        const activeStyle = "background: #e0f2fe; color: #0284c7; border: 1px solid #7dd3fc; border-radius: 50px; padding: 10px 18px; cursor: pointer; transition: all 0.3s ease; margin-right: 15px; font-size: 16px; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3); display: inline-flex; align-items: center; justify-content: center;";
+
         if (!focusBtn) {
             focusBtn = document.createElement('button');
             focusBtn.id = "focus-mode-btn";
             focusBtn.style.cssText = "background: rgba(255, 255, 255, 0.92); color: #115e59; border: 1px solid rgba(15, 118, 110, 0.22); border-radius: 50px; padding: 8px 15px; cursor: pointer; transition: all 0.3s ease; margin-right: 10px; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: inline-flex; align-items: center; justify-content: center;";
+            focusBtn.style.cssText = defaultStyle;
             focusBtn.innerHTML = '<i class="fas fa-headphones"></i>';
             // Injects exactly to the left of Sign Out button
             signOutBtn.parentNode.insertBefore(focusBtn, signOutBtn);
@@ -231,12 +237,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 focusBtn.style.background = "#e8f5f3";
                 focusBtn.style.color = "#0f766e";
                 focusBtn.style.borderColor = "#0f766e";
+                focusBtn.style.cssText = activeStyle;
                 focusBtn.innerHTML = '<i class="fas fa-headphones" style="animation: pulseHeadphone 1.5s infinite;"></i>';
             } else {
                 focusAudio.pause();
                 focusBtn.style.background = "rgba(255, 255, 255, 0.92)";
                 focusBtn.style.color = "#115e59";
                 focusBtn.style.borderColor = "rgba(15, 118, 110, 0.22)";
+                focusBtn.style.cssText = defaultStyle;
                 focusBtn.innerHTML = '<i class="fas fa-headphones"></i>';
             }
         });
