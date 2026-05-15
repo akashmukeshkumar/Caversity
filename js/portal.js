@@ -195,26 +195,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 🔥 FOCUS MODE MUSIC LOGIC (Moved from Resume Builder) 🔥
-    const focusBtn = document.getElementById("focus-mode-btn");
-    const focusAudio = document.getElementById("focus-audio");
+   // 🔥 CLEAN FOCUS MODE LOGIC 🔥
+    const focusBtn = document.getElementById('focus-mode-btn');
+    const focusAudio = document.getElementById('focus-audio');
+
     if (focusBtn && focusAudio) {
-        focusAudio.volume = 0.25; // 25% volume for smooth lo-fi vibe
-        focusBtn.addEventListener("click", () => {
+        focusAudio.volume = 0.25; // Volume set to 25% for background focus
+        
+        focusBtn.addEventListener('click', () => {
             if (focusAudio.paused) {
-                focusAudio.play();
-                focusBtn.style.background = "#e8f5f3";
-                focusBtn.style.color = "#0f766e";
-                focusBtn.style.borderColor = "#0f766e";
-                focusBtn.innerHTML = '<i class="fas fa-headphones"></i>';
-                focusBtn.title = "Pause Focus Mode";
+                focusAudio.play().catch(e => console.error("Audio Error:", e));
+                focusBtn.classList.add('playing');
             } else {
                 focusAudio.pause();
-                focusBtn.style.background = "rgba(255, 255, 255, 0.92)";
-                focusBtn.style.color = "#115e59";
-                focusBtn.style.borderColor = "rgba(15, 118, 110, 0.22)";
-                focusBtn.innerHTML = '<i class="fas fa-headphones"></i>';
-                focusBtn.title = "Enable Focus Mode";
+                focusBtn.classList.remove('playing');
             }
         });
     }
