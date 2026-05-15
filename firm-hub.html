@@ -331,7 +331,8 @@
             { id: "Parker Russell", aliases: ["parker russell"] },
             { id: "Zahid Jamil & Co", aliases: ["zahid jamil"] },
             { id: "Rahman Sarfaraz Rahim Iqbal Rafiq", aliases: ["rahman sarfaraz", "rahman sarfraz", "rsrir", "rsririr"] },
-            { id: "Axiom World", aliases: ["axiom world", "axiom"] }
+            { id: "Axiom World", aliases: ["axiom world", "axiom"] },
+            { id: "Reanda Haroon Zakaria", aliases: ["reanda", "reanda haroon", "haroon zakaria"] }
         ];
 
         const CITY_MAPPINGS = [
@@ -362,6 +363,18 @@
                 if (f.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(lowerText))) {
                     firm = f.id;
                     break;
+                }
+            }
+
+            // 2. Try Loaded Directory Data (Match from 400+ Database Firms)
+            if (firm === "Unspecified Firm" && typeof firebaseFirms !== 'undefined' && firebaseFirms.length > 0) {
+                let sortedFirms = [...firebaseFirms].sort((a,b) => b.name.length - a.name.length);
+                for (let f of sortedFirms) {
+                    let cleanName = f.name.toLowerCase().replace(/ \(\w+\)$/, '').replace(/ & co\.?/gi, '').replace(/chartered accountants?/gi, '').replace(/associates/gi, '').trim();
+                    if (cleanName.length > 4 && lowerText.includes(cleanName)) {
+                        firm = f.name;
+                        break;
+                    }
                 }
             }
 
@@ -414,9 +427,9 @@
                     let msgLow = i.message.toLowerCase();
                     
                     // 🔥 SMART AI CLASSIFIER: Is it an actual Feedback or just a Call Notification?
-                    let isShort = i.message.length < 250;
-                    let isCallNotify = (msgLow.includes("received") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
-                    let isTestNotify = msgLow.includes("test") || msgLow.includes("system") || msgLow.includes("shortlist") || msgLow.includes("schedule");
+                    let isShort = i.message.length < 300; // Increased length tolerance slightly
+                    let isCallNotify = (msgLow.includes("received") || msgLow.includes("recieved") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
+                    let isTestNotify = msgLow.includes("test") || msgLow.includes("system") || msgLow.includes("shortlist") || msgLow.includes("schedule") || msgLow.includes("scheduled");
                     
                     if (isShort && (isCallNotify || isTestNotify)) type = 'Call Alert';
                     
