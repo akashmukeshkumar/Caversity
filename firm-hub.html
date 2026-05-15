@@ -322,7 +322,9 @@
             { id: "Fazal Mahmood & Co", aliases: ["fazal mahmood", "fazal mehmood"] },
             { id: "Faruq Ali & Co", aliases: ["faruq ali", "farooq ali"] },
             { id: "Parker Russell", aliases: ["parker russell"] },
-            { id: "Zahid Jamil & Co", aliases: ["zahid jamil"] }
+            { id: "Zahid Jamil & Co", aliases: ["zahid jamil"] },
+            { id: "Rahman Sarfaraz Rahim Iqbal Rafiq", aliases: ["rahman sarfaraz", "rahman sarfraz", "rsrir", "rsririr"] },
+            { id: "Axiom World", aliases: ["axiom world", "axiom"] }
         ];
 
         const CITY_MAPPINGS = [
@@ -338,6 +340,14 @@
             let lowerText = text.toLowerCase();
             let firm = "Unspecified Firm";
             let city = "Unspecified City";
+
+            // 0. Find City First (Helps in clean extraction)
+            for (let c of CITY_MAPPINGS) {
+                if (c.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(lowerText))) {
+                    city = c.id;
+                    break;
+                }
+            }
 
             // Find Firm
             for (let f of FIRM_MAPPINGS) {
@@ -361,9 +371,9 @@
                     if (firmWords.length > 0) firm = firmWords.join(" ").replace(/\b\w/g, l => l.toUpperCase()) + " & Co.";
                 }
                 
-                // 2. Catch generic "[Word] Chartered Accountants"
+                // 3c. Catch generic "[Word] Chartered Accountants"
                 if (firm === "Unspecified Firm") {
-                    let caMatch = text.match(/([a-zA-Z\s]+?)\s+(?:chartered accountants?|ca firm)\b/i);
+                    let caMatch = text.match(/([a-zA-Z\s]+?)\s*(?:chartered\s*accountants?|ca\s*firm)/i);
                     if (caMatch && !caMatch[0].toLowerCase().includes("any ")) {
                         let words = caMatch[1].trim().split(/\s+/);
                         let firmWords = words.slice(-3);
@@ -373,13 +383,6 @@
                 }
             }
 
-            // Find City
-            for (let c of CITY_MAPPINGS) {
-                if (c.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(lowerText))) {
-                    city = c.id;
-                    break;
-                }
-            }
             return { firm, city };
         }
 
@@ -799,7 +802,10 @@
         }
 
         // Init
-        window.onload = () => { loadFirebaseData(); loadDirectoryData(); };
+        window.onload = async () => { 
+            await loadDirectoryData(); // MUST LOAD 400+ FIRMS DB FIRST
+            await loadFirebaseData();  // THEN EXTRACT FEED WITH FULL AI BRAIN
+        };
 
         // ==========================================
         // 📧 SMART EMAIL COMPOSER LOGIC
