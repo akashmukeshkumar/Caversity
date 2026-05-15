@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CA Firm Intelligence Hub</title>
     
-    <!-- 🔥 UNIVERSAL SECURITY LOCK 🔥 -->
     <meta name="page-id" content="firm_hub">
     <meta name="page-type" content="free">
     <style id="page-lock">body { display: none !important; }</style>
@@ -160,12 +159,12 @@
         .btn-em-send { flex: 2; padding: 12px; border: none; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: white; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
         .btn-em-send:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); }
 
-/* --- MOTIVATION EASTER EGG CSS --- */
-      .motivate-wrapper {
+        /* --- MOTIVATION EASTER EGG CSS --- */
+        .motivate-wrapper {
             position: fixed;
             bottom: -200px; /* Hidden by default */
             left: 50%; /* NEW: Move to center */
-            transform: translateX(-50%); /* NEW: Perfectly center align */
+            transform: translateX(-50%); /* Perfectly center align */
             width: 300px;
             height: 150px;
             perspective: 1000px;
@@ -222,7 +221,6 @@
             50% { transform: scale(1.2); }
             100% { transform: scale(1); }
         }
-        
     </style>
 </head>
 <body>
@@ -234,17 +232,14 @@
 
     <div class="main-container">
         
-        <!-- MAIN TABS -->
         <div class="master-tabs">
             <div class="m-tab active" onclick="switchMainTab('live', this)"><i class="fas fa-bolt"></i> Live Updates</div>
             <div class="m-tab" onclick="switchMainTab('directory', this)"><i class="fas fa-building"></i> Firm Directory</div>
             <div class="m-tab" onclick="switchMainTab('tracker', this)"><i class="fas fa-hourglass-half"></i> CA Tracker</div>
         </div>
 
-        <!-- SECTION 1: LIVE UPDATES -->
         <div id="live-section" class="section-content active">
             
-            <!-- Sub Tabs (HOT / Inductions / Feedbacks) -->
             <div class="tag-container">
                 <div class="tag hot-tag active" onclick="setLiveFilter('hot', this)">🔥 Hot (Last 48 Hrs)</div>
                 <div class="tag" onclick="setLiveFilter('Induction', this)">🚨 Inductions</div>
@@ -252,7 +247,6 @@
                 <div class="tag" onclick="setLiveFilter('Call Alert', this)">📞 Call Alerts</div>
             </div>
 
-            <!-- SMART FILTERS (Visible only on Induction/Feedback tabs) -->
             <div class="smart-filters-container" id="smart-filters">
                 <div class="filter-group">
                     <label>Filter By Firm</label>
@@ -274,13 +268,11 @@
                 </div>
             </div>
 
-            <!-- FEED AREA -->
             <div class="feed-grid" id="feed-container">
                 <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Fetching Live Intelligence...</div>
             </div>
         </div>
 
-        <!-- SECTION 2: DIRECTORY -->
         <div id="directory-section" class="section-content">
             <div class="directory-controls">
                 <select id="dir-city" onchange="searchDirectory()">
@@ -310,7 +302,6 @@
             <div id="directory-container"></div>
         </div>
 
-        <!-- SECTION 3: CA TRACKER -->
         <div id="tracker-section" class="section-content">
             <div class="tracker-card">
                 <h3 style="font-family:'Poppins'; font-size:24px; margin-top:0;">Track Your CA Journey</h3>
@@ -327,7 +318,7 @@
 
     </div>
 
-<audio id="motivate-audio" src="features/assets/motivate.mp3"></audio>
+    <audio id="motivate-audio" src="features/assets/motivate.mp3"></audio>
     <div id="motivate-popup" class="motivate-wrapper">
         <div class="motivate-inner" id="motivate-inner">
             <div class="motivate-front" onclick="startMotivation()">
@@ -341,7 +332,7 @@
             </div>
         </div>
     </div>
-    <!-- QUICK EMAIL COMPOSER MODAL -->
+
     <div id="email-composer" class="email-modal-overlay">
         <div class="email-card">
             <h3><i class="fas fa-paper-plane"></i> Quick Apply Generator</h3>
@@ -427,7 +418,6 @@
             let firm = "Unspecified Firm";
             let city = "Unspecified City";
 
-            // 0. Find City First (Helps in clean extraction)
             for (let c of CITY_MAPPINGS) {
                 if (c.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(lowerText))) {
                     city = c.id;
@@ -435,16 +425,13 @@
                 }
             }
 
-            // Find Firm
             for (let f of FIRM_MAPPINGS) {
-                // Regex word boundary taake 'they' mein se 'ey' detect na ho!
                 if (f.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(lowerText))) {
                     firm = f.id;
                     break;
                 }
             }
 
-            // 2. Try Loaded Directory Data (Match from 400+ Database Firms)
             if (firm === "Unspecified Firm" && typeof firebaseFirms !== 'undefined' && firebaseFirms.length > 0) {
                 let sortedFirms = [...firebaseFirms].sort((a,b) => b.name.length - a.name.length);
                 for (let f of sortedFirms) {
@@ -456,20 +443,17 @@
                 }
             }
 
-            // 🔥 SMART FALLBACK AI LOGIC FOR UNKNOWN FIRMS 🔥
             if (firm === "Unspecified Firm") {
                 const stopWords = ['to', 'at', 'in', 'for', 'from', 'with', 'by', 'the', 'a', 'an', 'is', 'was', 'of', 'any', 'top', 'good', 'best', 'my', 'our', 'their', 'firm', 'give', 'giving', 'has', 'have', 'had', 'got'];
                 
-                // 1. Catch generic "[Word] & Co" or "[Word] and Co"
                 let coMatch = text.match(/([a-zA-Z\s]+?)\s*(?:&|and)\s*co\b/i);
                 if (coMatch) {
                     let words = coMatch[1].trim().split(/\s+/);
-                    let firmWords = words.slice(-3); // Last 3 words max
+                    let firmWords = words.slice(-3);
                     while(firmWords.length > 0 && stopWords.includes(firmWords[0].toLowerCase())) firmWords.shift();
                     if (firmWords.length > 0) firm = firmWords.join(" ").replace(/\b\w/g, l => l.toUpperCase()) + " & Co.";
                 }
                 
-                // 3c. Catch generic "[Word] Chartered Accountants"
                 if (firm === "Unspecified Firm") {
                     let caMatch = text.match(/([a-zA-Z\s]+?)\s*(?:chartered\s*accountants?|ca\s*firm)/i);
                     if (caMatch && !caMatch[0].toLowerCase().includes("any ")) {
@@ -480,7 +464,6 @@
                     }
                 }
             }
-
             return { firm, city };
         }
 
@@ -489,7 +472,7 @@
         // ==========================================
         const FIREBASE_URL = 'https://caversity-48b29-default-rtdb.firebaseio.com';
         let allData = [];
-        let currentLiveType = 'hot'; // 'hot', 'Induction', 'Feedback'
+        let currentLiveType = 'hot'; 
 
         async function loadFirebaseData() {
             try {
@@ -504,20 +487,16 @@
                     let type = 'Feedback';
                     let msgLow = i.message.toLowerCase();
                     
-                    // 🔥 SMART AI CLASSIFIER: Is it an actual Feedback or just a Call Notification?
-                    let isShort = i.message.length < 300; // Increased length tolerance slightly
+                    let isShort = i.message.length < 300; 
                     let isCallNotify = (msgLow.includes("received") || msgLow.includes("recieved") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
                     let isTestNotify = msgLow.includes("test") || msgLow.includes("system") || msgLow.includes("shortlist") || msgLow.includes("schedule") || msgLow.includes("scheduled");
                     
                     if (isShort && (isCallNotify || isTestNotify)) type = 'Call Alert';
-                    
                     return {...i, type: type, ...meta};
                 }) : [];
 
-                // Mix all, sort by newest first
                 allData = [...arrInd, ...arrFb].sort((a, b) => b.timestamp - a.timestamp);
-                
-                applyFilters(); // Initial render based on 'hot' tab
+                applyFilters(); 
             } catch (error) {
                 document.getElementById('feed-container').innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> Error loading intelligence data.</div>';
             }
@@ -526,8 +505,6 @@
         // ==========================================
         // 🎛️ UI & FILTER LOGIC
         // ==========================================
-
-        // 🔥 BULLETPROOF TIMESTAMP HELPER
         function getValidDate(item) {
             let dateObj;
             let ts = parseInt(item.timestamp);
@@ -543,14 +520,12 @@
         function switchMainTab(tabId, el) {
             document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
             document.querySelectorAll('.m-tab').forEach(btn => btn.classList.remove('active'));
-            
             document.getElementById(tabId + '-section').classList.add('active');
             el.classList.add('active');
         }
 
         function setLiveFilter(type, el) {
             currentLiveType = type;
-            
             document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
             el.classList.add('active');
 
@@ -565,7 +540,6 @@
             document.getElementById('sel-firm').value = 'All';
             document.getElementById('sel-city').value = 'All';
             document.getElementById('sel-time').value = 'all';
-
             applyFilters();
         }
 
@@ -573,7 +547,6 @@
             let targetType = currentLiveType;
             let relevantData = allData.filter(i => i.type === targetType || currentLiveType === 'hot');
 
-            // Get unique Firms and Cities that actually exist in this data
             let firmsSet = new Set();
             let citiesSet = new Set();
             
@@ -582,19 +555,13 @@
                 if(item.city !== "Unspecified City") citiesSet.add(item.city);
             });
 
-            // Populate Firm Dropdown
             const selFirm = document.getElementById('sel-firm');
             selFirm.innerHTML = '<option value="All">All Firms</option>';
-            Array.from(firmsSet).sort().forEach(f => {
-                selFirm.innerHTML += `<option value="${f}">${f}</option>`;
-            });
+            Array.from(firmsSet).sort().forEach(f => { selFirm.innerHTML += `<option value="${f}">${f}</option>`; });
 
-            // Populate City Dropdown
             const selCity = document.getElementById('sel-city');
             selCity.innerHTML = '<option value="All">All Cities</option>';
-            Array.from(citiesSet).sort().forEach(c => {
-                selCity.innerHTML += `<option value="${c}">${c}</option>`;
-            });
+            Array.from(citiesSet).sort().forEach(c => { selCity.innerHTML += `<option value="${c}">${c}</option>`; });
         }
 
         function applyFilters() {
@@ -604,63 +571,40 @@
             if(currentLiveType === 'hot') {
                 const FORTY_EIGHT_HRS = 48 * 60 * 60 * 1000;
                 filtered = allData.filter(item => (now - getValidDate(item).getTime()) <= FORTY_EIGHT_HRS);
-            } 
-            else {
+            } else {
                 const selFirm = document.getElementById('sel-firm').value;
                 const selCity = document.getElementById('sel-city').value;
                 const selTime = document.getElementById('sel-time').value;
 
                 filtered = allData.filter(item => {
                     if(item.type !== currentLiveType) return false;
-                    
-                    // Match Firm
                     if(selFirm !== 'All' && item.firm !== selFirm) return false;
-                    
-                    // Match City
                     if(selCity !== 'All' && item.city !== selCity) return false;
-                    
-                    // Match Timeframe
                     if(selTime !== 'all') {
                         const daysInMs = parseInt(selTime) * 24 * 60 * 60 * 1000;
                         if((now - item.timestamp) > daysInMs) return false;
                     }
-                    
                     return true;
                 });
             }
-
             renderData(filtered);
         }
 
         function renderData(dataToRender) {
             const container = document.getElementById('feed-container');
             container.innerHTML = '';
-            const now = Date.now();
-            const FORTY_EIGHT_HRS = 48 * 60 * 60 * 1000;
 
             if(dataToRender.length === 0) {
                 if(currentLiveType === 'hot') {
-                    container.innerHTML = `
-                        <div class="empty-state">
-                            <i class="fas fa-fire-extinguisher" style="font-size: 30px; margin-bottom: 10px; opacity: 0.5;"></i><br>
-                            Abhi koi live update nahi hai, jese hi hogi aapko show ho jayegi.
-                        </div>`;
+                    container.innerHTML = `<div class="empty-state"><i class="fas fa-fire-extinguisher" style="font-size: 30px; margin-bottom: 10px; opacity: 0.5;"></i><br>Abhi koi live update nahi hai, jese hi hogi aapko show ho jayegi.</div>`;
                 } else {
-                    container.innerHTML = `
-                        <div class="empty-state">
-                            <i class="fas fa-folder-open" style="font-size: 30px; margin-bottom: 10px; opacity: 0.5;"></i><br>
-                            No records found for the selected filters.<br>
-                            <small>Change your filters to see more results.</small>
-                        </div>`;
+                    container.innerHTML = `<div class="empty-state"><i class="fas fa-folder-open" style="font-size: 30px; margin-bottom: 10px; opacity: 0.5;"></i><br>No records found for the selected filters.</div>`;
                 }
                 return;
             }
 
             dataToRender.forEach(item => {
-                
-                // 🔥 BULLETPROOF INVALID DATE FIX
                 let dateObj = getValidDate(item);
-                
                 let formattedDate = dateObj.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
                 
                 let cardStyle = item.type === 'Induction' ? 'type-ind' : (item.type === 'Call Alert' ? 'type-call' : 'type-fb');
@@ -669,10 +613,8 @@
                 let typeBadgeClass = item.type === 'Induction' ? 'b-ind' : (item.type === 'Call Alert' ? 'b-call' : 'b-fb');
                 let typeIcon = item.type === 'Induction' ? '🚨' : (item.type === 'Call Alert' ? '📞' : '🗣️');
 
-                // Format WhatsApp Bold (*text*) and remove stray asterisks
                 let cleanMessage = item.message.replace(/\*([^*]+)\*/g, '<strong>$1</strong>').replace(/\*/g, '');
 
-                // UI Logic: Don't show "Unspecified" badges if we don't know them, keep it clean
                 let firmHtml = item.firm !== "Unspecified Firm" ? `<span class="badge-firm"><i class="far fa-building"></i> ${item.firm}</span>` : '';
                 let cityHtml = item.city !== "Unspecified City" ? `<span class="badge-city"><i class="fas fa-map-marker-alt"></i> ${item.city}</span>` : '';
 
@@ -703,29 +645,24 @@
         const LOAD_LIMIT = 10;
 
         async function loadDirectoryData() {
-            // 1. Load Local JSON first
             try {
                 let localRes = await fetch('/api/get-data?file=firms');
                 let result = await localRes.json();
                 let localFirms = JSON.parse(atob(result.payload));
                 if (localFirms && localFirms.length > 0) firebaseFirms = localFirms;
-            } catch(e) { 
-                console.warn("API firms fetch failed. Check your Vercel functions.", e); 
-            }
+            } catch(e) { console.warn("API firms fetch failed. Check your Vercel functions.", e); }
 
-            // 2. Load and merge Firebase live data
             try {
                 let res = await fetch(`${FIREBASE_URL}/firms_directory.json`);
                 let data = await res.json();
                 if (data) {
                     let dbFirms = Object.values(data);
                     dbFirms.forEach(dbFirm => {
-                        // Filter duplicate firms
                         let exists = firebaseFirms.some(f => f.name.toLowerCase() === dbFirm.name.toLowerCase() && f.city === dbFirm.city);
                         if(!exists) firebaseFirms.push(dbFirm);
                     });
                 }
-                searchDirectory(); // Re-render directory with new merged data
+                searchDirectory();
             } catch(e) { console.error("Firebase Directory Load Error:", e); }
         }
 
@@ -743,26 +680,14 @@
 
             if(currentSearchResults.length === 0) {
                 if(query.length > 2) {
-                    // 🔥 SMART RADAR & FIREBASE AUTO-SAVE LOGIC 🔥
                     let searchCity = city === 'All' ? 'Pakistan' : city;
                     let fullCityStr = searchCity === 'Pakistan' ? 'Pakistan' : searchCity + ', Pakistan';
                     let mapQuery = encodeURIComponent(`${rawQuery} Chartered Accountants, ${fullCityStr}`);
+                    let newFirm = { name: rawQuery.toUpperCase(), city: searchCity, address: "Auto-Detected via Live GPS Radar", phone: "N/A", email: "" };
                     let firmId = sanitizeId(newFirm.name + newFirm.city);
                     
-                    let newFirm = {
-                        name: rawQuery.toUpperCase(),
-                        city: searchCity,
-                        address: "Auto-Detected via Live GPS Radar",
-                        phone: "N/A",
-                        email: ""
-                    };
-
-                    // Add to UI immediately and save to Firebase permanently
                     firebaseFirms.push(newFirm);
-                    fetch(`${FIREBASE_URL}/firms_directory.json`, {
-                        method: 'POST',
-                        body: JSON.stringify(newFirm)
-                    }).catch(e => console.error(e));
+                    fetch(`${FIREBASE_URL}/firms_directory.json`, { method: 'POST', body: JSON.stringify(newFirm) }).catch(e => console.error(e));
 
                     container.innerHTML = `
                         <div style="background: rgba(16, 185, 129, 0.1); border: 1px dashed #10b981; padding: 15px; border-radius: 12px; margin-bottom: 20px; color: #cbd5e1; text-align: center; font-size: 14px;">
@@ -783,14 +708,11 @@
                 }
                 return;
             }
-
-            // Render Normal / Firebase Loaded Data
             loadMoreDirectory();
         }
 
         function loadMoreDirectory() {
             const container = document.getElementById('directory-container');
-            
             const existingBtn = document.getElementById('load-more-btn-container');
             if (existingBtn) existingBtn.remove();
 
@@ -803,7 +725,6 @@
                 
                 let emailHtml = '';
                 if (firm.email && firm.email !== 'N/A') {
-                    // Pick the first email if multiple exist
                     let primaryEmail = firm.email.split(',')[0].trim();
                     emailHtml = `<div class="dir-detail"><i class="fas fa-envelope"></i> <span><a href="mailto:${primaryEmail}" style="color:#2563eb; text-decoration:none;">${firm.email}</a></span></div>`;
                 }
@@ -830,32 +751,24 @@
                         <button onclick="loadMoreDirectory()" style="background: #1e293b; color: white; padding: 12px 30px; border: none; border-radius: 50px; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
                             Load More Firms <i class="fas fa-chevron-down" style="margin-left: 5px;"></i>
                         </button>
-                        <div style="color: #64748b; font-size: 13px; margin-top: 10px;">Showing ${currentDisplayIndex} of ${currentSearchResults.length} firms</div>
                     </div>`;
             } else {
                 container.innerHTML += `<div style="text-align:center; padding: 30px; color: #64748b; font-size: 14px; font-weight: 600;"><i class="fas fa-check-circle"></i> Showing all ${currentSearchResults.length} firms.</div>`;
             }
         }
 
-        // 🔥 THE DEEP RESEARCH ENGINE (GROQ + FIREBASE CACHE) 🔥
         async function doDeepResearch(firmName, city, domId) {
             const btn = document.getElementById('btn-' + domId);
             const container = document.getElementById('res-' + domId);
-            
-            if(btn) btn.style.display = 'none'; // Hide button after click
+            if(btn) btn.style.display = 'none';
             container.innerHTML = '<div style="color:#8b5cf6; font-size:13px; font-weight:600; padding:10px;"><i class="fas fa-spinner fa-spin"></i> AI is extracting key personnel data...</div>';
             
             try {
-                // 1. Pehlay Firebase Cache check karein
                 let fbRes = await fetch(`${FIREBASE_URL}/firm_personnel/${domId}.json`);
                 let fbData = await fbRes.json();
                 
-                if (fbData && fbData.length > 0) {
-                    renderPersonnel(fbData, container, firmName);
-                    return;
-                }
+                if (fbData && fbData.length > 0) { renderPersonnel(fbData, container, firmName); return; }
                 
-                // 2. Agar Firebase mein nahi hai, tou GROQ AI ko Hit karein
                 const prompt = `You are a highly accurate corporate researcher. Find up to 3 actual, verifiable Key Personnel (can be all Partners, Directors, or HR) and their official emails for the CA Firm '${firmName}' located in '${city}', Pakistan. Return ONLY a valid JSON array. Format: [{"name": "Real Name", "position": "Title", "contact": "email@address.com"}]. CRITICAL RULES: 1) DO NOT hallucinate or invent names (e.g., 'Muhammad Ali'). If you cannot find real, verifiable people for this specific firm, return an empty array []. 2) If exact email is unknown but the person is real, return "N/A" in contact. NO markdown, ONLY valid JSON.`;
                 
                 const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -868,10 +781,8 @@
                 let rawJson = groqData.choices[0].message.content.replace(/```json/gi, '').replace(/```/g, '').trim();
                 let personnelData = JSON.parse(rawJson);
                 
-                // 3. Khufiya tareeqay se Firebase mein SAVE kar lein next time ke liye
                 await fetch(`${FIREBASE_URL}/firm_personnel/${domId}.json`, { method: 'PUT', body: JSON.stringify(personnelData) });
                 renderPersonnel(personnelData, container, firmName);
-                
             } catch (e) {
                 console.error("Deep Research Error:", e);
                 container.innerHTML = '<div style="color:#ef4444; font-size:13px; font-weight:600;"><i class="fas fa-exclamation-triangle"></i> Research failed. Please refresh and try again.</div>';
@@ -898,7 +809,7 @@
             container.innerHTML = html;
         }
 
-      // ==========================================
+        // ==========================================
         // ⏳ CA JOURNEY TRACKER & EASTER EGG
         // ==========================================
         let motivationTimeout;
@@ -911,7 +822,7 @@
             let m = (new Date().getFullYear() - new Date(start).getFullYear()) * 12 + new Date().getMonth() - new Date(start).getMonth();
             if(m < 0) m = 0;
             
-            let attempts = Math.floor(m/6); // Calculate attempts
+            let attempts = Math.floor(m/6); 
             
             document.getElementById('stat-years').innerText = (m/12).toFixed(1);
             document.getElementById('stat-months').innerText = m;
@@ -922,50 +833,42 @@
             const inner = document.getElementById('motivate-inner');
             const audio = document.getElementById('motivate-audio');
 
-            // Agar user bar bar date change kar raha hai, tou pehle wala timer cancel kar do
             clearTimeout(motivationTimeout);
 
-            // 🔥 LOGIC: 6 ya zada attempts pe card 1.5 sec delay ke baad slide hoga 🔥
             if (attempts >= 6) {
                 if (!motivationTriggered) {
                     motivationTimeout = setTimeout(() => {
                         popup.classList.add('show');
-                        motivationTriggered = true; // Mark as triggered taake bar bar na aye
-                    }, 1500); // 1.5 seconds ka delay
+                        motivationTriggered = true; 
+                    }, 1500); 
                 }
             } else {
-                // 🔥 LOGIC: Agar attempts 6 se kam hain (date theek kar li), tou sab ghaaib karo 🔥
                 popup.classList.remove('show');
-                motivationTriggered = false; // Reset
-                
-                // Card ko wapis seedha karo, timer roko, aur audio band karo
+                motivationTriggered = false; 
                 inner.classList.remove('flipped');
                 clearInterval(countdownTimer);
                 document.getElementById('motivate-timer').innerText = '5';
                 audio.pause();
-                audio.currentTime = 0; // Audio wapis start pe lay aao
+                audio.currentTime = 0; 
             }
         }
 
         function startMotivation() {
             const inner = document.getElementById('motivate-inner');
-            if (inner.classList.contains('flipped')) return; // Avoid double clicks
+            if (inner.classList.contains('flipped')) return; 
             
-            inner.classList.add('flipped'); // Card Flip Animation
-            
+            inner.classList.add('flipped'); 
             let timeLeft = 5;
             const timerEl = document.getElementById('motivate-timer');
-            timerEl.innerText = timeLeft; // Update UI immediately
+            timerEl.innerText = timeLeft; 
             
-            // 5 second ka countdown
             countdownTimer = setInterval(() => {
                 timeLeft--;
                 timerEl.innerText = timeLeft;
-                
                 if (timeLeft <= 0) {
                     clearInterval(countdownTimer);
                     timerEl.innerHTML = '<i class="fas fa-headphones" style="animation: pulseAudio 1.5s infinite;"></i>';
-                    playMotivateAudio(); // Timer khatam hone pe play
+                    playMotivateAudio(); 
                 }
             }, 1000);
         }
@@ -974,12 +877,11 @@
             const audio = document.getElementById('motivate-audio');
             audio.play().catch(e => console.error("Audio blocked by browser:", e));
             
-            // Jab audio khtam ho jaye, card ko neechay wapis bhaij do
             audio.onended = () => {
                 document.getElementById('motivate-popup').classList.remove('show');
-                document.getElementById('motivate-inner').classList.remove('flipped'); // Reset for next time
+                document.getElementById('motivate-inner').classList.remove('flipped'); 
                 document.getElementById('motivate-timer').innerText = '5';
-                motivationTriggered = false; // Allow it to happen again later if needed
+                motivationTriggered = false; 
             };
         }
 
@@ -995,9 +897,7 @@
             document.getElementById('email-composer').classList.add('active');
         }
 
-        function closeEmailComposer() {
-            document.getElementById('email-composer').classList.remove('active');
-        }
+        function closeEmailComposer() { document.getElementById('email-composer').classList.remove('active'); }
 
         function updateEmailDraft() {
             let name = document.getElementById('em-name').value.trim() || "[Your Name]";
@@ -1013,9 +913,7 @@
 
         function copyEmailDraft() {
             let body = document.getElementById('em-body').value;
-            navigator.clipboard.writeText(body).then(() => {
-                alert("Draft copied to clipboard! You can paste it manually in your Email App.");
-            });
+            navigator.clipboard.writeText(body).then(() => { alert("Draft copied to clipboard! You can paste it manually in your Email App."); });
         }
 
         function triggerMailApp() {
@@ -1026,6 +924,14 @@
             window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
             closeEmailComposer();
         }
+
+        // ==========================================
+        // 🚀 INIT: BOOT UP THE INTELLIGENCE HUB
+        // ==========================================
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFirebaseData();
+            loadDirectoryData();
+        });
     </script>
 </body>
 </html>
