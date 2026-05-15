@@ -116,6 +116,7 @@
         }
         .feed-card.type-ind { border-left-color: #f59e0b; }
         .feed-card.type-hot { border-left-color: #ef4444; }
+        .feed-card.type-call { border-left-color: #8b5cf6; }
         
         .card-meta-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 10px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; }
         
@@ -126,6 +127,7 @@
         .badge-type { font-size: 11px; font-weight: 800; padding: 5px 12px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; }
         .b-ind { background: #fef3c7; color: #b45309; }
         .b-fb { background: #dbeafe; color: #1e40af; }
+        .b-call { background: #ede9fe; color: #6d28d9; }
 
         .feed-date { font-weight: 600; color: var(--text-light); font-size: 13px; display: flex; align-items: center; gap: 6px; }
         .feed-text { font-size: 15px; line-height: 1.7; white-space: pre-wrap; color: #334155; }
@@ -183,6 +185,7 @@
                 <div class="tag hot-tag active" onclick="setLiveFilter('hot', this)">🔥 Hot (Last 48 Hrs)</div>
                 <div class="tag" onclick="setLiveFilter('Induction', this)">🚨 Inductions</div>
                 <div class="tag" onclick="setLiveFilter('Feedback', this)">🗣️ Feedbacks</div>
+                <div class="tag" onclick="setLiveFilter('Call Alert', this)">📞 Call Alerts</div>
             </div>
 
             <!-- SMART FILTERS (Visible only on Induction/Feedback tabs) -->
@@ -277,9 +280,12 @@
             <div class="form-group">
                 <label>Your Current Status</label>
                 <select id="em-status" onchange="updateEmailDraft()">
-                    <option value="CAF Passed Student">CAF Passed Student</option>
+                    <option value="CAF Passed Student">CAF Full Passed</option>
+                    <option value="CAF Student (1 Paper Remaining)">CAF (1 Paper Remaining)</option>
+                    <option value="CAF Student (2 Papers Remaining)">CAF (2 Papers Remaining)</option>
+                    <option value="CAF Student (3 Papers Remaining)">CAF (3 Papers Remaining)</option>
                     <option value="ACCA Affiliate">ACCA Affiliate</option>
-                    <option value="CA Finalist">CA Finalist</option>
+                    <option value="ACCA Professional Level">ACCA Professional Level</option>
                 </select>
             </div>
             <div class="form-group">
@@ -291,7 +297,8 @@
             
             <div class="email-actions">
                 <button class="btn-em-cancel" onclick="closeEmailComposer()">Cancel</button>
-                <button class="btn-em-send" onclick="triggerMailApp()"><i class="fab fa-google"></i> Open Mail App</button>
+                <button class="btn-em-cancel" onclick="copyEmailDraft()"><i class="fas fa-copy"></i> Copy</button>
+                <button class="btn-em-send" onclick="triggerMailApp()"><i class="fas fa-envelope"></i> Open App (Gmail/Yahoo)</button>
             </div>
         </div>
     </div>
@@ -401,7 +408,20 @@
 
                 let resFb = await fetch(`${FIREBASE_URL}/feedbacks.json`);
                 let dataFb = await resFb.json();
-                let arrFb = dataFb ? Object.values(dataFb).map(i => ({...i, type: 'Feedback', ...extractMetadata(i.message)})) : [];
+                let arrFb = dataFb ? Object.values(dataFb).map(i => {
+                    let meta = extractMetadata(i.message);
+                    let type = 'Feedback';
+                    let msgLow = i.message.toLowerCase();
+                    
+                    // 🔥 SMART AI CLASSIFIER: Is it an actual Feedback or just a Call Notification?
+                    let isShort = i.message.length < 250;
+                    let isCallNotify = (msgLow.includes("received") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
+                    let isTestNotify = msgLow.includes("test") || msgLow.includes("system") || msgLow.includes("shortlist") || msgLow.includes("schedule");
+                    
+                    if (isShort && (isCallNotify || isTestNotify)) type = 'Call Alert';
+                    
+                    return {...i, type: type, ...meta};
+                }) : [];
 
                 // Mix all, sort by newest first
                 allData = [...arrInd, ...arrFb].sort((a, b) => b.timestamp - a.timestamp);
@@ -552,11 +572,11 @@
                 
                 let formattedDate = dateObj.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
                 
-                let cardStyle = item.type === 'Induction' ? 'type-ind' : 'type-fb';
+                let cardStyle = item.type === 'Induction' ? 'type-ind' : (item.type === 'Call Alert' ? 'type-call' : 'type-fb');
                 if(currentLiveType === 'hot') cardStyle = 'type-hot';
 
-                let typeBadgeClass = item.type === 'Induction' ? 'b-ind' : 'b-fb';
-                let typeIcon = item.type === 'Induction' ? '🚨' : '🗣️';
+                let typeBadgeClass = item.type === 'Induction' ? 'b-ind' : (item.type === 'Call Alert' ? 'b-call' : 'b-fb');
+                let typeIcon = item.type === 'Induction' ? '🚨' : (item.type === 'Call Alert' ? '📞' : '🗣️');
 
                 // Format WhatsApp Bold (*text*) and remove stray asterisks
                 let cleanMessage = item.message.replace(/\*([^*]+)\*/g, '<strong>$1</strong>').replace(/\*/g, '');
@@ -833,6 +853,13 @@
             
             let draft = `${greeting}\n\nI am writing to express my interest in joining your esteemed firm as an Audit Trainee. I am a highly motivated ${status} with a strong foundation in accounting, auditing, and corporate laws.\n\nI have attached my updated resume for your consideration. I am eager to bring my dedication and skills to ${firm} and would welcome the opportunity for an interview.\n\nLooking forward to hearing from you.\n\nBest regards,\n${name}\n\n--\n(Sent via Caversity Platform)`;
             document.getElementById('em-body').value = draft;
+        }
+
+        function copyEmailDraft() {
+            let body = document.getElementById('em-body').value;
+            navigator.clipboard.writeText(body).then(() => {
+                alert("Draft copied to clipboard! You can paste it manually in your Email App.");
+            });
         }
 
         function triggerMailApp() {
