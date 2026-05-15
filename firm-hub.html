@@ -159,6 +159,69 @@
         .btn-em-cancel:hover { background: #f1f5f9; }
         .btn-em-send { flex: 2; padding: 12px; border: none; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: white; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
         .btn-em-send:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); }
+
+/* --- MOTIVATION EASTER EGG CSS --- */
+        .motivate-wrapper {
+            position: fixed;
+            bottom: -200px; /* Hidden by default */
+            right: 30px;
+            width: 300px;
+            height: 150px;
+            perspective: 1000px;
+            z-index: 99999;
+            transition: bottom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .motivate-wrapper.show { bottom: 30px; } /* Slides up */
+        
+        .motivate-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.5); /* Purple glow */
+        }
+        .motivate-inner.flipped {
+            transform: rotateY(180deg);
+            cursor: default;
+        }
+        
+        .motivate-front, .motivate-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #7e22ce 0%, #c084fc 100%); /* Beautiful purple blend */
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .motivate-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #581c87 0%, #9333ea 100%); /* Darker purple on back */
+        }
+        
+        .motivate-front h4 { margin: 0; font-family: 'Poppins', sans-serif; font-size: 16px; }
+        .motivate-front p { margin: 5px 0 0; font-size: 12px; opacity: 0.8; }
+        .motivate-back h4 { margin: 0 0 10px; font-family: 'Poppins', sans-serif; font-size: 14px; line-height: 1.4; color: #f3e8ff; }
+        .m-timer { font-size: 36px; font-weight: 800; color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        
+        @keyframes pulseAudio {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
     </style>
 </head>
 <body>
@@ -263,6 +326,20 @@
 
     </div>
 
+<audio id="motivate-audio" src="features/assets/motivate.mp3"></audio>
+    <div id="motivate-popup" class="motivate-wrapper">
+        <div class="motivate-inner" id="motivate-inner">
+            <div class="motivate-front" onclick="startMotivation()">
+                <i class="fas fa-gift" style="font-size: 24px; margin-bottom: 10px; color: #f3e8ff;"></i>
+                <h4>A Special Message For You</h4>
+                <p>Click to open</p>
+            </div>
+            <div class="motivate-back">
+                <h4>Close your eyes then listen...</h4>
+                <div id="motivate-timer" class="m-timer">5</div>
+            </div>
+        </div>
+    </div>
     <!-- QUICK EMAIL COMPOSER MODAL -->
     <div id="email-composer" class="email-modal-overlay">
         <div class="email-card">
@@ -820,18 +897,63 @@
             container.innerHTML = html;
         }
 
+       // ==========================================
+        // ⏳ CA JOURNEY TRACKER & EASTER EGG
         // ==========================================
-        // ⏳ CA JOURNEY TRACKER
-        // ==========================================
+        let motivationTriggered = false; // Taake bar bar trigger na ho
+
         function calculateJourney() {
             const start = document.getElementById('caStartDate').value;
             if(!start) return;
             let m = (new Date().getFullYear() - new Date(start).getFullYear()) * 12 + new Date().getMonth() - new Date(start).getMonth();
             if(m < 0) m = 0;
+            
+            let attempts = Math.floor(m/6); // Calculate attempts
+            
             document.getElementById('stat-years').innerText = (m/12).toFixed(1);
             document.getElementById('stat-months').innerText = m;
-            document.getElementById('stat-attempts').innerText = Math.floor(m/6);
+            document.getElementById('stat-attempts').innerText = attempts;
             document.getElementById('tracker-results').style.display = 'flex';
+
+            // 🔥 LOGIC: 6 ya zada attempts pe card slide hoga 🔥
+            if (attempts >= 6 && !motivationTriggered) {
+                motivationTriggered = true; // Taake aik hi dafa chale
+                setTimeout(() => {
+                    document.getElementById('motivate-popup').classList.add('show');
+                }, 800); // Thora sa delay de kar smooth entry
+            }
+        }
+
+        function startMotivation() {
+            const inner = document.getElementById('motivate-inner');
+            if (inner.classList.contains('flipped')) return; // Avoid double clicks
+            
+            inner.classList.add('flipped'); // Card Flip Animation
+            
+            let timeLeft = 5;
+            const timerEl = document.getElementById('motivate-timer');
+            
+            // 5 second ka countdown
+            let countdown = setInterval(() => {
+                timeLeft--;
+                timerEl.innerText = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    timerEl.innerHTML = '<i class="fas fa-headphones" style="animation: pulseAudio 1.5s infinite;"></i>';
+                    playMotivateAudio(); // Timer khatam hone pe play
+                }
+            }, 1000);
+        }
+
+        function playMotivateAudio() {
+            const audio = document.getElementById('motivate-audio');
+            audio.play().catch(e => console.error("Audio blocked by browser:", e));
+            
+            // Jab audio khtam ho jaye, card ko neechay wapis bhaij do
+            audio.onended = () => {
+                document.getElementById('motivate-popup').classList.remove('show');
+            };
         }
 
         // Init
