@@ -195,57 +195,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 🔥 FOCUS MODE MUSIC LOGIC (Dynamically Injected next to Sign Out) 🔥
-    if (signOutBtn) {
-        let focusAudio = document.getElementById("focus-audio");
-        if (!focusAudio) {
-            focusAudio = document.createElement('audio');
-            focusAudio.id = "focus-audio";
-            focusAudio.loop = true;
-            focusAudio.src = "assets/focus-music.mp3"; // Note: Make sure this file exists
-            document.body.appendChild(focusAudio);
-        }
-
-        let focusBtn = document.getElementById("focus-mode-btn");
-        
-        // 🔥 Professional styles to match Sign Out button exactly 🔥
-        const defaultStyle = "background: rgba(255, 255, 255, 0.9); color: #334155; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 10px 18px; cursor: pointer; transition: all 0.3s ease; margin-right: 15px; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: inline-flex; align-items: center; justify-content: center;";
-        const activeStyle = "background: #e0f2fe; color: #0284c7; border: 1px solid #7dd3fc; border-radius: 50px; padding: 10px 18px; cursor: pointer; transition: all 0.3s ease; margin-right: 15px; font-size: 16px; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3); display: inline-flex; align-items: center; justify-content: center;";
-
-        if (!focusBtn) {
-            focusBtn = document.createElement('button');
-            focusBtn.id = "focus-mode-btn";
-            focusBtn.style.cssText = "background: rgba(255, 255, 255, 0.92); color: #115e59; border: 1px solid rgba(15, 118, 110, 0.22); border-radius: 50px; padding: 8px 15px; cursor: pointer; transition: all 0.3s ease; margin-right: 10px; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: inline-flex; align-items: center; justify-content: center;";
-            focusBtn.style.cssText = defaultStyle;
-            focusBtn.innerHTML = '<i class="fas fa-headphones"></i>';
-            // Injects exactly to the left of Sign Out button
-            signOutBtn.parentNode.insertBefore(focusBtn, signOutBtn);
-        }
-
-        // Add Keyframe Animation for pulsing Headphone
-        if (!document.getElementById('focus-anim-style')) {
-            const style = document.createElement('style');
-            style.id = 'focus-anim-style';
-            style.innerHTML = `@keyframes pulseHeadphone { 0% { transform: scale(1); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }`;
-            document.head.appendChild(style);
-        }
-
-        focusAudio.volume = 0.25;
+    // 🔥 FOCUS MODE MUSIC LOGIC (Moved from Resume Builder) 🔥
+    const focusBtn = document.getElementById("focus-mode-btn");
+    const focusAudio = document.getElementById("focus-audio");
+    if (focusBtn && focusAudio) {
+        focusAudio.volume = 0.25; // 25% volume for smooth lo-fi vibe
         focusBtn.addEventListener("click", () => {
             if (focusAudio.paused) {
-                focusAudio.play().catch(e => console.log("Audio Error:", e));
+                focusAudio.play();
                 focusBtn.style.background = "#e8f5f3";
                 focusBtn.style.color = "#0f766e";
                 focusBtn.style.borderColor = "#0f766e";
-                focusBtn.style.cssText = activeStyle;
-                focusBtn.innerHTML = '<i class="fas fa-headphones" style="animation: pulseHeadphone 1.5s infinite;"></i>';
+                focusBtn.innerHTML = '<i class="fas fa-headphones"></i>';
+                focusBtn.title = "Pause Focus Mode";
             } else {
                 focusAudio.pause();
                 focusBtn.style.background = "rgba(255, 255, 255, 0.92)";
                 focusBtn.style.color = "#115e59";
                 focusBtn.style.borderColor = "rgba(15, 118, 110, 0.22)";
-                focusBtn.style.cssText = defaultStyle;
                 focusBtn.innerHTML = '<i class="fas fa-headphones"></i>';
+                focusBtn.title = "Enable Focus Mode";
             }
         });
     }
