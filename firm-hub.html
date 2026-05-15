@@ -745,7 +745,7 @@
                 }
                 
                 // 2. Agar Firebase mein nahi hai, tou GROQ AI ko Hit karein
-                const prompt = `You are a highly accurate corporate researcher. Find Key Personnel (Partners, Directors, HR Heads) and their DIRECT official email addresses for the CA Firm '${firmName}' located in '${city}', Pakistan. Return ONLY a valid JSON array of objects. Format: [{"name": "Person Name", "position": "Title", "contact": "email@address.com"}]. CRITICAL RULES: 1) NEVER return generic website links or URLs. 2) If exact email is unknown, return the general recruitment/HR email. 3) If absolutely no email is found, return "N/A" in contact. Maximum 3 results. NO markdown, ONLY valid JSON.`;
+                const prompt = `You are a highly accurate corporate researcher. Find up to 3 actual, verifiable Key Personnel (can be all Partners, Directors, or HR) and their official emails for the CA Firm '${firmName}' located in '${city}', Pakistan. Return ONLY a valid JSON array. Format: [{"name": "Real Name", "position": "Title", "contact": "email@address.com"}]. CRITICAL RULES: 1) DO NOT hallucinate or invent names (e.g., 'Muhammad Ali'). If you cannot find real, verifiable people for this specific firm, return an empty array []. 2) If exact email is unknown but the person is real, return "N/A" in contact. NO markdown, ONLY valid JSON.`;
                 
                 const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                     method: "POST",
