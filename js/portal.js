@@ -195,18 +195,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 🔥 FOCUS MODE MUSIC LOGIC (Moved from Resume Builder) 🔥
-    const focusBtn = document.getElementById("focus-mode-btn");
-    const focusAudio = document.getElementById("focus-audio");
-    if (focusBtn && focusAudio) {
-        focusAudio.volume = 0.25; // 25% volume for smooth lo-fi vibe
+    // 🔥 FOCUS MODE MUSIC LOGIC (Dynamically Injected next to Sign Out) 🔥
+    if (signOutBtn) {
+        let focusAudio = document.getElementById("focus-audio");
+        if (!focusAudio) {
+            focusAudio = document.createElement('audio');
+            focusAudio.id = "focus-audio";
+            focusAudio.loop = true;
+            focusAudio.src = "assets/focus-music.mp3"; // Note: Make sure this file exists
+            document.body.appendChild(focusAudio);
+        }
+
+        let focusBtn = document.getElementById("focus-mode-btn");
+        if (!focusBtn) {
+            focusBtn = document.createElement('button');
+            focusBtn.id = "focus-mode-btn";
+            focusBtn.style.cssText = "background: rgba(255, 255, 255, 0.92); color: #115e59; border: 1px solid rgba(15, 118, 110, 0.22); border-radius: 50px; padding: 8px 15px; cursor: pointer; transition: all 0.3s ease; margin-right: 10px; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: inline-flex; align-items: center; justify-content: center;";
+            focusBtn.innerHTML = '<i class="fas fa-headphones"></i>';
+            // Injects exactly to the left of Sign Out button
+            signOutBtn.parentNode.insertBefore(focusBtn, signOutBtn);
+        }
+
+        // Add Keyframe Animation for pulsing Headphone
+        if (!document.getElementById('focus-anim-style')) {
+            const style = document.createElement('style');
+            style.id = 'focus-anim-style';
+            style.innerHTML = `@keyframes pulseHeadphone { 0% { transform: scale(1); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }`;
+            document.head.appendChild(style);
+        }
+
+        focusAudio.volume = 0.25;
         focusBtn.addEventListener("click", () => {
             if (focusAudio.paused) {
-                focusAudio.play();
+                focusAudio.play().catch(e => console.log("Audio Error:", e));
                 focusBtn.style.background = "#e8f5f3";
                 focusBtn.style.color = "#0f766e";
                 focusBtn.style.borderColor = "#0f766e";
-                focusBtn.innerHTML = '<i class="fas fa-headphones"></i>';
+                focusBtn.innerHTML = '<i class="fas fa-headphones" style="animation: pulseHeadphone 1.5s infinite;"></i>';
             } else {
                 focusAudio.pause();
                 focusBtn.style.background = "rgba(255, 255, 255, 0.92)";
