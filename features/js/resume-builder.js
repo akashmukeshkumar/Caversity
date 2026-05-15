@@ -272,29 +272,6 @@ document.addEventListener("DOMContentLoaded", () => {
     input.addEventListener("input", updatePreview);
   });
 
-  // 🔥 FOCUS MODE MUSIC LOGIC 🔥
-  const focusBtn = byId("focus-mode-btn");
-  const focusAudio = byId("focus-audio");
-  if (focusBtn && focusAudio) {
-    focusAudio.volume = 0.25; // 25% volume for smooth lo-fi vibe
-    focusBtn.addEventListener("click", () => {
-      if (focusAudio.paused) {
-        focusAudio.play();
-        focusBtn.style.background = "#e8f5f3";
-        focusBtn.style.color = "#0f766e";
-        focusBtn.style.borderColor = "#0f766e";
-        focusBtn.innerHTML = '<i class="fas fa-headphones"></i>';
-        focusBtn.title = "Pause Focus Mode";
-      } else {
-        focusAudio.pause();
-        focusBtn.style.background = "rgba(255, 255, 255, 0.92)";
-        focusBtn.style.color = "#115e59";
-        focusBtn.style.borderColor = "rgba(15, 118, 110, 0.22)";
-        focusBtn.innerHTML = '<i class="fas fa-headphones"></i>';
-        focusBtn.title = "Enable Focus Mode";
-      }
-    });
-  }
 
   // SECURE CONFIG FETCH
   fetch('/api/resume', {
