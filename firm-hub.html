@@ -10,202 +10,204 @@
     <style id="page-lock">body { display: none !important; }</style>
     <script type="module" src="js/security.js"></script>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+        @import url('[https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap)');
         
         :root {
-            --bg-top: #ffffff;
-            --bg-bottom: #f4f5f7;
-            --primary: #007aff;
-            --primary-soft: #ebf4ff;
-            --text-dark: #1d1d1f;
-            --text-light: #86868b;
-            --card-bg: #ffffff;
-            --border: #eaeaea;
+            --primary: #2563eb;
+            --primary-soft: #eff6ff;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --card-bg: rgba(255, 255, 255, 0.95); /* Soft transparent white */
+            --border: rgba(0, 0, 0, 0.06);
             --radius-lg: 20px;
             --radius-md: 12px;
-            --shadow-soft: 0 8px 30px rgba(0,0,0,0.03);
-            --shadow-hover: 0 12px 40px rgba(0,0,0,0.06);
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.08);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+            /* Premium Soft Colorful Blend Background */
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(219, 234, 254, 0.7) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(243, 232, 255, 0.7) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(220, 252, 231, 0.5) 0%, transparent 40%);
             background-attachment: fixed;
             color: var(--text-dark);
             margin: 0; padding: 0; min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
         }
 
         /* --- HEADER --- */
         .hub-header { text-align: center; padding: 50px 20px 30px; }
-        .hub-header h1 { font-family: 'Poppins', sans-serif; font-size: 32px; font-weight: 700; margin: 0; color: var(--text-dark); letter-spacing: -0.5px;}
+        .hub-header h1 { font-family: 'Poppins', sans-serif; font-size: 34px; font-weight: 700; margin: 0; color: #0f172a; letter-spacing: -0.5px;}
         .hub-header h1 i { color: var(--primary); }
-        .hub-header p { color: var(--text-light); font-size: 15px; margin-top: 10px; max-width: 600px; margin-inline: auto; font-weight: 400;}
+        .hub-header p { color: var(--text-light); font-size: 15px; margin-top: 10px; max-width: 600px; margin-inline: auto; font-weight: 500;}
 
         .main-container { max-width: 1000px; margin: 0 auto; padding: 0 20px 60px; }
 
-        /* --- MASTER TABS (Premium Top Segmented Control) --- */
+        /* --- MASTER TABS --- */
         .master-tabs { 
-            display: flex; justify-content: center; background: #f0f0f5; 
-            padding: 5px; border-radius: 16px; max-width: 550px; margin: 0 auto 40px auto;
+            display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 35px;
         }
         .m-tab {
-            flex: 1; text-align: center; color: var(--text-light); padding: 12px 15px; 
-            border-radius: 12px; cursor: pointer; font-weight: 600; font-family: 'Inter', sans-serif;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px;
+            background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(0,0,0,0.05);
+            color: var(--text-light); padding: 14px 28px; border-radius: 50px;
+            cursor: pointer; font-weight: 600; font-family: 'Poppins', sans-serif;
+            transition: 0.3s ease; display: flex; align-items: center; gap: 8px; font-size: 14px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02); backdrop-filter: blur(10px);
         }
-        .m-tab:hover { color: var(--text-dark); }
+        .m-tab:hover { background: rgba(255, 255, 255, 1); color: var(--text-dark); transform: translateY(-1px);}
         .m-tab.active { 
-            background: var(--card-bg); color: var(--text-dark); 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            background: var(--primary); border-color: var(--primary); color: white; 
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25); 
         }
 
         /* --- SECTIONS --- */
         .section-content { display: none; animation: fadeIn 0.4s ease; }
         .section-content.active { display: block; }
 
-        /* --- SUB TABS (Properly aligned above feed) --- */
+        /* --- SUB TABS (Tags) --- */
         .tag-container { 
-            display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; 
-            align-items: center; justify-content: flex-start;
+            display: flex; width: fit-content; margin: 0 auto 25px auto; 
+            background: rgba(255, 255, 255, 0.7); padding: 6px; border-radius: 50px; 
+            border: 1px solid var(--border); gap: 5px; flex-wrap: wrap; justify-content: center; 
+            backdrop-filter: blur(10px);
         }
         .tag { 
-            padding: 8px 18px; background: transparent; color: var(--text-light); 
-            border-radius: 50px; font-size: 13px; cursor: pointer; border: 1px solid #d2d2d7; 
-            font-weight: 600; transition: 0.2s ease; 
+            padding: 8px 20px; background: transparent; color: var(--text-light); border-radius: 50px; 
+            font-size: 13px; cursor: pointer; border: none; font-weight: 600; transition: 0.3s; 
         }
-        .tag:hover { border-color: var(--text-dark); color: var(--text-dark); }
-        .tag.active { background: var(--text-dark); color: white; border-color: var(--text-dark); }
-        .tag.hot-tag.active { background: #ff3b30; color: white; border-color: #ff3b30; box-shadow: 0 4px 12px rgba(255, 59, 48, 0.2); }
+        .tag:hover { color: var(--text-dark); background: rgba(0,0,0,0.03); }
+        .tag.active { background: #10b981; color: white; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); }
+        .tag.hot-tag.active { background: #ef4444; color: white; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25); }
 
         /* --- SMART FILTERS AREA --- */
         .smart-filters-container {
             background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-lg); 
             padding: 20px; margin-bottom: 30px; display: none; box-shadow: var(--shadow-soft);
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.3s ease; backdrop-filter: blur(20px);
         }
         .smart-filters-container.show { display: flex; gap: 15px; flex-wrap: wrap; }
         
-        .filter-group { flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 6px; }
-        .filter-group label { font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; padding-left: 2px;}
+        .filter-group { flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 8px; }
+        .filter-group label { font-size: 12px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; padding-left: 5px;}
         .filter-group select {
-            width: 100%; padding: 12px 15px; border-radius: var(--radius-md); border: 1px solid var(--border);
-            background: #fafafc; color: var(--text-dark); font-size: 14px; font-family: 'Inter', sans-serif;
-            font-weight: 500; outline: none; cursor: pointer; transition: 0.2s; appearance: none;
+            width: 100%; padding: 14px 15px; border-radius: var(--radius-md); border: 1px solid #e2e8f0;
+            background: #f8fafc; color: var(--text-dark); font-size: 14px; font-family: 'Inter', sans-serif;
+            outline: none; cursor: pointer; transition: 0.2s; appearance: none; font-weight: 500;
         }
-        .filter-group select:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1); }
+        .filter-group select:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
 
         /* --- FEED GRID --- */
         .feed-grid { display: flex; flex-direction: column; gap: 20px; }
         .feed-card {
-            background: var(--card-bg); padding: 25px 30px; border-radius: var(--radius-lg);
+            background: var(--card-bg); padding: 25px; border-radius: var(--radius-lg);
             border: 1px solid var(--border); box-shadow: var(--shadow-soft);
             position: relative; animation: fadeIn 0.4s ease; transition: 0.3s ease;
+            backdrop-filter: blur(10px);
         }
-        .feed-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+        .feed-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
         
-        /* Subtle Color accents instead of heavy left borders */
-        .feed-card::before {
-            content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 4px;
-            border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-        }
-        .feed-card.type-ind::before { background: #ff9500; }
-        .feed-card.type-hot::before { background: #ff3b30; }
-        .feed-card.type-call::before { background: #af52de; }
+        /* Clean Left Border Indicator */
+        .feed-card::before { content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 5px; border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+        .feed-card.type-ind::before { background: #f59e0b; }
+        .feed-card.type-hot::before { background: #ef4444; }
+        .feed-card.type-call::before { background: #8b5cf6; }
         .feed-card.type-fb::before { background: var(--primary); }
         
-        .card-meta-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 10px; border-bottom: 1px solid #f2f2f7; padding-bottom: 15px; }
+        .card-meta-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 10px; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; }
         
-        .smart-badges { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-        .badge-firm { background: #f2f2f7; color: var(--text-dark); font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; display: flex; align-items: center; gap: 6px; }
-        .badge-city { border: 1px solid #e5e5ea; color: var(--text-light); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 8px; display: flex; align-items: center; gap: 5px; }
-        .badge-type { font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .smart-badges { display: flex; gap: 8px; flex-wrap: wrap; align-items: center;}
+        .badge-firm { background: #f1f5f9; color: var(--text-dark); font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 50px; display: flex; align-items: center; gap: 5px; }
+        .badge-city { border: 1px solid #e2e8f0; color: var(--text-light); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 50px; display: flex; align-items: center; gap: 5px; }
+        .badge-type { font-size: 11px; font-weight: 800; padding: 6px 12px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        .b-ind { background: #fff4e5; color: #d57a00; }
-        .b-fb { background: var(--primary-soft); color: var(--primary); }
-        .b-call { background: #f4efff; color: #af52de; }
+        .b-ind { background: #fef3c7; color: #b45309; }
+        .b-fb { background: #dbeafe; color: #1e40af; }
+        .b-call { background: #ede9fe; color: #6d28d9; }
 
-        .feed-date { font-weight: 500; color: var(--text-light); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-        .feed-text { font-size: 15px; line-height: 1.6; white-space: pre-wrap; color: #3a3a3c; }
+        .feed-date { font-weight: 600; color: var(--text-light); font-size: 12px; display: flex; align-items: center; gap: 6px; }
+        .feed-text { font-size: 15px; line-height: 1.7; white-space: pre-wrap; color: #334155; }
 
-        .loading-state { text-align: center; color: var(--text-light); padding: 40px; font-weight: 500; font-size: 15px; }
-        .empty-state { text-align: center; padding: 60px 20px; background: var(--card-bg); border-radius: var(--radius-lg); border: 1px dashed #d2d2d7; color: var(--text-light); }
+        .loading-state { text-align: center; color: var(--primary); padding: 40px; font-weight: 600; font-size: 15px; }
+        .empty-state { text-align: center; padding: 50px; background: rgba(255,255,255,0.5); border-radius: var(--radius-lg); border: 1px dashed #cbd5e1; color: var(--text-light); font-weight: 500;}
         
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
         /* --- DIRECTORY CSS --- */
         .directory-controls { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
         .directory-controls select, .directory-controls input {
-            padding: 15px 20px; border-radius: var(--radius-md); border: 1px solid var(--border); 
+            padding: 15px; border-radius: var(--radius-md); border: 1px solid var(--border); 
             background: var(--card-bg); color: var(--text-dark); font-size: 15px; outline: none; flex: 1;
             font-family: 'Inter', sans-serif; box-shadow: var(--shadow-soft); transition: 0.2s; font-weight: 500;
         }
-        .directory-controls select:focus, .directory-controls input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1); }
+        .directory-controls select:focus, .directory-controls input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
         
-        .dir-card { background: var(--card-bg); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-soft); margin-bottom: 25px; border: 1px solid var(--border); transition: 0.3s;}
-        .dir-card:hover { box-shadow: var(--shadow-hover); }
+        .dir-card { background: var(--card-bg); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-soft); margin-bottom: 25px; border: 1px solid var(--border); transition: 0.3s; backdrop-filter: blur(10px);}
+        .dir-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px);}
         @media (min-width: 768px) { .dir-card { flex-direction: row; min-height: 300px; height: auto; } }
-        .dir-info { padding: 35px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
-        .dir-info h3 { margin: 0 0 15px; color: var(--text-dark); font-size: 22px; font-family: 'Poppins', sans-serif; font-weight: 600;}
-        .dir-detail { margin-bottom: 12px; font-size: 14px; color: #48484a; display: flex; align-items: flex-start; gap: 12px; }
-        .dir-detail i { color: var(--text-light); margin-top: 3px; width: 16px; text-align: center; }
-        .dir-map { flex: 1; background: #e5e5ea; min-height: 250px; border-left: 1px solid var(--border);}
+        .dir-info { padding: 30px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .dir-info h3 { margin: 0 0 15px; color: #0f172a; font-size: 22px; font-family: 'Poppins', sans-serif; font-weight: 700;}
+        .dir-detail { margin-bottom: 10px; font-size: 14px; color: #475569; display: flex; align-items: flex-start; gap: 10px; }
+        .dir-detail i { color: var(--primary); margin-top: 3px; width: 16px; text-align: center; }
+        .dir-map { flex: 1; background: #e2e8f0; min-height: 250px; border-left: 1px solid #f1f5f9;}
         .dir-map iframe { width: 100%; height: 100%; border: none; }
 
         /* --- DEEP RESEARCH CSS --- */
-        .btn-research { background: #f4efff; color: #af52de; border: none; padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; margin-top: 15px; display: inline-flex; align-items: center; gap: 8px; width: fit-content; font-family: 'Inter', sans-serif;}
-        .btn-research:hover { background: #af52de; color: white; }
+        .btn-research { background: #f4efff; color: #7e22ce; border: 1px solid #e9d5ff; padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; margin-top: 15px; display: inline-flex; align-items: center; gap: 8px; width: fit-content; font-family: 'Inter', sans-serif;}
+        .btn-research:hover { background: #7e22ce; color: white; box-shadow: 0 4px 15px rgba(126, 34, 206, 0.2);}
         .personnel-list { margin-top: 15px; display: flex; flex-direction: column; gap: 10px; }
-        .personnel-item { background: #fafafc; border-left: 3px solid #af52de; padding: 15px; border-radius: 0 10px 10px 0; font-size: 13px; animation: fadeIn 0.4s ease; border: 1px solid var(--border); border-left-width: 3px; }
-        .personnel-item strong { color: var(--text-dark); display: block; margin-bottom: 2px; font-size: 14px; font-weight: 600;}
+        .personnel-item { background: #f8fafc; border-left: 3px solid #8b5cf6; padding: 15px; border-radius: 0 10px 10px 0; font-size: 13px; animation: fadeIn 0.4s ease; border: 1px solid #e2e8f0; border-left-width: 3px; }
+        .personnel-item strong { color: var(--text-dark); display: block; margin-bottom: 2px; font-size: 14px; font-weight: 700;}
         .personnel-item span { color: var(--text-light); }
-        .personnel-item .contact { color: var(--primary); font-weight: 500; margin-top: 8px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;}
+        .personnel-item .contact { color: var(--primary); font-weight: 600; margin-top: 6px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;}
 
         /* Quick Apply Button */
-        .quick-apply-btn { background: var(--primary-soft); color: var(--primary); font-size: 11px; padding: 6px 12px; border-radius: 6px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; transition: 0.2s; text-decoration: none; border: 1px solid transparent;}
-        .quick-apply-btn:hover { background: var(--primary); color: white; }
+        .quick-apply-btn { background: #e0f2fe; color: #0369a1; font-size: 11px; padding: 6px 12px; border-radius: 6px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; transition: 0.2s; text-decoration: none; border: 1px solid #bae6fd;}
+        .quick-apply-btn:hover { background: #0284c7; color: white; border-color: #0284c7;}
 
         /* --- TRACKER CSS --- */
-        .tracker-card { background: var(--card-bg); padding: 50px; border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-soft); border: 1px solid var(--border); }
-        .tracker-input { margin: 25px auto; padding: 15px 20px; border-radius: var(--radius-md); border: 1px solid var(--border); font-size: 16px; outline: none; width: 100%; max-width: 320px; display: block; font-family: 'Inter', sans-serif; background: #fafafc; color: var(--text-dark); font-weight: 500;}
-        .tracker-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1); background: white;}
+        .tracker-card { background: var(--card-bg); padding: 50px; border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-soft); border: 1px solid var(--border); backdrop-filter: blur(10px);}
+        .tracker-input { margin: 25px auto; padding: 15px; border-radius: var(--radius-md); border: 2px solid #e2e8f0; font-size: 16px; outline: none; width: 100%; max-width: 300px; display: block; font-family: 'Inter', sans-serif; background: #f8fafc; color: var(--text-dark); font-weight: 500; transition: 0.2s;}
+        .tracker-input:focus { border-color: var(--primary); background: white;}
         .tracker-stats { display: flex; justify-content: center; gap: 20px; margin-top: 35px; flex-wrap: wrap; }
-        .stat-box { background: #fafafc; padding: 25px 20px; border-radius: var(--radius-md); flex: 1; min-width: 150px; border: 1px solid var(--border); }
-        .stat-box h4 { margin: 0; font-size: 36px; color: var(--text-dark); font-family: 'Poppins', sans-serif; font-weight: 700;}
-        .stat-box p { margin: 8px 0 0; color: var(--text-light); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
+        .stat-box { background: #f8fafc; padding: 25px 20px; border-radius: var(--radius-md); flex: 1; min-width: 150px; border: 1px solid #e2e8f0; }
+        .stat-box h4 { margin: 0; font-size: 36px; color: var(--primary); font-family: 'Poppins', sans-serif; font-weight: 700;}
+        .stat-box p { margin: 8px 0 0; color: var(--text-light); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
 
         /* --- EMAIL COMPOSER CSS --- */
-        .email-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; animation: fadeIn 0.3s ease; padding: 20px; box-sizing: border-box; }
+        .email-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; animation: fadeIn 0.3s ease; padding: 20px; box-sizing: border-box; }
         .email-modal-overlay.active { display: flex; }
-        .email-card { background: var(--card-bg); width: 100%; max-width: 520px; padding: 35px; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); border: 1px solid var(--border); }
-        .email-card h3 { margin: 0 0 8px 0; color: var(--text-dark); font-family: 'Poppins', sans-serif; display: flex; align-items: center; gap: 10px; font-size: 20px;}
+        .email-card { background: white; width: 100%; max-width: 520px; padding: 35px; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; }
+        .email-card h3 { margin: 0 0 10px 0; color: #0f172a; font-family: 'Poppins', sans-serif; display: flex; align-items: center; gap: 10px; font-size: 20px;}
         .email-card p { font-size: 13px; color: var(--text-light); margin-bottom: 25px; }
         .form-group { margin-bottom: 18px; text-align: left; }
-        .form-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-light); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;}
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: var(--radius-md); font-family: 'Inter', sans-serif; font-size: 14px; outline: none; box-sizing: border-box; background: #fafafc; color: var(--text-dark); font-weight: 500;}
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1); }
-        .form-group textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
-        .attachment-warning { background: #fff4e5; color: #d57a00; padding: 12px 16px; border-radius: var(--radius-md); font-size: 12px; font-weight: 500; display: flex; align-items: flex-start; gap: 8px; margin-bottom: 25px; line-height: 1.5; }
+        .form-group label { display: block; font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;}
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: var(--radius-md); font-family: 'Inter', sans-serif; font-size: 14px; outline: none; box-sizing: border-box; background: #f8fafc; color: var(--text-dark); font-weight: 500;}
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .form-group textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+        .attachment-warning { background: #fef3c7; color: #b45309; padding: 12px 16px; border-radius: var(--radius-md); font-size: 12px; font-weight: 600; display: flex; align-items: flex-start; gap: 8px; margin-bottom: 25px; line-height: 1.5; border: 1px solid #fde68a;}
         .email-actions { display: flex; gap: 12px; }
-        .btn-em-cancel { flex: 1; padding: 14px; border: 1px solid var(--border); background: white; color: var(--text-dark); border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: 0.2s; }
-        .btn-em-cancel:hover { background: #f2f2f7; }
-        .btn-em-send { flex: 2; padding: 14px; border: none; background: var(--primary); color: white; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .btn-em-send:hover { background: #005bb5; }
+        .btn-em-cancel { flex: 1; padding: 14px; border: 1px solid #cbd5e1; background: white; color: var(--text-dark); border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-em-cancel:hover { background: #f1f5f9; }
+        .btn-em-send { flex: 2; padding: 14px; border: none; background: linear-gradient(135deg, var(--primary) 0%, #1d4ed8 100%); color: white; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);}
+        .btn-em-send:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35); }
 
         /* --- MOTIVATION EASTER EGG CSS --- */
         .motivate-wrapper { position: relative; margin: 40px auto 0; width: 300px; height: 160px; perspective: 1000px; display: none; }
         .motivate-wrapper.show { display: block; animation: slideUpFade 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
-        .motivate-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; cursor: pointer; border-radius: var(--radius-lg); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
+        .motivate-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; cursor: pointer; border-radius: var(--radius-lg); box-shadow: 0 15px 35px rgba(139, 92, 246, 0.3); }
         .motivate-inner.flipped { transform: rotateY(180deg); cursor: default; }
-        .motivate-front, .motivate-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; color: white; border: 1px solid rgba(0,0,0,0.05); }
-        .motivate-front { background: linear-gradient(135deg, #1d1d1f 0%, #48484a 100%); }
-        .motivate-back { transform: rotateY(180deg); background: linear-gradient(135deg, #000000 0%, #1d1d1f 100%); }
-        .motivate-front h4 { margin: 0; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 500;}
-        .motivate-front p { margin: 6px 0 0; font-size: 13px; color: #aeaeb2; }
-        .motivate-back h4 { margin: 0 0 10px; font-family: 'Poppins', sans-serif; font-size: 14px; color: #f2f2f7; font-weight: 500;}
-        .m-timer { font-size: 38px; font-weight: 800; color: #ffffff; font-family: 'Inter', sans-serif;}
+        .motivate-front, .motivate-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; color: white; border: 1px solid rgba(255,255,255,0.2); }
+        .motivate-front { background: linear-gradient(135deg, #7e22ce 0%, #c084fc 100%); }
+        .motivate-back { transform: rotateY(180deg); background: linear-gradient(135deg, #581c87 0%, #9333ea 100%); }
+        .motivate-front h4 { margin: 0; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600;}
+        .motivate-front p { margin: 6px 0 0; font-size: 13px; opacity: 0.9; }
+        .motivate-back h4 { margin: 0 0 10px; font-family: 'Poppins', sans-serif; font-size: 14px; color: #f3e8ff; font-weight: 500;}
+        .m-timer { font-size: 38px; font-weight: 800; color: #ffffff; font-family: 'Inter', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.2);}
         
         @keyframes slideUpFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulseAudio { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
@@ -214,7 +216,7 @@
 <body>
 
     <div class="hub-header">
-        <h1><i class="fas fa-layer-group"></i> Intelligence Hub</h1>
+        <h1><i class="fas fa-brain"></i> Intelligence Hub</h1>
         <p>Live, auto-extracted analytics from Pakistan's top CA induction groups.</p>
     </div>
 
@@ -223,7 +225,7 @@
         <div class="master-tabs">
             <div class="m-tab active" onclick="switchMainTab('live', this)"><i class="fas fa-bolt"></i> Live Updates</div>
             <div class="m-tab" onclick="switchMainTab('directory', this)"><i class="fas fa-building"></i> Firm Directory</div>
-            <div class="m-tab" onclick="switchMainTab('tracker', this)"><i class="fas fa-chart-pie"></i> CA Tracker</div>
+            <div class="m-tab" onclick="switchMainTab('tracker', this)"><i class="fas fa-hourglass-half"></i> CA Tracker</div>
         </div>
 
         <div id="live-section" class="section-content active">
@@ -256,7 +258,7 @@
             </div>
 
             <div class="feed-grid" id="feed-container">
-                <div class="loading-state"><i class="fas fa-circle-notch fa-spin"></i> Fetching Live Intelligence...</div>
+                <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Fetching Live Intelligence...</div>
             </div>
         </div>
 
@@ -355,12 +357,11 @@
             <div class="email-actions">
                 <button class="btn-em-cancel" onclick="closeEmailComposer()">Cancel</button>
                 <button class="btn-em-cancel" onclick="copyEmailDraft()"><i class="far fa-copy"></i> Copy</button>
-                <button class="btn-em-send" onclick="triggerMailApp()"><i class="fas fa-external-link-alt"></i> Open App</button>
+                <button class="btn-em-send" onclick="triggerMailApp()"><i class="fas fa-envelope"></i> Open App</button>
             </div>
         </div>
     </div>
 
-    <!-- BELOW IS EXACTLY 100% UNTOUCHED ORIGINAL JAVASCRIPT -->
     <script>
         // ==========================================
         // 🧠 THE BRAIN: SMART ALIAS EXTRACTION SYSTEM
@@ -464,7 +465,7 @@
         // ==========================================
         // 📡 FIREBASE & STATE MANAGEMENT
         // ==========================================
-        const FIREBASE_URL = 'https://caversity-48b29-default-rtdb.firebaseio.com';
+        const FIREBASE_URL = '[https://caversity-48b29-default-rtdb.firebaseio.com](https://caversity-48b29-default-rtdb.firebaseio.com)';
         let allData = [];
         let currentLiveType = 'hot'; 
 
@@ -511,7 +512,7 @@
                         type = 'Induction';
                     }
 
-                    // Only keep non-Call Alerts (Hides Shortlist/Call messages completely)
+                    // Only keep non-Call Alerts
                     if (type !== 'Call Alert') {
                         processedData.push({...i, type: type, ...meta});
                     }
@@ -533,18 +534,14 @@
         // ==========================================
         function getValidDate(item) {
             if (item.time) { 
-                // 1. Primary: Extract exactly the date part before comma "15/05/2026, 1:16:00 am" -> "15/05/2026"
                 let dateStr = item.time.split(",")[0].trim();
-                let parts = dateStr.split(/[\/\-]/); // Split by slash or dash
+                let parts = dateStr.split(/[\/\-]/); 
                 let dateObj;
                 
-                // Safari/iOS strict date parsing fix (Converts DD/MM/YYYY to YYYY/MM/DD safely)
                 if (parts.length === 3) {
                     if (parts[2].length === 4) {
-                        // Format is DD/MM/YYYY
                         dateObj = new Date(`${parts[2]}/${parts[1]}/${parts[0]}`);
                     } else if (parts[0].length === 4) {
-                        // Format is YYYY/MM/DD
                         dateObj = new Date(`${parts[0]}/${parts[1]}/${parts[2]}`);
                     } else {
                         dateObj = new Date(dateStr.replace(/-/g, '/'));
@@ -556,14 +553,11 @@
                 if (!isNaN(dateObj.getTime())) return dateObj;
             }
             
-            // 2. Fallback: If 'time' string is missing or invalid, use Timestamp
             let ts = parseInt(item.timestamp);
             if (!isNaN(ts) && ts > 0) { 
-                if (ts < 10000000000) ts *= 1000; // Handle seconds vs milliseconds automatically
+                if (ts < 10000000000) ts *= 1000; 
                 return new Date(ts); 
             }
-
-            // Absolute fallback to current time
             return new Date();
         }
 
@@ -740,7 +734,7 @@
                     fetch(`${FIREBASE_URL}/firms_directory.json`, { method: 'POST', body: JSON.stringify(newFirm) }).catch(e => console.error(e));
 
                     container.innerHTML = `
-                        <div style="background: rgba(16, 185, 129, 0.1); border: 1px dashed #10b981; padding: 15px; border-radius: 12px; margin-bottom: 20px; color: #cbd5e1; text-align: center; font-size: 14px;">
+                        <div style="background: rgba(16, 185, 129, 0.1); border: 1px dashed #10b981; padding: 15px; border-radius: 12px; margin-bottom: 20px; color: #065f46; text-align: center; font-size: 14px; font-weight: 500;">
                             <i class="fas fa-database" style="color: #10b981; margin-right: 5px;"></i> Firm not found in local DB. <strong>Auto-Detected via Live Radar & Saved to Database permanently!</strong> 👇
                         </div>
                         <div class="dir-card">
@@ -751,7 +745,7 @@
                                 <button id="btn-${firmId}" class="btn-research" onclick="doDeepResearch('${newFirm.name}', '${newFirm.city}', '${firmId}')"><i class="fas fa-microchip"></i> Deep Research (Partners & HR)</button>
                                 <div id="res-${firmId}" class="personnel-list"></div>
                             </div>
-                            <div class="dir-map"><iframe src="https://maps.google.com/maps?q=${mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
+                            <div class="dir-map"><iframe src="[https://maps.google.com/maps?q=$](https://maps.google.com/maps?q=$){mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
                         </div>`;
                 } else {
                     container.innerHTML = '<div style="color:#94a3b8; text-align:center; padding: 40px;"><i class="fas fa-search-location" style="font-size: 30px; margin-bottom: 15px; opacity: 0.5;"></i><br>Select a city or search any firm name to find its details.</div>';
@@ -789,7 +783,7 @@
                             <button id="btn-${firmId}" class="btn-research" onclick="doDeepResearch('${firm.name}', '${firm.city}', '${firmId}')"><i class="fas fa-microchip"></i> Deep Research (Partners & HR)</button>
                             <div id="res-${firmId}" class="personnel-list"></div>
                         </div>
-                        <div class="dir-map"><iframe loading="lazy" src="https://maps.google.com/maps?q=${mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
+                        <div class="dir-map"><iframe loading="lazy" src="[https://maps.google.com/maps?q=$](https://maps.google.com/maps?q=$){mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
                     </div>`;
             });
 
@@ -798,7 +792,7 @@
             if (currentDisplayIndex < currentSearchResults.length) {
                 container.innerHTML += `
                     <div id="load-more-btn-container" style="text-align: center; margin-top: 20px; padding-bottom: 20px;">
-                        <button onclick="loadMoreDirectory()" style="background: #1e293b; color: white; padding: 12px 30px; border: none; border-radius: 50px; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                        <button onclick="loadMoreDirectory()" style="background: white; color: var(--text-dark); padding: 12px 30px; border: 1px solid var(--border); border-radius: 50px; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: var(--shadow-soft);">
                             Load More Firms <i class="fas fa-chevron-down" style="margin-left: 5px;"></i>
                         </button>
                     </div>`;
@@ -821,15 +815,15 @@
                 
                 const prompt = `You are a highly accurate corporate researcher. Find up to 3 actual, verifiable Key Personnel (can be all Partners, Directors, or HR) and their official emails for the CA Firm '${firmName}' located in '${city}', Pakistan. Return ONLY a valid JSON array. Format: [{"name": "Real Name", "position": "Title", "contact": "email@address.com"}]. CRITICAL RULES: 1) DO NOT hallucinate or invent names (e.g., 'Muhammad Ali'). If you cannot find real, verifiable people for this specific firm, return an empty array []. 2) If exact email is unknown but the person is real, return "N/A" in contact. NO markdown, ONLY valid JSON.`;
                 
-                const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                const groqRes = await fetch("[https://api.groq.com/openai/v1/chat/completions](https://api.groq.com/openai/v1/chat/completions)", {
                     method: "POST",
                     headers: { "Authorization": "Bearer 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", "Content-Type": "application/json" },
                     body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: [{ role: "system", content: prompt }], temperature: 0.2 })
                 });
                 
                 let groqData = await groqRes.json();
-                let rawJson = groqData.choices[0].message.content.replace(/```json/gi, '').replace(/
-```/g, '').trim();
+                // SAFE REGEX FIX IMPLEMENTED HERE 
+                let rawJson = groqData.choices[0].message.content.replace(new RegExp('\\`\\`\\`json', 'gi'), '').replace(new RegExp('\\`\\`\\`', 'g'), '').trim();
                 let personnelData = JSON.parse(rawJson);
                 
                 await fetch(`${FIREBASE_URL}/firm_personnel/${domId}.json`, { method: 'PUT', body: JSON.stringify(personnelData) });
@@ -855,7 +849,7 @@
                 } else {
                     contactHtml = `<span style="color:#94a3b8; font-size:12px;">Email not available</span>`;
                 }
-                html += `<div class="personnel-item"><strong>${p.name}</strong><span>${p.position}</span><div class="contact" style="margin-top:8px; display:flex; align-items:center; flex-wrap:wrap; gap:5px;">${contactHtml}</div></div>`;
+                html += `<div class="personnel-item"><strong>${p.name}</strong><span>${p.position}</span><div class="contact">${contactHtml}</div></div>`;
             });
             container.innerHTML = html;
         }
