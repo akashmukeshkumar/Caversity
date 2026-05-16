@@ -379,7 +379,7 @@
             { id: "A.F. Ferguson (PwC)", aliases: ["ferguson", "aff", "pwc", "a.f. ferguson", "price waterhouse"] },
             { id: "KPMG Taseer Hadi", aliases: ["kpmg", "taseer hadi"] },
             { id: "EY Ford Rhodes", aliases: ["ey", "ernst & young", "ford rhodes", "ernst and young", "eyfr"] },
-            { id: "Yousuf Adil (Deloitte)", aliases: ["deloitte", "yousuf adil", "yousaf adil", "ya"] },
+            { id: "Yousuf Adil (Deloitte)", aliases: ["deloitte", "yousuf adil", "yousaf adil"] },
             { id: "BDO Ebrahim", aliases: ["bdo", "ebrahim"] },
             { id: "Grant Thornton", aliases: ["grant thornton", "gt", "gth"] },
             { id: "Crowe Hussain Chaudhury", aliases: ["crowe", "hussain chaudhury"] },
@@ -486,14 +486,21 @@
                 if (dataFb) rawList = rawList.concat(Object.values(dataFb));
 
                 let processedData = [];
+                let seenMessages = new Set();
                 
                 for (let i of rawList) {
+                    if (!i || !i.message) continue;
+                    
+                    let msgTrimmed = i.message.trim();
+                    if (seenMessages.has(msgTrimmed)) continue;
+                    seenMessages.add(msgTrimmed);
+
                     let meta = extractMetadata(i.message);
-                    let msgLow = i.message.toLowerCase();
+                    let msgLow = msgTrimmed.toLowerCase();
                     let type = 'Induction';
                     
                     // Smart Categorization Logic
-                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("mera interview") || msgLow.includes("interview tha") || msgLow.includes("asked questions") || msgLow.includes("poochy") || msgLow.includes("introduce yourself") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("panelist") || msgLow.includes("interview feedback");
+                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback");
                     let isHiring = msgLow.includes("hiring") || msgLow.includes("induction") || msgLow.includes("trainee") || msgLow.includes("opportunity") || msgLow.includes("apply") || msgLow.includes("vacancies") || msgLow.includes("looking for");
                     
                     let isCallNotify = (msgLow.includes("received") || msgLow.includes("recieved") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
@@ -503,12 +510,10 @@
                     
                     if (isShort && (isCallNotify || isTestNotify || isInterviewMailNotify) && !isFeedback && !isHiring) {
                         type = 'Call Alert';
-                    } else if (isFeedback) {
+                    } else if (isFeedback || msgLow.includes("interview") || msgLow.includes("feedback")) {
                         type = 'Feedback';
                     } else if (isHiring) {
                         type = 'Induction';
-                    } else if ((msgLow.includes("interview") && msgLow.includes("?")) || msgLow.includes("feedback")) {
-                        type = 'Feedback';
                     }
 
                     // Only keep non-Call Alerts (Hides Shortlist/Call messages completely)
@@ -532,26 +537,39 @@
         // 🎛️ UI & FILTER LOGIC
         // ==========================================
         function getValidDate(item) {
-            let dateObj;
-            
-            // 1. Primary: Priority given to the exact 'time' text field from Database
             if (item.time) { 
-                // Safari/iOS strict date parsing fix
-                let safeTime = item.time.replace(/-/g, '/').replace(/ at /g, " "); 
-                dateObj = new Date(safeTime); 
-                if (isNaN(dateObj.getTime())) dateObj = new Date(item.time.split(",")[0].replace(/-/g, '/'));
+                // 1. Primary: Extract exactly the date part before comma "15/05/2026, 1:16:00 am" -> "15/05/2026"
+                let dateStr = item.time.split(",")[0].trim();
+                let parts = dateStr.split(/[\/\-]/); // Split by slash or dash
+                let dateObj;
+                
+                // Safari/iOS strict date parsing fix (Converts DD/MM/YYYY to YYYY/MM/DD safely)
+                if (parts.length === 3) {
+                    if (parts[2].length === 4) {
+                        // Format is DD/MM/YYYY
+                        dateObj = new Date(`${parts[2]}/${parts[1]}/${parts[0]}`);
+                    } else if (parts[0].length === 4) {
+                        // Format is YYYY/MM/DD
+                        dateObj = new Date(`${parts[0]}/${parts[1]}/${parts[2]}`);
+                    } else {
+                        dateObj = new Date(dateStr.replace(/-/g, '/'));
+                    }
+                } else {
+                    dateObj = new Date(dateStr.replace(/-/g, '/'));
+                }
+
+                if (!isNaN(dateObj.getTime())) return dateObj;
             }
             
-            // 2. Fallback: If 'time' is missing or unparseable, use 'timestamp'
-            if (!dateObj || isNaN(dateObj.getTime())) {
-                let ts = parseInt(item.timestamp);
-                if (!isNaN(ts) && ts > 0) { 
-                    if (ts < 10000000000) ts *= 1000; // Handle seconds vs milliseconds automatically
-                    dateObj = new Date(ts); 
-                }
+            // 2. Fallback: If 'time' string is missing or invalid, use Timestamp
+            let ts = parseInt(item.timestamp);
+            if (!isNaN(ts) && ts > 0) { 
+                if (ts < 10000000000) ts *= 1000; // Handle seconds vs milliseconds automatically
+                return new Date(ts); 
             }
-            if(!dateObj || isNaN(dateObj.getTime())) dateObj = new Date();
-            return dateObj;
+
+            // Absolute fallback to current time
+            return new Date();
         }
 
         function switchMainTab(tabId, el) {
