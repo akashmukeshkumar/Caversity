@@ -27,6 +27,7 @@
             { id: "Rahman Sarfaraz Rahim Iqbal Rafiq", aliases: ["rahman sarfaraz", "rahman sarfraz", "rsrir", "rsririr"] },
             { id: "Russell Bedford", aliases: ["russell bedford"] },
             { id: "Axiom World", aliases: ["axiom world", "axiom"] },
+            { id: "Baker Tilly", aliases: ["baker tilly", "BT"] },
             { id: "Reanda Haroon Zakaria", aliases: ["reanda", "reanda haroon", "haroon zakaria"] }
         ];
 
@@ -35,7 +36,7 @@
             { id: "Lahore", aliases: ["lahore", "lhr"] },
             { id: "Islamabad", aliases: ["islamabad", "isb"] },
             { id: "Rawalpindi", aliases: ["rawalpindi", "pindi", "rwp"] },
-            { id: "Faisalabad", aliases: ["faisalabad", "fsd"] },
+            { id: "Faisalabad", aliases: ["faisalabad","Faisalabad","Faislabad", "fsd"] },
             { id: "Multan", aliases: ["multan", "mux"] },
             { id: "Peshawar", aliases: ["peshawar", "pew"] },
             { id: "Gujranwala", aliases: ["gujranwala", "grw"] },
