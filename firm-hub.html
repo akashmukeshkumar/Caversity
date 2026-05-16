@@ -315,38 +315,6 @@
             </div>
         </div>
 
-        <!-- SECTION 4: SUBMIT FEEDBACK -->
-        <div id="submit-section" class="section-content">
-            <div class="tracker-card" style="max-width: 600px; margin: 0 auto;">
-                <h3 style="font-family:'Poppins'; font-size:24px; margin-top:0;">Share Your Interview Experience</h3>
-                <p style="color:#64748b; margin-bottom: 25px;">Help your juniors by sharing what was asked in your interview.</p>
-                
-                <div id="feedback-form-area">
-                    <div class="form-group">
-                        <label>Firm / Industry Name</label>
-                        <input type="text" id="fb-firm" placeholder="e.g. A.F. Ferguson (PwC)">
-                    </div>
-                    <div class="form-group">
-                        <label>Date of Interview</label>
-                        <input type="date" id="fb-date">
-                    </div>
-                    <div class="form-group">
-                        <label>Detailed Experience / Questions Asked</label>
-                        <textarea id="fb-message" rows="6" placeholder="Introduce yourself, technical questions asked, partner's behavior, etc..."></textarea>
-                    </div>
-                    <button onclick="submitStudentFeedback()" id="btn-submit-fb" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
-                        <i class="fas fa-paper-plane"></i> Submit Feedback
-                    </button>
-                </div>
-
-                <div id="feedback-success-msg" style="display: none; background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; padding: 20px; border-radius: 12px; margin-top: 20px;">
-                    <i class="fas fa-check-circle" style="font-size: 30px; color: #10b981; margin-bottom: 10px;"></i>
-                    <h4 style="margin: 0 0 5px 0;">Thank you for your contribution! 💖</h4>
-                    <p style="margin: 0; font-size: 13px;">Your feedback has been successfully submitted and will now help hundreds of students across Pakistan.</p>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <audio id="motivate-audio" src="features/assets/motivate.mp3"></audio>
@@ -439,9 +407,13 @@
             { id: "Karachi", aliases: ["karachi", "khi"] },
             { id: "Lahore", aliases: ["lahore", "lhr"] },
             { id: "Islamabad", aliases: ["islamabad", "isb"] },
+            { id: "Rawalpindi", aliases: ["rawalpindi", "pindi", "rwp"] },
             { id: "Faisalabad", aliases: ["faisalabad", "fsd"] },
             { id: "Multan", aliases: ["multan", "mux"] },
-            { id: "Peshawar", aliases: ["peshawar", "pew"] }
+            { id: "Peshawar", aliases: ["peshawar", "pew"] },
+            { id: "Gujranwala", aliases: ["gujranwala", "grw"] },
+            { id: "Sialkot", aliases: ["sialkot", "skt"] },
+            { id: "Quetta", aliases: ["quetta", "qta"] }
         ];
 
         function extractMetadata(text) {
