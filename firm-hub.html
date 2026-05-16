@@ -244,7 +244,6 @@
                 <div class="tag hot-tag active" onclick="setLiveFilter('hot', this)">🔥 Hot (Last 48 Hrs)</div>
                 <div class="tag" onclick="setLiveFilter('Induction', this)">🚨 Inductions</div>
                 <div class="tag" onclick="setLiveFilter('Feedback', this)">🗣️ Feedbacks</div>
-                <div class="tag" onclick="setLiveFilter('Call Alert', this)">📞 Call Alerts</div>
             </div>
 
             <div class="smart-filters-container" id="smart-filters">
@@ -478,26 +477,52 @@
             try {
                 let resInd = await fetch(`${FIREBASE_URL}/inductions.json`);
                 let dataInd = await resInd.json();
-                let arrInd = dataInd ? Object.values(dataInd).map(i => ({...i, type: 'Induction', ...extractMetadata(i.message)})) : [];
 
                 let resFb = await fetch(`${FIREBASE_URL}/feedbacks.json`);
                 let dataFb = await resFb.json();
-                let arrFb = dataFb ? Object.values(dataFb).map(i => {
+                
+                let rawList = [];
+                if (dataInd) rawList = rawList.concat(Object.values(dataInd));
+                if (dataFb) rawList = rawList.concat(Object.values(dataFb));
+
+                let processedData = [];
+                
+                for (let i of rawList) {
                     let meta = extractMetadata(i.message);
-                    let type = 'Feedback';
                     let msgLow = i.message.toLowerCase();
+                    let type = 'Induction';
                     
-                    let isShort = i.message.length < 300; 
+                    // Smart Categorization Logic
+                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback");
+                    let isHiring = msgLow.includes("hiring") || msgLow.includes("induction") || msgLow.includes("trainee") || msgLow.includes("opportunity") || msgLow.includes("apply") || msgLow.includes("vacancies") || msgLow.includes("looking for");
+                    
                     let isCallNotify = (msgLow.includes("received") || msgLow.includes("recieved") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
                     let isTestNotify = msgLow.includes("test") || msgLow.includes("system") || msgLow.includes("shortlist") || msgLow.includes("schedule") || msgLow.includes("scheduled");
+                    let isShort = i.message.length < 300; 
                     
-                    if (isShort && (isCallNotify || isTestNotify)) type = 'Call Alert';
-                    return {...i, type: type, ...meta};
-                }) : [];
+                    if (isShort && (isCallNotify || isTestNotify) && !isFeedback && !isHiring) {
+                        type = 'Call Alert';
+                    } else if (isFeedback) {
+                        type = 'Feedback';
+                    } else if (isHiring) {
+                        type = 'Induction';
+                    } else if (msgLow.includes("interview") || msgLow.includes("feedback")) {
+                        type = 'Feedback';
+                    }
 
-                allData = [...arrInd, ...arrFb].sort((a, b) => b.timestamp - a.timestamp);
+                    // Only keep non-Call Alerts (Hides Shortlist/Call messages completely)
+                    if (type !== 'Call Alert') {
+                        processedData.push({...i, type: type, ...meta});
+                    }
+                }
+
+                allData = processedData.sort((a, b) => {
+                    return getValidDate(b).getTime() - getValidDate(a).getTime();
+                });
+                
                 applyFilters(); 
             } catch (error) {
+                console.error("Firebase Load Error:", error);
                 document.getElementById('feed-container').innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> Error loading intelligence data.</div>';
             }
         }
@@ -508,10 +533,13 @@
         function getValidDate(item) {
             let dateObj;
             let ts = parseInt(item.timestamp);
-            if (!isNaN(ts)) { dateObj = new Date(ts); } 
-            else if (item.time) { 
-                dateObj = new Date(item.time.replace(/ at /g, " ")); 
-                if (isNaN(dateObj.getTime())) dateObj = new Date(item.time.split(",")[0]);
+            if (!isNaN(ts) && ts > 1000000000) { 
+                dateObj = new Date(ts); 
+            } else if (item.time) { 
+                // Safari/iOS strict date parsing fix
+                let safeTime = item.time.replace(/-/g, '/').replace(/ at /g, " "); 
+                dateObj = new Date(safeTime); 
+                if (isNaN(dateObj.getTime())) dateObj = new Date(item.time.split(",")[0].replace(/-/g, '/'));
             }
             if(!dateObj || isNaN(dateObj.getTime())) dateObj = new Date();
             return dateObj;
