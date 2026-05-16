@@ -493,20 +493,21 @@
                     let type = 'Induction';
                     
                     // Smart Categorization Logic
-                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback");
+                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("mera interview") || msgLow.includes("interview tha") || msgLow.includes("asked questions") || msgLow.includes("poochy") || msgLow.includes("introduce yourself") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("panelist") || msgLow.includes("interview feedback");
                     let isHiring = msgLow.includes("hiring") || msgLow.includes("induction") || msgLow.includes("trainee") || msgLow.includes("opportunity") || msgLow.includes("apply") || msgLow.includes("vacancies") || msgLow.includes("looking for");
                     
                     let isCallNotify = (msgLow.includes("received") || msgLow.includes("recieved") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
                     let isTestNotify = msgLow.includes("test") || msgLow.includes("system") || msgLow.includes("shortlist") || msgLow.includes("schedule") || msgLow.includes("scheduled");
+                    let isInterviewMailNotify = msgLow.includes("interview") && (msgLow.includes("mail") || msgLow.includes("email") || msgLow.includes("message"));
                     let isShort = i.message.length < 300; 
                     
-                    if (isShort && (isCallNotify || isTestNotify) && !isFeedback && !isHiring) {
+                    if (isShort && (isCallNotify || isTestNotify || isInterviewMailNotify) && !isFeedback && !isHiring) {
                         type = 'Call Alert';
                     } else if (isFeedback) {
                         type = 'Feedback';
                     } else if (isHiring) {
                         type = 'Induction';
-                    } else if (msgLow.includes("interview") || msgLow.includes("feedback")) {
+                    } else if ((msgLow.includes("interview") && msgLow.includes("?")) || msgLow.includes("feedback")) {
                         type = 'Feedback';
                     }
 
@@ -532,14 +533,22 @@
         // ==========================================
         function getValidDate(item) {
             let dateObj;
-            let ts = parseInt(item.timestamp);
-            if (!isNaN(ts) && ts > 1000000000) { 
-                dateObj = new Date(ts); 
-            } else if (item.time) { 
+            
+            // 1. Primary: Priority given to the exact 'time' text field from Database
+            if (item.time) { 
                 // Safari/iOS strict date parsing fix
                 let safeTime = item.time.replace(/-/g, '/').replace(/ at /g, " "); 
                 dateObj = new Date(safeTime); 
                 if (isNaN(dateObj.getTime())) dateObj = new Date(item.time.split(",")[0].replace(/-/g, '/'));
+            }
+            
+            // 2. Fallback: If 'time' is missing or unparseable, use 'timestamp'
+            if (!dateObj || isNaN(dateObj.getTime())) {
+                let ts = parseInt(item.timestamp);
+                if (!isNaN(ts) && ts > 0) { 
+                    if (ts < 10000000000) ts *= 1000; // Handle seconds vs milliseconds automatically
+                    dateObj = new Date(ts); 
+                }
             }
             if(!dateObj || isNaN(dateObj.getTime())) dateObj = new Date();
             return dateObj;
