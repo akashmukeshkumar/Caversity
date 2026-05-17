@@ -106,22 +106,28 @@ onAuthStateChanged(auth, async (user) => {
 
             // 🔥 PENDING FIRM INTERVIEW CHECK 🔥
             let pendingFirm = localStorage.getItem('targetFirm');
-            if (pendingFirm && !activeSubs.includes('mock_interview')) {
-                setTimeout(() => {
-                    let interviewCard = document.getElementById('subject-card-mock_interview');
-                    let alertBox = document.getElementById('subscribe-alert');
-                    if (interviewCard && alertBox) {
-                        interviewCard.classList.add('blink-highlight');
-                        alertBox.innerHTML = `⚠️ First subscribe this to start your <b>${pendingFirm}</b> interview!`;
-                        alertBox.style.display = "block";
-                        interviewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                        setTimeout(() => {
-                            interviewCard.classList.remove('blink-highlight');
-                            alertBox.style.display = "none";
-                        }, 6000);
-                    }
-                }, 500); // Thora delay taake card pehle screen par render ho jaye
+            if (pendingFirm) {
+                if (activeSubs.includes('mock_interview') && interviewSessions > 0) {
+                    // 🔥 Seedha Interview Page Par Le Jao Agar Pehle Se Khareeda Hua Hai
+                    window.location.href = 'interview.html';
+                    return;
+                } else {
+                    // 🔥 Package Nahi Hai Ya Sessions Khatam Hain To Blink Karwao
+                    setTimeout(() => {
+                        let interviewCard = document.getElementById('subject-card-mock_interview');
+                        let alertBox = document.getElementById('subscribe-alert');
+                        if (interviewCard && alertBox) {
+                            interviewCard.classList.add('blink-highlight');
+                            alertBox.innerHTML = `⚠️ First subscribe this to start your <b>${pendingFirm}</b> interview!`;
+                            alertBox.style.display = "block";
+                            interviewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            setTimeout(() => {
+                                interviewCard.classList.remove('blink-highlight');
+                                alertBox.style.display = "none";
+                            }, 6000);
+                        }
+                    }, 500);
+                }
             }
         } else {
             console.log("No user database record found!");
