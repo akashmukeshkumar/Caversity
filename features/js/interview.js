@@ -299,6 +299,7 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
         statusMsg.style.color = "#ef4444";
         statusMsg.innerText = "❌ Error reading CV: " + e.message;
     }
+});
 
 async function extractTextFromPDF(file) {
     const arrayBuffer = await file.arrayBuffer();
