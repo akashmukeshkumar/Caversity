@@ -28,7 +28,14 @@ body {
 .master-tabs { 
     display: flex; justify-content: flex-start; gap: 20px; 
     margin-bottom: 20px; border-bottom: 2px solid var(--border-color);
-    padding-bottom: 10px; overflow-x: auto;
+    padding-bottom: 10px; 
+    overflow-x: auto;
+    overflow-y: hidden; /* YEH LINE VERTICAL SCROLLBAR KO KHATAM KAREGI */
+    scrollbar-width: none; /* Firefox ke liye scrollbar hide */
+}
+/* Chrome/Safari mein scrollbar bilkul invisible karne ke liye */
+.master-tabs::-webkit-scrollbar {
+    display: none;
 }
 .m-tab {
     background: transparent; color: var(--text-light); 
@@ -36,6 +43,7 @@ body {
     cursor: pointer; font-weight: 600; font-family: 'Poppins', sans-serif;
     transition: 0.3s; display: flex; align-items: center; gap: 8px; font-size: 15px;
     position: relative;
+    white-space: nowrap; /* Text ko totne se bachaega */
 }
 .m-tab:hover { color: var(--primary); }
 .m-tab.active { color: var(--primary); }
@@ -43,7 +51,6 @@ body {
     content: ''; position: absolute; bottom: -12px; left: 0; width: 100%; 
     height: 3px; background: var(--primary); border-radius: 3px 3px 0 0;
 }
-
 /* --- SUB TABS (Left aligned, under main tabs) --- */
 .tag-container { 
     display: flex; justify-content: flex-start; gap: 10px; flex-wrap: wrap;
@@ -136,6 +143,55 @@ body {
     color: white; font-size: 12px; padding: 8px 16px; border-radius: 8px; font-weight: 700; gap: 6px; border: none; text-decoration: none; margin-left: auto;
 }
 .quick-apply-btn:hover { background-position: right center; box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3); transform: translateY(-2px); color: white; }
+
+/* --- DEEP RESEARCH PERSONNEL LAYOUT --- */
+.personnel-list { 
+    margin-top: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+}
+.personnel-item { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    background: #ffffff; 
+    border: 1px solid var(--border-color); 
+    border-left: 4px solid #8b5cf6; 
+    padding: 16px 20px; 
+    border-radius: 12px; 
+    font-size: 14px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    animation: fadeIn 0.4s ease;
+    flex-wrap: wrap; 
+    gap: 15px;
+}
+.personnel-item strong { 
+    color: #0f172a; 
+    font-size: 16px;
+    margin-right: 12px; 
+}
+.personnel-item span, 
+.personnel-item text { 
+    color: #475569; 
+    background: #f1f5f9; 
+    padding: 4px 10px; 
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    border: 1px solid #e2e8f0;
+}
+.personnel-item .contact, 
+.personnel-item a[href^="mailto"],
+.personnel-item i.fa-envelope { 
+    color: #64748b; 
+    display: block; 
+    margin-top: 8px;
+    font-size: 14px;
+    width: 100%;
+}
+.personnel-item i { color: #8b5cf6; margin-right: 6px; }
 
 /* Email modal CSS remains exactly the same logic, just styled cleaner */
 .email-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(5px); z-index: 99999; align-items: center; justify-content: center; }
