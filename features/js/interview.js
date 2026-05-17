@@ -731,28 +731,52 @@ if(recognition) {
 }
 
 // ==========================================
-// 🔥 AUTO-SELECT TARGET FIRM FROM DASHBOARD
+// 🔥 AUTO-LOAD FIRMS & SELECT TARGET FIRM
 // ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    let pendingFirm = localStorage.getItem('targetFirm');
-    if (pendingFirm) {
-        let dropdown = document.getElementById('target-firm');
-        if (dropdown) {
-            let found = false;
-            for (let i = 0; i < dropdown.options.length; i++) {
-                if (dropdown.options[i].value.toLowerCase().includes(pendingFirm.toLowerCase()) || pendingFirm.toLowerCase().includes(dropdown.options[i].value.toLowerCase())) {
-                    dropdown.selectedIndex = i;
-                    found = true;
-                    break;
+document.addEventListener("DOMContentLoaded", async () => {
+    const dropdown = document.getElementById('target-firm');
+    if (!dropdown) return;
+
+    try {
+        const fbRes = await fetch('https://caversity-48b29-default-rtdb.firebaseio.com/feedbacks.json');
+        const fbData = await fbRes.json();
+        
+        let interviewFirms = new Set();
+        if (fbData) {
+            Object.values(fbData).forEach(item => {
+                if (item.firm && item.firm !== "Unspecified Firm") {
+                    interviewFirms.add(item.firm);
                 }
-            }
-            if (!found) {
-                let opt = document.createElement('option');
-                opt.value = pendingFirm;
-                opt.innerHTML = pendingFirm;
-                opt.selected = true;
-                dropdown.appendChild(opt);
-            }
+            });
         }
+
+        const activeFirmsArray = Array.from(interviewFirms).sort();
+        
+        dropdown.innerHTML = '';
+        if (activeFirmsArray.length === 0) {
+            dropdown.innerHTML = '<option value="">No recent interview data available</option>';
+        } else {
+            activeFirmsArray.forEach(firm => {
+                let opt = document.createElement('option');
+                opt.value = firm;
+                opt.innerHTML = firm;
+                dropdown.appendChild(opt);
+            });
+        }
+
+        let pendingFirm = localStorage.getItem('targetFirm');
+        if (pendingFirm) {
+            let found = Array.from(dropdown.options).some((opt, i) => {
+                if (opt.value.toLowerCase().includes(pendingFirm.toLowerCase()) || pendingFirm.toLowerCase().includes(opt.value.toLowerCase())) { dropdown.selectedIndex = i; return true; }
+                return false;
+            });
+            if (!found) { let opt = document.createElement('option'); opt.value = pendingFirm; opt.innerHTML = pendingFirm; opt.selected = true; dropdown.appendChild(opt); }
+            
+            // 🔥 Prevent Redirect Loop! Memory se nikal dein taake Dashboard daba kar anay pr dobara na bhej de.
+            localStorage.removeItem('targetFirm');
+        }
+    } catch(e) {
+        console.warn("Live DB Fetch error:", e);
+        dropdown.innerHTML = '<option value="">Error loading firms. Please type manually.</option>';
     }
 });
