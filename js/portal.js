@@ -26,7 +26,7 @@ const academicSubjects = [
     { id: 'caf7', name: 'CAF 7: Business Insights and Analysis', description: 'Strategic financial analysis and managerial decision-making tools.', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
     { id: 'caf8', name: 'CAF 8: Audit and Assurance Essentials', description: 'Audit methodologies and assurance services in professional practice.', price: 200, type: 'premium', url: 'audit.html' },
     { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Face a realistic technical and psychological interview with a strict AI Partner.', price: 400, type: 'premium', url: 'interview.html' },
-    { id: 'firm_hub', name: 'Firm Intelligence Hub', description: 'Track live firm inductions, interview feedbacks, and scan complete firm directory with AI.', price: 0, type: 'free', url: 'firm-hub.html' },
+    { id: 'firm_hub', name: 'Firm Prime', description: 'Track live firm inductions, interview feedbacks, and scan complete firm directory with AI.', price: 0, type: 'free', url: 'firm-hub.html' },
     { id: 'resume', name: 'CA Resume Builder', description: 'Craft a standout, ATS-friendly resume tailored specifically for CA & ACCA students.', price: 0, type: 'free', url: 'resume.html' },
     { id: 'sanctuary', name: 'The Sanctuary', description: 'Spiritual guidance and ethical foundations for professional excellence.', price: 0, type: 'free', url: 'blueprint.html' }
 ];
