@@ -26,7 +26,7 @@ const academicSubjects = [
     { id: 'caf7', name: 'CAF 7: Business Insights and Analysis', description: 'Strategic financial analysis and managerial decision-making tools.', price: 200, type: 'premium', url: 'subjects/caf7/index.html' },
     { id: 'caf8', name: 'CAF 8: Audit and Assurance Essentials', description: 'Audit methodologies and assurance services in professional practice.', price: 200, type: 'premium', url: 'audit.html' },
     { id: 'mock_interview', name: 'Firm Interview Simulator', description: 'Face a realistic technical and psychological interview with a strict AI Partner.', price: 400, type: 'premium', url: 'interview.html' },
-    { id: 'firm_hub', name: 'Firm Prime', description: 'Track live firm inductions, interview feedbacks, and scan complete firm directory with Caversity AI.', price: 0, type: 'free', url: 'firm-hub.html' },
+    { id: 'firm_hub', name: 'Firm Intelligence Hub', description: 'Track live firm inductions, interview feedbacks, and scan complete firm directory with AI.', price: 0, type: 'free', url: 'firm-hub.html' },
     { id: 'resume', name: 'CA Resume Builder', description: 'Craft a standout, ATS-friendly resume tailored specifically for CA & ACCA students.', price: 0, type: 'free', url: 'resume.html' },
     { id: 'sanctuary', name: 'The Sanctuary', description: 'Spiritual guidance and ethical foundations for professional excellence.', price: 0, type: 'free', url: 'blueprint.html' }
 ];
@@ -103,6 +103,26 @@ onAuthStateChanged(auth, async (user) => {
             
             renderSubjectCards();
             renderReviews();
+
+            // 🔥 PENDING FIRM INTERVIEW CHECK 🔥
+            let pendingFirm = localStorage.getItem('targetFirm');
+            if (pendingFirm && !activeSubs.includes('mock_interview')) {
+                setTimeout(() => {
+                    let interviewCard = document.getElementById('subject-card-mock_interview');
+                    let alertBox = document.getElementById('subscribe-alert');
+                    if (interviewCard && alertBox) {
+                        interviewCard.classList.add('blink-highlight');
+                        alertBox.innerHTML = `⚠️ First subscribe this to start your <b>${pendingFirm}</b> interview!`;
+                        alertBox.style.display = "block";
+                        interviewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                        setTimeout(() => {
+                            interviewCard.classList.remove('blink-highlight');
+                            alertBox.style.display = "none";
+                        }, 6000);
+                    }
+                }, 500); // Thora delay taake card pehle screen par render ho jaye
+            }
         } else {
             console.log("No user database record found!");
         }
@@ -118,6 +138,7 @@ function renderSubjectCards() {
         const isSubscribed = currentUserProfile.subscriptions.includes(subject.id);
         const card = document.createElement('div');
         card.className = `subject-card ${subject.type}-card`;
+        card.id = `subject-card-${subject.id}`;
 
         let buttonText = 'Subscribe to Get Access';
         let buttonClass = 'premium-action';
@@ -194,6 +215,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // 🔥 DYNAMIC CSS FOR BLINKING ALERT 🔥
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .blink-highlight {
+            animation: blinker 1s linear infinite;
+            border: 2px solid #ef4444 !important;
+            box-shadow: 0px 0px 15px rgba(239, 68, 68, 0.6) !important;
+            transition: all 0.3s ease-in-out;
+        }
+        @keyframes blinker {
+            50% { opacity: 0.8; transform: scale(1.02); }
+        }
+        .alert-message {
+            color: #ef4444; font-size: 13px; font-weight: 600; display: none;
+            margin-top: 10px; margin-bottom: 10px; background: #fef2f2;
+            padding: 8px; border-radius: 6px; text-align: center;
+        }
+    `;
+    document.head.appendChild(style);
 
    // 🔥 CLEAN FOCUS MODE LOGIC 🔥
     const focusBtn = document.getElementById('focus-mode-btn');
