@@ -17,23 +17,25 @@
 <body>
 
     <div class="hub-header">
-        <h1 style="display: flex; align-items: center; justify-content: center; gap: 12px;">
-            <svg width="40" height="40" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">
+        <div style="display: flex; align-items: center; gap: 15px; justify-content: center; margin-bottom: 12px;">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" style="width: 50px; height: 50px; filter: drop-shadow(0 4px 10px rgba(59, 130, 246, 0.2));">
                 <defs>
-                    <linearGradient id="logoGradientHub" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
                     </linearGradient>
                 </defs>
-                <circle cx="30" cy="30" r="28" fill="url(#logoGradientHub)" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="30" cy="30" r="28" fill="url(#logoGradient)" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
                 <text x="30" y="38" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">C</text>
                 <rect x="18" y="20" width="24" height="2" fill="#ffffff" rx="1"/>
                 <rect x="18" y="24" width="20" height="2" fill="#ffffff" rx="1"/>
                 <rect x="18" y="28" width="16" height="2" fill="#ffffff" rx="1"/>
             </svg>
-            Firm Prime
-        </h1>
-        <p>Track live firm inductions, interview feedbacks, and scan complete directory with AI.</p>
+            <h1 style="color: #1e293b; margin: 0;">
+                Firm <span style="background: linear-gradient(to right, #3b82f6, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Prime</span>
+            </h1>
+        </div>
+        <p>Navigate your CA & ACCA journey with real-time induction alerts, authentic firm feedback, and comprehensive progress tracking.</p>
     </div>
 
     <div class="main-container">
@@ -137,9 +139,9 @@
         </div>
 
         <div id="interview-section" class="section-content">
-            <div class="tracker-card">
-                <h3 style="font-family:'Poppins'; font-size:24px; margin-top:0;">🎯 Live AI Mock Interviews</h3>
-                <p style="color:#64748b; margin-bottom: 20px;">Practice with real AI-driven questions based on recent student feedback for the firms below.</p>
+            <div class="tracker-card" style="background: #0f172a; border: 1px solid #1e293b; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                <h3 style="font-family:'Poppins'; font-size:24px; margin-top:0; color: #f8fafc;">🎯 Live AI Mock Interviews</h3>
+                <p style="color:#94a3b8; margin-bottom: 20px;">Practice with real AI-driven questions based on recent student feedback for the firms below.</p>
                 
                 <div id="interview-firm-list" style="display: flex; flex-direction: column; gap: 15px;">
                     <!-- Dynamically populated via JS -->
