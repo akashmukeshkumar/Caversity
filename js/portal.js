@@ -113,20 +113,30 @@ onAuthStateChanged(auth, async (user) => {
                     return;
                 } else {
                     // 🔥 Package Nahi Hai Ya Sessions Khatam Hain To Blink Karwao
-                    setTimeout(() => {
-                        let interviewCard = document.getElementById('subject-card-mock_interview');
+                setTimeout(() => {
+                    let interviewCard = document.getElementById('subject-card-mock_interview');
+                    if (interviewCard) {
+                        // Agar pehle se alert nahi bana hua to bana do
                         let alertBox = document.getElementById('subscribe-alert');
-                        if (interviewCard && alertBox) {
-                            interviewCard.classList.add('blink-highlight');
-                            alertBox.innerHTML = `⚠️ First subscribe this to start your <b>${pendingFirm}</b> interview!`;
-                            alertBox.style.display = "block";
-                            interviewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            setTimeout(() => {
-                                interviewCard.classList.remove('blink-highlight');
-                                alertBox.style.display = "none";
-                            }, 6000);
+                        if (!alertBox) {
+                            alertBox = document.createElement('div');
+                            alertBox.id = 'subscribe-alert';
+                            alertBox.className = 'alert-message';
+                            interviewCard.insertBefore(alertBox, interviewCard.children[1]); // Card ke title ke neechay daal do
                         }
-                    }, 500);
+                        
+                        interviewCard.classList.add('blink-highlight');
+                        alertBox.innerHTML = `⚠️ First subscribe to start your <b>${pendingFirm}</b> interview!`;
+                        alertBox.style.display = "block";
+                        interviewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        
+                        setTimeout(() => {
+                            interviewCard.classList.remove('blink-highlight');
+                            // Alert ko 6 second baad hide kar dein
+                            alertBox.style.display = "none";
+                        }, 6000);
+                    }
+                }, 500);
                 }
             }
         } else {
