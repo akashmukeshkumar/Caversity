@@ -619,3 +619,57 @@
             loadFirebaseData();
             loadDirectoryData();
         });
+
+// ==========================================
+// 🎙️ LIVE MOCK INTERVIEW LOGIC
+// ==========================================
+
+// 1. Redirect Logic
+window.startMockInterview = function(firmName) {
+    // Save target firm for Portal to check
+    localStorage.setItem('targetFirm', firmName);
+    window.location.href = 'portal.html';
+};
+
+// 2. Population Logic (Filter: Sirf wo firms jinka Feedback ho)
+window.populateInterviewList = function() {
+    const listContainer = document.getElementById('interview-firm-list');
+    if (!listContainer) return;
+
+    let interviewFirms = new Set();
+    
+    // allData hamare paas Firebase se loaded array hai
+    // Hum sirf 'Feedback' type wali unique firms nikaal rahe hain
+    allData.forEach(item => {
+        if (item.type === 'Feedback' && item.firm && item.firm !== "Unspecified Firm") {
+            interviewFirms.add(item.firm);
+        }
+    });
+
+    const activeFirmsArray = Array.from(interviewFirms).sort();
+
+    if (activeFirmsArray.length === 0) {
+        listContainer.innerHTML = `
+            <div style="color:#94a3b8; text-align:center; padding: 30px;">
+                <i class="fas fa-microphone-slash" style="font-size: 30px; margin-bottom: 15px; opacity: 0.5;"></i><br>
+                Abhi koi interview data available nahi hai.
+            </div>`;
+        return;
+    }
+
+    // List clear karein aur naye professional cards add karein
+    listContainer.innerHTML = '';
+    activeFirmsArray.forEach(firm => {
+        listContainer.innerHTML += `
+            <div class="interview-firm-card">
+                <div class="firm-info-wrapper">
+                    <h3>${firm}</h3>
+                    <div class="ai-badge"><i class="fas fa-robot"></i> AI Partner Trained</div>
+                </div>
+                <button class="btn-start-interview" onclick="startMockInterview('${firm.replace(/'/g, "\\'")}')">
+                    Start Mock Interview
+                </button>
+            </div>
+        `;
+    });
+};
