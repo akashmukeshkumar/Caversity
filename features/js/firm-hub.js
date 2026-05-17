@@ -159,6 +159,8 @@
                 });
                 
                 applyFilters(); 
+                populateInterviewList(); // 🔥 Yeh add ho gaya hai 🔥
+                    
             } catch (error) {
                 console.error("Firebase Load Error:", error);
                 document.getElementById('feed-container').innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> Error loading intelligence data.</div>';
