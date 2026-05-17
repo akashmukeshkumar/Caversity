@@ -28,6 +28,7 @@
             { id: "Russell Bedford", aliases: ["russell bedford"] },
             { id: "Axiom World", aliases: ["axiom world", "axiom"] },
             { id: "Baker Tilly", aliases: ["baker tilly", "Bakertilly", "BT"] },
+            { id: "EUSOL (Odoo Partner)", aliases: ["eusol", "odoo", "odoo gold partner", "eusol (odoo gold partner)"] }
             { id: "Reanda Haroon Zakaria", aliases: ["reanda", "reanda haroon", "haroon zakaria"] }
         ];
 
