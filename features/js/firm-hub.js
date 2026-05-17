@@ -650,12 +650,12 @@
 
             activeFirmsArray.forEach(firm => {
                 listContainer.innerHTML += `
-                    <div style="background: rgba(255,255,255,0.8); border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
                         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left;">
-                            <h3 style="margin: 0; color: #1e293b; font-size: 16px; font-weight: 700;">${firm}</h3>
-                            <span style="font-size: 12px; color: #64748b; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; display: inline-block; white-space: nowrap;"><i class="fas fa-robot" style="color: #3b82f6;"></i> Caversity AI Powered</span>
+                            <h3 style="margin: 0; color: #f8fafc; font-size: 16px; font-weight: 700;">${firm}</h3>
+                            <span style="font-size: 12px; color: #94a3b8; background: rgba(59, 130, 246, 0.1); padding: 4px 8px; border-radius: 4px; display: inline-block; white-space: nowrap; border: 1px solid rgba(59, 130, 246, 0.2);"><i class="fas fa-robot" style="color: #60a5fa;"></i> Caversity AI Powered</span>
                         </div>
-                        <button onclick="startMockInterview('${firm.replace(/'/g, "\\'")}')" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; white-space: nowrap;">
+                        <button onclick="startMockInterview('${firm.replace(/'/g, "\\'")}')" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; white-space: nowrap; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);">
                             Start Interview
                         </button>
                     </div>
