@@ -197,6 +197,31 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
         const cvText = await extractTextFromPDF(cvFile);
         if(cvText.length < 50) throw new Error("CV seems empty or unreadable.");
         
+        // 🔥 FETCHING LIVE FIRM INTELLIGENCE (SUPER PROMPT DATA) 🔥
+        statusMsg.innerText = "⏳ Fetching Firm's Live Interview History...";
+        let firmHistoryText = "No specific recent feedback available. Proceed with general firm technicals.";
+        try {
+            const fbRes = await fetch('https://caversity-48b29-default-rtdb.firebaseio.com/feedbacks.json');
+            const fbData = await fbRes.json();
+            if (fbData) {
+                const now = Date.now();
+                const SIXTY_DAYS = 60 * 24 * 60 * 60 * 1000;
+                let recentQuestions = [];
+                let firmMainWord = firm.split(/[\s()]+/)[0].toLowerCase();
+                if (firmMainWord === "pwc" || firmMainWord === "a.f.") firmMainWord = "ferguson"; // Fallback smartness
+                
+                Object.values(fbData).forEach(item => {
+                    let itemFirm = item.firm ? item.firm.toLowerCase() : "";
+                    if ((itemFirm.includes(firmMainWord) || firm.toLowerCase().includes(itemFirm)) && item.timestamp && (now - item.timestamp <= SIXTY_DAYS)) {
+                        recentQuestions.push(item.message.replace(/\*/g, '').trim());
+                    }
+                });
+                if (recentQuestions.length > 0) {
+                    firmHistoryText = recentQuestions.join("\n---\n");
+                }
+            }
+        } catch(e) { console.warn("Live DB Fetch error:", e); }
+
         // 🔥 SMART JUGAR: Pre-flight Limit Check before entering room 🔥
         statusMsg.innerText = "⏳ Checking Partner's Schedule...";
         const isPartnerFree = await checkPartnerAvailability();
@@ -213,7 +238,7 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
             last_active: serverTimestamp()
         });
 
-        candidateData = { name, firm, cvText };
+        candidateData = { name, firm, cvText, firmHistory: firmHistoryText };
         statusMsg.innerText = "✅ CV Extracted. Entering Room...";
         
         setTimeout(startInterviewRoom, 1000);
@@ -704,3 +729,30 @@ if(recognition) {
 } else {
     alert("Your browser does not support Speech Recognition. Please use Chrome.");
 }
+
+// ==========================================
+// 🔥 AUTO-SELECT TARGET FIRM FROM DASHBOARD
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    let pendingFirm = localStorage.getItem('targetFirm');
+    if (pendingFirm) {
+        let dropdown = document.getElementById('target-firm');
+        if (dropdown) {
+            let found = false;
+            for (let i = 0; i < dropdown.options.length; i++) {
+                if (dropdown.options[i].value.toLowerCase().includes(pendingFirm.toLowerCase()) || pendingFirm.toLowerCase().includes(dropdown.options[i].value.toLowerCase())) {
+                    dropdown.selectedIndex = i;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                let opt = document.createElement('option');
+                opt.value = pendingFirm;
+                opt.innerHTML = pendingFirm;
+                opt.selected = true;
+                dropdown.appendChild(opt);
+            }
+        }
+    }
+});
