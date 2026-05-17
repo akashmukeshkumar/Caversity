@@ -251,15 +251,24 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                 const now = Date.now();
                 const SIXTY_DAYS = 60 * 24 * 60 * 60 * 1000;
                 let recentQuestions = [];
-                let firmMainWord = firm.split(/[\s()]+/)[0].toLowerCase();
-                if (firmMainWord === "pwc" || firmMainWord === "a.f.") firmMainWord = "ferguson"; // Fallback smartness
                 
                 Object.values(fbData).forEach(item => {
-                    let itemFirm = item.firm ? item.firm.toLowerCase() : "";
-                    if ((itemFirm.includes(firmMainWord) || firm.toLowerCase().includes(itemFirm)) && item.timestamp && (now - item.timestamp <= SIXTY_DAYS)) {
-                        recentQuestions.push(item.message.replace(/\*/g, '').trim());
+                    if (!item || !item.message) return;
+                    let msgLow = item.message.toLowerCase();
+                    
+                    // Strict Firm-Hub Filtering
+                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback");
+                    
+                    if (isFeedback) {
+                        let cleanFirm = getCleanFirmName(item.message, item.firm);
+                        
+                        // Check if this feedback belongs to the Target Firm selected by user
+                        if (cleanFirm === firm && item.timestamp && (now - item.timestamp <= SIXTY_DAYS)) {
+                            recentQuestions.push(item.message.replace(/\*/g, '').trim());
+                        }
                     }
                 });
+                
                 if (recentQuestions.length > 0) {
                     firmHistoryText = recentQuestions.join("\n---\n");
                 }
@@ -290,7 +299,6 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
         statusMsg.style.color = "#ef4444";
         statusMsg.innerText = "❌ Error reading CV: " + e.message;
     }
-});
 
 async function extractTextFromPDF(file) {
     const arrayBuffer = await file.arrayBuffer();
@@ -840,37 +848,3 @@ document.addEventListener("DOMContentLoaded", async () => {
         dropdown.innerHTML = '<option value="">Error loading firms. Please type manually.</option>';
     }
 });
-
-// 🔥 FETCHING LIVE FIRM INTELLIGENCE (SUPER PROMPT DATA) 🔥
-        statusMsg.innerText = "⏳ Fetching Firm's Live Interview History...";
-        let firmHistoryText = "No specific recent feedback available. Proceed with general firm technicals.";
-        try {
-            const fbRes = await fetch('https://caversity-48b29-default-rtdb.firebaseio.com/feedbacks.json');
-            const fbData = await fbRes.json();
-            if (fbData) {
-                const now = Date.now();
-                const SIXTY_DAYS = 60 * 24 * 60 * 60 * 1000;
-                let recentQuestions = [];
-                
-                Object.values(fbData).forEach(item => {
-                    if (!item || !item.message) return;
-                    let msgLow = item.message.toLowerCase();
-                    
-                    // Strict Firm-Hub Filtering
-                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback");
-                    
-                    if (isFeedback) {
-                        let cleanFirm = getCleanFirmName(item.message, item.firm);
-                        
-                        // Check if this feedback belongs to the Target Firm selected by user
-                        if (cleanFirm === firm && item.timestamp && (now - item.timestamp <= SIXTY_DAYS)) {
-                            recentQuestions.push(item.message.replace(/\*/g, '').trim());
-                        }
-                    }
-                });
-                
-                if (recentQuestions.length > 0) {
-                    firmHistoryText = recentQuestions.join("\n---\n");
-                }
-            }
-        } catch(e) { console.warn("Live DB Fetch error:", e); }
