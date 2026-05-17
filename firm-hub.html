@@ -40,12 +40,13 @@
 
     <div class="main-container">
         
-        <div class="master-tabs">
+      <div class="master-tabs">
             <button class="m-tab active" onclick="switchMainTab('live', this)"><i class="fas fa-bolt"></i> Live Updates</button>
             <button class="m-tab" onclick="switchMainTab('directory', this)"><i class="fas fa-building"></i> Firm Directory</button>
             <button class="m-tab" onclick="switchMainTab('tracker', this)"><i class="fas fa-hourglass-half"></i> CA Tracker</button>
+            <button class="m-tab" onclick="switchMainTab('interview', this)"><i class="fas fa-microphone-alt"></i> Mock Interview</button>
         </div>
-
+        
         <div id="live-section" class="section-content active">
             
             <div class="tag-container">
@@ -124,6 +125,19 @@
         </div>
 
     </div> <audio id="motivate-audio" src="features/assets/motivate.mp3"></audio>
+
+    <div id="interview-section" class="section-content">
+    <div class="tracker-card" style="text-align: left; border-top: 4px solid #3b82f6;">
+        <h3 style="font-family:'Poppins'; font-size:24px; margin-top:0; color:#1e3a8a;">
+            Live AI Mock Interviews
+        </h3>
+        <p style="color:#64748b; margin-bottom: 25px;">Practice technical rounds with Caversity AI using real questions shared by students for the firms below.</p>
+        
+        <div id="interview-firm-list" style="display: flex; flex-direction: column; gap: 15px;">
+            <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Organizing interview data...</div>
+        </div>
+    </div>
+</div>
 
     <div id="email-composer" class="email-modal-overlay">
         <div class="email-card">
