@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <div class="hub-header">
+  <div class="hub-header">
         <div style="display: flex; align-items: center; gap: 15px; justify-content: center; margin-bottom: 12px;">
             <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" style="width: 50px; height: 50px; filter: drop-shadow(0 4px 10px rgba(59, 130, 246, 0.2));">
                 <defs>
@@ -31,7 +31,7 @@
                 <rect x="18" y="24" width="20" height="2" fill="#ffffff" rx="1"/>
                 <rect x="18" y="28" width="16" height="2" fill="#ffffff" rx="1"/>
             </svg>
-            <h1 style="color: #1e293b; margin: 0;">
+            <h1 style="color: #1e293b;">
                 Firm <span style="background: linear-gradient(to right, #3b82f6, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Prime</span>
             </h1>
         </div>
@@ -41,18 +41,17 @@
     <div class="main-container">
         
         <div class="master-tabs">
-            <div class="m-tab active" onclick="switchMainTab('live', this)"><i class="fas fa-bolt"></i> Live Updates</div>
-            <div class="m-tab" onclick="switchMainTab('directory', this)"><i class="fas fa-building"></i> Firm Directory</div>
-            <div class="m-tab" onclick="switchMainTab('tracker', this)"><i class="fas fa-hourglass-half"></i> CA Tracker</div>
-            <div class="m-tab" onclick="switchMainTab('interview', this)"><i class="fas fa-microphone-alt"></i> Mock Interview</div>
+            <button class="m-tab active" onclick="switchMainTab('live', this)"><i class="fas fa-bolt"></i> Live Updates</button>
+            <button class="m-tab" onclick="switchMainTab('directory', this)"><i class="fas fa-building"></i> Firm Directory</button>
+            <button class="m-tab" onclick="switchMainTab('tracker', this)"><i class="fas fa-hourglass-half"></i> CA Tracker</button>
         </div>
 
         <div id="live-section" class="section-content active">
             
             <div class="tag-container">
-                <div class="tag hot-tag active" onclick="setLiveFilter('hot', this)">🔥 Hot (Last 48 Hrs)</div>
-                <div class="tag" onclick="setLiveFilter('Induction', this)">🚨 Inductions</div>
-                <div class="tag" onclick="setLiveFilter('Feedback', this)">🗣️ Feedbacks</div>
+                <button class="tag hot-tag active" onclick="setLiveFilter('hot', this)">🔥 Hot (Last 48 Hrs)</button>
+                <button class="tag" onclick="setLiveFilter('Induction', this)">🚨 Inductions</button>
+                <button class="tag" onclick="setLiveFilter('Feedback', this)">🗣️ Feedbacks</button>
             </div>
 
             <div class="smart-filters-container" id="smart-filters">
@@ -85,35 +84,20 @@
             <div class="directory-controls">
                 <select id="dir-city" onchange="searchDirectory()">
                     <option value="All">All Cities</option>
-                    <option value="Attock">Attock</option>
                     <option value="Faisalabad">Faisalabad</option>
-                    <option value="Gujranwala">Gujranwala</option>
-                    <option value="Gujrat">Gujrat</option>
-                    <option value="Hyderabad">Hyderabad</option>
-                    <option value="Islamabad">Islamabad</option>
                     <option value="Karachi">Karachi</option>
-                    <option value="Khanewal">Khanewal</option>
                     <option value="Lahore">Lahore</option>
-                    <option value="Mirpur (A.J.K)">Mirpur (A.J.K)</option>
-                    <option value="Multan">Multan</option>
-                    <option value="Peshawar">Peshawar</option>
-                    <option value="Quetta">Quetta</option>
-                    <option value="Rahim Yar Khan">Rahim Yar Khan</option>
-                    <option value="Rawalpindi">Rawalpindi</option>
-                    <option value="Sialkot">Sialkot</option>
-                    <option value="Swabi">Swabi</option>
-                    <option value="Toba Tek Singh">Toba Tek Singh</option>
-                    <option value="Wah Cantt">Wah Cantt</option>
+                    <option value="Islamabad">Islamabad</option>
                 </select>
                 <input type="text" id="dir-search" placeholder="Enter Firm Name..." onkeyup="searchDirectory()">
             </div>
             <div id="directory-container"></div>
         </div>
 
-        <div id="tracker-section" class="section-content">
+       <div id="tracker-section" class="section-content">
             <div class="tracker-card">
-                <h3 style="font-family:'Poppins'; font-size:24px; margin-top:0;">Track Your CA Journey</h3>
-                <p style="color:#64748b;">Enter the date you officially started CA (PRC/AFC/CAF registration).</p>
+                <h3 style="font-family:'Poppins'; font-size:24px; margin-top:0; color:#1e3a8a;">Track Your CA Journey</h3>
+                <p style="color:#64748b;">Enter the date you officially started CA.</p>
                 <input type="date" id="caStartDate" class="tracker-input" onchange="calculateJourney()">
                 
                 <div class="tracker-stats" id="tracker-results" style="display:none;">
@@ -135,31 +119,18 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
-        <div id="interview-section" class="section-content">
-            <div class="tracker-card" style="background: #0f172a; border: 1px solid #1e293b; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-                <h3 style="font-family:'Poppins'; font-size:24px; margin-top:0; color: #f8fafc;">🎯 Live AI Mock Interviews</h3>
-                <p style="color:#94a3b8; margin-bottom: 20px;">Practice with real AI-driven questions based on recent student feedback for the firms below.</p>
-                
-                <div id="interview-firm-list" style="display: flex; flex-direction: column; gap: 15px;">
-                    <!-- Dynamically populated via JS -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <audio id="motivate-audio" src="features/assets/motivate.mp3"></audio>
+    </div> <audio id="motivate-audio" src="features/assets/motivate.mp3"></audio>
 
     <div id="email-composer" class="email-modal-overlay">
         <div class="email-card">
             <h3><i class="fas fa-paper-plane"></i> Quick Apply Generator</h3>
-            <p>We've drafted a professional email for you. Just fill in your details!</p>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">We've drafted a professional email for you.</p>
             
             <input type="hidden" id="em-target" value="">
-            <input type="hidden" id="em-firm" value="">
-            <input type="hidden" id="em-person" value="">
             
             <div class="form-group">
                 <label>Your Full Name</label>
@@ -170,23 +141,16 @@
                 <select id="em-status" onchange="updateEmailDraft()">
                     <option value="CAF Passed Student">CAF Full Passed</option>
                     <option value="CAF Student (1 Paper Remaining)">CAF (1 Paper Remaining)</option>
-                    <option value="CAF Student (2 Papers Remaining)">CAF (2 Papers Remaining)</option>
-                    <option value="CAF Student (3 Papers Remaining)">CAF (3 Papers Remaining)</option>
-                    <option value="ACCA Affiliate">ACCA Affiliate</option>
-                    <option value="ACCA Professional Level">ACCA Professional Level</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Auto-Generated Cover Letter (You can edit this)</label>
-                <textarea id="em-body"></textarea>
+                <label>Cover Letter</label>
+                <textarea id="em-body" style="min-height: 120px;"></textarea>
             </div>
-            
-            <div class="attachment-warning"><i class="fas fa-paperclip" style="margin-top:2px;"></i> Security Note: Your browser requires you to attach your CV manually after your Mail app opens.</div>
             
             <div class="email-actions">
                 <button class="btn-em-cancel" onclick="closeEmailComposer()">Cancel</button>
-                <button class="btn-em-cancel" onclick="copyEmailDraft()"><i class="fas fa-copy"></i> Copy</button>
-                <button class="btn-em-send" onclick="triggerMailApp()"><i class="fas fa-envelope"></i> Open App (Gmail/Yahoo)</button>
+                <button class="btn-em-send" onclick="triggerMailApp()"><i class="fas fa-envelope"></i> Open App</button>
             </div>
         </div>
     </div>
