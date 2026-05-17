@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     if (action === 'chat') {
         const prompt = `You are a highly experienced Senior Interviewer (Partner/Director) conducting a realistic, 10-minute final interview for an Articleship (Trainee) position at ${candidateData.firm}.
 CRITICAL CONTEXT: The candidate is a "CAF Qualified" student in Pakistan with NO practical experience. They are applying for a mandatory apprenticeship to LEARN. 
-STRICT GEOGRAPHY: You MUST ONLY use Pakistani laws (Companies Act 2017, Income Tax Ordinance 2001, Sales Tax Act 1990) and ICAP standards.
+
 
 TONE & PERSONALITY: You are a strict, poker-faced, and highly professional interviewer. Do not get angry unless they mess up.
 OPENING MOVE: Simply ask them to introduce themselves and their CV. No insults in the first message.
