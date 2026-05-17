@@ -6,7 +6,51 @@ import { getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.j
 import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// API Keys and System Prompts are now securely hosted in the Vercel Backend (/api/live-audit-chat.js)
+// ==========================================
+// 🧠 THE BRAIN: SMART ALIAS EXTRACTION SYSTEM (Imported from Firm Hub)
+// ==========================================
+const FIRM_MAPPINGS = [
+    { id: "A.F. Ferguson (PwC)", aliases: ["ferguson", "aff", "pwc", "a.f. ferguson", "price waterhouse"] },
+    { id: "KPMG Taseer Hadi", aliases: ["kpmg", "taseer hadi"] },
+    { id: "EY Ford Rhodes", aliases: ["ey", "ernst & young", "ford rhodes", "ernst and young", "eyfr"] },
+    { id: "Yousuf Adil (Deloitte)", aliases: ["deloitte", "yousuf adil", "yousaf adil"] },
+    { id: "BDO Ebrahim", aliases: ["bdo", "ebrahim"] },
+    { id: "Grant Thornton", aliases: ["grant thornton", "gt", "gth"] },
+    { id: "Crowe Hussain Chaudhury", aliases: ["crowe", "hussain chaudhury"] },
+    { id: "RSM Awais Hyder", aliases: ["rsm", "awais hyder"] },
+    { id: "Baker Tilly", aliases: ["baker tilly", "mehmood idrees", "Bakertilly", "BT"] },
+    { id: "HLB Ijaz Tabussum", aliases: ["hlb", "ijaz tabussum", "ijaz tabassum"] },
+    { id: "Ilyas Saeed & Co", aliases: ["ilyas saeed", "isc"] },
+    { id: "Riaz Ahmad & Co", aliases: ["riaz ahmad", "rac"] },
+    { id: "BKR Ansari", aliases: ["bkr", "ansari"] },
+    { id: "UHY Hassan Naeem", aliases: ["uhy", "hassan naeem"] },
+    { id: "Muniff Ziauddin", aliases: ["muniff", "mz", "ziauddin"] },
+    { id: "Hameed Zahid & Co", aliases: ["hameed zahid", "hz & co"] },
+    { id: "Amir Alam Khan & Co", aliases: ["amir alam khan", "amir alam"] },
+    { id: "Tariq Abdul Ghani Maqbool", aliases: ["tagm", "tariq abdul ghani"] },
+    { id: "Fazal Mahmood & Co", aliases: ["fazal mahmood", "fazal mehmood"] },
+    { id: "Faruq Ali & Co", aliases: ["faruq ali", "farooq ali"] },
+    { id: "Parker Russell", aliases: ["parker russell"] },
+    { id: "Zahid Jamil & Co", aliases: ["zahid jamil"] },
+    { id: "Rahman Sarfaraz Rahim Iqbal Rafiq", aliases: ["rahman sarfaraz", "rahman sarfraz", "rsrir", "rsririr"] },
+    { id: "Russell Bedford", aliases: ["russell bedford"] },
+    { id: "Axiom World", aliases: ["axiom world", "axiom"] },
+    { id: "Reanda Haroon Zakaria", aliases: ["reanda", "reanda haroon", "haroon zakaria"] }
+];
+
+// Helper function to get clean firm name
+function getCleanFirmName(text, existingFirm) {
+    let lowerText = text.toLowerCase();
+    let firm = existingFirm || "Unspecified Firm";
+    
+    for (let f of FIRM_MAPPINGS) {
+        if (f.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(lowerText))) {
+            firm = f.id;
+            break;
+        }
+    }
+    return firm;
+}
 
 // 2. STATE VARIABLES
 let candidateData = { name: "", firm: "", cvText: "" };
@@ -731,11 +775,13 @@ if(recognition) {
 }
 
 // ==========================================
-// 🔥 AUTO-LOAD FIRMS & SELECT TARGET FIRM
+// 🔥 AUTO-LOAD FIRMS & SELECT TARGET FIRM (DIRECT FIREBASE)
 // ==========================================
 document.addEventListener("DOMContentLoaded", async () => {
     const dropdown = document.getElementById('target-firm');
     if (!dropdown) return;
+
+    dropdown.innerHTML = '<option value="">Fetching live firms from database...</option>';
 
     try {
         const fbRes = await fetch('https://caversity-48b29-default-rtdb.firebaseio.com/feedbacks.json');
@@ -744,14 +790,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         let interviewFirms = new Set();
         if (fbData) {
             Object.values(fbData).forEach(item => {
-                if (item.firm && item.firm !== "Unspecified Firm") {
-                    interviewFirms.add(item.firm);
+                if (!item || !item.message) return;
+                
+                let msgLow = item.message.toLowerCase();
+                
+                // 🔥 THE EXACT FIRM-HUB LOGIC (Only Feedback Allowed) 🔥
+                let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback");
+                
+                if (isFeedback) {
+                    let cleanFirm = getCleanFirmName(item.message, item.firm);
+                    if (cleanFirm !== "Unspecified Firm") {
+                        interviewFirms.add(cleanFirm);
+                    }
                 }
+                // (Inductions and Call alerts are automatically ignored here!)
             });
         }
 
-        const activeFirmsArray = Array.from(interviewFirms).sort();
-        
+        let activeFirmsArray = Array.from(interviewFirms).sort();
+
         dropdown.innerHTML = '';
         if (activeFirmsArray.length === 0) {
             dropdown.innerHTML = '<option value="">No recent interview data available</option>';
@@ -764,19 +821,56 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         }
 
+        // Auto-Select Firm if coming from Portal
         let pendingFirm = localStorage.getItem('targetFirm');
         if (pendingFirm) {
             let found = Array.from(dropdown.options).some((opt, i) => {
-                if (opt.value.toLowerCase().includes(pendingFirm.toLowerCase()) || pendingFirm.toLowerCase().includes(opt.value.toLowerCase())) { dropdown.selectedIndex = i; return true; }
+                if (opt.value.toLowerCase().includes(pendingFirm.toLowerCase()) || pendingFirm.toLowerCase().includes(opt.value.toLowerCase())) { 
+                    dropdown.selectedIndex = i; return true; 
+                }
                 return false;
             });
-            if (!found) { let opt = document.createElement('option'); opt.value = pendingFirm; opt.innerHTML = pendingFirm; opt.selected = true; dropdown.appendChild(opt); }
-            
-            // 🔥 Prevent Redirect Loop! Memory se nikal dein taake Dashboard daba kar anay pr dobara na bhej de.
+            if (!found) { 
+                let opt = document.createElement('option'); opt.value = pendingFirm; opt.innerHTML = pendingFirm; opt.selected = true; dropdown.appendChild(opt); 
+            }
             localStorage.removeItem('targetFirm');
         }
     } catch(e) {
-        console.warn("Live DB Fetch error:", e);
+        console.warn("Firebase firm load error:", e);
         dropdown.innerHTML = '<option value="">Error loading firms. Please type manually.</option>';
     }
 });
+
+// 🔥 FETCHING LIVE FIRM INTELLIGENCE (SUPER PROMPT DATA) 🔥
+        statusMsg.innerText = "⏳ Fetching Firm's Live Interview History...";
+        let firmHistoryText = "No specific recent feedback available. Proceed with general firm technicals.";
+        try {
+            const fbRes = await fetch('https://caversity-48b29-default-rtdb.firebaseio.com/feedbacks.json');
+            const fbData = await fbRes.json();
+            if (fbData) {
+                const now = Date.now();
+                const SIXTY_DAYS = 60 * 24 * 60 * 60 * 1000;
+                let recentQuestions = [];
+                
+                Object.values(fbData).forEach(item => {
+                    if (!item || !item.message) return;
+                    let msgLow = item.message.toLowerCase();
+                    
+                    // Strict Firm-Hub Filtering
+                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback");
+                    
+                    if (isFeedback) {
+                        let cleanFirm = getCleanFirmName(item.message, item.firm);
+                        
+                        // Check if this feedback belongs to the Target Firm selected by user
+                        if (cleanFirm === firm && item.timestamp && (now - item.timestamp <= SIXTY_DAYS)) {
+                            recentQuestions.push(item.message.replace(/\*/g, '').trim());
+                        }
+                    }
+                });
+                
+                if (recentQuestions.length > 0) {
+                    firmHistoryText = recentQuestions.join("\n---\n");
+                }
+            }
+        } catch(e) { console.warn("Live DB Fetch error:", e); }
