@@ -16,136 +16,106 @@
 </head>
 <body>
 
-   <div class="hub-header">
-        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px;">
-            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" style="width: 50px; height: 50px; filter: drop-shadow(0 4px 10px rgba(59, 130, 246, 0.4));">
+  <div class="hub-header">
+        <div style="display: flex; align-items: center; gap: 15px; justify-content: center; margin-bottom: 12px;">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" style="width: 50px; height: 50px; filter: drop-shadow(0 4px 10px rgba(59, 130, 246, 0.2));">
                 <defs>
                     <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+                        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
                     </linearGradient>
                 </defs>
-                <circle cx="30" cy="30" r="28" fill="url(#logoGradient)" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                <circle cx="30" cy="30" r="28" fill="url(#logoGradient)" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
                 <text x="30" y="38" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">C</text>
-                
                 <rect x="18" y="20" width="24" height="2" fill="#ffffff" rx="1"/>
                 <rect x="18" y="24" width="20" height="2" fill="#ffffff" rx="1"/>
                 <rect x="18" y="28" width="16" height="2" fill="#ffffff" rx="1"/>
             </svg>
-
-            <h1 style="font-size: 34px; font-weight: 800; margin: 0; font-family: 'Poppins', sans-serif; background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                Caversity <span style="background: linear-gradient(to right, #818cf8, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Pulse</span>
+            <h1 style="color: #1e293b;">
+                Caversity <span style="background: linear-gradient(to right, #3b82f6, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Pulse</span>
             </h1>
         </div>
-        <p style="color: #94a3b8; font-size: 16px; margin-top: 10px; max-width: 650px; line-height: 1.6;">
-            Navigate your CA journey with real-time induction alerts, authentic firm feedback, and comprehensive progress tracking.
-        </p>
+        <p>Navigate your CA journey with real-time induction alerts, authentic firm feedback, and comprehensive progress tracking.</p>
     </div>
 
     <div class="main-container">
         
-        <div class="sidebar-tabs">
-            <div class="m-tab active" onclick="switchMainTab('live', this)"><i class="fas fa-bolt"></i> Live Updates</div>
-            <div class="m-tab" onclick="switchMainTab('directory', this)"><i class="fas fa-building"></i> Firm Directory</div>
-            <div class="m-tab" onclick="switchMainTab('tracker', this)"><i class="fas fa-hourglass-half"></i> CA Tracker</div>
+        <div class="master-tabs">
+            <button class="m-tab active" onclick="switchMainTab('live', this)"><i class="fas fa-bolt"></i> Live Updates</button>
+            <button class="m-tab" onclick="switchMainTab('directory', this)"><i class="fas fa-building"></i> Firm Directory</button>
+            <button class="m-tab" onclick="switchMainTab('tracker', this)"><i class="fas fa-hourglass-half"></i> CA Tracker</button>
         </div>
 
-        <div class="content-area">
+        <div id="live-section" class="section-content active">
             
-            <div id="live-section" class="section-content active">
-                <div class="tag-container">
-                    <div class="tag hot-tag active" onclick="setLiveFilter('hot', this)">🔥 Hot (Last 48 Hrs)</div>
-                    <div class="tag" onclick="setLiveFilter('Induction', this)">🚨 Inductions</div>
-                    <div class="tag" onclick="setLiveFilter('Feedback', this)">🗣️ Feedbacks</div>
-                </div>
-
-                <div class="smart-filters-container" id="smart-filters">
-                    <div class="filter-group">
-                        <label>Filter By Firm</label>
-                        <select id="sel-firm" onchange="applyFilters()"><option value="All">All Firms</option></select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Filter By City</label>
-                        <select id="sel-city" onchange="applyFilters()"><option value="All">All Cities</option></select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Timeframe</label>
-                        <select id="sel-time" onchange="applyFilters()">
-                            <option value="all">All Time</option>
-                            <option value="7">Last 7 Days</option>
-                            <option value="14">Last 14 Days</option>
-                            <option value="30">Last 1 Month</option>
-                            <option value="60">Last 2 Months</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="feed-grid" id="feed-container">
-                    <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Fetching Live Intelligence...</div>
-                </div>
+            <div class="tag-container">
+                <button class="tag hot-tag active" onclick="setLiveFilter('hot', this)">🔥 Hot (Last 48 Hrs)</button>
+                <button class="tag" onclick="setLiveFilter('Induction', this)">🚨 Inductions</button>
+                <button class="tag" onclick="setLiveFilter('Feedback', this)">🗣️ Feedbacks</button>
             </div>
 
-            <div id="directory-section" class="section-content">
-                <div class="directory-controls">
-                    <select id="dir-city" onchange="searchDirectory()">
-                        <option value="All">All Cities</option>
-                        <option value="Attock">Attock</option>
-                        <option value="Faisalabad">Faisalabad</option>
-                        <option value="Gujranwala">Gujranwala</option>
-                        <option value="Gujrat">Gujrat</option>
-                        <option value="Hyderabad">Hyderabad</option>
-                        <option value="Islamabad">Islamabad</option>
-                        <option value="Karachi">Karachi</option>
-                        <option value="Lahore">Lahore</option>
-                        <option value="Multan">Multan</option>
-                        <option value="Peshawar">Peshawar</option>
-                        <option value="Quetta">Quetta</option>
-                        <option value="Rawalpindi">Rawalpindi</option>
-                        <option value="Sialkot">Sialkot</option>
+            <div class="smart-filters-container" id="smart-filters">
+                <div class="filter-group">
+                    <label>Filter By Firm</label>
+                    <select id="sel-firm" onchange="applyFilters()"><option value="All">All Firms</option></select>
+                </div>
+                <div class="filter-group">
+                    <label>Filter By City</label>
+                    <select id="sel-city" onchange="applyFilters()"><option value="All">All Cities</option></select>
+                </div>
+                <div class="filter-group">
+                    <label>Timeframe</label>
+                    <select id="sel-time" onchange="applyFilters()">
+                        <option value="all">All Time</option>
+                        <option value="7">Last 7 Days</option>
+                        <option value="14">Last 14 Days</option>
+                        <option value="30">Last 1 Month</option>
+                        <option value="60">Last 2 Months</option>
                     </select>
-                    <input type="text" id="dir-search" placeholder="Enter Firm Name..." onkeyup="searchDirectory()">
-                </div>
-                <div id="directory-container"></div>
-            </div>
-
-            <div id="tracker-section" class="section-content">
-                <div class="tracker-card">
-                    <h3 style="font-family:'Poppins'; font-size:24px; margin-top:0;">Track Your CA Journey</h3>
-                    <p style="color:#64748b;">Enter the date you officially started CA (PRC/AFC/CAF registration).</p>
-                    <input type="date" id="caStartDate" class="tracker-input" onchange="calculateJourney()">
-                    
-                    <div class="tracker-stats" id="tracker-results" style="display:none;">
-                        <div class="stat-box"><h4 id="stat-years">0</h4><p>Years Passed</p></div>
-                        <div class="stat-box"><h4 id="stat-months">0</h4><p>Total Months</p></div>
-                        <div class="stat-box"><h4 id="stat-attempts">0</h4><p>Est. Attempts Passed</p></div>
-                    </div>
-
-                    <div id="motivate-popup" class="motivate-wrapper">
-                        <div class="motivate-inner" id="motivate-inner">
-                            <div class="motivate-front" onclick="startMotivation()">
-                                <i class="fas fa-gift" style="font-size: 24px; margin-bottom: 10px; color: #f3e8ff;"></i>
-                                <h4>A Special Message For You</h4>
-                                <p>Click to open</p>
-                            </div>
-                            <div class="motivate-back">
-                                <h4>Close your eyes then listen...</h4>
-                                <div id="motivate-timer" class="m-timer">5</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-        </div> </div> <audio id="motivate-audio" src="features/assets/motivate.mp3"></audio>
+            <div class="feed-grid" id="feed-container">
+                <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Fetching Live Intelligence...</div>
+            </div>
+        </div>
+
+        <div id="directory-section" class="section-content">
+            <div class="directory-controls">
+                <select id="dir-city" onchange="searchDirectory()">
+                    <option value="All">All Cities</option>
+                    <option value="Faisalabad">Faisalabad</option>
+                    <option value="Karachi">Karachi</option>
+                    <option value="Lahore">Lahore</option>
+                    <option value="Islamabad">Islamabad</option>
+                </select>
+                <input type="text" id="dir-search" placeholder="Enter Firm Name..." onkeyup="searchDirectory()">
+            </div>
+            <div id="directory-container"></div>
+        </div>
+
+        <div id="tracker-section" class="section-content">
+            <div class="tracker-card">
+                <h3 style="font-family:'Poppins'; font-size:24px; margin-top:0; color:#1e3a8a;">Track Your CA Journey</h3>
+                <p style="color:#64748b;">Enter the date you officially started CA.</p>
+                <input type="date" id="caStartDate" class="tracker-input" onchange="calculateJourney()">
+                
+                <div class="tracker-stats" id="tracker-results" style="display:none;">
+                    <div class="stat-box"><h4 id="stat-years">0</h4><p>Years Passed</p></div>
+                    <div class="stat-box"><h4 id="stat-months">0</h4><p>Total Months</p></div>
+                    <div class="stat-box"><h4 id="stat-attempts">0</h4><p>Est. Attempts Passed</p></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <div id="email-composer" class="email-modal-overlay">
         <div class="email-card">
             <h3><i class="fas fa-paper-plane"></i> Quick Apply Generator</h3>
-            <p>We've drafted a professional email for you. Just fill in your details!</p>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">We've drafted a professional email for you.</p>
             
             <input type="hidden" id="em-target" value="">
-            <input type="hidden" id="em-firm" value="">
-            <input type="hidden" id="em-person" value="">
             
             <div class="form-group">
                 <label>Your Full Name</label>
@@ -156,22 +126,15 @@
                 <select id="em-status" onchange="updateEmailDraft()">
                     <option value="CAF Passed Student">CAF Full Passed</option>
                     <option value="CAF Student (1 Paper Remaining)">CAF (1 Paper Remaining)</option>
-                    <option value="CAF Student (2 Papers Remaining)">CAF (2 Papers Remaining)</option>
-                    <option value="CAF Student (3 Papers Remaining)">CAF (3 Papers Remaining)</option>
-                    <option value="ACCA Affiliate">ACCA Affiliate</option>
-                    <option value="ACCA Professional Level">ACCA Professional Level</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Auto-Generated Cover Letter (You can edit this)</label>
-                <textarea id="em-body"></textarea>
+                <label>Cover Letter</label>
+                <textarea id="em-body" style="min-height: 120px;"></textarea>
             </div>
-            
-            <div class="attachment-warning"><i class="fas fa-paperclip" style="margin-top:2px;"></i> Security Note: Your browser requires you to attach your CV manually after your Mail app opens.</div>
             
             <div class="email-actions">
                 <button class="btn-em-cancel" onclick="closeEmailComposer()">Cancel</button>
-                <button class="btn-em-cancel" onclick="copyEmailDraft()"><i class="fas fa-copy"></i> Copy</button>
                 <button class="btn-em-send" onclick="triggerMailApp()"><i class="fas fa-envelope"></i> Open App</button>
             </div>
         </div>
