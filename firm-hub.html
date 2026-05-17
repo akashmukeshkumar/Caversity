@@ -94,7 +94,7 @@
             <div id="directory-container"></div>
         </div>
 
-        <div id="tracker-section" class="section-content">
+       <div id="tracker-section" class="section-content">
             <div class="tracker-card">
                 <h3 style="font-family:'Poppins'; font-size:24px; margin-top:0; color:#1e3a8a;">Track Your CA Journey</h3>
                 <p style="color:#64748b;">Enter the date you officially started CA.</p>
@@ -105,10 +105,25 @@
                     <div class="stat-box"><h4 id="stat-months">0</h4><p>Total Months</p></div>
                     <div class="stat-box"><h4 id="stat-attempts">0</h4><p>Est. Attempts Passed</p></div>
                 </div>
+
+                <div id="motivate-popup" class="motivate-wrapper">
+                    <div class="motivate-inner" id="motivate-inner">
+                        <div class="motivate-front" onclick="startMotivation()">
+                            <i class="fas fa-gift" style="font-size: 24px; margin-bottom: 10px; color: #f3e8ff;"></i>
+                            <h4>A Special Message For You</h4>
+                            <p>Click to open</p>
+                        </div>
+                        <div class="motivate-back">
+                            <h4>Close your eyes then listen...</h4>
+                            <div id="motivate-timer" class="m-timer">5</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-    </div>
+    </div> <audio id="motivate-audio" src="features/assets/motivate.mp3"></audio>
 
     <div id="email-composer" class="email-modal-overlay">
         <div class="email-card">
