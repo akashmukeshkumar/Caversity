@@ -159,6 +159,7 @@
                 });
                 
                 applyFilters(); 
+                populateInterviewList();
             } catch (error) {
                 console.error("Firebase Load Error:", error);
                 document.getElementById('feed-container').innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> Error loading intelligence data.</div>';
@@ -619,3 +620,45 @@
             loadFirebaseData();
             loadDirectoryData();
         });
+
+        // ==========================================
+        // 🎙️ LIVE MOCK INTERVIEW FIRM LIST & REDIRECT
+        // ==========================================
+        window.startMockInterview = function(firmName) {
+            localStorage.setItem('targetFirm', firmName);
+            window.location.href = 'portal.html';
+        };
+
+        window.populateInterviewList = function() {
+            const listContainer = document.getElementById('interview-firm-list');
+            if (!listContainer) return;
+            listContainer.innerHTML = '';
+
+            let interviewFirms = new Set();
+            allData.forEach(item => {
+                if (item.type === 'Feedback' && item.firm !== "Unspecified Firm") {
+                    interviewFirms.add(item.firm);
+                }
+            });
+
+            const activeFirmsArray = Array.from(interviewFirms).sort();
+
+            if (activeFirmsArray.length === 0) {
+                listContainer.innerHTML = '<div style="color:#94a3b8; text-align:center; padding: 30px;"><i class="fas fa-microphone-slash" style="font-size: 30px; margin-bottom: 15px; opacity: 0.5;"></i><br>No recent interview data available right now.</div>';
+                return;
+            }
+
+            activeFirmsArray.forEach(firm => {
+                listContainer.innerHTML += `
+                    <div style="background: rgba(255,255,255,0.8); border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                        <div>
+                            <h3 style="margin: 0 0 5px 0; color: #1e293b; font-size: 16px;">${firm}</h3>
+                            <span style="font-size: 12px; color: #64748b; background: #f1f5f9; padding: 4px 8px; border-radius: 4px;"><i class="fas fa-robot" style="color: #3b82f6;"></i> AI Powered</span>
+                        </div>
+                        <button onclick="startMockInterview('${firm.replace(/'/g, "\\'")}')" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s;">
+                            Start Interview
+                        </button>
+                    </div>
+                `;
+            });
+        };
