@@ -779,11 +779,7 @@ window.submitStudentUpdate = async function() {
         return;
     }
     
-    let finalFormattedMessage = `[LIVE STUDENT POST]\n`;
-    if (firmInput) finalFormattedMessage += `Firm: *${firmInput}*\n`;
-    if (cityInput) finalFormattedMessage += `City: *${cityInput}*\n`;
-    finalFormattedMessage += `Update: ${messageInput}`;
-
+    let finalFormattedMessage = `[LIVE STUDENT POST]\n${messageInput}`;
     if (selectedFormType === 'Feedback') {
         finalFormattedMessage += `\nInterview experience feedback details updated.`;
     } else {
@@ -823,10 +819,6 @@ window.submitStudentUpdate = async function() {
         
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnHtml;
-        
-        document.getElementById('student-contribution-form').style.display = 'none';
-        const feedContainer = document.getElementById('feed-container');
-        if (feedContainer) feedContainer.style.display = 'block';
         
         const modal = document.getElementById('success-popup-modal');
         modal.classList.add('show');
