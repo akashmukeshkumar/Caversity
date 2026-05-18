@@ -670,27 +670,35 @@ window.populateInterviewList = function() {
 };
 
 // ==========================================
-// 🚀 STUDENT CONTRIBUTION FORM TOGGLE & INTEGRATED ROUTING
+// 🚀 INTEGRATED STUDENT FORM ARCHITECTURE
 // ==========================================
 let selectedFormType = 'Feedback';
 
 window.toggleStudentForm = function(el) {
     const formElement = document.getElementById('student-contribution-form');
+    const filtersBox = document.getElementById('smart-filters');
+    const feedContainer = document.getElementById('feed-container');
+    
     if (!formElement) return;
     
     if (formElement.style.display === 'none' || formElement.style.display === '') {
-        // 1. Open the intelligence form
+        // 1. Show the input contribution form layout
         formElement.style.display = 'block';
         
-        // 2. Remove active look from standard feed capsules, and apply premium blue active look to Share capsule
+        // 2. Hide filters and output feed data to prevent conflict layout
+        if (filtersBox) filtersBox.classList.remove('show');
+        if (feedContainer) feedContainer.style.display = 'none';
+        
+        // 3. Deactivate all tags, make Share tag active with uniform system style
         document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
         el.classList.add('active');
         
-        // 3. Smooth scroll down to form area
+        // 4. Clean view scroll
         formElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     } else {
-        // Close form and restore default "Hot" filter feed state so screen isn't empty
+        // Close form and revert cleanly to Hot status feed
         formElement.style.display = 'none';
+        if (feedContainer) feedContainer.style.display = 'block';
         el.classList.remove('active');
         
         const hotBtn = document.querySelector('.tag.hot-tag');
@@ -700,15 +708,15 @@ window.toggleStudentForm = function(el) {
     }
 }
 
-// Intercept existing tab switches so the student form closes gracefully when user goes back to standard feeds
+// Wrapper to hook into original filter clicks so layout handles form closing gracefully
 const originalSetLiveFilter = window.setLiveFilter;
 window.setLiveFilter = function(type, el) {
     const formElement = document.getElementById('student-contribution-form');
-    if (formElement) {
-        formElement.style.display = 'none'; // Close form smoothly to prevent overlaps
-    }
+    const feedContainer = document.getElementById('feed-container');
     
-    // Trigger standard table feed filtering logic
+    if (formElement) formElement.style.display = 'none';
+    if (feedContainer) feedContainer.style.display = 'block';
+    
     if (typeof originalSetLiveFilter === 'function') {
         originalSetLiveFilter(type, el);
     } else {
@@ -731,7 +739,6 @@ window.setLiveFilter = function(type, el) {
 
 window.setFormType = function(type) {
     selectedFormType = type;
-    
     const btnFeedback = document.getElementById('btn-type-feedback');
     const btnInduction = document.getElementById('btn-type-induction');
     const labelMsg = document.getElementById('stu-msg-label');
@@ -761,7 +768,6 @@ window.submitStudentUpdate = async function() {
     }
     
     let finalFormattedMessage = `[LIVE STUDENT POST]\nFirm: *${firmInput}*\nCity: *${cityInput}*\nUpdate: ${messageInput}`;
-    
     if (selectedFormType === 'Feedback') {
         finalFormattedMessage += `\nInterview experience feedback details updated.`;
     } else {
@@ -783,7 +789,7 @@ window.submitStudentUpdate = async function() {
         const submitBtn = document.querySelector('.btn-submit-student');
         const originalBtnHtml = submitBtn.innerHTML;
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Contribution...';
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
         
         await fetch(`${FIREBASE_URL}/${targetEndpoint}`, {
             method: 'POST',
@@ -799,6 +805,8 @@ window.submitStudentUpdate = async function() {
         submitBtn.innerHTML = originalBtnHtml;
         
         document.getElementById('student-contribution-form').style.display = 'none';
+        const feedContainer = document.getElementById('feed-container');
+        if (feedContainer) feedContainer.style.display = 'block';
         
         const modal = document.getElementById('success-popup-modal');
         modal.classList.add('show');
@@ -811,7 +819,7 @@ window.submitStudentUpdate = async function() {
         }, 3000);
         
     } catch (error) {
-        console.error("Error submitting data to firebase:", error);
+        console.error("Error submitting data:", error);
         alert("Something went wrong with connection. Please try again.");
     }
 }
