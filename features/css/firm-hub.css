@@ -351,6 +351,16 @@ body {
 
 
 /* ✍️ Share Button Blue Active State (Symmetric Theme) */
+.tag.share-tag {
+    background: #eff6ff;
+    color: #2563eb;
+    border-color: #bfdbfe;
+    font-weight: 700;
+}
+.tag.share-tag:hover {
+    background: #dbeafe;
+    border-color: #93c5fd;
+}
 .tag.share-tag.active {
     background: #2563eb !important;
     color: white !important;
