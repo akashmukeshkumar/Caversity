@@ -779,12 +779,7 @@ window.submitStudentUpdate = async function() {
         return;
     }
     
-    let finalFormattedMessage = `[LIVE STUDENT POST]\n${messageInput}`;
-    if (selectedFormType === 'Feedback') {
-        finalFormattedMessage += `\nInterview experience feedback details updated.`;
-    } else {
-        finalFormattedMessage += `\nInduction hiring trainee criteria details announced.`;
-    }
+    let finalFormattedMessage = messageInput;
     
     const now = new Date();
     const formattedTimeStr = now.toLocaleDateString('en-GB') + ", " + now.toLocaleTimeString('en-US', { hour12: true }).toLowerCase();
