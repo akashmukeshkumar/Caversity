@@ -668,3 +668,96 @@ window.populateInterviewList = function() {
         `;
     });
 };
+
+// ==========================================
+// 🚀 STUDENT CONTRIBUTION FORM LOGIC
+// ==========================================
+let selectedFormType = 'Feedback';
+
+window.setFormType = function(type) {
+    selectedFormType = type;
+    
+    const btnFeedback = document.getElementById('btn-type-feedback');
+    const btnInduction = document.getElementById('btn-type-induction');
+    const labelMsg = document.getElementById('stu-msg-label');
+    const inputMsg = document.getElementById('stu-message');
+    
+    if (type === 'Feedback') {
+        btnFeedback.classList.add('active');
+        btnInduction.classList.remove('active');
+        labelMsg.innerHTML = '<i class="far fa-comments"></i> Your Interview Feedback / Experience';
+        inputMsg.placeholder = "Type your detailed update here... What questions were asked? What was the status?";
+    } else {
+        btnInduction.classList.add('active');
+        btnFeedback.classList.remove('active');
+        labelMsg.innerHTML = '<i class="fas fa-bullhorn"></i> Induction Announcement Details';
+        inputMsg.placeholder = "Type induction criteria here... Which department is hiring? What is the deadline to apply?";
+    }
+}
+
+window.submitStudentUpdate = async function() {
+    const firmInput = document.getElementById('stu-firm').value.trim();
+    const cityInput = document.getElementById('stu-city').value.trim();
+    const messageInput = document.getElementById('stu-message').value.trim();
+    
+    if (!firmInput || !cityInput || !messageInput) {
+        alert("Please fill out all fields (Firm Name, City, and Message) before submitting!");
+        return;
+    }
+    
+    // Formatting matching your background text extractors
+    let finalFormattedMessage = `[LIVE STUDENT POST]\nFirm: *${firmInput}*\nCity: *${cityInput}*\nUpdate: ${messageInput}`;
+    
+    if (selectedFormType === 'Feedback') {
+        finalFormattedMessage += `\nInterview experience feedback details updated.`;
+    } else {
+        finalFormattedMessage += `\nInduction hiring trainee criteria details announced.`;
+    }
+    
+    const now = new Date();
+    const formattedTimeStr = now.toLocaleDateString('en-GB') + ", " + now.toLocaleTimeString('en-US', { hour12: true }).toLowerCase();
+    
+    const submissionPayload = {
+        message: finalFormattedMessage,
+        time: formattedTimeStr,
+        timestamp: now.getTime()
+    };
+    
+    const targetEndpoint = selectedFormType === 'Feedback' ? 'feedbacks.json' : 'inductions.json';
+    
+    try {
+        const submitBtn = document.querySelector('.btn-submit-student');
+        const originalBtnHtml = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Contribution...';
+        
+        await fetch(`${FIREBASE_URL}/${targetEndpoint}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(submissionPayload)
+        });
+        
+        // Clear inputs
+        document.getElementById('stu-firm').value = '';
+        document.getElementById('stu-city').value = '';
+        document.getElementById('stu-message').value = '';
+        
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHtml;
+        
+        // Popup show logic
+        const modal = document.getElementById('success-popup-modal');
+        modal.classList.add('show');
+        
+        setTimeout(() => {
+            modal.classList.remove('show');
+            if (typeof loadFirebaseData === 'function') {
+                loadFirebaseData(); // Refresh UI lists seamlessly
+            }
+        }, 3000);
+        
+    } catch (error) {
+        console.error("Error submitting data to firebase:", error);
+        alert("Something went wrong with connection. Please try again.");
+    }
+}
