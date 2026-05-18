@@ -259,7 +259,7 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                     let msgLow = item.message.toLowerCase();
                     
                     // Strict Firm-Hub Filtering
-                      let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("feedback") || msgLow.includes("gave test");
+                      let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
                     
                     if (isFeedback) {
                         let cleanFirm = getCleanFirmName(item.message, item.firm);
