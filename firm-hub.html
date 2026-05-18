@@ -53,11 +53,12 @@
                 <button class="tag hot-tag active" onclick="setLiveFilter('hot', this)">🔥 Hot (Last 48 Hrs)</button>
                 <button class="tag" onclick="setLiveFilter('Induction', this)">🚨 Inductions</button>
                 <button class="tag" onclick="setLiveFilter('Feedback', this)">🗣️ Feedbacks</button>
+                <button class="tag" onclick="setLiveFilter('Share', this)">✍️ Share</button>
             </div>
 
-<div class="student-form-card">
-    <div class="form-header-premium">
-        <h3><i class="fas fa-pen-nib"></i> Share Live Update / Feedback</h3>
+<div class="student-form-card" id="student-contribution-form" style="display: none;">
+    <div class="form-header-premium-centered">
+        <h3 class="blue-themed-title">Share Live Updates</h3>
         <p>Your contribution directly helps CA & ACCA students across Pakistan navigate their induction journey.</p>
     </div>
     
@@ -88,7 +89,7 @@
 
     <div class="form-submit-wrapper">
         <button class="btn-submit-student" onclick="submitStudentUpdate()">
-            <i class="fas fa-paper-plane"></i> Submit
+            <i class="fas fa-paper-plane"></i> Submit Live Intelligence
         </button>
     </div>
 </div>
