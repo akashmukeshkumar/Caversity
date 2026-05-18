@@ -348,7 +348,38 @@ body {
     .btn-start-interview { width: 100%; }
 }
 
-/* --- PREMIUM STUDENT FORM DESIGN --- */
+/* New 4th Capsule Unique Blue Accent Style */
+.tag-btn.contribution-toggle-tag {
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px dashed #3b82f6;
+}
+.tag-btn.contribution-toggle-tag.form-open-active {
+    background: #2563eb !important;
+    color: #ffffff !important;
+    border-style: solid;
+}
+
+/* Centered Form Header Styling with Blue Tone */
+.form-header-premium-centered {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.form-header-premium-centered h3.blue-themed-title {
+    margin: 0 0 6px 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    color: #2563eb; /* Pure Blue Accent Text */
+    font-weight: 700;
+}
+.form-header-premium-centered p {
+    margin: 0 auto;
+    max-width: 600px;
+    font-size: 13.5px;
+    color: var(--text-light);
+}
+
+/* Premium White Card Structure */
 .student-form-card {
     background: #ffffff;
     border: 1px solid var(--border-color);
@@ -356,25 +387,13 @@ body {
     padding: 30px;
     margin-bottom: 35px;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
-    border-top: 4px solid var(--primary);
+    border-top: 4px solid #2563eb;
+    animation: slideDownForm 0.3s ease-out;
 }
 
-.form-header-premium {
-    margin-bottom: 25px;
-}
-.form-header-premium h3 {
-    margin: 0 0 6px 0;
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    color: #0f172a;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.form-header-premium p {
-    margin: 0;
-    font-size: 13.5px;
-    color: var(--text-light);
+@keyframes slideDownForm {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .student-form-grid {
@@ -390,6 +409,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    text-align: left; /* Keep input labels left aligned internally for form structure */
 }
 .s-form-group label {
     font-size: 12px;
@@ -417,11 +437,12 @@ body {
     resize: vertical;
 }
 .s-form-group input:focus, .s-form-group textarea:focus {
-    border-color: var(--primary);
+    border-color: #2563eb;
     background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
 }
 
+/* Toggle Buttons for Selection Type */
 .type-toggle-container {
     display: flex;
     gap: 10px;
@@ -443,10 +464,11 @@ body {
 }
 .form-type-btn.active {
     background: #ffffff;
-    color: var(--primary);
+    color: #2563eb;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
+/* Submit Button styling */
 .form-submit-wrapper {
     margin-top: 25px;
     display: flex;
@@ -507,8 +529,8 @@ body {
 .popup-icon-circle {
     width: 70px;
     height: 70px;
-    background: #fef2f2;
-    color: #ef4444;
+    background: #eff6ff;
+    color: #2563eb;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -541,7 +563,7 @@ body {
     position: absolute;
     left: 0; top: 0; height: 100%;
     width: 0;
-    background: #ef4444;
+    background: #2563eb;
     animation: loadBar 3s linear forwards;
 }
 
