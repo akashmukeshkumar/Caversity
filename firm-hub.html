@@ -49,62 +49,12 @@
         
         <div id="live-section" class="section-content active">
             
-      <div class="tag-container">
-    <button class="tag hot-tag active" onclick="setLiveFilter('hot', this)">🔥 Hot (Last 48 Hrs)</button>
-    <button class="tag" onclick="setLiveFilter('Induction', this)">🚨 Inductions</button>
-    <button class="tag" onclick="setLiveFilter('Feedback', this)">🗣️ Feedbacks</button>
-    <button class="tag share-tag" id="tag-share-form" onclick="toggleStudentForm(this)">✍️ Share</button>
-</div>
-
-<div class="student-form-card" id="student-contribution-form" style="display: none;">
-    <div class="form-header-premium-centered">
-        <h3 class="blue-themed-title">Share Live Updates</h3>
-        <p>Your contribution directly helps CA & ACCA students across Pakistan navigate their induction journey.</p>
-    </div>
-    
-    <div class="student-form-grid">
-        <div class="s-form-group">
-            <label><i class="fas fa-layer-group"></i> Information Type</label>
-            <div class="type-toggle-container">
-                <button type="button" class="form-type-btn active" id="btn-type-feedback" onclick="setFormType('Feedback')">🗣️ Feedback</button>
-                <button type="button" class="form-type-btn" id="btn-type-induction" onclick="setFormType('Induction')">🚨 Induction</button>
+            <div class="tag-container">
+                <button class="tag hot-tag active" onclick="setLiveFilter('hot', this)">🔥 Hot (Last 48 Hrs)</button>
+                <button class="tag" onclick="setLiveFilter('Induction', this)">🚨 Inductions</button>
+                <button class="tag" onclick="setLiveFilter('Feedback', this)">🗣️ Feedbacks</button>
             </div>
-        </div>
 
-        <div class="s-form-group">
-            <label><i class="far fa-building"></i> Firm / Industry Name</label>
-            <input type="text" id="stu-firm" placeholder="E.g. A.F. Ferguson, KPMG, BDO, etc.">
-        </div>
-
-        <div class="s-form-group">
-            <label><i class="fas fa-map-marker-alt"></i> City</label>
-            <input type="text" id="stu-city" placeholder="E.g. Lahore, Karachi, Islamabad">
-        </div>
-
-        <div class="s-form-group full-width">
-            <label id="stu-msg-label"><i class="far fa-comments"></i> Your Interview Feedback / Experience</label>
-            <textarea id="stu-message" placeholder="Type your detailed update here... What questions were asked? What is the status?"></textarea>
-        </div>
-    </div>
-
-    <div class="form-submit-wrapper">
-        <button class="btn-submit-student" onclick="submitStudentUpdate()">
-            <i class="fas fa-paper-plane"></i> Submit
-        </button>
-    </div>
-</div>
-
-<div id="success-popup-modal" class="custom-popup-overlay">
-    <div class="custom-popup-card">
-        <div class="popup-icon-circle">
-            <i class="fas fa-heart"></i>
-        </div>
-        <h2>Thank You!</h2>
-        <p>Thank you for your valuable contribution for <strong>CA and ACCA students</strong>.</p>
-        <div class="popup-mini-loader"></div>
-    </div>
-</div>
-            
             <div class="smart-filters-container" id="smart-filters">
                 <div class="filter-group">
                     <label>Filter By Firm</label>
