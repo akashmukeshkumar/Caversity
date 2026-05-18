@@ -36,6 +36,8 @@ const FIRM_MAPPINGS = [
     { id: "Russell Bedford", aliases: ["russell bedford"] },
     { id: "Axiom World", aliases: ["axiom world", "axiom"] },
     { id: "EUSOL (Odoo Partner)", aliases: ["eusol", "odoo", "odoo gold partner", "eusol (odoo gold partner)"] },
+    { id: "PKF F.R.A.N.T.S.", aliases: ["pkf", "frants", "pkf-frants", "pkf frants"] },
+    { id: "YB Holdings", aliases: ["yb holdings", "yb holding", "yb"] },
     { id: "Reanda Haroon Zakaria", aliases: ["reanda", "reanda haroon", "haroon zakaria"] }
 ];
 
