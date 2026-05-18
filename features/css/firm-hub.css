@@ -350,20 +350,29 @@ body {
 
 
 
-/* Left-Aligned Premium Form Header */
-.form-header-premium-left {
-    text-align: left;
+/* ✍️ Share Button Blue Active State (Symmetric Theme) */
+.tag.share-tag.active {
+    background: #2563eb !important;
+    color: white !important;
+    border-color: #2563eb !important;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3) !important;
+}
+
+/* Centered Form Header with Premium Blue Text Title */
+.form-header-premium-centered {
+    text-align: center;
     margin-bottom: 25px;
 }
-.form-header-premium-left h3 {
+.form-header-premium-centered h3.blue-themed-title {
     margin: 0 0 6px 0;
     font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    color: var(--text-dark);
+    font-size: 22px;
+    color: #2563eb; /* ✨ Pure aesthetic blue text color */
     font-weight: 700;
 }
-.form-header-premium-left p {
-    margin: 0;
+.form-header-premium-centered p {
+    margin: 0 auto;
+    max-width: 600px;
     font-size: 13.5px;
     color: var(--text-light);
 }
@@ -376,7 +385,7 @@ body {
     padding: 30px;
     margin-bottom: 35px;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
-    border-top: 4px solid #10b981;
+    border-top: 4px solid #2563eb; /* ✨ Card top line now dynamic blue */
     animation: slideDownForm 0.25s ease-out;
 }
 
@@ -426,9 +435,9 @@ body {
     resize: vertical;
 }
 .s-form-group input:focus, .s-form-group textarea:focus {
-    border-color: #10b981;
+    border-color: #2563eb;
     background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.08);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
 }
 
 .type-toggle-container {
@@ -452,7 +461,7 @@ body {
 }
 .form-type-btn.active {
     background: #ffffff;
-    color: #10b981;
+    color: #2563eb;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
@@ -461,8 +470,9 @@ body {
     display: flex;
     justify-content: flex-end;
 }
+/* Premium Blue Submit Action Button */
 .btn-submit-student {
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
     color: white;
     font-weight: 600;
     font-size: 14px;
@@ -473,12 +483,12 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
     transition: all 0.3s;
 }
 .btn-submit-student:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
 }
 
 /* Custom Modal Popup for Thank You Alert */
@@ -516,8 +526,8 @@ body {
 .popup-icon-circle {
     width: 70px;
     height: 70px;
-    background: #e6f4ea;
-    color: #10b981;
+    background: #eff6ff;
+    color: #2563eb;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -550,6 +560,6 @@ body {
     position: absolute;
     left: 0; top: 0; height: 100%;
     width: 0;
-    background: #10b981;
+    background: #2563eb;
     animation: loadBar 3s linear forwards;
 }
