@@ -670,7 +670,7 @@ window.populateInterviewList = function() {
 };
 
 // ==========================================
-// 🚀 INTEGRATED STUDENT FORM ARCHITECTURE
+// 🚀 INTEGRATED STUDENT FORM BLUE THEMED LOGIC
 // ==========================================
 let selectedFormType = 'Feedback';
 
@@ -682,21 +682,20 @@ window.toggleStudentForm = function(el) {
     if (!formElement) return;
     
     if (formElement.style.display === 'none' || formElement.style.display === '') {
-        // 1. Show the input contribution form layout
+        // Form ko display karwain
         formElement.style.display = 'block';
         
-        // 2. Hide filters and output feed data to prevent conflict layout
+        // Output feeds aur dynamic drop-downs ko completely hide karein conflict se bachne k liye
         if (filtersBox) filtersBox.classList.remove('show');
         if (feedContainer) feedContainer.style.display = 'none';
         
-        // 3. Deactivate all tags, make Share tag active with uniform system style
+        // Baqi buttons ki active status close kar ke Share button ko dynamic professional blue look dain
         document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
         el.classList.add('active');
         
-        // 4. Clean view scroll
         formElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     } else {
-        // Close form and revert cleanly to Hot status feed
+        // Close action aur standard Hot state par back redirect
         formElement.style.display = 'none';
         if (feedContainer) feedContainer.style.display = 'block';
         el.classList.remove('active');
@@ -708,7 +707,6 @@ window.toggleStudentForm = function(el) {
     }
 }
 
-// Wrapper to hook into original filter clicks so layout handles form closing gracefully
 const originalSetLiveFilter = window.setLiveFilter;
 window.setLiveFilter = function(type, el) {
     const formElement = document.getElementById('student-contribution-form');
