@@ -129,6 +129,20 @@
                     seenMessages.add(msgTrimmed);
 
                     let meta = extractMetadata(i.message);
+
+                    // 🔥 SMART LOGIC: Agar student ne specifically form mein Firm ya City likha hai, toh usko preference dein
+                    if (i.firm && i.firm.trim() !== "") {
+                        let explicitFirm = i.firm.trim();
+                        let foundFirm = FIRM_MAPPINGS.find(f => f.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(explicitFirm.toLowerCase())));
+                        meta.firm = foundFirm ? foundFirm.id : explicitFirm; // Agar list mein hai to map karega, warna custom naam dikhayega
+                    }
+                    
+                    if (i.city && i.city.trim() !== "") {
+                        let explicitCity = i.city.trim();
+                        let foundCity = CITY_MAPPINGS.find(c => c.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(explicitCity.toLowerCase())));
+                        meta.city = foundCity ? foundCity.id : explicitCity;
+                    }
+
                     let msgLow = msgTrimmed.toLowerCase();
                     let type = 'Induction';
                     
@@ -760,12 +774,16 @@ window.submitStudentUpdate = async function() {
     const cityInput = document.getElementById('stu-city').value.trim();
     const messageInput = document.getElementById('stu-message').value.trim();
     
-    if (!firmInput || !cityInput || !messageInput) {
-        alert("Please fill out all fields (Firm Name, City, and Message) before submitting!");
+    if (!messageInput) {
+        alert("Please enter your message or update details before submitting!");
         return;
     }
     
-    let finalFormattedMessage = `[LIVE STUDENT POST]\nFirm: *${firmInput}*\nCity: *${cityInput}*\nUpdate: ${messageInput}`;
+    let finalFormattedMessage = `[LIVE STUDENT POST]\n`;
+    if (firmInput) finalFormattedMessage += `Firm: *${firmInput}*\n`;
+    if (cityInput) finalFormattedMessage += `City: *${cityInput}*\n`;
+    finalFormattedMessage += `Update: ${messageInput}`;
+
     if (selectedFormType === 'Feedback') {
         finalFormattedMessage += `\nInterview experience feedback details updated.`;
     } else {
@@ -780,6 +798,10 @@ window.submitStudentUpdate = async function() {
         time: formattedTimeStr,
         timestamp: now.getTime()
     };
+    
+    // 🔥 Agar explicitly firm/city field mein data mojood hai, toh isko alag se object mein store karein
+    if (firmInput) submissionPayload.firm = firmInput;
+    if (cityInput) submissionPayload.city = cityInput;
     
     const targetEndpoint = selectedFormType === 'Feedback' ? 'feedbacks.json' : 'inductions.json';
     
