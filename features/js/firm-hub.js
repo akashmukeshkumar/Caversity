@@ -670,23 +670,62 @@ window.populateInterviewList = function() {
 };
 
 // ==========================================
-// 🚀 STUDENT CONTRIBUTION FORM TOGGLE & ROUTING LOGIC
+// 🚀 STUDENT CONTRIBUTION FORM TOGGLE & INTEGRATED ROUTING
 // ==========================================
 let selectedFormType = 'Feedback';
 
-// Toggle Form Visibility when clicking 4th capsule
-window.toggleStudentForm = function() {
+window.toggleStudentForm = function(el) {
     const formElement = document.getElementById('student-contribution-form');
-    const toggleTagBtn = document.getElementById('tag-share-form');
+    if (!formElement) return;
     
-    if (formElement.style.display === 'none') {
+    if (formElement.style.display === 'none' || formElement.style.display === '') {
+        // 1. Open the intelligence form
         formElement.style.display = 'block';
-        toggleTagBtn.classList.add('form-open-active');
-        // Smooth scroll to form area
+        
+        // 2. Remove active look from standard feed capsules, and apply premium blue active look to Share capsule
+        document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        
+        // 3. Smooth scroll down to form area
         formElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     } else {
+        // Close form and restore default "Hot" filter feed state so screen isn't empty
         formElement.style.display = 'none';
-        toggleTagBtn.classList.remove('form-open-active');
+        el.classList.remove('active');
+        
+        const hotBtn = document.querySelector('.tag.hot-tag');
+        if (hotBtn && typeof setLiveFilter === 'function') {
+            setLiveFilter('hot', hotBtn);
+        }
+    }
+}
+
+// Intercept existing tab switches so the student form closes gracefully when user goes back to standard feeds
+const originalSetLiveFilter = window.setLiveFilter;
+window.setLiveFilter = function(type, el) {
+    const formElement = document.getElementById('student-contribution-form');
+    if (formElement) {
+        formElement.style.display = 'none'; // Close form smoothly to prevent overlaps
+    }
+    
+    // Trigger standard table feed filtering logic
+    if (typeof originalSetLiveFilter === 'function') {
+        originalSetLiveFilter(type, el);
+    } else {
+        currentLiveType = type;
+        document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        const filtersBox = document.getElementById('smart-filters');
+        if(type === 'hot') {
+            filtersBox.classList.remove('show');
+        } else {
+            filtersBox.classList.add('show');
+            updateDropdownsForCurrentTab();
+        }
+        document.getElementById('sel-firm').value = 'All';
+        document.getElementById('sel-city').value = 'All';
+        document.getElementById('sel-time').value = 'all';
+        applyFilters();
     }
 }
 
@@ -702,7 +741,7 @@ window.setFormType = function(type) {
         btnFeedback.classList.add('active');
         btnInduction.classList.remove('active');
         labelMsg.innerHTML = '<i class="far fa-comments"></i> Your Interview Feedback / Experience';
-        inputMsg.placeholder = "Type your detailed update here... What questions were asked? What was the status?";
+        inputMsg.placeholder = "Type your detailed update here... What questions were asked? What is the status?";
     } else {
         btnInduction.classList.add('active');
         btnFeedback.classList.remove('active');
@@ -721,7 +760,6 @@ window.submitStudentUpdate = async function() {
         return;
     }
     
-    // Auto formatting matching your existing background extraction pattern
     let finalFormattedMessage = `[LIVE STUDENT POST]\nFirm: *${firmInput}*\nCity: *${cityInput}*\nUpdate: ${messageInput}`;
     
     if (selectedFormType === 'Feedback') {
@@ -747,14 +785,12 @@ window.submitStudentUpdate = async function() {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Contribution...';
         
-        // Push payload data into Firebase Endpoint
         await fetch(`${FIREBASE_URL}/${targetEndpoint}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(submissionPayload)
         });
         
-        // Form inputs clean layout execution
         document.getElementById('stu-firm').value = '';
         document.getElementById('stu-city').value = '';
         document.getElementById('stu-message').value = '';
@@ -762,18 +798,15 @@ window.submitStudentUpdate = async function() {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnHtml;
         
-        // Hide form dynamically after submission and remove capsule active status
         document.getElementById('student-contribution-form').style.display = 'none';
-        document.getElementById('tag-share-form').classList.remove('form-open-active');
         
-        // Show premium Blue automated success modal popup 
         const modal = document.getElementById('success-popup-modal');
         modal.classList.add('show');
         
         setTimeout(() => {
             modal.classList.remove('show');
             if (typeof loadFirebaseData === 'function') {
-                loadFirebaseData(); // Refresh list to instantly stream new data
+                loadFirebaseData();
             }
         }, 3000);
         
