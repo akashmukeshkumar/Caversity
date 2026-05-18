@@ -348,16 +348,12 @@ body {
     .btn-start-interview { width: 100%; }
 }
 
-/* New 4th Capsule Unique Blue Accent Style */
-.tag-btn.contribution-toggle-tag {
-    background: #eff6ff;
-    color: #2563eb;
-    border: 1px dashed #3b82f6;
-}
-.tag-btn.contribution-toggle-tag.form-open-active {
+/* ✍️ Share Button Blue Accent Theme (When Active) */
+.tag.share-tag.active {
     background: #2563eb !important;
-    color: #ffffff !important;
-    border-style: solid;
+    color: white !important;
+    border-color: #2563eb !important;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3) !important;
 }
 
 /* Centered Form Header Styling with Blue Tone */
@@ -369,7 +365,7 @@ body {
     margin: 0 0 6px 0;
     font-family: 'Poppins', sans-serif;
     font-size: 22px;
-    color: #2563eb; /* Pure Blue Accent Text */
+    color: #2563eb;
     font-weight: 700;
 }
 .form-header-premium-centered p {
@@ -409,7 +405,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    text-align: left; /* Keep input labels left aligned internally for form structure */
+    text-align: left;
 }
 .s-form-group label {
     font-size: 12px;
@@ -442,7 +438,6 @@ body {
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
 }
 
-/* Toggle Buttons for Selection Type */
 .type-toggle-container {
     display: flex;
     gap: 10px;
@@ -468,7 +463,6 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-/* Submit Button styling */
 .form-submit-wrapper {
     margin-top: 25px;
     display: flex;
