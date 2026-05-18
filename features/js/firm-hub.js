@@ -670,9 +670,25 @@ window.populateInterviewList = function() {
 };
 
 // ==========================================
-// 🚀 STUDENT CONTRIBUTION FORM LOGIC
+// 🚀 STUDENT CONTRIBUTION FORM TOGGLE & ROUTING LOGIC
 // ==========================================
 let selectedFormType = 'Feedback';
+
+// Toggle Form Visibility when clicking 4th capsule
+window.toggleStudentForm = function() {
+    const formElement = document.getElementById('student-contribution-form');
+    const toggleTagBtn = document.getElementById('tag-share-form');
+    
+    if (formElement.style.display === 'none') {
+        formElement.style.display = 'block';
+        toggleTagBtn.classList.add('form-open-active');
+        // Smooth scroll to form area
+        formElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+        formElement.style.display = 'none';
+        toggleTagBtn.classList.remove('form-open-active');
+    }
+}
 
 window.setFormType = function(type) {
     selectedFormType = type;
@@ -705,7 +721,7 @@ window.submitStudentUpdate = async function() {
         return;
     }
     
-    // Formatting matching your background text extractors
+    // Auto formatting matching your existing background extraction pattern
     let finalFormattedMessage = `[LIVE STUDENT POST]\nFirm: *${firmInput}*\nCity: *${cityInput}*\nUpdate: ${messageInput}`;
     
     if (selectedFormType === 'Feedback') {
@@ -731,13 +747,14 @@ window.submitStudentUpdate = async function() {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Contribution...';
         
+        // Push payload data into Firebase Endpoint
         await fetch(`${FIREBASE_URL}/${targetEndpoint}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(submissionPayload)
         });
         
-        // Clear inputs
+        // Form inputs clean layout execution
         document.getElementById('stu-firm').value = '';
         document.getElementById('stu-city').value = '';
         document.getElementById('stu-message').value = '';
@@ -745,14 +762,18 @@ window.submitStudentUpdate = async function() {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnHtml;
         
-        // Popup show logic
+        // Hide form dynamically after submission and remove capsule active status
+        document.getElementById('student-contribution-form').style.display = 'none';
+        document.getElementById('tag-share-form').classList.remove('form-open-active');
+        
+        // Show premium Blue automated success modal popup 
         const modal = document.getElementById('success-popup-modal');
         modal.classList.add('show');
         
         setTimeout(() => {
             modal.classList.remove('show');
             if (typeof loadFirebaseData === 'function') {
-                loadFirebaseData(); // Refresh UI lists seamlessly
+                loadFirebaseData(); // Refresh list to instantly stream new data
             }
         }, 3000);
         
