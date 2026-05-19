@@ -1,7 +1,7 @@
         // ==========================================
         // 🧠 THE BRAIN: SMART ALIAS EXTRACTION SYSTEM
         // ==========================================
-       const FIRM_MAPPINGS = [
+     const FIRM_MAPPINGS = [
             // --- The Big 4 & Top Tier ---
             { id: "A.F. Ferguson (PwC)", aliases: ["ferguson", "aff", "pwc", "a.f. ferguson", "price waterhouse"] },
             { id: "KPMG Taseer Hadi", aliases: ["kpmg", "taseer hadi"] },
@@ -24,7 +24,7 @@
             { id: "Tariq Abdul Ghani Maqbool", aliases: ["tagm", "tariq abdul ghani"] },
             { id: "Faruq Ali & Co", aliases: ["faruq ali", "farooq ali"] },
             { id: "Parker Russell", aliases: ["parker russell", "parker russell ajs"] },
-            { id: "Zahid Jamil & Co", aliases: ["zahid jamil"] },
+            { id: "Zahid Jamil & Co", aliases: ["zahid jamil", "zahid jamil and co"] },
             { id: "Rahman Sarfaraz Rahim Iqbal Rafiq", aliases: ["rahman sarfaraz", "rahman sarfraz", "rsrir", "rsririr"] },
             { id: "PKF F.R.A.N.T.S.", aliases: ["pkf", "frants", "pkf-frants", "pkf frants"] },
             { id: "Reanda Haroon Zakaria", aliases: ["reanda", "reanda haroon", "haroon zakaria"] },
@@ -92,7 +92,8 @@
             { id: "Zain Suhail & Co", aliases: ["zain suhail"] },
             { id: "Zulfiqar Ahmad & Co", aliases: ["zulfiqar ahmad"] },
 
-            // --- Pre-existing independent firms ---
+            // --- Pre-existing & Restored Independent Firms ---
+            { id: "YB Holdings", aliases: ["YB holdings", "yb holding", "yb"] }, // 🔥 RESTORED
             { id: "Hameed Zahid & Co", aliases: ["hameed zahid", "hz & co"] },
             { id: "Amir Alam Khan & Co", aliases: ["amir alam khan", "amir alam"] },
             { id: "Fazal Mahmood & Co", aliases: ["fazal mahmood", "fazal mehmood"] },
