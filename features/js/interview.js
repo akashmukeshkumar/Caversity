@@ -254,12 +254,17 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                 const SIXTY_DAYS = 60 * 24 * 60 * 60 * 1000;
                 let recentQuestions = [];
                 
-                Object.values(fbData).forEach(item => {
+               Object.values(fbData).forEach(item => {
                     if (!item || !item.message) return;
                     let msgLow = item.message.toLowerCase();
                     
+                    // 🛑 STRICT FILTERS (Same as Firm Hub)
+                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("induction alert")) {
+                        return; // Skip these messages entirely
+                    }
+                    
                     // Strict Firm-Hub Filtering
-                      let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
+                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
                     
                     if (isFeedback) {
                         let cleanFirm = getCleanFirmName(item.message, item.firm);
