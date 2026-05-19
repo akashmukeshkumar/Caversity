@@ -414,16 +414,18 @@ body {
 
 /* --- A4 PDF Formatting Tweaks --- */
 .pdf-mode {
-    display: block !important; /* 🔥 Fixes height rendering issues in html2canvas */
+    display: block !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     max-height: none !important;
     height: auto !important;
+    padding: 30px !important; /* YEH PADDING A4 PAPER MEIN MARGIN BANEGI */
+    background: white !important;
 }
 .pdf-mode .trend-content {
     overflow: visible !important;
     max-height: none !important;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
 }
 .pdf-mode .hide-on-pdf {
     display: none !important;
