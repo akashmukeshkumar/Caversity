@@ -129,6 +129,9 @@ body {
 .stat-box h4 { margin: 0; font-size: 36px; color: var(--primary); }
 
 /* --- COLORFUL ANIMATED BUTTONS --- */
+.btn-em-copy { flex: 1; padding: 12px; border: 1px solid #3b82f6; background: #eff6ff; color: #3b82f6; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.btn-em-copy:hover { background: #dbeafe; }
+
 .btn-research, .quick-apply-btn, .btn-em-send { 
     background-size: 200% auto; transition: 0.4s; cursor: pointer;
     font-family: 'Inter', sans-serif; display: inline-flex; align-items: center; justify-content: center;
