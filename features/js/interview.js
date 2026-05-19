@@ -258,8 +258,8 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                     if (!item || !item.message) return;
                     let msgLow = item.message.toLowerCase();
                     
-                    // 🛑 STRICT FILTERS (Same as Firm Hub)
-                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("induction alert")) {
+                    // 🛑 STRICT FILTERS (Same as Firm Hub - Case Insensitive)
+                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("induction alert") || msgLow.includes("another toop")) {
                         return; // Skip these messages entirely
                     }
                     
