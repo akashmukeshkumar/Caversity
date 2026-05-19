@@ -414,6 +414,7 @@ body {
 
 /* --- A4 PDF Formatting Tweaks --- */
 .pdf-mode {
+    display: block !important; /* 🔥 Fixes height rendering issues in html2canvas */
     border-radius: 0 !important;
     box-shadow: none !important;
     max-height: none !important;
