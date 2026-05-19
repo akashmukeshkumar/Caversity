@@ -350,32 +350,28 @@ body {
 }
 
 
-/* AI Insight Button Styling */
+/* AI Insight Button */
 .ai-insight-btn {
-    background: #eff6ff;
-    color: #3b82f6;
-    border: 1px solid #dbeafe;
-    padding: 8px 12px;
-    border-radius: 8px;
+    background: #f0f9ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
     cursor: pointer;
-    font-size: 12px;
     font-weight: 600;
-    transition: 0.3s;
+    margin-top: 5px;
 }
-.ai-insight-btn:hover { background: #3b82f6; color: white; }
+.ai-insight-btn:hover { background: #2563eb; color: #fff; }
 
-/* Watermark and Modal */
-.caversity-watermark {
-    position: relative;
-    overflow: hidden;
+/* Report Modal (Watermark wala) */
+#reportModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+.modal-content { 
+    background: white; margin: 10% auto; padding: 20px; width: 80%; max-width: 600px;
+    border-radius: 12px; position: relative; overflow: hidden;
 }
-.caversity-watermark::after {
+.modal-content::after {
     content: "CAVERSITY";
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) rotate(-45deg);
-    font-size: 80px;
-    color: rgba(0,0,0,0.03);
-    pointer-events: none;
-    z-index: 0;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 80px; color: rgba(0,0,0,0.03); z-index: 0; pointer-events: none;
 }
