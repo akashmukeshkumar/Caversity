@@ -123,7 +123,7 @@
                 let processedData = [];
                 let seenMessages = new Set();
                 
-                for (let i of rawList) {
+               for (let i of rawList) {
                     if (!i || !i.message) continue;
                     
                     let msgTrimmed = i.message.trim();
@@ -133,9 +133,15 @@
                     let meta = extractMetadata(i.message);
                     let msgLow = msgTrimmed.toLowerCase();
                     let type = 'Induction';
+
+                    // 🛑 NEW: Hide messages with specific blocked words completely
+                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted")) {
+                        continue; 
+                    }
                     
                     // Smart Categorization Logic
-                   let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
+                    let isStrictInduction = msgLow.includes("induction alert"); // 🚀 Strict override
+                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
                     let isHiring = msgLow.includes("hiring") || msgLow.includes("induction") || msgLow.includes("trainee") || msgLow.includes("opportunity") || msgLow.includes("apply") || msgLow.includes("vacancies") || msgLow.includes("looking for");
                     
                     let isCallNotify = (msgLow.includes("received") || msgLow.includes("recieved") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
@@ -143,10 +149,13 @@
                     let isInterviewMailNotify = msgLow.includes("interview") && (msgLow.includes("mail") || msgLow.includes("email") || msgLow.includes("message"));
                     let isShort = i.message.length < 300; 
                     
-                    if (isShort && (isCallNotify || isTestNotify || isInterviewMailNotify) && !isFeedback && !isHiring) {
+                    // 🛠️ FIXED PRIORITY LOGIC
+                    if (isStrictInduction) {
+                        type = 'Induction'; // Agar "induction alert" hai toh sirf induction
+                    } else if (isShort && (isCallNotify || isTestNotify || isInterviewMailNotify) && !isFeedback && !isHiring) {
                         type = 'Call Alert';
                     } else if (isFeedback || msgLow.includes("interview") || msgLow.includes("feedback")) {
-                        type = 'Feedback';
+                        type = 'Feedback'; // Yahan pehle interview ki wajah se catch ho raha tha
                     } else if (isHiring) {
                         type = 'Induction';
                     }
