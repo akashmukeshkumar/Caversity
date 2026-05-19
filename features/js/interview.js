@@ -804,14 +804,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         const fbData = await fbRes.json();
         
         let interviewFirms = new Set();
-        if (fbData) {
+      if (fbData) {
             Object.values(fbData).forEach(item => {
                 if (!item || !item.message) return;
                 
                 let msgLow = item.message.toLowerCase();
                 
+                // 🛑 STRICT FILTERS (Same as Firm Hub)
+                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("induction alert")) {
+                    return; // Skip these messages entirely
+                }
+                
                 // 🔥 THE EXACT FIRM-HUB LOGIC (Only Feedback Allowed) 🔥
-                let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback");
+                let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
                 
                 if (isFeedback) {
                     let cleanFirm = getCleanFirmName(item.message, item.firm);
@@ -819,7 +824,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                         interviewFirms.add(cleanFirm);
                     }
                 }
-                // (Inductions and Call alerts are automatically ignored here!)
             });
         }
 
