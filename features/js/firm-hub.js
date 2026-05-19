@@ -125,6 +125,9 @@
                 
                for (let i of rawList) {
                     if (!i || !i.message) continue;
+
+                       // 🛑 NEW: Completely remove these names and channel tags
+                    i.message = i.message.replace(/saboor|saboir|CA Professionals Pakistan Official Induction Channel|Sawaira|Nouman/gi, '');
                     
                     let msgTrimmed = i.message.trim();
                     if (seenMessages.has(msgTrimmed)) continue;
