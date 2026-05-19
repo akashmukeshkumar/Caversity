@@ -64,6 +64,7 @@ body {
 .tag:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 .tag.active { background: #10b981; color: white; border-color: #10b981; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
 .tag.hot-tag.active { background: linear-gradient(135deg, #ef4444, #f43f5e); color: white; border-color: transparent; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); }
+.tag.fb-tag.active { background: #3b82f6; color: white; border-color: #3b82f6; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
 
 /* --- SECTIONS & CARDS --- */
 .section-content { display: none; animation: fadeIn 0.4s ease; }
