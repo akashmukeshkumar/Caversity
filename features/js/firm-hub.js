@@ -460,7 +460,7 @@ function searchDirectory() {
                         <h3>${newFirm.name}</h3>
                         <div class="dir-detail"><i class="fas fa-map-marker-alt"></i> <span><strong>Location:</strong> ${fullCityStr} (${newFirm.address})</span></div>
                         <div class="dir-detail"><i class="fas fa-info-circle"></i> <span>Phone/Email not verified in local database yet.</span></div>
-                        <button id="btn-${firmId}" class="btn-research" onclick="doDeepResearch('${newFirm.name}', '${newFirm.city}', '${firmId}')"><i class="fas fa-microchip"></i> Deep Research (Partners & HR)</button>
+                        <button id="btn-${firmId}" class="btn-research"onclick="doDeepResearch('${newFirm.name}', '${newFirm.city}', '${firmId}', '${newFirm.address.replace(/'/g, "\\'")}')"><i class="fas fa-microchip"></i> Deep Research (Partners & HR)</button>
                         <div id="res-${firmId}" class="personnel-list"></div>
                     </div>
                     <div class="dir-map"><iframe src="https://maps.google.com/maps?q=${mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
@@ -499,7 +499,7 @@ function loadMoreDirectory() {
                     <div class="dir-detail"><i class="fas fa-map-marker-alt"></i> <span><strong>${firm.city}:</strong> ${firm.address}</span></div>
                     ${phoneHtml}
                     ${emailHtml}
-                    <button id="btn-${firmId}" class="btn-research" onclick="doDeepResearch('${firm.name}', '${firm.city}', '${firmId}')"><i class="fas fa-microchip"></i> Deep Research (Partners & HR)</button>
+                    <button id="btn-${firmId}" class="btn-research"onclick="doDeepResearch('${firm.name}', '${firm.city}', '${firmId}', '${firm.address.replace(/'/g, "\\'")}')"><i class="fas fa-microchip"></i> Deep Research (Partners & HR)</button>
                     <div id="res-${firmId}" class="personnel-list"></div>
                 </div>
                 <div class="dir-map"><iframe loading="lazy" src="https://maps.google.com/maps?q=${mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
@@ -520,33 +520,33 @@ function loadMoreDirectory() {
     }
 }
 
-async function doDeepResearch(firmName, city, domId) {
+async function doDeepResearch(firmName, city, domId, address = "") {
     const btn = document.getElementById('btn-' + domId);
     const container = document.getElementById('res-' + domId);
     if(btn) btn.style.display = 'none';
-    container.innerHTML = '<div style="color:#8b5cf6; font-size:13px; font-weight:600; padding:10px;"><i class="fas fa-spinner fa-spin"></i> AI is extracting key personnel data...</div>';
+    container.innerHTML = '<div style="color:#8b5cf6; font-size:13px; font-weight:600; padding:10px;"><i class="fas fa-spinner fa-spin"></i> AI is scanning the web for verified personnel...</div>';
     
     try {
         let fbRes = await fetch(`${FIREBASE_URL}/firm_personnel/${domId}.json`);
         let fbData = await fbRes.json();
         
-        if (fbData && fbData.length > 0) { 
+        if (fbData) { 
             renderPersonnel(fbData, container, firmName); 
             return; 
         }
         
-        const prompt = "You are an expert corporate researcher specializing in Pakistani CA firms. Find 1 to 3 key personnel contacts (Partners, Directors, or HR Managers) for the CA Firm '" + firmName + "' located in '" + city + "', Pakistan. CRITICAL RULES: 1. If you know exact names and emails of active partners/HR heads, list them. 2. If exact specific names are unknown, DO NOT return an empty array. Instead, provide a generic departmental fallback like 'HR Recruitment Team' or 'Trainee Induction Head' and the firm's standard domain email (e.g., hr@afferguson.com, careers@kpmg.com.pk, or info@firmdomain.com) so the Quick Apply generator still functions. 3. Return ONLY a valid JSON array. Format: " + '[{"name": "Real Name or HR Team", "position": "Title", "contact": "email@domain.com"}]';
+        // STRICT PROMPT: Address is passed, fake data strictly prohibited.
+        const prompt = "You are an elite corporate researcher. Find 1 to 3 actual Key Personnel (Partners, Directors, or HR) for the CA Firm '" + firmName + "' located at '" + address + "', '" + city + "', Pakistan. CRITICAL RULES: 1. You MUST ONLY use real, verifiable names and emails associated with this specific office. 2. DO NOT invent names. DO NOT generate fake generic HR departments. 3. If you cannot find REAL public data for this specific firm, you MUST return an empty array []. 4. Return ONLY a valid JSON array. Format: " + '[{"name": "Real Name", "position": "Title", "contact": "email@domain.com"}]';
         
-        // FIX: Removed invalid markdown link syntax
         const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: { "Authorization": "Bearer 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", "Content-Type": "application/json" },
-            body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: [{ role: "system", content: prompt }], temperature: 0.2 })
+            body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: [{ role: "system", content: prompt }], temperature: 0.1 })
         });
         
         let groqData = await groqRes.json();
         let content = groqData.choices[0].message.content.trim();
-        let jsonMatch = content.match(/\[\s*\{[\s\S]*\}\s*\]/);
+        let jsonMatch = content.match(/\[\s*\{[\s\S]*\}\s*\]/) || content.match(/\[\s*\]/);
         let personnelData = [];
         
         if (jsonMatch) {
@@ -559,7 +559,7 @@ async function doDeepResearch(firmName, city, domId) {
         renderPersonnel(personnelData, container, firmName);
     } catch (e) {
         console.error("Deep Research Error:", e);
-        container.innerHTML = '<div style="color:#ef4444; font-size:13px; font-weight:600;"><i class="fas fa-exclamation-triangle"></i> Research failed. Please refresh and try again.</div>';
+        container.innerHTML = '<div style="color:#ef4444; font-size:13px; font-weight:600;"><i class="fas fa-exclamation-triangle"></i> No data found or request failed.</div>';
         if(btn) btn.style.display = 'inline-flex';
     }
 }
