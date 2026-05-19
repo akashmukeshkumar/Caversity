@@ -348,3 +348,57 @@ body {
     .interview-firm-card { flex-direction: column; align-items: flex-start; gap: 15px; }
     .btn-start-interview { width: 100%; }
 }
+
+
+/* --- AI TREND REPORT MODAL --- */
+.trend-report-card {
+    background: white; width: 100%; max-width: 700px; border-radius: 16px; 
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); position: relative;
+    overflow: hidden; display: flex; flex-direction: column; max-height: 90vh;
+}
+.trend-watermark {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 400px; font-weight: 900; font-family: 'Arial';
+    color: #e2e8f0; opacity: 0.15; pointer-events: none; z-index: 0;
+}
+.trend-header {
+    background: #f8fafc; padding: 20px 30px; border-bottom: 1px solid #e2e8f0;
+    display: flex; justify-content: space-between; align-items: center; z-index: 1;
+}
+.trend-brand { display: flex; align-items: center; gap: 15px; }
+.trend-brand h2 { margin: 0; font-size: 18px; color: #0f172a; font-family: 'Poppins'; }
+.trend-brand p { margin: 0; font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
+.btn-close-trend {
+    background: transparent; border: none; font-size: 20px; color: #64748b;
+    cursor: pointer; transition: 0.2s;
+}
+.btn-close-trend:hover { color: #ef4444; transform: scale(1.1); }
+
+.trend-meta {
+    padding: 15px 30px; display: flex; gap: 20px; background: white;
+    border-bottom: 1px dashed #cbd5e1; z-index: 1;
+}
+.trend-meta span { font-size: 13px; font-weight: 700; color: #3b82f6; display: flex; align-items: center; gap: 6px; background: #eff6ff; padding: 6px 12px; border-radius: 6px;}
+
+.trend-content {
+    padding: 30px; overflow-y: auto; z-index: 1; color: #334155; line-height: 1.7;
+    font-size: 15px;
+}
+.trend-content h4 { color: #1e3a8a; font-size: 18px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-top: 0; margin-bottom: 15px; font-family: 'Poppins';}
+.trend-content ul { padding-left: 20px; margin-bottom: 20px; }
+.trend-content li { margin-bottom: 8px; }
+.trend-content li strong { color: #0f172a; }
+
+.trend-footer {
+    background: #f1f5f9; padding: 15px 30px; font-size: 11px; color: #94a3b8;
+    text-align: center; border-top: 1px solid #e2e8f0; z-index: 1;
+}
+
+/* Updated Action Buttons for Interview List */
+.firm-actions-group { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-trend-report {
+    background: white; color: #8b5cf6; border: 1px solid #8b5cf6;
+    padding: 10px 15px; border-radius: 10px; font-weight: 600; font-size: 13px;
+    cursor: pointer; transition: 0.2s; white-space: nowrap; display: flex; align-items: center; gap: 6px;
+}
+.btn-trend-report:hover { background: #8b5cf6; color: white; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2); }
