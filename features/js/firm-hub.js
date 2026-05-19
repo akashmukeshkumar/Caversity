@@ -172,7 +172,8 @@ function extractMetadata(text) {
 // ==========================================
 // 📡 FIREBASE & STATE MANAGEMENT
 // ==========================================
-const FIREBASE_URL = '[https://caversity-48b29-default-rtdb.firebaseio.com](https://caversity-48b29-default-rtdb.firebaseio.com)';
+// FIX: Removed invalid markdown link syntax
+const FIREBASE_URL = 'https://caversity-48b29-default-rtdb.firebaseio.com';
 let allData = [];
 let currentLiveType = 'hot'; 
 
@@ -449,6 +450,7 @@ function searchDirectory() {
             firebaseFirms.push(newFirm);
             fetch(`${FIREBASE_URL}/firms_directory.json`, { method: 'POST', body: JSON.stringify(newFirm) }).catch(e => console.error(e));
 
+            // FIX: Repaired the broken iframe markdown
             container.innerHTML = `
                 <div style="background: rgba(16, 185, 129, 0.1); border: 1px dashed #10b981; padding: 15px; border-radius: 12px; margin-bottom: 20px; color: #cbd5e1; text-align: center; font-size: 14px;">
                     <i class="fas fa-database" style="color: #10b981; margin-right: 5px;"></i> Firm not found in local DB. <strong>Auto-Detected via Live Radar & Saved to Database permanently!</strong> 👇
@@ -461,7 +463,7 @@ function searchDirectory() {
                         <button id="btn-${firmId}" class="btn-research" onclick="doDeepResearch('${newFirm.name}', '${newFirm.city}', '${firmId}')"><i class="fas fa-microchip"></i> Deep Research (Partners & HR)</button>
                         <div id="res-${firmId}" class="personnel-list"></div>
                     </div>
-                    <div class="dir-map"><iframe src="[https://maps.google.com/maps?q=$](https://maps.google.com/maps?q=$){mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
+                    <div class="dir-map"><iframe src="https://maps.google.com/maps?q=${mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
                 </div>`;
         } else {
             container.innerHTML = '<div style="color:#94a3b8; text-align:center; padding: 40px;"><i class="fas fa-search-location" style="font-size: 30px; margin-bottom: 15px; opacity: 0.5;"></i><br>Select a city or search any firm name to find its details.</div>';
@@ -489,6 +491,7 @@ function loadMoreDirectory() {
             emailHtml = `<div class="dir-detail"><i class="fas fa-envelope"></i> <span><a href="mailto:${primaryEmail}" style="color:#2563eb; text-decoration:none;">${firm.email}</a></span></div>`;
         }
 
+        // FIX: Repaired the broken iframe markdown
         container.innerHTML += `
             <div class="dir-card">
                 <div class="dir-info">
@@ -499,7 +502,7 @@ function loadMoreDirectory() {
                     <button id="btn-${firmId}" class="btn-research" onclick="doDeepResearch('${firm.name}', '${firm.city}', '${firmId}')"><i class="fas fa-microchip"></i> Deep Research (Partners & HR)</button>
                     <div id="res-${firmId}" class="personnel-list"></div>
                 </div>
-                <div class="dir-map"><iframe loading="lazy" src="[https://maps.google.com/maps?q=$](https://maps.google.com/maps?q=$){mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
+                <div class="dir-map"><iframe loading="lazy" src="https://maps.google.com/maps?q=${mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
             </div>`;
     });
 
@@ -534,7 +537,8 @@ async function doDeepResearch(firmName, city, domId) {
         
         const prompt = "You are an expert corporate researcher specializing in Pakistani CA firms. Find 1 to 3 key personnel contacts (Partners, Directors, or HR Managers) for the CA Firm '" + firmName + "' located in '" + city + "', Pakistan. CRITICAL RULES: 1. If you know exact names and emails of active partners/HR heads, list them. 2. If exact specific names are unknown, DO NOT return an empty array. Instead, provide a generic departmental fallback like 'HR Recruitment Team' or 'Trainee Induction Head' and the firm's standard domain email (e.g., hr@afferguson.com, careers@kpmg.com.pk, or info@firmdomain.com) so the Quick Apply generator still functions. 3. Return ONLY a valid JSON array. Format: " + '[{"name": "Real Name or HR Team", "position": "Title", "contact": "email@domain.com"}]';
         
-        const groqRes = await fetch("[https://api.groq.com/openai/v1/chat/completions](https://api.groq.com/openai/v1/chat/completions)", {
+        // FIX: Removed invalid markdown link syntax
+        const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: { "Authorization": "Bearer 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", "Content-Type": "application/json" },
             body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: [{ role: "system", content: prompt }], temperature: 0.2 })
@@ -796,7 +800,8 @@ window.generateTrendReport = async function(firmName) {
 
         const prompt = "You are an elite Career Consultant specializing in CA articleship interviews. Analyze the following recent interview feedbacks for the firm '" + firmName + "'. Strictly extract and predict: 1. The most frequent technical topics asked. 2. Common exact interview questions. 3. Overall interview structure/style. CRITICAL RULES: - Prioritize technical topics and common questions heavily over HR details. - Respond ONLY with clean HTML elements (use h4, ul, li, p tags). Do NOT use any markdown backticks or markdown code block syntax. Start directly with the raw HTML text. - Keep the tone highly professional, objective, and insightful. - Do not mention the word 'feedback', act as if you are providing an 'Interview Blueprint' or 'Prediction'. Feedbacks to analyze:\n" + combinedText;
 
-        const groqRes = await fetch("[https://api.groq.com/openai/v1/chat/completions](https://api.groq.com/openai/v1/chat/completions)", {
+        // FIX: Removed invalid markdown link syntax
+        const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: { 
                 "Authorization": "Bearer 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", 
