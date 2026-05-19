@@ -120,17 +120,25 @@ function extractMetadata(text) {
     let firm = "Unspecified Firm";
     let city = "Unspecified City";
 
+    let earliestCityIndex = Infinity;
     for (let c of CITY_MAPPINGS) {
-        if (c.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(lowerText))) {
-            city = c.id;
-            break;
+        for (let alias of c.aliases) {
+            let match = lowerText.match(new RegExp(`\\b${alias}\\b`, 'i'));
+            if (match && match.index < earliestCityIndex) {
+                earliestCityIndex = match.index;
+                city = c.id;
+            }
         }
     }
 
+    let earliestFirmIndex = Infinity;
     for (let f of FIRM_MAPPINGS) {
-        if (f.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(lowerText))) {
-            firm = f.id;
-            break;
+        for (let alias of f.aliases) {
+            let match = lowerText.match(new RegExp(`\\b${alias}\\b`, 'i'));
+            if (match && match.index < earliestFirmIndex) {
+                earliestFirmIndex = match.index;
+                firm = f.id;
+            }
         }
     }
 
@@ -168,7 +176,6 @@ function extractMetadata(text) {
     }
     return { firm, city };
 }
-
 // ==========================================
 // 📡 FIREBASE & STATE MANAGEMENT
 // ==========================================
@@ -530,12 +537,13 @@ async function doDeepResearch(firmName, city, domId, address = "") {
         let fbRes = await fetch(`${FIREBASE_URL}/firm_personnel/${domId}.json`);
         let fbData = await fbRes.json();
         
-        if (fbData) { 
-            renderPersonnel(fbData, container, firmName); 
+        // 🔥 FIX: Ab agar data empty bhi hua toh Firebase read karega aur wahi se dikhayega!
+        if (fbData !== null) { 
+            let dataToRender = fbData.empty ? [] : fbData;
+            renderPersonnel(dataToRender, container, firmName); 
             return; 
         }
         
-        // STRICT PROMPT: Address is passed, fake data strictly prohibited.
         const prompt = "You are an elite corporate researcher. Find 1 to 3 actual Key Personnel (Partners, Directors, or HR) for the CA Firm '" + firmName + "' located at '" + address + "', '" + city + "', Pakistan. CRITICAL RULES: 1. You MUST ONLY use real, verifiable names and emails associated with this specific office. 2. DO NOT invent names. DO NOT generate fake generic HR departments. 3. If you cannot find REAL public data for this specific firm, you MUST return an empty array []. 4. Return ONLY a valid JSON array. Format: " + '[{"name": "Real Name", "position": "Title", "contact": "email@domain.com"}]';
         
         const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -555,7 +563,10 @@ async function doDeepResearch(firmName, city, domId, address = "") {
             personnelData = JSON.parse(content.replace(/```json/gi, '').replace(/```/g, '').trim());
         }
         
-        await fetch(`${FIREBASE_URL}/firm_personnel/${domId}.json`, { method: 'PUT', body: JSON.stringify(personnelData) });
+        // 🔥 FIX: Empty array ki jagah {empty: true} object save karain taky Firebase node delete na kary!
+        let saveData = personnelData.length === 0 ? { empty: true } : personnelData;
+        await fetch(`${FIREBASE_URL}/firm_personnel/${domId}.json`, { method: 'PUT', body: JSON.stringify(saveData) });
+        
         renderPersonnel(personnelData, container, firmName);
     } catch (e) {
         console.error("Deep Research Error:", e);
