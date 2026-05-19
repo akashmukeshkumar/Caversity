@@ -277,7 +277,10 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                 });
                 
                 if (recentQuestions.length > 0) {
-                    firmHistoryText = recentQuestions.join("\n---\n");
+                    // 🔥 NAYA LOGIC: Array ko reverse kar ke sirf latest 5 reviews pick karega
+                    // Reverse isliye taake jo sab se naye (latest) hain wo top par aa jayen
+                    let topQuestions = recentQuestions.reverse().slice(0, 5); 
+                    firmHistoryText = topQuestions.join("\n---\n");
                 }
             }
         } catch(e) { console.warn("Live DB Fetch error:", e); }
