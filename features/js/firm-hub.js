@@ -850,3 +850,48 @@ window.generateTrendReport = async function(firmName) {
         contentBox.innerHTML = '<div style="color:#ef4444; font-size:14px; font-weight:600; text-align:center;"><i class="fas fa-exclamation-triangle"></i> Failed to generate report. Please try again.</div>';
     }
 };
+
+// ==========================================
+// 📄 PDF GENERATION LOGIC (A4 FORMAT)
+// ==========================================
+window.downloadTrendPDF = function() {
+    const btn = document.querySelector('.btn-download-pdf');
+    const originalText = btn.innerHTML;
+    
+    // UI update while processing
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+    btn.disabled = true;
+
+    // Get the element to convert
+    const element = document.getElementById('pdf-export-area');
+    
+    // Add a temporary class to format it perfectly for A4
+    element.classList.add('pdf-mode');
+
+    // Extract firm name for the file name
+    let rawFirmName = document.getElementById('trend-firm-name').innerText.trim();
+    let safeName = rawFirmName.replace(/[^a-zA-Z0-9]/g, '_');
+    let fileName = `Caversity_Insight_${safeName}.pdf`;
+
+    // Configure high-quality A4 PDF settings
+    const opt = {
+        margin:       0.5, // Half-inch margins on all sides
+        filename:     fileName,
+        image:        { type: 'jpeg', quality: 1 },
+        html2canvas:  { scale: 2, useCORS: true, windowWidth: element.scrollWidth },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+    // Generate and save
+    html2pdf().set(opt).from(element).save().then(() => {
+        // Restore UI back to normal after download
+        element.classList.remove('pdf-mode');
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }).catch(err => {
+        console.error("PDF Generation Error:", err);
+        element.classList.remove('pdf-mode');
+        btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed';
+        setTimeout(() => { btn.innerHTML = originalText; btn.disabled = false; }, 3000);
+    });
+};
