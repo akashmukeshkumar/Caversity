@@ -835,7 +835,7 @@ window.generateTrendReport = async function(firmName) {
 };
 
 // ==========================================
-// 📄 PDF GENERATION LOGIC (A4 FORMAT)
+// 📄 PDF GENERATION LOGIC (A4 FORMAT - FIXED BLANK PAGE BUG)
 // ==========================================
 window.downloadTrendPDF = function() {
     const btn = document.querySelector('.btn-download-pdf');
@@ -851,11 +851,18 @@ window.downloadTrendPDF = function() {
     let safeName = rawFirmName.replace(/[^a-zA-Z0-9]/g, '_');
     let fileName = `Caversity_Insight_${safeName}.pdf`;
 
+    // FIXED CONFIGURATION FOR FIXED MODALS
     const opt = {
-        margin:       0.5,
+        margin:       0.4, // Clean padding for A4
         filename:     fileName,
-        image:        { type: 'jpeg', quality: 1 },
-        html2canvas:  { scale: 2, useCORS: true, windowWidth: element.scrollWidth },
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { 
+            scale: 2, 
+            useCORS: true, 
+            scrollY: 0,   // 🔥 CRITICAL FIX: Forces html2canvas to ignore page scroll
+            scrollX: 0,   // 🔥 CRITICAL FIX: Prevents horizontal shift
+            logging: false
+        },
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
 
