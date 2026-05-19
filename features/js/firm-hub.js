@@ -127,7 +127,7 @@
                     if (!i || !i.message) continue;
 
                        // 🛑 NEW: Completely remove these names and channel tags
-                    i.message = i.message.replace(/saboor|saboir|CA Professionals Pakistan Official Induction Channel|Sawaira|Nouman/gi, '');
+                    i.message = i.message.replace(/saboor|saboir|CA Professionals Pakistan|Sawaira|Nouman/gi, '');
                     
                     let msgTrimmed = i.message.trim();
                     if (seenMessages.has(msgTrimmed)) continue;
@@ -137,8 +137,8 @@
                     let msgLow = msgTrimmed.toLowerCase();
                     let type = 'Induction';
 
-                    // 🛑 NEW: Hide messages with specific blocked words completely
-                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted")) {
+                    // 🛑 NEW: Hide messages with specific blocked words completely (Case-Insensitive)
+                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("another toop")) {
                         continue; 
                     }
                     
