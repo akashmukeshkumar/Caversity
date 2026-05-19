@@ -172,7 +172,7 @@ function extractMetadata(text) {
 // ==========================================
 // 📡 FIREBASE & STATE MANAGEMENT
 // ==========================================
-const FIREBASE_URL = 'https://caversity-48b29-default-rtdb.firebaseio.com';
+const FIREBASE_URL = '[https://caversity-48b29-default-rtdb.firebaseio.com](https://caversity-48b29-default-rtdb.firebaseio.com)';
 let allData = [];
 let currentLiveType = 'hot'; 
 
@@ -194,7 +194,6 @@ async function loadFirebaseData() {
         for (let i of rawList) {
             if (!i || !i.message) continue;
 
-            // 🛑 NEW: Completely remove these names and channel tags
             i.message = i.message.replace(/saboor|saboir|CA Professionals Pakistan|Sawaira|Nouman/gi, '');
             
             let msgTrimmed = i.message.trim();
@@ -205,13 +204,11 @@ async function loadFirebaseData() {
             let msgLow = msgTrimmed.toLowerCase();
             let type = 'Induction';
 
-            // 🛑 NEW: Hide messages with specific blocked words completely (Case-Insensitive)
             if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("interview guidance") || msgLow.includes("another toop")) {
                 continue; 
             }
             
-            // Smart Categorization Logic
-            let isStrictInduction = msgLow.includes("induction alert"); // 🚀 Strict override
+            let isStrictInduction = msgLow.includes("induction alert");
             let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
             let isHiring = msgLow.includes("hiring") || msgLow.includes("induction") || msgLow.includes("trainee") || msgLow.includes("opportunity") || msgLow.includes("apply") || msgLow.includes("vacancies") || msgLow.includes("looking for");
             
@@ -220,18 +217,16 @@ async function loadFirebaseData() {
             let isInterviewMailNotify = msgLow.includes("interview") && (msgLow.includes("mail") || msgLow.includes("email") || msgLow.includes("message"));
             let isShort = i.message.length < 300; 
             
-            // 🛠️ FIXED PRIORITY LOGIC
             if (isStrictInduction) {
-                type = 'Induction'; // Agar "induction alert" hai toh sirf induction
+                type = 'Induction';
             } else if (isShort && (isCallNotify || isTestNotify || isInterviewMailNotify) && !isFeedback && !isHiring) {
                 type = 'Call Alert';
             } else if (isFeedback || msgLow.includes("interview") || msgLow.includes("feedback")) {
-                type = 'Feedback'; // Yahan pehle interview ki wajah se catch ho raha tha
+                type = 'Feedback';
             } else if (isHiring) {
                 type = 'Induction';
             }
 
-            // Only keep non-Call Alerts (Hides Shortlist/Call messages completely)
             if (type !== 'Call Alert') {
                 processedData.push({...i, type: type, ...meta});
             }
@@ -242,7 +237,7 @@ async function loadFirebaseData() {
         });
         
         applyFilters(); 
-        populateInterviewList(); // 🔥 Yeh add ho gaya hai 🔥
+        populateInterviewList();
             
     } catch (error) {
         console.error("Firebase Load Error:", error);
@@ -255,18 +250,14 @@ async function loadFirebaseData() {
 // ==========================================
 function getValidDate(item) {
     if (item.time) { 
-        // 1. Primary: Extract exactly the date part before comma "15/05/2026, 1:16:00 am" -> "15/05/2026"
         let dateStr = item.time.split(",")[0].trim();
-        let parts = dateStr.split(/[\/\-]/); // Split by slash or dash
+        let parts = dateStr.split(/[\/\-]/);
         let dateObj;
         
-        // Safari/iOS strict date parsing fix (Converts DD/MM/YYYY to YYYY/MM/DD safely)
         if (parts.length === 3) {
             if (parts[2].length === 4) {
-                // Format is DD/MM/YYYY
                 dateObj = new Date(`${parts[2]}/${parts[1]}/${parts[0]}`);
             } else if (parts[0].length === 4) {
-                // Format is YYYY/MM/DD
                 dateObj = new Date(`${parts[0]}/${parts[1]}/${parts[2]}`);
             } else {
                 dateObj = new Date(dateStr.replace(/-/g, '/'));
@@ -278,14 +269,11 @@ function getValidDate(item) {
         if (!isNaN(dateObj.getTime())) return dateObj;
     }
     
-    // 2. Fallback: If 'time' string is missing or invalid, use Timestamp
     let ts = parseInt(item.timestamp);
     if (!isNaN(ts) && ts > 0) { 
-        if (ts < 10000000000) ts *= 1000; // Handle seconds vs milliseconds automatically
+        if (ts < 10000000000) ts *= 1000;
         return new Date(ts); 
     }
-
-    // Absolute fallback to current time
     return new Date();
 }
 
@@ -473,7 +461,7 @@ function searchDirectory() {
                         <button id="btn-${firmId}" class="btn-research" onclick="doDeepResearch('${newFirm.name}', '${newFirm.city}', '${firmId}')"><i class="fas fa-microchip"></i> Deep Research (Partners & HR)</button>
                         <div id="res-${firmId}" class="personnel-list"></div>
                     </div>
-                    <div class="dir-map"><iframe src="https://maps.google.com/maps?q=${mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
+                    <div class="dir-map"><iframe src="[https://maps.google.com/maps?q=$](https://maps.google.com/maps?q=$){mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
                 </div>`;
         } else {
             container.innerHTML = '<div style="color:#94a3b8; text-align:center; padding: 40px;"><i class="fas fa-search-location" style="font-size: 30px; margin-bottom: 15px; opacity: 0.5;"></i><br>Select a city or search any firm name to find its details.</div>';
@@ -511,7 +499,7 @@ function loadMoreDirectory() {
                     <button id="btn-${firmId}" class="btn-research" onclick="doDeepResearch('${firm.name}', '${firm.city}', '${firmId}')"><i class="fas fa-microchip"></i> Deep Research (Partners & HR)</button>
                     <div id="res-${firmId}" class="personnel-list"></div>
                 </div>
-                <div class="dir-map"><iframe loading="lazy" src="https://maps.google.com/maps?q=${mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
+                <div class="dir-map"><iframe loading="lazy" src="[https://maps.google.com/maps?q=$](https://maps.google.com/maps?q=$){mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
             </div>`;
     });
 
@@ -539,19 +527,29 @@ async function doDeepResearch(firmName, city, domId) {
         let fbRes = await fetch(`${FIREBASE_URL}/firm_personnel/${domId}.json`);
         let fbData = await fbRes.json();
         
-        if (fbData && fbData.length > 0) { renderPersonnel(fbData, container, firmName); return; }
+        if (fbData && fbData.length > 0) { 
+            renderPersonnel(fbData, container, firmName); 
+            return; 
+        }
         
-        const prompt = `You are a highly accurate corporate researcher. Find 1 to 3 actual Key Personnel for the CA Firm '${firmName}' located in '${city}', Pakistan. You can provide any mix of Partners, Directors, or HR Managers. Prioritize individuals whose official emails are known. If a Partner's email is unknown but an HR contact is available, include the HR contact. Return ONLY a valid JSON array. Format: [{"name": "Real Name", "position": "Title", "contact": "email@address.com"}]. CRITICAL RULES: 1) DO NOT invent names. If no verifiable people exist, return an empty array []. 2) If exact email is unknown, return "N/A" in contact. NO markdown, ONLY valid JSON.`;
+        const prompt = "You are an expert corporate researcher specializing in Pakistani CA firms. Find 1 to 3 key personnel contacts (Partners, Directors, or HR Managers) for the CA Firm '" + firmName + "' located in '" + city + "', Pakistan. CRITICAL RULES: 1. If you know exact names and emails of active partners/HR heads, list them. 2. If exact specific names are unknown, DO NOT return an empty array. Instead, provide a generic departmental fallback like 'HR Recruitment Team' or 'Trainee Induction Head' and the firm's standard domain email (e.g., hr@afferguson.com, careers@kpmg.com.pk, or info@firmdomain.com) so the Quick Apply generator still functions. 3. Return ONLY a valid JSON array. Format: " + '[{"name": "Real Name or HR Team", "position": "Title", "contact": "email@domain.com"}]';
         
-        const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        const groqRes = await fetch("[https://api.groq.com/openai/v1/chat/completions](https://api.groq.com/openai/v1/chat/completions)", {
             method: "POST",
             headers: { "Authorization": "Bearer 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", "Content-Type": "application/json" },
             body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: [{ role: "system", content: prompt }], temperature: 0.2 })
         });
         
         let groqData = await groqRes.json();
-        let rawJson = groqData.choices[0].message.content.replace(/```json/gi, '').replace(/```/g, '').trim();
-        let personnelData = JSON.parse(rawJson);
+        let content = groqData.choices[0].message.content.trim();
+        let jsonMatch = content.match(/\[\s*\{[\s\S]*\}\s*\]/);
+        let personnelData = [];
+        
+        if (jsonMatch) {
+            personnelData = JSON.parse(jsonMatch[0]);
+        } else {
+            personnelData = JSON.parse(content.replace(/```json/gi, '').replace(/```/g, '').trim());
+        }
         
         await fetch(`${FIREBASE_URL}/firm_personnel/${domId}.json`, { method: 'PUT', body: JSON.stringify(personnelData) });
         renderPersonnel(personnelData, container, firmName);
@@ -709,7 +707,6 @@ window.addEventListener('DOMContentLoaded', () => {
 // 🎙️ LIVE MOCK INTERVIEW FIRM LIST & REDIRECT
 // ==========================================
 window.startMockInterview = function(firmName) {
-    // Yeh portal.html ko batayega ke user ne kis firm par click kiya hai
     localStorage.setItem('targetFirm', firmName);
     window.location.href = 'portal.html';
 };
@@ -777,23 +774,19 @@ window.generateTrendReport = async function(firmName) {
     const now = Date.now();
 
     try {
-        // 1. Check Firebase Cache First
         let cacheRes = await fetch(`${FIREBASE_URL}/firm_trends/${firmId}.json`);
         let cachedData = await cacheRes.json();
 
         if (cachedData && cachedData.timestamp && (now - cachedData.timestamp) < TWO_WEEKS_MS) {
-            // Use Cached Report
-            let cacheDate = new Date(cachedData.timestamp).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
             dateLabel.innerHTML = `<i class="fas fa-check-circle"></i> AI Insight Ready`;
             contentBox.innerHTML = cachedData.htmlReport;
             return;
         }
 
-        // 2. If no cache or expired, gather recent 5-7 feedbacks
         let firmFeedbacks = allData.filter(item => item.firm === firmName && item.type === 'Feedback');
         firmFeedbacks.sort((a, b) => getValidDate(b).getTime() - getValidDate(a).getTime());
         
-        let targetFeedbacks = firmFeedbacks.slice(0, 7); // Max 7 recent
+        let targetFeedbacks = firmFeedbacks.slice(0, 7);
         if (targetFeedbacks.length === 0) {
             contentBox.innerHTML = '<div class="empty-state">Not enough recent interview data to generate a reliable AI prediction.</div>';
             return;
@@ -801,23 +794,9 @@ window.generateTrendReport = async function(firmName) {
 
         let combinedText = targetFeedbacks.map(f => `- ${f.message}`).join('\n\n');
 
-        // 3. Hit Groq API to generate report
-        const prompt = `You are an elite Career Consultant specializing in CA articleship interviews. Analyze the following recent interview feedbacks for the firm '${firmName}'. 
-        Strictly extract and predict:
-        1. The most frequent technical topics asked.
-        2. Common exact interview questions.
-        3. Overall interview structure/style.
-        
-        CRITICAL RULES:
-        - Prioritize technical topics and common questions heavily over HR details.
-        - Respond ONLY with clean HTML elements (use <h4>, <ul>, <li>, <p>). Do NOT use markdown. Do NOT wrap in \`\`\`html.
-        - Keep the tone highly professional, objective, and insightful.
-        - Do not mention the word "feedback", act as if you are providing an "Interview Blueprint" or "Prediction".
-        
-        Feedbacks to analyze:
-        ${combinedText}`;
+        const prompt = "You are an elite Career Consultant specializing in CA articleship interviews. Analyze the following recent interview feedbacks for the firm '" + firmName + "'. Strictly extract and predict: 1. The most frequent technical topics asked. 2. Common exact interview questions. 3. Overall interview structure/style. CRITICAL RULES: - Prioritize technical topics and common questions heavily over HR details. - Respond ONLY with clean HTML elements (use h4, ul, li, p tags). Do NOT use any markdown backticks or markdown code block syntax. Start directly with the raw HTML text. - Keep the tone highly professional, objective, and insightful. - Do not mention the word 'feedback', act as if you are providing an 'Interview Blueprint' or 'Prediction'. Feedbacks to analyze:\n" + combinedText;
 
-        const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        const groqRes = await fetch("[https://api.groq.com/openai/v1/chat/completions](https://api.groq.com/openai/v1/chat/completions)", {
             method: "POST",
             headers: { 
                 "Authorization": "Bearer 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", 
@@ -833,7 +812,6 @@ window.generateTrendReport = async function(firmName) {
         let groqData = await groqRes.json();
         let reportHtml = groqData.choices[0].message.content.replace(/```html/gi, '').replace(/```/g, '').trim();
 
-        // 4. Save to Firebase to cache for the next 2 weeks
         await fetch(`${FIREBASE_URL}/firm_trends/${firmId}.json`, { 
             method: 'PUT', 
             body: JSON.stringify({
@@ -858,33 +836,25 @@ window.downloadTrendPDF = function() {
     const btn = document.querySelector('.btn-download-pdf');
     const originalText = btn.innerHTML;
     
-    // UI update while processing
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
     btn.disabled = true;
 
-    // Get the element to convert
     const element = document.getElementById('pdf-export-area');
-    
-    // Add a temporary class to format it perfectly for A4
     element.classList.add('pdf-mode');
 
-    // Extract firm name for the file name
     let rawFirmName = document.getElementById('trend-firm-name').innerText.trim();
     let safeName = rawFirmName.replace(/[^a-zA-Z0-9]/g, '_');
     let fileName = `Caversity_Insight_${safeName}.pdf`;
 
-    // Configure high-quality A4 PDF settings
     const opt = {
-        margin:       0.5, // Half-inch margins on all sides
+        margin:       0.5,
         filename:     fileName,
         image:        { type: 'jpeg', quality: 1 },
         html2canvas:  { scale: 2, useCORS: true, windowWidth: element.scrollWidth },
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
 
-    // Generate and save
     html2pdf().set(opt).from(element).save().then(() => {
-        // Restore UI back to normal after download
         element.classList.remove('pdf-mode');
         btn.innerHTML = originalText;
         btn.disabled = false;
