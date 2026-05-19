@@ -205,7 +205,7 @@
                     let type = 'Induction';
 
                     // 🛑 NEW: Hide messages with specific blocked words completely (Case-Insensitive)
-                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("another toop")) {
+                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("interview guidance") || msgLow.includes("another toop")) {
                         continue; 
                     }
                     
