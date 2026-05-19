@@ -43,7 +43,7 @@ const FIRM_MAPPINGS = [
             { id: "Nauman Javed Hasnain Rashid (NJHR)", aliases: ["nauman javed", "hasnain rashid", "njhr"] },
             { id: "Riaz Ahmad Saqib Gohar (RASG)", aliases: ["riaz ahmad saqib gohar", "rasg", "saqib gohar"] },
             { id: "Clarkson Hyde Saud Ansari", aliases: ["clarkson hyde", "saud ansari", "chsa"] },
-            { id: "Junaidy Shoaib Asad (JSA)", aliases: ["junaidy shoaib asad", "jsa"] },
+            { id: "Junaidy Shoaib Asad (JSA)", aliases: ["junaidy shoaib asad", "junaidi shoaib asad", "jsa"] },
             { id: "Salman & Raheel (SRCA)", aliases: ["salman & raheel", "salman and raheel", "srca"] },
 
             // --- Remaining New Additions ---
