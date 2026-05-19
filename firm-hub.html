@@ -164,6 +164,10 @@
                 <select id="em-status" onchange="updateEmailDraft()">
                     <option value="CAF Passed Student">CAF Full Passed</option>
                     <option value="CAF Student (1 Paper Remaining)">CAF (1 Paper Remaining)</option>
+                    <option value="CAF Student (2 Papers Remaining)">CAF (2 Papers Remaining)</option>
+                    <option value="CAF Student (3 Papers Remaining)">CAF (3 Papers Remaining)</option>
+                    <option value="ACCA Affiliate">ACCA Affiliate</option>
+                    <option value="ACCA Student">ACCA Strategic Level</option>
                 </select>
             </div>
             <div class="form-group">
@@ -173,7 +177,8 @@
             
             <div class="email-actions">
                 <button class="btn-em-cancel" onclick="closeEmailComposer()">Cancel</button>
-                <button class="btn-em-send" onclick="triggerMailApp()"><i class="fas fa-envelope"></i> Open App</button>
+                <button class="btn-em-copy" onclick="copyEmailDraft()"><i class="far fa-copy"></i> Copy</button>
+                <button class="btn-em-send" onclick="triggerMailApp()"><i class="fas fa-envelope"></i> App</button>
             </div>
         </div>
     </div>
