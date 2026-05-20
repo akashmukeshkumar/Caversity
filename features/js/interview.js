@@ -359,7 +359,7 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                     let msgLow = item.message.toLowerCase();
                     
                  // 🛑 100% FIRM HUB SYNC LOGIC
-                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || /\bmail\b/.test(msgLow) || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop")) {
+                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop")) {
                     return; // Skip these messages entirely
                 }
                     
@@ -932,7 +932,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 let msgLow = item.message.toLowerCase();
                 
                // 🛑 100% FIRM HUB SYNC LOGIC
-                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || /\bmail\b/.test(msgLow) || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop")) {
+                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop")) {
                     return; // Skip these messages entirely
                 }
                 
