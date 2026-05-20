@@ -14,7 +14,7 @@ const FIRM_MAPPINGS = [
             { id: "A.F. Ferguson (PwC)", aliases: ["ferguson", "aff", "pwc", "a.f. ferguson", "price waterhouse"] },
             { id: "KPMG Taseer Hadi", aliases: ["kpmg", "taseer hadi"] },
             { id: "EY Ford Rhodes", aliases: ["ey", "ernst & young", "ford rhodes", "ernst and young", "eyfr", "ey fords rhodes"] },
-            { id: "Yousuf Adil (Deloitte)", aliases: ["deloitte", "yousuf adil", "yusuf adil", "yousaf adil", "ya"] },
+            { id: "Yousuf Adil (Deloitte)", aliases: ["deloitte", "yousuf adil", "yusuf adil", "yousaf adil", "ya", "yousif adil"] },
             { id: "BDO Ebrahim", aliases: ["bdo", "ebrahim", "ibrahim"] },
             { id: "Grant Thornton", aliases: ["grant thornton", "gt", "gth"] },
             { id: "Forvis Mazars", aliases: ["forvis", "mazars"] },
@@ -365,7 +365,7 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                     
                     let type = 'Induction';
                     let isStrictInduction = msgLow.includes("induction alert");
-                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test") || msgLow.includes("mcqs");
+                   let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("mcqs") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test") || msgLow.includes("1st interview") || msgLow.includes("technical questions") || msgLow.includes("any questions");
                     let isHiring = msgLow.includes("hiring") || msgLow.includes("induction") || msgLow.includes("trainee") || msgLow.includes("opportunity") || msgLow.includes("apply") || msgLow.includes("vacancies") || msgLow.includes("looking for");
                     
                     let isCallNotify = (msgLow.includes("received") || msgLow.includes("recieved") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
@@ -938,7 +938,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 
                 let type = 'Induction';
                 let isStrictInduction = msgLow.includes("induction alert");
-                let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test") || msgLow.includes("mcqs");
+              let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("mcqs") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test") || msgLow.includes("1st interview") || msgLow.includes("technical questions") || msgLow.includes("any questions");
                 let isHiring = msgLow.includes("hiring") || msgLow.includes("induction") || msgLow.includes("trainee") || msgLow.includes("opportunity") || msgLow.includes("apply") || msgLow.includes("vacancies") || msgLow.includes("looking for");
                 
                 let isCallNotify = (msgLow.includes("received") || msgLow.includes("recieved") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
