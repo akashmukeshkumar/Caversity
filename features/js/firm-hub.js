@@ -109,7 +109,7 @@ const CITY_MAPPINGS = [
     { id: "Rawalpindi", aliases: ["rawalpindi", "pindi", "rwp"] },
     { id: "Faisalabad", aliases: ["faisalabad", "Faisalabad", "Faislabad", "fsd"] },
     { id: "Multan", aliases: ["multan", "mux"] },
-    { id: "Peshawar", aliases: ["peshawar", "pew"] },
+    { id: "Peshawar", aliases: ["peshawar", "peshwr", "pew"] },
     { id: "Gujranwala", aliases: ["gujranwala", "grw"] },
     { id: "Sialkot", aliases: ["sialkot", "skt"] },
     { id: "Quetta", aliases: ["quetta", "qta"] }
