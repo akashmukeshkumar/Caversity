@@ -14,7 +14,7 @@ const FIRM_MAPPINGS = [
             { id: "A.F. Ferguson (PwC)", aliases: ["ferguson", "aff", "pwc", "a.f. ferguson", "price waterhouse"] },
             { id: "KPMG Taseer Hadi", aliases: ["kpmg", "taseer hadi"] },
             { id: "EY Ford Rhodes", aliases: ["ey", "ernst & young", "ford rhodes", "ernst and young", "eyfr", "ey fords rhodes"] },
-            { id: "Yousuf Adil (Deloitte)", aliases: ["deloitte", "yousuf adil", "yusuf adil", "yousaf adil"] },
+            { id: "Yousuf Adil (Deloitte)", aliases: ["deloitte", "yousuf adil", "yusuf adil", "yousaf adil", "ya"] },
             { id: "BDO Ebrahim", aliases: ["bdo", "ebrahim", "ibrahim"] },
             { id: "Grant Thornton", aliases: ["grant thornton", "gt", "gth"] },
             { id: "Forvis Mazars", aliases: ["forvis", "mazars"] },
