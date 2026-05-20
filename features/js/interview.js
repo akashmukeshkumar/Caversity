@@ -330,17 +330,34 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                     if (!item || !item.message) return;
                     let msgLow = item.message.toLowerCase();
                     
-                    // 🛑 STRICT FILTERS (Same as Firm Hub - Case Insensitive)
-                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("induction alert") || msgLow.includes("call") || msgLow.includes("ca firms") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("visited") || msgLow.includes("calling") || msgLow.includes("interview guidance") || msgLow.includes("another toop")) {
+                   // 🛑 100% FIRM HUB SYNC LOGIC
+                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("interview guidance") || msgLow.includes("another toop")) {
                         return; // Skip these messages entirely
                     }
                     
-                   // 🔥 THE EXACT FIRM-HUB LOGIC (Only Feedback Allowed) 🔥
-let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("mcqs") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
+                    let type = 'Induction';
+                    let isStrictInduction = msgLow.includes("induction alert");
+                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test") || msgLow.includes("mcqs");
+                    let isHiring = msgLow.includes("hiring") || msgLow.includes("induction") || msgLow.includes("trainee") || msgLow.includes("opportunity") || msgLow.includes("apply") || msgLow.includes("vacancies") || msgLow.includes("looking for");
+                    
+                    let isCallNotify = (msgLow.includes("received") || msgLow.includes("recieved") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
+                    let isTestNotify = msgLow.includes("test") || msgLow.includes("system") || msgLow.includes("shortlist") || msgLow.includes("schedule") || msgLow.includes("scheduled");
+                    let isInterviewMailNotify = msgLow.includes("interview") && (msgLow.includes("mail") || msgLow.includes("email") || msgLow.includes("message"));
+                    let isShort = item.message.length < 300; 
+                    
+                    if (isStrictInduction) {
+                        type = 'Induction';
+                    } else if (isShort && (isCallNotify || isTestNotify || isInterviewMailNotify) && !isFeedback && !isHiring) {
+                        type = 'Call Alert';
+                    } else if (isFeedback || msgLow.includes("interview") || msgLow.includes("feedback")) {
+                        type = 'Feedback';
+                    } else if (isHiring) {
+                        type = 'Induction';
+                    }
 
-// Added "interview" and "feedback" fallback just like firm-hub.js
-if (isFeedback || msgLow.includes("interview") || msgLow.includes("feedback")) {
-    let cleanFirm = getCleanFirmName(item.message, item.firm);
+                    // Sirf agar actually 'Feedback' hai toh aage jaye
+                    if (type === 'Feedback') {
+                        let cleanFirm = getCleanFirmName(item.message, item.firm);
                         
                         // Check if this feedback belongs to the Target Firm selected by user
                         if (cleanFirm === firm && item.timestamp && (now - item.timestamp <= SIXTY_DAYS)) {
@@ -886,24 +903,40 @@ document.addEventListener("DOMContentLoaded", async () => {
                 
                 let msgLow = item.message.toLowerCase();
                 
-                // 🛑 STRICT FILTERS (Same as Firm Hub)
-                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("induction alert")) {
+                // 🛑 100% FIRM HUB SYNC LOGIC
+                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("interview guidance") || msgLow.includes("another toop")) {
                     return; // Skip these messages entirely
                 }
                 
-               // 🔥 THE EXACT FIRM-HUB LOGIC (Only Feedback Allowed) 🔥
-let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("mcqs") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
+                let type = 'Induction';
+                let isStrictInduction = msgLow.includes("induction alert");
+                let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test") || msgLow.includes("mcqs");
+                let isHiring = msgLow.includes("hiring") || msgLow.includes("induction") || msgLow.includes("trainee") || msgLow.includes("opportunity") || msgLow.includes("apply") || msgLow.includes("vacancies") || msgLow.includes("looking for");
+                
+                let isCallNotify = (msgLow.includes("received") || msgLow.includes("recieved") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
+                let isTestNotify = msgLow.includes("test") || msgLow.includes("system") || msgLow.includes("shortlist") || msgLow.includes("schedule") || msgLow.includes("scheduled");
+                let isInterviewMailNotify = msgLow.includes("interview") && (msgLow.includes("mail") || msgLow.includes("email") || msgLow.includes("message"));
+                let isShort = item.message.length < 300; 
+                
+                if (isStrictInduction) {
+                    type = 'Induction';
+                } else if (isShort && (isCallNotify || isTestNotify || isInterviewMailNotify) && !isFeedback && !isHiring) {
+                    type = 'Call Alert';
+                } else if (isFeedback || msgLow.includes("interview") || msgLow.includes("feedback")) {
+                    type = 'Feedback';
+                } else if (isHiring) {
+                    type = 'Induction';
+                }
 
-// Added "interview" and "feedback" fallback just like firm-hub.js
-if (isFeedback || msgLow.includes("interview") || msgLow.includes("feedback")) {
-    let cleanFirm = getCleanFirmName(item.message, item.firm);
+                // Sirf agar actually 'Feedback' hai toh aage jaye
+                if (type === 'Feedback') {
+                    let cleanFirm = getCleanFirmName(item.message, item.firm);
                     if (cleanFirm !== "Unspecified Firm") {
                         interviewFirms.add(cleanFirm);
                     }
                 }
             });
         }
-
         let activeFirmsArray = Array.from(interviewFirms).sort();
 
         dropdown.innerHTML = '';
