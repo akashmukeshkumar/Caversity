@@ -109,11 +109,12 @@ const FIRM_MAPPINGS = [
             { id: "Axiom World", aliases: ["axiom world", "axiom"] },
             { id: "EUSOL (Odoo Partner)", aliases: ["eusol", "odoo", "odoo gold partner", "eusol (odoo gold partner)"] }
         ];
-// Helper function to get clean firm name (Updated Earliest Match Logic)
+// Helper function to get clean firm name (Updated with Earliest Match & Auto-Detect Fallback)
 function getCleanFirmName(text, existingFirm) {
     let lowerText = text.toLowerCase();
     let firm = existingFirm || "Unspecified Firm";
     
+    // 1. Pehle exact mapping list check karein
     let earliestFirmIndex = Infinity;
     for (let f of FIRM_MAPPINGS) {
         for (let alias of f.aliases) {
@@ -124,6 +125,32 @@ function getCleanFirmName(text, existingFirm) {
             }
         }
     }
+
+    // 2. 🔥 FALLBACK LOGIC FROM FIRM HUB (Agar mapping nahi mili toh khud name extract karein)
+    if (firm === "Unspecified Firm") {
+        const stopWords = ['to', 'at', 'in', 'for', 'from', 'with', 'by', 'the', 'a', 'an', 'is', 'was', 'of', 'any', 'top', 'good', 'best', 'my', 'our', 'their', 'firm', 'give', 'giving', 'has', 'have', 'had', 'got'];
+        
+        // Check for "& Co" or "and Co" patterns
+        let coMatch = text.match(/([a-zA-Z\s]+?)\s*(?:&|and)\s*co\b/i);
+        if (coMatch) {
+            let words = coMatch[1].trim().split(/\s+/);
+            let firmWords = words.slice(-3);
+            while(firmWords.length > 0 && stopWords.includes(firmWords[0].toLowerCase())) firmWords.shift();
+            if (firmWords.length > 0) firm = firmWords.join(" ").replace(/\b\w/g, l => l.toUpperCase()) + " & Co.";
+        }
+        
+        // Check for "Chartered Accountants" or "CA Firm" patterns
+        if (firm === "Unspecified Firm") {
+            let caMatch = text.match(/([a-zA-Z\s]+?)\s*(?:chartered\s*accountants?|ca\s*firm)/i);
+            if (caMatch && !caMatch[0].toLowerCase().includes("any ")) {
+                let words = caMatch[1].trim().split(/\s+/);
+                let firmWords = words.slice(-3);
+                while(firmWords.length > 0 && stopWords.includes(firmWords[0].toLowerCase())) firmWords.shift();
+                if (firmWords.length > 0 && firmWords.join(" ").length > 2) firm = firmWords.join(" ").replace(/\b\w/g, l => l.toUpperCase());
+            }
+        }
+    }
+
     return firm;
 }
 // 2. STATE VARIABLES
