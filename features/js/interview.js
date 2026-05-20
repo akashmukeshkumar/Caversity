@@ -109,20 +109,23 @@ const FIRM_MAPPINGS = [
             { id: "Axiom World", aliases: ["axiom world", "axiom"] },
             { id: "EUSOL (Odoo Partner)", aliases: ["eusol", "odoo", "odoo gold partner", "eusol (odoo gold partner)"] }
         ];
-// Helper function to get clean firm name
+// Helper function to get clean firm name (Updated Earliest Match Logic)
 function getCleanFirmName(text, existingFirm) {
     let lowerText = text.toLowerCase();
     let firm = existingFirm || "Unspecified Firm";
     
+    let earliestFirmIndex = Infinity;
     for (let f of FIRM_MAPPINGS) {
-        if (f.aliases.some(alias => new RegExp(`\\b${alias}\\b`, 'i').test(lowerText))) {
-            firm = f.id;
-            break;
+        for (let alias of f.aliases) {
+            let match = lowerText.match(new RegExp(`\\b${alias}\\b`, 'i'));
+            if (match && match.index < earliestFirmIndex) {
+                earliestFirmIndex = match.index;
+                firm = f.id;
+            }
         }
     }
     return firm;
 }
-
 // 2. STATE VARIABLES
 let candidateData = { name: "", firm: "", cvText: "" };
 let interviewMemory = [];
@@ -333,7 +336,7 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                     }
                     
                     // Strict Firm-Hub Filtering
-                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
+                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("mcqs") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
                     
                     if (isFeedback) {
                         let cleanFirm = getCleanFirmName(item.message, item.firm);
@@ -888,7 +891,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
                 
                 // 🔥 THE EXACT FIRM-HUB LOGIC (Only Feedback Allowed) 🔥
-                let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
+                let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("mcqs") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
                 
                 if (isFeedback) {
                     let cleanFirm = getCleanFirmName(item.message, item.firm);
