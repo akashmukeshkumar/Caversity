@@ -14,7 +14,7 @@ const FIRM_MAPPINGS = [
             { id: "A.F. Ferguson (PwC)", aliases: ["ferguson", "aff", "pwc", "a.f. ferguson", "price waterhouse"] },
             { id: "KPMG Taseer Hadi", aliases: ["kpmg", "taseer hadi"] },
             { id: "EY Ford Rhodes", aliases: ["ey", "ernst & young", "ford rhodes", "ernst and young", "eyfr", "ey fords rhodes"] },
-            { id: "Yousuf Adil (Deloitte)", aliases: ["deloitte", "yousuf adil", "yousaf adil"] },
+            { id: "Yousuf Adil (Deloitte)", aliases: ["deloitte", "yousuf adil", "yusuf adil", "yousaf adil"] },
             { id: "BDO Ebrahim", aliases: ["bdo", "ebrahim", "ibrahim"] },
             { id: "Grant Thornton", aliases: ["grant thornton", "gt", "gth"] },
             { id: "Forvis Mazars", aliases: ["forvis", "mazars"] },
@@ -328,7 +328,7 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                     let msgLow = item.message.toLowerCase();
                     
                     // 🛑 STRICT FILTERS (Same as Firm Hub - Case Insensitive)
-                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("induction alert") || msgLow.includes("call") || msgLow.includes("ca firms") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("visited") || msgLow.includes("calling") || msgLow.includes("interview guidance") || msgLow.includes("another toop")) {
+                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("induction alert") || msgLow.includes("call") || msgLow.includes("ca firms") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("visited") || msgLow.includes("calling") || msgLow.includes("interview guidance") || msgLow.includes("another toop")) {
                         return; // Skip these messages entirely
                     }
                     
