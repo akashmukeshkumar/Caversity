@@ -335,11 +335,12 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                         return; // Skip these messages entirely
                     }
                     
-                    // Strict Firm-Hub Filtering
-                    let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("mcqs") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
-                    
-                    if (isFeedback) {
-                        let cleanFirm = getCleanFirmName(item.message, item.firm);
+                   // 🔥 THE EXACT FIRM-HUB LOGIC (Only Feedback Allowed) 🔥
+let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("penalist") || msgLow.includes("mcqs") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
+
+// Added "interview" and "feedback" fallback just like firm-hub.js
+if (isFeedback || msgLow.includes("interview") || msgLow.includes("feedback")) {
+    let cleanFirm = getCleanFirmName(item.message, item.firm);
                         
                         // Check if this feedback belongs to the Target Firm selected by user
                         if (cleanFirm === firm && item.timestamp && (now - item.timestamp <= SIXTY_DAYS)) {
@@ -890,11 +891,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                     return; // Skip these messages entirely
                 }
                 
-                // 🔥 THE EXACT FIRM-HUB LOGIC (Only Feedback Allowed) 🔥
-                let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("mcqs") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
-                
-                if (isFeedback) {
-                    let cleanFirm = getCleanFirmName(item.message, item.firm);
+               // 🔥 THE EXACT FIRM-HUB LOGIC (Only Feedback Allowed) 🔥
+let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("mcqs") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test");
+
+// Added "interview" and "feedback" fallback just like firm-hub.js
+if (isFeedback || msgLow.includes("interview") || msgLow.includes("feedback")) {
+    let cleanFirm = getCleanFirmName(item.message, item.firm);
                     if (cleanFirm !== "Unspecified Firm") {
                         interviewFirms.add(cleanFirm);
                     }
