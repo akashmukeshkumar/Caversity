@@ -328,7 +328,7 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                     let msgLow = item.message.toLowerCase();
                     
                     // 🛑 STRICT FILTERS (Same as Firm Hub - Case Insensitive)
-                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("induction alert") || msgLow.includes("interview guidance") || msgLow.includes("another toop")) {
+                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("induction alert") || msgLow.includes("call") || msgLow.includes("ca firms") || msgLow.includes("visited") || msgLow.includes("calling") || msgLow.includes("interview guidance") || msgLow.includes("another toop")) {
                         return; // Skip these messages entirely
                     }
                     
