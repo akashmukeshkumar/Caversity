@@ -212,7 +212,8 @@ async function loadFirebaseData() {
             let msgLow = msgTrimmed.toLowerCase();
             let type = 'Induction';
 
-            if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("call") || msgLow.includes("ca firms") || msgLow.includes("visited") || msgLow.includes("calling") || msgLow.includes("another toop")) {
+           // Uses Regex \b to ensure "call" and "calling" are separate words, not part of words like "physically"
+            if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || /\bcall\b/.test(msgLow) || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop")) {
                 continue; 
             }
             
