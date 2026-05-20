@@ -21,6 +21,7 @@ const FIRM_MAPPINGS = [
 
             // --- Updated & Merged Firms from Your List ---
             { id: "Crowe Hussain Chaudhury", aliases: ["crowe", "hussain chaudhury"] },
+            { id: "Siemens Energy", aliases: ["siemens", "siemens energy", "seimens"] },
             { id: "RSM Awais Hyder", aliases: ["rsm", "awais hyder", "avais haider"] },
             { id: "Baker Tilly", aliases: ["baker tilly", "mehmood idrees", "bakertilly", "bt", "mehmood idrees qamar"] },
             { id: "HLB Ijaz Tabussum", aliases: ["hlb", "ijaz tabussum", "ijaz tabassum"] },
@@ -358,7 +359,7 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                     let msgLow = item.message.toLowerCase();
                     
                  // 🛑 100% FIRM HUB SYNC LOGIC
-                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || /\bcall\b/.test(msgLow) || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop")) {
+                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop")) {
                     return; // Skip these messages entirely
                 }
                     
@@ -931,7 +932,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 let msgLow = item.message.toLowerCase();
                 
                // 🛑 100% FIRM HUB SYNC LOGIC
-                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || /\bcall\b/.test(msgLow) || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop")) {
+                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop")) {
                     return; // Skip these messages entirely
                 }
                 
