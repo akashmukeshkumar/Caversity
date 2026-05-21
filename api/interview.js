@@ -7,7 +7,7 @@ const FIREBASE_URL = 'https://caversity-48b29-default-rtdb.firebaseio.com';
 
 // 🔒 API KEYS YAHAN SECURE HAIN (Rotating Keys for Fallback) 🔒
 const GROQ_API_KEYS = [
-    "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",
+    "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",
     "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",
     "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",
     "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",
