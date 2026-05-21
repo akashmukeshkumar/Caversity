@@ -16,7 +16,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// 🔥 UPDATED: Prices changed to 250
 const academicSubjects = [
     { id: 'caf1', name: 'CAF 1: Financial Accounting and Reporting', description: 'Master the fundamentals of financial accounting principles and reporting standards.', price: 250, type: 'premium', url: 'subjects/caf1/index.html' },
     { id: 'caf2', name: 'CAF 2: Taxation Principles and Compliance', description: 'Comprehensive understanding of taxation principles and practices.', price: 250, type: 'premium', url: 'subjects/caf2/index.html' },
@@ -71,22 +70,23 @@ onAuthStateChanged(auth, async (user) => {
                 const expiryValue = dbSubs[subId];
                 if (expiryValue && expiryValue !== false) {
                     if (subId === 'mock_interview') {
+                        // 🔥 DUAL LOGIC: Month + Sessions (Format: "2024-12-31,10") 🔥
                         let dStr = expiryValue;
-                        // 🔥 UPDATED: Default Sessions changed to 2
-                        let sCount = 2; 
+                        let sCount = 2; // Default sessions if only date is typed
                         if (typeof expiryValue === 'string' && expiryValue.includes(',')) {
                             const parts = expiryValue.split(',');
                             dStr = parts[0];
                             sCount = parseInt(parts[1], 10);
                         } else if (!isNaN(expiryValue)) {
                             sCount = Number(expiryValue);
-                            dStr = "2099-12-31"; 
+                            dStr = "2099-12-31"; // Never expires if only number is typed
                         }
                         if (new Date(dStr) > today && sCount > 0) {
                             activeSubs.push(subId);
                             interviewSessions = sCount;
                         }
                     } else {
+                        // Normal monthly expiry logic
                         const expiryDate = new Date(expiryValue);
                         if (expiryDate > today) {
                             activeSubs.push(subId);
@@ -97,28 +97,32 @@ onAuthStateChanged(auth, async (user) => {
 
             currentUserProfile = { name: userData.name, subscriptions: activeSubs, interviewSessions };
             
+            // Update Name in UI
             const welcomeMsg = document.getElementById('welcome-message');
             if(welcomeMsg) welcomeMsg.innerText = `Welcome back, ${userData.name.split(' ')[0]}`;
             
             renderSubjectCards();
             renderReviews();
 
-            // PENDING FIRM INTERVIEW CHECK
+            // 🔥 PENDING FIRM INTERVIEW CHECK 🔥
             let pendingFirm = localStorage.getItem('targetFirm');
             if (pendingFirm) {
                 if (activeSubs.includes('mock_interview') && interviewSessions > 0) {
+                    // 🔥 Seedha Interview Page Par Le Jao Agar Pehle Se Khareeda Hua Hai
                     window.location.href = 'interview.html';
                     return;
                 } else {
+                    // 🔥 Package Nahi Hai Ya Sessions Khatam Hain To Blink Karwao
                     setTimeout(() => {
                         let interviewCard = document.getElementById('subject-card-mock_interview');
                         if (interviewCard) {
+                            // Agar pehle se alert nahi bana hua to bana do
                             let alertBox = document.getElementById('subscribe-alert');
                             if (!alertBox) {
                                 alertBox = document.createElement('div');
                                 alertBox.id = 'subscribe-alert';
                                 alertBox.className = 'alert-message';
-                                interviewCard.insertBefore(alertBox, interviewCard.children[1]); 
+                                interviewCard.insertBefore(alertBox, interviewCard.children[1]); // Card ke title ke neechay daal do
                             }
                             
                             interviewCard.classList.add('blink-highlight');
@@ -128,10 +132,12 @@ onAuthStateChanged(auth, async (user) => {
                             
                             setTimeout(() => {
                                 interviewCard.classList.remove('blink-highlight');
+                                // Alert ko 6 second baad hide kar dein
                                 alertBox.style.display = "none";
                             }, 6000);
                         }
                     }, 500);
+                    // 🛑 NEW: Yeh line add ki hai taake refresh par dobara blink na kare
                     localStorage.removeItem('targetFirm'); 
                 }
             }
@@ -159,6 +165,9 @@ function renderSubjectCards() {
             if (isSubscribed) {
                 card.classList.add('subscribed-card');
                 buttonText = 'Open Subject';
+                if (subject.id === 'mock_interview') {
+                    // buttonText = `Open Subject (${currentUserProfile.interviewSessions} Sessions Left)`; // As requested, removed sessions count from button
+                }
                 buttonClass = 'subscribed-action';
             }
         } else {
@@ -168,6 +177,7 @@ function renderSubjectCards() {
 
         let actionsHtml = `<button class="subject-action ${buttonClass}" data-id="${subject.id}">${buttonText}</button>`;
         
+        // Add small share button next to free subjects
         if (subject.type === 'free') {
             let shareType = subject.id === 'resume' ? 'cv' : (subject.id === 'sanctuary' ? 'qarcs' : '');
             if (shareType) {
@@ -207,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 isMultiSubjectMode = false;
                 openSubscriptionModal();
             } else {
+                // Re-enforce security memory
                 localStorage.setItem('caversity_user', JSON.stringify(currentUserProfile));
                 window.location.href = subject.url || `subjects/${subject.id}/index.html`;
             }
@@ -223,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 🔥 DYNAMIC CSS FOR BLINKING ALERT 🔥
     const style = document.createElement('style');
     style.innerHTML = `
         .blink-highlight {
@@ -242,11 +254,13 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
+   // 🔥 CLEAN FOCUS MODE LOGIC 🔥
     const focusBtn = document.getElementById('focus-mode-btn');
     const focusAudio = document.getElementById('focus-audio');
 
     if (focusBtn && focusAudio) {
-        focusAudio.volume = 0.25; 
+        focusAudio.volume = 0.25; // Volume set to 25% for background focus
+        
         focusBtn.addEventListener('click', () => {
             if (focusAudio.paused) {
                 focusAudio.play().catch(e => console.error("Audio Error:", e));
@@ -271,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('subscription-modal').classList.remove('show');
     });
 
-    // 🔥 SECURE API CALL FOR COUPONS 🔥
+    // 🔥 DYNAMIC FIREBASE COUPON LOGIC 🔥
     document.getElementById('apply-coupon-btn')?.addEventListener('click', async () => {
         const code = document.getElementById('coupon-code').value.trim().toUpperCase();
         const msg = document.getElementById('coupon-message');
@@ -286,41 +300,64 @@ document.addEventListener('DOMContentLoaded', () => {
         msg.className = 'coupon-message';
 
         try {
-            let selectedSubjectsForApi = [];
-            if (isMultiSubjectMode) {
-                const checked = document.getElementById('subject-checkboxes').querySelectorAll('input:checked');
-                checked.forEach(chk => selectedSubjectsForApi.push(chk.value));
-            }
-
-            // Call to Vercel Backend
-            const response = await fetch('/api/portal', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: 'verifyCoupon',
-                    payload: {
-                        code: code,
-                        isMultiSubjectMode: isMultiSubjectMode,
-                        currentSubjectId: currentSubjectContext ? currentSubjectContext.id : null,
-                        selectedSubjects: selectedSubjectsForApi
+            // Firebase se 'coupons' collection mein is code ko dhoondo
+            const couponDoc = await getDoc(doc(db, "coupons", code));
+            
+            if (couponDoc.exists()) {
+                const couponData = couponDoc.data();
+                
+                // Check if coupon is restricted to specific subjects
+                let allowedSubjects = couponData.subjectId || couponData.subjectid || couponData.applicableFor || "all";
+                if (allowedSubjects !== "all") {
+                    if (typeof allowedSubjects === 'string') {
+                        allowedSubjects = allowedSubjects.split(',').map(s => s.replace(/\s+/g, '').toLowerCase());
+                    } else if (Array.isArray(allowedSubjects)) {
+                        allowedSubjects = allowedSubjects.map(s => s.replace(/\s+/g, '').toLowerCase());
                     }
-                })
-            });
 
-            const data = await response.json();
+                    let isValid = true;
+                    if (isMultiSubjectMode) {
+                        const checked = document.getElementById('subject-checkboxes').querySelectorAll('input:checked');
+                        checked.forEach(chk => { if (!allowedSubjects.includes(chk.value.replace(/\s+/g, '').toLowerCase())) isValid = false; });
+                    } else {
+                        if (!allowedSubjects.includes(currentSubjectContext.id.replace(/\s+/g, '').toLowerCase())) isValid = false;
+                    }
+                    
+                    if (!isValid) {
+                        msg.textContent = 'This coupon is not valid for the selected subject(s).';
+                        msg.className = 'coupon-message error';
+                        return;
+                    }
+                }
 
-            if (response.ok && data.discount) {
-                appliedCouponDiscount = data.discount;
-                appliedCouponCode = data.code;
-                msg.textContent = `Coupon applied! (Rs. ${appliedCouponDiscount} off)`;
-                msg.className = 'coupon-message success';
+                // 🔥 BULLETPROOF COUPON EXTRACTOR 🔥
+                let discountFound = 0;
+                for (let key in couponData) {
+                    let k = key.toLowerCase();
+                    if (k.includes('discount') || k.includes('amount') || k.includes('value') || k.includes('val')) {
+                        let parsed = parseInt(couponData[key], 10);
+                        if (!isNaN(parsed) && parsed > 0) {
+                            discountFound = parsed;
+                            break;
+                        }
+                    }
+                }
+                appliedCouponDiscount = discountFound;
+                appliedCouponCode = code;
+                if (appliedCouponDiscount > 0) {
+                    msg.textContent = `Coupon applied! (Rs. ${appliedCouponDiscount} off)`;
+                    msg.className = 'coupon-message success';
+                } else {
+                    msg.textContent = 'Coupon applied but no discount value found in database.';
+                    msg.className = 'coupon-message error';
+                }
             } else {
-                throw new Error(data.error || 'Invalid or expired coupon code.');
+                throw new Error("Invalid");
             }
         } catch (error) {
             appliedCouponDiscount = 0;
             appliedCouponCode = '';
-            msg.textContent = error.message;
+            msg.textContent = error.message || 'Invalid or expired coupon code.';
             msg.className = 'coupon-message error';
         }
         
@@ -352,16 +389,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const subtotal = document.getElementById('total-amount').dataset.subtotal;
         const discount = subtotal - total;
         
+        // Fetch Payment Method Chosen
         const selectedMethodBtn = document.querySelector('.pay-badge.active');
         const selectedMethod = selectedMethodBtn ? selectedMethodBtn.getAttribute('data-method') : 'Easypaisa';
 
+        // Loading State for Premium Feel
         const btn = document.getElementById('confirm-subscription');
         const originalHtml = btn.innerHTML;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
         btn.disabled = true;
 
         setTimeout(() => {
-            // 🔥 UPDATED: Session message updated to 2 Sessions
+            // GENERATE WHATSAPP MESSAGE
             let period = currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode ? 'month (2 Sessions)' : 'month';
             if (isMultiSubjectMode) period = 'month';
 
@@ -391,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.innerHTML = originalHtml;
             btn.disabled = false;
             document.getElementById('subscription-modal').classList.remove('show');
-        }, 1200); 
+        }, 1200); // Wait 1.2s to show processing effect
     });
 });
 
@@ -407,6 +446,7 @@ function openSubscriptionModal() {
         couponContainer.parentNode.insertBefore(featuresContainer, couponContainer);
     }
 
+    // Only show features if the student is subscribing specifically to CAF 8 Audit or Firm Interview
     if (!isMultiSubjectMode && currentSubjectContext) {
         if (currentSubjectContext.id === 'caf8' && featuresContainer) {
             featuresContainer.innerHTML = getAuditFeaturesHtml();
@@ -442,7 +482,6 @@ function openSubscriptionModal() {
         multiDisplay.innerHTML = '';
         academicSubjects.filter(s => s.type === 'premium').forEach(s => {
             const isSub = currentUserProfile.subscriptions.includes(s.id);
-            // 🔥 UPDATED: 2 Sessions in Multi Mode
             const priceLabel = s.id === 'mock_interview' ? `(Rs. ${s.price} / month - 2 Sessions)` : `(Rs. ${s.price} / month)`;
             multiDisplay.innerHTML += `
                 <div class="checkbox-item">
@@ -455,7 +494,6 @@ function openSubscriptionModal() {
         multiDisplay.style.display = 'none';
         couponContainer.style.display = 'block';
         document.getElementById('modal-subject-name').innerText = currentSubjectContext.name;
-        // 🔥 UPDATED: 2 Sessions in Single Mode
         document.getElementById('modal-subject-price').innerText = currentSubjectContext.id === 'mock_interview' ? `Rs. ${currentSubjectContext.price} / month (2 Sessions)` : `Rs. ${currentSubjectContext.price} / month`;
     }
 
@@ -494,7 +532,6 @@ function calculateTotal() {
         document.getElementById('discount-line').style.display = 'none';
     }
 
-    // 🔥 UPDATED: Total summary shows 2 Sessions
     let periodText = (currentSubjectContext && currentSubjectContext.id === 'mock_interview' && !isMultiSubjectMode) ? ' / 2 Sessions' : ' / month';
     document.getElementById('total-amount').innerText = `Rs. ${grandTotal}${periodText}`;
     document.getElementById('total-amount').dataset.subtotal = subtotal;
@@ -551,7 +588,9 @@ window.submitFeedback = function() {
     });
 }
 
-// SURPRISE BOX LOGIC
+// =========================================
+// 🔥 SURPRISE BOX LOGIC 🔥
+// =========================================
 let quotesCollection = [];
 fetch('assets/surprise.json')
     .then(r => r.json())
@@ -579,12 +618,15 @@ window.revealSurprise = function() {
     content.style.display = 'block';
 };
 
-// ADHKAR APP LOGIC 
+// =========================================
+// 🔥 ADHKAR APP LOGIC 🔥
+// =========================================
 (function() {
     let appEmotions = [];
     let appResources = [];
     const niceColors = ["linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%)", "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)", "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)", "linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)", "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)", "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)", "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)", "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)", "linear-gradient(135deg, #fa709a 0%, #fee140 100%)", "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)", "linear-gradient(135deg, #ff0844 0%, #ffb199 100%)", "linear-gradient(135deg, #b721ff 0%, #21d4fd 100%)", "linear-gradient(135deg, #20E2D7 0%, #F9FEA5 100%)"];
     
+    // 🔥 SAFELY DECODE BASE64 UTF-8 (Arabic Fix) 🔥
     function decodeBase64UTF8(base64Str) {
         const binary = atob(base64Str);
         const bytes = new Uint8Array(binary.length);
@@ -596,6 +638,7 @@ window.revealSurprise = function() {
 
     async function loadAdhkarData() {
         try {
+            // 🔥 Cache Busting: Mobile browser ko zabardasti fresh data fetch karwane ke liye timestamp add kiya
             const timestamp = Date.now();
             
             const emoRes = await fetch(`/api/get-data?file=emotion&t=${timestamp}`);
@@ -772,7 +815,6 @@ window.revealSurprise = function() {
         `;
     };
 
-    // 🔥 UPDATED: Real Firm Intelligence added
     window.getInterviewFeaturesHtml = function() {
         return `
         <div class="audit-features-accordion" style="margin-top: 20px; margin-bottom: 20px; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #f8fafc; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
