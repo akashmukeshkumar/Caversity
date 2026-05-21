@@ -123,7 +123,7 @@ export default async function handler(req, res) {
                     let msgLow = item.message.toLowerCase();
                     
                     // 100% EXACT ORIGINAL LOGIC 
-                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || /\btoop\b/.test(msgLow) || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("update about") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("updates and feedback")) {
+                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("read full details") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("update about") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("updates and feedback")) {
                         return; 
                     }
                         
@@ -172,7 +172,7 @@ export default async function handler(req, res) {
                     let msgLow = item.message.toLowerCase();
                     
                     // 100% EXACT ORIGINAL LOGIC 
-                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || /\btoop\b/.test(msgLow) || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("update about") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("updates and feedback")) {
+                    if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("read full details") || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("update about") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("updates and feedback")) {
                         return; 
                     }
                         
