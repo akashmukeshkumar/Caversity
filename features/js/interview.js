@@ -22,6 +22,7 @@ const FIRM_MAPPINGS = [
             // --- Updated & Merged Firms from Your List ---
             { id: "Crowe Hussain Chaudhury", aliases: ["crowe", "hussain chaudhury"] },
             { id: "Siemens Energy", aliases: ["siemens", "siemens energy", "seimens"] },
+            { id: "Linktax", aliases: ["linktax", "link tax", "linktax chartered", "linktax chartered management accountants", "linktax management"] },
             { id: "RSM Awais Hyder", aliases: ["rsm", "awais hyder", "avais haider"] },
             { id: "Baker Tilly", aliases: ["baker tilly", "mehmood idrees", "bakertilly", "bt", "mehmood idrees qamar"] },
             { id: "HLB Ijaz Tabussum", aliases: ["hlb", "ijaz tabussum", "ijaz tabassum"] },
@@ -358,8 +359,8 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                     if (!item || !item.message) return;
                     let msgLow = item.message.toLowerCase();
                     
-                      // Uses Regex \b to ensure "call" and "calling" are separate words, not part of words like "physically"
-if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("update")) {
+   // Uses Regex \b to ensure "call" and "calling" are separate words, not part of words like "physically"
+if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("updates and feedback) || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("update about")) {
     continue; 
 }
                     
@@ -931,8 +932,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 
                 let msgLow = item.message.toLowerCase();
                 
-                    // Uses Regex \b to ensure "call" and "calling" are separate words, not part of words like "physically"
-if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("update")) {
+   // Uses Regex \b to ensure "call" and "calling" are separate words, not part of words like "physically"
+if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("updates and feedback) || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("update about")) {
     continue; 
 }
                 
