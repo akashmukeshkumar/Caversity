@@ -358,10 +358,10 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
                     if (!item || !item.message) return;
                     let msgLow = item.message.toLowerCase();
                     
-                 // 🛑 100% FIRM HUB SYNC LOGIC
-                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop")) {
-                    return; // Skip these messages entirely
-                }
+                      // Uses Regex \b to ensure "call" and "calling" are separate words, not part of words like "physically"
+if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("update")) {
+    continue; 
+}
                     
                     let type = 'Induction';
                     let isStrictInduction = msgLow.includes("induction alert");
@@ -931,10 +931,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 
                 let msgLow = item.message.toLowerCase();
                 
-               // 🛑 100% FIRM HUB SYNC LOGIC
-                if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop")) {
-                    return; // Skip these messages entirely
-                }
+                    // Uses Regex \b to ensure "call" and "calling" are separate words, not part of words like "physically"
+if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("update")) {
+    continue; 
+}
                 
                 let type = 'Induction';
                 let isStrictInduction = msgLow.includes("induction alert");
