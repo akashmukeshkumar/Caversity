@@ -213,10 +213,10 @@ async function loadFirebaseData() {
             let msgLow = msgTrimmed.toLowerCase();
             let type = 'Induction';
 
-           // Uses Regex \b to ensure "call" and "calling" are separate words, not part of words like "physically"
-            if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("update about") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop")) {
-                continue; 
-            }
+          // Uses Regex \b to ensure "call" and "calling" are separate words, not part of words like "physically"
+if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("update")) {
+    continue; 
+}
             
             let isStrictInduction = msgLow.includes("induction alert");
            let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("mcqs") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test") || msgLow.includes("1st interview") || msgLow.includes("technical questions") || msgLow.includes("any questions");
