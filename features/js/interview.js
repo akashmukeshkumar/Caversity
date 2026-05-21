@@ -1,160 +1,11 @@
 // ==========================================
-// 🚀 CAVERSITY FRONTEND INTERVIEW ENGINE
+// 🚀 CAVERSITY FRONTEND INTERVIEW ENGINE (SECURE)
 // ==========================================
 
 import { getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// ==========================================
-// 🧠 THE BRAIN: SMART ALIAS EXTRACTION SYSTEM (Imported from Firm Hub)
-// ==========================================
-const FIRM_MAPPINGS = [
-            // --- The Big 4 & Top Tier ---
-            { id: "A.F. Ferguson (PwC)", aliases: ["ferguson", "aff", "pwc", "a.f. ferguson", "price waterhouse"] },
-            { id: "KPMG Taseer Hadi", aliases: ["kpmg", "taseer hadi"] },
-            { id: "EY Ford Rhodes", aliases: ["ey", "ernst & young", "ford rhodes", "ernst and young", "eyfr", "ey fords rhodes"] },
-            { id: "Yousuf Adil (Deloitte)", aliases: ["deloitte", "yousuf adil", "yusuf adil", "yousaf adil", "ya", "yousif adil"] },
-            { id: "BDO Ebrahim", aliases: ["bdo", "ebrahim", "ibrahim"] },
-            { id: "Grant Thornton", aliases: ["grant thornton", "gt", "gth"] },
-            { id: "Forvis Mazars", aliases: ["forvis", "mazars"] },
-
-            // --- Updated & Merged Firms from Your List ---
-            { id: "Crowe Hussain Chaudhury", aliases: ["crowe", "hussain chaudhury"] },
-            { id: "Siemens Energy", aliases: ["siemens", "siemens energy", "seimens"] },
-            { id: "Linktax", aliases: ["linktax", "link tax", "linktax chartered", "linktax chartered management accountants", "linktax management"] },
-            { id: "RSM Awais Hyder", aliases: ["rsm", "awais hyder", "avais haider"] },
-            { id: "Baker Tilly", aliases: ["baker tilly", "mehmood idrees", "bakertilly", "bt", "mehmood idrees qamar"] },
-            { id: "HLB Ijaz Tabussum", aliases: ["hlb", "ijaz tabussum", "ijaz tabassum"] },
-            { id: "MGI Ilyas Saeed & Co", aliases: ["ilyas saeed", "isc", "mgi ilyas saeed"] },
-            { id: "Riaz Ahmad & Co", aliases: ["riaz ahmad", "rac"] },
-            { id: "BKR Ansari", aliases: ["bkr", "ansari"] },
-            { id: "UHY Hassan Naeem", aliases: ["uhy", "hassan naeem"] },
-            { id: "Muniff Ziauddin", aliases: ["muniff", "mz", "ziauddin"] },
-            { id: "Tariq Abdul Ghani Maqbool", aliases: ["tagm", "tariq abdul ghani"] },
-            { id: "Faruq Ali & Co", aliases: ["faruq ali", "farooq ali"] },
-            { id: "Parker Russell", aliases: ["parker russell", "parker russell ajs"] },
-            { id: "Zahid Jamil & Co", aliases: ["zahid jamil", "zahid jamil and co"] },
-            { id: "Rahman Sarfaraz Rahim Iqbal Rafiq", aliases: ["rahman sarfaraz", "rahman sarfraz", "rsrir", "rsririr"] },
-            { id: "PKF F.R.A.N.T.S.", aliases: ["pkf", "frants", "pkf-frants", "pkf frants"] },
-            { id: "Reanda Haroon Zakaria", aliases: ["reanda", "reanda haroon", "haroon zakaria"] },
-            { id: "ShineWing Hameed Chaudhary", aliases: ["shinewing", "hameed chaudhary"] },
-            { id: "Kreston Hyder Bhimji", aliases: ["kreston", "hyder bhimji"] },
-            { id: "NJMI Nasir Javeed Maqsood Imran", aliases: ["njmi", "nasir javeed maqsood imran", "nasir javed"] },
-            { id: "Naveed Zafar Ashfaq Jaffery", aliases: ["naveed zafar", "ashfaq jaffery", "nzaj"] },
-            { id: "Nauman Javed Hasnain Rashid (NJHR)", aliases: ["nauman javed", "hasnain rashid", "njhr"] },
-            { id: "Riaz Ahmad Saqib Gohar (RASG)", aliases: ["riaz ahmad saqib gohar", "rasg", "saqib gohar"] },
-            { id: "Clarkson Hyde Saud Ansari", aliases: ["clarkson hyde", "saud ansari", "chsa"] },
-            { id: "Junaidy Shoaib Asad (JSA)", aliases: ["junaidy shoaib asad", "junaidi shoaib asad", "jsa"] },
-            { id: "Salman & Raheel (SRCA)", aliases: ["salman & raheel", "salman and raheel", "srca"] },
-
-            // --- Remaining New Additions ---
-            { id: "A.H.W & Co", aliases: ["a.h.w", "ahw"] },
-            { id: "Abdul Khaliq & Co", aliases: ["abdul khaliq"] },
-            { id: "Abdullah Shahid & Co", aliases: ["abdullah shahid"] },
-            { id: "AD Akhawala & Co", aliases: ["ad akhawala", "akhawala"] },
-            { id: "Afzaal Awais Farooq & Co", aliases: ["afzaal awais farooq", "afzaal awais", "aaf"] },
-            { id: "Akram & Co", aliases: ["akram"] },
-            { id: "Alam Aulakh & Co", aliases: ["alam aulakh"] },
-            { id: "Ali Akhtar Adnan & Co", aliases: ["ali akhtar adnan"] },
-            { id: "Amin Mudassar & Co", aliases: ["amin mudassar"] },
-            { id: "Anas Rehman & Co", aliases: ["anas rehman"] },
-            { id: "Arslan & Co", aliases: ["arslan"] },
-            { id: "Awan & Co", aliases: ["awan"] },
-            { id: "Bilal Arsalan & Co", aliases: ["bilal arsalan"] },
-            { id: "Dawood Saif & Co", aliases: ["dawood saif"] },
-            { id: "H.A.M.D & Co", aliases: ["h.a.m.d", "hamd"] },
-            { id: "H.O.A", aliases: ["h.o.a", "hoa"] },
-            { id: "Hina Shahrukh & Co", aliases: ["hina shahrukh"] },
-            { id: "Iqbal Yasir & Co", aliases: ["iqbal yasir"] },
-            { id: "Irfan Bashir & Co", aliases: ["irfan bashir"] },
-            { id: "Jalis Ahmad & Co", aliases: ["jalis ahmad"] },
-            { id: "JASB Associates", aliases: ["jasb"] },
-            { id: "Javaid Jalal Amjad & Co", aliases: ["javaid jalal amjad"] },
-            { id: "M. Almas & Co", aliases: ["m. almas", "almas"] },
-            { id: "M.R.M.E & Co", aliases: ["m.r.m.e", "mrme"] },
-            { id: "Malik & Co", aliases: ["malik & co", "malik and co"] },
-            { id: "Malik Haroon & Co (MHSS)", aliases: ["malik haroon", "mhss"] },
-            { id: "Malik Mirza & Co", aliases: ["malik mirza"] },
-            { id: "Masood Pervaiz & Co", aliases: ["masood pervaiz"] },
-            { id: "Murad Ali & Co", aliases: ["murad ali"] },
-            { id: "Nasir Jameel & Co", aliases: ["nasir jameel"] },
-            { id: "Peter & Co", aliases: ["peter"] },
-            { id: "Qamar Waheed", aliases: ["qamar waheed"] },
-            { id: "Riaz & Co", aliases: ["riaz & co", "riaz and co"] },
-            { id: "Rizwan & Co", aliases: ["rizwan"] },
-            { id: "RK Group", aliases: ["rk group"] },
-            { id: "S.M Sohail & Co", aliases: ["s.m sohail", "sm sohail"] },
-            { id: "Saad Uz Zaman & Co", aliases: ["saad uz zaman"] },
-            { id: "Sana Javaid & Co", aliases: ["sana javaid"] },
-            { id: "Sarmad Ali & Co", aliases: ["sarmad ali"] },
-            { id: "Sattar & Co", aliases: ["sattar"] },
-            { id: "Shekha Mufti & Co", aliases: ["shekha mufti"] },
-            { id: "Tayyab & Co", aliases: ["tayyab"] },
-            { id: "Tehseen Rehman & Co", aliases: ["tehseen rehman"] },
-            { id: "Ubaid-Ur-Rehman & Co", aliases: ["ubaid-ur-rehman", "ubaid ur rehman"] },
-            { id: "UHF & Co", aliases: ["uhf"] },
-            { id: "Umair Ali & Co", aliases: ["umair ali"] },
-            { id: "Viqar A Khan & Co", aliases: ["viqar a khan", "viqar khan"] },
-            { id: "Yousaf Hassan Associates", aliases: ["yousaf hassan"] },
-            { id: "Yousaf Saeed & Co", aliases: ["yousaf saeed"] },
-            { id: "Z.M.T & Co", aliases: ["z.m.t", "zmt"] },
-            { id: "Zain Suhail & Co", aliases: ["zain suhail"] },
-            { id: "Zulfiqar Ahmad & Co", aliases: ["zulfiqar ahmad"] },
-
-            // --- Pre-existing & Restored Independent Firms ---
-            { id: "YB Holdings", aliases: ["yb holdings", "yb holding", "yb"] }, // 🔥 RESTORED
-            { id: "Hameed Zahid & Co", aliases: ["hameed zahid", "hz & co"] },
-            { id: "Amir Alam Khan & Co", aliases: ["amir alam khan", "amir alam"] },
-            { id: "Fazal Mahmood & Co", aliases: ["fazal mahmood", "fazal mehmood"] },
-            { id: "Russell Bedford", aliases: ["russell bedford"] },
-            { id: "Axiom World", aliases: ["axiom world", "axiom"] },
-            { id: "EUSOL (Odoo Partner)", aliases: ["eusol", "odoo", "odoo gold partner", "eusol (odoo gold partner)"] }
-        ];
-// Helper function to get clean firm name (Updated with Earliest Match & Auto-Detect Fallback)
-function getCleanFirmName(text, existingFirm) {
-    let lowerText = text.toLowerCase();
-    let firm = existingFirm || "Unspecified Firm";
-    
-    // 1. Pehle exact mapping list check karein
-    let earliestFirmIndex = Infinity;
-    for (let f of FIRM_MAPPINGS) {
-        for (let alias of f.aliases) {
-            let match = lowerText.match(new RegExp(`\\b${alias}\\b`, 'i'));
-            if (match && match.index < earliestFirmIndex) {
-                earliestFirmIndex = match.index;
-                firm = f.id;
-            }
-        }
-    }
-
-    // 2. 🔥 FALLBACK LOGIC FROM FIRM HUB (Agar mapping nahi mili toh khud name extract karein)
-    if (firm === "Unspecified Firm") {
-        const stopWords = ['to', 'at', 'in', 'for', 'from', 'with', 'by', 'the', 'a', 'an', 'is', 'was', 'of', 'any', 'top', 'good', 'best', 'my', 'our', 'their', 'firm', 'give', 'giving', 'has', 'have', 'had', 'got'];
-        
-        // Check for "& Co" or "and Co" patterns
-        let coMatch = text.match(/([a-zA-Z\s]+?)\s*(?:&|and)\s*co\b/i);
-        if (coMatch) {
-            let words = coMatch[1].trim().split(/\s+/);
-            let firmWords = words.slice(-3);
-            while(firmWords.length > 0 && stopWords.includes(firmWords[0].toLowerCase())) firmWords.shift();
-            if (firmWords.length > 0) firm = firmWords.join(" ").replace(/\b\w/g, l => l.toUpperCase()) + " & Co.";
-        }
-        
-        // Check for "Chartered Accountants" or "CA Firm" patterns
-        if (firm === "Unspecified Firm") {
-            let caMatch = text.match(/([a-zA-Z\s]+?)\s*(?:chartered\s*accountants?|ca\s*firm)/i);
-            if (caMatch && !caMatch[0].toLowerCase().includes("any ")) {
-                let words = caMatch[1].trim().split(/\s+/);
-                let firmWords = words.slice(-3);
-                while(firmWords.length > 0 && stopWords.includes(firmWords[0].toLowerCase())) firmWords.shift();
-                if (firmWords.length > 0 && firmWords.join(" ").length > 2) firm = firmWords.join(" ").replace(/\b\w/g, l => l.toUpperCase());
-            }
-        }
-    }
-
-    return firm;
-}
 // 2. STATE VARIABLES
 let candidateData = { name: "", firm: "", cvText: "" };
 let interviewMemory = [];
@@ -164,13 +15,13 @@ let secondsElapsed = 0;
 let speechPauseTimer;
 let absoluteSilenceTimer;
 let isMicOpen = false;
-let finalAnswer = ""; // 🔥 Stores text safely even if you pause
-let silenceStrikes = 0; // 🔥 To auto-cut the call
-let globalSessionCount = 0; // 🔥 Track sessions globally to prevent bypass
-let hasTriggeredWrapUp = false; // 🔥 Auto wrap-up flag
-let currentPartnerAudio = null; // 🔥 For Audio Stream Control
-let globalUserId = null; // 🔥 Safely track User ID
-let globalSubVal = null; // 🔥 Store raw subscription value securely
+let finalAnswer = ""; 
+let silenceStrikes = 0; 
+let globalSessionCount = 0; 
+let hasTriggeredWrapUp = false; 
+let currentPartnerAudio = null; 
+let globalUserId = null; 
+let globalSubVal = null; 
 
 // 🔥 FIREBASE SETUP FOR ROOM LOCK 🔥
 const app = getApp();
@@ -185,8 +36,8 @@ const synth = window.speechSynthesis;
 
 // Setup STT
 if (recognition) {
-    recognition.continuous = false; // We auto-restart it safely in onend
-    recognition.interimResults = true; // Captures while you pause
+    recognition.continuous = false;
+    recognition.interimResults = true; 
     recognition.lang = 'en-PK';
 }
 
@@ -197,7 +48,7 @@ let serverState = { is_busy: false, current_student: null };
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        globalUserId = user.uid; // Store it securely before any timeouts
+        globalUserId = user.uid; 
         onSnapshot(roomDocRef, (docSnap) => {
             if (docSnap.exists()) {
                 serverState = docSnap.data();
@@ -213,8 +64,8 @@ onAuthStateChanged(auth, (user) => {
             if (userSnap.exists()) {
                 let subs = userSnap.data().subscriptions || {};
                 let subVal = subs['mock_interview'];
-                globalSubVal = subVal; // Cache it globally for instant deduction
-                let sCount = 3; // 🔥 FIX: Match security.js default to prevent Desync Illusion
+                globalSubVal = subVal; 
+                let sCount = 3; 
                 if (typeof subVal === 'string' && subVal.includes(',')) {
                     sCount = parseInt(subVal.split(',')[1], 10);
                 } else if (!isNaN(subVal) && subVal !== false && subVal !== "") {
@@ -226,31 +77,30 @@ onAuthStateChanged(auth, (user) => {
                 if (badge && countEl) {
                     badge.style.display = 'flex';
                     countEl.innerText = sCount;
-                    // Warn if low sessions
-                countEl.style.color = sCount <= 0 ? '#ef4444' : (sCount <= 2 ? '#f59e0b' : '#38bdf8');
-            }
+                    countEl.style.color = sCount <= 0 ? '#ef4444' : (sCount <= 2 ? '#f59e0b' : '#38bdf8');
+                }
 
-            globalSessionCount = sCount; // Update global state
+                globalSessionCount = sCount; 
             
-            // 🔥 REAL-TIME BUTTON LOCK IF SESSIONS REACH 0 🔥
-            const btn = document.getElementById('start-interview-btn');
-            const statusMsg = document.getElementById('lobby-status');
-            if (sCount <= 0) {
-                if (btn) {
-                    btn.disabled = true;
-                    btn.innerText = "Sessions Exhausted";
-                    btn.style.background = "#ef4444";
-                }
-                if (statusMsg && !isInterviewActive) {
-                    statusMsg.style.color = "#ef4444";
-                    statusMsg.innerText = "⚠️ You have 0 sessions left. Please renew your access from the dashboard.";
-                }
-            } else {
-                if (btn && btn.innerText === "Sessions Exhausted") {
-                    btn.disabled = false;
-                    btn.innerText = "Join Interview Room";
-                    btn.style.background = "";
-                }
+                // 🔥 REAL-TIME BUTTON LOCK IF SESSIONS REACH 0 🔥
+                const btn = document.getElementById('start-interview-btn');
+                const statusMsg = document.getElementById('lobby-status');
+                if (sCount <= 0) {
+                    if (btn) {
+                        btn.disabled = true;
+                        btn.innerText = "Sessions Exhausted";
+                        btn.style.background = "#ef4444";
+                    }
+                    if (statusMsg && !isInterviewActive) {
+                        statusMsg.style.color = "#ef4444";
+                        statusMsg.innerText = "⚠️ You have 0 sessions left. Please renew your access from the dashboard.";
+                    }
+                } else {
+                    if (btn && btn.innerText === "Sessions Exhausted") {
+                        btn.disabled = false;
+                        btn.innerText = "Join Interview Room";
+                        btn.style.background = "";
+                    }
                 }
             }
         });
@@ -281,7 +131,6 @@ function updateLobbyStatus() {
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
-// 🔥 PRE-FLIGHT API CHECK (SMART JUGAR) 🔥
 async function checkPartnerAvailability() {
     try {
         const response = await fetch("/api/interview", {
@@ -291,12 +140,12 @@ async function checkPartnerAvailability() {
         });
         if (response.ok) return true;
     } catch(e) {}
-    return false; // All keys hit limit
+    return false;
 }
 
 document.getElementById('start-interview-btn').addEventListener('click', async () => {
     const name = document.getElementById('candidate-name').value.trim();
-    updateLobbyStatus(); // re-check
+    updateLobbyStatus(); 
     const firm = document.getElementById('target-firm').value;
     const cvFile = document.getElementById('cv-upload').files[0];
     const statusMsg = document.getElementById('lobby-status');
@@ -309,26 +158,21 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
     if (!name) return statusMsg.innerText = "⚠️ Please enter your name.";
     if (!cvFile) return statusMsg.innerText = "⚠️ Please upload your CV (PDF).";
 
-    // 🔥 PRO-LEVEL FIX 1: Unlock Browser Speech Engine synchronously on click 🔥
-    // (Prevents Safari, iPhone, and strict Chrome from blocking AI voice later)
     const unlockUtterance = new SpeechSynthesisUtterance('');
     speechSynthesis.speak(unlockUtterance);
     speechSynthesis.cancel();
 
-    // 🔥 PRO-LEVEL FIX 2: Block "Ghost Rooms" by enforcing strict hardware checks 🔥
     try {
         const testStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        testStream.getTracks().forEach(track => track.stop()); // Free hardware immediately
+        testStream.getTracks().forEach(track => track.stop()); 
     } catch (hardwareErr) {
         return statusMsg.innerText = "❌ Camera/Microphone blocked! You must allow permissions to take the interview.";
     }
 
-    // 🔥 CHECK LOCK BEFORE JOINING 🔥
     try {
         const snap = await getDoc(roomDocRef);
         if (snap.exists() && snap.data().is_busy) {
             const lastActive = snap.data().last_active ? snap.data().last_active.toMillis() : 0;
-            // Auto-unlock if frozen for more than 5 minutes
             if (Date.now() - lastActive < 5 * 60 * 1000) {
                 return statusMsg.innerText = `⚠️ Room is busy with ${snap.data().current_student}. Please wait.`;
             }
@@ -344,78 +188,30 @@ document.getElementById('start-interview-btn').addEventListener('click', async (
         const cvText = await extractTextFromPDF(cvFile);
         if(cvText.length < 50) throw new Error("CV seems empty or unreadable.");
         
-        // 🔥 FETCHING LIVE FIRM INTELLIGENCE (SUPER PROMPT DATA) 🔥
         statusMsg.innerText = "⏳ Fetching Firm's Live Interview History...";
         let firmHistoryText = "No specific recent feedback available. Proceed with general firm technicals.";
+        
         try {
-            const fbRes = await fetch('https://caversity-48b29-default-rtdb.firebaseio.com/feedbacks.json');
-            const fbData = await fbRes.json();
-            if (fbData) {
-                const now = Date.now();
-                const SIXTY_DAYS = 60 * 24 * 60 * 60 * 1000;
-                let recentQuestions = [];
-                
-               Object.values(fbData).forEach(item => {
-                    if (!item || !item.message) return;
-                    let msgLow = item.message.toLowerCase();
-                    
-  if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("update about") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("updates and feedback")) {
-                    return; 
-                }
-                    
-                    let type = 'Induction';
-                    let isStrictInduction = msgLow.includes("induction alert");
-                   let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("mcqs") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test") || msgLow.includes("1st interview") || msgLow.includes("technical questions") || msgLow.includes("any questions");
-                    let isHiring = msgLow.includes("hiring") || msgLow.includes("induction") || msgLow.includes("trainee") || msgLow.includes("opportunity") || msgLow.includes("apply") || msgLow.includes("vacancies") || msgLow.includes("looking for");
-                    
-                    let isCallNotify = (msgLow.includes("received") || msgLow.includes("recieved") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
-                    let isTestNotify = msgLow.includes("test") || msgLow.includes("system") || msgLow.includes("shortlist") || msgLow.includes("schedule") || msgLow.includes("scheduled");
-                    let isInterviewMailNotify = msgLow.includes("interview") && (msgLow.includes("mail") || msgLow.includes("email") || msgLow.includes("message"));
-                    let isShort = item.message.length < 300; 
-                    
-                    if (isStrictInduction) {
-                        type = 'Induction';
-                    } else if (isShort && (isCallNotify || isTestNotify || isInterviewMailNotify) && !isFeedback && !isHiring) {
-                        type = 'Call Alert';
-                    } else if (isFeedback || msgLow.includes("interview") || msgLow.includes("feedback")) {
-                        type = 'Feedback';
-                    } else if (isHiring) {
-                        type = 'Induction';
-                    }
+            const histRes = await fetch("/api/interview", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ action: "getFirmHistory", firm: firm })
+            });
+            const histData = await histRes.json();
+            if(histData.firmHistoryText) firmHistoryText = histData.firmHistoryText;
+        } catch(e) { console.warn("API History Fetch error:", e); }
 
-                    // Sirf agar actually 'Feedback' hai toh aage jaye
-                    if (type === 'Feedback') {
-                        let cleanFirm = getCleanFirmName(item.message, item.firm);
-                        
-                        // Check if this feedback belongs to the Target Firm selected by user
-                        if (cleanFirm === firm && item.timestamp && (now - item.timestamp <= SIXTY_DAYS)) {
-                            recentQuestions.push(item.message.replace(/\*/g, '').trim());
-                        }
-                    }
-                });
-                
-                if (recentQuestions.length > 0) {
-                    // 🔥 NAYA LOGIC: Array ko reverse kar ke sirf latest 5 reviews pick karega
-                    // Reverse isliye taake jo sab se naye (latest) hain wo top par aa jayen
-                    let topQuestions = recentQuestions.reverse().slice(0, 5); 
-                    firmHistoryText = topQuestions.join("\n---\n");
-                }
-            }
-        } catch(e) { console.warn("Live DB Fetch error:", e); }
-
-        // 🔥 SMART JUGAR: Pre-flight Limit Check before entering room 🔥
         statusMsg.innerText = "⏳ Checking Partner's Schedule...";
         const isPartnerFree = await checkPartnerAvailability();
         if (!isPartnerFree) {
-            statusMsg.style.color = "#f59e0b"; // Warning Orange
+            statusMsg.style.color = "#f59e0b"; 
             return statusMsg.innerText = "⚠️ The Partner is currently occupied with another interview. Please try joining again after 30 to 60 minutes.";
         }
 
-        // Acquire Room Lock
         await setDoc(roomDocRef, {
             is_busy: true,
             current_student: name,
-            student_id: globalUserId, // 🔥 SECURITY: Link lock to user ID
+            student_id: globalUserId, 
             last_active: serverTimestamp()
         });
 
@@ -442,7 +238,7 @@ async function extractTextFromPDF(file) {
 }
 
 // ==========================================
-// 🖨️ SMART PDF GENERATOR (No Browser Headers)
+// 🖨️ SMART PDF GENERATOR 
 // ==========================================
 window.downloadReportPDF = function() {
     const element = document.querySelector('.official-paper');
@@ -452,7 +248,6 @@ window.downloadReportPDF = function() {
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
     btn.disabled = true;
 
-    // Force exact dimensions for perfect PDF capture
     const originalWidth = element.style.width;
     const originalMaxWidth = element.style.maxWidth;
     element.style.width = '794px';
@@ -491,7 +286,6 @@ function startInterviewRoom() {
     isInterviewActive = true;
     hasTriggeredWrapUp = false;
 
-    // 🔥 DEDUCT ONE SESSION FROM FIREBASE 🔥
     if (globalUserId && globalSubVal) {
         let dStr = globalSubVal;
         let sCount = 3;
@@ -517,34 +311,28 @@ function startInterviewRoom() {
         }
     }
 
-    // 🔥 Show Instructions Toast 🔥
     const toast = document.getElementById('interview-toast');
     if(toast) {
         toast.classList.add('show');
-        setTimeout(() => { toast.classList.remove('show'); }, 15000); // Auto hide after 15 seconds
+        setTimeout(() => { toast.classList.remove('show'); }, 15000); 
     }
 
-    // 🔥 HIDE TIMER FRONTEND 🔥
     const timerEl = document.getElementById('call-timer');
     if (timerEl) {
         timerEl.style.display = 'none';
         if (timerEl.parentElement) timerEl.parentElement.style.display = 'none'; 
     }
 
-    // Clear previous transcript
     const tsContent = document.getElementById('ts-content');
     if (tsContent) tsContent.innerHTML = '';
 
-    // Start Webcam
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         .then(stream => { document.getElementById('user-webcam').srcObject = stream; })
         .catch(err => { console.warn("Camera fallback failed:", err); });
 
-    // Start Timer
     timerInterval = setInterval(() => {
         secondsElapsed++;
         
-        // 🔥 8 MINUTE SMART WRAP-UP TRIGGER 🔥
         if (secondsElapsed === 480 && !hasTriggeredWrapUp) {
             hasTriggeredWrapUp = true;
             interviewMemory.push({
@@ -553,17 +341,14 @@ function startInterviewRoom() {
             });
         }
         
-        // 🔥 AUTO-END AT 10 MINUTES 🔥
         if (secondsElapsed >= 600 && !synth.speaking && isInterviewActive) {
-            endInterview(); // Cut call immediately if partner is silent
+            endInterview(); 
         }
     }, 1000);
 
-    setSystemPrompt();
     triggerPartnerGreeting();
 }
 
-// 🔥 ABSOLUTE SILENCE HANDLER 🔥
 async function handleAbsoluteSilence() {
     if (!isMicOpen) return;
     
@@ -587,7 +372,6 @@ async function handleAbsoluteSilence() {
     }
 }
 
-// 🔥 WINDOW CLOSE PROTECTION (Releases lock if user closes tab) 🔥
 window.addEventListener('beforeunload', () => {
     if (isInterviewActive) {
         setDoc(roomDocRef, {
@@ -601,7 +385,7 @@ async function endInterview() {
     clearInterval(timerInterval);
     clearTimeout(absoluteSilenceTimer);
     clearTimeout(speechPauseTimer);
-    synth.cancel(); // Stop speaking
+    synth.cancel(); 
     if (currentPartnerAudio) {
         currentPartnerAudio.pause();
         currentPartnerAudio.currentTime = 0;
@@ -613,7 +397,6 @@ async function endInterview() {
         document.getElementById('user-webcam').srcObject = null;
     }
     
-    // Release Lock
     setDoc(roomDocRef, {
         is_busy: false,
         current_student: null,
@@ -621,31 +404,26 @@ async function endInterview() {
         last_active: serverTimestamp()
     }).catch(e => console.warn("Failed to release lock", e));
 
-    // Switch to Dashboard
     document.getElementById('interview-screen').classList.remove('active-screen');
     document.getElementById('evaluation-screen').classList.add('active-screen');
     
-    // Set Report Header Data
     document.getElementById('report-candidate-name').innerText = candidateData.name;
     document.getElementById('report-firm-name').innerText = candidateData.firm.toUpperCase();
     document.getElementById('report-date').innerText = new Date().toLocaleDateString('en-GB');
     
-    // 🔥 Screen change hotay hi smoothly TOP par scroll karega 🔥
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     await generateEvaluationReport();
 }
 
-window.endInterview = endInterview; // Export for HTML onclick
+window.endInterview = endInterview; 
 
 // ==========================================
 // 📊 EVALUATION REPORT ENGINE
 // ==========================================
 async function generateEvaluationReport() {
-    
     try {
         const reply = await askGroqWithFallback('evaluate');
-        // 🔥 BULLETPROOF JSON PARSER 🔥
         const cleanedReply = reply.replace(/```json/g, '').replace(/```/g, '').trim();
         const jsonMatch = cleanedReply.match(/\{[\s\S]*\}/);
         const report = JSON.parse(jsonMatch ? jsonMatch[0] : cleanedReply);
@@ -678,12 +456,6 @@ async function generateEvaluationReport() {
 // 🧠 AI BRAIN & API FALLBACK
 // ==========================================
 
-function setSystemPrompt() {
-    // System prompt and personality are securely injected by the Vercel Backend now.
-    // This keeps the frontend memory clean.
-}
-
-// Expose for voice load
 speechSynthesis.onvoiceschanged = () => { window.availableVoices = speechSynthesis.getVoices(); };
 
 async function askGroqWithFallback(action = 'chat') {
@@ -727,27 +499,25 @@ function appendToTranscript(role, text) {
     msgDiv.className = `ts-msg ${role === 'user' ? 'user-msg' : 'ai-msg'}`;
     msgDiv.innerText = text;
     tsContent.appendChild(msgDiv);
-    tsContent.scrollTop = tsContent.scrollHeight; // Auto scroll to bottom
+    tsContent.scrollTop = tsContent.scrollHeight; 
 }
 
 // ==========================================
-// �️ SPEECH LOGIC (Browser Built-in)
+// 🗣️ SPEECH LOGIC (Browser Built-in)
 // ==========================================
 
 async function triggerPartnerGreeting() {
-    // Add a natural delay (pretending to read CV) before speaking
     document.getElementById('subtitle-box').innerText = "Partner is reviewing your profile...";
     setTimeout(async () => {
         const reply = await askGroqWithFallback();
         setTimeout(() => speakResponse(reply), 1000);
-    }, 3500); // Wait 3.5 seconds before the first interaction
+    }, 3500); 
 }
 
 function speakWithBrowserVoice(text, onAudioEnd) {
     const utterance = new SpeechSynthesisUtterance(text);
     const voices = speechSynthesis.getVoices();
     
-    // 🔥 Strict Professional English Voice 🔥
     let bestVoice = voices.find(v => v.name.includes('Google UK English Male') || v.name.includes('Microsoft Mark') || v.name.includes('Microsoft Guy') || (v.lang.startsWith('en') && v.name.includes('Male')));
     if (bestVoice) utterance.voice = bestVoice;
     
@@ -782,46 +552,42 @@ async function speakResponse(text) {
     const onAudioEnd = () => {
         document.querySelector('.ai-video').classList.remove('ai-speaking');
         interviewMemory.push({ "role": "assistant", "content": text });
-        appendToTranscript('assistant', cleanText); // Add clean text to Sidebar
+        appendToTranscript('assistant', cleanText); 
         if (isInterviewActive) {
-            // 🔥 AUTO-CUT CALL LOGIC 🔥
             if (isTimeUpOrEnding) {
-                setTimeout(endInterview, 1000); // Cut the call if angry or time's up
+                setTimeout(endInterview, 1000); 
             } else {
-                startAutoListening(); // 🔥 AI finished, turn Mic ON
+                startAutoListening(); 
             }
         }
     };
     
-    // 🔥 COMPLETELY REMOVED EXTERNAL HUGGING FACE LINKS 🔥
-    // ALWAYS USE FAST NATIVE BROWSER VOICES
     speakWithBrowserVoice(cleanText, onAudioEnd);
 }
-// 🔥 AUTOMATIC HANDS-FREE MIC LOGIC 🔥
+
 function startAutoListening() {
     if (!isInterviewActive || synth.speaking) return;
 
     isMicOpen = true;
-    finalAnswer = ""; // Reset answer text
+    finalAnswer = ""; 
     document.getElementById('subtitle-box').innerText = "Listening... (Click 'Send' when done)";
 
     const helper = document.getElementById('mic-helper');
     if(helper) {
-        helper.style.display = 'none'; // 🔥 Hide "Click Mic to Send" completely
+        helper.style.display = 'none'; 
     }
 
     updateMicUI(true);
 
     try {
         if(recognition) recognition.start();
-    } catch (e) { /* Ignore if already started */ }
+    } catch (e) { }
 
     clearTimeout(absoluteSilenceTimer);
     clearTimeout(speechPauseTimer);
-    absoluteSilenceTimer = setTimeout(handleAbsoluteSilence, 20000); // Wait 20 seconds for activity
+    absoluteSilenceTimer = setTimeout(handleAbsoluteSilence, 20000); 
 }
 
-// 🔥 CLICK MIC TO SEND LOGIC 🔥
 document.getElementById('auto-mic-indicator')?.addEventListener('click', () => {
     if (isMicOpen) {
         const currentSub = document.getElementById('subtitle-box').innerText;
@@ -848,14 +614,13 @@ async function sendUserResponse() {
     const helper = document.getElementById('mic-helper');
     if(helper) helper.classList.remove('show');
 
-    silenceStrikes = 0; // Reset strikes since user responded
+    silenceStrikes = 0; 
 
     document.getElementById('subtitle-box').innerText = "Processing your response...";
     interviewMemory.push({ "role": "user", "content": finalAnswer });
     appendToTranscript('user', finalAnswer);
 
     const reply = await askGroqWithFallback();
-    // Delay AI response by 1 second to make it natural
     setTimeout(() => {
         speakResponse(reply);
     }, 1000);
@@ -874,7 +639,6 @@ function updateMicUI(isListening) {
 
 if(recognition) {
     recognition.onend = () => {
-        // Auto-restart if browser drops it before timer or user speaks
         if (isMicOpen && isInterviewActive) {
             try { recognition.start(); } catch(e){}
         }
@@ -899,12 +663,12 @@ if(recognition) {
             
             speechPauseTimer = setTimeout(() => {
                 if (currentText.trim().length > 2) {
-                    finalAnswer = currentText; // Ensure we get everything
+                    finalAnswer = currentText; 
                     sendUserResponse();
                 } else {
                     absoluteSilenceTimer = setTimeout(handleAbsoluteSilence, 20000);
                 }
-            }, 4000); // 4-second pause to auto-send
+            }, 4000); 
         }
     };
 } else {
@@ -912,7 +676,7 @@ if(recognition) {
 }
 
 // ==========================================
-// 🔥 AUTO-LOAD FIRMS & SELECT TARGET FIRM (DIRECT FIREBASE)
+// 🔥 AUTO-LOAD FIRMS & SELECT TARGET FIRM (API DRIVEN)
 // ==========================================
 document.addEventListener("DOMContentLoaded", async () => {
     const dropdown = document.getElementById('target-firm');
@@ -921,50 +685,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     dropdown.innerHTML = '<option value="">Fetching live firms from database...</option>';
 
     try {
-        const fbRes = await fetch('https://caversity-48b29-default-rtdb.firebaseio.com/feedbacks.json');
-        const fbData = await fbRes.json();
+        const res = await fetch("/api/interview", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "getFirms" })
+        });
         
-        let interviewFirms = new Set();
-      if (fbData) {
-            Object.values(fbData).forEach(item => {
-                if (!item || !item.message) return;
-                
-                let msgLow = item.message.toLowerCase();
-                
-   if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("update about") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("updates and feedback")) {
-                    return; 
-                }
-                
-                let type = 'Induction';
-                let isStrictInduction = msgLow.includes("induction alert");
-              let isFeedback = msgLow.includes("gave interview") || msgLow.includes("asked questions") || msgLow.includes("interview experience") || msgLow.includes("mcqs") || msgLow.includes("penalist") || msgLow.includes("interview feedback") || msgLow.includes("gave test") || msgLow.includes("1st interview") || msgLow.includes("technical questions") || msgLow.includes("any questions");
-                let isHiring = msgLow.includes("hiring") || msgLow.includes("induction") || msgLow.includes("trainee") || msgLow.includes("opportunity") || msgLow.includes("apply") || msgLow.includes("vacancies") || msgLow.includes("looking for");
-                
-                let isCallNotify = (msgLow.includes("received") || msgLow.includes("recieved") || msgLow.includes("got")) && (msgLow.includes("call") || msgLow.includes("email") || msgLow.includes("mail") || msgLow.includes("message"));
-                let isTestNotify = msgLow.includes("test") || msgLow.includes("system") || msgLow.includes("shortlist") || msgLow.includes("schedule") || msgLow.includes("scheduled");
-                let isInterviewMailNotify = msgLow.includes("interview") && (msgLow.includes("mail") || msgLow.includes("email") || msgLow.includes("message"));
-                let isShort = item.message.length < 300; 
-                
-                if (isStrictInduction) {
-                    type = 'Induction';
-                } else if (isShort && (isCallNotify || isTestNotify || isInterviewMailNotify) && !isFeedback && !isHiring) {
-                    type = 'Call Alert';
-                } else if (isFeedback || msgLow.includes("interview") || msgLow.includes("feedback")) {
-                    type = 'Feedback';
-                } else if (isHiring) {
-                    type = 'Induction';
-                }
-
-                // Sirf agar actually 'Feedback' hai toh aage jaye
-                if (type === 'Feedback') {
-                    let cleanFirm = getCleanFirmName(item.message, item.firm);
-                    if (cleanFirm !== "Unspecified Firm") {
-                        interviewFirms.add(cleanFirm);
-                    }
-                }
-            });
-        }
-        let activeFirmsArray = Array.from(interviewFirms).sort();
+        const activeFirmsArray = await res.json();
 
         dropdown.innerHTML = '';
         if (activeFirmsArray.length === 0) {
@@ -978,7 +705,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         }
 
-        // Auto-Select Firm if coming from Portal
         let pendingFirm = localStorage.getItem('targetFirm');
         if (pendingFirm) {
             let found = Array.from(dropdown.options).some((opt, i) => {
@@ -993,7 +719,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             localStorage.removeItem('targetFirm');
         }
     } catch(e) {
-        console.warn("Firebase firm load error:", e);
+        console.warn("API firm load error:", e);
         dropdown.innerHTML = '<option value="">Error loading firms. Please type manually.</option>';
     }
 });
