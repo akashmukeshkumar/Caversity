@@ -932,8 +932,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 
                 let msgLow = item.message.toLowerCase();
                 
-   // Uses Regex \b to ensure "call" and "calling" are separate words, not part of words like "physically"
-if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("updates and feedback) || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("update about")) {
+      // Uses Regex \b to ensure "call" and "calling" are separate words, not part of words like "physically"
+if (msgLow.includes("channel") || msgLow.includes("feedback share") || msgLow.includes("cv accepted") || msgLow.includes("received interview") || msgLow.includes("please share") || msgLow.includes("interview guidance") || msgLow.includes("conducted tomorrow") || msgLow.includes("test mail") || msgLow.includes("ca firms") || msgLow.includes("visited") || /\bcalling\b/.test(msgLow) || msgLow.includes("another toop") || msgLow.includes("update about") || msgLow.includes("umeed") || msgLow.includes("cv drop") || msgLow.includes("this post") || msgLow.includes("interview call") || msgLow.includes("updates and feedback")) {
     continue; 
 }
                 
