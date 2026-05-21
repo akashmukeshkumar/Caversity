@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 
-// Vercel backend ke liye wahi config use hogi
 const firebaseConfig = {
     apiKey: "AIzaSyAeIvzRYa7G2f0iqfpgmRaaRRoDDb-OBZ8",
     authDomain: "caversity-48b29.firebaseapp.com",
@@ -16,27 +15,21 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export default async function handler(req, res) {
-    // Sirf POST requests allow karni hain security ke liye
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method Not Allowed' });
-    }
+    if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
-    const { action, payload } = req.body;
+    // Frontend jo payload bhej raha hai usko extract kiya
+    const { code, isMultiSubjectMode, currentSubjectId, selectedSubjects } = req.body.payload;
 
-    // 🔥 SECURE COUPON LOGIC HIDDEN IN BACKEND 🔥
-    if (action === 'verifyCoupon') {
-        const { code, isMultiSubjectMode, currentSubjectId, selectedSubjects } = payload;
+    try {
+        // --- DITTO COPY PASTE FROM YOUR FRONTEND ---
         
-        try {
-            const couponDoc = await getDoc(doc(db, "coupons", code));
-            
-            if (!couponDoc.exists()) {
-                return res.status(400).json({ error: 'Invalid or expired coupon code.' });
-            }
-
+        // Firebase se 'coupons' collection mein is code ko dhoondo
+        const couponDoc = await getDoc(doc(db, "coupons", code));
+        
+        if (couponDoc.exists()) {
             const couponData = couponDoc.data();
             
-            // Check Subject Restrictions securely
+            // Check if coupon is restricted to specific subjects
             let allowedSubjects = couponData.subjectId || couponData.subjectid || couponData.applicableFor || "all";
             if (allowedSubjects !== "all") {
                 if (typeof allowedSubjects === 'string') {
@@ -47,9 +40,8 @@ export default async function handler(req, res) {
 
                 let isValid = true;
                 if (isMultiSubjectMode) {
-                    selectedSubjects.forEach(chk => { 
-                        if (!allowedSubjects.includes(chk.replace(/\s+/g, '').toLowerCase())) isValid = false; 
-                    });
+                    // Vercel pe DOM nahi hota, isliye selectedSubjects array use ki hai
+                    selectedSubjects.forEach(chk => { if (!allowedSubjects.includes(chk.replace(/\s+/g, '').toLowerCase())) isValid = false; });
                 } else {
                     if (!allowedSubjects.includes(currentSubjectId.replace(/\s+/g, '').toLowerCase())) isValid = false;
                 }
@@ -59,7 +51,7 @@ export default async function handler(req, res) {
                 }
             }
 
-            // Bulletproof discount extractor logic (now hidden from users)
+            // 🔥 BULLETPROOF COUPON EXTRACTOR 🔥
             let discountFound = 0;
             for (let key in couponData) {
                 let k = key.toLowerCase();
@@ -71,17 +63,19 @@ export default async function handler(req, res) {
                     }
                 }
             }
-
+            
             if (discountFound > 0) {
                 return res.status(200).json({ discount: discountFound, code: code });
             } else {
                 return res.status(400).json({ error: 'Coupon applied but no discount value found in database.' });
             }
-
-        } catch (error) {
-            return res.status(500).json({ error: 'Server error while verifying coupon.' });
+        } else {
+            return res.status(400).json({ error: "Invalid" });
         }
+        
+        // --- END DITTO COPY PASTE ---
+        
+    } catch (error) {
+        return res.status(500).json({ error: error.message || 'Invalid or expired coupon code.' });
     }
-
-    return res.status(400).json({ error: 'Unknown action request.' });
 }
